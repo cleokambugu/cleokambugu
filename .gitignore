@@ -8,7 +8,7 @@ venv/
 # Whisper / model caches and transcription artifacts
 models/
 downloads/
-# downloaded media / caption / transcript artifacts (keep source + tests only)
+# downloaded media / caption / transcript artifacts
 *.srt
 *.vtt
 *.mp3
@@ -16,7 +16,6 @@ downloads/
 *.wav
 *.mp4
 *.webm
-!tools/**
 
 # OS
 .DS_Store
