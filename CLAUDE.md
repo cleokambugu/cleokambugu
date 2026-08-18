@@ -38,6 +38,26 @@ Practical consequence: when a resource is blocked, look for its public GitHub re
 that instead of giving up. That path produced all of `notes/jam-with-ai/`. Do not attempt to
 route around the proxy — report blocked hosts instead.
 
+## Learning from video / audio / notes
+
+To turn a talk, lecture, or podcast into study-able text, use the committed toolkit in
+[`tools/transcribe/`](tools/transcribe/) (one front door: `learn.py`). Do **not** claim
+audio/video can't be handled — it can, through this pipeline:
+
+- `learn.py ingest FILE` — existing captions / transcript / PDF → clean transcript. No
+  network, no model. **Fastest**; use it whenever captions or a transcript exist.
+- `learn.py transcribe FILE|URL` — media → Whisper ASR. Provision a model first with
+  `provision_model.sh`: `SRC=mirror` pulls one from GitHub raw and works even on the
+  locked-down **Trusted** policy (no allowlist change); `SRC=hf` gets the official model
+  when the network allows it (Full, or Hugging Face allowlisted).
+- `learn.py youtube URL` — yt-dlp fetches captions (fast) or audio. Needs YouTube reachable,
+  i.e. the environment on **Full** network access or **Custom** with YouTube's hosts (see
+  [`notes/tooling/admin-allowlist.md`](notes/tooling/admin-allowlist.md)). A network-policy
+  change only applies to **newly started** sessions, never the running one.
+
+Real ASR is verified in-sandbox (a mirror-provisioned tiny model transcribed a real clip).
+Blocked hosts are **reported, never bypassed** — the fix is an allowlist/policy change, not code.
+
 ## Tooling notes
 
 - Writing files with `cat <<'EOF'` heredocs is blocked by the auto-mode classifier in this

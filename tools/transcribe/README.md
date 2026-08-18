@@ -26,6 +26,28 @@ python tools/transcribe/learn.py ingest captions.en.vtt
 
 Each is also a standalone script: `transcribe.py`, `fetch.py`, `ingest.py`.
 
+### New-session quickstart (environment on Full network access)
+
+Once the environment is set to **Full** and you've started a **fresh** session
+(policy changes don't affect an already-running session), YouTube and Hugging
+Face are both reachable, so it's two commands:
+
+```bash
+pip install -r tools/transcribe/requirements.txt
+python tools/transcribe/learn.py youtube "https://www.youtube.com/watch?v=VIDEO_ID" --mode subs \
+  && python tools/transcribe/learn.py ingest downloads/*.vtt
+# no captions? fetch audio and transcribe (model auto-downloads from HF on Full):
+python tools/transcribe/learn.py youtube "URL" --mode audio && python tools/transcribe/learn.py transcribe downloads/*.mp3
+```
+
+To make it zero-touch, paste this one line into the environment's **Setup
+script** field (same dialog as Network access) — it's cached, so it runs once,
+not per session:
+
+```bash
+pip install -r tools/transcribe/requirements.txt
+```
+
 - **Route 2 needs the media host allowlisted** and, for the audio→ASR sub-path,
   the model host too. You're the admin — see
   [`notes/tooling/admin-allowlist.md`](../../notes/tooling/admin-allowlist.md)
