@@ -1,0 +1,18 @@
+# cleokambugu
+
+Notes and things I'm learning.
+
+> ℹ️ This file renders on the public GitHub profile page at
+> [github.com/cleokambugu](https://github.com/cleokambugu). Worth rewording to taste before
+> merging — the placeholder above is deliberately minimal rather than a guess at how you'd
+> introduce yourself.
+
+## Notes
+
+- **[Jam With AI](notes/jam-with-ai/)** — production RAG and agentic system design, distilled
+  from the [Jam With AI](https://www.youtube.com/@jam-with-ai) project's open-source course.
+  - [Curriculum map](notes/jam-with-ai/curriculum.md) — the Mother of AI project's six phases
+    and its seven-week RAG syllabus
+  - [Production RAG playbook](notes/jam-with-ai/production-rag-playbook.md) — fourteen
+    engineering patterns pulled from the course source, from hybrid retrieval and chunking
+    strategy through agent guardrails, tracing, and cache key design
