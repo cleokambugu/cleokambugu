@@ -60,9 +60,20 @@ the blocked host."* So:
    directory into the environment and set `$WHISPER_MODEL_DIR`. After that,
    transcribing a local file needs **no network** — see the tool README.
 3. **Adjust the network policy.** An environment owner can allowlist the hosts
-   (e.g. `huggingface.co` for models, or a media host), per
-   [Claude Code on the web — network policies](https://code.claude.com/docs/en/claude-code-on-the-web).
-   Then the pipeline runs unattended, end to end.
+   (`huggingface.co` for models, YouTube's hosts for media) so the pipeline runs
+   unattended, end to end. Exact levels, click-path, and host lists are in the
+   admin runbook: **[`admin-allowlist.md`](admin-allowlist.md)**.
+
+## The tooling (built, tested)
+
+[`tools/transcribe/`](../../tools/transcribe/) implements all three paths behind
+one CLI, `learn.py`:
+
+- `learn.py transcribe FILE` — media file/URL → Whisper ASR → transcript (path 2).
+- `learn.py youtube URL` — yt-dlp fetches captions (fast) or audio (path 3, once
+  the host is allowlisted).
+- `learn.py ingest FILE` — existing `.vtt`/`.srt`/`.txt`/`.md`/`.pdf` → clean
+  transcript, no network or model (path 1 — the fastest).
 
 ## Practical recipe (works today, no policy change)
 

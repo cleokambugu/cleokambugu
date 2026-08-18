@@ -18,9 +18,12 @@ Notes and things I'm learning.
     strategy through agent guardrails, tracing, and cache key design
 - **[Tooling](notes/tooling/)** — environment notes.
   - [Learning from video/audio, and the egress boundary](notes/tooling/media-and-egress.md)
+  - [Admin runbook: allowlist media & model hosts](notes/tooling/admin-allowlist.md)
 
 ## Tools
 
-- **[transcribe](tools/transcribe/)** — turn a video/audio file into a `.txt`/`.md`/`.srt`
-  transcript (ffmpeg + Whisper, CPU-only, offline once a model is present) so talks and
-  lectures can be studied as text.
+- **[transcribe](tools/transcribe/)** — learn from video/audio/notes as text, via one CLI
+  (`learn.py`) with three routes: **transcribe** a media file (ffmpeg + Whisper, CPU-only,
+  offline once a model is present), **youtube** to fetch captions/audio with yt-dlp once a
+  host is allowlisted, or **ingest** existing captions/transcripts/PDFs with no network at
+  all. Tested (`test_transcribe.py`).

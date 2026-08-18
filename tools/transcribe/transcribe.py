@@ -162,9 +162,10 @@ def srt_timestamp(seconds: float) -> str:
 
 def write_outputs(stem: Path, segments, info, source_name: str) -> dict[str, Path]:
     """Write .txt, .md and .srt. Consumes the segment generator once."""
-    txt_path = stem.with_suffix(".txt")
-    md_path = stem.with_suffix(".md")
-    srt_path = stem.with_suffix(".srt")
+    # Build names by appending — with_suffix() would eat a dotted stem like "talk.en".
+    txt_path = Path(f"{stem}.txt")
+    md_path = Path(f"{stem}.md")
+    srt_path = Path(f"{stem}.srt")
 
     plain_lines: list[str] = []
     md_lines = [

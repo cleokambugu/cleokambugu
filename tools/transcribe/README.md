@@ -1,9 +1,40 @@
-# transcribe — video/audio → text
+# transcribe — learn from video / audio / notes as text
 
-A small, dependency-light tool that turns a video or audio file into a readable
-transcript so its content can be studied as text. This is the standard, well-worn
-solution to "learn from a talk/lecture/podcast": there is no magic and no native
-"listening" — you extract the audio and run speech recognition over it.
+A small, dependency-light toolkit that turns talks, lectures, and podcasts into
+readable text. There's no magic and no native "listening": you get the words as
+text, by one of three routes depending on what you have and what the network
+allows.
+
+```
+                                          ┌─ transcribe: media FILE ─► ffmpeg ─► Whisper ─┐
+learn.py <video/audio/URL/captions/pdf> ──┼─ youtube:   URL (allowlisted) ─► yt-dlp ──────┼─► .txt / .md / .srt
+                                          └─ ingest:    captions / transcript / PDF ──────┘
+```
+
+## The three routes (one front door: `learn.py`)
+
+```bash
+# 1. You have a media FILE (or a direct media URL): speech recognition
+python tools/transcribe/learn.py transcribe lecture.mp4
+
+# 2. A media host is allowlisted: fetch captions (fastest) or audio
+python tools/transcribe/learn.py youtube "https://www.youtube.com/watch?v=ID" --mode subs
+
+# 3. You already have captions / a transcript / a PDF: just clean it up
+python tools/transcribe/learn.py ingest captions.en.vtt
+```
+
+Each is also a standalone script: `transcribe.py`, `fetch.py`, `ingest.py`.
+
+- **Route 2 needs the media host allowlisted** and, for the audio→ASR sub-path,
+  the model host too. You're the admin — see
+  [`notes/tooling/admin-allowlist.md`](../../notes/tooling/admin-allowlist.md)
+  for the exact host lists and click-path.
+- **Route 3 needs nothing** — no download, no model, no network. If a video has
+  captions, this is by far the fastest way to read it: grab the caption file and
+  ingest it. Rolling auto-caption repetition is collapsed automatically.
+
+The rest of this page covers Route 1 (the ASR pipeline) in detail.
 
 ```
 media file  ->  ffmpeg (16 kHz mono audio)  ->  Whisper ASR  ->  .txt / .md / .srt

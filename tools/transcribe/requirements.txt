@@ -1,4 +1,12 @@
-# Transcription pipeline dependencies. Both install from PyPI with no system
-# packages and no PyTorch. CPU-only by design.
+# Dependencies for the media→text tools. All install from PyPI, no system
+# packages, no PyTorch. CPU-only by design.
+
+# Core ASR pipeline (transcribe.py):
 faster-whisper>=1.2.0    # CTranslate2 Whisper ASR (CPU-friendly)
 imageio-ffmpeg>=0.5.1    # ships a static ffmpeg binary; no system ffmpeg needed
+
+# Fetching captions/audio from a URL (fetch.py / learn.py youtube):
+yt-dlp>=2025.1.1         # only useful once the media host is allowlisted
+
+# Ingesting existing material (ingest.py / learn.py ingest):
+pypdf>=4.0.0             # PDF text extraction
