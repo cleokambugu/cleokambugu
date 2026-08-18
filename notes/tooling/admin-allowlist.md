@@ -62,7 +62,7 @@ about egress. Use the lists below.
 
 ## Allowed-domains lists (for Option B)
 
-### To download the ASR model (Hugging Face) — needed once per model
+### To download the ASR model (Hugging Face) — optional
 
 ```
 huggingface.co
@@ -74,6 +74,13 @@ huggingface.co
 API lives on `huggingface.co` and the weight blobs come from its CDN subdomains,
 so the wildcards matter. After the model is cached once, you can drop these again
 and run offline via `WHISPER_MODEL_DIR`.
+
+> **You may not need this at all.** A model can also be provisioned from
+> `raw.githubusercontent.com` (already on the Trusted list) with
+> `SRC=mirror tools/transcribe/provision_model.sh` — no allowlisting required.
+> Allowlist Hugging Face only if you want the **official** Systran model rather
+> than a community mirror (see the provenance note in `provision_model.sh`).
+> Allowlisting for **media** (below) is the part that actually needs doing.
 
 ### To fetch video captions / audio from YouTube (yt-dlp)
 

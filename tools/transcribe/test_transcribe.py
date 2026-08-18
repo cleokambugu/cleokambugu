@@ -202,4 +202,5 @@ if __name__ == "__main__":
     test_subtitle_to_text()
     test_pdf_to_text_real()
     test_build_ydl_opts()
-    print("\nAll pipeline tests passed (ASR forward pass excluded — see README).")
+    print("\nAll pipeline tests passed (no model/network needed).")
+    print("For the real ASR forward pass, run test_asr_integration.py with a model.")
