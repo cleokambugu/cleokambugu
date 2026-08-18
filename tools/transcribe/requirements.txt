@@ -1,0 +1,4 @@
+# Transcription pipeline dependencies. Both install from PyPI with no system
+# packages and no PyTorch. CPU-only by design.
+faster-whisper>=1.2.0    # CTranslate2 Whisper ASR (CPU-friendly)
+imageio-ffmpeg>=0.5.1    # ships a static ffmpeg binary; no system ffmpeg needed

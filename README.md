@@ -16,3 +16,11 @@ Notes and things I'm learning.
   - [Production RAG playbook](notes/jam-with-ai/production-rag-playbook.md) — fourteen
     engineering patterns pulled from the course source, from hybrid retrieval and chunking
     strategy through agent guardrails, tracing, and cache key design
+- **[Tooling](notes/tooling/)** — environment notes.
+  - [Learning from video/audio, and the egress boundary](notes/tooling/media-and-egress.md)
+
+## Tools
+
+- **[transcribe](tools/transcribe/)** — turn a video/audio file into a `.txt`/`.md`/`.srt`
+  transcript (ffmpeg + Whisper, CPU-only, offline once a model is present) so talks and
+  lectures can be studied as text.

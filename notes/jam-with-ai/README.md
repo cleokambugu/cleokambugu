@@ -14,12 +14,19 @@ Substack newsletter, and open-source course repositories, with an explicitly bui
 
 ## How these notes were made — read this first
 
-**I did not watch the videos.** Two independent reasons, both worth stating plainly:
+**I did not watch the videos** — but not because it's fundamentally impossible. Two things
+were in the way:
 
-1. I have no audio or video capability — I cannot watch or listen to a video under any
-   circumstances.
+1. There's no native ability to *hear* audio, and in this session no speech model was
+   available either. But transcription is a standard, solved pipeline (extract audio →
+   Whisper ASR → read the text), and it's now built and tested in
+   [`tools/transcribe/`](../../tools/transcribe/). An earlier version of this note said
+   audio/video was impossible "with no exceptions" — that was an overstatement; see
+   [`notes/tooling/media-and-egress.md`](../tooling/media-and-egress.md) for the correction.
 2. In this environment `youtube.com`, `jamwithai.dev`, and `jamwithai.substack.com` are all
-   **blocked by the network egress proxy**, so even the pages' text was out of reach.
+   **blocked by the network egress proxy** — and so is `huggingface.co`, where the speech
+   model would come from. So in *this* sandbox both the video and the model are out of reach,
+   though either can be supplied by hand or unblocked by policy (details in the tooling note).
 
 What I did instead was go to the primary source that *was* reachable: the project's public
 GitHub repository, **[`jamwithai/production-agentic-rag-course`](https://github.com/jamwithai/production-agentic-rag-course)**
