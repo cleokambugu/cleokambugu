@@ -1,0 +1,12 @@
+# Project-local ignores (in addition to the repo root .gitignore)
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# local market-data caches and run outputs — never commit data dumps or secrets
+data_cache/
+*.csv
+*.parquet
+.env
+*.log

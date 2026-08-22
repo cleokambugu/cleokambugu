@@ -1,0 +1,15 @@
+# OPTIONAL dependencies. The core engine (backtest, paper-sim, strategies, risk,
+# optimizer, CLI, tests) needs NONE of these — it runs on a bare Python install.
+# Install these only for the feature you want.
+
+# Live/historical market data:
+ccxt>=4.0.0            # crypto exchanges (Binance, Coinbase, Kraken, …)
+alpaca-py>=0.20.0      # US equities (paper account is free)
+
+# ML-scored strategies (roadmap):
+numpy>=1.26
+pandas>=2.0
+scikit-learn>=1.3
+
+# News/LLM sentiment signals reuse tools/transcribe/requirements.txt
+# (faster-whisper, etc.) plus your chosen LLM client.
