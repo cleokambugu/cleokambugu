@@ -63,6 +63,27 @@ def cmd_backtest(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_paper(args: argparse.Namespace) -> int:
+    from .live_runner import PaperRunner
+    config = Config(starting_cash=args.cash, periods_per_year=args.periods_per_year)
+    strategy = create(args.strategy, **_strategy_params(args))
+    runner = PaperRunner(config, strategy)
+
+    def on_step(snap) -> None:
+        if snap.last_action != "hold":
+            print(f"  {snap.ts:%Y-%m-%d}  equity {snap.equity:,.2f}  {snap.last_action}")
+
+    snaps = runner.run(_feed(args), max_steps=args.max_steps, on_step=on_step,
+                       state_path=args.state)
+    if snaps:
+        final = snaps[-1]
+        print(f"\nFinal: equity {final.equity:,.2f}  cash {final.cash:,.2f}  "
+              f"positions {final.positions or '{}'}"
+              + (f"  HALTED ({runner.risk.halt_reason})" if final.halted else ""))
+    print("\nPaper/simulated only. Live routing stays hard-gated (see README).")
+    return 0
+
+
 def cmd_optimize(args: argparse.Namespace) -> int:
     config = Config(starting_cash=args.cash, periods_per_year=args.periods_per_year)
     if args.strategy == "ma_cross":
@@ -118,6 +139,12 @@ def build_parser() -> argparse.ArgumentParser:
     bt = sub.add_parser("backtest", help="run a backtest")
     common(bt)
     bt.set_defaults(func=cmd_backtest)
+
+    pa = sub.add_parser("paper", help="run the incremental paper-trading loop")
+    common(pa)
+    pa.add_argument("--max-steps", type=int, default=None, help="stop after N bars")
+    pa.add_argument("--state", default=None, help="path to persist runner state (JSON)")
+    pa.set_defaults(func=cmd_paper)
 
     opt = sub.add_parser("optimize", help="walk-forward parameter search")
     common(opt)

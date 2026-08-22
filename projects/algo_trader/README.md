@@ -80,9 +80,42 @@ honoring their terms and rate limits.
 cd projects/algo_trader
 python -m algo_trader list-strategies
 python -m algo_trader backtest --strategy ma_cross --bars 500
+python -m algo_trader backtest --strategy ml_scored --bars 500   # self-training ML
+python -m algo_trader paper    --strategy ml_scored --state run.json
 python -m algo_trader optimize --strategy ma_cross      # shows the overfitting gap
-python tests/test_algo_trader.py                        # 13 tests, all offline
+python tests/test_algo_trader.py && python tests/test_features.py   # 22 tests, offline
 ```
+
+## The three engines added on top of the core
+
+### Paper-trading runner (`live_runner.py`)
+Same logic as the backtester, but **stateful and incremental** so it can consume a
+live/paper data stream and survive restarts (`save_state`/`load_state` to JSON). A
+test asserts it reproduces the backtester **bar-for-bar** on the same feed, so the
+thing you validate offline is the thing that runs forward. For a real loop, feed it
+a `PollingFeed` wrapping a venue fetch on an interval. It only ever uses the paper
+broker — live routing stays hard-gated.
+
+### News / LLM sentiment signal (`signals/`)
+The "learn from diverse data" piece, wired like the RAG work. Text items → a
+sentiment score in [-1, 1] → a `FeatureStore` → the `news_sentiment` strategy reads
+the latest score **as of** each bar and trades it. The `FeatureStore` enforces
+no-look-ahead (a headline at time T only affects bars ≥ T). Default scorer is an
+offline finance lexicon (deterministic, testable, handles negation);
+`LLMSentimentScorer` is a lazy-imported upgrade for nuanced Claude-scored sentiment.
+
+```python
+from algo_trader.signals import NewsItem, build_feature_store, NewsSentimentStrategy
+store = build_feature_store([NewsItem(ts, "BTC/USDT", "record profit, shares surge")])
+strat = NewsSentimentStrategy(store=store)
+```
+
+### ML-scored strategy (`ml/`)
+Online **walk-forward** learning with the label-leakage guard that matters: a bar's
+label is its forward return over `horizon` bars, so at bar *t* the model trains only
+on bars whose outcome has already happened (`i + horizon ≤ t`) and predicts on *t*.
+Per-symbol models. Ships a dependency-free `LogisticRegressionGD`; swap in
+`SklearnPredictor` for gradient boosting. Sizing scales with model confidence.
 
 ## Using real data (optional)
 
@@ -113,19 +146,22 @@ is just another strategy that emits target weights:
 - ML-scored signals (a model predicting short-horizon direction) fit the same
   interface, trained walk-forward to avoid look-ahead.
 
-These are **scaffolded, not yet built** — the interfaces exist and are honest
-about that. See the roadmap.
+The sentiment and ML signals described here are **now built** (`signals/`, `ml/`) —
+see "The three engines added on top of the core" above. What remains is wiring a
+real news source and richer models; the interfaces and offline-testable defaults
+are in place.
 
 ## Roadmap
 
 - [x] Core engine: data → strategy → risk → execution, next-bar backtest
 - [x] Risk limits + daily-loss/drawdown kill switch
 - [x] Simulated broker with costs; hard-gated live broker
-- [x] `ma_cross`, `rsi_meanrev`; walk-forward optimizer; CLI; 13 tests
+- [x] `ma_cross`, `rsi_meanrev`; walk-forward optimizer; CLI
 - [x] Optional ccxt / Alpaca historical data adapters
-- [ ] Paper-trading runner against live data (loop + scheduler)
-- [ ] News/LLM sentiment signal source (reuse the RAG pipeline)
-- [ ] ML-scored strategy with walk-forward training + purged CV
+- [x] **Paper-trading runner** — stateful, restartable, proven equal to the backtester (`live_runner.py`)
+- [x] **News/LLM sentiment signal** — `news_sentiment` strategy + `FeatureStore` (`signals/`)
+- [x] **ML-scored strategy** — online walk-forward training, no label leakage (`ml/`)
+- [x] 22 offline tests across both suites
 - [ ] Portfolio-level allocation across strategies; regime detection
 - [ ] Langfuse-style trade/decision observability (per the RAG playbook)
 - [ ] A live venue adapter you wire with your own keys, after paper proves out
@@ -135,9 +171,12 @@ about that. See the roadmap.
 ```
 algo_trader/
   types.py config.py portfolio.py risk.py optimize.py cli.py
+  live_runner.py                         # paper-trading runner + PollingFeed
   data/       base.py synthetic.py csv_feed.py live_adapters.py
   strategy/   base.py registry.py ma_cross.py rsi_mean_reversion.py
+  signals/    sentiment.py               # news/LLM sentiment → news_sentiment
+  ml/         features.py model.py strategy.py   # ml_scored (walk-forward)
   execution/  base.py simulated.py live.py
   backtest/   engine.py metrics.py
-tests/        test_algo_trader.py
+tests/        test_algo_trader.py test_features.py   # 22 tests, offline
 ```
