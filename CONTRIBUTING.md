@@ -2,6 +2,8 @@
 
 Thank you for wanting to build with us. Collaboration here starts with a real problem, the people affected, and the evidence or lived knowledge we should respect.
 
+Participation is governed by the [community code of conduct](./.github/CODE_OF_CONDUCT.md).
+
 ## Ways to contribute
 
 - Use or test a public experience and report what happened.
