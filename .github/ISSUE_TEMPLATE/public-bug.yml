@@ -1,0 +1,61 @@
+name: Public bug report
+description: Report something broken in the GitHub profile or a linked public experience.
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping improve the work. This form is public. For security issues, use private vulnerability reporting instead.
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Where did the problem occur?
+      options:
+        - GitHub profile or portfolio atlas
+        - Tazama public experience
+        - Uganda Opportunity Map preview
+        - Another linked public experience
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Public URL
+      placeholder: https://…
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: What did you observe?
+      description: Include the exact message or visible behaviour. Do not include private data or credentials.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open…
+        2. Select…
+        3. Observe…
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Device and browser
+      placeholder: Android / Chrome 140, Windows / Firefox 142, etc.
+  - type: checkboxes
+    id: safety_check
+    attributes:
+      label: Safety check
+      options:
+        - label: This report contains no credentials, confidential information, personal records, or security exploit details.
+          required: true
