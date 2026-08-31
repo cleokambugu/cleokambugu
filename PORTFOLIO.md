@@ -57,7 +57,7 @@ Status reflects evidence reviewed on **31 August 2026**:
 | **Model Room** | A local, auditable coordination broker for multiple models with fixed identities, bounded rooms, and an append-only record. | **Private infrastructure** |
 | **Claude Bridge** | A durable, file-backed handoff relay between AI workspaces. | **Private infrastructure** |
 | **AgentGPT Bridge** | A local MCP service for reusable profiles around a self-hosted AgentGPT environment. | **Private infrastructure** |
-| **Aegis Security Command Center** | A localhost-only dashboard for read-only Windows security telemetry, evidence, and operator control. | **Private prototype** |
+| **Aegis Security Platform** | A local-first defensive security platform. Its current Local Security Command Center provides read-only Windows Defender, Firewall, and audit telemetry with evidence and operator control. | **Private prototype** |
 
 ## Trading research and controls
 
