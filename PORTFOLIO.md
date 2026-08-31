@@ -15,11 +15,11 @@ Status reflects evidence reviewed on **31 August 2026**:
 
 | System | What it is | Status |
 | --- | --- | --- |
-| **[Tazama](https://tazama-watch.xulaye.chatgpt.site/)** | Africa-first, rights-aware social watching and listening with curator-led discovery, private rooms, and first-party experiences. | **Live** |
-| **Ingia** | Privacy-first video moment recognition for finding an indexed film and its exact timestamp from a transformed short clip. | **Prototype** |
+| **[Tazama Watch](https://tazama-watch.xulaye.chatgpt.site/)** | The live watching surface of Tazama: Africa-first, rights-aware discovery, authorised sources, private rooms, and first-party experiences. | **Live** |
+| **[Tazama Listen](https://tazama-watch.xulaye.chatgpt.site/)** | The integrated listening surface inside Tazama, with live radio, podcasts, public television, music discovery, and source-aware audio experiences. | **Live** |
+| **Tazama Personal** | A local media vault and player for media the user controls, with private discovery and experience experiments. | **Prototype** |
 | **GAIA by Tazama** | Procedural nature soundscapes with transparent controls and no therapeutic claims. | **Prototype** |
-| **Nnalongo** | The voice and presence layer for Tazama and related interfaces. | **Private infrastructure** |
-| **Tazama Personal** | A local media vault and player for media the user controls, with discovery and wellness-oriented experience experiments. | **Prototype** |
+| **Ingia** | Privacy-first video moment recognition for finding an indexed film and its exact timestamp from a transformed short clip. | **Prototype** |
 
 ## Institutions, public interest, and collective action
 
@@ -35,7 +35,6 @@ Status reflects evidence reviewed on **31 August 2026**:
 | System | What it is | Status |
 | --- | --- | --- |
 | **Fundi** | A local-first studio for composing interface specifications, previewing responsive states, optionally collaborating with a local model, and exporting React. | **Prototype** |
-| **Daily Rhythms** | A voice-friendly productivity interface descended from the Sage OS direction; the previously recorded Replit page is no longer publicly reachable. | **Private prototype** |
 | **CONVENE Strategy Adventure** | A collaborative strategy game and facilitation experience prototyped across mobile and design tools; a public link has not been verified. | **Prototype** |
 | **Tafuta Q** | A local-first search-intent studio with approval-gated agents and explicit `OPEN`, `FOUND`, and `UNKNOWN` evidence states. | **Prototype** |
 | **Marketing HQ** | A local planning and approval system for coordinating a family of products and channels. | **Private infrastructure** |
@@ -48,15 +47,24 @@ Status reflects evidence reviewed on **31 August 2026**:
 | **AI Rogue** | A governance study of bounded AI action, failure containment, and accountable control. | **Research** |
 | **Y.E.A.R. / S.T.A.Y. / R.E.P.E.A.T. / V.A.L.U.E.** | Executive and personal decision frameworks developed as research and communication artifacts. | **Research** |
 
-## Governed AI, safety, and continuity
+## AI operating systems and continuity
+
+In this portfolio, an **operating system** is a coordinating product layer for human–AI work, not a device kernel or a claim of one autonomous service. The systems remain separately permissioned and are public only where explicitly linked.
 
 | System | What it is | Status |
 | --- | --- | --- |
+| **Nalongo OS** | The voice, presence, and conversational layer designed to connect Tazama with the wider AI ecosystem. | **Private prototype** |
+| **Sage OS** | A voice-first productivity and coordination interface designed for work across ChatGPT and the broader AI ecosystem. An earlier artifact was recorded as Daily Rhythms, but no public deployment is currently verified. | **Private prototype** |
 | **Cleo OS** | A continuity architecture for carrying context, preferences, privacy boundaries, skills, and integrations across AI workspaces. It is a design direction, not one autonomous or sentient service. | **Private infrastructure** |
-| **Uwingi** | An alpha language and runtime experiment for contextual values, plural answers, provenance, consent, and ternary truth. | **Private research prototype** |
 | **Model Room** | A local, auditable coordination broker for multiple models with fixed identities, bounded rooms, and an append-only record. | **Private infrastructure** |
 | **Claude Bridge** | A durable, file-backed handoff relay between AI workspaces. | **Private infrastructure** |
 | **AgentGPT Bridge** | A local MCP service for reusable profiles around a self-hosted AgentGPT environment. | **Private infrastructure** |
+
+## Governed AI and safety
+
+| System | What it is | Status |
+| --- | --- | --- |
+| **Uwingi** | An alpha language and runtime experiment for contextual values, plural answers, provenance, consent, and ternary truth. | **Private research prototype** |
 | **Aegis Security Platform** | A local-first defensive security platform. Its current Local Security Command Center provides read-only Windows Defender, Firewall, and audit telemetry with evidence and operator control. | **Private prototype** |
 
 ## Trading research and controls
