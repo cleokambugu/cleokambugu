@@ -81,6 +81,8 @@ Use something. Question it. Report what broke. Bring domain knowledge. Translate
 
 Collaboration can begin before a pull request. **The more the merrier.**
 
+**[Propose a collaboration](https://github.com/cleokambugu/cleokambugu/issues/new?template=collaboration.yml)** · **[Report a public bug](https://github.com/cleokambugu/cleokambugu/issues/new?template=public-bug.yml)** · **[Read the contribution guide](./CONTRIBUTING.md)**
+
 ## Working toolkit
 
 `TypeScript` `React` `Next.js` `Python` `Cloudflare` `progressive web apps` `media pipelines` `voice interfaces` `local AI` `MCP` `security engineering` `product strategy`
