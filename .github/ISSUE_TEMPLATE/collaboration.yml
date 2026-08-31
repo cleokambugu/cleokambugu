@@ -1,0 +1,64 @@
+name: Collaboration proposal
+description: Bring a problem, contribution, partnership, or public-interest opportunity.
+title: "[Collaboration] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reaching out. This form is public. Do not include confidential information, credentials, private links, personal records, or anything you do not have permission to share.
+  - type: dropdown
+    id: contribution_type
+    attributes:
+      label: How would you like to collaborate?
+      options:
+        - Use or test a public experience
+        - Bring domain or community knowledge
+        - Accessibility or translation
+        - Design or engineering
+        - Research or evidence
+        - Institutional or funding partnership
+        - Bring a problem worth solving
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is the problem or opportunity?
+      description: Describe the situation, who experiences it, and why it matters.
+      placeholder: The problem is… It affects… A useful change would be…
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: What have you observed?
+      description: Separate direct observations, supporting sources, informed inference, preference, and missing evidence.
+      placeholder: Observed… Sources… We infer… Still unknown…
+    validations:
+      required: true
+  - type: textarea
+    id: contribution
+    attributes:
+      label: What can you contribute?
+      description: Skills, time, access, lived knowledge, research, design, code, testing, funding, or institutional support.
+    validations:
+      required: true
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Constraints or access needs
+      description: Note relevant language, accessibility, privacy, safety, rights, geography, time, or cost constraints. Do not disclose sensitive personal information.
+  - type: textarea
+    id: first_outcome
+    attributes:
+      label: What would a small first outcome look like?
+      description: Suggest one bounded result that could be tested or reviewed.
+    validations:
+      required: true
+  - type: checkboxes
+    id: public_consent
+    attributes:
+      label: Public-posting check
+      options:
+        - label: I have removed confidential information and have permission to share everything in this issue publicly.
+          required: true
