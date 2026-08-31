@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Private security report
+    url: https://github.com/cleokambugu/cleokambugu/security/advisories/new
+    about: Report a vulnerability privately. Do not put security details in a public issue.
+  - name: Portfolio atlas
+    url: https://github.com/cleokambugu/cleokambugu/blob/main/PORTFOLIO.md
+    about: Check whether a system is live, preview, prototype, research, or private.
