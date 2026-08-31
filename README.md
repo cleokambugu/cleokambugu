@@ -19,6 +19,7 @@
 
 <p align="center">
   <a href="#product-ecosystems">Product ecosystems</a> ·
+  <a href="https://github.com/users/cleokambugu/projects/1">Roadmap</a> ·
   <a href="#more-systems-we-are-building">More systems</a> ·
   <a href="#the-lab-behind-the-work">The lab</a> ·
   <a href="#collaborate">Collaborate</a>
@@ -70,7 +71,7 @@ These layers have moved through ChatGPT, Claude, Codex, Replit, and local models
 | **FIRSTLIGHT** | Decision intelligence for time-bound travel and public-policy opportunities: catalyst, pricing lag, traveller economics, deadlines, and invalidation. | `RESEARCH` |
 | **[Uganda Opportunity Map](https://uganda-opportunity-map.xulaye.chatgpt.site/)** | Source-linked opportunity intelligence connecting cases to budgets, payers, capital wedges, triggers, and stop conditions. | `PREVIEW` |
 
-The wider [portfolio atlas](./PORTFOLIO.md) connects the products, experiments, research, and infrastructure behind them.
+The wider [portfolio atlas](./PORTFOLIO.md) connects the products, experiments, research, and infrastructure behind them. The public [Portfolio Roadmap](https://github.com/users/cleokambugu/projects/1) offers a compact, evidence-labelled view of the current systems.
 
 ## The lab behind the work
 
