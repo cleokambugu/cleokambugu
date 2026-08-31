@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-labelledby="title desc">
+  <title id="title">Cleopatra Kambugu. Building is collaboration.</title>
+  <desc id="desc">A cream editorial banner about bespoke applications built with people, with dark green text, gold and jade accents, and a geometric collaboration mark.</desc>
+  <rect width="1200" height="360" rx="28" fill="#F4F0E6"/>
+  <rect x="18" y="18" width="1164" height="324" rx="18" fill="none" stroke="#D9D2C2" stroke-width="2"/>
+  <path d="M72 62V298" stroke="#A67217" stroke-width="4"/>
+
+  <g font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+    <text x="96" y="91" fill="#226C55" font-size="17" font-weight="700" letter-spacing="4">CLEOPATRA KAMBUGU</text>
+    <text x="94" y="177" fill="#15201D" font-family="Georgia, 'Times New Roman', serif" font-size="55" font-weight="700">Building is collaboration.</text>
+    <text x="96" y="226" fill="#46534F" font-size="22" font-weight="450">Bespoke applications for real problems, built with people.</text>
+    <text x="96" y="294" fill="#6F766F" font-size="14" font-weight="650" letter-spacing="2.6">BESPOKE  /  USEFUL  /  OPEN  /  TOGETHER</text>
+  </g>
+
+  <g transform="translate(1006 180)" fill="none">
+    <circle r="112" stroke="#D9D2C2" stroke-width="2"/>
+    <circle r="80" stroke="#226C55" stroke-width="3"/>
+    <circle r="47" stroke="#A67217" stroke-width="3"/>
+    <path d="M-108 0H108M0-108V108" stroke="#D9D2C2" stroke-width="1.5"/>
+    <path d="M-72-31C-34-70 36-70 76-25" stroke="#226C55" stroke-width="6" stroke-linecap="round"/>
+    <path d="M-76 28C-35 69 34 70 73 31" stroke="#A67217" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="-25" cy="0" r="7" fill="#15201D" stroke="none"/>
+    <circle cx="0" cy="0" r="7" fill="#A67217" stroke="none"/>
+    <circle cx="25" cy="0" r="7" fill="#226C55" stroke="none"/>
+  </g>
+
+  <g fill="#A67217">
+    <circle cx="1132" cy="64" r="4"/>
+    <circle cx="1150" cy="64" r="4"/>
+    <circle cx="1132" cy="82" r="4"/>
+    <circle cx="1150" cy="82" r="4"/>
+  </g>
+</svg>
