@@ -6,8 +6,6 @@
 <title>UG Mobility</title>
 <meta name="description" content="UG — Ride. Pool. Rent. One Ugandan app that compares every ride on the market, pools the road trip, rents the car, and books the park. Pay by mobile money through Flutterwave.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20128%20128%22%20width%3D%22128%22%20height%3D%22128%22%20role%3D%22img%22%20aria-label%3D%22UG%20app%20icon%22%3E%20%3Cdefs%3E%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%20%3Cstop%20offset%3D%220%22%20stop-color%3D%22%231B1612%22/%3E%20%3Cstop%20offset%3D%221%22%20stop-color%3D%22%230F0C0A%22/%3E%20%3C/linearGradient%3E%20%3ClinearGradient%20id%3D%22sheen%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%20%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23ffffff%22%20stop-opacity%3D%22.10%22/%3E%20%3Cstop%20offset%3D%22.5%22%20stop-color%3D%22%23ffffff%22%20stop-opacity%3D%220%22/%3E%20%3C/linearGradient%3E%20%3C/defs%3E%20%3Crect%20width%3D%22128%22%20height%3D%22128%22%20rx%3D%2228%22%20fill%3D%22url%28%23g%29%22/%3E%20%3Crect%20width%3D%22128%22%20height%3D%22128%22%20rx%3D%2228%22%20fill%3D%22url%28%23sheen%29%22/%3E%20%3Cg%20transform%3D%22translate%2832%2026%29%20scale%281%29%22%3E%20%3Cpath%20d%3D%22M28.5%2040.5%20Q22%2031%2012.5%2017%22%20fill%3D%22none%22%20stroke%3D%22%23F4ECDD%22%20stroke-width%3D%227.5%22%20stroke-linecap%3D%22round%22/%3E%20%3Cpath%20d%3D%22M32%2038.5%20Q32%2024%2032%208.5%22%20fill%3D%22none%22%20stroke%3D%22%23F2C200%22%20stroke-width%3D%227.5%22%20stroke-linecap%3D%22round%22/%3E%20%3Cpath%20d%3D%22M35.5%2040.5%20Q42%2031%2051.5%2017%22%20fill%3D%22none%22%20stroke%3D%22%23D2202F%22%20stroke-width%3D%227.5%22%20stroke-linecap%3D%22round%22/%3E%20%3Ccircle%20cx%3D%2232%22%20cy%3D%2248%22%20r%3D%227.5%22%20fill%3D%22%23F4ECDD%22/%3E%20%3Ccircle%20cx%3D%2232%22%20cy%3D%2248%22%20r%3D%223%22%20fill%3D%22%23F2C200%22/%3E%20%3C/g%3E%20%3Ctext%20x%3D%2264%22%20y%3D%22106%22%20text-anchor%3D%22middle%22%20font-family%3D%22Unbounded%2C%20%27Albert%20Sans%27%2C%20system-ui%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2222%22%20letter-spacing%3D%221%22%20fill%3D%22%23F4ECDD%22%3EUG%3C/text%3E%20%3C/svg%3E%20">
-<link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#0F0C0A">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Albert+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
@@ -62,7 +60,7 @@ h1,h2,h3,h4{margin:0;font-family:var(--font-display);line-height:1.05;text-wrap:
 h1{font-weight:900} h2{font-weight:700} h3{font-weight:500}
 p{margin:0}
 .mono{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
-.eyebrow{font-family:var(--font-body);font-weight:600;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.eyebrow{font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
 .eyebrow b{color:var(--yellow);font-weight:600}
 .wrap{width:min(1240px,calc(100% - 40px));margin:0 auto}
 :focus-visible{outline:2px solid var(--yellow);outline-offset:3px}
@@ -92,7 +90,7 @@ section{padding:96px 0;border-top:1px solid var(--line)}
 .logo .crest{width:34px;height:34px;color:var(--ink);flex:none}
 .logo:hover .crest{animation:crestWave 1.2s cubic-bezier(.16,1,.3,1)}
 @keyframes crestWave{0%{transform:rotate(0)}30%{transform:rotate(-8deg)}60%{transform:rotate(6deg)}100%{transform:rotate(0)}}
-.tagline{font-family:var(--font-body);font-weight:600;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-left:-14px;display:inline-flex;gap:.6em}
+.tagline{font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-left:-14px;display:inline-flex;gap:.6em}
 .tagline span{transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
 .js .tagline.hidden span{opacity:0;transform:translateY(6px)}
 .tagline span:nth-child(2){transition-delay:.08s}.tagline span:nth-child(3){transition-delay:.16s}
@@ -103,7 +101,6 @@ section{padding:96px 0;border-top:1px solid var(--line)}
 .nav .spacer{flex:1}
 .theme-toggle{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 10px;font-family:var(--font-mono);font-size:12px}
 @media (max-width:900px){.nav-links{display:none}}
-@media (max-width:640px){#micBtn,#themeToggle{display:none}.nav .wrap{gap:12px}}
 
 /* ---------- Hero ---------- */
 .hero{position:relative;overflow:hidden;border-top:0;padding:0}
@@ -125,20 +122,15 @@ section{padding:96px 0;border-top:1px solid var(--line)}
 #scene.dragging{cursor:grabbing}
 .pins{position:absolute;inset:0;pointer-events:none}
 .pin{position:absolute;transform:translate(-50%,-50%);pointer-events:auto;cursor:pointer;display:flex;align-items:center;gap:6px;transition:opacity .2s}
-.pin .dot{width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 0 3px color-mix(in srgb,var(--red) 28%,transparent)}
-.pin .lbl{font-family:var(--font-body);font-size:12px;font-weight:500;letter-spacing:0;color:var(--ink);background:color-mix(in srgb,var(--ground) 70%,transparent);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid color-mix(in srgb,var(--ink) 12%,transparent);padding:3px 9px;border-radius:999px;white-space:nowrap;box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 10%,transparent)}
-.pin.big{z-index:3}.pin.small{z-index:1}.pin.park{z-index:1}.pin:hover,.pin.active{z-index:4}
-.pin.big .lbl{font-weight:600;font-size:13px}
-.pin.park .dot{background:var(--crane);box-shadow:0 0 0 3px color-mix(in srgb,var(--crane) 28%,transparent)}
-.pin.park .lbl{color:var(--ink-2)}
-.pin.small .lbl{font-size:11px;color:var(--ink-2)}
+.pin .dot{width:10px;height:10px;border-radius:50%;background:var(--red);box-shadow:0 0 0 4px color-mix(in srgb,var(--red) 30%,transparent)}
+.pin .lbl{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;background:color-mix(in srgb,var(--ground) 82%,transparent);border:1px solid var(--line);padding:3px 7px;border-radius:4px;white-space:nowrap}
 .pin:hover .dot,.pin.active .dot{background:var(--yellow);box-shadow:0 0 0 6px color-mix(in srgb,var(--yellow) 30%,transparent)}
 .pin.behind{opacity:.25}
 .pin-card{position:absolute;right:0;bottom:12px;width:min(320px,90%);border-radius:var(--radius-lg);padding:14px 16px;pointer-events:auto}
 .pin-card h4{font-family:var(--font-display);font-weight:500;font-size:15px;margin-bottom:4px}
 .pin-card p{font-size:13px;color:var(--ink-2)}
 .pin-card .row{display:flex;justify-content:space-between;gap:12px;margin-top:10px;font-family:var(--font-mono);font-size:12px}
-.hint{position:absolute;left:0;bottom:12px;font-family:var(--font-body);font-size:12px;color:var(--ink-3)}
+.hint{position:absolute;left:0;bottom:12px;font-family:var(--font-mono);font-size:11px;color:var(--ink-3);letter-spacing:.08em}
 @media (max-width:960px){.hero .wrap{grid-template-columns:1fr;min-height:0}.stage{min-height:420px}.hero-copy{padding-top:48px}}
 
 /* ---------- Booking strip (Ride. Pool. Rent. plus Explore) ---------- */
@@ -159,8 +151,7 @@ section{padding:96px 0;border-top:1px solid var(--line)}
 @media (max-width:900px){.fields{grid-template-columns:1fr 1fr}.field{border-bottom:1px solid var(--line)}.fields .go{grid-column:1/-1}.verbs button{font-size:12px}}
 
 /* ---------- Ticker ---------- */
-.proto{font-size:12px;color:var(--ink-3);text-align:center;padding:10px 16px;margin-top:40px;border-top:1px solid var(--line)}
-.ticker{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--ground-2)}
+.ticker{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--ground-2);margin-top:56px}
 .ticker-track{display:flex;gap:48px;white-space:nowrap;padding:12px 0;animation:tick 60s linear infinite;font-family:var(--font-mono);font-size:13px;color:var(--ink-2)}
 .ticker-track span b{color:var(--yellow);font-weight:600}
 @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
@@ -199,7 +190,7 @@ section{padding:96px 0;border-top:1px solid var(--line)}
 .q-price{font-family:var(--font-mono);font-size:22px;font-weight:600;font-variant-numeric:tabular-nums}
 .q-price small{font-size:11px;color:var(--ink-3);display:block;font-weight:400}
 .q-eta{font-family:var(--font-mono);font-size:13px;color:var(--ink-2)}
-.q-eta .tag{display:inline-block;font-family:var(--font-body);font-weight:600;font-size:11px;letter-spacing:.02em;padding:2px 6px;border-radius:4px;background:var(--surface-2);border:1px solid var(--line);margin-top:4px}
+.q-eta .tag{display:inline-block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:2px 6px;border-radius:4px;background:var(--surface-2);border:1px solid var(--line);margin-top:4px}
 .tag.best{background:var(--yellow);color:var(--yellow-ink);border-color:var(--yellow)}
 .tag.surge{background:var(--red-soft);color:var(--ink);border-color:transparent}
 .tag.est{color:var(--ink-3)}
@@ -215,7 +206,7 @@ section{padding:96px 0;border-top:1px solid var(--line)}
 .trip .when b{display:block;font-size:20px;color:var(--ink);font-weight:600}
 .trip .route{font-weight:600;font-size:16px}
 .trip .driver{font-size:13px;color:var(--ink-2);margin-top:3px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.badge{display:inline-flex;align-items:center;gap:4px;font-family:var(--font-body);font-weight:600;font-size:11px;letter-spacing:.02em;padding:2px 7px;border-radius:4px;border:1px solid var(--line);background:var(--surface-2)}
+.badge{display:inline-flex;align-items:center;gap:4px;font-family:var(--font-mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:4px;border:1px solid var(--line);background:var(--surface-2)}
 .badge.ok{border-color:var(--good);color:var(--good)}
 .badge.crane{border-color:var(--crane);color:var(--crane)}
 .seats{display:flex;gap:4px;margin-top:8px}
@@ -306,14 +297,14 @@ section{padding:96px 0;border-top:1px solid var(--line)}
 .plug .pl-mark{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;color:#fff;background:var(--pc);box-shadow:inset 0 1px 0 rgba(255,255,255,.2)}
 .plug .pl-mark svg{width:40px;height:40px}
 .plug h3{font-size:16px}
-.plug .role{font-family:var(--font-body);font-weight:600;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.plug .role{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
 .plug p{font-size:13px;color:var(--ink-2);flex:1}
 .plug .st{font-family:var(--font-mono);font-size:11px;display:flex;align-items:center;gap:6px;color:var(--ink-3)}
 .plug .st i{width:8px;height:8px;border-radius:50%;background:var(--ink-3)}
 .plug .st.on{color:var(--good)}.plug .st.on i{background:var(--good);box-shadow:0 0 0 4px color-mix(in srgb,var(--good) 25%,transparent)}
 .plug .acts{display:flex;gap:8px;flex-wrap:wrap}
 .hooks{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
-.hook{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-body);font-weight:500;font-size:12px;padding:4px 9px;border-radius:999px;text-decoration:none;color:var(--ink-2);border:1px solid color-mix(in srgb,var(--ink) 14%,transparent);background:color-mix(in srgb,var(--surface) 60%,transparent)}
+.hook{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:11px;letter-spacing:.04em;padding:4px 9px;border-radius:999px;text-decoration:none;color:var(--ink-2);border:1px solid color-mix(in srgb,var(--ink) 14%,transparent);background:color-mix(in srgb,var(--surface) 60%,transparent)}
 .hook:hover{border-color:var(--yellow);color:var(--ink)}
 .hook i{width:6px;height:6px;border-radius:50%;background:var(--pc,var(--crane))}
 @media (max-width:1000px){.plugs{grid-template-columns:1fr 1fr}}
@@ -325,7 +316,7 @@ section{padding:96px 0;border-top:1px solid var(--line)}
 .trust h3{font-size:16px;margin-bottom:8px}
 .trust p{font-size:14px;color:var(--ink-2)}
 .partners{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
-.partners span{border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-family:var(--font-body);font-size:13px;color:var(--ink-2)}
+.partners span{border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-family:var(--font-mono);font-size:12px;color:var(--ink-2)}
 @media (max-width:860px){.trust{grid-template-columns:1fr}}
 
 /* ---------- Checkout modal ---------- */
@@ -350,170 +341,16 @@ section{padding:96px 0;border-top:1px solid var(--line)}
 /* ---------- Footer ---------- */
 footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(--ground-2)}
 .foot{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:28px}
-.foot h4{font-family:var(--font-body);font-weight:600;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-bottom:12px}
+.foot h4{font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-bottom:12px}
 .foot a{display:block;text-decoration:none;color:var(--ink-2);font-size:14px;margin-bottom:8px}
 .foot a:hover{color:var(--ink)}
 .foot p{font-size:13px;color:var(--ink-2);max-width:40ch}
 .socials{display:flex;flex-wrap:wrap;gap:10px;margin-top:32px}
-.soc{display:inline-flex;align-items:center;gap:8px;padding:8px 14px 8px 10px;border-radius:999px;text-decoration:none;font-family:var(--font-body);font-weight:500;font-size:13px;color:var(--ink-2);background:color-mix(in srgb,var(--surface) 64%,transparent);border:1px solid color-mix(in srgb,var(--ink) 14%,transparent);box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 12%,transparent);transition:transform .25s cubic-bezier(.16,1,.3,1),background .25s,color .25s,border-color .25s}
+.soc{display:inline-flex;align-items:center;gap:8px;padding:8px 14px 8px 10px;border-radius:999px;text-decoration:none;font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;color:var(--ink-2);background:color-mix(in srgb,var(--surface) 64%,transparent);border:1px solid color-mix(in srgb,var(--ink) 14%,transparent);box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 12%,transparent);transition:transform .25s cubic-bezier(.16,1,.3,1),background .25s,color .25s,border-color .25s}
 .soc svg{width:16px;height:16px;display:block}
 .soc:hover{transform:translateY(-2px);background:var(--yellow);color:var(--yellow-ink);border-color:var(--yellow)}
 .legal{margin-top:36px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-3);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 @media (max-width:860px){.foot{grid-template-columns:1fr 1fr}}
-
-/* ---------- Doors ---------- */
-.doors{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:26px}
-.door{text-align:left;border-radius:var(--radius-lg);padding:18px 18px 16px;display:flex;flex-direction:column;gap:6px;background:color-mix(in srgb,var(--surface) 70%,transparent);border:1px solid color-mix(in srgb,var(--ink) 14%,transparent);box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 12%,transparent);transition:transform .3s cubic-bezier(.16,1,.3,1),border-color .3s}
-.door:hover{transform:translateY(-3px);border-color:var(--yellow)}
-.door .d-k{font-family:var(--font-display);font-weight:500;font-size:16px}
-.door .d-v{font-size:13px;color:var(--ink-2)}
-.door .d-go{font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--yellow);margin-top:6px}
-.quiet{font-size:13px;color:var(--ink-3);text-decoration:underline;text-underline-offset:3px}
-@media (max-width:560px){.doors{grid-template-columns:1fr}}
-
-/* ---------- Virtual Stage ---------- */
-.stage-bar{display:flex;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap}
-.stages{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.st-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:16px;display:flex;flex-direction:column;gap:10px;position:relative;transition:border-color .3s}
-.st-card.funded{border-color:var(--good)}
-.st-card.full{border-color:var(--yellow)}
-.st-card .route{font-weight:600;font-size:16px}
-.st-card .win{font-family:var(--font-mono);font-size:12px;color:var(--ink-3);display:flex;justify-content:space-between;gap:8px}
-.fill{height:10px;border-radius:999px;background:var(--surface-2);border:1px solid var(--line);overflow:hidden;position:relative}
-.fill>i{display:block;height:100%;background:linear-gradient(90deg,var(--yellow),var(--red));transition:width .9s cubic-bezier(.16,1,.3,1)}
-.st-card.funded .fill>i{background:var(--good)}
-.st-meta{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
-.st-meta .p{font-family:var(--font-mono);font-size:22px;font-weight:600}
-.st-meta .p small{display:block;font-size:11px;color:var(--ink-3);font-weight:400}
-.st-meta .drop{font-family:var(--font-mono);font-size:11px;color:var(--good);text-align:right}
-.st-who{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ink-2)}
-.av{width:22px;height:22px;border-radius:50%;background:var(--crane-soft);color:var(--crane);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;border:1px solid var(--line);margin-left:-6px}
-.av:first-child{margin-left:0}
-.av.you{background:var(--yellow);color:var(--yellow-ink);border-color:var(--yellow)}
-.st-acts{display:flex;gap:8px;flex-wrap:wrap}
-.chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-body);font-weight:600;font-size:11px;letter-spacing:.02em;padding:3px 8px;border-radius:4px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink-2)}
-.chip.good{border-color:var(--good);color:var(--good)}
-.chip.warn{border-color:var(--warn);color:var(--warn)}
-.chip.hot{border-color:var(--yellow);color:var(--yellow)}
-.reach{margin-top:28px;padding-top:22px;border-top:1px dashed var(--line-strong)}
-.reach-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}
-.town{display:flex;flex-direction:column;gap:3px;padding:10px 12px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--line);cursor:pointer;text-align:left;transition:border-color .2s}
-.town:hover{border-color:var(--yellow)}
-.town b{font-size:14px}
-.town small{font-size:12px;color:var(--ink-3)}
-.town .apps{font-size:11px;color:var(--ink-2)}
-@media (max-width:900px){.reach-grid{grid-template-columns:1fr 1fr}}
-.legs{margin-top:28px;padding-top:22px;border-top:1px dashed var(--line-strong)}
-.legs-list{display:flex;gap:10px;overflow-x:auto;padding:12px 0 4px;scroll-snap-type:x mandatory}
-.leg{flex:0 0 260px;scroll-snap-align:start;border-radius:var(--radius-lg);padding:14px;background:color-mix(in srgb,var(--surface) 78%,transparent);border:1px solid color-mix(in srgb,var(--ink) 12%,transparent);display:flex;flex-direction:column;gap:6px}
-.leg .r{font-weight:600}
-.leg .m{font-family:var(--font-mono);font-size:12px;color:var(--ink-3)}
-.leg .p{font-family:var(--font-mono);font-size:18px;font-weight:600}
-.leg .p s{color:var(--ink-3);font-size:12px;font-weight:400;margin-left:6px}
-@media (max-width:960px){.stages{grid-template-columns:1fr 1fr}}
-@media (max-width:600px){.stages{grid-template-columns:1fr}}
-
-/* ---------- Drive ---------- */
-.drive{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:24px;align-items:start}
-.cmap{display:flex;flex-direction:column;gap:12px}
-.cmap .corr{display:flex;flex-wrap:wrap;gap:6px}
-.corr .c{font-family:var(--font-body);font-weight:500;font-size:12px;padding:5px 10px;border-radius:999px;border:1px solid var(--line-strong);background:var(--surface-2);cursor:pointer;color:var(--ink-2)}
-.corr .c.on{background:var(--yellow);color:var(--yellow-ink);border-color:var(--yellow)}
-.kv{display:grid;grid-template-columns:1fr auto;gap:6px 12px;font-size:13px;color:var(--ink-2)}
-.kv b{font-family:var(--font-mono);font-weight:500;color:var(--ink);text-align:right}
-.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
-.tile{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:12px 14px}
-.tile .k{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-3)}
-.tile .v{font-family:var(--font-mono);font-size:20px;font-weight:600;margin-top:2px}
-.offer{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--yellow);border-radius:var(--radius-lg);padding:14px 16px;margin-bottom:10px;animation:fxIn .8s cubic-bezier(.16,1,.3,1)}
-.offer.taken{border-left-color:var(--good);opacity:.85}
-.offer .o-r{font-weight:600}
-.offer .o-m{font-family:var(--font-mono);font-size:12px;color:var(--ink-3);margin-top:3px}
-.offer .o-p{font-family:var(--font-mono);font-size:22px;font-weight:600;text-align:right}
-.offer .o-p small{display:block;font-size:11px;color:var(--ink-3);font-weight:400}
-.offer .o-a{grid-column:1/-1;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.teaser{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
-.teaser .step{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:16px}
-.teaser .step b{font-family:var(--font-display);font-weight:500;font-size:14px;display:block;margin-bottom:6px}
-.teaser .step p{font-size:13px;color:var(--ink-2)}
-.teaser .n{font-family:var(--font-mono);font-size:11px;color:var(--yellow);letter-spacing:.1em}
-@media (max-width:960px){.drive{grid-template-columns:1fr}.teaser{grid-template-columns:1fr}}
-
-/* ---------- Handshake ---------- */
-.sheet.hs{width:min(520px,100%)}
-.dots{display:flex;gap:6px;margin-left:auto;margin-right:12px}
-.dots i{width:8px;height:8px;border-radius:50%;background:var(--line-strong)}
-.dots i.on{background:var(--yellow)}
-.roles{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:6px 0 14px}
-.role{border:1px solid var(--line);background:var(--surface-2);border-radius:var(--radius);padding:10px 8px;font-size:13px;text-align:center;display:flex;flex-direction:column;gap:4px;align-items:center}
-.role.on{border-color:var(--yellow);background:color-mix(in srgb,var(--yellow) 14%,var(--surface-2))}
-.role small{font-size:11px;color:var(--ink-3)}
-.days{display:flex;gap:4px}
-.days button{flex:1;border:1px solid var(--line);background:var(--surface-2);border-radius:6px;padding:7px 0;font-family:var(--font-mono);font-size:11px}
-.days button.on{background:var(--ink);color:var(--ground);border-color:var(--ink)}
-.snap{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.snap button{border:1px dashed var(--line-strong);background:transparent;border-radius:var(--radius);padding:12px;font-size:13px;color:var(--ink-2)}
-.snap button.ok{border-style:solid;border-color:var(--good);color:var(--good)}
-.hs h4{font-family:var(--font-display);font-weight:500;font-size:15px;margin:2px 0 10px}
-.hs .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.otp{display:flex;gap:8px;align-items:center}
-.otp input{font-family:var(--font-mono);font-size:22px;letter-spacing:.4em;text-align:center}
-.done{text-align:center;padding:10px 0}
-.done .big{font-family:var(--font-display);font-weight:700;font-size:22px;margin:8px 0 6px}
-.done p{font-size:14px;color:var(--ink-2)}
-.done .crest{width:64px;height:64px;color:var(--ink);animation:crestWave 1.4s cubic-bezier(.16,1,.3,1)}
-
-/* ---------- Me ---------- */
-.me-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
-.me-av{width:48px;height:48px;border-radius:50%;background:var(--yellow);color:var(--yellow-ink);display:grid;place-items:center;font-family:var(--font-display);font-weight:700;font-size:18px}
-.me-head b{font-size:16px}
-.me-head small{display:block;font-family:var(--font-mono);font-size:12px;color:var(--ink-3)}
-.me-list{display:flex;flex-direction:column;gap:8px}
-.me-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;border-radius:var(--radius);background:var(--surface-2);border:1px solid var(--line);font-size:13px}
-.pchip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:4px 12px 4px 4px;background:var(--surface);font-size:13px;font-weight:600}
-.pchip i{width:24px;height:24px;border-radius:50%;background:var(--yellow);color:var(--yellow-ink);display:grid;place-items:center;font-family:var(--font-display);font-size:11px;font-weight:700;font-style:normal}
-.pchip.ok i{background:var(--good);color:#fff}
-
-/* ---------- Pulse (demand and supply, read by UG) ---------- */
-.pulse{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;gap:10px;margin-bottom:16px}
-.pulse .lead{border-radius:var(--radius-lg);padding:14px 16px;background:linear-gradient(135deg,color-mix(in srgb,var(--yellow) 14%,var(--surface)),var(--surface));border:1px solid color-mix(in srgb,var(--yellow) 40%,var(--line))}
-.pulse .lead b{font-family:var(--font-display);font-weight:500;font-size:14px;display:block}
-.pulse .lead p{font-size:13px;color:var(--ink-2);margin-top:4px}
-.hot{border-radius:var(--radius-lg);padding:12px 14px;background:var(--surface);border:1px solid var(--line);display:flex;flex-direction:column;gap:4px;position:relative;overflow:hidden}
-.hot::before{content:"";position:absolute;right:-30px;top:-30px;width:90px;height:90px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--hc,var(--yellow)) 40%,transparent),transparent 70%);animation:pulseGlow 2.6s ease-in-out infinite}
-@keyframes pulseGlow{0%,100%{transform:scale(1);opacity:.7}50%{transform:scale(1.25);opacity:1}}
-.hot b{font-size:14px}
-.hot small{font-size:12px;color:var(--ink-2)}
-.hot .k{font-family:var(--font-body);font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--hc,var(--yellow))}
-.hot button{align-self:flex-start;margin-top:4px}
-@media (max-width:960px){.pulse{grid-template-columns:1fr 1fr}}
-@media (max-width:560px){.pulse{grid-template-columns:1fr}}
-@media (prefers-reduced-motion:reduce){.hot::before{animation:none}}
-
-/* ---------- Tazama dock ---------- */
-.dock{position:fixed;right:16px;bottom:16px;z-index:58;display:flex;align-items:center;gap:10px;padding:8px 10px 8px 8px;border-radius:999px;max-width:min(380px,calc(100vw - 32px));transition:max-width .4s cubic-bezier(.16,1,.3,1),padding .4s,gap .4s}
-.dock.compact:not(:hover):not(:focus-within){max-width:56px;padding:8px;gap:0;overflow:hidden}
-.dock.compact:not(:hover):not(:focus-within) .dock-body,.dock.compact:not(:hover):not(:focus-within) .dock-next{display:none}
-.dock.compact:not(:hover):not(:focus-within) .dock-viz{position:absolute;inset:0;width:100%;height:100%;opacity:.25;pointer-events:none}
-.dock-play{width:40px;height:40px;border-radius:50%;border:0;background:var(--yellow);color:var(--yellow-ink);display:grid;place-items:center;flex:none;box-shadow:0 0 0 0 color-mix(in srgb,var(--yellow) 50%,transparent);animation:dockPulse 2.2s ease-out infinite}
-.dock.on .dock-play{animation:none}
-@keyframes dockPulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--yellow) 55%,transparent)}100%{box-shadow:0 0 0 14px transparent}}
-.dock-play svg{width:18px;height:18px}
-.dock-body{min-width:0;flex:1}
-.dock-k{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.dock-t{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.dock-viz{width:56px;height:28px;flex:none;opacity:.9}
-.dock-next{border:0;background:transparent;color:var(--ink-2);font-size:22px;line-height:1;padding:0 4px;flex:none}
-@media (max-width:900px){.dock{bottom:96px;left:12px;right:12px;max-width:none}.dock.compact:not(:hover):not(:focus-within){left:auto;max-width:56px}}
-@media (prefers-reduced-motion:reduce){.dock-play{animation:none}}
-.mic-on{background:var(--red)!important;color:#fff!important;border-color:var(--red)!important}
-
-/* ---------- Bottom tab bar (phones) ---------- */
-.tabbar{display:none;position:fixed;left:12px;right:12px;bottom:12px;z-index:60;border-radius:18px;padding:6px;grid-template-columns:repeat(5,1fr)}
-.tabbar a,.tabbar button{display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 4px;border:0;background:transparent;text-decoration:none;font-family:var(--font-body);font-weight:600;font-size:11px;color:var(--ink-2);border-radius:12px}
-.tabbar svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.tabbar .on{color:var(--yellow);background:color-mix(in srgb,var(--yellow) 10%,transparent)}
-@media (max-width:900px){.tabbar{display:grid}body{padding-bottom:84px}.toast{bottom:96px}}
 
 /* ---------- Intro choreography (Ride. Pool. Rent.) ---------- */
 @media (prefers-reduced-motion:no-preference){
@@ -551,18 +388,17 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
     <a class="logo" href="#top" aria-label="UG home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true" class="crest">    <path d="M28.5 40.5 Q22 31 12.5 17" fill="none" stroke="currentColor" stroke-width="7.5" stroke-linecap="round"/>  <path d="M32 38.5 Q32 24 32 8.5" fill="none" stroke="#F2C200" stroke-width="7.5" stroke-linecap="round"/>  <path d="M35.5 40.5 Q42 31 51.5 17" fill="none" stroke="#D2202F" stroke-width="7.5" stroke-linecap="round"/>  <circle cx="32" cy="48" r="7.5" fill="currentColor"/>  <circle cx="32" cy="48" r="3" fill="#F2C200"/></svg>UG</a>
     <span class="tagline" id="tagline" aria-hidden="true"><span>Ride.</span><span>Pool.</span><span>Rent.</span></span>
     <div class="nav-links">
-      <a href="#stage">Stage</a>
       <a href="#compare">Compare</a>
+      <a href="#pool">Pool</a>
       <a href="#rent">Rent</a>
       <a href="#explore">Explore</a>
-      <a href="#drive">Drive</a>
-      <a href="#hustle">Hustle</a>
+      <a href="#hustle">Hustle Mode</a>
+      <a href="#partners">Partners</a>
       <a href="#plugins">Plug-ins</a>
     </div>
     <span class="spacer"></span>
-    <button class="theme-toggle" id="micBtn" type="button" aria-label="Voice commands" title="Voice commands (Cephable / browser speech)">🎤 voice</button>
     <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle colour theme">night / noon</button>
-    <button class="btn primary small" type="button" id="navCta">Get started</button>
+    <a class="btn primary small" href="#strip">Book now</a>
   </div>
 </nav>
 
@@ -574,11 +410,10 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
       <h1 id="verbs" aria-label="Ride. Pool. Rent."><span class="w" data-w="Ride.">Ride.</span><span class="w hl" data-w="Pool.">Pool.</span><span class="w" data-w="Rent.">Rent.</span></h1>
       <p class="lede tag fx" style="--d:1.25s">Look the part. Pay the smart price.</p>
       <p class="lede fx" style="--d:1.45s">One app that quotes every ride on the Ugandan market side by side, pools the road trip so the Prado costs a quarter, rents the car when you need to arrive, and books the park before the permits go. Paid the way Kampala pays: mobile money.</p>
-      <div class="doors fx" style="--d:1.6s">
-        <button class="door" type="button" data-door="rider"><span class="d-k">I need to get somewhere</span><span class="d-v">Queue a seat, compare every ride, plan the weekend.</span><span class="d-go">Start →</span></button>
-        <button class="door" type="button" data-door="driver"><span class="d-k">I drive, or I have a car</span><span class="d-v">Say where you're comfortable. Funded trips come to you.</span><span class="d-go">Open for business →</span></button>
+      <div class="hero-cta fx" style="--d:1.6s">
+        <a class="btn primary" href="#compare">Compare a ride now</a>
+        <a class="btn" href="#explore">Plan a weekend</a>
       </div>
-      <div class="fx" style="--d:1.7s;margin-top:12px"><a class="quiet" href="#compare">Just compare prices, no account needed</a></div>
       <div class="hero-stats fx" style="--d:1.75s" aria-label="Key figures">
         <div><div class="v mono" id="statProviders">10</div><div class="k">quotes per search</div></div>
         <div><div class="v mono">3 verbs</div><div class="k">ride · pool · rent, plus Explore for the weekend</div></div>
@@ -589,7 +424,7 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
       <canvas id="scene" aria-label="Interactive particle map of Uganda. Drag to rotate, hover a place to see it." role="img"></canvas>
       <div class="pins" id="pins"></div>
       <div class="pin-card glass" id="pinCard" hidden></div>
-      <div class="hint" id="hint">Drag to rotate · hover a town</div>
+      <div class="hint" id="hint">DRAG TO ROTATE · HOVER A PLACE</div>
     </div>
   </div>
 
@@ -612,58 +447,10 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
     </div>
   </div>
 
-  <div class="proto" role="note">Prototype v1 · every price is an estimate from a published model · payments run in a sandbox · nothing here is a licensed service yet</div>
   <div class="ticker" aria-hidden="true">
     <div class="ticker-track" id="ticker"></div>
   </div>
 </header>
-
-<!-- ===================== VIRTUAL STAGE ===================== -->
-<section id="stage">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <div>
-        <div class="eyebrow">The Virtual Stage · <b>seats fill first, then the car comes</b></div>
-        <h2>Pay for the seat. Watch the stage fill. The car is manufactured when the money is in.</h2>
-      </div>
-      <p>Like a matatu stage, a car leaves when it is full or at the cut-off. Unlike a stage, you queue money from your sofa, the seat price falls as friends join, and the driver who takes it is one who already said they are comfortable on that road. Not full at cut-off, you are refunded in full the same hour, and airport-night stages carry a guarantee: a special hire at a capped price instead of a refund.</p>
-    </div>
-    <div class="stage-bar rv">
-      <div class="seg" id="segStage" style="max-width:420px">
-        <button type="button" data-v="all" class="on">All corridors</button>
-        <button type="button" data-v="mine">Near me</button>
-        <button type="button" data-v="funded">Funded</button>
-      </div>
-      <span class="spacer" style="flex:1"></span>
-      <button class="btn small" type="button" id="newStageBtn">Start a stage</button>
-    </div>
-    <div class="pulse rv" id="pulse"></div>
-    <div class="stages rv" id="stages" aria-live="polite"></div>
-    <div class="reach rv">
-      <div class="eyebrow">Reach · <b id="reachCount"></b></div>
-      <p class="note" style="margin-top:4px;max-width:70ch">Every town on the map is a corridor from Kampala and a stage of its own. Where a local app already runs, UG hands the last mile to it rather than pretending to be there.</p>
-      <div class="reach-grid" id="reach"></div>
-    </div>
-    <div class="legs rv">
-      <div class="legs-head"><div><div class="eyebrow">Empty legs · <b>the return seats, 40% of the fare</b></div><p class="note" style="margin-top:4px">Every rental with driver and every pool has a way back. The moment the outbound is booked, the return's seats go on sale.</p></div></div>
-      <div class="legs-list" id="legs"></div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== DRIVE ===================== -->
-<section id="drive">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <div>
-        <div class="eyebrow">Drive · <b>funded trips come to you</b></div>
-        <h2>Say where you are comfortable, once. Then accept full cars with the money already in them.</h2>
-      </div>
-      <p>No posting, no waiting at a stage, no bidding. Your Comfort Map is the only thing you maintain: base, radius, corridors, hours, hard no's. Offers arrive the minute you sign up; you accept them the minute verification clears, usually within a day. Decline anything, no penalty.</p>
-    </div>
-    <div id="driveBody"></div>
-  </div>
-</section>
 
 <!-- ===================== COMPARE ===================== -->
 <section id="compare">
@@ -717,7 +504,7 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
         <div class="eyebrow">Pool · <b>share the seat, split the fuel</b></div>
         <h2>The Friday Jinja run, the Saturday Mbarara dash, the 4 a.m. airport drop. Someone in your circle is already driving.</h2>
       </div>
-      <p>Verified phone, verified plates, verified employer or church or alumni circle. Riders and drivers rate each other, chat inside the trip, and the fare is the true cost of the road divided by the seats. No surge, no meter. The driver's wage is in the price and shown in shillings, and so is UG's fee.</p>
+      <p>Verified phone, verified plates, verified employer or church or alumni circle. Riders and drivers rate each other, chat inside the trip, and the fare is the true cost of the road divided by the seats. No surge, no meter, no awkward cash. UG takes ten percent of the rider share to keep the lights on.</p>
     </div>
     <div class="pool">
       <div class="rv">
@@ -728,7 +515,7 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
         <h3>Offer a seat, or see what a seat should cost</h3>
         <div class="split">
           <div class="ctl"><label for="pRoute">Route</label><select id="pRoute"></select></div>
-          <div class="ctl"><label for="pSeats">Paying seats</label><input id="pSeats" type="number" min="1" max="6" value="3"></div>
+          <div class="ctl"><label for="pSeats">Seats filled (incl. you)</label><input id="pSeats" type="number" min="1" max="7" value="4"></div>
           <div class="ctl"><label for="pCar">Car</label><select id="pCar"></select></div>
           <div class="ctl"><label for="pWhen">Departure</label><input id="pWhen" type="time" value="06:00"></div>
           <div class="out" id="splitOut"></div>
@@ -758,7 +545,7 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
       <label>Split between <input type="range" id="rSplit" min="1" max="7" value="4"> <span class="mono" id="rSplitV">4</span></label>
       <label><input type="checkbox" id="rDriver"> With driver (+UGX 90,000/day)</label>
       <span class="spacer" style="flex:1"></span>
-      <span class="mono" style="font-size:12px;color:var(--ink-3)">Fuel and park fees billed separately · return legs sold as empty legs</span>
+      <span class="mono" style="font-size:12px;color:var(--ink-3)">Fuel and park fees billed separately</span>
     </div>
     <div class="fleet rv" id="fleet"></div>
   </div>
@@ -814,13 +601,13 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
         <div class="eyebrow">Hustle Mode · <b>for people running three lives</b></div>
         <h2>School run, board meeting, side-hustle delivery, kwanjula on Saturday. UG chains the day and tells you what it will cost before it starts.</h2>
       </div>
-      <p>Drop the day's stops in once. UG quotes each leg on the cheapest sensible mode, tells you where a boda beats a car by twenty minutes, and holds the money on your MoMo wallet so nothing bounces at the gate.</p>
+      <p>Drop the day's stops in once. UG quotes each leg on the cheapest sensible mode, warns you where a boda is faster than your dignity is worth, and holds the money on your MoMo wallet so nothing bounces at the gate.</p>
     </div>
     <div class="hustle">
       <div class="day rv" id="day"></div>
       <div class="rv">
         <div class="wallet">
-          <div class="eyebrow">UG Wallet · sandbox balance, not real money</div>
+          <div class="eyebrow">UG Wallet · funded by Flutterwave</div>
           <div class="bal">UGX <span id="walletBal">184,500</span></div>
           <div class="meta"><span>Today's legs: <b id="dayTotal">—</b></span><span>Plan: <b>Boujee</b></span></div>
           <div style="display:flex;gap:8px;margin-top:14px"><button class="btn small primary" type="button" id="topupBtn">Top up UGX 50,000</button><button class="btn small" type="button" id="payDayBtn">Pre-pay the day</button></div>
@@ -885,7 +672,7 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
       <a class="soc" href="https://youtube.com/@ridepoolrent" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="6" width="18" height="12" rx="4"/><path d="M10 9.5v5l4.5-2.5z" fill="currentColor" stroke="none"/></svg>YouTube</a>
     </div>
     <div class="legal">
-      <span>© 2026 UG · <b>v1</b> · <a href="v0.html" data-v0>v0 archived</a> · Prototype. Quotes are indicative estimates from a published model, not live fares.</span>
+      <span>© 2026 UG. Prototype. Quotes are indicative estimates from a published model, not live fares.</span>
       <span class="mono">Kampala · Entebbe · Jinja · Mbarara · Gulu</span>
     </div>
   </div>
@@ -902,12 +689,12 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
         <button type="button" data-net="AIRTEL">Airtel Money</button>
         <button type="button" data-net="CARD">Card</button>
       </div>
-      <div class="ctl"><label for="payPhone">Phone number</label><input id="payPhone" type="tel" placeholder="07XX XXX XXX" value=""></div>
-      <div class="ctl"><label for="payEmail">Email for the receipt</label><input id="payEmail" type="email" placeholder="you@example.com" value=""></div>
+      <div class="ctl"><label for="payPhone">Phone number</label><input id="payPhone" type="tel" placeholder="07XX XXX XXX" value="0772 000 000"></div>
+      <div class="ctl"><label for="payEmail">Email for the receipt</label><input id="payEmail" type="email" placeholder="you@example.com" value="rider@example.com"></div>
       <button class="btn primary" type="button" id="payBtn" style="width:100%;justify-content:center">Pay now</button>
       <div class="status" id="payStatus">Flutterwave will send a prompt to your phone. Approve it with your PIN.</div>
     </div>
-    <footer><span>Checkout by Flutterwave · sandbox until a live key is set</span><span class="mono" id="payRef"></span></footer>
+    <footer><span>Secured by Flutterwave · Bank of Uganda licensed PSO</span><span class="mono" id="payRef"></span></footer>
   </div>
 </div>
 <div class="modal" id="plugModal" hidden role="dialog" aria-modal="true" aria-labelledby="plugTitle">
@@ -922,36 +709,7 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
     <footer><span id="plugFoot"></span><span class="mono">stored locally</span></footer>
   </div>
 </div>
-<div class="modal" id="hsModal" hidden role="dialog" aria-modal="true" aria-labelledby="hsTitle">
-  <div class="sheet glass hs">
-    <header><b id="hsTitle">Set up in sixty seconds</b><div class="dots" id="hsDots"><i class="on"></i><i></i><i></i></div><button class="x" type="button" id="hsClose" aria-label="Close">×</button></header>
-    <div class="body" id="hsBody"></div>
-    <footer><span id="hsFoot">Phone-verified account · nothing is charged</span><span class="mono" id="hsStep">1 / 3</span></footer>
-  </div>
-</div>
-<div class="modal" id="meModal" hidden role="dialog" aria-modal="true" aria-labelledby="meTitle">
-  <div class="sheet glass">
-    <header><b id="meTitle">Me</b><button class="x" type="button" id="meClose" aria-label="Close">×</button></header>
-    <div class="body" id="meBody"></div>
-  </div>
-</div>
-<aside class="dock glass" id="dock" aria-label="Tazama in-transit entertainment">
-  <button class="dock-play" type="button" id="dockPlay" aria-label="Play"><svg viewBox="0 0 24 24" id="dockIcon"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></button>
-  <div class="dock-body">
-    <div class="dock-k" id="dockK">Tazama · tap to start the drive</div>
-    <div class="dock-t" id="dockT">UG Drive · Kampala morning mix</div>
-  </div>
-  <canvas class="dock-viz" id="dockViz" width="56" height="28" aria-hidden="true"></canvas>
-  <button class="dock-next" type="button" id="dockNext" aria-label="Next">›</button>
-</aside>
-<nav class="tabbar glass" id="tabbar" aria-label="App sections">
-  <a href="#stage"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="11" rx="2"/><path d="M7 18v2M17 18v2M3 12h18"/></svg>Stage</a>
-  <a href="#compare"><svg viewBox="0 0 24 24"><path d="M4 17h16M4 12h10M4 7h16"/></svg>Ride</a>
-  <a href="#rent"><svg viewBox="0 0 24 24"><path d="M5 16l2-6h10l2 6v3H5z"/><circle cx="8" cy="18" r="1.5"/><circle cx="16" cy="18" r="1.5"/></svg>Rent</a>
-  <a href="#explore"><svg viewBox="0 0 24 24"><path d="M3 20l6-14 4 8 3-4 5 10z"/></svg>Explore</a>
-  <button type="button" id="tabMe"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg><span id="tabMeLbl">Me</span></button>
-</nav>
-<div class="toast" id="toast" role="status" hidden></div>
+<div class="toast" id="toast" hidden></div>
 
 <!-- Three.js UMD build (r128 is the last UMD release on cdnjs) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -964,7 +722,6 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
    ===================================================================== */
 const UGX_PER_USD = 3700;               // modelled working rate, 2026
 const FUEL_UGX_PER_L = 6300;            // snippet: ~6,000–6,600 UGX/L in 2026
-const DRIVER_WAGE_PER_KM = 300;         // modelled: what a stage trip pays the driver above cost (v1, after the ops and driver critiques)
 const FLW_PUBLIC_KEY = 'FLWPUBK_TEST-replace-me-X';   // placeholder; set a real key in production
 
 const ROUTES = [
@@ -983,29 +740,7 @@ const ROUTES = [
   {id:'kampala-bwindi', from:'Kampala', to:'Bwindi (Buhoma)', km:470, min:540, tolls:0, inter:true, bus:60000},
   {id:'kampala-kidepo', from:'Kampala', to:'Kidepo Valley', km:520, min:660, tolls:0, inter:true, bus:70000},
   {id:'kampala-ssese', from:'Kampala', to:'Ssese Islands (via Bukakata ferry)', km:130, min:240, tolls:0, inter:true, bus:35000, ferry:14000},
-  {id:'kampala-mukono', from:'Kampala', to:'Mukono', km:25, min:60, tolls:0, inter:true, bus:5000},
-  {id:'kampala-masaka', from:'Kampala', to:'Masaka', km:130, min:150, tolls:0, inter:true, bus:20000},
-  {id:'kampala-mbale', from:'Kampala', to:'Mbale', km:225, min:270, tolls:0, inter:true, bus:30000},
-  {id:'kampala-tororo', from:'Kampala', to:'Tororo', km:210, min:240, tolls:0, inter:true, bus:30000},
-  {id:'kampala-soroti', from:'Kampala', to:'Soroti', km:300, min:330, tolls:0, inter:true, bus:40000},
-  {id:'kampala-hoima', from:'Kampala', to:'Hoima', km:200, min:240, tolls:0, inter:true, bus:30000},
-  {id:'kampala-masindi', from:'Kampala', to:'Masindi', km:215, min:240, tolls:0, inter:true, bus:30000},
-  {id:'kampala-lira', from:'Kampala', to:'Lira', km:340, min:360, tolls:0, inter:true, bus:45000},
-  {id:'kampala-arua', from:'Kampala', to:'Arua', km:470, min:480, tolls:0, inter:true, bus:60000},
-  {id:'kampala-bushenyi', from:'Kampala', to:'Bushenyi', km:320, min:360, tolls:0, inter:true, bus:45000},
-  {id:'kampala-kabale', from:'Kampala', to:'Kabale', km:410, min:480, tolls:0, inter:true, bus:55000},
-  {id:'kampala-moroto', from:'Kampala', to:'Moroto (Karamoja)', km:470, min:540, tolls:0, inter:true, bus:60000},
-  {id:'kampala-kotido', from:'Kampala', to:'Kotido', km:520, min:600, tolls:0, inter:true, bus:65000},
 ];
-
-/* Towns UG reaches, and the local apps a rider is handed to there. Provenance: Tinka's own site says
-   it runs in 15+ towns (snippet); 8 to 8 in Jinja is from the founder's brief and could not be verified
-   online; Abanista, Kweli.shop and Jumia upcountry delivery from snippets. Verify each before launch. */
-const LOCAL = {
-  Kampala:['Uber','Bolt','SafeBoda','Faras','Yango','Tinka'], Entebbe:['Uber','Bolt','SafeBoda','Tinka'], Mukono:['Tinka','SafeBoda'], Jinja:['Tinka','8 to 8 (delivery)','SafariShare'],
-  Masaka:['Tinka','Jumia upcountry'], Mbarara:['Tinka','Faras','SafariShare'], Bushenyi:['Tinka'], Kabale:['SafariShare'], 'Fort Portal':['Tinka'], Hoima:['Tinka','Abanista'], Masindi:['SafariShare'],
-  Gulu:['Tinka','SafariShare'], Lira:['Tinka','Kweli.shop'], Arua:['Tinka','Abanista'], Soroti:['Tinka'], Mbale:['Tinka','SafariShare'], Tororo:['SafariShare'], Moroto:['SafariShare'], Kotido:['SafariShare'],
-};
 
 /* Provider fare models. base/perKm/perMin/min in UGX.  kind: boda|car|shared|rent */
 const PROVIDERS = [
@@ -1013,7 +748,7 @@ const PROVIDERS = [
   {id:'uberboda', name:'Uber', sub:'UberBoda', kind:'boda', base:500, perKm:450, perMin:70, min:1500, colour:'#000000', link:'https://m.uber.com/ul/?action=setPickup', prov:'snippet (Uber UG blog)', surge:1.25},
   {id:'bolt', name:'Bolt', sub:'Bolt car', kind:'car', base:1000, perKm:800, perMin:120, min:5000, colour:'#34D186', link:'https://bolt.eu/en/cities/kampala/', prov:'modelled (no public tariff found)', surge:1.4},
   {id:'boltboda', name:'Bolt', sub:'Bolt Boda', kind:'boda', base:500, perKm:400, perMin:60, min:1500, colour:'#34D186', link:'https://bolt.eu/en/cities/kampala/', prov:'modelled', surge:1.3},
-  {id:'safeboda', name:'SafeBoda', sub:'Boda', kind:'boda', base:500, perKm:450, perMin:60, min:1500, colour:'#F7941D', link:'https://safeboda.com/', prov:'base fare from snippet; per-km modelled', surge:1.2},
+  {id:'safeboda', name:'SafeBoda', sub:'Helmet included', kind:'boda', base:500, perKm:450, perMin:60, min:1500, colour:'#F7941D', link:'https://safeboda.com/', prov:'base fare from snippet; per-km modelled', surge:1.2},
   {id:'faras', name:'Faras', sub:'Boda · 10% commission', kind:'boda', base:500, perKm:400, perMin:55, min:1500, colour:'#1F6FEB', link:'https://faras.com/', prov:'commission from snippet; rates modelled', surge:1.2},
   {id:'farascar', name:'Faras', sub:'Faras car', kind:'car', base:1000, perKm:750, perMin:110, min:5000, colour:'#1F6FEB', link:'https://faras.com/', prov:'modelled', surge:1.3},
   {id:'yango', name:'Yango', sub:'Car', kind:'car', base:1200, perKm:800, perMin:120, min:5500, colour:'#FF3B30', link:'https://yango.com/', prov:'modelled', surge:1.4},
@@ -1032,7 +767,7 @@ const FLEET = [
   {id:'noah', name:'Toyota Noah', cls:'Van · 7 seats · the whole circle', day:150000, kmPerL:10, glyph:'van'},
   {id:'rav4', name:'Toyota RAV4', cls:'4×4 · 5 seats · park roads', day:165000, kmPerL:10, glyph:'suv', hot:true},
   {id:'prado', name:'Land Cruiser Prado', cls:'4×4 · 7 seats · arrive properly', day:300000, kmPerL:8, glyph:'suv'},
-  {id:'v8', name:'Land Cruiser V8', cls:'4×4 · 7 seats · the function car', day:400000, kmPerL:6, glyph:'suv'},
+  {id:'v8', name:'Land Cruiser V8', cls:'4×4 · 7 seats · kwanjula grade', day:400000, kmPerL:6, glyph:'suv'},
   {id:'camper', name:'4×4 with rooftop tent', cls:'Camping kit · 4 sleepers', day:260000, kmPerL:8, glyph:'camper'},
 ];
 
@@ -1052,7 +787,7 @@ const DESTS = [
 
 const PLANS = [
   {name:'Hustler', price:0, per:'free', items:['Compare every ride, unlimited','Pool as a rider','Weekend planner','Pay-as-you-go with MoMo']},
-  {name:'Boujee', price:29000, per:'per month', hot:true, items:['Everything in Hustler','Priority seats on popular pools','8% off UG Rent, per-head billing','Day-chain planner with pre-pay','Named pickup points with shade at Entebbe and Kampala stages']},
+  {name:'Boujee', price:29000, per:'per month', hot:true, items:['Everything in Hustler','Priority seats on popular pools','8% off UG Rent, per-head billing','Day-chain planner with pre-pay','Airport lounge-style waiting room at Entebbe pick-up']},
   {name:'Executive', price:79000, per:'per month', items:['Everything in Boujee','Chauffeur-hour credits (4/mo)','Park permit concierge','Family and PA sub-accounts','Monthly statement for the accountant']},
 ];
 
@@ -1102,29 +837,16 @@ const UG_LAKES = [[[-81.527,29.257],[-81.52,29.229],[-81.571,29.203],[-81.598,29
 [[33.488,1.659],[33.496,1.634],[33.403,1.649],[33.352,1.642],[33.318,1.613],[33.287,1.623],[33.095,1.507],[33.108,1.481],[33.147,1.469],[33.221,1.49],[33.215,1.477],[33.276,1.486],[33.277,1.469],[33.25,1.47],[33.249,1.442],[33.2,1.439],[33.153,1.414],[33.221,1.395],[33.195,1.395],[33.203,1.381],[33.256,1.395],[33.278,1.383],[33.29,1.421],[33.332,1.424],[33.329,1.404],[33.307,1.403],[33.311,1.38],[33.333,1.372],[33.327,1.354],[33.352,1.332],[33.329,1.305],[33.318,1.312],[33.262,1.281],[33.27,1.216],[33.242,1.223],[33.215,1.305],[33.201,1.298],[33.186,1.312],[33.153,1.285],[33.113,1.277],[33.13,1.326],[33.103,1.349],[33.068,1.367],[33.048,1.359],[32.899,1.441],[32.851,1.428],[32.873,1.421],[32.859,1.395],[32.838,1.414],[32.893,1.312],[32.865,1.326],[32.879,1.298],[32.859,1.309],[32.831,1.401],[32.783,1.421],[32.742,1.416],[32.72,1.378],[32.773,1.342],[32.776,1.305],[32.738,1.354],[32.584,1.397],[32.537,1.451],[32.558,1.499],[32.544,1.524],[32.561,1.531],[32.602,1.497],[32.681,1.49],[32.758,1.571],[32.811,1.6],[32.811,1.565],[32.797,1.579],[32.789,1.565],[32.811,1.538],[32.842,1.556],[32.899,1.556],[32.914,1.572],[32.936,1.553],[32.98,1.568],[32.995,1.558],[32.982,1.538],[33.008,1.542],[33.089,1.612],[33.088,1.636],[33.108,1.65],[33.105,1.621],[33.133,1.606],[33.156,1.63],[33.153,1.621],[33.171,1.627],[33.192,1.672],[33.224,1.653],[33.252,1.692],[33.25,1.658],[33.274,1.634],[33.325,1.674],[33.393,1.689],[33.438,1.774],[33.455,1.764],[33.434,1.732],[33.436,1.671],[33.476,1.689],[33.469,1.655]],
 [[32.54,1.625],[32.564,1.641],[32.514,1.645],[32.423,1.682],[32.324,1.641],[32.328,1.626],[32.35,1.617],[32.392,1.606],[32.41,1.617],[32.441,1.585],[32.505,1.584],[32.517,1.557],[32.475,1.565],[32.475,1.552],[32.402,1.568],[32.379,1.599],[32.303,1.621],[32.303,1.634],[32.235,1.668],[32.348,1.658],[32.392,1.689],[32.429,1.698],[32.52,1.668],[32.571,1.676],[32.648,1.743],[32.669,1.8],[32.687,1.812],[32.684,1.789],[32.701,1.764],[32.709,1.78],[32.763,1.812],[32.771,1.86],[32.783,1.866],[32.776,1.853],[32.789,1.855],[32.811,1.866],[32.839,1.855],[32.851,1.874],[32.865,1.84],[32.879,1.847],[32.907,1.825],[32.931,1.879],[33.003,1.929],[33.023,1.927],[32.955,1.847],[32.975,1.845],[32.986,1.812],[33.014,1.824],[33.017,1.808],[32.993,1.783],[32.989,1.716],[32.955,1.799],[32.909,1.784],[32.854,1.785],[32.817,1.833],[32.786,1.798],[32.78,1.77],[32.796,1.732],[32.731,1.725],[32.735,1.696],[32.708,1.702],[32.65,1.67],[32.629,1.635],[32.579,1.624],[32.564,1.613],[32.572,1.606],[32.537,1.593]]];
 const PLACES = [
-  {name:'Kampala', lon:32.58, lat:0.32, sub:'Capital · UG home base', route:'ntinda-cbd', big:true, off:[-14,-14]},
-  {name:'Entebbe', lon:32.46, lat:0.05, sub:'Airport · expressway toll UGX 5,000', route:'cbd-entebbe', off:[-6,14]},
-  {name:'Mukono', lon:32.75, lat:0.35, sub:'25 km east · the kwanjula belt', route:'kampala-mukono', off:[30,10]},
-  {name:'Jinja', lon:33.20, lat:0.43, sub:'Source of the Nile · 80 km', route:'kampala-jinja', big:true, off:[16,-14]},
-  {name:'Masaka', lon:31.73, lat:-0.33, sub:'On the road south-west · 130 km', route:'kampala-masaka'},
-  {name:'Mbarara', lon:30.66, lat:-0.61, sub:'South-west hub · 270 km', route:'kampala-mbarara', big:true, off:[10,14]},
-  {name:'Bushenyi', lon:30.19, lat:-0.54, sub:'Tea country · 320 km', route:'kampala-bushenyi', off:[-12,-14]},
-  {name:'Kabale', lon:29.99, lat:-1.25, sub:'Lake Bunyonyi gateway · 410 km', route:'kampala-bunyonyi'},
-  {name:'Bwindi', lon:29.65, lat:-1.05, sub:'Mountain gorillas', route:'kampala-bwindi', park:true},
-  {name:'Fort Portal', lon:30.27, lat:0.67, sub:'Kibale chimps · crater lakes · 300 km', route:'kampala-fortportal', big:true},
-  {name:'Hoima', lon:31.35, lat:1.43, sub:'Oil city · 200 km', route:'kampala-hoima', off:[-8,12]},
-  {name:'Masindi', lon:31.72, lat:1.67, sub:'Gateway to Murchison · 215 km', route:'kampala-masindi', off:[14,-12]},
-  {name:'Murchison', lon:31.70, lat:2.28, sub:'Murchison Falls NP', route:'kampala-murchison', park:true},
-  {name:'Gulu', lon:32.30, lat:2.77, sub:'Northern hub · 335 km', route:'kampala-gulu', big:true},
-  {name:'Lira', lon:32.90, lat:2.25, sub:'Lango · 340 km', route:'kampala-lira'},
-  {name:'Arua', lon:30.91, lat:3.02, sub:'West Nile · 470 km', route:'kampala-arua'},
-  {name:'Soroti', lon:33.61, lat:1.71, sub:'Teso · 300 km', route:'kampala-soroti'},
-  {name:'Mbale', lon:34.18, lat:1.08, sub:'Mt Elgon · 225 km', route:'kampala-mbale', big:true, off:[-10,-6]},
-  {name:'Tororo', lon:34.18, lat:0.69, sub:'Border town · 210 km', route:'kampala-tororo', off:[0,14]},
-  {name:'Sipi', lon:34.37, lat:1.33, sub:'Sipi Falls · Mt Elgon', route:'kampala-sipi', park:true},
-  {name:'Moroto', lon:34.66, lat:2.53, sub:'Karamoja · 470 km', route:'kampala-moroto'},
-  {name:'Kotido', lon:34.12, lat:3.01, sub:'Karamoja north · 520 km', route:'kampala-kotido'},
-  {name:'Kidepo', lon:33.85, lat:3.85, sub:'Kidepo Valley NP', route:'kampala-kidepo', park:true},
+  {name:'Kampala', lon:32.58, lat:0.32, sub:'Capital · UG home base', route:'ntinda-cbd', fact:'Ten quotes, one screen'},
+  {name:'Entebbe', lon:32.46, lat:0.05, sub:'Airport · expressway toll UGX 5,000', route:'cbd-entebbe', fact:'Airport pools every hour'},
+  {name:'Jinja', lon:33.20, lat:0.43, sub:'Source of the Nile · 80 km', route:'kampala-jinja', fact:'Friday pools from UGX 21k'},
+  {name:'Mbarara', lon:30.66, lat:-0.61, sub:'South-west hub · 270 km', route:'kampala-mbarara', fact:'Faras and Tinka operate here'},
+  {name:'Fort Portal', lon:30.27, lat:0.67, sub:'Kibale chimps · crater lakes', route:'kampala-fortportal', fact:'Chimp permits from UGX 150k'},
+  {name:'Bwindi', lon:29.65, lat:-1.05, sub:'Mountain gorillas', route:'kampala-bwindi', fact:'EAC permit UGX 300,000'},
+  {name:'Murchison', lon:31.70, lat:2.28, sub:'Murchison Falls NP', route:'kampala-murchison', fact:'EAC entry UGX 25,000'},
+  {name:'Gulu', lon:32.30, lat:2.77, sub:'Northern hub · 335 km', route:'kampala-gulu', fact:'Bus from UGX 45k'},
+  {name:'Kidepo', lon:33.85, lat:3.85, sub:'Kidepo Valley NP', route:'kampala-kidepo', fact:'Fly-in or 11 h drive'},
+  {name:'Sipi', lon:34.37, lat:1.33, sub:'Sipi Falls · Mt Elgon', route:'kampala-sipi', fact:'Weekend from UGX 60k/head'},
 ];
 
 /* =====================================================================
@@ -1132,7 +854,6 @@ const PLACES = [
    ===================================================================== */
 const $ = s => document.querySelector(s);
 const fmt = n => Math.round(n).toLocaleString('en-UG');
-const esc = v => String(v==null?'':v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const clamp = (v,a,b) => Math.min(b,Math.max(a,v));
 const round500 = n => Math.floor(n/500)*500;
 const provKind = p => /UG model/.test(p) ? 'UG model' : /official/.test(p) ? 'official' : /snippet/.test(p) ? 'snippet' : 'modelled';
@@ -1146,19 +867,13 @@ document.documentElement.classList.add('js');
    Fare engine (the arbitrage desk)
    ===================================================================== */
 const TIME = { off:{mult:1, eta:1, label:'off-peak'}, peak:{mult:1.35, eta:1.45, label:'rush hour'}, night:{mult:1.2, eta:1.05, label:'night'} };
-/* One definition, used everywhere. `riders` is the number of paying seats; the driver is never a seat.
-   road = fuel + wear + tolls; wage = UGX 300/km to the driver above cost; riders split road + wage;
-   UG adds 10% on top of the rider share. The driver takes home road + wage in shillings. */
-function poolSeatCost(route, riders, car){
+function poolSeatCost(route, seats, car){
   car = car || FLEET[2];
   const fuel = (route.km / car.kmPerL) * FUEL_UGX_PER_L;
   const wear = route.km * 250;                 // modelled: tyres, service, depreciation share
-  const wage = route.km * DRIVER_WAGE_PER_KM;
-  const road = fuel + wear + (route.tolls||0) + (route.ferry||0);
-  const total = road + wage;
-  const n = Math.max(1, riders);
-  const perSeat = total / n;
-  return { total, road, wage, perSeat, riderPays: perSeat * 1.10, driverKeeps: total, ugFee: perSeat * 0.10 * n };
+  const total = fuel + wear + (route.tolls||0) + (route.ferry||0);
+  const perSeat = total / Math.max(1,seats);
+  return { total, perSeat, riderPays: perSeat * 1.10, driverKeeps: perSeat };
 }
 function quoteAll(route, timeKey, rain, pax){
   const T = TIME[timeKey];
@@ -1256,8 +971,8 @@ function renderCompare(){
     el.innerHTML = `
       <div class="q-logo" style="background:${q.p.colour}" title="${q.p.name}">${mark}</div>
       <div class="q-name">${q.p.name}<small>${q.p.sub}</small></div>
-      <div class="q-price">UGX ${fmt(shown)}<small>${split&&pax>1?'per person':'total'} · ${q.note.join(' · ')||'estimate'} · ${provKind(q.p.prov)==='UG model'?'UG price':provKind(q.p.prov)==='snippet'?'estimate from a published rate':'UG estimate, unverified'}</small></div>
-      <div class="q-eta">~${Math.round(q.eta)} min<br>${i===0?`<span class="tag best">${provKind(q.p.prov)==='UG model'?'Cheapest':'Likely cheapest'}</span>`:''}${q.note.some(n=>n.startsWith('surge'))?' <span class="tag surge">surge</span>':''} <span class="tag est" title="${q.p.prov}">${provKind(q.p.prov)}</span></div>
+      <div class="q-price">UGX ${fmt(shown)}<small>${split&&pax>1?'per person':'total'} · ${q.note.join(' · ')||'estimate'}</small></div>
+      <div class="q-eta">~${Math.round(q.eta)} min<br>${i===0?'<span class="tag best">Best price</span>':''}${q.note.some(n=>n.startsWith('surge'))?' <span class="tag surge">surge</span>':''} <span class="tag est" title="${q.p.prov}">${provKind(q.p.prov)}</span></div>
       <div class="q-act">${act}</div>`;
     res.appendChild(el);
     if (i===0 && !q.p.ug && ugq){
@@ -1298,15 +1013,15 @@ function renderTrips(){
   trips.forEach((t,i)=>{
     const r = ROUTES.find(x=>x.id===t.route); if(!r) return;
     const car = FLEET.find(c=> t.car && c.name.includes(t.car.split(' ')[0])) || FLEET[2];
-    const cost = poolSeatCost(r, Math.max(1,t.seats), car);
+    const cost = poolSeatCost(r, t.seats, car);
     const seats = Array.from({length:t.seats},(_,k)=>`<span class="seat ${k<t.taken?'taken':''}"></span>`).join('');
     const div = document.createElement('div'); div.className='trip'; div.dataset.min=r.min;
     div.innerHTML = `
       <div class="when">${t.d}<b>${t.t}</b></div>
       <div><div class="route">${r.from} → ${r.to}</div>
-        <div class="driver">${esc(t.driver)} · ${esc(t.car)} · ★ ${Number(t.rating).toFixed(1)} ${t.badges.map(b=>`<span class="badge ${b.includes('Plates')?'ok':'crane'}">${esc(b)}</span>`).join('')}</div>
+        <div class="driver">${t.driver} · ${t.car} · ★ ${t.rating.toFixed(1)} ${t.badges.map(b=>`<span class="badge ${b.includes('Plates')?'ok':'crane'}">${b}</span>`).join('')}</div>
         <div class="seats" aria-label="${t.taken} of ${t.seats} seats taken">${seats}</div></div>
-      <div class="fare"><div class="p">UGX ${fmt(cost.riderPays)}</div><small>per seat · ${r.km} km · ${t.seats-t.taken} left · UG fee UGX ${fmt(cost.riderPays-cost.perSeat)}</small>
+      <div class="fare"><div class="p">UGX ${fmt(cost.riderPays)}</div><small>per seat · ${r.km} km · ${t.seats-t.taken} left</small>
         <button class="btn small primary" type="button" data-book="${i}" style="margin-top:8px">Take a seat</button></div>`;
     el.appendChild(div);
   });
@@ -1324,9 +1039,9 @@ function renderSplit(){
   const car = FLEET.find(c=>c.id===$('#pCar').value) || FLEET[2];
   const c = poolSeatCost(r, seats, car);
   $('#splitOut').innerHTML = `
-    <div>Road cost UGX ${fmt(c.road)} (fuel ${fmt((r.km/car.kmPerL)*FUEL_UGX_PER_L)} + wear ${fmt(r.km*250)}${r.tolls?' + toll '+fmt(r.tolls):''}${r.ferry?' + ferry '+fmt(r.ferry):''}) + driver's wage UGX ${fmt(c.wage)}</div>
-    <div class="big">UGX ${fmt(c.riderPays)} <span style="font-size:13px;color:var(--ink-2)">per rider · ${seats} paying seats</span></div>
-    <div>Driver takes home UGX ${fmt(c.driverKeeps)} · UG's fee UGX ${fmt(c.ugFee)} in total (10% of the rider share, shown in shillings)</div>`;
+    <div>Road cost (fuel ${fmt((r.km/car.kmPerL)*FUEL_UGX_PER_L)} + wear ${fmt(r.km*250)}${r.tolls?' + toll '+fmt(r.tolls):''}${r.ferry?' + ferry '+fmt(r.ferry):''})</div>
+    <div class="big">UGX ${fmt(c.riderPays)} <span style="font-size:13px;color:var(--ink-2)">per rider</span></div>
+    <div>Driver keeps UGX ${fmt(c.driverKeeps*(seats-1))} of a UGX ${fmt(c.total)} trip · UG fee UGX ${fmt((c.riderPays-c.perSeat)*(seats-1))}</div>`;
 }
 $('#offerBtn').addEventListener('click', ()=>{
   const r = ROUTES.find(x=>x.id===$('#pRoute').value); const car = FLEET.find(c=>c.id===$('#pCar').value);
@@ -1471,7 +1186,7 @@ function loadFlutterwave(){
   });
 }
 $('#payBtn').addEventListener('click', async ()=>{
-  const phone = ($('#payPhone').value||(account&&account.phone)||'').replace(/\s+/g,''), email=$('#payEmail').value.trim();
+  const phone = $('#payPhone').value.replace(/\s+/g,''), email=$('#payEmail').value.trim();
   const status = $('#payStatus'); const btn=$('#payBtn'); btn.disabled=true;
   const tx_ref = $('#payRef').textContent.replace('tx_ref ','');
   const config = {
@@ -1480,7 +1195,7 @@ $('#payBtn').addEventListener('click', async ()=>{
     customer:{ email: email||'rider@example.com', phone_number: phone.startsWith('0')?'256'+phone.slice(1):phone, name:'UG rider' },
     customizations:{ title:'UG', description: pay.label, logo:'' },
     meta:{ product:'ug', label: pay.label, network: pay.net },
-    callback: d=>{ if(d && d.status==='successful'){ status.className='status ok'; status.textContent=`Paid. flw_ref ${d.flw_ref||'—'}. Fulfilment waits for the server-side verification and webhook.`; if(pay.onDone) pay.onDone(); } else { status.className='status'; status.textContent=`Payment ${d&&d.status?d.status:'not completed'}. Nothing was fulfilled.`; } },
+    callback: d=>{ status.className='status ok'; status.textContent=`Paid. flw_ref ${d.flw_ref||'—'} · status ${d.status}. Verify server-side before fulfilling.`; if(pay.onDone) pay.onDone(); },
     onclose: ()=>{ btn.disabled=false; }
   };
   const realKey = /^FLWPUBK(_TEST)?-[0-9a-f]{32}-X$/i.test(FLW_PUBLIC_KEY);
@@ -1490,9 +1205,8 @@ $('#payBtn').addEventListener('click', async ()=>{
     await loadFlutterwave();
     window.FlutterwaveCheckout(config);
   } catch (err) {
-    if (err.message!=='no-key'){ status.className='status'; status.textContent='Could not open Flutterwave checkout ('+err.message+'). Nothing was charged. Check your connection and try again.'; btn.disabled=false; return; }
-    // Sandbox stand-in, only when no key is configured: same fields, same sequence, no money moves.
-    const why = 'no public key configured';
+    // Sandbox stand-in: same fields, same sequence, no money moves.
+    const why = err.message==='no-key' ? 'no public key configured' : 'checkout script unreachable here';
     status.textContent = `Sandbox mode (${why}). Simulating ${pay.net==='CARD'?'card':pay.net+' mobile money'} prompt to ${phone||'your phone'}…`;
     await new Promise(r=>setTimeout(r,1400));
     status.textContent = 'Prompt sent. Waiting for PIN approval…';
@@ -1521,9 +1235,6 @@ const PLUGINS = [
   {id:'tazama', name:'Tazama', role:'Entertainment', colour:'#7C3AED', url:'https://tazama-watch.xulaye.chatgpt.site/', endpoint:'http://127.0.0.1:5178', blurb:'The road-trip playlist and a watch room for the back seats. A pool car opens Tazama with the trip\'s length, so the film ends when the car does. Rights-aware, Africa-first.', hooks:['Queue the trip playlist','Open a watch room'],
     mark:`<svg viewBox="0 0 40 40"><rect x="6" y="9" width="28" height="19" rx="4" fill="none" stroke="#fff" stroke-width="2.4"/><path d="M17 14v9l8-4.5z" fill="#fff"/><path d="M14 33h12" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg>`,
     open:(ctx)=>{ const e=plugEndpoint('tazama'); const p=new URLSearchParams({source:'ug', ...(ctx||{})}); return e.replace(/\/$/,'')+'/?'+p.toString(); }},
-  {id:'clarifom', name:'Clarifom', role:'Feedback · voice notes', colour:'#B45309', url:'https://clarifom.com/', endpoint:'https://clarifom.com/', blurb:'Feedback that is spoken, not typed. After a trip, hold the mic and say what happened; Clarifom turns it into a rating, a tag and a ticket UG can act on. Also the voice behind the commands.', hooks:['Say what happened','Rate by voice'],
-    mark:`<svg viewBox="0 0 40 40"><rect x="15" y="7" width="10" height="16" rx="5" fill="#fff"/><path d="M11 19a9 9 0 0 0 18 0M20 28v5M15 33h10" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg>`,
-    open:(ctx)=>plugEndpoint('clarifom'), unverified:true},
   {id:'cephable', name:'Cephable', role:'Automation · hands-free', colour:'#0F766E', url:'https://cephable.com/downloads/', endpoint:'https://cephable.com/downloads/', blurb:'Voice, face and switch controls for UG through Cephable, and automations that book for you: "take my Friday Jinja seat the moment it opens", "top up when the wallet drops under 20k".', hooks:['Enable voice commands','Automate Friday seat'],
     mark:`<svg viewBox="0 0 40 40"><path d="M10 22a10 10 0 0 1 20 0" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/><circle cx="20" cy="22" r="3" fill="#fff"/><path d="M20 25v8M14 33h12" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/></svg>`,
     open:(ctx)=>plugEndpoint('cephable')},
@@ -1536,22 +1247,16 @@ function renderPlugins(){
     const st=plugState(pl.id); const on=!!(st&&st.on);
     const d=document.createElement('article'); d.className='plug'; d.style.setProperty('--pc',pl.colour);
     d.innerHTML=`<div class="pl-mark">${pl.mark}</div><div class="role">${pl.role}</div><h3>${pl.name}</h3><p>${pl.blurb}</p>
-      <div class="st ${on?'on':''}"><i></i>${on?'Connected · '+esc((st.endpoint||pl.endpoint).replace(/^https?:\/\//,'').slice(0,34)):'Not connected'}</div>
+      <div class="st ${on?'on':''}"><i></i>${on?'Connected · '+(st.endpoint||pl.endpoint).replace(/^https?:\/\//,'').slice(0,34):'Not connected'}</div>
       <div class="hooks">${pl.hooks.map(h=>`<span class="hook"><i></i>${h}</span>`).join('')}</div>
-      <div class="acts"><a class="btn small ${on?'primary':''}" href="${esc(pl.open())}" target="_blank" rel="noopener noreferrer">Open ${pl.name} ↗</a><button class="btn small" type="button" data-plug="${pl.id}">${on?'Settings':'Connect'}</button>${pl.id==='cephable'?`<button class="btn small" type="button" data-voice>🎤 Hands-free</button>`:''}${pl.id==='clarifom'?`<button class="btn small" type="button" data-feedback>Say what happened</button>`:''}${pl.id==='felt'?`<button class="btn small" type="button" data-felt-export>Export Pulse layer</button>`:''}${pl.id==='tazama'?`<button class="btn small" type="button" data-dock>Start the drive</button>`:''}</div>${pl.unverified?'<p class="note">Vendor named in the brief; not verified online yet.</p>':''}`;
+      <div class="acts"><a class="btn small ${on?'primary':''}" href="${pl.open()}" target="_blank" rel="noopener">Open ${pl.name} ↗</a><button class="btn small" type="button" data-plug="${pl.id}">${on?'Settings':'Connect'}</button></div>`;
     el.appendChild(d);
   });
   el.querySelectorAll('[data-plug]').forEach(b=>b.addEventListener('click',()=>openPlug(b.dataset.plug)));
-  el.querySelectorAll('[data-voice]').forEach(b=>b.addEventListener('click',toggleVoice));
-  el.querySelectorAll('[data-feedback]').forEach(b=>b.addEventListener('click',openFeedback));
-  el.querySelectorAll('[data-felt-export]').forEach(b=>b.addEventListener('click',exportPulseGeoJSON));
-  el.querySelectorAll('[data-dock]').forEach(b=>b.addEventListener('click',()=>{ dock.toggle(true); location.hash='#top'; }));
   renderHooks();
 }
 let plugEditing=null;
-const PLUG_BODY = $('#plugModal .body').innerHTML;
 function openPlug(id){
-  if(!$('#plugEndpoint')){ $('#plugModal .body').innerHTML=PLUG_BODY; bindPlugModal(); }
   const pl=PLUGINS.find(p=>p.id===id); const st=plugState(id)||{}; plugEditing=id;
   $('#plugTitle').textContent=`Connect ${pl.name} · ${pl.role}`; $('#plugEndpoint').value=st.endpoint||pl.endpoint; $('#plugKey').value=st.key||'';
   $('#plugStatus').className='status'; $('#plugStatus').textContent=`UG will open ${pl.name} at this endpoint and pass trip context in the URL. Keys are used only if the endpoint is an API.`;
@@ -1559,373 +1264,16 @@ function openPlug(id){
 }
 $('#plugClose').addEventListener('click',()=>$('#plugModal').hidden=true);
 $('#plugModal').addEventListener('click',e=>{ if(e.target===$('#plugModal')) $('#plugModal').hidden=true; });
-function bindPlugModal(){
-$('#plugSave').addEventListener('click',()=>{ const ep=$('#plugEndpoint').value.trim(); if(!/^https?:\/\/[\w.\-:]+(\/[^\s"'<>]*)?$/.test(ep)){ $('#plugStatus').textContent='Endpoint must be a plain http(s) URL.'; return; } store('plug:'+plugEditing,{on:true,endpoint:ep,key:$('#plugKey').value.trim()}); if(plugEditing==='tazama') dock.setConnected(true); renderPulse(); $('#plugStatus').className='status ok'; $('#plugStatus').textContent='Connected. Hooks are live across the app.'; renderPlugins(); setTimeout(()=>$('#plugModal').hidden=true,900); toast(`${PLUGINS.find(p=>p.id===plugEditing).name} connected.`); });
+$('#plugSave').addEventListener('click',()=>{ const ep=$('#plugEndpoint').value.trim(); if(!/^https?:\/\//.test(ep)){ $('#plugStatus').textContent='Endpoint must start with http:// or https://'; return; } store('plug:'+plugEditing,{on:true,endpoint:ep,key:$('#plugKey').value.trim()}); $('#plugStatus').className='status ok'; $('#plugStatus').textContent='Connected. Hooks are live across the app.'; renderPlugins(); setTimeout(()=>$('#plugModal').hidden=true,900); toast(`${PLUGINS.find(p=>p.id===plugEditing).name} connected.`); });
 $('#plugForget').addEventListener('click',()=>{ try{ localStorage.removeItem('ug:plug:'+plugEditing); }catch(e){} renderPlugins(); $('#plugModal').hidden=true; });
-}
-bindPlugModal();
 /* Hooks that appear elsewhere once a plug-in is on */
-function hookLink(id,label,ctx){ const pl=PLUGINS.find(p=>p.id===id); const st=plugState(id); if(!(st&&st.on)) return ''; return `<a class="hook" style="--pc:${pl.colour}" href="${esc(pl.open(ctx))}" target="_blank" rel="noopener noreferrer"><i></i>${label}</a>`; }
+function hookLink(id,label,ctx){ const pl=PLUGINS.find(p=>p.id===id); const st=plugState(id); if(!(st&&st.on)) return ''; return `<a class="hook" style="--pc:${pl.colour}" href="${pl.open(ctx)}" target="_blank" rel="noopener"><i></i>${label}</a>`; }
 function renderHooks(){
   document.querySelectorAll('.trip').forEach(t=>{ const old=t.querySelector('.hooks'); if(old) old.remove(); const r=t.querySelector('.route').textContent; const html=hookLink('felt','Map on Felt',{q:r})+hookLink('tazama','Tazama playlist',{trip:r,minutes:t.dataset.min||''}); if(html){ const h=document.createElement('div'); h.className='hooks'; h.innerHTML=html; t.children[1].appendChild(h);} });
   const it=$('#itinHooks')||(()=>{ const h=document.createElement('div'); h.id='itinHooks'; h.className='hooks'; $('#itinNote').before(h); return h; })();
   it.innerHTML = hookLink('felt','Map the weekend',{q:dest.name}) + hookLink('infrared','Route comfort',{}) + hookLink('tazama','Watch room for the drive',{trip:dest.name});
   const dh=$('#dayHooks')||(()=>{ const h=document.createElement('div'); h.id='dayHooks'; h.className='hooks'; $('#day').after(h); return h; })();
   dh.innerHTML = hookLink('infrared','Check the day\'s heat',{}) + hookLink('cephable','Hands-free today',{});
-}
-
-/* =====================================================================
-   v1: account, the Handshake, the Virtual Stage, Drive (Comfort Map + offers), empty legs, Me.
-   Everything is local to this browser; timers simulate other riders and drivers so the loop
-   can be felt. docs/v1-concept.md explains the mechanism.
-   ===================================================================== */
-const SUBURBS = ['Kololo','Nakasero','Ntinda','Bugolobi','Kira','Naalya','Muyenga','Makindye','Kansanga','Najjera','Bukoto','Naguru','Mengo','Rubaga','Kawempe','Entebbe','Mukono'];
-const CIRCLES = ['Stanbic circle','MUBS alumni','Watoto circle','Ntinda school run','Kampala Parents','Airport regulars','Ministry of Health','Kyambogo staff'];
-const CORRIDORS = ROUTES.filter(r=>r.inter||r.entebbe).map(r=>({id:r.id,label:`${r.from} → ${r.to.split(' (')[0]}`,km:r.km}));
-let account = load('account', null);
-const hasRole = r => !!(account && account.roles && account.roles.includes(r));
-function saveAccount(){ store('account', account); renderAccountUI(); }
-function initials(n){ return (n||'U').trim().split(/\s+/).map(w=>w[0]).join('').slice(0,2).toUpperCase(); }
-
-/* ---- Virtual Stage ---- */
-const capFor = car => car==='Boda'?1:(FLEET.find(c=>c.name.includes(car))||FLEET[2]).cls.includes('7')?6:4;
-const MIN_FILL = st => (ROUTES.find(x=>x.id===st.route).entebbe ? 2 : 3);   // ops rule: 3 paying seats intercity, 2 on airport
-function seatPrice(stage){ const r=ROUTES.find(x=>x.id===stage.route); return poolSeatCost(r, Math.max(MIN_FILL(stage), stage.seats)).riderPays; }   // ceiling: never charge early riders more than late ones; the difference rebates at departure
-function fullPrice(stage){ const r=ROUTES.find(x=>x.id===stage.route); return poolSeatCost(r, stage.cap).riderPays; }
-const SEED_STAGES = [
-  {id:'s1', route:'kampala-jinja', day:'Fri', win:'17:00–19:00', cutoff:'Fri 15:30', pickup:'Total Ntinda, 17:15', cap:4, seats:3, circles:['Stanbic circle','MUBS alumni'], riders:['BK','IT','AN'], status:'filling'},
-  {id:'s2', route:'cbd-entebbe', day:'Sun', win:'03:00–04:00', cutoff:'Sat 22:00', pickup:'Shell Bugolobi, 03:00', guarantee:true, cap:6, seats:5, circles:['Airport regulars'], riders:['DO','PM','SN','JK','RA'], status:'filling'},
-  {id:'s3', route:'kampala-mbarara', day:'Sat', win:'05:30–07:00', cutoff:'Fri 20:00', pickup:'Shoprite Lubowa, 05:45', cap:6, seats:2, circles:['MUBS alumni'], riders:['CN','EW'], status:'filling'},
-  {id:'s4', route:'ntinda-cbd', day:'Weekdays', win:'07:30', cutoff:'daily 06:30', pickup:'Ntinda Shopping Centre, 07:25', cap:4, seats:4, circles:['Ntinda school run'], riders:['MK','LN','TA','you'], status:'funded', driver:'Brenda K. · RAV4 · UBH 123X'},
-  {id:'s5', route:'kampala-murchison', day:'Fri', win:'13:00', cutoff:'Thu 18:00', pickup:'Acacia Mall, 13:00', cap:5, seats:1, circles:['Watoto circle'], riders:['GS'], status:'filling'},
-  {id:'s6', route:'kampala-gulu', day:'Sat', win:'06:00', cutoff:'Fri 20:00', pickup:'Kalerwe stage, 06:00', cap:6, seats:4, circles:['Ministry of Health'], riders:['AO','FK','NM','PO'], status:'filling'},
-];
-let stages = load('stages', SEED_STAGES);
-let stageFilter='all';
-function renderStages(){
-  const el=$('#stages'); el.innerHTML=''; if(typeof renderPulse==='function' && $('#pulse')) setTimeout(renderPulse,0);
-  let list=stages.slice();
-  if (stageFilter==='funded') list=list.filter(s=>s.status==='funded');
-  if (stageFilter==='mine'){ const home=(account&&account.rider&&account.rider.home)||'Ntinda'; list=list.filter(s=>{ const r=ROUTES.find(x=>x.id===s.route); return r.from===home||r.to.includes(home)||r.from==='Kampala'; }); }
-  list.forEach(st=>{
-    const r=ROUTES.find(x=>x.id===st.route); const full=st.seats>=st.cap; const pct=Math.min(100,Math.round(st.seats/st.cap*100));
-    const price=seatPrice(st), atFull=fullPrice(st);
-    const d=document.createElement('article'); d.className='st-card'+(st.status==='funded'?' funded':full?' full':'');
-    const status = st.status==='funded' ? `<span class="chip good">Funded · ${st.driver}</span>` : full ? `<span class="chip hot">Full · offered to drivers</span>` : `<span class="chip">Filling · cut-off ${st.cutoff}</span>`;
-    d.innerHTML=`<div class="route">${r.from} → ${r.to.split(' (')[0]}</div>
-      <div class="win"><span>${st.day} ${st.win}</span><span>${r.km} km · ~${Math.round(r.min/60*10)/10} h</span></div>${st.pickup?`<div class="win"><span>Pickup: ${st.pickup}</span><span>min ${MIN_FILL(st)} seats</span></div>`:''}
-      <div class="fill" aria-label="${st.seats} of ${st.cap} seats"><i style="width:${pct}%"></i></div>
-      <div class="st-meta"><div class="p">UGX ${fmt(price)}<small>per seat now · ${st.seats}/${st.cap} in</small></div>${!full?`<div class="drop">falls to UGX ${fmt(atFull)}<br>when full</div>`:''}</div>
-      <div class="st-who">${st.riders.map(x=>`<span class="av ${x==='you'?'you':''}">${x==='you'?'YOU':x}</span>`).join('')}<span style="margin-left:6px">${st.circles.join(' · ')}</span></div>
-      <div>${status} ${comfortHint(st.win)}${st.guarantee?' <span class="chip good">Airport guarantee: a special hire at a capped price if the stage does not fill</span>':''}</div>
-      <div class="st-acts">${st.status==='funded'?`<button class="btn small" type="button" data-share="${st.id}">Share plate & ETA</button>`:full?`<button class="btn small" type="button" data-share="${st.id}">Invite</button>`:`<button class="btn small primary" type="button" data-seat="${st.id}">Take a seat · UGX ${fmt(price)}</button><button class="btn small" type="button" data-share="${st.id}">Invite</button>`}</div>`;
-    el.appendChild(d);
-  });
-  if(!list.length) el.innerHTML='<div class="panel">No stage here yet. Start one and invite your circle.</div>';
-  el.querySelectorAll('[data-seat]').forEach(b=>b.addEventListener('click',()=>{ const st=stages.find(x=>x.id===b.dataset.seat); if(!account){ openHandshake('rider', ()=>takeSeat(st)); return; } takeSeat(st); }));
-  el.querySelectorAll('[data-share]').forEach(b=>b.addEventListener('click',()=>{ const st=stages.find(x=>x.id===b.dataset.share); const r=ROUTES.find(x=>x.id===st.route); const txt=`UG stage: ${r.from} → ${r.to.split(' (')[0]} ${st.day} ${st.win} · ${st.seats}/${st.cap} seats · UGX ${fmt(seatPrice(st))} a seat, falls as it fills. Join: ug.app/s/${st.id}`; if(navigator.clipboard) navigator.clipboard.writeText(txt).then(()=>toast('Stage link copied. Send it to the group.')).catch(()=>toast(txt)); else toast(txt); }));
-}
-function takeSeat(st){
-  if (st.riders.includes('you')){ toast('You are already in this stage.'); return; }
-  const r=ROUTES.find(x=>x.id===st.route);
-  openCheckout(seatPrice(st), `Seat · ${r.from} → ${r.to.split(' (')[0]} · ${st.day} ${st.win} (held until departure; refunded in full if the stage does not fill)`, ()=>{
-    st.seats=Math.min(st.cap, st.seats+1); st.riders.push('you'); store('stages',stages); renderStages(); renderOffers();
-    if (st.seats>=st.cap){ toast('Stage full. Offered to drivers on this corridor.'); setTimeout(()=>fundStage(st),9000); }
-  });
-}
-function fundStage(st, driver){ if(st.status==='funded') return; st.status='funded'; st.driver=driver||['Brenda K. · RAV4 · UBH 123X','Ivan T. · Prado · UAX 908K','Aisha N. · Noah · UBG 447L'][Math.floor(Math.random()*3)]; store('stages',stages); renderStages(); addLeg(st); toast('Stage funded. Driver, plate and ETA are on the card.'); }
-$('#segStage').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; $('#segStage').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); stageFilter=b.dataset.v; renderStages(); });
-$('#newStageBtn').addEventListener('click',()=>{
-  const go=()=>{ const corr=CORRIDORS[Math.floor(Math.random()*CORRIDORS.length)]; const st={id:'s'+Date.now().toString(36), route:corr.id, day:'Sat', win:'06:00–08:00', cutoff:'Fri 20:00', cap:4, seats:1, circles:[(account.rider&&account.rider.circles&&account.rider.circles[0])||'Your circle'], riders:['you'], status:'filling'}; stages.unshift(st); store('stages',stages); renderStages(); toast('Stage started. Invite three friends and the price falls.'); };
-  if(!account) openHandshake('rider', go); else go();
-});
-/* the world moves: other riders join filling stages now and then */
-function tickStages(){ if(document.hidden) return; const open=stages.filter(s=>s.status==='filling'&&s.seats<s.cap); if(!open.length) return; if(Math.random()<0.55){ const st=open[Math.floor(Math.random()*open.length)]; st.seats++; st.riders.push(String.fromCharCode(65+Math.floor(Math.random()*26))+String.fromCharCode(65+Math.floor(Math.random()*26))); if(st.seats>=st.cap){ setTimeout(()=>fundStage(st), 12000); } store('stages',stages); renderStages(); renderOffers(); } }
-
-/* ---- Empty legs ---- */
-const SEED_LEGS = [
-  {route:'kampala-mbarara', back:true, day:'Sun 15:00', car:'Prado · with driver', seats:3, from:'a kwanjula rental'},
-  {route:'kampala-jinja', back:true, day:'Sun 17:30', car:'RAV4', seats:2, from:'Friday pool returning'},
-  {route:'cbd-entebbe', back:true, day:'Sun 05:10', car:'Noah', seats:5, from:'airport drop returning'},
-  {route:'kampala-fortportal', back:true, day:'Mon 08:00', car:'Land Cruiser · with driver', seats:4, from:'lodge transfer returning'},
-];
-let legs = load('legs', SEED_LEGS);
-function addLeg(st){ const r=ROUTES.find(x=>x.id===st.route); if(!r.inter&&!r.entebbe) return; legs.unshift({route:st.route, back:true, day:st.day+' return', car:(st.driver||'RAV4').split('·')[1]?.trim()||'RAV4', seats:st.cap-1, from:'this stage returning'}); store('legs',legs); renderLegs(); }
-function renderLegs(){
-  const el=$('#legs'); el.innerHTML='';
-  legs.forEach((l,i)=>{ const r=ROUTES.find(x=>x.id===l.route); const fullFare=poolSeatCost(r,2).riderPays; const price=Math.round(fullFare*0.4/500)*500;
-    const d=document.createElement('div'); d.className='leg'; d.innerHTML=`<div class="r">${r.to.split(' (')[0]} → ${r.from}</div><div class="m">${l.day} · ${l.car} · ${l.seats} seat${l.seats>1?'s':''} · ${l.from}</div><div class="p">UGX ${fmt(price)}<s>UGX ${fmt(fullFare)}</s></div><button class="btn small primary" type="button" data-leg="${i}">Take the empty leg</button>`; el.appendChild(d); });
-  el.querySelectorAll('[data-leg]').forEach(b=>b.addEventListener('click',()=>{ const l=legs[b.dataset.leg]; const r=ROUTES.find(x=>x.id===l.route); const price=Math.round(poolSeatCost(r,2).riderPays*0.4/500)*500; const go=()=>openCheckout(price,`Empty leg · ${r.to.split(' (')[0]} → ${r.from} · ${l.day}`,()=>{ l.seats=Math.max(0,l.seats-1); if(!l.seats) legs.splice(legs.indexOf(l),1); store('legs',legs); renderLegs(); }); if(!account) openHandshake('rider',go); else go(); }));
-}
-
-/* ---- Drive: Comfort Map + offers ---- */
-let offers = load('offers', []);
-let driverStats = load('driverStats', {earned:0, accepted:0, declined:0});
-function comfortMatches(st){ const c=account&&account.comfort; if(!c) return false; const r=ROUTES.find(x=>x.id===st.route); if(c.corridors.includes(st.route)) return true; if(!r.inter && !r.entebbe && r.km<=c.radius) return true; return false; }
-function offerFor(st){ const r=ROUTES.find(x=>x.id===st.route); const cost=poolSeatCost(r, st.cap); return { id:'o-'+st.id, stage:st.id, route:`${r.from} → ${r.to.split(' (')[0]}`, when:`${st.day} ${st.win}`, seats:st.cap, pay:Math.round(cost.driverKeeps), wage:Math.round(cost.wage), road:Math.round(cost.road), km:r.km, status:'open', at:Date.now() }; }
-function renderOffers(){
-  if(!hasRole('driver')) return;
-  // offers exist for full stages inside the comfort map, plus a couple of simulated corridor offers
-  stages.filter(st=>st.seats>=st.cap && st.status!=='funded' && comfortMatches(st)).forEach(st=>{ if(!offers.find(o=>o.stage===st.id)) { offers.unshift(offerFor(st)); toast('New funded offer on your corridor.'); } });
-  store('offers',offers); renderDrive();
-}
-function simulateOffer(){ if(document.hidden||!hasRole('driver')||!account.comfort) return; const ids=account.comfort.corridors; if(!ids.length) return; const rid=ids[Math.floor(Math.random()*ids.length)]; const r=ROUTES.find(x=>x.id===rid); const cap=capFor(account.comfort.vehicle); const cost=poolSeatCost(r,cap); const days=['Fri','Sat','Sun','Mon']; offers.unshift({id:'o'+Date.now().toString(36), stage:null, route:`${r.from} → ${r.to.split(' (')[0]}`, when:`${days[Math.floor(Math.random()*4)]} ${['05:30','07:00','13:00','17:30','21:00'][Math.floor(Math.random()*5)]}`, seats:cap, pay:Math.round(cost.driverKeeps), wage:Math.round(cost.wage), road:Math.round(cost.road), km:r.km, status:'open', at:Date.now()}); store('offers',offers); renderDrive(); toast('New funded offer: '+r.to.split(' (')[0]+'.'); }
-function renderDrive(){
-  const el=$('#driveBody');
-  if(!hasRole('driver')){
-    el.innerHTML=`<div class="teaser rv"><div class="step"><span class="n">SIXTY SECONDS</span><b>Phone, name, code.</b><p>No forms. No office visit to start. Verification runs while you drive your first circle trips.</p></div><div class="step"><span class="n">ONE SCREEN</span><b>Your Comfort Map.</b><p>Base, radius, the corridors you would drive, hours, the car, and your hard no's. Change it any time.</p></div><div class="step"><span class="n">THEN</span><b>Funded offers arrive.</b><p>Full cars with the money already in escrow. Accept in one tap. Decline anything, no penalty.</p></div></div><div style="margin-top:16px"><button class="btn primary" type="button" id="driveStart">Open for business</button></div>`;
-    $('#driveStart').addEventListener('click',()=>openHandshake('driver'));
-    return;
-  }
-  const c=account.comfort; const open=offers.filter(o=>o.status==='open'); const week=driverStats.earned;
-  el.innerHTML=`<div class="drive">
-    <div class="panel cmap"><h3>Your Comfort Map</h3>
-      <div class="kv"><span>Base</span><b>${esc(c.base)}</b><span>Radius in town</span><b>${c.radius} km</b><span>Days</span><b>${c.days.join(' ')}</b><span>Hours</span><b>${c.hours.join(', ')}</b><span>Vehicle</span><b>${esc(c.vehicle)} · ${esc(c.plate)||'plate pending'}</b><span>Hard no's</span><b>${c.nos.length?c.nos.join(', '):'none'}</b></div>
-      <div><div class="eyebrow" style="margin-bottom:6px">Corridors</div><div class="corr">${CORRIDORS.map(k=>`<span class="c ${c.corridors.includes(k.id)?'on':''}" data-corr="${k.id}">${k.label}</span>`).join('')}</div></div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn small" type="button" id="editComfort">Edit map</button><span class="pchip ${account.verified?'ok':''}"><i>${account.verified?'✓':'…'}</i>${account.verified?'Verified · all circles':'Verification pending · circle trips only'}</span></div>
-      ${!account.verified?`<p class="note">Offers arrive now. Two vouches (${account.vouches||0}/2) make you visible inside your circles; only UG's document check (permit, registration, insurance) lets you accept a funded trip. In this sandbox it clears in about a minute. <button class="btn small" type="button" id="verifyNow">Verify now (sandbox)</button></p>`:''}
-    </div>
-    <div>
-      <div class="tiles"><div class="tile"><div class="k">Earned this week</div><div class="v">UGX ${fmt(week)}</div></div><div class="tile"><div class="k">Open offers</div><div class="v">${open.length}</div></div><div class="tile"><div class="k">Acceptance</div><div class="v">${driverStats.accepted+driverStats.declined?Math.round(driverStats.accepted/(driverStats.accepted+driverStats.declined)*100):'—'}%</div></div></div>
-      <div id="offerList">${offers.length?offers.map(o=>`<div class="offer ${o.status!=='open'?'taken':''}"><div><div class="o-r">${o.route}</div><div class="o-m">${o.when} · ${o.seats} seats funded · ${o.km} km · escrowed</div></div><div class="o-p">UGX ${fmt(o.pay)}<small>to your MoMo · fuel and wear UGX ${fmt(o.road||0)} + your wage UGX ${fmt(o.wage||0)}</small></div>
-        <div class="o-a">${o.status==='open'?`<button class="btn small primary" type="button" data-acc="${o.id}" ${account.verified?'':'disabled title="Documents must clear before you can accept a funded trip"'}>${account.verified?'Accept · car is full':'Verify to accept'}</button><button class="btn small" type="button" data-dec="${o.id}">Decline, no penalty</button>`:`<span class="chip ${o.status==='accepted'?'good':''}">${o.status}</span>`}${o.status==='accepted'?hookLink('tazama','Watch room for the drive',{trip:o.route}):''}</div></div>`).join(''):'<div class="panel">No offers yet. They arrive as stages on your corridors fill; in this sandbox one comes every half minute or so.</div>'}</div>
-    </div></div>`;
-  $('#editComfort').addEventListener('click',()=>openHandshake('driver'));
-  const v=$('#verifyNow'); if(v) v.addEventListener('click',()=>{ account.verified=true; saveAccount(); renderDrive(); toast('Verified. Every corridor is open to you.'); });
-  el.querySelectorAll('[data-corr]').forEach(x=>x.addEventListener('click',()=>{ const id=x.dataset.corr; const i=c.corridors.indexOf(id); if(i>=0) c.corridors.splice(i,1); else c.corridors.push(id); saveAccount(); renderDrive(); }));
-  el.querySelectorAll('[data-acc]').forEach(b=>b.addEventListener('click',()=>{ const o=offers.find(x=>x.id===b.dataset.acc); o.status='accepted'; driverStats.accepted++; driverStats.earned+=o.pay; store('driverStats',driverStats); const st=stages.find(s=>s.id===o.stage); if(st) fundStage(st, `${account.name} · ${c.vehicle} · ${c.plate||'plate pending'}`); store('offers',offers); renderDrive(); toast(`Accepted. UGX ${fmt(o.pay)} releases to your MoMo when the trip completes.`); }));
-  el.querySelectorAll('[data-dec]').forEach(b=>b.addEventListener('click',()=>{ const o=offers.find(x=>x.id===b.dataset.dec); o.status='declined'; driverStats.declined++; store('driverStats',driverStats); store('offers',offers); renderDrive(); }));
-}
-
-/* ---- The Handshake ---- */
-let hs = {step:1, roles:[], after:null, draft:{}};
-function openHandshake(role, after){
-  hs={step:1, roles: account?account.roles.slice():[], after: after||null, draft: account?JSON.parse(JSON.stringify(account)):{}};
-  if(role && !hs.roles.includes(role)) hs.roles.push(role);
-  if(role==='driver' && account && account.comfort){ hs.step=2; }
-  $('#hsModal').hidden=false; renderHS();
-}
-function closeHS(){ $('#hsModal').hidden=true; }
-$('#hsClose').addEventListener('click',closeHS);
-$('#hsModal').addEventListener('click',e=>{ if(e.target===$('#hsModal')) closeHS(); });
-function hsSteps(){ const order=['rider','driver','owner'].filter(r=>hs.roles.includes(r)); return ['who', ...order, 'done']; }
-function renderHS(){
-  const steps=hsSteps(); const key=steps[hs.step-1]||'who'; const body=$('#hsBody'); const d=hs.draft;
-  $('#hsDots').innerHTML=steps.map((_,i)=>`<i class="${i<hs.step?'on':''}"></i>`).join(''); $('#hsStep').textContent=`${hs.step} / ${steps.length}`;
-  const next=(label='Continue')=>`<div style="display:flex;gap:8px;margin-top:14px"><button class="btn primary" type="button" id="hsNext" style="flex:1;justify-content:center">${label}</button>${hs.step>1?'<button class="btn" type="button" id="hsBack">Back</button>':''}</div>`;
-  if(key==='who'){
-    $('#hsTitle').textContent='Set up in sixty seconds';
-    body.innerHTML=`<h4>Who are you on UG?</h4>
-      <div class="roles">${[['rider','I need rides','queue seats, compare'],['driver','I drive','get funded trips'],['owner','I have a car','rent it per head']].map(([r,t,s])=>`<button type="button" class="role ${hs.roles.includes(r)?'on':''}" data-role="${r}">${t}<small>${s}</small></button>`).join('')}</div>
-      <div class="row2"><div class="ctl"><label for="hsName">First name</label><input id="hsName" type="text" value="${d.name||''}" placeholder="Brenda" autocomplete="given-name"></div><div class="ctl"><label for="hsPhone">Phone</label><input id="hsPhone" type="tel" value="${d.phone||''}" placeholder="07XX XXX XXX" autocomplete="tel"></div></div>
-      <div class="ctl"><label for="hsOtp">Code we sent by SMS (sandbox: any four digits)</label><div class="otp"><input id="hsOtp" type="text" inputmode="numeric" maxlength="4" placeholder="••••" style="width:140px"><button class="btn small" type="button" id="hsSend">Send code</button><span class="mono" id="hsSent" style="font-size:12px;color:var(--ink-3)"></span></div></div>
-      ${next()}`;
-    body.querySelectorAll('[data-role]').forEach(b=>b.addEventListener('click',()=>{ const r=b.dataset.role; const i=hs.roles.indexOf(r); if(i>=0) hs.roles.splice(i,1); else hs.roles.push(r); b.classList.toggle('on'); }));
-    $('#hsSend').addEventListener('click',()=>{ $('#hsSent').textContent='sent to '+($('#hsPhone').value||'your phone'); });
-    $('#hsNext').addEventListener('click',()=>{ const name=$('#hsName').value.trim(), phone=$('#hsPhone').value.trim(), otp=$('#hsOtp').value.trim(); if(!name||!phone){ toast('Name and phone, please.'); return; } if(!/^\d{4}$/.test(otp)){ toast('Enter the four-digit code (any digits in this sandbox).'); return; } if(!hs.roles.length) hs.roles.push('rider'); d.name=name; d.phone=phone; hs.step=2; renderHS(); });
-  } else if(key==='rider'){
-    $('#hsTitle').textContent='Where do you usually go?'; const r=d.rider||{home:'Ntinda', to:['Kampala CBD','Entebbe'], circles:['Stanbic circle']};
-    body.innerHTML=`<h4>Home and the two places you go most</h4><div class="row2"><div class="ctl"><label for="hsHome">Home</label><select id="hsHome">${SUBURBS.map(x=>`<option ${x===r.home?'selected':''}>${x}</option>`).join('')}</select></div><div class="ctl"><label for="hsTo1">Most days</label><select id="hsTo1">${['Kampala CBD','Nakasero','Kololo','Nakawa','Makerere','Entebbe','Jinja','Mbarara'].map(x=>`<option ${x===r.to[0]?'selected':''}>${x}</option>`).join('')}</select></div></div>
-      <div class="ctl"><label for="hsTo2">Weekends</label><select id="hsTo2">${['Entebbe','Jinja','Mbarara','Fort Portal','Gulu','Murchison Falls (Paraa)','Bwindi (Buhoma)'].map(x=>`<option ${x===r.to[1]?'selected':''}>${x}</option>`).join('')}</select></div>
-      <div class="ctl"><label>Your circles (ride with people you half-know)</label><div class="corr" id="hsCircles">${CIRCLES.map(c=>`<span class="c ${r.circles.includes(c)?'on':''}" data-c="${c}">${c}</span>`).join('')}</div></div>
-      ${next()}`;
-    body.querySelectorAll('[data-c]').forEach(x=>x.addEventListener('click',()=>x.classList.toggle('on')));
-    $('#hsNext').addEventListener('click',()=>{ d.rider={home:$('#hsHome').value, to:[$('#hsTo1').value,$('#hsTo2').value], circles:[...body.querySelectorAll('[data-c].on')].map(x=>x.dataset.c)}; hs.step++; renderHS(); });
-    $('#hsBack')&&$('#hsBack').addEventListener('click',()=>{ hs.step--; renderHS(); });
-  } else if(key==='driver'){
-    $('#hsTitle').textContent='Your Comfort Map'; const c=d.comfort||{base:'Ntinda', radius:15, corridors:['kampala-jinja','cbd-entebbe'], days:['Mon','Tue','Wed','Thu','Fri'], hours:['Mornings','Evenings'], vehicle:'RAV4', plate:'', nos:[], docs:{plate:false,permit:false}};
-    body.innerHTML=`<h4>Where and when are you comfortable driving?</h4>
-      <div class="row2"><div class="ctl"><label for="hsBase">Base</label><select id="hsBase">${SUBURBS.map(x=>`<option ${x===c.base?'selected':''}>${x}</option>`).join('')}</select></div><div class="ctl"><label for="hsRadius">Radius in town: <b class="mono" id="hsRadiusV">${c.radius}</b> km</label><input id="hsRadius" type="range" min="3" max="40" value="${c.radius}" style="accent-color:var(--yellow);width:100%"></div></div>
-      <div class="ctl"><label>Corridors you would drive</label><div class="corr" id="hsCorr">${CORRIDORS.map(k=>`<span class="c ${c.corridors.includes(k.id)?'on':''}" data-corr="${k.id}">${k.label}</span>`).join('')}</div></div>
-      <div class="row2"><div class="ctl"><label>Days</label><div class="days" id="hsDays">${['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map(x=>`<button type="button" class="${c.days.includes(x)?'on':''}" data-d="${x}">${x[0]}</button>`).join('')}</div></div><div class="ctl"><label>Hours</label><div class="corr" id="hsHours">${['Mornings','Days','Evenings','Nights'].map(x=>`<span class="c ${c.hours.includes(x)?'on':''}" data-h="${x}">${x}</span>`).join('')}</div></div></div>
-      <div class="row2"><div class="ctl"><label for="hsVeh">Vehicle</label><select id="hsVeh">${['Boda',...FLEET.map(f=>f.name.replace('Toyota ','').replace('Land Cruiser ','LC '))].map(x=>`<option ${x===c.vehicle?'selected':''}>${x}</option>`).join('')}</select></div><div class="ctl"><label for="hsPlate">Plate</label><input id="hsPlate" type="text" value="${c.plate}" placeholder="UBH 123X" style="text-transform:uppercase"></div></div>
-      <div class="ctl"><label>Snap now or later (verification runs while you drive circle trips)</label><div class="snap"><button type="button" id="snapPlate" class="${c.docs.plate?'ok':''}">${c.docs.plate?'Plate photo added ✓':'📷 Plate photo'}</button><button type="button" id="snapPermit" class="${c.docs.permit?'ok':''}">${c.docs.permit?'Permit added ✓':'📷 Driving permit'}</button></div></div>
-      <div class="ctl"><label>Hard no's</label><div class="corr" id="hsNos">${['No nights','No boda passengers','No upcountry','No airport runs'].map(x=>`<span class="c ${c.nos.includes(x)?'on':''}" data-n="${x}">${x}</span>`).join('')}</div></div>
-      ${next('Open for business')}`;
-    $('#hsRadius').addEventListener('input',e=>$('#hsRadiusV').textContent=e.target.value);
-    body.querySelectorAll('[data-corr],[data-h],[data-n]').forEach(x=>x.addEventListener('click',()=>x.classList.toggle('on')));
-    body.querySelectorAll('[data-d]').forEach(x=>x.addEventListener('click',()=>x.classList.toggle('on')));
-    $('#snapPlate').addEventListener('click',e=>{ e.target.classList.add('ok'); e.target.textContent='Plate photo added ✓'; c.docs.plate=true; });
-    $('#snapPermit').addEventListener('click',e=>{ e.target.classList.add('ok'); e.target.textContent='Permit added ✓'; c.docs.permit=true; });
-    $('#hsNext').addEventListener('click',()=>{ const corr=[...body.querySelectorAll('[data-corr].on')].map(x=>x.dataset.corr); d.comfort={base:$('#hsBase').value, radius:parseInt($('#hsRadius').value,10), corridors:corr, days:[...body.querySelectorAll('[data-d].on')].map(x=>x.dataset.d), hours:[...body.querySelectorAll('[data-h].on')].map(x=>x.dataset.h), vehicle:$('#hsVeh').value, plate:$('#hsPlate').value.trim().toUpperCase(), nos:[...body.querySelectorAll('[data-n].on')].map(x=>x.dataset.n), docs:c.docs}; hs.step++; renderHS(); });
-    $('#hsBack')&&$('#hsBack').addEventListener('click',()=>{ hs.step--; renderHS(); });
-  } else if(key==='owner'){
-    $('#hsTitle').textContent='Your car, priced per head'; const o=d.owner||{cls:'rav4', price:165000, driver:false, circles:['Stanbic circle']}; const car=FLEET.find(f=>f.id===o.cls)||FLEET[2];
-    body.innerHTML=`<h4>List the car. Empty legs sell themselves.</h4><div class="row2"><div class="ctl"><label for="hsCls">Class</label><select id="hsCls">${FLEET.map(f=>`<option value="${f.id}" ${f.id===o.cls?'selected':''}>${f.name}</option>`).join('')}</select></div><div class="ctl"><label for="hsPrice">Per day (suggested UGX <span id="hsSug">${fmt(car.day)}</span>)</label><input id="hsPrice" type="number" value="${o.price}" step="5000"></div></div>
-      <label class="toggle"><span>Comes with a driver (+UGX 90,000/day)</span><input type="checkbox" id="hsDrv" ${o.driver?'checked':''}></label>
-      <div class="ctl"><label>Circles allowed to book</label><div class="corr" id="hsOC">${CIRCLES.map(c=>`<span class="c ${o.circles.includes(c)?'on':''}" data-c="${c}">${c}</span>`).join('')}</div></div>
-      <div class="ctl"><label>Photos</label><div class="snap"><button type="button" id="snapCar1">📷 Front three-quarter</button><button type="button" id="snapCar2">📷 Interior</button></div></div>
-      ${next('List the car')}`;
-    $('#hsCls').addEventListener('change',e=>{ const f=FLEET.find(x=>x.id===e.target.value); $('#hsSug').textContent=fmt(f.day); $('#hsPrice').value=f.day; });
-    body.querySelectorAll('[data-c]').forEach(x=>x.addEventListener('click',()=>x.classList.toggle('on')));
-    ['snapCar1','snapCar2'].forEach(id=>$('#'+id).addEventListener('click',e=>{ e.target.classList.add('ok'); e.target.textContent='Added ✓'; }));
-    $('#hsNext').addEventListener('click',()=>{ d.owner={cls:$('#hsCls').value, price:parseInt($('#hsPrice').value,10)||car.day, driver:$('#hsDrv').checked, circles:[...body.querySelectorAll('[data-c].on')].map(x=>x.dataset.c)}; hs.step++; renderHS(); });
-    $('#hsBack')&&$('#hsBack').addEventListener('click',()=>{ hs.step--; renderHS(); });
-  } else {
-    // done
-    const wasNew=!account;
-    account=Object.assign({verified:false, vouches:0, createdAt:Date.now()}, account||{}, d, {roles:hs.roles});
-    saveAccount(); store('account',account);
-    $('#hsTitle').textContent='Open for business';
-    const lines=[]; if(hs.roles.includes('driver')) lines.push('Offers arrive now on your corridors. Accept them once verification clears, usually within a day; in this sandbox, about a minute.'); if(hs.roles.includes('rider')) lines.push('Your stages are live. Take a seat, invite the circle, watch the price fall.'); if(hs.roles.includes('owner')) lines.push('Your car is listed in Rent, per head, and its return legs will sell as empty legs.');
-    body.innerHTML=`<div class="done">${document.querySelector('.logo .crest').outerHTML}<div class="big">${esc(account.name)}, you are on UG.</div><p>${lines.join(' ')}</p><div style="display:flex;gap:8px;justify-content:center;margin-top:16px;flex-wrap:wrap">${hs.roles.includes('driver')?'<a class="btn primary" href="#drive" id="hsGoDrive">Go to your offers</a>':'<a class="btn primary" href="#stage" id="hsGoStage">See your stages</a>'}<button class="btn" type="button" id="hsDone">Done</button></div></div>`;
-    $('#hsDone').addEventListener('click',()=>{ closeHS(); });
-    body.querySelectorAll('a.btn').forEach(a=>a.addEventListener('click',()=>closeHS()));
-    if(hs.roles.includes('driver') && !account.verified){ setTimeout(()=>{ if(account&&!account.verified){ account.verified=true; saveAccount(); renderDrive(); toast('Verification cleared. Every corridor is open to you.'); } }, 60000); setTimeout(simulateOffer, 4000); }
-    if(hs.roles.includes('owner') && d.owner){ const f=FLEET.find(x=>x.id===d.owner.cls); if(f && !FLEET.find(x=>x.id==='mine')){ FLEET.push({id:'mine', name:f.name+' · '+account.name+"'s", cls:f.cls+' · your listing', day:d.owner.price, kmPerL:f.kmPerL, glyph:f.glyph}); renderFleet(); } }
-    renderStages(); renderDrive(); renderTrips();
-    if(hs.after){ const f=hs.after; hs.after=null; setTimeout(f, 300); }
-  }
-}
-
-/* ---- Me ---- */
-function renderAccountUI(){
-  const cta=$('#navCta'); const tab=$('#tabMeLbl');
-  if(account){ cta.className='pchip'+(account.verified?' ok':''); cta.innerHTML=`<i>${account.verified?'✓':esc(initials(account.name))}</i>${esc(account.name)}`; tab.textContent=account.name.split(' ')[0]; }
-  else { cta.className='btn primary small'; cta.textContent='Get started'; tab.textContent='Me'; }
-}
-function openMe(){
-  if(!account){ openHandshake('rider'); return; }
-  const b=$('#meBody');
-  b.innerHTML=`<div class="me-head"><div class="me-av">${esc(initials(account.name))}</div><div><b>${esc(account.name)}</b><small>${esc(account.phone)} · ${account.roles.map(r=>({rider:'rides',driver:'drives',owner:'rents out'})[r]).join(' · ')}</small></div></div>
-    <div class="me-list">
-      <div class="me-row"><span>Verification</span><span class="pchip ${account.verified?'ok':''}"><i>${account.verified?'✓':'…'}</i>${account.verified?'Verified':'Pending'}</span></div>
-      <div class="me-row"><span>Vouches</span><span class="mono">${account.vouches||0} / 2 ${account.vouches>=2?'· visible in circle':''}</span></div>
-      ${hasRole('rider')?`<div class="me-row"><span>Home · circles</span><span class="mono">${account.rider.home} · ${account.rider.circles.length}</span></div>`:''}
-      ${hasRole('driver')?`<div class="me-row"><span>Comfort Map</span><button class="btn small" type="button" id="meEditMap">${account.comfort.corridors.length} corridors · edit</button></div>`:''}
-      <div class="me-row"><span>Continue on your phone</span><button class="btn small" type="button" id="meLink">Copy link</button></div>
-      <div class="me-row"><span>Install UG on this device</span><button class="btn small" type="button" id="meInstall">${window.__installPrompt?'Install':'Add from browser menu'}</button></div>
-      <div class="me-row"><span>Ask a circle member to vouch (sandbox)</span><button class="btn small" type="button" id="meVouch">+1 vouch</button></div>
-      <div class="me-row"><span>Roles</span><button class="btn small" type="button" id="meRoles">Add a role</button></div>
-      <div class="me-row"><span>Theme</span><button class="btn small" type="button" id="meTheme">night / noon</button></div>
-      <div class="me-row"><span>Voice commands</span><button class="btn small" type="button" id="meVoice">🎤 Listen</button></div>
-      <div class="me-row"><span>Sign out</span><button class="btn small" type="button" id="meOut">Sign out</button></div>
-    </div>`;
-  $('#meModal').hidden=false;
-  const em=$('#meEditMap'); if(em) em.addEventListener('click',()=>{ $('#meModal').hidden=true; openHandshake('driver'); });
-  $('#meLink').addEventListener('click',()=>{ const u=location.href.split('#')[0]; if(navigator.clipboard) navigator.clipboard.writeText(u).then(()=>toast('Link copied. Open it on your phone; sign in with the same number.')).catch(()=>toast(u)); else toast(u); });
-  $('#meInstall').addEventListener('click',()=>{ if(window.__installPrompt){ window.__installPrompt.prompt(); } else toast('Use your browser menu: Add to Home screen.'); });
-  $('#meVouch').addEventListener('click',()=>{ account.vouches=(account.vouches||0)+1; saveAccount(); openMe(); renderDrive(); toast('A circle member vouched for you.'); });
-  $('#meRoles').addEventListener('click',()=>{ $('#meModal').hidden=true; openHandshake(); });
-  $('#meTheme').addEventListener('click',()=>$('#themeToggle').click());
-  $('#meVoice').addEventListener('click',()=>{ $('#meModal').hidden=true; toggleVoice(); });
-  $('#meOut').addEventListener('click',()=>{ account=null; try{ ['account','offers','driverStats'].forEach(k=>localStorage.removeItem('ug:'+k)); }catch(e){} renderAccountUI(); renderDrive(); renderStages(); $('#meModal').hidden=true; toast('Signed out on this device.'); });
-}
-$('#meClose').addEventListener('click',()=>$('#meModal').hidden=true);
-$('#meModal').addEventListener('click',e=>{ if(e.target===$('#meModal')) $('#meModal').hidden=true; });
-$('#navCta').addEventListener('click',()=>{ if(account) openMe(); else openHandshake(); });
-$('#tabMe').addEventListener('click',openMe);
-document.querySelectorAll('[data-door]').forEach(b=>b.addEventListener('click',()=>{ const role=b.dataset.door; if(account && hasRole(role)){ location.hash = role==='driver'?'#drive':'#stage'; return; } openHandshake(role); }));
-window.addEventListener('beforeinstallprompt', e=>{ e.preventDefault(); window.__installPrompt=e; });
-/* bottom bar: highlight the section in view */
-function initTabbar(){ const links=[...document.querySelectorAll('#tabbar a')]; if(!('IntersectionObserver' in window)) return; const map={stage:'#stage',compare:'#compare',rent:'#rent',explore:'#explore'}; const io=new IntersectionObserver(en=>en.forEach(x=>{ if(x.isIntersecting){ links.forEach(l=>l.classList.toggle('on', l.getAttribute('href')==='#'+x.target.id)); } }),{rootMargin:'-40% 0px -50% 0px'}); Object.keys(map).forEach(k=>{ const el=document.querySelector(map[k]); if(el) io.observe(el); }); }
-function renderReach(){ const towns=PLACES.filter(p=>!p.park); $('#reachCount').textContent=`${towns.length} towns · ${ROUTES.filter(r=>r.inter||r.entebbe).length} corridors`; $('#reach').innerHTML=towns.map(t=>{ const r=ROUTES.find(x=>x.id===t.route); return `<button class="town" type="button" data-town="${t.route}"><b>${t.name}</b><small>${r?(r.inter?r.km+' km · bus from UGX '+fmt(r.bus||0):'in town'):''}</small><span class="apps">${(LOCAL[t.name]||['no local app yet']).join(' · ')}</span></button>`; }).join(''); $('#reach').querySelectorAll('[data-town]').forEach(b=>b.addEventListener('click',()=>{ const r=ROUTES.find(x=>x.id===b.dataset.town); if(!r) return; $('#cFrom').value=r.from; syncTo('cFrom','cTo'); $('#cTo').value=r.id; renderCompare(); location.hash='#compare'; })); }
-function initDockCompact(){ if(!('IntersectionObserver' in window)) return; const hero=document.querySelector('#top .hero-copy'); if(!hero) return; new IntersectionObserver(en=>{ $('#dock').classList.toggle('compact', !en[0].isIntersecting); },{threshold:0}).observe(hero); }
-function initAutoDrive(){ initDockCompact(); if(matchMedia('(prefers-reduced-motion: reduce)').matches) return; if(load('dockOff',false)) return; const once=()=>{ document.removeEventListener('pointerdown',once); if(!dock.playing) dock.toggle(true); }; document.addEventListener('pointerdown',once,{once:true}); $('#dockPlay').addEventListener('click',()=>{ if(!dock.playing) store('dockOff',true); }); }
-function initV1(){ initAutoDrive(); renderReach(); renderAccountUI(); renderStages(); renderLegs(); renderDrive(); initTabbar(); setInterval(tickStages, 9000); setInterval(simulateOffer, 32000); document.querySelectorAll('[data-v0]').forEach(a=>{ if(location.hostname.endsWith('claude.ai')) a.href='https://claude.ai/code/artifact/511855d0-486a-477c-8400-ff36d05e5494'; }); }
-
-/* =====================================================================
-   Lit-up plug-ins. Tazama is the in-transit entertainment system (the New York cab screen, done
-   properly): a dock that starts the drive, generative in the sandbox and Tazama's catalogue when
-   connected. Pulse reads demand (paid seats) and supply (comfort maps) per town and points people
-   there without a search; Felt gets that layer as GeoJSON. Cephable and Clarifom drive voice:
-   commands and spoken feedback via the browser's speech engine here, the Cephable device layer
-   in production. Infrared adds a comfort hint per departure.
-   ===================================================================== */
-/* ---- Tazama dock: generative drive music (WebAudio) + bulletin ---- */
-const dock = (()=>{
-  const el=$('#dock'), play=$('#dockPlay'), k=$('#dockK'), t=$('#dockT'), viz=$('#dockViz'), icon=$('#dockIcon');
-  const MIX=[{t:'UG Drive · Kampala morning mix', key:0},{t:'Nile Groove · Jinja Friday', key:3},{t:'Highlands · the Mbarara road', key:-2},{t:'Night Runway · Entebbe 03:00', key:-5}];
-  let ctx=null, master=null, analyser=null, on=false, i=0, timer=null, bulletinTimer=null, bulletinIx=0, connected=false;
-  const CH=[[0,4,7,11],[5,9,12,16],[7,11,14,17],[9,12,16,19]]; // maj7, IV, V, vi
-  function note(n){ return 220*Math.pow(2,(n+MIX[i].key)/12); }
-  function chord(idx){ const now=ctx.currentTime; CH[idx].forEach((n,j)=>{ const o=ctx.createOscillator(); o.type=j%2?'triangle':'sine'; o.frequency.value=note(n-12*(j===0?1:0)); const g=ctx.createGain(); g.gain.setValueAtTime(0.0001,now); g.gain.exponentialRampToValueAtTime(0.09,now+0.6); g.gain.exponentialRampToValueAtTime(0.0001,now+3.9); o.connect(g); g.connect(master); o.start(now); o.stop(now+4); }); const kick=ctx.createOscillator(); const kg=ctx.createGain(); kick.frequency.setValueAtTime(110,now); kick.frequency.exponentialRampToValueAtTime(40,now+0.25); kg.gain.setValueAtTime(0.25,now); kg.gain.exponentialRampToValueAtTime(0.0001,now+0.3); kick.connect(kg); kg.connect(master); kick.start(now); kick.stop(now+0.32); }
-  let step=0;
-  function loop(){ chord(step%4); step++; timer=setTimeout(loop, 60000/96*4); }
-  function draw(){ if(!on) return; const g=viz.getContext('2d'); const cs=getComputedStyle(document.documentElement); g.clearRect(0,0,56,28); const d=new Uint8Array(analyser.frequencyBinCount); analyser.getByteFrequencyData(d); g.fillStyle=cs.getPropertyValue('--yellow').trim(); for(let b=0;b<7;b++){ const v=d[b*3]/255; const h=3+v*24; g.fillRect(b*8,28-h,5,h);} requestAnimationFrame(draw); }
-  function bulletin(){ const lines=[`Fuel today UGX ${fmt(FUEL_UGX_PER_L)}/L`, `Entebbe expressway toll UGX 5,000`, ...stages.filter(s=>s.status==='filling').slice(0,3).map(s=>{ const r=ROUTES.find(x=>x.id===s.route); return `${r.to.split(' (')[0]} stage ${s.seats}/${s.cap} · UGX ${fmt(seatPrice(s))} a seat`; }), `Gorilla permit, EAC citizens UGX 300,000`]; k.textContent='UG Bulletin · '+lines[bulletinIx%lines.length]; bulletinIx++; }
-  function start(){ try{ if(!ctx){ ctx=new (window.AudioContext||window.webkitAudioContext)(); master=ctx.createGain(); master.gain.value=0.5; const lp=ctx.createBiquadFilter(); lp.type='lowpass'; lp.frequency.value=1800; analyser=ctx.createAnalyser(); analyser.fftSize=64; master.connect(lp); lp.connect(analyser); analyser.connect(ctx.destination); } if(ctx.state==='suspended') ctx.resume(); on=true; el.classList.add('on'); icon.innerHTML='<path d="M7 5h4v14H7zM13 5h4v14h-4z" fill="currentColor"/>'; t.textContent=MIX[i].t; k.textContent=connected?'Tazama · now playing':'Tazama · now playing (sandbox mix)'; loop(); draw(); bulletin(); bulletinTimer=setInterval(bulletin, 7000); }catch(e){ toast('Audio is not available here.'); } }
-  function stop(){ on=false; el.classList.remove('on'); clearTimeout(timer); clearInterval(bulletinTimer); icon.innerHTML='<path d="M8 5v14l11-7z" fill="currentColor"/>'; k.textContent='Tazama · paused'; }
-  function toggle(force){ const want = force===undefined ? !on : force; if(want && !on) start(); else if(!want && on) stop(); }
-  function next(){ i=(i+1)%MIX.length; t.textContent=MIX[i].t; if(on){ step=0; } }
-  play.addEventListener('click',()=>toggle());
-  $('#dockNext').addEventListener('click',next);
-  document.addEventListener('visibilitychange',()=>{ if(document.hidden && on) stop(); });
-  return { toggle, next, get playing(){ return on; }, setConnected(v){ connected=v; } };
-})();
-
-/* ---- Pulse: where demand and supply are, right now ---- */
-function pulseData(){
-  const towns={};
-  const add=(name,k,v)=>{ towns[name]=towns[name]||{name, demand:0, supply:0, unfilled:0, funded:0}; towns[name][k]+=v; };
-  stages.forEach(st=>{ const r=ROUTES.find(x=>x.id===st.route); const dest=r.to.split(' (')[0].replace('Kampala CBD','Kampala').replace('Entebbe Airport','Entebbe'); const key=PLACES.find(p=>dest.startsWith(p.name))?.name || 'Kampala'; add(key,'demand',st.seats); if(st.status!=='funded') add(key,'unfilled',st.cap-st.seats); else add(key,'funded',1); add('Kampala','demand',Math.round(st.seats/2)); });
-  // supply: the signed-in driver's comfort map plus a modelled base of drivers per town
-  const base={Kampala:14,Entebbe:5,Jinja:3,Mbarara:3,Gulu:2,Mbale:2,'Fort Portal':2,Masaka:2,Mukono:2};
-  Object.keys(base).forEach(n=>add(n,'supply',base[n]));
-  if(account&&account.comfort){ add(account.comfort.base in towns?account.comfort.base:'Kampala','supply',1); account.comfort.corridors.forEach(cid=>{ const r=ROUTES.find(x=>x.id===cid); const dest=r.to.split(' (')[0]; const key=PLACES.find(p=>dest.startsWith(p.name))?.name; if(key) add(key,'supply',1); }); }
-  return Object.values(towns).map(t=>({...t, gap:t.demand - t.supply*2}));
-}
-function renderPulse(){
-  const el=$('#pulse'); if(!el) return; const d=pulseData();
-  const driverSide = hasRole('driver');
-  const ranked = d.filter(t=>t.name!=='Kampala' || !driverSide).sort((a,b)=> driverSide ? (b.gap-a.gap) : ((b.demand/(b.demand+b.unfilled||1))-(a.demand/(a.demand+a.unfilled||1)))).slice(0,3);
-  const lead = driverSide ? `<b>Where the money is waiting</b><p>UG reads paid seats against drivers' comfort maps. These towns have more funded demand than cars. Tap one and the map points you there.</p>` : `<b>Where the stages fill fastest</b><p>UG reads today's paid seats and drivers nearby. These stages will leave first; take a seat before the cut-off.</p>`;
-  el.innerHTML = `<div class="lead">${lead}<small class="note">${PLUGINS.find(p=>p.id==='felt')&&plugState('felt')&&plugState('felt').on?'Live layer exported to Felt.':'Connect Felt to export this as a live map layer.'}</small></div>` + ranked.map(t=>`<div class="hot" style="--hc:${t.gap>0?'var(--red)':'var(--good)'}"><span class="k">${driverSide?(t.gap>0?'Undersupplied':'Covered'):(t.unfilled<=1?'Leaving soon':'Filling')}</span><b>${t.name}</b><small>${t.demand} paid seats · ${t.supply} drivers near · ${t.unfilled} seats open</small><button class="btn small" type="button" data-point="${t.name}">Point me there</button></div>`).join('');
-  el.querySelectorAll('[data-point]').forEach(b=>b.addEventListener('click',()=>{ const n=b.dataset.point; if(scene&&scene.focus){ scene.focus(n); } location.hash='#top'; toast(`Pointing you to ${n}.`); }));
-  if(scene&&scene.setHeat) scene.setHeat(d);
-}
-function exportPulseGeoJSON(){
-  const d=pulseData();
-  const feats=d.map(t=>{ const p=PLACES.find(x=>x.name===t.name); if(!p) return null; return {type:'Feature', geometry:{type:'Point', coordinates:[p.lon,p.lat]}, properties:{name:t.name, demand_seats:t.demand, drivers_near:t.supply, seats_open:t.unfilled, gap:t.gap, source:'UG Pulse', at:new Date().toISOString()}}; }).filter(Boolean);
-  const K=PLACES[0]; ROUTES.filter(r=>r.inter||r.entebbe).forEach(r=>{ const dest=r.to.split(' (')[0]; const p=PLACES.find(x=>dest.startsWith(x.name)); if(!p) return; const st=stages.find(s=>s.route===r.id); feats.push({type:'Feature', geometry:{type:'LineString', coordinates:[[K.lon,K.lat],[p.lon,p.lat]]}, properties:{corridor:`${r.from} → ${dest}`, km:r.km, stage_seats:st?st.seats:0, stage_cap:st?st.cap:0, seat_price_ugx:st?Math.round(seatPrice(st)):null}}); });
-  const gj=JSON.stringify({type:'FeatureCollection', features:feats}, null, 1);
-  const done=()=>{ toast('Pulse layer copied as GeoJSON. In Felt: New map → Upload → paste.'); const st=plugState('felt'); if(st&&st.on) window.open(plugEndpoint('felt'),'_blank','noopener'); };
-  if(navigator.clipboard) navigator.clipboard.writeText(gj).then(done).catch(()=>{ console.log(gj); toast('GeoJSON printed to the console.'); }); else { console.log(gj); toast('GeoJSON printed to the console.'); }
-}
-/* ---- Infrared: comfort hint by departure hour (modelled sun index; the workflow replaces it when connected) ---- */
-function comfortHint(win){ const h=parseInt(String(win).slice(0,2),10); if(isNaN(h)) return ''; const on=plugState('infrared')&&plugState('infrared').on; const src=on?'Infrared workflow':'modelled sun index'; if(h>=11&&h<=15) return `<span class="chip warn" title="${src}">Hot leg · consider 16:00+</span>`; if((h>=5&&h<=8)||(h>=17&&h<=19)) return `<span class="chip good" title="${src}">Cool departure</span>`; if(h>=21||h<5) return `<span class="chip" title="${src}">Night · lit pickup</span>`; return ''; }
-/* ---- Voice: Cephable in production, the browser's speech engine here ---- */
-let rec=null, listening=false;
-function say(txt){ try{ if('speechSynthesis' in window){ const u=new SpeechSynthesisUtterance(txt); u.lang='en-UG'; speechSynthesis.cancel(); speechSynthesis.speak(u);} }catch(e){} toast(txt); }
-function handleCommand(text){
-  const t=text.toLowerCase().trim(); let m;
-  if((m=t.match(/compare (.+?) to (.+)/))){ const from=SUBURBS.find(x=>m[1].includes(x.toLowerCase()))||(m[1].includes('kampala')?'Kampala':null); const to=ROUTES.find(r=>m[2].includes(r.to.toLowerCase().split(' (')[0])||m[2].includes(r.to.toLowerCase().split(' ')[0])); if(to){ $('#cFrom').value=to.from; syncTo('cFrom','cTo'); $('#cTo').value=to.id; renderCompare(); location.hash='#compare'; const best=quoteAll(to,state.time,false,1)[0]; say(`${to.from} to ${to.to.split(' (')[0]}: cheapest is ${best.p.name} at about ${fmt(best.price)} shillings.`); return; } }
-  if((m=t.match(/(take|book) (a |me a )?seat (to|for) (.+)/))){ const st=stages.find(s=>{ const r=ROUTES.find(x=>x.id===s.route); return r.to.toLowerCase().includes(m[4].trim()); }); if(st){ location.hash='#stage'; takeSeat(st); say(`Opening a seat to ${m[4]}.`); return; } }
-  if(/my offers|open offers|drive/.test(t)){ location.hash='#drive'; say(hasRole('driver')?`You have ${offers.filter(o=>o.status==='open').length} open offers.`:'Open for business in sixty seconds.'); return; }
-  if(/stage|stages/.test(t)){ location.hash='#stage'; say('Here are the stages.'); return; }
-  if(/night mode|dark mode/.test(t)){ document.documentElement.setAttribute('data-theme','dark'); store('theme','dark'); scene&&scene.recolour(); say('Night.'); return; }
-  if(/day mode|light mode|noon/.test(t)){ document.documentElement.setAttribute('data-theme','light'); store('theme','light'); scene&&scene.recolour(); say('Noon.'); return; }
-  if(/(start|play).*(music|drive|tazama)/.test(t)){ dock.toggle(true); say('Starting the drive.'); return; }
-  if(/(stop|pause).*(music|drive|tazama)/.test(t)){ dock.toggle(false); say('Paused.'); return; }
-  if(/next (song|track|mix)/.test(t)){ dock.next(); say('Next mix.'); return; }
-  if(/where.*(busy|demand|money)/.test(t)){ location.hash='#stage'; const d=pulseData().sort((a,b)=>b.gap-a.gap)[0]; if(d){ scene&&scene.focus&&scene.focus(d.name); say(`${d.name}: ${d.demand} paid seats and ${d.supply} drivers near.`); } return; }
-  if(/help|what can you do/.test(t)){ say('Try: compare Ntinda to Kampala CBD. Take a seat to Jinja. My offers. Where is the demand. Night mode. Start the music.'); return; }
-  say('I did not catch that. Say help for the list.');
-}
-function toggleVoice(){
-  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-  if(!SR){ toast('Voice needs Chrome, Edge, or the Cephable app for face and switch control.'); return; }
-  if(listening){ rec.stop(); return; }
-  rec=new SR(); rec.lang='en-UG'; rec.interimResults=false; rec.maxAlternatives=1;
-  rec.onstart=()=>{ listening=true; $('#micBtn').classList.add('mic-on'); $('#micBtn').textContent='🎤 listening'; };
-  rec.onend=()=>{ listening=false; $('#micBtn').classList.remove('mic-on'); $('#micBtn').textContent='🎤 voice'; };
-  rec.onerror=e=>{ toast('Voice: '+e.error); };
-  rec.onresult=e=>{ const txt=e.results[0][0].transcript; toast('“'+txt+'”'); handleCommand(txt); };
-  try{ rec.start(); }catch(e){ toast('Could not start listening.'); }
-}
-$('#micBtn').addEventListener('click',toggleVoice);
-/* ---- Clarifom: spoken feedback ---- */
-function openFeedback(){
-  const m=$('#plugModal'); plugEditing=null;
-  $('#plugTitle').textContent='Say what happened'; $('#plugFoot').textContent='Clarifom · feedback';
-  $('#plugModal .body').innerHTML=`<div class="ctl"><label for="fbText">Hold the mic or type. One sentence is enough.</label><textarea id="fbText" rows="3" style="background:var(--surface-2);border:1px solid var(--line);border-radius:var(--radius);padding:10px 12px;width:100%;font:inherit;color:inherit" placeholder="The driver was ten minutes late but the car was clean."></textarea></div>
-    <div class="corr" id="fbTags">${['Late','On time','Clean car','Unsafe driving','Great driver','Price surprise','App bug'].map(x=>`<span class="c" data-t="${x}">${x}</span>`).join('')}</div>
-    <div style="display:flex;gap:8px;margin-top:12px"><button class="btn" type="button" id="fbMic">🎤 Say it</button><button class="btn primary" type="button" id="fbSend" style="flex:1;justify-content:center">Send feedback</button></div>
-    <div class="status" id="fbStatus">Kept on this device until accounts exist. Nothing is sent anywhere yet.</div>`;
-  m.hidden=false;
-  $('#fbTags').querySelectorAll('[data-t]').forEach(x=>x.addEventListener('click',()=>x.classList.toggle('on')));
-  $('#fbMic').addEventListener('click',()=>{ const SR=window.SpeechRecognition||window.webkitSpeechRecognition; if(!SR){ toast('Dictation needs Chrome or Edge here.'); return; } const r=new SR(); r.lang='en-UG'; r.onresult=e=>{ $('#fbText').value=e.results[0][0].transcript; }; r.onerror=e=>toast('Voice: '+e.error); r.start(); });
-  $('#fbSend').addEventListener('click',()=>{ const fb=load('feedback',[]); fb.unshift({at:Date.now(), text:$('#fbText').value.trim(), tags:[...$('#fbTags').querySelectorAll('.on')].map(x=>x.dataset.t)}); store('feedback',fb); $('#fbStatus').className='status ok'; $('#fbStatus').textContent='Thank you. Logged (sandbox). Clarifom would tag and route this in production.'; setTimeout(()=>m.hidden=true,1200); });
 }
 
 /* =====================================================================
@@ -2004,7 +1352,7 @@ function initReveal(){
 let scene = null;
 function initScene(){
   const canvas = $('#scene'); const stage = $('#stage');
-  if (!window.THREE || !canvas.getContext('webgl')){ canvas.style.display='none'; $('#hint').textContent='The 3D map needs WebGL'; return; }
+  if (!window.THREE || !canvas.getContext('webgl')){ canvas.style.display='none'; $('#hint').textContent='3D VIEW NEEDS WEBGL'; return; }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const renderer = new THREE.WebGLRenderer({canvas, alpha:true, antialias:true, powerPreference:'high-performance'});
   renderer.setPixelRatio(Math.min(devicePixelRatio||1, 2));
@@ -2039,9 +1387,9 @@ function initScene(){
   const landP = mk(land, .1, .95), edgeP = mk(edge, .16, 1), waterP = mk(water, .08, .55), shoreP = mk(shore, .12, .9);
 
   // Landmarks
-  const pinsEl = $('#pins'); const pins = PLACES.map(pl=>{ const [x,y]=P(pl.lon,pl.lat); const v=new THREE.Vector3(x,y,.35); const el=document.createElement('button'); el.type='button'; el.className='pin'+(pl.big?' big':'')+(pl.park?' park':'')+(!pl.big&&!pl.park?' small':''); el.style.setProperty('--i', PLACES.indexOf(pl)); el.innerHTML=`<span class="dot"></span><span class="lbl">${pl.name}</span>`; el.setAttribute('aria-label',pl.name+': '+pl.sub); pinsEl.appendChild(el); return {pl,v,el}; });
+  const pinsEl = $('#pins'); const pins = PLACES.map(pl=>{ const [x,y]=P(pl.lon,pl.lat); const v=new THREE.Vector3(x,y,.35); const el=document.createElement('button'); el.type='button'; el.className='pin'; el.style.setProperty('--i', PLACES.indexOf(pl)); el.innerHTML=`<span class="dot"></span><span class="lbl">${pl.name}</span>`; el.setAttribute('aria-label',pl.name+': '+pl.sub); pinsEl.appendChild(el); return {pl,v,el}; });
   const nodeGeo = new THREE.BufferGeometry(); nodeGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(pins.flatMap(p=>[p.v.x,p.v.y,p.v.z])),3));
-  const nodeMat = new THREE.PointsMaterial({size:.26, map:tex, transparent:true, opacity:.9, depthWrite:false, color:new THREE.Color('#D2202F')});
+  const nodeMat = new THREE.PointsMaterial({size:.34, map:tex, transparent:true, opacity:.9, depthWrite:false, color:new THREE.Color('#D2202F')});
   group.add(new THREE.Points(nodeGeo,nodeMat));
 
   // Colours from theme tokens
@@ -2069,13 +1417,10 @@ function initScene(){
   addEventListener('scroll', ()=>{ scrollV += (scrollY-lastY)*0.0025; lastY=scrollY; }, {passive:true});
 
   const card=$('#pinCard');
-  function showPin(p){ active=p; pins.forEach(q=>q.el.classList.toggle('active',q===p)); const r=ROUTES.find(x=>x.id===p.pl.route); const c=r?poolSeatCost(r,4):null; card.hidden=false; card.innerHTML=`<h4>${p.pl.name}</h4><p>${p.pl.sub}</p>${LOCAL[p.pl.name]?`<p style="margin-top:4px">Local apps here: ${LOCAL[p.pl.name].join(', ')}</p>`:''}<div class="row"><span>${r?r.km+' km · ~'+Math.round(r.min/60*10)/10+' h':''}</span><span>${c?'pool seat UGX '+fmt(c.riderPays):''}</span></div><div style="margin-top:10px;display:flex;gap:8px"><a class="btn small primary" href="#compare" data-route="${p.pl.route}">Compare rides</a>${DESTS.find(d=>d.id===p.pl.route)?`<a class="btn small" href="#explore" data-dest="${p.pl.route}">Plan weekend</a>`:''}</div>`; }
+  function showPin(p){ active=p; pins.forEach(q=>q.el.classList.toggle('active',q===p)); const r=ROUTES.find(x=>x.id===p.pl.route); const c=r?poolSeatCost(r,4):null; card.hidden=false; card.innerHTML=`<h4>${p.pl.name}</h4><p>${p.pl.sub}</p><div class="row"><span>${r?r.km+' km · ~'+Math.round(r.min/60*10)/10+' h':''}</span><span>${c?'pool seat UGX '+fmt(c.riderPays):''}</span></div><div style="margin-top:10px;display:flex;gap:8px"><a class="btn small primary" href="#compare" data-route="${p.pl.route}">Compare rides</a>${DESTS.find(d=>d.id===p.pl.route)?`<a class="btn small" href="#explore" data-dest="${p.pl.route}">Plan weekend</a>`:''}</div>`; }
   pins.forEach(p=>{ p.el.addEventListener('mouseenter',()=>showPin(p)); p.el.addEventListener('focus',()=>showPin(p)); p.el.addEventListener('click',()=>showPin(p)); });
   card.addEventListener('click', e=>{ const a=e.target.closest('a'); if(!a) return; if(a.dataset.route){ const r=ROUTES.find(x=>x.id===a.dataset.route); if(r){ $('#cFrom').value=r.from; syncTo('cFrom','cTo'); $('#cTo').value=r.id; renderCompare(); } } if(a.dataset.dest){ const d=DESTS.find(x=>x.id===a.dataset.dest); if(d){ dest=d; renderDests(); renderItin(); } } });
   showPin(pins[0]);
-  // Pulse heat: one glowing sprite per town, sized by demand (yellow) or by gap (red); breathes.
-  const heat=[]; function setHeat(d){ heat.forEach(h=>group.remove(h.pts)); heat.length=0; d.forEach(t=>{ const p=pins.find(x=>x.pl.name===t.name); if(!p||t.demand<1) return; const g=new THREE.BufferGeometry(); g.setAttribute('position',new THREE.BufferAttribute(new Float32Array([p.v.x,p.v.y,p.v.z-.05]),3)); const m=new THREE.PointsMaterial({size:.35+Math.min(1.2,t.demand*0.12), map:tex, transparent:true, opacity:.35, depthWrite:false, color:new THREE.Color(t.gap>0?'#D2202F':'#F2C200'), blending:THREE.AdditiveBlending}); const pts=new THREE.Points(g,m); group.add(pts); heat.push({pts,m,base:m.size,ph:Math.random()*6}); }); }
-  function focus(name){ const p=pins.find(x=>x.pl.name===name); if(!p) return; rot.y = -p.v.x*0.22; rot.x = p.v.y*0.2; showPin(p); }
 
   function resize(){ const w=stage.clientWidth, h=stage.clientHeight; renderer.setSize(w,h,false); cam.aspect=w/h; cam.updateProjectionMatrix(); const fit = Math.max(6.2, 7.6*(1/Math.min(1,cam.aspect))); baseZ = fit + (w<640?2.2:1.6); cam.position.z = baseZ; }
   new ResizeObserver(resize).observe(stage); resize();
@@ -2092,18 +1437,15 @@ function initScene(){
       const breath = 1 + 0.015*Math.sin(t*0.6);
       for (const p of [landP,edgeP,waterP,shoreP]){ const pos=p.geometry.attributes.position, b=p.userData.base, ph=p.userData.ph; for(let i=0;i<p.userData.n;i++){ const bx=b[i*3],by=b[i*3+1],bz=b[i*3+2]; const d=Math.hypot(bx,by); const wave=Math.sin(d*2.2 - t*1.6 + ph[i])*0.03; pos.setXYZ(i, bx*breath + Math.sin(t*0.7+ph[i])*0.012, by*breath + Math.cos(t*0.6+ph[i])*0.012, bz + wave + Math.sin(t*0.9+ph[i])*0.02); } pos.needsUpdate=true; }
     }
-    if(!reduce) heat.forEach(h=>{ h.m.size=h.base*(1+0.18*Math.sin(t*2+h.ph)); h.m.opacity=.28+.14*Math.sin(t*2+h.ph); });
     renderer.render(sc,cam);
     // project pins
     const w=stage.clientWidth,h=stage.clientHeight;
-    for (const p of pins){ tmp.copy(p.v).applyMatrix4(group.matrixWorld).project(cam); const ox=(p.pl.off||[0,0])[0], oy=(p.pl.off||[0,0])[1]; const x=(tmp.x*.5+.5)*w+ox, y=(-tmp.y*.5+.5)*h+oy; p.el.style.left=x+'px'; p.el.style.top=y+'px'; const behind = tmp.z>0.999; p.el.classList.toggle('behind', behind); }
-    if (visible) requestAnimationFrame(frame);
+    for (const p of pins){ tmp.copy(p.v).applyMatrix4(group.matrixWorld).project(cam); const x=(tmp.x*.5+.5)*w, y=(-tmp.y*.5+.5)*h; p.el.style.left=x+'px'; p.el.style.top=y+'px'; const behind = tmp.z>0.999; p.el.classList.toggle('behind', behind); }
+    requestAnimationFrame(frame);
   }
-  let visible=true; if('IntersectionObserver' in window){ new IntersectionObserver(en=>{ const was=visible; visible=en[0].isIntersecting; if(visible&&!was) requestAnimationFrame(frame); },{threshold:0}).observe(stage); }
   requestAnimationFrame(frame);
   matchMedia('(prefers-color-scheme: dark)').addEventListener('change', recolour);
-  scene = {recolour, setHeat, focus};
-  if(typeof renderPulse==='function') renderPulse();
+  scene = {recolour};
 }
 
 /* =====================================================================
@@ -2120,9 +1462,8 @@ renderFleet();
 renderDests(); renderItin();
 renderDay();
 renderPlugins();
-initV1();
 initReveal(); initVerbs();
-try { initScene(); } catch (e) { console.warn('scene', e); $('#hint').textContent='3D map unavailable here'; }
+try { initScene(); } catch (e) { console.warn('scene', e); $('#hint').textContent='3D VIEW UNAVAILABLE'; }
 </script>
 </body>
 </html>

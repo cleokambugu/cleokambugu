@@ -84,8 +84,12 @@ Semantic colours (good `#3DBB7A`, warn `#F2A900`, bad `#E5484D`) are separate fr
 - **Display: Unbounded** (900 for the headline, 700 for section heads, 500 for card titles). A
   wide, geometric face that reads like a number plate from across a car park.
 - **Body: Albert Sans.** Quiet, humanist, works at 13 px on a price card.
-- **Data: IBM Plex Mono** with tabular numerals for every price, distance, time, and tag. The
-  meter look is deliberate: money in this app is always in the monospace face.
+- **Data: IBM Plex Mono** with tabular numerals for every price, distance and time. The meter
+  look is deliberate: money in this app is always in the monospace face.
+- **Labels are Albert Sans**, semibold, 11–13 px: eyebrows, chips, badges, map labels, the tab
+  bar, the footer headings. v0 set these in uppercase mono and they read as retro; v1 moved every
+  label to the body face so only figures carry the meter look. Map labels are glass pills in
+  the body face, bolder for the big towns, muted for parks.
 
 Scale: hero 44–96 px fluid, section heads 28–46 px fluid, body 16 px, card body 13–14 px,
 labels 11–12 px uppercase with 0.1 em tracking.

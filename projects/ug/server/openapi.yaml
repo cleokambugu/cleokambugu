@@ -1,0 +1,178 @@
+openapi: 3.1.0
+info:
+  title: UG API
+  version: 2.0.0-draft
+  description: >
+    Contract for the v2 backend behind UG (Ride. Pool. Rent.). Written from the Virtual Stage
+    design and the panel's findings; nothing here is implemented in v1. Money endpoints are
+    idempotent and fulfil only after processor verification.
+servers:
+  - url: https://api.ug.example/v2
+tags:
+  - name: identity
+  - name: stages
+  - name: comfort
+  - name: offers
+  - name: ledger
+  - name: pulse
+  - name: fares
+  - name: plugins
+  - name: feedback
+paths:
+  /auth/otp:
+    post:
+      tags: [identity]
+      summary: Send a one-time code to a phone number
+      requestBody: {content: {application/json: {schema: {type: object, required: [phone], properties: {phone: {type: string}}}}}}
+      responses: {'202': {description: Sent}}
+  /auth/verify:
+    post:
+      tags: [identity]
+      summary: Exchange the code for a session; binds the device
+      responses: {'200': {description: Session, content: {application/json: {schema: {$ref: '#/components/schemas/Session'}}}}}
+  /me:
+    get: {tags: [identity], summary: Profile, roles, verification ladder, vouches, payout limit, responses: {'200': {description: Me, content: {application/json: {schema: {$ref: '#/components/schemas/Me'}}}}}}
+  /me/documents:
+    post: {tags: [identity], summary: Upload permit, registration, insurance; starts the document check, responses: {'202': {description: Queued}}}
+  /vouches:
+    post: {tags: [identity], summary: Vouch for a driver inside a circle (visibility only, never payment), responses: {'201': {description: Recorded}}}
+  /comfort:
+    get: {tags: [comfort], summary: The signed-in driver's Comfort Map, responses: {'200': {description: Map, content: {application/json: {schema: {$ref: '#/components/schemas/ComfortMap'}}}}}}
+    put: {tags: [comfort], summary: Replace the Comfort Map, requestBody: {content: {application/json: {schema: {$ref: '#/components/schemas/ComfortMap'}}}}, responses: {'200': {description: Saved}}}
+  /stages:
+    get:
+      tags: [stages]
+      summary: Stages on a corridor or near a place
+      parameters:
+        - {name: corridor, in: query, schema: {type: string}}
+        - {name: near, in: query, schema: {type: string}, description: town or suburb}
+        - {name: status, in: query, schema: {type: string, enum: [filling, full, funded, departed]}}
+      responses: {'200': {description: Stages, content: {application/json: {schema: {type: array, items: {$ref: '#/components/schemas/Stage'}}}}}}
+    post: {tags: [stages], summary: Start a stage (corridor, window, pickup point), responses: {'201': {description: Created}}}
+  /stages/{id}/intents:
+    post:
+      tags: [stages]
+      summary: Queue a paid seat intent; returns a processor charge to complete
+      description: Price is the ceiling for the current fill; the rebate as the car fills is paid after departure.
+      responses: {'201': {description: Intent with charge, content: {application/json: {schema: {$ref: '#/components/schemas/Intent'}}}}}
+  /intents/{id}:
+    delete: {tags: [stages], summary: Cancel before cut-off (full refund) or after (per policy), responses: {'200': {description: Cancelled}}}
+  /stages/{id}/depart:
+    post: {tags: [stages], summary: Rider or driver confirms departure (geofence or code); starts the payout hold, responses: {'200': {description: Confirmed}}}
+  /offers:
+    get: {tags: [offers], summary: Funded offers for the signed-in driver, ordered by comfort fit, acceptance rate, rating, distance, responses: {'200': {description: Offers, content: {application/json: {schema: {type: array, items: {$ref: '#/components/schemas/Offer'}}}}}}}
+  /offers/{id}/accept:
+    post: {tags: [offers], summary: Accept a funded trip; refused unless documents are cleared, responses: {'200': {description: Accepted}, '403': {description: Documents not cleared}}}
+  /offers/{id}/decline:
+    post: {tags: [offers], summary: Decline, no penalty, responses: {'200': {description: Declined}}}
+  /legs:
+    get: {tags: [stages], summary: Empty legs on sale (airport corridor first), responses: {'200': {description: Legs}}}
+  /ledger/webhooks/flutterwave:
+    post:
+      tags: [ledger]
+      summary: charge.completed and transfer events; verified against the processor before posting
+      responses: {'200': {description: Acknowledged (idempotent)}}
+  /ledger/intents/{id}:
+    get: {tags: [ledger], summary: Journal for an intent (held, released, refunded, rebated), responses: {'200': {description: Journal}}}
+  /pulse:
+    get:
+      tags: [pulse]
+      summary: Demand and supply per town and corridor for the next hours, ranked for the caller's role
+      parameters:
+        - {name: role, in: query, schema: {type: string, enum: [rider, driver]}}
+        - {name: hours, in: query, schema: {type: integer, default: 6}}
+      responses: {'200': {description: Hotspots, content: {application/json: {schema: {type: array, items: {$ref: '#/components/schemas/Hotspot'}}}}}}
+  /pulse.geojson:
+    get: {tags: [pulse], summary: The same layer as GeoJSON for Felt, responses: {'200': {description: FeatureCollection}}}
+  /fares/quote:
+    get:
+      tags: [fares]
+      summary: Quotes for a trip across providers, each with provenance and a sampled date
+      parameters:
+        - {name: from, in: query, required: true, schema: {type: string}}
+        - {name: to, in: query, required: true, schema: {type: string}}
+        - {name: at, in: query, schema: {type: string, format: date-time}}
+      responses: {'200': {description: Quotes}}
+  /fares/samples:
+    post: {tags: [fares], summary: A rider submits what they paid (the weekly index), responses: {'202': {description: Recorded}}}
+  /plugins:
+    get: {tags: [plugins], summary: The caller's plug-in connections and consents, responses: {'200': {description: Connections}}}
+  /plugins/{id}/connect:
+    post: {tags: [plugins], summary: Connect with consent; keys stay server-side behind a host allowlist, responses: {'200': {description: Connected}}}
+  /plugins/{id}/share:
+    post: {tags: [plugins], summary: Share trip context with the plug-in; requires consent from every rider on the trip, responses: {'202': {description: Shared}, '409': {description: A rider has not consented}}}
+  /feedback:
+    post: {tags: [feedback], summary: Spoken or typed feedback with tags (Clarifom); creates a ticket and a rating, responses: {'201': {description: Logged}}}
+components:
+  schemas:
+    Session: {type: object, properties: {token: {type: string}, device_id: {type: string}}}
+    Me:
+      type: object
+      properties:
+        id: {type: string}
+        name: {type: string}
+        phone: {type: string}
+        roles: {type: array, items: {type: string, enum: [rider, driver, owner, chairman]}}
+        verification: {type: string, enum: [none, vouched, documents_pending, verified]}
+        vouches: {type: integer}
+        payout_limit_ugx: {type: integer}
+    ComfortMap:
+      type: object
+      properties:
+        base: {type: string}
+        radius_km: {type: integer}
+        corridors: {type: array, items: {type: string}}
+        days: {type: array, items: {type: string}}
+        hours: {type: array, items: {type: string}}
+        vehicle: {type: string}
+        plate: {type: string}
+        hard_nos: {type: array, items: {type: string}}
+        driver_type: {type: string, enum: [going_anyway, for_hire]}
+        min_payout_ugx: {type: integer}
+        pickup_points: {type: array, items: {type: string}}
+    Stage:
+      type: object
+      properties:
+        id: {type: string}
+        corridor: {type: string}
+        window: {type: string}
+        cutoff: {type: string, format: date-time}
+        pickup: {type: string}
+        capacity: {type: integer}
+        min_fill: {type: integer}
+        seats_paid: {type: integer}
+        seat_price_ugx: {type: integer, description: ceiling at the current fill}
+        price_when_full_ugx: {type: integer}
+        status: {type: string, enum: [filling, full, funded, departed, refunded]}
+        guarantee: {type: boolean, description: airport-night special-hire fallback}
+        comfort_hint: {type: string, description: from Infrared when connected, else modelled}
+    Intent:
+      type: object
+      properties:
+        id: {type: string}
+        stage_id: {type: string}
+        state: {type: string, enum: [queued, held, manufactured, accepted, departed, settled, refunded]}
+        tx_ref: {type: string, description: server-generated, idempotent}
+        charge: {type: object, description: processor charge to complete on the client}
+    Offer:
+      type: object
+      properties:
+        id: {type: string}
+        stage_id: {type: string}
+        corridor: {type: string}
+        when: {type: string}
+        seats_funded: {type: integer}
+        pay_ugx: {type: integer, description: road cost plus wage, to the driver}
+        road_ugx: {type: integer}
+        wage_ugx: {type: integer}
+        expires_at: {type: string, format: date-time}
+    Hotspot:
+      type: object
+      properties:
+        town: {type: string}
+        demand_seats: {type: integer}
+        drivers_near: {type: integer}
+        seats_open: {type: integer}
+        gap: {type: integer}
+        lon: {type: number}
+        lat: {type: number}

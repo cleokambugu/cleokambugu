@@ -7,6 +7,31 @@
 - Published fare model with provenance on every card.
 - Interactive 3D particle map of Uganda as the hero.
 
+## v1 — the Virtual Stage (done, this prototype)
+
+- Two doors, the Handshake, stages with fill bars and cut-offs, Comfort Map and funded offers,
+  empty legs, Pulse, the Tazama dock, voice commands, Felt export, Me, tab bar, manifest.
+- The panel's quick wins: driver wage in the formula, verified-only acceptance, honest
+  provenance and sandbox, fixed pickup points, the airport guarantee, escaping and referrer
+  hygiene.
+
+## v2 — the backend and the licence (what the panel says must exist before a shilling moves)
+
+Ranked by how many seats asked for it; details in `stress-test.md`, contract in `../server/`.
+
+1. Ledger and intent state machine; server-generated `tx_ref`; webhook-first fulfilment;
+   T+1 payout hold; departure confirmation.
+2. Regulatory gate: MoWT/TLB written position, per-seat insurance, PDPO registration, entity
+   and URA; the float question settled with Bank of Uganda and Flutterwave.
+3. Two launch corridors with contracted anchor drivers: nightly Entebbe, Saturday-morning Jinja.
+4. Mobile diet: static map on phones, fonts cut, intro off, Three.js only on desktop with hover.
+5. Four-tab shell with a driver switch; Hustle, plans and plug-ins behind Me.
+6. Documents at the first funded offer; the Handshake becomes phone plus OTP.
+7. Weekly crowd-sampled fare index with dates; plain-text competitor names in production.
+8. Chairman vouch accounts with a cut per rider signed; circles with a verified anchor.
+9. Charge at seating for a rider's first trip; escrow from the second.
+10. Sensitive-data handling for circles; per-plug-in consent from every rider on a trip.
+
 ## Phase 1 — trust before supply (8–10 weeks)
 
 - Backend: accounts (phone OTP), trips, seats, bookings, wallet ledger, Flutterwave verify and

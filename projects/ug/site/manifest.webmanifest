@@ -1,0 +1,18 @@
+{
+  "name": "UG — Ride. Pool. Rent.",
+  "short_name": "UG",
+  "description": "Queue a seat, compare every ride, rent per head, plan the park weekend. Kampala and everywhere after.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0F0C0A",
+  "theme_color": "#0F0C0A",
+  "lang": "en-UG",
+  "icons": [
+    { "src": "../brand/app-icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ],
+  "shortcuts": [
+    { "name": "The Stage", "url": "./index.html#stage" },
+    { "name": "Compare a ride", "url": "./index.html#compare" },
+    { "name": "Drive", "url": "./index.html#drive" }
+  ]
+}

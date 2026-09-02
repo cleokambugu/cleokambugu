@@ -7,12 +7,19 @@ quarter (**Pool**), and rents the car when you need to arrive (**Rent**). **Expl
 whole park weekend in one number and is where all three verbs get used at once. Payment is mobile
 money through Flutterwave.
 
-Status: **PROTOTYPE**. The site is a working single-file web app with a published fare model.
-Nothing here is a live fare, a licensed service, or a production payment integration.
+Status: **PROTOTYPE, v1**. The site is a working single-file web app with a published fare model,
+and timers stand in for other riders and drivers. Nothing here is a live fare, a licensed
+service, or a production payment integration. v0 is frozen beside it.
 
 | Path | What it is |
 | --- | --- |
-| [`site/index.html`](site/index.html) | The full site and interactive prototype. Single file, no build step. Open it in a browser. |
+| [`site/index.html`](site/index.html) | **v1.** The app shell and the Virtual Stage: two doors, the sixty-second Handshake, paid intents that fill a stage, the driver's Comfort Map and funded-offer feed, empty legs, Pulse, the Tazama dock, voice commands, Me, a bottom tab bar. Single file, no build step. |
+| [`site/v0.html`](site/v0.html) | **v0**, frozen (also git tag `ug-v0`). |
+| [`site/manifest.webmanifest`](site/manifest.webmanifest) | Web app manifest so the site installs as the app. |
+| [`docs/versions.md`](docs/versions.md) | What each version is and where it lives. |
+| [`docs/v1-concept.md`](docs/v1-concept.md) | The Virtual Stage: the logistics trick, the four mechanisms, the Handshake. |
+| [`docs/stress-test.md`](docs/stress-test.md) | The panel of sharks and maestros: verdicts, what v1 changed, what v2 must do. Full critiques in [`docs/panel/`](docs/panel/). |
+| [`server/`](server/) | The v2 backend contract: services, non-negotiables, and an OpenAPI draft. |
 | [`data/`](data/) | The fare model, routes, fleet, and destinations as JSON, with provenance tags. Exported from the site's data block. `uganda-geometry.json` is the border and lakes from Natural Earth 10m, simplified. |
 | [`brand/`](brand/) | The Crest mark, wordmark, and app icon as SVG. |
 | [`docs/business-plan.md`](docs/business-plan.md) | Market, customer, product, revenue model, unit economics, go-to-market, risks. |
