@@ -267,6 +267,9 @@
   "ui.trip": "Orugyendo",
   "ui.language": "Orurimi",
   "ui.draftNote": "N'ekihandiiko ky'okubanza; ebigambo ebiburire nibireebeka omu Rungyereza.",
-  "ui.reviewNote": "Ebyahindurwa bikahandiikwa UG kandi byakyeberwa omurundi gwa kabiri; okukyebera kw'abarikugamba orurimi kukyayigwire. Ebigambo ebiburire bigarukira aha Rungyereza."
+  "ui.reviewNote": "Ebyahindurwa bikahandiikwa UG kandi byakyeberwa omurundi gwa kabiri; okukyebera kw'abarikugamba orurimi kukyayigwire. Ebigambo ebiburire bigarukira aha Rungyereza.",
+  "ui.welcome": "Waije omu Uganda.",
+  "ui.chooseLanguage": "Toorana orurimi rwawe",
+  "ui.continue": "Gumizamu"
  }
 }
