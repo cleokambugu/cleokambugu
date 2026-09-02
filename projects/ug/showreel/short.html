@@ -1,4 +1,4 @@
-<title>UG Showreel with Sound</title>
+<title>UG Short Cut</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Albert+Sans:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
@@ -95,7 +95,7 @@ const W = 1280, H = 720;
 const C = {ground:'#0F0C0A', surface:'#1E1915', ink:'#F4ECDD', yellow:'#F2C200', red:'#D2202F', crane:'#94A8B6', good:'#3DBB7A'};
 const inkA = a => `rgba(244,236,221,${a})`;
 const params = new URLSearchParams(location.search);
-const SOUND = true; // the sound cut
+const SOUND = false; // silent
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const FONT = {
   disp:(w,s)=>`${w} ${s}px Unbounded, "Albert Sans", system-ui, sans-serif`,
@@ -489,7 +489,7 @@ const SCENES = [
 ];
 /* The short cut: five scenes, each run a little faster. index.html?cut=short, or short.html / short-sound.html from build.js. */
 const SHORT = [['opening',1.25],['ride',1.6],['pool',2],['atlas',1.6],['link',1.2]];
-const FORCE_CUT = 'long';
+const FORCE_CUT = 'short';
 const CUT = (typeof FORCE_CUT!=='undefined' && FORCE_CUT) || params.get('cut') || 'long';
 if (CUT==='short'){ const picked=[]; SHORT.forEach(([id,k])=>{ const src=SCENES.find(x=>x.id===id); if(!src) return; picked.push({ id:src.id, name:src.name, dur:src.dur/k, voice:src.voice, caps:src.caps.map(c=>Object.assign({},c,{at:c.at/k})), draw:(g,t)=>src.draw(Object.assign({},g,{now:g.now*k,dur:src.dur}),t*k) }); }); SCENES.length=0; picked.forEach(x=>SCENES.push(x)); }
 

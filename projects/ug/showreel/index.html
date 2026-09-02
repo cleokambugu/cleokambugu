@@ -2,6 +2,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Albert+Sans:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<script src="ug-score.js"></script>
 <style>
 :root{--ground:#0F0C0A;--surface:#1E1915;--ink:#F4ECDD;--yellow:#F2C200;--red:#D2202F;--crane:#94A8B6;--u:1px;color-scheme:dark}
 html,body{margin:0;height:100%;background:var(--ground);color:var(--ink)}
@@ -20,6 +21,7 @@ html,body{margin:0;height:100%;background:var(--ground);color:var(--ink)}
 #counter{display:flex;gap:calc(var(--u)*10);align-items:center;color:rgba(244,236,221,.7)}
 #counter b{font:500 calc(var(--u)*12) "IBM Plex Mono",monospace;color:var(--ink);font-variant-numeric:tabular-nums}
 #counter i{font-style:normal;color:rgba(244,236,221,.4)}
+.vlabel{color:rgba(244,236,221,.45);font:500 calc(var(--u)*11) "IBM Plex Mono",monospace}
 .btns{display:flex;gap:calc(var(--u)*8);align-items:center}
 .btn{font:600 calc(var(--u)*12) "Albert Sans",system-ui,sans-serif;color:var(--ink);background:rgba(30,25,21,.64);border:1px solid rgba(244,236,221,.14);box-shadow:inset 0 1px 0 rgba(244,236,221,.08);backdrop-filter:blur(8px);border-radius:999px;padding:calc(var(--u)*7) calc(var(--u)*14);cursor:pointer;line-height:1}
 .btn:hover{border-color:rgba(244,236,221,.35)}
@@ -61,7 +63,7 @@ html,body{margin:0;height:100%;background:var(--ground);color:var(--ink)}
     <div id="cap" aria-live="polite"><div class="eb"></div><div class="main"></div><div class="sub"></div></div>
     <div id="end"><button class="btn y" id="replay" type="button">Replay</button></div>
     <div id="hud">
-      <div id="counter"><b id="cnt">01 / 12</b><i>·</i><span id="cname">Opening</span></div>
+      <div id="counter"><b id="cnt">01 / 12</b><i>·</i><span id="cname">Opening</span><i>·</i><span id="vlabel" class="vlabel" hidden></span></div>
       <div class="btns"><span class="hint" id="hint">space · ← →</span><button class="btn" id="mute" type="button" hidden>Mute</button><button class="btn" id="skip" type="button">Skip ›</button></div>
     </div>
     <div id="bar"><i id="barfill"></i></div>
@@ -71,7 +73,7 @@ html,body{margin:0;height:100%;background:var(--ground);color:var(--ink)}
         <h1>UG</h1>
         <div class="cp">Ride. Pool. Rent. Deliver.</div>
         <button id="play" type="button" aria-label="Play the showreel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z" fill="currentColor"/></svg></button>
-        <div class="meta" id="pmeta">Showreel · 4:35</div>
+        <div class="meta" id="pmeta">Showreel</div>
       </div>
     </div>
   </div>
@@ -248,7 +250,7 @@ const GLYPH={
 const SCENES = [
 { id:'opening', name:'Opening', dur:20,
   caps:[{at:1.2,eb:'UG · Showreel',main:'The map you watch assemble is the map you land on.'},{at:8.6,main:''}],
-  voice:['UG. Ride. Pool. Rent. Deliver.','One app for every way to move in Uganda.'],
+  voice:['UG. Ride. Pool. Rent. Deliver.','One app for every way to move in Uganda. Tugende.'],
   draw(g,t){ const {ctx,now}=g; const P=MAP.proj(640,330,600);
     const dim = 1-.62*E.outCubic(seg(t,9,10.6));
     MAP.draw(ctx,P,{assemble:t,now,alpha:dim});
@@ -276,7 +278,7 @@ const SCENES = [
 },
 { id:'problem', name:'The problem', dur:20,
   caps:[{at:1.5,eb:'The problem',main:'Kampala checks three apps before every trip.'},{at:11,eb:'One crest',main:'Every way, one screen.',sub:'Every partner quote, drawn in one consistent hand, ranked on one desk.'}],
-  voice:['Kampala checks three apps before every trip.','UG puts every way on one screen.'],
+  voice:['In Kampala we check three apps before every trip, and still ask the boda man.','UG puts every way on one screen.'],
   draw(g,t){ const {ctx,now}=g;
     const px=640,py=330, pw=300,ph=560; const pp=E.outExpo(seg(t,0,1.2));
     ctx.save(); ctx.globalAlpha=pp; card(ctx,px-pw/2,py-ph/2+30*(1-pp),pw,ph,{r:44,fill:'#161210'}); rr(ctx,px-40,py-ph/2+12+30*(1-pp),80,14,7); ctx.fillStyle='#0a0807'; ctx.fill(); ctx.restore();
@@ -291,9 +293,9 @@ const SCENES = [
 },
 { id:'ride', name:'Ride', dur:30,
   caps:[{at:1,eb:'Ride · the compare desk',main:'Every way, one screen.'},{at:8.5,main:'Ranked by price. Estimates say so.',sub:'Every quote carries its provenance in words, on the card.'},{at:14,main:'The ones that cannot serve you stay on the screen.',sub:'Greyed, with the reason.'},{at:20,main:'Nobody is sent away.',sub:'The button is always Book on UG. The partner link is a quiet secondary.'}],
-  voice:['Every quote, ranked by price, with its provenance.','The button is always Book on UG. Nobody is sent away.'],
+  voice:['Every quote, ranked by price, and it tells you which ones are estimates.','The button is always Book on UG. Nobody sends you away.'],
   draw(g,t){ const {ctx,now}=g;
-    const hp=E.outExpo(seg(t,.3,1.4)); eyebrow(ctx,'Ride · Ntinda → Kampala CBD',200,86,{alpha:hp}); txt(ctx,'Ntinda → Kampala CBD',200,128,{font:FONT.disp(700,32),alpha:hp}); txt(ctx,'8 km · 25 min · now',1080,128,{font:FONT.mono(400,15),align:'right',color:inkA(.55),alpha:hp});
+    const hp=E.outExpo(seg(t,.3,1.4)); eyebrow(ctx,'Ride · Ntinda → Downtown Kampala',200,86,{alpha:hp}); txt(ctx,'Ntinda → Downtown Kampala',200,128,{font:FONT.disp(700,32),alpha:hp}); txt(ctx,'8 km · 25 min · now',1080,128,{font:FONT.mono(400,15),align:'right',color:inkA(.55),alpha:hp});
     const rk=E.inOutCubic(seg(t,8.5,10)); const y0=168, rh=42;
     const focusDim = t>21 ? .35 : 1;
     QUOTES.forEach((q,i)=>{ const ap=E.outExpo(seg(t,.8+i*.4,1.8+i*.4)); if(ap<=0) return; const y=y0+lerp(i,rankOf(i),rk)*rh; const x=200+40*(1-ap); const isBest=rankOf(i)===0; const a=ap*(t>21&&!isBest?focusDim:1);
@@ -311,7 +313,7 @@ const SCENES = [
 },
 { id:'pool', name:'Pool', dur:40,
   caps:[{at:1,eb:'Pool · the Virtual Stage',main:'A stage that fills before the car exists.'},{at:5,main:'Riders queue money, not requests.',sub:'Where, roughly when, and the seat paid into escrow.'},{at:13,main:'The price falls as the car fills.',sub:'Invite the circle; the seat gets cheaper for everyone.'},{at:22,main:'Full early, leave early.',sub:'Not full at cut-off: top up from the empty-leg pool, or refund.'},{at:30,main:'UG manufactures the trip and offers it with the money already in it.'},{at:35.5,main:'One tap. The riders get a car, a plate and a face.'}],
-  voice:['The Virtual Stage. Riders pay for seats first, and the price falls as the car fills.','Then UG manufactures the trip and offers it to a driver with the money already in it.'],
+  voice:['The Virtual Stage. You pay for your seat first, and the price drops as the car fills.','When the money is in, UG makes the trip and hands it to a driver who is comfortable on that road.'],
   draw(g,t){ const {ctx,now}=g;
     const ap=E.outExpo(seg(t,.3,1.4));
     // corridor strip
@@ -339,7 +341,7 @@ const SCENES = [
 },
 { id:'drive', name:'Drive', dur:25,
   caps:[{at:1,eb:'Drive · the Comfort Map',main:'Drivers declare a comfort map, not trips.'},{at:9,sub:'Base, radius, corridors, days, hours, car. Hard no’s stay no.',main:'One screen. Never post a trip again.'},{at:15,main:'Funded offers come to you.'},{at:20,main:'Offers arrive now. Accept after verification.',sub:'Usually within a day.'}],
-  voice:['Drivers declare a comfort map, not trips.','Funded offers come to them.'],
+  voice:['Drivers do not chase trips. They say where they are comfortable, once.','Funded offers come to them. Accept, and go.'],
   draw(g,t){ const {ctx,now}=g;
     const ap=E.outExpo(seg(t,.3,1.4));
     // map (zoomed on the centre), clipped right
@@ -365,7 +367,7 @@ const SCENES = [
 },
 { id:'rent', name:'Rent and Signature', dur:20,
   caps:[{at:1,eb:'Rent',main:'Arrive properly.',sub:'Rent the ride. Split it four ways.'},{at:6,main:'UGX 300,000 becomes 75,000 each.',sub:'Per head, with the empty leg on sale the moment you book.'},{at:11,eb:'Signature',main:'The Signature fleet. Chauffeured, priced through the same desk.'}],
-  voice:['Rent a Prado for the weekend and split it four ways.','Or arrive in the Signature fleet.'],
+  voice:['Rent a Prado for the weekend and split it four ways.','Or arrive in the Signature fleet, and look the part.'],
   draw(g,t){ const {ctx,now}=g;
     const a1=E.outExpo(seg(t,.3,1.4))*(1-E.inCubic(seg(t,9.6,10.6)));
     if(a1>0){ card(ctx,190,120,900,400,{alpha:a1}); eyebrow(ctx,'Rent · per day · with driver or self-drive',220,156,{alpha:a1}); txt(ctx,'Land Cruiser Prado',220,200,{font:FONT.disp(700,30),alpha:a1}); txt(ctx,'4×4 · 7 seats · arrive properly',220,228,{font:FONT.body(400,15),color:inkA(.6),alpha:a1});
@@ -378,7 +380,7 @@ const SCENES = [
 },
 { id:'deliver', name:'Deliver', dur:20,
   caps:[{at:3.5,eb:'Deliver',main:'A quarter of a seat.',sub:'A seat to Jinja is UGX 26,000. The parcel rides in the boot for 6,500.'},{at:11,main:'Send the thing. It runs on the same rail.',sub:'Placed, courier assigned, picked up, on the way, delivered.'}],
-  voice:['A parcel rides in the boot of the stage car.','A quarter of a seat.'],
+  voice:['Your parcel rides in the boot of the stage car to Jinja.','A quarter of a seat. That is it.'],
   draw(g,t){ const {ctx,now}=g;
     // road
     ctx.fillStyle='#14100D'; ctx.fillRect(0,300,W,200); ctx.fillStyle='#1c1713'; ctx.fillRect(0,300,W,4); const off=(t*260)%80; ctx.save(); ctx.strokeStyle=inkA(.35); ctx.lineWidth=3; ctx.setLineDash([40,40]); ctx.lineDashOffset=off; ctx.beginPath(); ctx.moveTo(0,405); ctx.lineTo(W,405); ctx.stroke(); ctx.restore();
@@ -394,7 +396,7 @@ const SCENES = [
 },
 { id:'atlas', name:'The Atlas', dur:30,
   caps:[{at:1,eb:'The Atlas',main:'Every way to move in Uganda is a row in one table.'},{at:13,main:'Four honest states, always shown.'},{at:22,sub:'Nothing is hidden, nothing is faked. Fares are modelled and marked so.',main:'Book on UG. Call ahead. Listed. Coming.'}],
-  voice:['Air, bus, water, rail, Signature, stays. One table.','Four honest states, always shown.'],
+  voice:['Air, bus, water, rail, Signature, stays. One table.','Four honest states, always on the screen.'],
   draw(g,t){ const {ctx,now}=g;
     const P=MAP.proj(640,250,420); const ma=E.outCubic(seg(t,0,1.5)); MAP.draw(ctx,P,{now,alpha:.38*ma,breathe:.5});
     const modes=['air','bus','water','rail','signature','stays'], labels=['Air','Bus','Water','Rail','Signature','Stays'];
@@ -409,7 +411,7 @@ const SCENES = [
 },
 { id:'explore', name:'Explore', dur:20,
   caps:[{at:1,eb:'Explore · the weekend',main:'The Pearl, priced honestly.'},{at:7,main:'A Bwindi weekend, totalled in shillings.'},{at:12,main:'The permit: UGX 300,000 for East African citizens. USD 800 for visitors.',sub:'Fees from UWA snippets, marked as such. Lodge and seats modelled.'}],
-  voice:['The Pearl, priced honestly.','East African citizens pay East African prices.'],
+  voice:['The Pearl, priced honestly. The whole weekend in one number.','East African citizens pay East African prices.'],
   draw(g,t){ const {ctx,now}=g;
     const P=MAP.proj(960,370,400); const ma=E.outCubic(seg(t,0,1.5)); MAP.draw(ctx,P,{now,alpha:.42*ma,breathe:.5});
     const path=pathBetween(P.t('Kampala'),P.t('Bwindi'),.12); const rp=E.outCubic(seg(t,1,3.5)); strokePath(ctx,path,0,rp,C.yellow,2.5,.9); const [bx,by]=P.t('Bwindi'); if(rp>=1){ const pq=E.outBack(seg(t,3.5,4.1)); glow(ctx,bx,by,'rgba(210,32,47,.5)',22*pq,1); dot(ctx,bx,by,5,C.red); pill(ctx,'Bwindi · mountain gorillas',bx+96,by-24,{scale:pq,font:FONT.body(700,12),h:24,px:18}); }
@@ -423,7 +425,7 @@ const SCENES = [
 },
 { id:'plugins', name:'Plug-ins', dur:20,
   caps:[{at:.8,eb:'Plug-ins · Tazama',main:'Tazama in the dock. The drive starts with the first tap.'},{at:5.8,eb:'Plug-ins · Pulse',main:'Pulse: where paid demand outruns cars. Point me there.'},{at:10.8,eb:'Plug-ins · Felt',main:'Export the layer to Felt. A shared map, not a pin.'},{at:15.8,eb:'Plug-ins · Cephable',main:'Cephable: hands-free. Say it, UG does it.'}],
-  voice:['Tazama in the dock. Pulse shows where the demand is.','Export it to Felt. Talk to it through Cephable.'],
+  voice:['Tazama plays in the dock. Pulse shows where the demand is.','Send it to Felt. Talk to it through Cephable.'],
   draw(g,t){ const {ctx,now}=g; const beat=Math.min(3,Math.floor(t/5)); const bt=t-beat*5; const ba=Math.min(E.outExpo(seg(bt,0,.8)),1-E.inCubic(seg(bt,4.5,5)));
     ctx.save(); ctx.globalAlpha=ba; const sx=340,sy=150,sw=600,sh=400; card(ctx,sx,sy,sw,sh);
     if(beat===0){ eyebrow(ctx,'Tazama · the dock',sx+26,sy+36); txt(ctx,'UG mix 03',sx+26,sy+76,{font:FONT.disp(700,24)}); txt(ctx,'96 bpm · warm chords · sized to the trip',sx+26,sy+100,{font:FONT.body(400,14),color:inkA(.55)});
@@ -444,7 +446,7 @@ const SCENES = [
     if(beat===3){ eyebrow(ctx,'Cephable · hands-free',sx+26,sy+36); const mx=sx+300,my=sy+170; for(let i=0;i<3;i++){ const r=((now*.6+i/3)%1); ctx.save(); ctx.strokeStyle=C.yellow; ctx.globalAlpha=(1-r)*.6; ctx.lineWidth=2; ctx.beginPath(); ctx.arc(mx,my,30+r*70,0,7); ctx.stroke(); ctx.restore(); }
       dot(ctx,mx,my,30,C.yellow); rr(ctx,mx-6,my-16,12,22,6); ctx.fillStyle='#17120E'; ctx.fill(); ctx.strokeStyle='#17120E'; ctx.lineWidth=2.5; ctx.beginPath(); ctx.arc(mx,my+2,11,.2,Math.PI-.2); ctx.stroke(); ctx.beginPath(); ctx.moveTo(mx,my+13); ctx.lineTo(mx,my+18); ctx.stroke();
       for(let i=0;i<50;i++){ const x=sx+60+i*9.8; const h=4+Math.abs(Math.sin(now*9+i*.9)*Math.sin(now*2.3+i*.3))*36*(bt<2.6?1:.15); ctx.fillStyle=inkA(.6); rr(ctx,x,my+90-h/2,4,h,2); ctx.fill(); }
-      const cmd='compare Ntinda to Kampala CBD'; const n=Math.floor(seg(bt,.6,2.4)*cmd.length); txt(ctx,'“'+cmd.slice(0,n)+(n<cmd.length?'|':'”'),mx,sy+300,{font:FONT.disp(500,20),align:'center'});
+      const cmd='compare Ntinda to Downtown Kampala'; const n=Math.floor(seg(bt,.6,2.4)*cmd.length); txt(ctx,'“'+cmd.slice(0,n)+(n<cmd.length?'|':'”'),mx,sy+300,{font:FONT.disp(500,20),align:'center'});
       const rq=E.outExpo(seg(bt,2.8,3.6)); if(rq>0) pill(ctx,'Matatu, UGX 2,200. Likely cheapest. Book it?',mx,sy+350,{font:FONT.body(600,13),h:32,px:22,alpha:rq,fill:'rgba(242,194,0,.12)',stroke:'rgba(242,194,0,.5)'}); }
     ctx.restore();
     // beat dots
@@ -453,9 +455,9 @@ const SCENES = [
 },
 { id:'rail', name:'Stay on UG', dur:15,
   caps:[{at:1,eb:'Stay on UG',main:'Whatever you book, one rail.'},{at:7,main:'Nobody is sent away to finish what they started.'},{at:12,sub:'Timers stand in for partner channels in the prototype. Production wires Uber Central, Bolt Ride Booker, SB Business.',main:'The partner link is a quiet secondary.'}],
-  voice:['Whatever you book, the same trip rail carries it to done.','Nobody is sent away.'],
+  voice:['Whatever you book, the same trip rail carries it to done.','Hakuna anayetumwa mbali. Twende.'],
   draw(g,t){ const {ctx,now}=g; const ap=E.outExpo(seg(t,.3,1.3));
-    eyebrow(ctx,'Trip rail · Ntinda → Kampala CBD · Bolt · Book on UG',640,150,{align:'center',alpha:ap});
+    eyebrow(ctx,'Trip rail · Ntinda → Downtown Kampala · Bolt · Book on UG',640,150,{align:'center',alpha:ap});
     const lit=seg(t,1,13); railSteps(ctx,RAIL,140,1140,300,lit,{alpha:ap,fs:15,dy:36,times:RAIL_T,r:10});
     const pq=E.outBack(seg(t,5.6,6.4)); if(pq>0){ pill(ctx,'UBK 412X · Ronald · Bolt',540,236,{scale:pq,font:FONT.mono(500,14),h:34,px:22,fill:'rgba(52,209,134,.14)',stroke:'rgba(52,209,134,.6)'}); }
     const aq=E.outBack(seg(t,8.6,9.2)); if(aq>0) pill(ctx,'ETA 4 min · share',740,236,{scale:aq,font:FONT.body(600,13),h:30,px:20});
@@ -465,7 +467,7 @@ const SCENES = [
 },
 { id:'link', name:'One link', dur:15,
   caps:[{at:1,eb:'One link',main:'Install it. Same crest, same account.',sub:'The site is the app. Scan from the desktop and the screen is in your hand.'},{at:7.6,main:''}],
-  voice:['Install it. Same crest, same account.','UG. Look the part. Pay the smart price.'],
+  voice:['Install it. Same crest, same account, same shillings.','UG. Weebale. Tugende.'],
   draw(g,t){ const {ctx,now}=g; const a1=E.outExpo(seg(t,.3,1.4))*(1-E.inCubic(seg(t,7.2,8.2)));
     if(a1>0){ ctx.save(); ctx.globalAlpha=a1; const qx=430,qy=330,size=300,n=25,m=size/n; rr(ctx,qx-size/2-22,qy-size/2-22,size+44,size+44,22); ctx.fillStyle=C.ink; ctx.fill();
       const r=rng(7); const reveal=E.outCubic(seg(t,.6,2.4)); const finder=(i,j)=>(i<7&&j<7)||(i>=n-7&&j<7)||(i<7&&j>=n-7); const ring=(i,j,ox,oy)=>{ const a=i-ox,b=j-oy; return (a===0||a===6||b===0||b===6)||(a>=2&&a<=4&&b>=2&&b<=4); };
@@ -485,8 +487,14 @@ const SCENES = [
     vignette(ctx); }
 }
 ];
+/* The short cut: five scenes, each run a little faster. index.html?cut=short, or short.html / short-sound.html from build.js. */
+const SHORT = [['opening',1.25],['ride',1.6],['pool',2],['atlas',1.6],['link',1.2]];
+const CUT = (typeof FORCE_CUT!=='undefined' && FORCE_CUT) || params.get('cut') || 'long';
+if (CUT==='short'){ const picked=[]; SHORT.forEach(([id,k])=>{ const src=SCENES.find(x=>x.id===id); if(!src) return; picked.push({ id:src.id, name:src.name, dur:src.dur/k, voice:src.voice, caps:src.caps.map(c=>Object.assign({},c,{at:c.at/k})), draw:(g,t)=>src.draw(Object.assign({},g,{now:g.now*k,dur:src.dur}),t*k) }); }); SCENES.length=0; picked.forEach(x=>SCENES.push(x)); }
+
 const TOTAL = SCENES.reduce((s,x)=>s+x.dur,0);
 const OFFSET = SCENES.map((s,i)=>SCENES.slice(0,i).reduce((a,x)=>a+x.dur,0));
+{ const mm=Math.floor(TOTAL/60), ss=String(Math.round(TOTAL%60)).padStart(2,'0'); const pm=document.getElementById('pmeta'); if(pm) pm.textContent=(CUT==='short'?'Short cut':'Showreel')+' · '+mm+':'+ss+(SOUND?' · with sound':''); }
 
 /* ---------- DOM ---------- */
 const $ = id => document.getElementById(id);
@@ -509,53 +517,52 @@ let S=1, dpr=1;
 function resize(){ const w=stage.clientWidth, h=stage.clientHeight; dpr=Math.min(2,window.devicePixelRatio||1); S=w/W; canvas.width=Math.round(w*dpr); canvas.height=Math.round(h*dpr); stage.style.setProperty('--u',(w/W)+'px'); }
 new ResizeObserver(resize).observe(stage); resize();
 
-/* ---------- audio (sound mode only; never constructed in silent mode) ---------- */
+/* ---------- audio: the generative score (ug-score.js, sound mode only; never constructed in silent mode) ---------- */
 const audio = SOUND ? (() => {
-  let ac=null, master, bedGain, filt, oscA, oscB, sub, third, noise, nextBeat=0, beatN=0, chordI=-1, muted=false;
-  const CHORDS=[[110,1.5],[130.81,1.25],[98,1.5],[146.83,1.2],[123.47,1.5],[87.31,1.25],[116.54,1.5],[130.81,1.5]];
-  function start(){ if(ac) { ac.resume(); return; } ac=new (window.AudioContext||window.webkitAudioContext)(); master=ac.createGain(); master.gain.value=muted?0:.6; master.connect(ac.destination);
-    filt=ac.createBiquadFilter(); filt.type='lowpass'; filt.frequency.value=520; filt.Q.value=.8; bedGain=ac.createGain(); bedGain.gain.value=0; filt.connect(bedGain); bedGain.connect(master);
-    oscA=ac.createOscillator(); oscA.type='sawtooth'; oscB=ac.createOscillator(); oscB.type='sawtooth'; oscB.detune.value=9; sub=ac.createOscillator(); sub.type='sine'; third=ac.createOscillator(); third.type='triangle';
-    const gA=ac.createGain(), gB=ac.createGain(), gS=ac.createGain(), gT=ac.createGain(); gA.gain.value=.11; gB.gain.value=.11; gS.gain.value=.16; gT.gain.value=.07;
-    oscA.connect(gA); oscB.connect(gB); sub.connect(gS); third.connect(gT); [gA,gB,gS,gT].forEach(g=>g.connect(filt)); [oscA,oscB,sub,third].forEach(o=>o.start());
-    const lfo=ac.createOscillator(); lfo.frequency.value=.07; const lg=ac.createGain(); lg.gain.value=140; lfo.connect(lg); lg.connect(filt.frequency); lfo.start();
-    const len=ac.sampleRate*2; noise=ac.createBuffer(1,len,ac.sampleRate); const d=noise.getChannelData(0); for(let i=0;i<len;i++) d[i]=Math.random()*2-1;
-    bedGain.gain.setTargetAtTime(1,ac.currentTime,1.2); nextBeat=ac.currentTime+.3; }
-  function chord(i){ if(!ac||i===chordI) return; chordI=i; const [root,ratio]=CHORDS[i%CHORDS.length]; const t=ac.currentTime; oscA.frequency.setTargetAtTime(root,t,.6); oscB.frequency.setTargetAtTime(root,t,.7); sub.frequency.setTargetAtTime(root/2,t,.6); third.frequency.setTargetAtTime(root*ratio,t,.6); }
-  function kick(at,strong){ const o=ac.createOscillator(), g=ac.createGain(); o.frequency.setValueAtTime(150,at); o.frequency.exponentialRampToValueAtTime(48,at+.12); g.gain.setValueAtTime(strong?.32:.18,at); g.gain.exponentialRampToValueAtTime(.001,at+.22); o.connect(g); g.connect(master); o.start(at); o.stop(at+.25); }
-  function shaker(at){ const s=ac.createBufferSource(); s.buffer=noise; const f=ac.createBiquadFilter(); f.type='highpass'; f.frequency.value=6000; const g=ac.createGain(); g.gain.setValueAtTime(.05,at); g.gain.exponentialRampToValueAtTime(.001,at+.07); s.connect(f); f.connect(g); g.connect(master); s.start(at); s.stop(at+.08); }
-  function tick(clock){ if(!ac||ac.state!=='running') return; chord(Math.floor(clock/8)); const beat=60/96; while(nextBeat<ac.currentTime+.25){ kick(nextBeat,beatN%2===0); if(beatN%2===1) shaker(nextBeat+beat/2); nextBeat+=beat; beatN++; } }
-  function sting(){ if(!ac||ac.state!=='running') return; const t=ac.currentTime; const s=ac.createBufferSource(); s.buffer=noise; const f=ac.createBiquadFilter(); f.type='bandpass'; f.Q.value=1.6; f.frequency.setValueAtTime(300,t); f.frequency.exponentialRampToValueAtTime(2600,t+.6); const g=ac.createGain(); g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(.2,t+.35); g.gain.exponentialRampToValueAtTime(.001,t+1.3); s.connect(f); f.connect(g); g.connect(master); s.start(t); s.stop(t+1.4); }
-  function pause(){ if(ac) ac.suspend(); } function resume(){ if(ac){ ac.resume().then(()=>{ nextBeat=Math.max(nextBeat,ac.currentTime+.1); }); } }
-  function setMuted(m){ muted=m; if(master) master.gain.setTargetAtTime(m?0:.6,ac.currentTime,.05); }
-  return {start,tick,sting,pause,resume,setMuted,get muted(){return muted;}};
+  let ac=null, master=null, score=null, muted=false;
+  function start(){ if(ac){ ac.resume(); return; } ac=new (window.AudioContext||window.webkitAudioContext)(); master=ac.createGain(); master.gain.value=muted?0:.9; master.connect(ac.destination);
+    if(window.UGScore){ score=window.UGScore.create(ac, master); score.play(CUT==='short'?'short':'long'); } }
+  function cue(i){ if(score && CUT!=='short') score.cue(i); }
+  function tick(){ }
+  function sting(){ }
+  function duck(on){ if(score) score.duck(on); }
+  function pause(){ if(ac) ac.suspend(); } function resume(){ if(ac) ac.resume(); }
+  function setMuted(m){ muted=m; if(master&&ac) master.gain.setTargetAtTime(m?0:.9,ac.currentTime,.05); }
+  return {start,tick,sting,cue,duck,pause,resume,setMuted,get muted(){return muted;}};
 })() : null;
 
-/* narration through speechSynthesis (sound mode only) */
-const voice = SOUND && 'speechSynthesis' in window ? (() => {
-  let v=null; const pick=()=>{ const vs=speechSynthesis.getVoices(); v = vs.find(x=>/en[-_](GB|UG|KE|ZA|NG)/i.test(x.lang)) || vs.find(x=>/^en/i.test(x.lang)) || vs[0] || null; }; pick(); speechSynthesis.addEventListener('voiceschanged',pick);
-  return { say(lines){ if(audio.muted) return; try{ speechSynthesis.cancel(); lines.forEach(l=>{ const u=new SpeechSynthesisUtterance(l); if(v) u.voice=v; u.rate=.98; u.pitch=1; speechSynthesis.speak(u); }); }catch(e){} },
-    stop(){ try{ speechSynthesis.cancel(); }catch(e){} }, pause(){ try{ speechSynthesis.pause(); }catch(e){} }, resume(){ try{ speechSynthesis.resume(); }catch(e){} } };
+/* narration: rendered Ugandan voices (voice/manifest.json, see voice/README.md) when present; else the browser voice, labelled as a placeholder */
+const voice = SOUND ? (() => {
+  let v=null, manifest=null, files={}, cur=[], label=$('vlabel');
+  const pick=()=>{ if(!('speechSynthesis' in window)) return; const vs=speechSynthesis.getVoices(); const pref=['en-UG','en-KE','en-TZ','en-NG','en-ZA','en-GB']; for(const p of pref){ v=vs.find(x=>x.lang.replace('_','-').toLowerCase()===p.toLowerCase()); if(v) break; } v = v || vs.find(x=>/^en/i.test(x.lang)) || vs[0] || null; if(label&&!manifest) label.textContent = v ? `placeholder voice · ${v.name.replace(/Microsoft |Google /,'')}` : 'placeholder voice'; };
+  if('speechSynthesis' in window){ pick(); speechSynthesis.addEventListener('voiceschanged',pick); }
+  fetch('voice/manifest.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(m=>{ if(!m||!m.scenes) return; manifest=m; m.scenes.forEach(sc=>{ files[sc.id]=sc.files.map(f=>'voice/'+f.file); }); if(label) label.textContent='Ugandan voices · '+(m.engine||'rendered').split('/').pop(); }).catch(()=>{});
+  function stopAll(){ cur.forEach(a=>{ try{ a.pause(); }catch(e){} }); cur=[]; if(audio&&audio.duck) audio.duck(false); try{ if('speechSynthesis' in window) speechSynthesis.cancel(); }catch(e){} }
+  function playFiles(list){ let i=0; if(audio.duck) audio.duck(true); const next=()=>{ if(i>=list.length){ if(audio.duck) audio.duck(false); return; } const a=new Audio(list[i++]); a.volume=1; cur=[a]; a.addEventListener('ended',()=>setTimeout(next,260)); a.play().catch(()=>{}); }; next(); }
+  return { say(sceneId, lines){ if(audio.muted) return; stopAll(); if(manifest&&files[sceneId]){ playFiles(files[sceneId]); return; } if(!('speechSynthesis' in window)) return; try{ if(audio.duck) audio.duck(true); lines.forEach((l,i)=>{ const u=new SpeechSynthesisUtterance(l); if(v) u.voice=v; u.rate=.96; u.pitch=.98; if(i===lines.length-1){ u.onend=()=>{ if(audio.duck) audio.duck(false); }; u.onerror=u.onend; } speechSynthesis.speak(u); }); }catch(e){} },
+    stop(){ stopAll(); }, pause(){ cur.forEach(a=>{ try{ a.pause(); }catch(e){} }); try{ if('speechSynthesis' in window) speechSynthesis.pause(); }catch(e){} }, resume(){ cur.forEach(a=>{ a.play().catch(()=>{}); }); try{ if('speechSynthesis' in window) speechSynthesis.resume(); }catch(e){} },
+    get rendered(){ return !!manifest; } };
 })() : null;
 
 /* ---------- player ---------- */
 let clock=0, playing=false, started=false, ended=false, sceneI=-1, capI=-1, lastTs=0;
 function setCaption(c){ const set=(el,s)=>{ el.classList.remove('in'); el.textContent=s||''; if(s){ void el.offsetWidth; el.classList.add('in'); } }; set(capEb,c&&c.eb); set(capMain,c&&c.main); set(capSub,c&&c.sub); }
-function enterScene(i,{sting=true}={}){ sceneI=i; capI=-1; setCaption(null); cnt.textContent=`${String(i+1).padStart(2,'0')} / ${SCENES.length}`; cname.textContent=SCENES[i].name; if(audio&&sting) audio.sting(); if(voice) voice.say(SCENES[i].voice); }
+function enterScene(i,{sting=true}={}){ sceneI=i; capI=-1; setCaption(null); cnt.textContent=`${String(i+1).padStart(2,'0')} / ${SCENES.length}`; cname.textContent=SCENES[i].name; if(audio&&audio.cue) audio.cue(i); if(voice) voice.say(SCENES[i].id, SCENES[i].voice); }
 function goto(i){ i=clamp(i,0,SCENES.length-1); clock=OFFSET[i]; if(ended){ ended=false; endEl.classList.remove('on'); } enterScene(i); if(!playing) setPlaying(true); }
 function setPlaying(p){ playing=p; if(audio){ p?audio.resume():audio.pause(); } if(voice){ p?voice.resume():voice.pause(); } hint.textContent = p ? 'space · ← →' : 'paused · space'; }
 function finish(){ playing=false; ended=true; endEl.classList.add('on'); hint.textContent='ended · r to replay'; if(audio) audio.pause(); }
-function start(){ if(started) return; started=true; if(audio) audio.start(); poster.classList.add('off'); hud.classList.add('on'); if(SOUND) muteBtn.hidden=false; stage.focus({preventScroll:true}); clock=0; playing=true; lastTs=performance.now(); enterScene(0,{sting:false}); requestAnimationFrame(loop); }
+function start(){ if(started) return; started=true; if(audio) audio.start(); poster.classList.add('off'); hud.classList.add('on'); if(SOUND){ muteBtn.hidden=false; const vl=$('vlabel'); if(vl) vl.hidden=false; } stage.focus({preventScroll:true}); clock=0; playing=true; lastTs=performance.now(); enterScene(0,{sting:false}); requestAnimationFrame(loop); }
 
-function loop(ts){ requestAnimationFrame(loop); const dt=Math.min(.1,(ts-lastTs)/1000); lastTs=ts; if(playing){ clock+=dt; if(clock>=TOTAL){ clock=TOTAL-.001; finish(); } }
+let RENDERING=false, capT0=0;
+function loop(ts){ if(!RENDERING) requestAnimationFrame(loop); const dt=RENDERING?0:Math.min(.1,(ts-lastTs)/1000); lastTs=ts; if(playing&&!RENDERING){ clock+=dt; if(clock>=TOTAL){ clock=TOTAL-.001; finish(); } }
   let i=SCENES.length-1; while(i>0&&clock<OFFSET[i]) i--; if(i!==sceneI) enterScene(i); const sc=SCENES[i], t=clock-OFFSET[i];
-  let ci=-1; for(let k=0;k<sc.caps.length;k++) if(sc.caps[k].at<=t) ci=k; if(ci!==capI){ capI=ci; setCaption(ci>=0?sc.caps[ci]:null); }
+  let ci=-1; for(let k=0;k<sc.caps.length;k++) if(sc.caps[k].at<=t) ci=k; if(ci!==capI){ capI=ci; capT0=clock; setCaption(ci>=0?sc.caps[ci]:null); }
   barfill.style.width=(clock/TOTAL*100)+'%';
   if(audio&&playing) audio.tick(clock);
   ctx.setTransform(dpr*S,0,0,dpr*S,0,0); ctx.fillStyle=C.ground; ctx.fillRect(-2,-2,W+4,H+4);
   ctx.save(); sc.draw({ctx,now:clock,dur:sc.dur},t); ctx.restore();
   ctx.globalAlpha=1; if('filter' in ctx) ctx.filter='none'; fade(ctx,t,sc.dur,i===SCENES.length-1);
-  if(!playing&&!ended){ ctx.fillStyle='rgba(15,12,10,.35)'; ctx.fillRect(0,0,W,H); pill(ctx,'paused',640,360,{font:FONT.body(700,14),h:36,px:28}); } }
+  if(!playing&&!ended&&!RENDERING){ ctx.fillStyle='rgba(15,12,10,.35)'; ctx.fillRect(0,0,W,H); pill(ctx,'paused',640,360,{font:FONT.body(700,14),h:36,px:28}); } }
 
 /* ---------- controls ---------- */
 playBtn.addEventListener('click',start);
@@ -572,6 +579,8 @@ document.addEventListener('keydown',e=>{ if(document.activeElement!==stage && (e
 /* fonts, then go */
 const fontsReady = Promise.race([ (document.fonts ? Promise.all([document.fonts.load('900 40px Unbounded'),document.fonts.load('700 20px Unbounded'),document.fonts.load('600 14px "Albert Sans"'),document.fonts.load('500 14px "IBM Plex Mono"')]) : Promise.resolve()).catch(()=>{}), new Promise(r=>setTimeout(r,2500)) ]);
 if (!SOUND) fontsReady.then(()=>setTimeout(start,900));
-window.__UG_REEL = {total:TOTAL, scenes:SCENES.map(s=>({id:s.id,name:s.name,dur:s.dur})), particles:MAP.count, lakes:MAP.lakes, seek(sec){ if(!started) start(); clock=clamp(sec,0,TOTAL-.001); let i=SCENES.length-1; while(i>0&&clock<OFFSET[i]) i--; enterScene(i,{sting:false}); }, get clock(){return clock;}, get playing(){return playing;}};
+window.__UG_REEL = {cut:CUT, sound:SOUND, total:TOTAL, voiceLines:SCENES.map(s=>({id:s.id, at:0, lines:s.voice})),
+  render(sec){ if(!started){ RENDERING=true; started=true; poster.classList.add('off'); hud.classList.add('on'); if(SOUND) muteBtn.hidden=false; stage.focus({preventScroll:true}); } RENDERING=true; playing=false; ended=false; hud.style.display='none'; $('bar').style.display='none'; endEl.style.display='none'; clock=clamp(sec,0,TOTAL-.001); let i=SCENES.length-1; while(i>0&&clock<OFFSET[i]) i--; if(i!==sceneI){ sceneI=i; capI=-1; cnt.textContent=`${String(i+1).padStart(2,'0')} / ${SCENES.length}`; cname.textContent=SCENES[i].name; } loop(performance.now()); const ms=Math.max(0,(clock-capT0)*1000); document.getAnimations().forEach(a=>{ a.pause(); try{ a.currentTime=ms; }catch(e){} }); barfill.style.transition='none'; endEl.classList.toggle('on', clock>=TOTAL-.05); return {scene:SCENES[i].id, t:clock-OFFSET[i]}; },
+  offsets:OFFSET.slice(), scenes:SCENES.map(s=>({id:s.id,name:s.name,dur:s.dur})), particles:MAP.count, lakes:MAP.lakes, seek(sec){ if(!started) start(); clock=clamp(sec,0,TOTAL-.001); let i=SCENES.length-1; while(i>0&&clock<OFFSET[i]) i--; enterScene(i,{sting:false}); }, get clock(){return clock;}, get playing(){return playing;}};
 })();
 </script>

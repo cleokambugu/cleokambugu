@@ -8,7 +8,7 @@ stage car if it is going upcountry (**Deliver**). **Explore** prices the
 whole park weekend in one number and is where all three verbs get used at once. Payment is mobile
 money through Flutterwave.
 
-Status: **v1.2, a working product in sandbox**. The site is a single-file installable web app
+Status: **v1.4, a working product in sandbox**, swept for ergonomics: six sections in the order a rider needs them, everything else revealed on request or in the Ops sheet, every supplier wearing its own mark. The site is a single-file installable web app
 and the server behind it is real: accounts by one-time code, the Virtual Stage with intents and
 funded offers, a double-entry ledger, bookings on the trip rail, Pulse, Flutterwave verification
 and webhooks, tests, a Docker image and deployment workflows. It runs in sandbox until
@@ -20,7 +20,8 @@ operator; see `docs/deploy.md` and the panel's list before real money moves.
 | [`site/index.html`](site/index.html) | **v1.** The app shell and the Virtual Stage: two doors, the sixty-second Handshake, paid intents that fill a stage, the driver's Comfort Map and funded-offer feed, empty legs, Pulse, the Tazama dock, voice commands, Me, a bottom tab bar. Single file, no build step. |
 | [`site/v0.html`](site/v0.html) | **v0**, frozen (also git tag `ug-v0`). |
 | [`site/manifest.webmanifest`](site/manifest.webmanifest) | Web app manifest so the site installs as the app. |
-| [`showreel/`](showreel/) | The film: `index.html` (silent, captions, auto-plays) and `sound.html` (generative soundtrack and narration). Twelve scenes, 4:35. |
+| [`showreel/`](showreel/) | The film, four cuts from one source: long (4:35, twelve scenes) and short (1:26), silent and with sound. `ug-score.js` is the generative Ugandan score, `voice/` the Ugandan-voice pipeline, `build-video.js` and `build-stills.js` the MP4 and still exporters. See [`docs/showreel.md`](docs/showreel.md). |
+| [`marketing/`](marketing/) | Stills: 4K frames from the reel and 2x screens of the site, desktop and phone, dark and light. |
 | [`docs/versions.md`](docs/versions.md) | What each version is and where it lives. |
 | [`docs/atlas.md`](docs/atlas.md) | The tie-together: one table, one truth about state, one desk, one rail, one formula, one map, one wallet, one crest, one link. |
 | [`docs/stay-on-ug.md`](docs/stay-on-ug.md) | Booking with partners without leaving UG: the trip rail now, and the business and API channels each operator offers (researched by search). |

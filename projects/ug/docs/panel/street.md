@@ -8,7 +8,7 @@ The 10% at a stage means nothing until it is shillings. Faras says 10%, SafeBoda
 
 "Vouch" — two members of a circle. At a stage the vouch is me. SafeBoda got that right: their man came to the stage, asked me, and the rider paid for training and two helmets, so he had skin in it. What they got wrong: the price pressure made boys ride fast, and the app never asked where a man is comfortable. If UG lets a chairman vouch in-app and pays him something for it, I sign my stage tomorrow. If "circles" means Stanbic and Watoto, that is not my stage.
 
-A Comfort Map must protect a driver from: night offers he cannot refuse without a rating drop; the CBD boda-free zones; Entebbe at 03:30; and a "funded car" that pays less than the street. Your note promises decline-without-penalty; the concept does not. Put it in writing.
+A Comfort Map must protect a driver from: night offers he cannot refuse without a rating drop; the downtown boda-free zones; Entebbe at 03:30; and a "funded car" that pays less than the street. Your note promises decline-without-penalty; the concept does not. Put it in writing.
 
 Cash or MoMo: riders pay cash when they sit. Your plan collects the whole fare, pays 3.5% to Flutterwave, then pays the driver "later". A boda man wants it before the rider's foot leaves the peg.
 
@@ -40,7 +40,7 @@ Insults: "warns you where a boda is faster than your dignity is worth" — I tak
 6. Bolt's office visit is not a bottleneck; it is how a driver knows the company exists.
 7. The function car comes from family or a known special-hire man on WhatsApp, not a yard.
 8. Special-hire drivers are personal drivers; you keep their number for years.
-9. The CBD boda-free zone means the boda drops you at the edge and you walk.
+9. The downtown boda-free zone means the boda drops you at the edge and you walk.
 10. Nobody here has heard of Felt, Infrared City, Tazama or Cephable.
 
 ## Recommendations for v2
@@ -50,4 +50,4 @@ Insults: "warns you where a boda is faster than your dignity is worth" — I tak
 3. Authorise on MoMo and charge when the rider is seated; refunds instant and fee-free.
 4. Kill "dignity", "Boujee" and "Look the part"; name plans by price.
 5. Mark 2020 and modelled quotes as estimates on the card, and add a "paid this week" figure from riders.
-6. Ship only Ntinda–CBD compare, Friday Jinja and Sunday Entebbe stages, circle-only or women-only; drop plug-ins and Bwindi until then.
+6. Ship only Ntinda–Downtown compare, Friday Jinja and Sunday Entebbe stages, circle-only or women-only; drop plug-ins and Bwindi until then.

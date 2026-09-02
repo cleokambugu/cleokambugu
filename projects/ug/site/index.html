@@ -68,6 +68,26 @@ p{margin:0}
 :focus-visible{outline:2px solid var(--yellow);outline-offset:3px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 section{padding:96px 0;border-top:1px solid var(--line)}
+section.secondary{padding:64px 0}
+/* Reveal: information on request. Anything a rider did not ask for sits behind one of these. */
+details.reveal{border-top:1px dashed var(--line);margin-top:28px;padding-top:2px}
+details.reveal>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;padding:14px 0;font-family:var(--font-display);font-weight:500;font-size:16px;color:var(--ink)}
+details.reveal>summary::-webkit-details-marker{display:none}
+details.reveal>summary::after{content:"";margin-left:auto;width:9px;height:9px;border-right:1.5px solid var(--ink-3);border-bottom:1.5px solid var(--ink-3);transform:rotate(45deg);transition:transform .2s;flex:none}
+details.reveal[open]>summary::after{transform:rotate(-135deg)}
+details.reveal>summary small{font-size:12px;color:var(--ink-3);font-weight:400;font-family:var(--font-body)}
+details.reveal>summary:hover{color:var(--yellow)}
+details.reveal .rv{opacity:1;transform:none;filter:none}
+details.reveal .sec-head{margin-bottom:24px}
+details.reveal .sec-head h2{font-size:clamp(20px,2.4vw,26px)}
+details.reveal .stage-bar{margin-top:0}
+.ops-tabs{margin-bottom:18px}
+.sheet.ops{width:min(980px,100%);max-height:92vh;overflow:auto}
+.sheet.ops .sec-head{grid-template-columns:1fr;gap:8px;margin-bottom:18px}
+.sheet.ops .sec-head h2{font-size:22px}
+.sheet.ops .reach-grid{margin-top:12px}
+.net button .pm{margin-right:6px}
+@media (max-width:640px){section{padding:48px 0}section.secondary{padding:40px 0}.dock{display:none}#navCta.btn{display:none}details.reveal>summary{font-size:15px}}
 .sec-head{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:32px;align-items:end;margin-bottom:44px}
 .sec-head h2{font-size:clamp(28px,4vw,46px);margin-top:10px}
 .sec-head p{color:var(--ink-2);max-width:52ch}
@@ -527,7 +547,10 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
 .town:hover{border-color:var(--yellow)}
 .town b{font-size:14px}
 .town small{font-size:12px;color:var(--ink-3)}
-.town .apps{font-size:11px;color:var(--ink-2)}
+.town .apps{font-size:11px;color:var(--ink-2);display:flex;flex-wrap:wrap;gap:4px 10px;margin-top:4px}
+.town .la{display:inline-flex;align-items:center;gap:0}
+.town .la .pm{width:16px;height:16px;border-radius:4px;margin-right:5px}
+.town .la .pm svg{width:16px;height:16px}
 @media (max-width:900px){.reach-grid{grid-template-columns:1fr 1fr}}
 .legs{margin-top:28px;padding-top:22px;border-top:1px dashed var(--line-strong)}
 .legs-list{display:flex;gap:10px;overflow-x:auto;padding:12px 0 4px;scroll-snap-type:x mandatory}
@@ -635,7 +658,7 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
 .mic-on{background:var(--red)!important;color:#fff!important;border-color:var(--red)!important}
 
 /* ---------- Bottom tab bar (phones) ---------- */
-.tabbar{display:none;position:fixed;left:12px;right:12px;bottom:12px;z-index:60;border-radius:18px;padding:6px;grid-template-columns:repeat(5,1fr)}
+.tabbar{display:none;position:fixed;left:12px;right:12px;bottom:12px;z-index:60;border-radius:18px;padding:6px;grid-template-columns:repeat(4,1fr)}
 .tabbar a,.tabbar button{display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 4px;border:0;background:transparent;text-decoration:none;font-family:var(--font-body);font-weight:600;font-size:11px;color:var(--ink-2);border-radius:12px}
 .tabbar svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .tabbar .on{color:var(--yellow);background:color-mix(in srgb,var(--yellow) 10%,transparent)}
@@ -681,16 +704,12 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
     <a class="logo" href="#top" aria-label="UG home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true" class="crest">    <path d="M28.5 40.5 Q22 31 12.5 17" fill="none" stroke="currentColor" stroke-width="7.5" stroke-linecap="round"/>  <path d="M32 38.5 Q32 24 32 8.5" fill="none" stroke="#F2C200" stroke-width="7.5" stroke-linecap="round"/>  <path d="M35.5 40.5 Q42 31 51.5 17" fill="none" stroke="#D2202F" stroke-width="7.5" stroke-linecap="round"/>  <circle cx="32" cy="48" r="7.5" fill="currentColor"/>  <circle cx="32" cy="48" r="3" fill="#F2C200"/></svg>UG</a>
     <span class="tagline" id="tagline" aria-hidden="true"><span>Ride.</span><span>Pool.</span><span>Rent.</span><span>Deliver.</span></span>
     <div class="nav-links">
+      <a href="#compare" data-i18n="tabRide">Ride</a>
       <a href="#stage" data-i18n="navStage">Stage</a>
-      <a href="#atlas" data-i18n="navAtlas">Atlas</a>
-      <a href="#compare" data-i18n="navCompare">Compare</a>
       <a href="#rent" data-i18n="navRent">Rent</a>
       <a href="#deliver" data-i18n="navDeliver">Deliver</a>
       <a href="#explore" data-i18n="navExplore">Explore</a>
-      <a href="#foresight" data-i18n="navForesight">Foresight</a>
       <a href="#drive" data-i18n="navDrive">Drive</a>
-      <a href="#hustle" data-i18n="navHustle">Hustle</a>
-      <a href="#plugins" data-i18n="navPlugins">Plug-ins</a>
     </div>
     <span class="spacer"></span>
     <span class="tppill" id="tpPill" hidden></span>
@@ -715,13 +734,8 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
         <button class="door" type="button" data-door="driver"><span class="d-k" data-i18n="doorDriver">I drive, or I have a car</span><span class="d-v" data-i18n="doorDriverSub">Say where you're comfortable. Funded trips come to you.</span><span class="d-go" data-i18n="open">Open for business →</span></button>
       </div>
       <div class="fx" style="--d:1.7s;margin-top:12px"><a class="quiet" href="#compare">Just compare prices, no account needed</a></div>
-      <div class="hero-stats fx" style="--d:1.75s" aria-label="Key figures">
-        <div><div class="v mono" id="statProviders">10</div><div class="k">quotes per search</div></div>
-        <div><div class="v mono">4 verbs</div><div class="k">ride · pool · rent · deliver</div></div>
-        <div><div class="v mono">UGX</div><div class="k">MTN MoMo · Airtel Money · cards</div></div>
-      </div>
     </div>
-    <div class="stage" id="stage">
+    <div class="stage" id="map">
       <canvas id="scene" aria-label="Interactive particle map of Uganda. Drag to rotate, hover a place to see it." role="img"></canvas>
       <div class="pins" id="pins"></div>
       <div class="pin-card glass" id="pinCard" hidden></div>
@@ -750,93 +764,7 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
   </div>
 
   <div class="proto" role="note">Prototype v1 · every price is an estimate from a published model · payments run in a sandbox · nothing here is a licensed service yet</div>
-  <div class="ticker" aria-hidden="true">
-    <div class="ticker-track" id="ticker"></div>
-  </div>
 </header>
-
-<!-- ===================== VIRTUAL STAGE ===================== -->
-<section id="stage">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <div>
-        <div class="eyebrow">The Virtual Stage · <b>seats fill first, then the car comes</b></div>
-        <h2>Pay for the seat. Watch the stage fill. The car is manufactured when the money is in.</h2>
-      </div>
-      <p>Like a matatu stage, a car leaves when it is full or at the cut-off. Unlike a stage, you queue money from your sofa, the seat price falls as friends join, and the driver who takes it is one who already said they are comfortable on that road. Not full at cut-off, you are refunded in full the same hour, and airport-night stages carry a guarantee: a special hire at a capped price instead of a refund.</p>
-    </div>
-    <div class="stage-bar rv">
-      <div class="seg" id="segStage" style="max-width:420px">
-        <button type="button" data-v="all" class="on">All corridors</button>
-        <button type="button" data-v="mine">Near me</button>
-        <button type="button" data-v="funded">Funded</button>
-      </div>
-      <span class="spacer" style="flex:1"></span>
-      <button class="btn small" type="button" id="newStageBtn">Start a stage</button>
-    </div>
-    <div class="pulse rv" id="pulse"></div>
-    <div class="stages rv" id="stages" aria-live="polite"></div>
-    <div class="buses rv">
-      <div class="legs-head"><div><div class="eyebrow">Buses on this corridor · <b>the fallback, side by side with the stage</b></div><p class="note" style="margin-top:4px;max-width:72ch">Every corridor also has buses. Compare departure times across operators, see the park you leave from, and book on UG where the operator takes online bookings. Where it does not, we say so and give you the number to call ahead, rather than a dead button.</p></div>
-        <div class="ctl" style="min-width:220px;margin:0"><label for="busCorr">Corridor</label><select id="busCorr"></select></div></div>
-      <div class="bus-list" id="buses"></div>
-    </div>
-    <div class="reach rv">
-      <div class="eyebrow">Reach · <b id="reachCount"></b></div>
-      <p class="note" style="margin-top:4px;max-width:70ch">Every town on the map is a corridor from Kampala and a stage of its own. Where a local app already runs, UG hands the last mile to it rather than pretending to be there.</p>
-      <div class="reach-grid" id="reach"></div>
-    </div>
-    <div class="legs rv">
-      <div class="legs-head"><div><div class="eyebrow">Empty legs · <b>the return seats, 40% of the fare</b></div><p class="note" style="margin-top:4px">Every rental with driver and every pool has a way back. The moment the outbound is booked, the return's seats go on sale.</p></div></div>
-      <div class="legs-list" id="legs"></div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== THE ATLAS: EVERY WAY TO MOVE ===================== -->
-<section id="atlas">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <div>
-        <div class="eyebrow">The Atlas · <b>every way to move, one table</b></div>
-        <h2>Air, bus, water, rail, road, and the car you actually want. Uganda is growing airports, ferries and a railway; UG quotes all of it on one screen.</h2>
-      </div>
-      <p>Complete transport arbitrage means the helicopter and the matatu sit in the same list, priced honestly, with a state that tells the truth: <b>Book on UG</b> where a channel exists, <b>Call ahead</b> where it does not, <b>Listed</b> so an operator is recognised before it is wired, <b>Coming</b> for what is being built. The picky traveller gets the Signature fleet; the weekend gets a stay on the same receipt.</p>
-    </div>
-    <div class="seg rv" id="segAtlas" style="max-width:720px;margin-bottom:16px"></div>
-    <p class="note rv" id="modeLine" style="margin-bottom:12px"></p>
-    <div class="atlas-grid rv" id="atlasGrid"></div>
-  </div>
-</section>
-
-<!-- ===================== FORESIGHT ===================== -->
-<section id="foresight">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <div>
-        <div class="eyebrow">Foresight · <b>demand before it happens</b></div>
-        <h2>Mango season needs minibuses in Masaka. Entebbe needs cars at midnight. Namboole needs sixty special hires at four. UG says so a week ahead, and counts who promised to be there.</h2>
-      </div>
-      <p>The system behind the app reads three calendars: the harvests by region, the rhythms of airports, hospitals, markets, campuses, churches and stadiums, and the named events of the year. From those it forecasts loads per day by place and vehicle class, shows the gap between what is needed and what drivers have promised, and points the right vehicle to the right place. As stages fill and trips complete, the forecast learns from what actually happened.</p>
-    </div>
-    <div class="stage-bar rv"><div class="seg" id="segVeh" style="flex-wrap:wrap;max-width:720px"></div><span class="spacer" style="flex:1"></span><span class="note">Confidence is shown per signal; seasons are rules until there are fills to learn from.</span></div>
-    <div class="fx-grid rv" id="foresightList"></div>
-  </div>
-</section>
-
-<!-- ===================== DRIVE ===================== -->
-<section id="drive">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <div>
-        <div class="eyebrow">Drive · <b>funded trips come to you</b></div>
-        <h2>Say where you are comfortable, once. Then accept full cars with the money already in them.</h2>
-      </div>
-      <p>No posting, no waiting at a stage, no bidding. Your Comfort Map is the only thing you maintain: base, radius, corridors, hours, hard no's. Offers arrive the minute you sign up; you accept them the minute verification clears, usually within a day. Decline anything, no penalty.</p>
-    </div>
-    <div id="driveBody"></div>
-  </div>
-</section>
 
 <!-- ===================== COMPARE ===================== -->
 <section id="compare">
@@ -844,9 +772,9 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
     <div class="sec-head rv">
       <div>
         <div class="eyebrow">Compare · <b>the arbitrage desk</b></div>
-        <h2>Every way to make the trip, quoted on one screen. Book the cheapest one here, or the one you actually want.</h2>
+        <h2>Every ride on the market, one screen, ranked by price.</h2>
       </div>
-      <p>Uber, Bolt, SafeBoda, Faras, Yango, Tinka, the street boda, the matatu stage, a special hire, the bus, the ferry, the flight, the helicopter, the Signature car, and UG's own stage and rentals. Same trip, same minute, ranked by price, and every one of them listed even when it does not serve the route, so you can see why. Book any of them on UG and track it on the rail; the partner's own app is one quiet link away if you prefer it. We earn a referral or a UG booking, never a mark-up on the quote.</p>
+      <p>Uber, Bolt, SafeBoda, Faras, Yango, Tinka, the street boda, the matatu, a special hire, the bus, the ferry, the flight, and UG’s own pool and rentals. Same trip, same minute. Estimates say so on the card, the ones that cannot serve you stay greyed with the reason, and the button is always Book on UG.</p>
     </div>
     <div class="desk">
       <div class="panel rv">
@@ -871,59 +799,62 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
           </div>
         </div>
         <div class="ctl"><label for="cPax">People travelling</label><input id="cPax" type="number" min="1" max="7" value="1"></div>
+        <details class="reveal" id="moreOpts" style="margin-top:6px"><summary>More options <small>pick the car, rain, split</small></summary>
         <div class="ctl"><label>Pick the car</label><div class="pick" id="pickCar"><span class="c on" data-p="any">Any</span><span class="c" data-p="sedan">Signature sedan</span><span class="c" data-p="suv">Signature SUV</span><span class="c" data-p="van">Executive van</span></div></div>
         <label class="toggle"><span>It is raining (Kampala surge)</span><input type="checkbox" id="cRain"></label>
         <label class="toggle"><span>Split fare across the group</span><input type="checkbox" id="cSplit" checked></label>
+        </details>
       </div>
       <div>
-        <div class="res-summary rv" id="resSummary"></div>
+        <details class="reveal" id="spreadWrap" style="margin:0 0 12px;border-top:0"><summary>What choosing badly costs <small>the spread across the market for this trip</small></summary><div class="res-summary" id="resSummary"></div></details>
         <div class="results" id="results" aria-live="polite"></div>
         <p class="disclaimer" id="disclaimer"></p>
       </div>
     </div>
+    <details class="reveal" id="atlas"><summary>The Atlas · every way to move, one table <small>air, bus, water, rail, Signature cars, stays, with the truth about each one's state</small></summary>
+    <p class="note" style="margin:4px 0 12px;max-width:80ch"><b>Book on UG</b> where a channel exists, <b>Call ahead</b> where it does not, <b>Listed</b> for recognition, <b>Coming</b> for what is being built. Fares are modelled and say so.</p>
+    <div class="seg rv" id="segAtlas" style="max-width:720px;margin-bottom:16px"></div>
+    <p class="note rv" id="modeLine" style="margin-bottom:12px"></p>
+    <div class="atlas-grid rv" id="atlasGrid"></div>
+    </details>
   </div>
 </section>
 
-<!-- ===================== DELIVER ===================== -->
-<section id="deliver">
+<!-- ===================== VIRTUAL STAGE ===================== -->
+<section id="stage">
   <div class="wrap">
     <div class="sec-head rv">
       <div>
-        <div class="eyebrow">Deliver · <b>send the thing</b></div>
-        <h2>Cakes to Bugolobi, a passport to Jinja, a sofa to Mukono. Every courier in town quoted, and the boot of every stage car for sale.</h2>
+        <div class="eyebrow">The Virtual Stage · <b>seats fill first, then the car comes</b></div>
+        <h2>Pay for the seat. The car comes when it fills.</h2>
       </div>
-      <p>The flip side of a ride is a parcel. UG quotes the boda couriers, the local delivery apps where they exist, and its own <b>Parcel on the Stage</b>: a box rides upcountry in the boot of a funded stage car for a quarter of a seat. You book and track here; nobody sends you to another app.</p>
+      <p>Like a matatu stage, a car leaves when it is full or at the cut-off. Unlike a stage, you queue money from your sofa, the seat price falls as friends join, and the driver who takes it already said they are comfortable on that road.</p>
     </div>
-    <div class="desk">
-      <div class="panel rv">
-        <h3>The parcel</h3>
-        <div class="split">
-          <div class="ctl"><label for="dFrom">From</label><select id="dFrom"></select></div>
-          <div class="ctl"><label for="dTo">To</label><select id="dTo"></select></div>
-        </div>
-        <div class="ctl"><label>What is it</label><div class="corr" id="dWhat"><span class="c on" data-w="envelope">Envelope · documents</span><span class="c" data-w="box">Small box</span><span class="c" data-w="food">Cakes · food, keep flat</span><span class="c" data-w="bag">A bag · shopping</span><span class="c" data-w="bulky">Bulky · needs a car</span><span class="c" data-w="produce">Produce · sacks, crates, a harvest</span></div></div>
-        <label class="toggle"><span>Someone must sign for it</span><input type="checkbox" id="dSign"></label>
-        <label class="toggle"><span>Same hour (otherwise today)</span><input type="checkbox" id="dRush"></label>
-        <div class="route-meta" id="dMeta"></div>
+    <div class="stage-bar rv">
+      <div class="seg" id="segStage" style="max-width:420px">
+        <button type="button" data-v="all" class="on">All corridors</button>
+        <button type="button" data-v="mine">Near me</button>
+        <button type="button" data-v="funded">Funded</button>
       </div>
-      <div>
-        <div class="results" id="dResults" aria-live="polite"></div>
-        <p class="disclaimer">Courier rates are UG estimates from a published model; 8 to 8 in Jinja is named from the founder's brief and its tariff is modelled. Parcel on the Stage is UG's own price: a quarter of the seat on that stage, paid to the driver with the seats.</p>
-      </div>
+      <span class="spacer" style="flex:1"></span>
+      <button class="btn small" type="button" id="newStageBtn">Start a stage</button>
     </div>
-  </div>
-</section>
-
-<!-- ===================== POOL ===================== -->
-<section id="pool">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <div>
-        <div class="eyebrow">Pool · <b>share the seat, split the fuel</b></div>
-        <h2>The Friday Jinja run, the Saturday Mbarara dash, the 4 a.m. airport drop. Someone in your circle is already driving.</h2>
-      </div>
-      <p>Verified phone, verified plates, verified employer or church or alumni circle. Riders and drivers rate each other, chat inside the trip, and the fare is the true cost of the road divided by the seats. No surge, no meter. The driver's wage is in the price and shown in shillings, and so is UG's fee.</p>
+    <details class="reveal" id="pulseWrap"><summary>Where stages fill fastest <small>Pulse · paid seats against comfort maps, by town</small></summary><div class="pulse rv" id="pulse"></div></details>
+    <div class="stages rv" id="stages" aria-live="polite"></div>
+    <details class="reveal" id="busesWrap"><summary>Buses on this corridor <small>the fallback, side by side with the stage</small></summary>
+    <div class="buses rv">
+      <div class="legs-head"><div><p class="note" style="margin-top:4px;max-width:72ch" hidden>Every corridor also has buses. Compare departure times across operators, see the park you leave from, and book on UG where the operator takes online bookings. Where it does not, we say so and give you the number to call ahead, rather than a dead button.</p></div>
+        <div class="ctl" style="min-width:220px;margin:0"><label for="busCorr">Corridor</label><select id="busCorr"></select></div></div>
+      <div class="bus-list" id="buses"></div>
     </div>
+    </details>
+    <details class="reveal" id="legsWrap"><summary>Empty legs <small>the return seats, 40% of the fare</small></summary>
+    <div class="legs rv">
+      <div class="legs-head"><div><p class="note" style="margin-top:4px">Every rental with driver and every pool has a way back. The moment the outbound is booked, the return's seats go on sale.</p></div></div>
+      <div class="legs-list" id="legs"></div>
+    </div>
+    </details>
+    <details class="reveal" id="pool"><summary>Post a trip of your own, or price a seat <small>Pool · your circles, the true cost of the road divided by seats</small></summary>
     <div class="pool">
       <div class="rv">
         <div id="trips"></div>
@@ -945,18 +876,19 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
         <p class="note">Posted trips live only in this browser until you sign in. Pool follows the same pattern the Pool app popularised: phone-verified accounts, a trip chat, and two-way ratings, plus circles so you ride with people you already half-know.</p>
       </div>
     </div>
+    </details>
   </div>
 </section>
 
 <!-- ===================== RENT ===================== -->
-<section id="rent">
+<section id="rent" class="secondary">
   <div class="wrap">
     <div class="sec-head rv">
       <div>
         <div class="eyebrow">Rent · <b>arrive properly</b></div>
-        <h2>Self-drive by the day, chauffeured by the hour, split four ways by default.</h2>
+        <h2>Rent the car, or arrive in it.</h2>
       </div>
-      <p>The rental desk works the way Sixt's does: pick a class, pick dates, skip the counter. The difference is the price tag is always shown per head as well as per day, because in Kampala the Prado is a group decision.</p>
+      <p>Self-drive by the day, chauffeured by the hour, or the Signature fleet when the arrival is the point. The price is per head when you split it.</p>
     </div>
     <div class="rent-bar rv">
       <label>Days <input type="range" id="rDays" min="1" max="14" value="3"> <span class="mono" id="rDaysV">3</span></label>
@@ -969,15 +901,45 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
   </div>
 </section>
 
+<!-- ===================== DELIVER ===================== -->
+<section id="deliver" class="secondary">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <div class="eyebrow">Deliver · <b>send the thing</b></div>
+        <h2>Send the thing. Any size, any distance.</h2>
+      </div>
+      <p>Every courier in town on one screen, ranked. Upcountry, the parcel rides in the boot of a stage car for a quarter of a seat, and in harvest season a minibus, pickup or lorry with a driver.</p>
+    </div>
+    <div class="desk">
+      <div class="panel rv">
+        <h3>The parcel</h3>
+        <div class="split">
+          <div class="ctl"><label for="dFrom">From</label><select id="dFrom"></select></div>
+          <div class="ctl"><label for="dTo">To</label><select id="dTo"></select></div>
+        </div>
+        <div class="ctl"><label>What is it</label><div class="corr" id="dWhat"><span class="c on" data-w="envelope">Envelope · documents</span><span class="c" data-w="box">Small box</span><span class="c" data-w="food">Cakes · food, keep flat</span><span class="c" data-w="bag">A bag · shopping</span><span class="c" data-w="bulky">Bulky · needs a car</span><span class="c" data-w="produce">Produce · sacks, crates, a harvest</span></div></div>
+        <label class="toggle"><span>Someone must sign for it</span><input type="checkbox" id="dSign"></label>
+        <label class="toggle"><span>Same hour (otherwise today)</span><input type="checkbox" id="dRush"></label>
+        <div class="route-meta" id="dMeta"></div>
+      </div>
+      <div>
+        <div class="results" id="dResults" aria-live="polite"></div>
+        <p class="disclaimer">Courier rates are UG estimates from a published model; 8 to 8 in Jinja is named from the founder's brief and its tariff is modelled. Parcel on the Stage is UG's own price: a quarter of the seat on that stage, paid to the driver with the seats.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ===================== EXPLORE ===================== -->
-<section id="explore">
+<section id="explore" class="secondary">
   <div class="wrap">
     <div class="sec-head rv">
       <div>
         <div class="eyebrow">Explore · <b>the Pearl, priced honestly</b></div>
-        <h2>Pick a place, tell us who is coming, and get the whole weekend in one number.</h2>
+        <h2>The whole park weekend, one number.</h2>
       </div>
-      <p>Park entry, permits, vehicle fees, and the road there, computed for East African citizens, foreign residents, and visitors separately, because the Uganda Wildlife Authority charges each differently. Choose pooled transport and watch the total fall.</p>
+      <p>Park entry, permits, vehicle fees, the lodge, the rolex money and the road there, computed for East African citizens, foreign residents and visitors. East African citizens pay East African prices.</p>
     </div>
     <div class="explore">
       <div class="dests rv" id="dests"></div>
@@ -1011,19 +973,7 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
         <p class="note" id="itinNote"></p>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- ===================== HUSTLE MODE ===================== -->
-<section id="hustle">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <div>
-        <div class="eyebrow">Hustle Mode · <b>for people running three lives</b></div>
-        <h2>School run, board meeting, side-hustle delivery, kwanjula on Saturday. UG chains the day and tells you what it will cost before it starts.</h2>
-      </div>
-      <p>Drop the day's stops in once. UG quotes each leg on the cheapest sensible mode, tells you where a boda beats a car by twenty minutes, and holds the money on your MoMo wallet so nothing bounces at the gate.</p>
-    </div>
+    <details class="reveal" id="hustle"><summary>Chain a whole day <small>Hustle Mode · every leg quoted on the cheapest sensible mode; wallet and plans are sandbox</small></summary>
     <div class="hustle">
       <div class="day rv" id="day"></div>
       <div class="rv">
@@ -1036,51 +986,38 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
         <div class="plans" id="plans"></div>
       </div>
     </div>
+    </details>
   </div>
 </section>
 
-<!-- ===================== PARTNERS ===================== -->
-<section id="partners">
+<!-- ===================== DRIVE ===================== -->
+<section id="drive">
   <div class="wrap">
     <div class="sec-head rv">
       <div>
-        <div class="eyebrow">Partners · <b>we send you demand</b></div>
-        <h2>Competitors are listed on purpose. A rider who trusts the comparison comes back for the pool and the rental.</h2>
+        <div class="eyebrow">Drive · <b>funded trips come to you</b></div>
+        <h2>Say where you are comfortable, once. Accept full cars.</h2>
       </div>
-      <p>UG is a marketplace first. Ride-hailing apps get pre-filled bookings with no acquisition cost. Rental yards get vetted weekend renters. Lodges get groups arriving on a known date. Drivers get a route full before they leave.</p>
+      <p>No posting, no waiting at a stage, no bidding. Your Comfort Map is the only thing you maintain: base, radius, corridors, hours, hard no’s. Funded offers arrive with the money already in them.</p>
     </div>
-    <div class="trust rv">
-      <div><h3>For riders</h3><p>Verified drivers and plates, an in-trip SOS that shares live location with a contact you choose, helmets on every pooled boda, and a receipt for every shilling.</p></div>
-      <div><h3>For drivers and yards</h3><p>Ten percent on pool, a flat listing fee on rentals, weekly payouts to MoMo through Flutterwave, and demand you did not have to advertise for.</p></div>
-      <div><h3>For the apps we compare</h3><p>Deep links that open your app with pick-up and drop-off filled. We never show a price we did not compute openly, and the method is published.</p></div>
-    </div>
-    <div class="partners" id="partnerList"></div>
-  </div>
-</section>
-
-<!-- ===================== PLUG-INS ===================== -->
-<section id="plugins">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <div>
-        <div class="eyebrow">Plug-ins · <b>UG talks to the tools you already use</b></div>
-        <h2>Maps from Felt. Climate workflows from Infrared City. Entertainment from Tazama. Hands-free control from Cephable.</h2>
-      </div>
-      <p>Each plug-in is an adapter with its own endpoint and key, stored on this device until you sign in. Connect one and the matching buttons light up across Pool, Explore and Hustle Mode. Nothing leaves UG without a plug-in you switched on.</p>
-    </div>
-    <div class="plugs rv" id="plugs"></div>
+    <div id="driveBody"></div>
+    <details class="reveal" id="foresight"><summary>Where demand is coming this week <small>Foresight · harvests, venue rhythms and events, a week ahead, by vehicle class</small></summary>
+    <p class="note" style="margin:4px 0 12px;max-width:80ch">Promise to be there and the gap closes for everyone. Confidence is shown per signal; seasons are rules until the first harvest teaches them.</p>
+    <div class="stage-bar rv"><div class="seg" id="segVeh" style="flex-wrap:wrap;max-width:720px"></div><span class="spacer" style="flex:1"></span><span class="note">Confidence is shown per signal; seasons are rules until there are fills to learn from.</span></div>
+    <div class="fx-grid rv" id="foresightList"></div>
+    </details>
   </div>
 </section>
 
 <!-- ===================== INSTALL ===================== -->
-<section id="install">
+<section id="install" class="secondary">
   <div class="wrap">
     <div class="sec-head rv">
       <div>
         <div class="eyebrow">One link · <b>two ways in</b></div>
-        <h2>The site is the app. Install it here, or point a phone at the code.</h2>
+        <h2>The site is the app. Install it, or scan the code.</h2>
       </div>
-      <p>UG runs from one link on the web and on the phone, with the same account, the same stages and the same Crest on the home screen. No store visit, no update nag; the app you install is the page you are reading.</p>
+      <p>One link on the web and on the phone: the same account, the same stages, the same Crest on the home screen. No store visit.</p>
     </div>
     <div class="inst rv">
       <div class="inst-card glass">
@@ -1098,6 +1035,7 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
   </div>
 </section>
 
+
 <!-- ===================== FOOTER ===================== -->
 <footer class="site">
   <div class="wrap">
@@ -1107,7 +1045,7 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
         <p style="margin-top:12px">Ride. Pool. Rent. Deliver. A Ugandan mobility marketplace for people who have places to be and a budget to respect.</p>
       </div>
       <div><h4>Product</h4><a href="#compare">Compare</a><a href="#pool">Pool</a><a href="#rent">Rent</a><a href="#explore">Explore</a><a href="#hustle">Hustle Mode</a></div>
-      <div><h4>Company</h4><a href="#partners">Partners</a><a href="#" data-soon>Drive with UG</a><a href="#" data-soon>List a car</a><a href="#" data-soon>Careers</a></div>
+      <div><h4>Company</h4><a href="#" data-ops-open="partners">Partners</a><a href="#" data-ops-open="plugins">Plug-ins</a><a href="#" data-ops-open="reach">Reach</a><a href="#" data-soon>Drive with UG</a><a href="#" data-soon>List a car</a><a href="#" data-soon>Careers</a></div>
       <div><h4>Trust</h4><a href="#" data-soon>Pricing method</a><a href="#" data-soon>Safety</a><a href="#" data-soon>Privacy</a><a href="#" data-soon>Terms</a></div>
     </div>
     <div class="socials" aria-label="UG on social media">
@@ -1118,6 +1056,7 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
       <a class="soc" href="https://linkedin.com/company/ridepoolrent" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 9h3v10H5zM6.5 4a1.7 1.7 0 1 1 0 3.4 1.7 1.7 0 0 1 0-3.4zM10 9h3v1.5c.5-.9 1.7-1.7 3.3-1.7 3.2 0 3.7 2 3.7 4.6V19h-3v-4.8c0-1.2 0-2.6-1.6-2.6s-1.9 1.2-1.9 2.5V19h-3z"/></svg>LinkedIn</a>
       <a class="soc" href="https://youtube.com/@ridepoolrent" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="6" width="18" height="12" rx="4"/><path d="M10 9.5v5l4.5-2.5z" fill="currentColor" stroke="none"/></svg>YouTube</a>
     </div>
+    <div class="partners" id="partnerList" aria-label="Partners and networks on UG"></div>
     <div class="legal">
       <span>© 2026 UG · <b>v1</b> · <a href="v0.html" data-v0>v0 archived</a> · Prototype. Quotes are indicative estimates from a published model, not live fares.</span>
       <span class="mono">Kampala · Entebbe · Jinja · Mbarara · Gulu</span>
@@ -1141,7 +1080,7 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
       <button class="btn primary" type="button" id="payBtn" style="width:100%;justify-content:center">Pay now</button>
       <div class="status" id="payStatus">Flutterwave will send a prompt to your phone. Approve it with your PIN.</div>
     </div>
-    <footer><span>Checkout by Flutterwave · sandbox until a live key is set</span><span class="mono" id="payRef"></span></footer>
+    <footer><span id="payBy">Checkout by Flutterwave · sandbox until a live key is set</span><span class="mono" id="payRef"></span></footer>
   </div>
 </div>
 <div class="modal" id="plugModal" hidden role="dialog" aria-modal="true" aria-labelledby="plugTitle">
@@ -1176,6 +1115,45 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
     <div class="body" id="meBody"></div>
   </div>
 </div>
+<div class="modal" id="ops" hidden role="dialog" aria-modal="true" aria-labelledby="opsTitle">
+  <div class="sheet glass ops">
+    <header><b id="opsTitle">Ops · the back office</b><button class="x" type="button" id="opsClose" aria-label="Close">×</button></header>
+    <div class="body">
+      <div class="seg ops-tabs" id="segOps"><button type="button" data-v="reach" class="on">Reach</button><button type="button" data-v="plugins">Plug-ins</button><button type="button" data-v="partners">Partners</button></div>
+      <div data-ops="reach">
+    <div class="reach">
+      <div class="eyebrow">Reach · <b id="reachCount"></b></div>
+      <p class="note" style="margin-top:4px;max-width:70ch">Every town on the map is a corridor from Kampala and a stage of its own. Where a local app already runs, UG hands the last mile to it rather than pretending to be there.</p>
+      <div class="reach-grid" id="reach"></div>
+    </div>
+      </div>
+      <div data-ops="plugins" hidden>
+    <div class="sec-head">
+      <div>
+        <div class="eyebrow">Plug-ins · <b>UG talks to the tools you already use</b></div>
+        <h2>Maps from Felt. Climate workflows from Infrared City. Entertainment from Tazama. Hands-free control from Cephable.</h2>
+      </div>
+      <p>Each plug-in is an adapter with its own endpoint and key, stored on this device until you sign in. Connect one and the matching buttons light up across Pool, Explore and Hustle Mode. Nothing leaves UG without a plug-in you switched on.</p>
+    </div>
+    <div class="plugs" id="plugs"></div>
+      </div>
+      <div data-ops="partners" hidden>
+    <div class="sec-head">
+      <div>
+        <div class="eyebrow">Partners · <b>we send you demand</b></div>
+        <h2>Competitors are listed on purpose. A rider who trusts the comparison comes back for the pool and the rental.</h2>
+      </div>
+      <p>UG is a marketplace first. Ride-hailing apps get pre-filled bookings with no acquisition cost. Rental yards get vetted weekend renters. Lodges get groups arriving on a known date. Drivers get a route full before they leave.</p>
+    </div>
+    <div class="trust">
+      <div><h3>For riders</h3><p>Verified drivers and plates, an in-trip SOS that shares live location with a contact you choose, helmets on every pooled boda, and a receipt for every shilling.</p></div>
+      <div><h3>For drivers and yards</h3><p>Ten percent on pool, a flat listing fee on rentals, weekly payouts to MoMo through Flutterwave, and demand you did not have to advertise for.</p></div>
+      <div><h3>For the apps we compare</h3><p>Deep links that open your app with pick-up and drop-off filled. We never show a price we did not compute openly, and the method is published.</p></div>
+    </div>
+      </div>
+    </div>
+  </div>
+</div>
 <aside class="dock glass" id="dock" aria-label="Tazama in-transit entertainment">
   <button class="dock-play" type="button" id="dockPlay" aria-label="Play"><svg viewBox="0 0 24 24" id="dockIcon"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></button>
   <div class="dock-body">
@@ -1186,9 +1164,8 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
   <button class="dock-next" type="button" id="dockNext" aria-label="Next">›</button>
 </aside>
 <nav class="tabbar glass" id="tabbar" aria-label="App sections">
-  <a href="#stage"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="11" rx="2"/><path d="M7 18v2M17 18v2M3 12h18"/></svg><span data-i18n="navStage">Stage</span></a>
   <a href="#compare"><svg viewBox="0 0 24 24"><path d="M4 17h16M4 12h10M4 7h16"/></svg><span data-i18n="tabRide">Ride</span></a>
-  <a href="#rent"><svg viewBox="0 0 24 24"><path d="M5 16l2-6h10l2 6v3H5z"/><circle cx="8" cy="18" r="1.5"/><circle cx="16" cy="18" r="1.5"/></svg><span data-i18n="navRent">Rent</span></a>
+  <a href="#stage"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="11" rx="2"/><path d="M7 18v2M17 18v2M3 12h18"/></svg><span data-i18n="navStage">Stage</span></a>
   <a href="#deliver"><svg viewBox="0 0 24 24"><path d="M3 8l9-4 9 4v9l-9 4-9-4z"/><path d="M3 8l9 4 9-4M12 12v9"/></svg><span data-i18n="navDeliver">Deliver</span></a>
   <button type="button" id="tabMe"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg><span id="tabMeLbl">Me</span></button>
 </nav>
@@ -1211,11 +1188,11 @@ const DRIVER_WAGE_PER_KM = 300;         // modelled: what a stage trip pays the 
 const FLW_PUBLIC_KEY = 'FLWPUBK_TEST-replace-me-X';   // placeholder; set a real key in production
 
 const ROUTES = [
-  {id:'kololo-nakasero', from:'Kololo', to:'Nakasero (CBD)', km:2.5, min:12, tolls:0, city:true},
-  {id:'ntinda-cbd', from:'Ntinda', to:'Kampala CBD', km:7, min:32, tolls:0, city:true},
+  {id:'kololo-nakasero', from:'Kololo', to:'Nakasero (Downtown)', km:2.5, min:12, tolls:0, city:true},
+  {id:'ntinda-cbd', from:'Ntinda', to:'Downtown Kampala', km:7, min:32, tolls:0, city:true},
   {id:'bugolobi-makerere', from:'Bugolobi', to:'Makerere', km:8, min:36, tolls:0, city:true},
   {id:'kira-nakawa', from:'Kira', to:'Nakawa', km:11, min:45, tolls:0, city:true},
-  {id:'cbd-entebbe', from:'Kampala CBD', to:'Entebbe Airport', km:40, min:60, tolls:5000, entebbe:true},
+  {id:'cbd-entebbe', from:'Downtown Kampala', to:'Entebbe Airport', km:40, min:60, tolls:5000, entebbe:true},
   {id:'kampala-jinja', from:'Kampala', to:'Jinja (Source of the Nile)', km:80, min:150, tolls:0, inter:true, bus:25000},
   {id:'kampala-mbarara', from:'Kampala', to:'Mbarara', km:270, min:300, tolls:0, inter:true, bus:40000},
   {id:'kampala-fortportal', from:'Kampala', to:'Fort Portal', km:300, min:300, tolls:0, inter:true, bus:40000},
@@ -1472,8 +1449,85 @@ const LOGOS = {
   bus: SVG(`<rect x="10" y="9" width="24" height="24" rx="4" fill="none" stroke="#fff" stroke-width="2.2"/><path d="M10 19h24M14 27h4M26 27h4" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><circle cx="15" cy="35" r="2.4" fill="#fff"/><circle cx="29" cy="35" r="2.4" fill="#fff"/>`),
   ugpool: SVG(CREST()),
   ugrent: SVG(CREST('#1A1400')),
+  /* Intercity buses */
+  linkbus: SVG(`<ellipse cx="14" cy="22" rx="7" ry="4.5" fill="none" stroke="#fff" stroke-width="2.2"/><ellipse cx="30" cy="22" rx="7" ry="4.5" fill="none" stroke="#fff" stroke-width="2.2"/>`+T('LINK',8,36,800,'letter-spacing="1.6"')),
+  globalcoaches: SVG(`<circle cx="22" cy="18" r="8" fill="none" stroke="#fff" stroke-width="2"/><path d="M14 18h16M22 10c-4 4-4 12 0 16M22 10c4 4 4 12 0 16" fill="none" stroke="#fff" stroke-width="1.6"/>`+T('GLOBAL',7.5,37,800,'letter-spacing="1.2"')),
+  mashpoa: SVG(T('mash',13,22,800,'letter-spacing="-.4"')+T('POA',8,35,600,'letter-spacing="2" opacity=".85"')),
+  jaguarexecutivecoaches: SVG(`<path d="M8 28c5-9 9-12 14-12s9 3 14 12" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><path d="M14 20l3-6 3 4" fill="none" stroke="#fff" stroke-width="2"/>`+T('JAGUAR',7.5,37,800,'letter-spacing="1.4"')),
+  yycoaches: SVG(T('YY',20,30,900,'letter-spacing="-1" font-style="italic"')),
+  kalitacoaches: SVG(T('Kalita',12,26,700,'letter-spacing="-.2"')+`<path d="M12 31h20" stroke="#fff" stroke-width="2" stroke-linecap="round"/>`),
+  trinityexpress: SVG(`<path d="M22 8l12 22H10z" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round"/><path d="M22 16l6 11H16z" fill="#fff"/>`+T('TRINITY',6.5,39,800,'letter-spacing="1.3"')),
+  gaagacoaches: SVG(T('GAAGA',10.5,27,900,'letter-spacing="-.3"')),
+  kkcoaches: SVG(T('KK',20,30,900,'letter-spacing="-2"')),
+  nilecoaches: SVG(`<path d="M8 20c4-6 8 6 12 0s8 6 12 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><path d="M8 27c4-6 8 6 12 0s8 6 12 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" opacity=".6"/>`+T('NILE',7.5,38,800,'letter-spacing="1.8"')),
+  elgonflyer: SVG(`<path d="M8 24l14-12 14 12" fill="none" stroke="#fff" stroke-width="2.6" stroke-linejoin="round"/><path d="M14 24l8-7 8 7" fill="#fff" opacity=".7"/>`+T('ELGON',7,37,800,'letter-spacing="1.6"')),
+  tausibus: SVG(`<path d="M22 32V18M22 18l-9-8M22 18l9-8M22 18l-4-11M22 18l4-11" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><circle cx="13" cy="10" r="2" fill="#fff"/><circle cx="31" cy="10" r="2" fill="#fff"/><circle cx="18" cy="7" r="2" fill="#fff"/><circle cx="26" cy="7" r="2" fill="#fff"/>`+T('TAUSI',7,39,800,'letter-spacing="1.6"')),
+  comfortcoaches: SVG(`<path d="M10 28v-8a4 4 0 0 1 4-4h16a4 4 0 0 1 4 4v8" fill="none" stroke="#fff" stroke-width="2.2"/><rect x="8" y="26" width="28" height="6" rx="3" fill="#fff"/>`+T('COMFORT',6,40,800,'letter-spacing="1.2"')),
+  bakulubus: SVG(T('Bakulu',11,26,800,'letter-spacing="-.3"')+`<rect x="12" y="30" width="20" height="3" rx="1.5" fill="#fff" opacity=".7"/>`),
+  postbus: SVG(`<rect x="8" y="13" width="28" height="19" rx="3" fill="none" stroke="#fff" stroke-width="2.2"/><path d="M8 15l14 10 14-10" fill="none" stroke="#fff" stroke-width="2.2"/>`),
+  friendshipbus: SVG(`<circle cx="16" cy="20" r="6" fill="none" stroke="#fff" stroke-width="2.2"/><circle cx="28" cy="20" r="6" fill="none" stroke="#fff" stroke-width="2.2"/>`+T('FRIENDSHIP',5.5,36,800,'letter-spacing="1"')),
+  gatewaybus: SVG(`<path d="M10 34V20a12 12 0 0 1 24 0v14" fill="none" stroke="#fff" stroke-width="2.6"/><path d="M16 34V22a6 6 0 0 1 12 0v12" fill="#fff" opacity=".5"/>`),
+  friendssafaris: SVG(`<path d="M6 30c6-8 10-10 16-10s10 2 16 10" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><circle cx="30" cy="14" r="4" fill="#fff"/>`+T('FRIENDS',6.5,38,800,'letter-spacing="1.3"')),
+  moderncoast: SVG(`<path d="M6 22c5-6 10-6 16 0s11 6 16 0" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/>`+T('MODERN',6.5,33,800,'letter-spacing="1.4"')+T('COAST',6.5,40,600,'letter-spacing="1.6" opacity=".8"')),
+  volcanoexpress: SVG(`<path d="M8 34L20 12h4l12 22z" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round"/><path d="M18 12c1 3 2 3 4 0 2 3 3 3 4 0" fill="none" stroke="#F2C200" stroke-width="2.2"/>`),
+  matatustagetaxis: SVG(`<rect x="8" y="14" width="28" height="16" rx="3" fill="none" stroke="#fff" stroke-width="2.2"/><path d="M8 22h28M16 14v8M24 14v8" stroke="#fff" stroke-width="2"/><circle cx="14" cy="33" r="2.6" fill="#fff"/><circle cx="30" cy="33" r="2.6" fill="#fff"/>`),
+  /* Air */
+  aerolinkuganda: SVG(`<path d="M6 26l30-12-8 10 8 6z" fill="#fff"/>`+T('AEROLINK',6,39,800,'letter-spacing="1.2"')),
+  eagleair: SVG(`<path d="M22 30L6 16c6-2 10 0 16 6 6-6 10-8 16-6z" fill="#fff"/>`+T('EAGLE',7,39,800,'letter-spacing="1.6"')),
+  baraviation: SVG(T('BAR',17,29,900,'letter-spacing="-.5"')+`<path d="M8 34h28" stroke="#fff" stroke-width="2"/>`),
+  kampalaexecutiveaviation: SVG(T('KEA',15,27,800,'letter-spacing=".5"')+`<path d="M10 33h24" stroke="#F2C200" stroke-width="2" stroke-linecap="round"/>`),
+  kampalaaeroclub: SVG(`<circle cx="22" cy="20" r="3" fill="#fff"/><path d="M22 20L12 10M22 20l14-2M22 20l-4 14" stroke="#fff" stroke-width="3" stroke-linecap="round"/>`+T('KAC',7.5,40,800,'letter-spacing="1.8"')),
+  helicoptercharter: SVG(`<path d="M6 12h32" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/><path d="M22 12v6" stroke="#fff" stroke-width="2"/><rect x="12" y="18" width="20" height="10" rx="5" fill="#fff"/><path d="M14 33h16M20 28v5" stroke="#fff" stroke-width="2"/>`),
+  ugandaairlines: SVG(`<path d="M22 8c-4 6-6 12-6 18h12c0-6-2-12-6-18z" fill="#fff"/><path d="M22 26v8M16 32h12" stroke="#F2C200" stroke-width="2.2" stroke-linecap="round"/><circle cx="22" cy="14" r="2" fill="#D2202F"/>`),
+  kabaaleinternationalairport: SVG(`<path d="M16 34l2-16h8l2 16z" fill="none" stroke="#fff" stroke-width="2.2"/><path d="M12 18h20" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/><path d="M22 18V10" stroke="#fff" stroke-width="2"/>`),
+  /* Water */
+  mvkalangala: SVG(`<path d="M8 26h28l-4 8H12z" fill="#fff"/><rect x="16" y="18" width="12" height="8" fill="#fff" opacity=".7"/><path d="M6 36c4-3 8-3 12 0s8 3 12 0 8-3 10 0" fill="none" stroke="#fff" stroke-width="1.8"/>`),
+  bukakatatolukuferry: SVG(`<path d="M8 24h28l-3 7H11z" fill="#fff"/><path d="M14 24v-5h16v5" fill="none" stroke="#fff" stroke-width="2"/>`+T('FERRY',6.5,40,800,'letter-spacing="1.6"')),
+  nileboatsjinja: SVG(`<path d="M8 26q14 8 28 0l-3 6H11z" fill="#fff"/><path d="M22 26V12l8 10z" fill="#fff" opacity=".75"/>`),
+  murchisonlaunch: SVG(`<path d="M6 28h32l-5 6H11z" fill="#fff"/><path d="M14 28v-8h16v8" fill="none" stroke="#fff" stroke-width="2"/><path d="M20 20v-6h4v6" fill="#fff"/>`),
+  lakevictoriacharters: SVG(`<path d="M10 30h24l-3 5H13z" fill="#fff"/><path d="M22 30V8l11 18z" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/>`),
+  lakebunyonyicanoes: SVG(`<path d="M6 24q16 10 32 0-4 8-16 8T6 24z" fill="#fff"/><path d="M14 18l16 8" stroke="#fff" stroke-width="2" stroke-linecap="round"/>`),
+  /* Rail */
+  urccommutertrain: SVG(`<path d="M12 8v28M32 8v28" stroke="#fff" stroke-width="3"/><path d="M12 14h20M12 22h20M12 30h20" stroke="#fff" stroke-width="2.2"/>`),
+  standardgaugerailway: SVG(`<path d="M10 36L20 8h4l10 28" fill="none" stroke="#fff" stroke-width="2.6" stroke-linejoin="round"/><path d="M15 26h14M17 20h10" stroke="#fff" stroke-width="2"/>`+T('SGR',7,42,800,'letter-spacing="1.6" opacity=".8"')),
+  kampalatotororoline: SVG(`<path d="M8 30L36 14" stroke="#fff" stroke-width="3" stroke-linecap="round"/><path d="M12 24l4 6M18 20l4 6M24 17l4 6M30 13l4 6" stroke="#fff" stroke-width="2" stroke-linecap="round"/>`),
+  /* Signature cars */
+  mercedesbenzeclass: SVG(`<circle cx="22" cy="22" r="13" fill="none" stroke="#fff" stroke-width="2"/><path d="M22 9v13l-11 7M22 22l11 7" fill="none" stroke="#fff" stroke-width="2"/>`+T('E',9,26,800,'x="22" dy="0"')),
+  mercedesbenzsclass: SVG(`<circle cx="22" cy="22" r="13" fill="none" stroke="#fff" stroke-width="2"/><path d="M22 9v13l-11 7M22 22l11 7" fill="none" stroke="#fff" stroke-width="2"/>`+T('S',9,26,800)),
+  rangeroversport: SVG(`<ellipse cx="22" cy="22" rx="16" ry="9" fill="none" stroke="#fff" stroke-width="2"/>`+T('RANGE',6.5,20,800,'letter-spacing="1.2"')+T('ROVER',6.5,28,800,'letter-spacing="1.2"')),
+  lexuslx570: SVG(`<ellipse cx="22" cy="22" rx="14" ry="11" fill="none" stroke="#fff" stroke-width="2"/><path d="M14 26h16l-8-11z" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>`),
+  landcruiserv8: SVG(`<path d="M8 27l4-8h20l4 8v5H8z" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/>`+T('V8',10,28,900,'letter-spacing="-.5"')),
+  toyotaalphard: SVG(`<rect x="8" y="14" width="28" height="17" rx="5" fill="none" stroke="#fff" stroke-width="2.2"/><path d="M8 22h28" stroke="#fff" stroke-width="1.6"/><circle cx="15" cy="34" r="2.4" fill="#fff"/><circle cx="29" cy="34" r="2.4" fill="#fff"/>`),
+  vintageweddingcar: SVG(`<path d="M8 28h28v5H8z" fill="#fff"/><path d="M12 28v-7h8l4-6h6v13" fill="none" stroke="#fff" stroke-width="2.2"/><circle cx="14" cy="34" r="3" fill="none" stroke="#fff" stroke-width="2"/><circle cx="30" cy="34" r="3" fill="none" stroke="#fff" stroke-width="2"/>`),
+  /* Stays */
+  kampalaserenahotel: SVG(T('Serena',12,25,600,'font-style="italic"')+`<path d="M12 31h20" stroke="#F2C200" stroke-width="1.6" stroke-linecap="round"/>`),
+  sheratonkampala: SVG(`<circle cx="22" cy="22" r="13" fill="none" stroke="#fff" stroke-width="2"/>`+T('S',18,29,700,'font-family="Georgia,serif"')),
+  spekeresortmunyonyo: SVG(`<path d="M22 8l4 8 8 1-6 6 2 9-8-4-8 4 2-9-6-6 8-1z" fill="#fff"/>`+T('SPEKE',6.5,42,800,'letter-spacing="1.4"')),
+  latitude0: SVG(`<circle cx="22" cy="22" r="12" fill="none" stroke="#fff" stroke-width="2"/><path d="M6 22h32" stroke="#fff" stroke-width="2.6"/>`+T('0°',9,26,800)),
+  mestilhotel: SVG(T('MESTIL',9,26,800,'letter-spacing="1.8"')+`<path d="M13 31h18" stroke="#fff" stroke-width="1.6"/>`),
+  parklodges: SVG(`<path d="M8 22L22 8l14 14" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round"/><path d="M12 22v12h20V22" fill="none" stroke="#fff" stroke-width="2.2"/><path d="M19 34v-8h6v8" fill="#fff"/>`),
+  /* Local apps, couriers, money, authorities */
+  eightto8: SVG(T('8',22,32,900,'x="14"')+`<path d="M20 22h6m-2-2 2 2-2 2" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/>`+T('8',22,32,900,'x="31"')),
+  safarishare: SVG(`<path d="M10 32c4-12 8-16 12-16s8 4 12 16" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/><path d="M22 16v16" stroke="#fff" stroke-width="2" stroke-dasharray="3 3"/>`+T('SAFARISHARE',5,40,800,'letter-spacing=".8"')),
+  jumia: SVG(T('JUMIA',11,27,900,'letter-spacing="-.2"')),
+  abanista: SVG(T('abanista',10,27,700,'letter-spacing="-.2"')),
+  kwelishop: SVG(T('kweli',13,27,800,'letter-spacing="-.3"')+`<circle cx="35" cy="17" r="2" fill="#F2C200"/>`),
+  flutterwave: SVG(`<path d="M6 24c5-8 10-8 16 0s11 8 16 0" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>`+T('flutterwave',5.5,36,700,'letter-spacing=".4"')),
+  mtnmomo: SVG(`<ellipse cx="22" cy="22" rx="16" ry="10" fill="#1a1400"/>`+T('MoMo',10,26,900,'letter-spacing="-.3"')),
+  airtelmoney: SVG(T('airtel',12,25,700,'letter-spacing="-.3"')+T('money',7,34,500,'letter-spacing=".6" opacity=".85"')),
+  ugandawildlifeauthority: SVG(`<path d="M22 6l13 5v10c0 8-6 14-13 17C15 35 9 29 9 21V11z" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/><path d="M22 27c-2-6 0-11 5-13-4 4-4 8-2 12" fill="#fff"/>`+T('UWA',6.5,40,800,'letter-spacing="1.6"')),
   generic: (t, ink='#fff') => SVG(`<text x="22" y="27" text-anchor="middle" font-family="'Albert Sans',system-ui,sans-serif" font-weight="700" font-size="${t.length>3?9:13}" fill="${ink}">${t}</text>`),
 };
+
+/* Every supplier wears its own mark wherever it is named. mark() resolves an object (with logo/id/name/op) or a
+   name to a LOGOS entry by explicit key, then by a slug of the name, then falls back to a monogram; markBox()
+   wraps it in the small tile with the brand colour. */
+const BRAND = {uber:'#000000', uberboda:'#000000', bolt:'#34D186', boltboda:'#34D186', safeboda:'#F7941D', faras:'#1F6FEB', yango:'#FC3F1D', tinka:'#E11D48', eightto8:'#0EA5E9', safarishare:'#0EA5E9', jumia:'#F68B1E', abanista:'#7C3AED', kwelishop:'#16A34A', flutterwave:'#F5A623', mtnmomo:'#FFCB05', airtelmoney:'#E4002B', ugandawildlifeauthority:'#2F6B3A', ugpool:'#D2202F', ugrent:'#F2C200', streetboda:'#6B7280', special:'#6B7280', matatu:'#2563EB'};
+const MARK_ALIAS = {air:'aerolinkuganda', heli:'helicoptercharter', ferry:'mvkalangala', train:'urccommutertrain', '8to8':'eightto8','8to8delivery':'eightto8','jumiaupcountry':'jumia','uwa':'ugandawildlifeauthority','momo':'mtnmomo','mtnmomo':'mtnmomo','matatu':'matatu','matatustagetaxis':'matatustagetaxis','postbuspostauganda':'postbus','helicopter':'helicoptercharter'};
+const markSlug = s => String(s||'').toLowerCase().replace(/\(.*?\)/g,'').replace(/[^a-z0-9]/g,'');
+function markKey(o){ if(!o) return ''; if(typeof o==='string'){ const k=markSlug(o); return MARK_ALIAS[k]||k; } for(const k of [o.logo, o.id, markSlug(o.name||o.op)]){ if(!k) continue; const kk=MARK_ALIAS[k]||k; if(LOGOS[kk]) return kk; } const k=markSlug(o.name||o.op); return MARK_ALIAS[k]||k; }
+function mark(o){ const k=markKey(o); if(LOGOS[k]) return LOGOS[k]; const name=typeof o==='string'?o:(o.name||o.op||''); const ini=name.replace(/\(.*?\)/g,'').split(/[\s·]+/).filter(Boolean).map(w=>w[0]).join('').slice(0,3).toUpperCase(); return LOGOS.generic(ini||'?', (o&&o.ink)||'#fff'); }
+function markBox(o, cls='pm'){ const k=markKey(o); const colour=(typeof o==='object'&&o.colour)||BRAND[k]||'#3B3430'; return `<i class="${cls}" style="background:${colour}" aria-hidden="true">${mark(o)}</i>`; }
 
 /* Uganda outline for the particle map: approximate (lon, lat) pairs, clockwise from the north-west. */
 /* Uganda's border and the lakes, from Natural Earth 10m (nvkelso/natural-earth-vector on GitHub),
@@ -1639,7 +1693,7 @@ function renderCompare(){
   const split = $('#cSplit').checked;
   $('#routeMeta').innerHTML = `<span>${route.km} km</span><span>~${route.min} min ${TIME[state.time].label}</span>${route.tolls?`<span>toll UGX ${fmt(route.tolls)}</span>`:''}`;
   let quotes = quoteAll(route, state.time, rain, pax);
-  if (state.mode==='more') quotes = quotes.filter(q => ['air','water','rail'].includes(q.p.kind) || q.p.sig);
+  if (state.mode==='more'){ quotes = quotes.filter(q => ['air','water','rail'].includes(q.p.kind) || q.p.sig); const at=$('#atlas'); if(at) at.open=true; }
   else if (state.mode!=='all') quotes = quotes.filter(q => state.mode==='shared' ? (q.p.kind==='shared') : q.p.kind===state.mode);
   const res = $('#results'); res.innerHTML='';
   if (!quotes.length){ res.innerHTML = '<div class="panel">No provider in this filter will take that trip. Try "All" or a shorter route.</div>'; $('#resSummary').innerHTML=''; return; }
@@ -1653,13 +1707,13 @@ function renderCompare(){
   quotes.forEach((q,i)=>{
     const el = document.createElement('div');
     if (q.price==null){
-      el.className='quote off'; const mk=LOGOS[q.p.id]||LOGOS.generic(q.p.name.slice(0,2).toUpperCase());
+      el.className='quote off'; const mk=mark(q.p);
       el.innerHTML=`<div class="q-logo" style="background:${q.p.colour};opacity:.5">${mk}</div><div class="q-name">${q.p.name}<small>${q.p.sub}</small></div><div class="q-price" style="font-size:14px;color:var(--ink-3)">Not on this route<small>${q.why}</small></div><div class="q-eta"></div><div class="q-act"><span class="chip listed">Listed</span></div>`;
       res.appendChild(el); return;
     }
     const shown = split ? q.price/pax : q.price;
     el.className = 'quote' + (i===0?' best':'') + (q.p.ug?' ug':'');
-    const mark = LOGOS[q.p.id] || LOGOS.generic(q.p.name);
+    const mk = mark(q.p);
     const act = (q.p.ug && !q.p.sig)
       ? `<a class="btn small primary" href="${q.p.link}">Book on UG</a>`
       : (q.p.sig || q.p.atlas) ? `<button class="btn small ${i===0?'primary':''}" type="button" data-stay="${i}">Book on UG</button>`
@@ -1667,7 +1721,7 @@ function renderCompare(){
       : q.p.stage ? `<button class="btn small" type="button" data-tip="Board at the stage. The conductor collects cash; no app, no surge.">At the stage</button>`
       : `<button class="btn small" type="button" data-haggle="${Math.round(q.price)}">Haggle script</button>`;
     el.innerHTML = `
-      <div class="q-logo" style="background:${q.p.colour}" title="${q.p.name}">${mark}</div>
+      <div class="q-logo" style="background:${q.p.colour}" title="${q.p.name}">${mk}</div>
       <div class="q-name">${q.p.name}<small>${q.p.sub}</small></div>
       <div class="q-price">UGX ${fmt(shown)}<small>${split&&pax>1?'per person':'total'} · ${q.note.join(' · ')||'estimate'} · ${provKind(q.p.prov)==='UG model'?'UG price':provKind(q.p.prov)==='snippet'?'estimate from a published rate':'UG estimate, unverified'}</small></div>
       <div class="q-eta">~${Math.round(q.eta)} min<br>${i===0?`<span class="tag best">${provKind(q.p.prov)==='UG model'?'Cheapest':'Likely cheapest'}</span>`:''}${q.note.some(n=>n.startsWith('surge'))?' <span class="tag surge">surge</span>':''} <span class="tag est" title="${q.p.prov}">${provKind(q.p.prov)}</span></div>
@@ -1675,7 +1729,7 @@ function renderCompare(){
     res.appendChild(el);
   });
   res.querySelectorAll('[data-stay]').forEach(b=>b.addEventListener('click',()=>{ const q=quotes[b.dataset.stay]; const go=()=>openCheckout(q.price, `${q.p.name} ${q.p.sub} · ${route.from} → ${route.to} · booked on UG`, ()=>startRail({kind:'ride', partner:{name:q.p.name, sub:q.p.sub, colour:q.p.colour, logo:q.p.id}, title:`${route.from} → ${route.to.split(' (')[0]}`, price:q.price, eta:Math.round(q.eta*0.25)+2})); if(!account) openHandshake('rider',go); else go(); }));
-  $('#disclaimer').textContent = `Estimates from UG's published fare model at ${new Date().toLocaleTimeString('en-UG',{hour:'2-digit',minute:'2-digit'})}. Provider tags show provenance: "snippet" means the rate was read from a public page or search summary, "modelled" means UG's own assumption, "official" means read on the operator's site. Live apps quote in real time and will differ. UG never marks up a competitor's price.`;
+  $('#disclaimer').textContent = `Estimates from UG's model at ${new Date().toLocaleTimeString('en-UG',{hour:'2-digit',minute:'2-digit'})} · "snippet" = read from a public page · "modelled" = UG's assumption · "official" = the operator's site · live apps differ · UG never marks up a price.`;
   // meter roll on prices
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches){
     res.querySelectorAll('.q-price').forEach(pe=>{
@@ -1817,7 +1871,7 @@ function renderItin(){
   else { transport = (r.bus||30000)*pax*2 + 20000*pax; tLabel=`Bus · ${pax} seat${pax>1?'s':''} return + local boda`; }
   lines.push([tLabel, transport]);
   const entry = fee(dest.fees)*pax*days; if (entry) lines.push([`Park entry · ${pax} × ${days} day${days>1?'s':''}`, entry]);
-  if (dest.vehicle && (mode==='rent'||mode==='rentdrv')) lines.push([`Vehicle entry (UWA)`, dest.vehicle]);
+  if (dest.vehicle && (mode==='rent'||mode==='rentdrv')) lines.push([`${markBox('Uganda Wildlife Authority')}Vehicle entry (UWA)`, dest.vehicle]);
   const act = fee(dest.act)*pax; lines.push([`${dest.act.name} × ${pax}`, act]);
   const rooms = Math.ceil(pax/2); const tier=parseFloat($('#eStay').value||'1'); const lodge = fee(dest.lodge)*tier*rooms*Math.max(1,days-1); lines.push([`${tier>=4?'Luxury':tier>1?'Premium':'Mid-range'} lodge · ${rooms} room${rooms>1?'s':''} × ${Math.max(1,days-1)} night${days-1>1?'s':''}`, lodge]);
   const food = 45000*pax*days; lines.push([`Meals and rolex money · ${pax} × ${days}`, food]);
@@ -2140,8 +2194,8 @@ function renderHS(){
     $('#hsSend').addEventListener('click',async ()=>{ if(LIVE){ try{ const r=await liveOtpSend($('#hsPhone').value); $('#hsSent').textContent='sent to '+r.to+(r.sandboxCode?' · sandbox code '+r.sandboxCode:''); if(r.sandboxCode) $('#hsOtp').value=r.sandboxCode; }catch(e){ $('#hsSent').textContent=e.message; } return; } $('#hsSent').textContent='sent to '+($('#hsPhone').value||'your phone'); });
     $('#hsNext').addEventListener('click',async ()=>{ const name=$('#hsName').value.trim(), phone=$('#hsPhone').value.trim(), otp=$('#hsOtp').value.trim(); if(!name||!phone){ toast('Name and phone, please.'); return; } if(!/^\d{4}$/.test(otp)){ toast('Enter the four-digit code'+(LIVE?'.':' (any digits in this sandbox).')); return; } if(LIVE){ try{ const m=await liveOtpVerify(phone, otp, name); d.id=m.id; d.verified=m.verified; d.vouches=m.vouches; }catch(e){ toast(e.message); return; } } if(!hs.roles.length) hs.roles.push('rider'); d.name=name; d.phone=phone; hs.step=2; renderHS(); });
   } else if(key==='rider'){
-    $('#hsTitle').textContent='Where do you usually go?'; const r=d.rider||{home:'Ntinda', to:['Kampala CBD','Entebbe'], circles:['Stanbic circle']};
-    body.innerHTML=`<h4>Home and the two places you go most</h4><div class="row2"><div class="ctl"><label for="hsHome">Home</label><select id="hsHome">${SUBURBS.map(x=>`<option ${x===r.home?'selected':''}>${x}</option>`).join('')}</select></div><div class="ctl"><label for="hsTo1">Most days</label><select id="hsTo1">${['Kampala CBD','Nakasero','Kololo','Nakawa','Makerere','Entebbe','Jinja','Mbarara'].map(x=>`<option ${x===r.to[0]?'selected':''}>${x}</option>`).join('')}</select></div></div>
+    $('#hsTitle').textContent='Where do you usually go?'; const r=d.rider||{home:'Ntinda', to:['Downtown Kampala','Entebbe'], circles:['Stanbic circle']};
+    body.innerHTML=`<h4>Home and the two places you go most</h4><div class="row2"><div class="ctl"><label for="hsHome">Home</label><select id="hsHome">${SUBURBS.map(x=>`<option ${x===r.home?'selected':''}>${x}</option>`).join('')}</select></div><div class="ctl"><label for="hsTo1">Most days</label><select id="hsTo1">${['Downtown Kampala','Nakasero','Kololo','Nakawa','Makerere','Entebbe','Jinja','Mbarara'].map(x=>`<option ${x===r.to[0]?'selected':''}>${x}</option>`).join('')}</select></div></div>
       <div class="ctl"><label for="hsTo2">Weekends</label><select id="hsTo2">${['Entebbe','Jinja','Mbarara','Fort Portal','Gulu','Murchison Falls (Paraa)','Bwindi (Buhoma)'].map(x=>`<option ${x===r.to[1]?'selected':''}>${x}</option>`).join('')}</select></div>
       <div class="ctl"><label>Your circles (ride with people you half-know)</label><div class="corr" id="hsCircles">${CIRCLES.map(c=>`<span class="c ${r.circles.includes(c)?'on':''}" data-c="${c}">${c}</span>`).join('')}</div></div>
       ${next()}`;
@@ -2212,6 +2266,7 @@ function openMe(){
       ${hasRole('rider')?`<div class="me-row"><span>Home · circles</span><span class="mono">${account.rider.home} · ${account.rider.circles.length}</span></div>`:''}
       ${hasRole('driver')?`<div class="me-row"><span>Comfort Map</span><button class="btn small" type="button" id="meEditMap">${account.comfort.corridors.length} corridors · edit</button></div>`:''}
       <div class="me-row"><span>Continue on your phone</span><button class="btn small" type="button" id="meLink">Copy link</button></div>
+      <div class="me-row"><span>Ops · reach, plug-ins, partners</span><button class="btn small" type="button" id="meOps">Open</button></div>
       <div class="me-row"><span>Install UG on this device</span><button class="btn small" type="button" id="meInstall">${window.__installPrompt?'Install':'Add from browser menu'}</button></div>
       <div class="me-row"><span>Ask a circle member to vouch (sandbox)</span><button class="btn small" type="button" id="meVouch">+1 vouch</button></div>
       <div class="me-row"><span>Replay the opening</span><button class="btn small" type="button" id="meIntro">Play</button></div>
@@ -2242,8 +2297,27 @@ $('#tabMe').addEventListener('click',openMe);
 document.querySelectorAll('[data-door]').forEach(b=>b.addEventListener('click',()=>{ const role=b.dataset.door; if(account && hasRole(role)){ location.hash = role==='driver'?'#drive':'#stage'; return; } openHandshake(role); }));
 window.addEventListener('beforeinstallprompt', e=>{ e.preventDefault(); window.__installPrompt=e; });
 /* bottom bar: highlight the section in view */
-function initTabbar(){ const links=[...document.querySelectorAll('#tabbar a')]; if(!('IntersectionObserver' in window)) return; const map={stage:'#stage',compare:'#compare',rent:'#rent',deliver:'#deliver'}; const io=new IntersectionObserver(en=>en.forEach(x=>{ if(x.isIntersecting){ links.forEach(l=>l.classList.toggle('on', l.getAttribute('href')==='#'+x.target.id)); } }),{rootMargin:'-40% 0px -50% 0px'}); Object.keys(map).forEach(k=>{ const el=document.querySelector(map[k]); if(el) io.observe(el); }); }
-function renderReach(){ const towns=PLACES.filter(p=>!p.park); $('#reachCount').textContent=`${towns.length} towns · ${ROUTES.filter(r=>r.inter||r.entebbe).length} corridors`; $('#reach').innerHTML=towns.map(t=>{ const r=ROUTES.find(x=>x.id===t.route); return `<button class="town" type="button" data-town="${t.route}"><b>${t.name}</b><small>${r?(r.inter?r.km+' km · bus from UGX '+fmt(r.bus||0):'in town'):''}</small><span class="apps">${(LOCAL[t.name]||['no local app yet']).join(' · ')}</span></button>`; }).join(''); $('#reach').querySelectorAll('[data-town]').forEach(b=>b.addEventListener('click',()=>{ const r=ROUTES.find(x=>x.id===b.dataset.town); if(!r) return; $('#cFrom').value=r.from; syncTo('cFrom','cTo'); $('#cTo').value=r.id; renderCompare(); location.hash='#compare'; })); }
+function initOps(){
+  const sheet=$('#ops'); if(!sheet) return;
+  const setOps=v=>{ $('#segOps').querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.v===v)); sheet.querySelectorAll('[data-ops]').forEach(d=>d.hidden=d.dataset.ops!==v); };
+  window.openOps=(v)=>{ const me=$('#meModal'); if(me) me.hidden=true; sheet.hidden=false; setOps(v||'reach'); };
+  $('#segOps').addEventListener('click',e=>{ const b=e.target.closest('button'); if(b) setOps(b.dataset.v); });
+  $('#opsClose').addEventListener('click',()=>{ sheet.hidden=true; });
+  sheet.addEventListener('click',e=>{ if(e.target===sheet) sheet.hidden=true; });
+  document.querySelectorAll('[data-ops-open]').forEach(a=>a.addEventListener('click',e=>{ e.preventDefault(); openOps(a.dataset.opsOpen); }));
+  document.addEventListener('click',e=>{ if(e.target&&e.target.id==='meOps') openOps('reach'); });
+  if(new URLSearchParams(location.search).has('ops')) openOps('reach');
+  /* a hash that points inside a closed reveal opens it */
+  const openFor=()=>{ if(!location.hash||location.hash.length<2) return; let el; try{ el=document.querySelector(location.hash); }catch(e){ return; } if(!el) return; const d=el.tagName==='DETAILS'?el:el.closest('details'); if(d&&!d.open){ d.open=true; setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),30); } };
+  addEventListener('hashchange',openFor); openFor();
+  /* empty legs open themselves once there is one */
+  const lw=$('#legsWrap'), lg=$('#legs'); if(lw&&lg&&'MutationObserver' in window) new MutationObserver(()=>{ if(lg.children.length && !lw.dataset.touched) lw.open=true; }).observe(lg,{childList:true}); if(lw) lw.addEventListener('toggle',()=>{ lw.dataset.touched='1'; });
+  /* network and checkout marks */
+  document.querySelectorAll('#netPick [data-net]').forEach(b=>{ const nm={MTN:'MTN MoMo',AIRTEL:'Airtel Money'}[b.dataset.net]; if(nm) b.insertAdjacentHTML('afterbegin', markBox(nm)); });
+  const pb=$('#payBy'); if(pb) pb.insertAdjacentHTML('afterbegin', markBox('Flutterwave'));
+}
+function initTabbar(){ const links=[...document.querySelectorAll('#tabbar a')]; if(!('IntersectionObserver' in window)) return; const map={top:'#compare',compare:'#compare',rent:'#compare',explore:'#compare',stage:'#stage',deliver:'#deliver',drive:'#drive'}; const io=new IntersectionObserver(en=>en.forEach(x=>{ if(x.isIntersecting){ const tab=map[x.target.id]; links.forEach(l=>l.classList.toggle('on', l.getAttribute('href')===tab)); } }),{rootMargin:'-40% 0px -50% 0px'}); Object.keys(map).forEach(k=>{ const el=document.getElementById(k); if(el) io.observe(el); }); }
+function renderReach(){ const towns=PLACES.filter(p=>!p.park); $('#reachCount').textContent=`${towns.length} towns · ${ROUTES.filter(r=>r.inter||r.entebbe).length} corridors`; $('#reach').innerHTML=towns.map(t=>{ const r=ROUTES.find(x=>x.id===t.route); return `<button class="town" type="button" data-town="${t.route}"><b>${t.name}</b><small>${r?(r.inter?r.km+' km · bus from UGX '+fmt(r.bus||0):'in town'):''}</small><span class="apps">${(LOCAL[t.name]||[]).map(a=>`<span class="la">${markBox(a.replace(/ \(.*\)/,''))}${a}</span>`).join('')||'no local app yet'}</span></button>`; }).join(''); $('#reach').querySelectorAll('[data-town]').forEach(b=>b.addEventListener('click',()=>{ const r=ROUTES.find(x=>x.id===b.dataset.town); if(!r) return; $('#cFrom').value=r.from; syncTo('cFrom','cTo'); $('#cTo').value=r.id; renderCompare(); location.hash='#compare'; })); }
 function initDockCompact(){ if(!('IntersectionObserver' in window)) return; const hero=document.querySelector('#top .hero-copy'); if(!hero) return; new IntersectionObserver(en=>{ $('#dock').classList.toggle('compact', !en[0].isIntersecting); },{threshold:0}).observe(hero); }
 function initAutoDrive(){ initDockCompact(); if(matchMedia('(prefers-reduced-motion: reduce)').matches) return; if(load('dockOff',false)) return; const once=()=>{ document.removeEventListener('pointerdown',once); if(!dock.playing) dock.toggle(true); }; document.addEventListener('pointerdown',once,{once:true}); $('#dockPlay').addEventListener('click',()=>{ if(!dock.playing) store('dockOff',true); }); }
 function initV1(){ initAutoDrive(); renderReach(); renderAccountUI(); renderStages(); renderLegs(); renderDrive(); initTabbar(); setInterval(tickStages, 9000); setInterval(simulateOffer, 32000); document.querySelectorAll('[data-v0]').forEach(a=>{ if(location.hostname.endsWith('claude.ai')) a.href='https://claude.ai/code/artifact/511855d0-486a-477c-8400-ff36d05e5494'; }); }
@@ -2282,7 +2356,7 @@ const dock = (()=>{
 function pulseData(){
   const towns={};
   const add=(name,k,v)=>{ towns[name]=towns[name]||{name, demand:0, supply:0, unfilled:0, funded:0}; towns[name][k]+=v; };
-  stages.forEach(st=>{ const r=ROUTES.find(x=>x.id===st.route); const dest=r.to.split(' (')[0].replace('Kampala CBD','Kampala').replace('Entebbe Airport','Entebbe'); const key=PLACES.find(p=>dest.startsWith(p.name))?.name || 'Kampala'; add(key,'demand',st.seats); if(st.status!=='funded') add(key,'unfilled',st.cap-st.seats); else add(key,'funded',1); add('Kampala','demand',Math.round(st.seats/2)); });
+  stages.forEach(st=>{ const r=ROUTES.find(x=>x.id===st.route); const dest=r.to.split(' (')[0].replace('Downtown Kampala','Kampala').replace('Entebbe Airport','Entebbe'); const key=PLACES.find(p=>dest.startsWith(p.name))?.name || 'Kampala'; add(key,'demand',st.seats); if(st.status!=='funded') add(key,'unfilled',st.cap-st.seats); else add(key,'funded',1); add('Kampala','demand',Math.round(st.seats/2)); });
   // supply: the signed-in driver's comfort map plus a modelled base of drivers per town
   const base={Kampala:14,Entebbe:5,Jinja:3,Mbarara:3,Gulu:2,Mbale:2,'Fort Portal':2,Masaka:2,Mukono:2};
   Object.keys(base).forEach(n=>add(n,'supply',base[n]));
@@ -2323,7 +2397,7 @@ function handleCommand(text){
   if(/(stop|pause).*(music|drive|tazama)/.test(t)){ dock.toggle(false); say('Paused.'); return; }
   if(/next (song|track|mix)/.test(t)){ dock.next(); say('Next mix.'); return; }
   if(/where.*(busy|demand|money)/.test(t)){ location.hash='#stage'; const d=pulseData().sort((a,b)=>b.gap-a.gap)[0]; if(d){ scene&&scene.focus&&scene.focus(d.name); say(`${d.name}: ${d.demand} paid seats and ${d.supply} drivers near.`); } return; }
-  if(/help|what can you do/.test(t)){ say('Try: compare Ntinda to Kampala CBD. Take a seat to Jinja. My offers. Where is the demand. Night mode. Start the music.'); return; }
+  if(/help|what can you do/.test(t)){ say('Try: compare Ntinda to Downtown Kampala. Take a seat to Jinja. My offers. Where is the demand. Night mode. Start the music.'); return; }
   say('I did not catch that. Say help for the list.');
 }
 function toggleVoice(){
@@ -2379,10 +2453,10 @@ function initBuses(){
 function renderBuses(){
   const id=$('#busCorr').value; const r=ROUTES.find(x=>x.id===id); const list=BUSES[id]||[]; const el=$('#buses'); el.innerHTML='';
   list.forEach((b,i)=>{ const pk=PARKS[b.park]; const mapUrl = pk ? `https://www.google.com/maps/search/?api=1&query=${pk[1]},${pk[0]}` : '#'; const felt=plugState('felt')&&plugState('felt').on;
-    const d=document.createElement('div'); d.className='bus'; d.innerHTML=`<div class="q-logo" style="background:${b.colour}">${LOGOS.generic(b.op.split(' ').map(w=>w[0]).join('').slice(0,3))}</div>
+    const d=document.createElement('div'); d.className='bus'; d.innerHTML=`<div class="q-logo" style="background:${b.colour}">${mark(b)}</div>
       <div><div class="q-name">${b.op}<small>${r.from} → ${r.to.split(' (')[0]} · ${r.km} km · ~${Math.round(r.min/60*10)/10} h</small></div><div class="times">${b.times.map(t=>`<span>${t}</span>`).join('')}</div><div class="park">Leaves from ${b.park} park · <a href="${felt?esc(plugEndpoint('felt')):mapUrl}" target="_blank" rel="noopener noreferrer">${felt?'map on Felt':'directions'}</a></div></div>
       <div><div class="p">UGX ${fmt(b.fare)}<small>per seat · modelled</small></div><div style="margin-top:8px;text-align:right">${b.online?`<button class="btn small primary" type="button" data-bus="${i}">Book on UG</button>`:`<a class="btn small" href="tel:${b.phone.replace(/\s+/g,'')}">Call ahead · ${b.phone}</a>`}</div></div>`; el.appendChild(d); });
-  el.querySelectorAll('[data-bus]').forEach(x=>x.addEventListener('click',()=>{ const b=list[x.dataset.bus]; const go=()=>openCheckout(b.fare, `${b.op} · ${r.from} → ${r.to.split(' (')[0]} · booked on UG`, ()=>startRail({kind:'ride', partner:{name:b.op, sub:'Bus · '+b.park+' park', colour:b.colour}, title:`${r.from} → ${r.to.split(' (')[0]} · ${b.times[0]}`, price:b.fare, eta:20})); if(!account) openHandshake('rider',go); else go(); }));
+  el.querySelectorAll('[data-bus]').forEach(x=>x.addEventListener('click',()=>{ const b=list[x.dataset.bus]; const go=()=>openCheckout(b.fare, `${b.op} · ${r.from} → ${r.to.split(' (')[0]} · booked on UG`, ()=>startRail({kind:'ride', partner:{name:b.op, sub:'Bus · '+b.park+' park', colour:b.colour, logo:markKey(b)}, title:`${r.from} → ${r.to.split(' (')[0]} · ${b.times[0]}`, price:b.fare, eta:20})); if(!account) openHandshake('rider',go); else go(); }));
 }
 
 /* =====================================================================
@@ -2400,9 +2474,9 @@ function renderAtlas(){
   ATLAS[atlasMode].forEach((o,i)=>{
     const st = o.state==='ug'?'<span class="chip good">Book on UG</span>':o.state==='call'?'<span class="chip warn">Call ahead</span>':o.state==='coming'?'<span class="chip coming">Coming</span>':'<span class="chip listed">Listed · recognised</span>';
     const act = o.state==='ug'?`<button class="btn small primary" type="button" data-atlas="${i}">Book on UG</button>`:o.state==='call'?`<a class="btn small" href="tel:${(o.phone||'').replace(/\s+/g,'')}">Call ahead</a>`:o.state==='coming'?`<button class="btn small" type="button" data-notify="${i}">Tell me when</button>`:`<button class="btn small" type="button" data-notify="${i}">Ask UG to add it</button>`;
-    const d=document.createElement('article'); d.className='op'; d.innerHTML=`<div class="head"><div class="q-logo" style="background:${o.colour}">${LOGOS.generic(o.code, '#fff')}</div><div><b>${o.op}</b><div class="what">${o.what}</div></div></div><div class="where">${o.where}</div><div class="row"><div class="p">${o.from?'UGX '+fmt(o.from):'—'}<small>${o.unit||''}</small></div>${st}</div><div class="prov">${esc(o.prov)}</div><div>${act}</div>`; el.appendChild(d);
+    const d=document.createElement('article'); d.className='op'; d.innerHTML=`<div class="head"><div class="q-logo" style="background:${o.colour}">${mark(o)}</div><div><b>${o.op}</b><div class="what">${o.what}</div></div></div><div class="where">${o.where}</div><div class="row"><div class="p">${o.from?'UGX '+fmt(o.from):'—'}<small>${o.unit||''}</small></div>${st}</div><div class="prov">${esc(o.prov)}</div><div>${act}</div>`; el.appendChild(d);
   });
-  el.querySelectorAll('[data-atlas]').forEach(b=>b.addEventListener('click',()=>{ const o=ATLAS[atlasMode][b.dataset.atlas]; const price=o.from||50000; const go=()=>openCheckout(price, `${o.op} · ${o.what} · booked on UG`, ()=>startRail({kind:'ride', partner:{name:o.op, sub:MODE_META[atlasMode].label, colour:o.colour}, title:`${o.op} · ${o.where.split(',')[0]}`, price, eta: atlasMode==='air'?90:atlasMode==='stay'?0:20})); if(!account) openHandshake('rider',go); else go(); }));
+  el.querySelectorAll('[data-atlas]').forEach(b=>b.addEventListener('click',()=>{ const o=ATLAS[atlasMode][b.dataset.atlas]; const price=o.from||50000; const go=()=>openCheckout(price, `${o.op} · ${o.what} · booked on UG`, ()=>startRail({kind:'ride', partner:{name:o.op, sub:MODE_META[atlasMode].label, colour:o.colour, logo:markKey(o)}, title:`${o.op} · ${o.where.split(',')[0]}`, price, eta: atlasMode==='air'?90:atlasMode==='stay'?0:20})); if(!account) openHandshake('rider',go); else go(); }));
   el.querySelectorAll('[data-notify]').forEach(b=>b.addEventListener('click',()=>{ const o=ATLAS[atlasMode][b.dataset.notify]; toast(`Noted. UG will tell you when ${o.op} is bookable here.`); }));
 }
 /* Pick the car: Signature quotes in the compare desk */
@@ -2415,7 +2489,7 @@ function signatureQuotes(route, pax){
 /* =====================================================================
    Deliver: couriers, local delivery apps, and Parcel on the Stage
    ===================================================================== */
-const SUBURB_XY = {Kololo:[32.59,0.33],Nakasero:[32.58,0.32],'Kampala CBD':[32.58,0.31],Ntinda:[32.62,0.35],Bugolobi:[32.62,0.31],Kira:[32.64,0.40],Naalya:[32.63,0.37],Muyenga:[32.61,0.29],Makindye:[32.59,0.28],Kansanga:[32.61,0.29],Najjera:[32.63,0.39],Bukoto:[32.60,0.35],Naguru:[32.61,0.34],Mengo:[32.56,0.31],Rubaga:[32.55,0.31],Kawempe:[32.56,0.38],Entebbe:[32.46,0.05],Mukono:[32.75,0.35]};
+const SUBURB_XY = {Kololo:[32.59,0.33],Nakasero:[32.58,0.32],'Downtown Kampala':[32.58,0.31],Ntinda:[32.62,0.35],Bugolobi:[32.62,0.31],Kira:[32.64,0.40],Naalya:[32.63,0.37],Muyenga:[32.61,0.29],Makindye:[32.59,0.28],Kansanga:[32.61,0.29],Najjera:[32.63,0.39],Bukoto:[32.60,0.35],Naguru:[32.61,0.34],Mengo:[32.56,0.31],Rubaga:[32.55,0.31],Kawempe:[32.56,0.38],Entebbe:[32.46,0.05],Mukono:[32.75,0.35]};
 const kmBetween=(a,b)=>{ const A=SUBURB_XY[a], B=SUBURB_XY[b]; if(!A||!B) return null; const dx=(A[0]-B[0])*111, dy=(A[1]-B[1])*111; return Math.max(1.5, Math.hypot(dx,dy)*1.4); };
 const COURIERS = [
   {id:'safebodasend', name:'SafeBoda', sub:'Send · boda courier', kind:'boda', base:3000, perKm:700, min:5000, colour:'#F7941D', prov:'modelled', town:'Kampala', logo:'safeboda'},
@@ -2459,7 +2533,7 @@ function renderDeliver(){
   }
   out.sort((a,b)=>a.price-b.price);
   const el=$('#dResults'); el.innerHTML='';
-  out.forEach((q,i)=>{ const d=document.createElement('div'); d.className='quote'+(i===0?' best':'')+(q.c.ug?' ug':''); d.innerHTML=`<div class="q-logo" style="background:${q.c.colour}">${LOGOS[q.c.logo]||LOGOS.generic(q.c.name.split(' ').map(w=>w[0]).join('').slice(0,3))}</div><div class="q-name">${q.c.name}<small>${q.c.sub}${q.lastMile?' · last mile in Jinja':''}</small></div><div class="q-price">UGX ${fmt(q.price)}<small>${provKind(q.c.prov)==='UG model'?'UG price':'UG estimate, unverified'}</small></div><div class="q-eta">~${Math.round(q.eta)} min${i===0?' <span class="tag best">Likely cheapest</span>':''}</div><div class="q-act"><button class="btn small ${i===0?'primary':''}" type="button" data-send="${i}">Send on UG</button></div>`; el.appendChild(d); });
+  out.forEach((q,i)=>{ const d=document.createElement('div'); d.className='quote'+(i===0?' best':'')+(q.c.ug?' ug':''); d.innerHTML=`<div class="q-logo" style="background:${q.c.colour}">${mark(q.c)}</div><div class="q-name">${q.c.name}<small>${q.c.sub}${q.lastMile?' · last mile in Jinja':''}</small></div><div class="q-price">UGX ${fmt(q.price)}<small>${provKind(q.c.prov)==='UG model'?'UG price':'UG estimate, unverified'}</small></div><div class="q-eta">~${Math.round(q.eta)} min${i===0?' <span class="tag best">Likely cheapest</span>':''}</div><div class="q-act"><button class="btn small ${i===0?'primary':''}" type="button" data-send="${i}">Send on UG</button></div>`; el.appendChild(d); });
   el.querySelectorAll('[data-send]').forEach(b=>b.addEventListener('click',()=>{ const q=out[b.dataset.send]; const go=()=>openCheckout(q.price, `Parcel · ${from} → ${to} · via ${q.c.name}`, ()=>startRail({kind:'parcel', partner:q.c, title:`${what} · ${from} → ${to}`, price:q.price, eta:q.eta})); if(!account) openHandshake('rider',go); else go(); }));
 }
 
@@ -2488,7 +2562,7 @@ function renderRail(open){
   const steps=RAIL_STEPS[rail.kind]; const fill=t=>t.replace('{p}',rail.partner.name).replace('{driver}',rail.driver).replace('{plate}',rail.plate).replace('{eta}',rail.eta).replace('{sign}',rail.sign);
   pill.classList.add('on'); $('#railPillT').textContent = rail.step>=steps.length-1 ? 'Trip done' : rail.step>=2 ? `${rail.plate} · ${fill(steps[rail.step][0])}` : fill(steps[rail.step][0]);
   $('#railTitle').textContent = rail.kind==='parcel'?'Your parcel':'Your ride'; $('#railRef').textContent=rail.id;
-  $('#railBody').innerHTML=`<div class="partner"><div class="q-logo" style="background:${rail.partner.colour}">${rail.partner.logo&&LOGOS[rail.partner.logo]?LOGOS[rail.partner.logo]:LOGOS.generic(rail.partner.name.slice(0,2).toUpperCase())}</div><div><b>${esc(rail.title)}</b><small>via ${esc(rail.partner.name)} · ${esc(rail.partner.sub)} · UGX ${fmt(rail.price)} on UG</small></div></div>
+  $('#railBody').innerHTML=`<div class="partner"><div class="q-logo" style="background:${rail.partner.colour}">${mark(rail.partner)}</div><div><b>${esc(rail.title)}</b><small>via ${esc(rail.partner.name)} · ${esc(rail.partner.sub)} · UGX ${fmt(rail.price)} on UG</small></div></div>
     <div class="tl">${steps.map((st,k)=>`<div class="st ${k<rail.step?'done':k===rail.step?'now':''}"><i></i><div>${fill(st[0])}<small>${fill(st[1])}</small></div><span class="t">${k<=rail.step?new Date(rail.started+RAIL_DELAYS[k]).toLocaleTimeString('en-UG',{hour:'2-digit',minute:'2-digit'}):''}</span></div>`).join('')}</div>
     <div class="acts">${rail.step>=2&&rail.step<5?`<a class="btn small" href="tel:+256700000000">Call ${esc(rail.driver.split(' ')[0])}</a><button class="btn small" type="button" id="railShare">Share ETA</button>`:''}${rail.step<2?'<button class="btn small" type="button" id="railCancel">Cancel, no charge</button>':''}${rail.step>=5?'<button class="btn small primary" type="button" id="railRate">Say what happened</button><button class="btn small" type="button" id="railClear">Close</button>':''}${hookLink('tazama','Watch room',{trip:rail.title})}</div>`;
   const sh=$('#railShare'); if(sh) sh.addEventListener('click',()=>{ const t=`${rail.driver} · ${rail.plate} · ${rail.eta} min · UG ${rail.id}`; if(navigator.clipboard) navigator.clipboard.writeText(t).then(()=>toast('ETA copied. Send it to whoever is waiting.')).catch(()=>toast(t)); else toast(t); });
@@ -2565,12 +2639,12 @@ function playIntro(force){
 function renderTicker(){
   const items = [];
   for (const r of ROUTES.filter(x=>x.inter||x.entebbe)){ const c=poolSeatCost(r,4); items.push(`<span>${r.from} → ${r.to} <b>UGX ${fmt(c.riderPays)}</b> pooled</span>`); }
-  const q = quoteAll(ROUTES[1],'off',false,1)[0]; items.push(`<span>Ntinda → CBD cheapest now <b>${q.p.name} UGX ${fmt(q.price)}</b></span>`);
+  const q = quoteAll(ROUTES[1],'off',false,1)[0]; items.push(`<span>Ntinda → Downtown cheapest now <b>${q.p.name} UGX ${fmt(q.price)}</b></span>`);
   items.push(`<span>Bwindi gorilla permit, EAC citizens <b>UGX 300,000</b></span>`,`<span>Entebbe expressway toll <b>UGX 5,000</b></span>`,`<span>Fuel today <b>UGX ${fmt(FUEL_UGX_PER_L)}/L</b></span>`);
   $('#ticker').innerHTML = items.join('') + items.join('');
 }
 function renderPartners(){
-  $('#partnerList').innerHTML = PROVIDERS.filter(p=>!p.ug&&p.link).map(p=>`<span><i class="pm" style="background:${p.colour}">${LOGOS[p.id]||LOGOS.generic(p.name)}</i>${p.name} · ${p.sub}</span>`).join('') + [['Uganda Wildlife Authority','#2F6B3A','UWA'],['SafariShare','#0EA5E9','SS'],['Flutterwave','#F5A623','FW'],['MTN MoMo','#FFCB05','MoMo','#1a1400'],['Airtel Money','#E4002B','airtel']].map(([n,c,t,ink])=>`<span><i class="pm" style="background:${c}">${LOGOS.generic(t,ink)}</i>${n}</span>`).join('');
+  $('#partnerList').innerHTML = PROVIDERS.filter(p=>!p.ug&&p.link).map(p=>`<span>${markBox(p)}${p.name} · ${p.sub}</span>`).join('') + ['Uganda Wildlife Authority','SafariShare','8 to 8','Link Bus','Aerolink Uganda','Uganda Airlines','MV Kalangala','URC commuter train','Flutterwave','MTN MoMo','Airtel Money'].map(n=>`<span>${markBox(n)}${n}</span>`).join('');
 }
 function initStrip(){
   const d=new Date(); d.setDate(d.getDate()+ (5-d.getDay()+7)%7 || 7); $('#sDate').value=d.toISOString().slice(0,10);
@@ -2636,7 +2710,7 @@ function initReveal(){
    ===================================================================== */
 let scene = null;
 function initScene(){
-  const canvas = $('#scene'); const stage = $('#stage');
+  const canvas = $('#scene'); const stage = $('#map');
   if (!window.THREE || !canvas.getContext('webgl')){ canvas.style.display='none'; $('#hint').textContent='The 3D map needs WebGL'; return; }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const renderer = new THREE.WebGLRenderer({canvas, alpha:true, antialias:true, powerPreference:'high-performance'});
@@ -2702,7 +2776,7 @@ function initScene(){
   addEventListener('scroll', ()=>{ scrollV += (scrollY-lastY)*0.0025; lastY=scrollY; }, {passive:true});
 
   const card=$('#pinCard');
-  function showPin(p){ active=p; pins.forEach(q=>q.el.classList.toggle('active',q===p)); const r=ROUTES.find(x=>x.id===p.pl.route); const c=r?poolSeatCost(r,4):null; card.hidden=false; card.innerHTML=`<h4>${p.pl.name}</h4><p>${p.pl.sub}</p>${LOCAL[p.pl.name]?`<p style="margin-top:4px">Local apps here: ${LOCAL[p.pl.name].join(', ')}</p>`:''}<div class="row"><span>${r?r.km+' km · ~'+Math.round(r.min/60*10)/10+' h':''}</span><span>${c?'pool seat UGX '+fmt(c.riderPays):''}</span></div><div style="margin-top:10px;display:flex;gap:8px"><a class="btn small primary" href="#compare" data-route="${p.pl.route}">Compare rides</a>${DESTS.find(d=>d.id===p.pl.route)?`<a class="btn small" href="#explore" data-dest="${p.pl.route}">Plan weekend</a>`:''}</div>`; }
+  function showPin(p){ active=p; pins.forEach(q=>q.el.classList.toggle('active',q===p)); const r=ROUTES.find(x=>x.id===p.pl.route); const c=r?poolSeatCost(r,4):null; card.hidden=false; card.innerHTML=`<h4>${p.pl.name}</h4><p>${p.pl.sub}</p>${LOCAL[p.pl.name]?`<p style="margin-top:4px">Local apps here: ${LOCAL[p.pl.name].map(a=>markBox(a.replace(/ \(.*\)/,''))+a).join(' · ')}</p>`:''}<div class="row"><span>${r?r.km+' km · ~'+Math.round(r.min/60*10)/10+' h':''}</span><span>${c?'pool seat UGX '+fmt(c.riderPays):''}</span></div><div style="margin-top:10px;display:flex;gap:8px"><a class="btn small primary" href="#compare" data-route="${p.pl.route}">Compare rides</a>${DESTS.find(d=>d.id===p.pl.route)?`<a class="btn small" href="#explore" data-dest="${p.pl.route}">Plan weekend</a>`:''}</div>`; }
   pins.forEach(p=>{ p.el.addEventListener('mouseenter',()=>{ showPin(p); clearTimeout(tpTimer); tpTimer=setTimeout(()=>{ if(tpLast!==p.pl.name) teleport(p.pl.name); },450); }); p.el.addEventListener('mouseleave',()=>clearTimeout(tpTimer)); p.el.addEventListener('focus',()=>showPin(p)); p.el.addEventListener('click',()=>{ showPin(p); clearTimeout(tpTimer); teleport(p.pl.name); }); });
   card.addEventListener('click', e=>{ const a=e.target.closest('a'); if(!a) return; if(a.dataset.route){ const r=ROUTES.find(x=>x.id===a.dataset.route); if(r){ $('#cFrom').value=r.from; syncTo('cFrom','cTo'); $('#cTo').value=r.id; renderCompare(); } } if(a.dataset.dest){ const d=DESTS.find(x=>x.id===a.dataset.dest); if(d){ dest=d; renderDests(); renderItin(); } } });
   showPin(pins[0]);
@@ -2957,8 +3031,7 @@ if ('serviceWorker' in navigator && location.protocol.startsWith('http') && !loc
 fillRouteSelects();
 initStrip();
 initTheme();
-$('#statProviders').textContent = PROVIDERS.filter(p=>p.kind!=='rent').length + 4;
-renderTicker(); renderPartners();
+renderPartners(); initOps();
 $('#cFrom').value='Ntinda'; syncTo('cFrom','cTo'); renderCompare();
 renderTrips(); renderSplit();
 renderFleet();

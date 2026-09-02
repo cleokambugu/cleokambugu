@@ -29,7 +29,7 @@ test('health, otp, session, comfort, a seat, an offer, the rail', async () => {
   const refused = await call('POST', `/api/offers/${offers.body[0].id}/accept`, {}, tok); assert.equal(refused.status, 403);
   await call('POST', '/api/me/verify-sandbox', {}, tok);
   const acc = await call('POST', `/api/offers/${offers.body[0].id}/accept`, {}, tok); assert.equal(acc.status, 200); assert.equal(acc.body.status, 'funded');
-  const b = await call('POST', '/api/bookings', { kind: 'ride', partner: 'Faras', partner_sub: 'Boda', title: 'Ntinda → CBD', price_ugx: 7000 }, tok); assert.equal(b.status, 200);
+  const b = await call('POST', '/api/bookings', { kind: 'ride', partner: 'Faras', partner_sub: 'Boda', title: 'Ntinda → Downtown Kampala', price_ugx: 7000 }, tok); assert.equal(b.status, 200);
   const bh = await call('POST', `/api/bookings/${b.body.booking.id}/confirm`, {}, tok); assert.equal(bh.body.step, 1);
   const cur = await call('GET', '/api/bookings/current', null, tok); assert.equal(cur.body.id, b.body.booking.id);
   const p = await call('GET', '/api/pulse?role=driver'); assert.ok(Array.isArray(p.body)); assert.ok(p.body.find((t) => t.town === 'Jinja'));

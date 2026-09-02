@@ -83,6 +83,24 @@ in the nav saying where you are. One teleport, every desk.
 The same strings in English, Swahili, Luganda, Runyankore-Rukiga, Acholi and Ateso, with the
 confidence of each shown and English as the honest fallback. See `languages.md`.
 
+## One mark per supplier
+
+Every supplier wears its own mark wherever it is named: the desk, the rail, the Atlas, the
+buses, Deliver, the checkout networks, the Reach grid, the footer. `mark()` resolves a row to a
+stylised mark by key, then by the slug of its name, and only then falls back to a monogram; a
+monogram appearing anywhere is a bug to fix by drawing the mark. The marks are UG's own
+renderings in one hand for the prototype; production swaps in official assets under each
+partner's brand guidelines. Representation is ownership: a partner who sees their mark on the
+screen sees that UG sends them demand.
+
+## One reveal
+
+The page is six sections in the order a rider needs them: Ride, Stage, Rent, Deliver, Explore,
+Drive. Anything a rider did not ask for sits behind a `details.reveal` (Pulse, buses, empty
+legs, Pool, the Atlas, Foresight, Hustle Mode, more options, the spread) or in the Ops sheet
+(Reach, plug-ins, partners). Transparency is kept whole and shown on request, never as a wall
+of static information. Four tabs on the phone: Ride, Stage, Deliver, Me.
+
 ## One rule for adding anything
 
 Before a feature ships it must answer: which row of the table is it, what state is it in, does

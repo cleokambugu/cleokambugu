@@ -1,0 +1,4 @@
+dist/
+voice/*.wav
+voice/manifest.json
+voice/Spark-TTS*

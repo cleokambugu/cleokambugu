@@ -6,7 +6,7 @@
     {
       "id": "kololo-nakasero",
       "from": "Kololo",
-      "to": "Nakasero (CBD)",
+      "to": "Nakasero (Downtown)",
       "km": 2.5,
       "min": 12,
       "tolls": 0,
@@ -15,7 +15,7 @@
     {
       "id": "ntinda-cbd",
       "from": "Ntinda",
-      "to": "Kampala CBD",
+      "to": "Downtown Kampala",
       "km": 7,
       "min": 32,
       "tolls": 0,
@@ -41,7 +41,7 @@
     },
     {
       "id": "cbd-entebbe",
-      "from": "Kampala CBD",
+      "from": "Downtown Kampala",
       "to": "Entebbe Airport",
       "km": 40,
       "min": 60,

@@ -66,7 +66,7 @@ Ranked by how many seats asked for it; details in `stress-test.md`, contract in 
 ## Regulatory and operating notes (snippet-level, to be verified with counsel)
 
 - Boda operators need a Class M permit and an annual PSV licence from the Transport Licensing
-  Board; KCCA runs boda-free zones in the CBD.
+  Board; KCCA runs boda-free zones downtown.
 - Kampala's leadership has said all bodas should operate under digital platforms; the shape of
   the resulting regulation is what UG must track.
 - Ride-hailing companies are licensed; UG as a comparison and pooling platform should get a

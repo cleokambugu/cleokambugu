@@ -80,7 +80,7 @@ normal day.
 
 ## Why call it arbitrage
 
-Because the spread is real money: on a 7 km Ntinda to CBD run at rush hour the model spreads
+Because the spread is real money: on a 7 km Ntinda to Downtown Kampala run at rush hour the model spreads
 from about UGX 2,000 (matatu) to about UGX 18,000 (surged app car). The rider does not need a
 different product to save; they need the spread shown. UG's own products sit in the same list
 and win only when they are cheaper.

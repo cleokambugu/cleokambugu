@@ -54,7 +54,7 @@ The panel:
   the copy the panel flagged as sneering ("dignity", "awkward cash", "kwanjula grade", the
   "lounge-style waiting room") was cut. Plan names are the founder's decision and are listed
   under v2 questions.
-- **In-town pooling.** Ops says drop the radius; the concept keeps Ntinda–CBD as the daily
+- **In-town pooling.** Ops says drop the radius; the concept keeps Ntinda–Downtown as the daily
   habit. **Call:** kept in the prototype as a fixed-pickup daily stage; the launch plan in
   `roadmap.md` opens intercity and airport first.
 - **Church as a circle.** The lawyer flags religious affiliation as sensitive data; the chairman
