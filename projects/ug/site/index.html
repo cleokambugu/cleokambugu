@@ -2530,7 +2530,7 @@ function initScene(){
   const group = new THREE.Group(); sc.add(group);
 
   // Map projection: lon/lat -> plane centred on Uganda (approx equirectangular; fine at the equator)
-  const cx=32.28, cy=1.37, S=1.15;
+  const cx=32.05, cy=1.37, S=1.12;
   const P = (lon,lat)=>[(lon-cx)*S,(lat-cy)*S];
   const inPoly = (x,y,poly)=>{ let ins=false; for(let i=0,j=poly.length-1;i<poly.length;j=i++){ const [xi,yi]=poly[i],[xj,yj]=poly[j]; if(((yi>y)!==(yj>y)) && (x < (xj-xi)*(y-yi)/(yj-yi)+xi)) ins=!ins; } return ins; };
   const outline = UG_LAND.map(([a,b])=>P(a,b)); const lakes = UG_LAKES.map(r=>r.map(([a,b])=>P(a,b)));
