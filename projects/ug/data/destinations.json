@@ -1,0 +1,211 @@
+{
+  "generated": "2026-09-02",
+  "source": "projects/ug/site/index.html data block",
+  "note": "Every figure is an estimate. prov fields: snippet = read from a search snippet or third-party page, modelled = UG assumption, official = read on the operator page, UG model = UG own formula. See docs/arbitrage-model.md.",
+  "destinations": [
+    {
+      "id": "kampala-jinja",
+      "name": "Jinja · Source of the Nile",
+      "region": "Eastern",
+      "stripe": "#0EA5E9",
+      "blurb": "Rafting, the Nile at sunset, and back for Monday.",
+      "fees": {
+        "eac": 0,
+        "fr": 0,
+        "fnr": 0
+      },
+      "act": {
+        "name": "Grade-5 rafting (half day)",
+        "eac": 250000,
+        "fr": 110,
+        "fnr": 140,
+        "prov": "modelled"
+      },
+      "lodge": {
+        "eac": 120000,
+        "fr": 60,
+        "fnr": 90
+      },
+      "season": "Year-round"
+    },
+    {
+      "id": "kampala-murchison",
+      "name": "Murchison Falls",
+      "region": "North-west",
+      "stripe": "#F2A900",
+      "blurb": "The Nile squeezed through a seven-metre gap. Boat to the base.",
+      "fees": {
+        "eac": 25000,
+        "fr": 35,
+        "fnr": 45,
+        "prov": "snippet (UWA to Jun 2026)"
+      },
+      "act": {
+        "name": "Launch cruise to the falls",
+        "eac": 30000,
+        "fr": 25,
+        "fnr": 30,
+        "prov": "modelled"
+      },
+      "vehicle": 40000,
+      "lodge": {
+        "eac": 180000,
+        "fr": 120,
+        "fnr": 180
+      },
+      "season": "Dec–Feb, Jun–Sep"
+    },
+    {
+      "id": "kampala-bwindi",
+      "name": "Bwindi · Mountain gorillas",
+      "region": "South-west",
+      "stripe": "#3DBB7A",
+      "blurb": "An hour with a gorilla family. Permits sell out months ahead.",
+      "fees": {
+        "eac": 0,
+        "fr": 0,
+        "fnr": 0
+      },
+      "act": {
+        "name": "Gorilla permit (1 day)",
+        "eac": 300000,
+        "fr": 700,
+        "fnr": 800,
+        "prov": "snippet (UWA)"
+      },
+      "lodge": {
+        "eac": 220000,
+        "fr": 150,
+        "fnr": 250
+      },
+      "season": "Jun–Sep, Dec–Feb (Apr/May/Nov permits discounted)"
+    },
+    {
+      "id": "kampala-fortportal",
+      "name": "Kibale · Chimpanzees & crater lakes",
+      "region": "Western",
+      "stripe": "#8B5CF6",
+      "blurb": "Chimp tracking in the morning, crater-lake swim by lunch.",
+      "fees": {
+        "eac": 0,
+        "fr": 0,
+        "fnr": 0
+      },
+      "act": {
+        "name": "Chimpanzee tracking permit",
+        "eac": 150000,
+        "fr": 200,
+        "fnr": 250,
+        "prov": "FNR from snippet; others modelled"
+      },
+      "lodge": {
+        "eac": 150000,
+        "fr": 90,
+        "fnr": 140
+      },
+      "season": "Year-round"
+    },
+    {
+      "id": "kampala-kidepo",
+      "name": "Kidepo Valley",
+      "region": "Far north-east",
+      "stripe": "#D2202F",
+      "blurb": "The wildest park in the country and the emptiest game drives.",
+      "fees": {
+        "eac": 20000,
+        "fr": 35,
+        "fnr": 45,
+        "prov": "snippet"
+      },
+      "act": {
+        "name": "Guided game drive",
+        "eac": 20000,
+        "fr": 20,
+        "fnr": 30,
+        "prov": "modelled"
+      },
+      "vehicle": 40000,
+      "lodge": {
+        "eac": 160000,
+        "fr": 110,
+        "fnr": 170
+      },
+      "season": "Sep–Mar"
+    },
+    {
+      "id": "kampala-sipi",
+      "name": "Sipi Falls",
+      "region": "Eastern · Mt Elgon",
+      "stripe": "#14B8A6",
+      "blurb": "Three waterfalls, coffee on the slopes, abseil if you dare.",
+      "fees": {
+        "eac": 0,
+        "fr": 0,
+        "fnr": 0
+      },
+      "act": {
+        "name": "Guided three-falls hike",
+        "eac": 30000,
+        "fr": 15,
+        "fnr": 20,
+        "prov": "modelled"
+      },
+      "lodge": {
+        "eac": 100000,
+        "fr": 55,
+        "fnr": 80
+      },
+      "season": "Year-round"
+    },
+    {
+      "id": "kampala-bunyonyi",
+      "name": "Lake Bunyonyi",
+      "region": "South-west",
+      "stripe": "#6366F1",
+      "blurb": "Twenty-nine islands, dugout canoes, no crocodiles, no hippos.",
+      "fees": {
+        "eac": 0,
+        "fr": 0,
+        "fnr": 0
+      },
+      "act": {
+        "name": "Canoe and island walk",
+        "eac": 25000,
+        "fr": 10,
+        "fnr": 15,
+        "prov": "modelled"
+      },
+      "lodge": {
+        "eac": 130000,
+        "fr": 70,
+        "fnr": 110
+      },
+      "season": "Year-round"
+    },
+    {
+      "id": "kampala-ssese",
+      "name": "Ssese Islands",
+      "region": "Lake Victoria",
+      "stripe": "#F59E0B",
+      "blurb": "Ferry, beach, fish. The Kampala weekend that feels furthest away.",
+      "fees": {
+        "eac": 0,
+        "fr": 0,
+        "fnr": 0
+      },
+      "act": {
+        "name": "Ferry (MV Kalangala, return)",
+        "eac": 28000,
+        "fr": 8,
+        "fnr": 8,
+        "prov": "modelled"
+      },
+      "lodge": {
+        "eac": 110000,
+        "fr": 60,
+        "fnr": 90
+      },
+      "season": "Dry months"
+    }
+  ]
+}

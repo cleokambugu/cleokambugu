@@ -1,0 +1,381 @@
+{
+  "generated": "2026-09-02",
+  "source": "projects/ug/site/index.html data block",
+  "note": "Every figure is an estimate. prov fields: snippet = read from a search snippet or third-party page, modelled = UG assumption, official = read on the operator page, UG model = UG own formula. See docs/arbitrage-model.md.",
+  "routes": [
+    {
+      "id": "kololo-nakasero",
+      "from": "Kololo",
+      "to": "Nakasero (CBD)",
+      "km": 2.5,
+      "min": 12,
+      "tolls": 0,
+      "city": true
+    },
+    {
+      "id": "ntinda-cbd",
+      "from": "Ntinda",
+      "to": "Kampala CBD",
+      "km": 7,
+      "min": 32,
+      "tolls": 0,
+      "city": true
+    },
+    {
+      "id": "bugolobi-makerere",
+      "from": "Bugolobi",
+      "to": "Makerere",
+      "km": 8,
+      "min": 36,
+      "tolls": 0,
+      "city": true
+    },
+    {
+      "id": "kira-nakawa",
+      "from": "Kira",
+      "to": "Nakawa",
+      "km": 11,
+      "min": 45,
+      "tolls": 0,
+      "city": true
+    },
+    {
+      "id": "cbd-entebbe",
+      "from": "Kampala CBD",
+      "to": "Entebbe Airport",
+      "km": 40,
+      "min": 60,
+      "tolls": 5000,
+      "entebbe": true
+    },
+    {
+      "id": "kampala-jinja",
+      "from": "Kampala",
+      "to": "Jinja (Source of the Nile)",
+      "km": 80,
+      "min": 150,
+      "tolls": 0,
+      "inter": true,
+      "bus": 25000
+    },
+    {
+      "id": "kampala-mbarara",
+      "from": "Kampala",
+      "to": "Mbarara",
+      "km": 270,
+      "min": 300,
+      "tolls": 0,
+      "inter": true,
+      "bus": 40000
+    },
+    {
+      "id": "kampala-fortportal",
+      "from": "Kampala",
+      "to": "Fort Portal",
+      "km": 300,
+      "min": 300,
+      "tolls": 0,
+      "inter": true,
+      "bus": 40000
+    },
+    {
+      "id": "kampala-murchison",
+      "from": "Kampala",
+      "to": "Murchison Falls (Paraa)",
+      "km": 305,
+      "min": 360,
+      "tolls": 0,
+      "inter": true,
+      "bus": 45000
+    },
+    {
+      "id": "kampala-gulu",
+      "from": "Kampala",
+      "to": "Gulu",
+      "km": 335,
+      "min": 360,
+      "tolls": 0,
+      "inter": true,
+      "bus": 45000
+    },
+    {
+      "id": "kampala-sipi",
+      "from": "Kampala",
+      "to": "Sipi Falls",
+      "km": 275,
+      "min": 330,
+      "tolls": 0,
+      "inter": true,
+      "bus": 40000
+    },
+    {
+      "id": "kampala-bunyonyi",
+      "from": "Kampala",
+      "to": "Lake Bunyonyi",
+      "km": 410,
+      "min": 480,
+      "tolls": 0,
+      "inter": true,
+      "bus": 55000
+    },
+    {
+      "id": "kampala-bwindi",
+      "from": "Kampala",
+      "to": "Bwindi (Buhoma)",
+      "km": 470,
+      "min": 540,
+      "tolls": 0,
+      "inter": true,
+      "bus": 60000
+    },
+    {
+      "id": "kampala-kidepo",
+      "from": "Kampala",
+      "to": "Kidepo Valley",
+      "km": 520,
+      "min": 660,
+      "tolls": 0,
+      "inter": true,
+      "bus": 70000
+    },
+    {
+      "id": "kampala-ssese",
+      "from": "Kampala",
+      "to": "Ssese Islands (via Bukakata ferry)",
+      "km": 130,
+      "min": 240,
+      "tolls": 0,
+      "inter": true,
+      "bus": 35000,
+      "ferry": 14000
+    }
+  ],
+  "places": [
+    {
+      "name": "Kampala",
+      "lon": 32.58,
+      "lat": 0.32,
+      "sub": "Capital · UG home base",
+      "route": "ntinda-cbd",
+      "fact": "Ten quotes, one screen"
+    },
+    {
+      "name": "Entebbe",
+      "lon": 32.46,
+      "lat": 0.05,
+      "sub": "Airport · expressway toll UGX 5,000",
+      "route": "cbd-entebbe",
+      "fact": "Airport pools every hour"
+    },
+    {
+      "name": "Jinja",
+      "lon": 33.2,
+      "lat": 0.43,
+      "sub": "Source of the Nile · 80 km",
+      "route": "kampala-jinja",
+      "fact": "Friday pools from UGX 21k"
+    },
+    {
+      "name": "Mbarara",
+      "lon": 30.66,
+      "lat": -0.61,
+      "sub": "South-west hub · 270 km",
+      "route": "kampala-mbarara",
+      "fact": "Faras and Tinka operate here"
+    },
+    {
+      "name": "Fort Portal",
+      "lon": 30.27,
+      "lat": 0.67,
+      "sub": "Kibale chimps · crater lakes",
+      "route": "kampala-fortportal",
+      "fact": "Chimp permits from UGX 150k"
+    },
+    {
+      "name": "Bwindi",
+      "lon": 29.65,
+      "lat": -1.05,
+      "sub": "Mountain gorillas",
+      "route": "kampala-bwindi",
+      "fact": "EAC permit UGX 300,000"
+    },
+    {
+      "name": "Murchison",
+      "lon": 31.7,
+      "lat": 2.28,
+      "sub": "Murchison Falls NP",
+      "route": "kampala-murchison",
+      "fact": "EAC entry UGX 25,000"
+    },
+    {
+      "name": "Gulu",
+      "lon": 32.3,
+      "lat": 2.77,
+      "sub": "Northern hub · 335 km",
+      "route": "kampala-gulu",
+      "fact": "Bus from UGX 45k"
+    },
+    {
+      "name": "Kidepo",
+      "lon": 33.85,
+      "lat": 3.85,
+      "sub": "Kidepo Valley NP",
+      "route": "kampala-kidepo",
+      "fact": "Fly-in or 11 h drive"
+    },
+    {
+      "name": "Sipi",
+      "lon": 34.37,
+      "lat": 1.33,
+      "sub": "Sipi Falls · Mt Elgon",
+      "route": "kampala-sipi",
+      "fact": "Weekend from UGX 60k/head"
+    }
+  ],
+  "outline_lon_lat": [
+    [
+      30.85,
+      3.5
+    ],
+    [
+      31.2,
+      3.8
+    ],
+    [
+      31.8,
+      3.6
+    ],
+    [
+      32.2,
+      3.5
+    ],
+    [
+      32.9,
+      3.8
+    ],
+    [
+      33.5,
+      3.75
+    ],
+    [
+      34,
+      4.2
+    ],
+    [
+      34.45,
+      3.65
+    ],
+    [
+      34.6,
+      3
+    ],
+    [
+      34.9,
+      2.4
+    ],
+    [
+      35,
+      1.9
+    ],
+    [
+      34.8,
+      1.4
+    ],
+    [
+      34.5,
+      1.1
+    ],
+    [
+      34.1,
+      0.7
+    ],
+    [
+      34,
+      0.3
+    ],
+    [
+      33.9,
+      -0.1
+    ],
+    [
+      33.95,
+      -0.9
+    ],
+    [
+      33.9,
+      -1
+    ],
+    [
+      31.5,
+      -1
+    ],
+    [
+      30.8,
+      -1
+    ],
+    [
+      30.5,
+      -1.1
+    ],
+    [
+      30.3,
+      -1.3
+    ],
+    [
+      29.9,
+      -1.4
+    ],
+    [
+      29.6,
+      -1.35
+    ],
+    [
+      29.6,
+      -0.9
+    ],
+    [
+      29.65,
+      -0.5
+    ],
+    [
+      29.7,
+      0.1
+    ],
+    [
+      29.85,
+      0.5
+    ],
+    [
+      30,
+      0.9
+    ],
+    [
+      30.2,
+      1.1
+    ],
+    [
+      30.5,
+      1.4
+    ],
+    [
+      30.6,
+      1.9
+    ],
+    [
+      31,
+      2.2
+    ],
+    [
+      31.3,
+      2.4
+    ],
+    [
+      30.9,
+      2.7
+    ],
+    [
+      30.75,
+      3
+    ]
+  ]
+}

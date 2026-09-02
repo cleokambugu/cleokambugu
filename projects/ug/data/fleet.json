@@ -1,0 +1,94 @@
+{
+  "generated": "2026-09-02",
+  "source": "projects/ug/site/index.html data block",
+  "note": "Every figure is an estimate. prov fields: snippet = read from a search snippet or third-party page, modelled = UG assumption, official = read on the operator page, UG model = UG own formula. See docs/arbitrage-model.md.",
+  "fleet": [
+    {
+      "id": "premio",
+      "name": "Toyota Premio",
+      "cls": "Sedan · 5 seats · city",
+      "day": 120000,
+      "kmPerL": 13,
+      "glyph": "sedan"
+    },
+    {
+      "id": "noah",
+      "name": "Toyota Noah",
+      "cls": "Van · 7 seats · the whole circle",
+      "day": 150000,
+      "kmPerL": 10,
+      "glyph": "van"
+    },
+    {
+      "id": "rav4",
+      "name": "Toyota RAV4",
+      "cls": "4×4 · 5 seats · park roads",
+      "day": 165000,
+      "kmPerL": 10,
+      "glyph": "suv",
+      "hot": true
+    },
+    {
+      "id": "prado",
+      "name": "Land Cruiser Prado",
+      "cls": "4×4 · 7 seats · arrive properly",
+      "day": 300000,
+      "kmPerL": 8,
+      "glyph": "suv"
+    },
+    {
+      "id": "v8",
+      "name": "Land Cruiser V8",
+      "cls": "4×4 · 7 seats · kwanjula grade",
+      "day": 400000,
+      "kmPerL": 6,
+      "glyph": "suv"
+    },
+    {
+      "id": "camper",
+      "name": "4×4 with rooftop tent",
+      "cls": "Camping kit · 4 sleepers",
+      "day": 260000,
+      "kmPerL": 8,
+      "glyph": "camper"
+    }
+  ],
+  "plans": [
+    {
+      "name": "Hustler",
+      "price": 0,
+      "per": "free",
+      "items": [
+        "Compare every ride, unlimited",
+        "Pool as a rider",
+        "Weekend planner",
+        "Pay-as-you-go with MoMo"
+      ]
+    },
+    {
+      "name": "Boujee",
+      "price": 29000,
+      "per": "per month",
+      "hot": true,
+      "items": [
+        "Everything in Hustler",
+        "Priority seats on popular pools",
+        "8% off UG Rent, per-head billing",
+        "Day-chain planner with pre-pay",
+        "Airport lounge-style waiting room at Entebbe pick-up"
+      ]
+    },
+    {
+      "name": "Executive",
+      "price": 79000,
+      "per": "per month",
+      "items": [
+        "Everything in Boujee",
+        "Chauffeur-hour credits (4/mo)",
+        "Park permit concierge",
+        "Family and PA sub-accounts",
+        "Monthly statement for the accountant"
+      ]
+    }
+  ]
+}
