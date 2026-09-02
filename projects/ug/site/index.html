@@ -130,7 +130,7 @@ section{padding:96px 0;border-top:1px solid var(--line)}
 #scene{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:grab;touch-action:none}
 #scene.dragging{cursor:grabbing}
 .pins{position:absolute;inset:0;pointer-events:none;overflow:hidden}
-.pin{position:absolute;transform:translate(-50%,-50%);pointer-events:auto;cursor:pointer;display:flex;align-items:center;gap:6px;transition:opacity .2s}
+.pin{position:absolute;transform:translate(-50%,-50%);pointer-events:auto;cursor:pointer;display:flex;align-items:center;gap:6px;transition:opacity .2s;background:none;border:0;padding:2px 4px;color:inherit;font:inherit}
 .pin .dot{width:7px;height:7px;border-radius:50%;background:var(--ink);box-shadow:0 0 6px var(--ink),0 0 0 2px color-mix(in srgb,var(--ground) 70%,transparent)}
 .pin .lbl{font-family:var(--font-body);font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);white-space:nowrap;text-shadow:0 0 6px var(--ground),0 0 12px var(--ground),0 0 18px var(--ground),0 1px 1px rgba(0,0,0,.9)}
 .pin.big .dot{width:14px;height:14px;background:var(--yellow);border-radius:0;box-shadow:none;clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);filter:drop-shadow(0 0 4px var(--yellow))}
@@ -139,9 +139,6 @@ section{padding:96px 0;border-top:1px solid var(--line)}
 .pin.park .lbl{color:var(--crane);text-transform:none;font-style:italic;font-weight:500;letter-spacing:.06em;font-size:11px}
 .pin:hover .lbl,.pin.active .lbl{color:var(--yellow)}
 .pin.big{z-index:3}.pin.small{z-index:1}.pin.park{z-index:1}.pin:hover,.pin.active{z-index:4}
-.pin.big .lbl{font-weight:600;font-size:13px}
-.pin.park .dot{background:var(--crane);box-shadow:0 0 0 3px color-mix(in srgb,var(--crane) 28%,transparent)}
-.pin.park .lbl{color:var(--ink-2)}
 .pin.small .lbl{font-size:10px;color:var(--ink-2)}
 .pin:hover .dot,.pin.active .dot{background:var(--yellow);box-shadow:0 0 10px var(--yellow)}
 .pin.behind{opacity:.25}
@@ -1394,7 +1391,7 @@ const PLACES = [
   {name:'Mbarara', lon:30.66, lat:-0.61, sub:'South-west hub · 270 km', route:'kampala-mbarara', big:true, off:[10,14]},
   {name:'Bushenyi', lon:30.19, lat:-0.54, sub:'Tea country · 320 km', route:'kampala-bushenyi', off:[-12,-14]},
   {name:'Kabale', lon:29.99, lat:-1.25, sub:'Lake Bunyonyi gateway · 410 km', route:'kampala-bunyonyi'},
-  {name:'Bwindi', lon:29.65, lat:-1.05, sub:'Mountain gorillas', route:'kampala-bwindi', park:true},
+  {name:'Bwindi', lon:29.65, lat:-1.05, sub:'Mountain gorillas', route:'kampala-bwindi', park:true, off:[26,-12]},
   {name:'Fort Portal', lon:30.27, lat:0.67, sub:'Kibale chimps · crater lakes · 300 km', route:'kampala-fortportal', big:true},
   {name:'Hoima', lon:31.35, lat:1.43, sub:'Oil city · 200 km', route:'kampala-hoima', off:[-8,12]},
   {name:'Masindi', lon:31.72, lat:1.67, sub:'Gateway to Murchison · 215 km', route:'kampala-masindi', off:[14,-12]},
@@ -1413,7 +1410,7 @@ const PLACES = [
   {name:'Mgahinga', lon:29.63, lat:-1.37, sub:'Mgahinga Gorilla NP · golden monkeys', route:'kampala-kisoro', park:true, off:[10,26]},
   {name:'Kasese', lon:30.08, lat:0.18, sub:'Rwenzori gateway · 380 km', route:'kampala-kasese', off:[14,10]},
   {name:'Rwenzori', lon:29.92, lat:0.36, sub:'Rwenzori Mountains NP · the Mountains of the Moon', route:'kampala-kasese', park:true, off:[-14,-14]},
-  {name:'Queen Elizabeth', lon:29.90, lat:-0.18, sub:'Queen Elizabeth NP · Kazinga Channel, tree lions', route:'kampala-qenp', park:true, off:[-10,14]},
+  {name:'Queen Elizabeth', lon:29.90, lat:-0.18, sub:'Queen Elizabeth NP · Kazinga Channel, tree lions', route:'kampala-qenp', park:true, off:[44,14]},
   {name:'Kibale', lon:30.40, lat:0.50, sub:'Kibale NP · chimpanzees', route:'kampala-fortportal', park:true, off:[16,10]},
   {name:'Semuliki', lon:30.15, lat:0.82, sub:'Semuliki NP · hot springs', route:'kampala-semuliki', park:true, off:[-10,-14]},
   {name:'Lake Mburo', lon:30.95, lat:-0.62, sub:'Lake Mburo NP · zebra, the closest park to Kampala', route:'kampala-mburo', park:true, off:[16,12]},
