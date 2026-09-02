@@ -8,9 +8,12 @@ stage car if it is going upcountry (**Deliver**). **Explore** prices the
 whole park weekend in one number and is where all three verbs get used at once. Payment is mobile
 money through Flutterwave.
 
-Status: **PROTOTYPE, v1**. The site is a working single-file web app with a published fare model,
-and timers stand in for other riders and drivers. Nothing here is a live fare, a licensed
-service, or a production payment integration. v0 is frozen beside it.
+Status: **v1.2, a working product in sandbox**. The site is a single-file installable web app
+and the server behind it is real: accounts by one-time code, the Virtual Stage with intents and
+funded offers, a double-entry ledger, bookings on the trip rail, Pulse, Flutterwave verification
+and webhooks, tests, a Docker image and deployment workflows. It runs in sandbox until
+Flutterwave keys are set. Nothing here is a live fare, a licensed service, or a contract with an
+operator; see `docs/deploy.md` and the panel's list before real money moves.
 
 | Path | What it is |
 | --- | --- |
@@ -22,7 +25,9 @@ service, or a production payment integration. v0 is frozen beside it.
 | [`docs/stay-on-ug.md`](docs/stay-on-ug.md) | Booking with partners without leaving UG: the trip rail now, and the business and API channels each operator offers (researched by search). |
 | [`docs/v1-concept.md`](docs/v1-concept.md) | The Virtual Stage: the logistics trick, the four mechanisms, the Handshake. |
 | [`docs/stress-test.md`](docs/stress-test.md) | The panel of sharks and maestros: verdicts, what v1 changed, what v2 must do. Full critiques in [`docs/panel/`](docs/panel/). |
-| [`server/`](server/) | The v2 backend contract: services, non-negotiables, and an OpenAPI draft. |
+| [`server/`](server/) | **The backend.** Node 22, no dependencies, SQLite: `src/` (api, stages, ledger, bookings, pulse, otp, flutterwave), `test/`, a Dockerfile, `.env.example`, `scripts/` (data export, icons). `README.md` there is the system shape; `openapi.yaml` the contract. |
+| [`docs/deploy.md`](docs/deploy.md) | Run it locally in two minutes; three ways to put it on the internet; what live and sandbox mean. |
+| [`site/sw.js`](site/sw.js), [`site/icons/`](site/icons/), [`site/config.js`](site/config.js) | Service worker for the offline shell, PNG icons from the Crest, the API base override. |
 | [`data/`](data/) | The fare model, routes, fleet, and destinations as JSON, with provenance tags. Exported from the site's data block. `uganda-geometry.json` is the border and lakes from Natural Earth 10m, simplified. |
 | [`brand/`](brand/) | The Crest mark, wordmark, and app icon as SVG. |
 | [`docs/business-plan.md`](docs/business-plan.md) | Market, customer, product, revenue model, unit economics, go-to-market, risks. |
@@ -36,11 +41,13 @@ service, or a production payment integration. v0 is frozen beside it.
 ## Run it
 
 ```
-# any static server works; no dependencies
-cd projects/ug/site
-python3 -m http.server 8080
-# open http://localhost:8080
+cd projects/ug/server
+npm run export-data && npm run dev     # sandbox server + site at http://localhost:8787
+npm test                               # ledger, stage and API tests
 ```
+
+The site alone also works from any static server or the Artifact link; without an API it runs
+its in-browser sandbox.
 
 The page loads Three.js r128 from cdnjs and three Google Fonts. Without network access the 3D map
 hides itself and the type falls back to the system stack; everything else works offline.

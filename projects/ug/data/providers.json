@@ -1,10 +1,11 @@
 {
   "generated": "2026-09-02",
   "source": "projects/ug/site/index.html data block",
-  "note": "Every figure is an estimate. prov fields: snippet = read from a search snippet or third-party page, modelled = UG assumption, official = read on the operator page, UG model = UG own formula. See docs/arbitrage-model.md.",
+  "note": "Every figure is an estimate. prov fields: snippet = read from a search snippet or third-party page, modelled = UG assumption, official = read on the operator page, UG model = UG own formula. See docs/arbitrage-model.md and docs/atlas.md.",
   "constants": {
     "UGX_PER_USD": 3700,
-    "FUEL_UGX_PER_L": 6300
+    "FUEL_UGX_PER_L": 6300,
+    "DRIVER_WAGE_PER_KM": 300
   },
   "providers": [
     {
@@ -66,7 +67,7 @@
     {
       "id": "safeboda",
       "name": "SafeBoda",
-      "sub": "Helmet included",
+      "sub": "Boda",
       "kind": "boda",
       "base": 500,
       "perKm": 450,

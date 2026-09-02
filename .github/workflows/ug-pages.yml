@@ -1,0 +1,32 @@
+name: UG site to GitHub Pages
+
+# Publishes projects/ug/site as a static site. Enable Pages with "GitHub Actions" as the source in the repository
+# settings once; after that every push to main that touches the site deploys it. The static site runs in sandbox
+# mode (no API); point it at a deployed server by setting window.UG_API_BASE in site/config.js.
+
+on:
+  push:
+    branches: [main]
+    paths: ['projects/ug/site/**', 'projects/ug/brand/**', 'projects/ug/data/**']
+  workflow_dispatch:
+
+permissions: { contents: read, pages: write, id-token: write }
+concurrency: { group: ug-pages, cancel-in-progress: true }
+
+jobs:
+  deploy:
+    environment: { name: github-pages, url: '${{ steps.deployment.outputs.page_url }}' }
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Assemble the static site
+        run: |
+          mkdir -p out/brand out/data
+          cp -r projects/ug/site/. out/
+          cp -r projects/ug/brand/. out/brand/
+          cp -r projects/ug/data/. out/data/
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: out }
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,16 @@
+{
+  "name": "ug-server",
+  "version": "1.2.0",
+  "description": "UG — Ride. Pool. Rent. Deliver. The backend: accounts, the Virtual Stage, the ledger, bookings, Pulse, Flutterwave.",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22.13" },
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "UG_SANDBOX=1 UG_DEMO_SEED=1 node --watch src/index.js",
+    "test": "node --test",
+    "export-data": "node scripts/export-data.js",
+    "icons": "node scripts/icons.js"
+  },
+  "license": "UNLICENSED"
+}

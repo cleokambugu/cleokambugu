@@ -131,14 +131,19 @@ section{padding:96px 0;border-top:1px solid var(--line)}
 #scene.dragging{cursor:grabbing}
 .pins{position:absolute;inset:0;pointer-events:none;overflow:hidden}
 .pin{position:absolute;transform:translate(-50%,-50%);pointer-events:auto;cursor:pointer;display:flex;align-items:center;gap:6px;transition:opacity .2s}
-.pin .dot{width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 0 3px color-mix(in srgb,var(--red) 28%,transparent)}
-.pin .lbl{font-family:var(--font-body);font-size:12px;font-weight:500;letter-spacing:0;color:var(--ink);background:color-mix(in srgb,var(--ground) 70%,transparent);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid color-mix(in srgb,var(--ink) 12%,transparent);padding:3px 9px;border-radius:999px;white-space:nowrap;box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 10%,transparent)}
+.pin .dot{width:7px;height:7px;border-radius:50%;background:var(--ink);box-shadow:0 0 6px var(--ink),0 0 0 2px color-mix(in srgb,var(--ground) 70%,transparent)}
+.pin .lbl{font-family:var(--font-body);font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);white-space:nowrap;text-shadow:0 0 6px var(--ground),0 0 12px var(--ground),0 0 18px var(--ground),0 1px 1px rgba(0,0,0,.9)}
+.pin.big .dot{width:14px;height:14px;background:var(--yellow);border-radius:0;box-shadow:none;clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);filter:drop-shadow(0 0 4px var(--yellow))}
+.pin.big .lbl{font-size:13px;letter-spacing:.22em;color:var(--yellow);text-shadow:0 0 8px var(--ground),0 0 16px var(--ground),0 0 24px color-mix(in srgb,var(--yellow) 30%,transparent),0 1px 1px rgba(0,0,0,.9)}
+.pin.park .dot{width:8px;height:8px;background:var(--crane);border-radius:0;transform:rotate(45deg);box-shadow:0 0 6px var(--crane)}
+.pin.park .lbl{color:var(--crane);text-transform:none;font-style:italic;font-weight:500;letter-spacing:.06em;font-size:11px}
+.pin:hover .lbl,.pin.active .lbl{color:var(--yellow)}
 .pin.big{z-index:3}.pin.small{z-index:1}.pin.park{z-index:1}.pin:hover,.pin.active{z-index:4}
 .pin.big .lbl{font-weight:600;font-size:13px}
 .pin.park .dot{background:var(--crane);box-shadow:0 0 0 3px color-mix(in srgb,var(--crane) 28%,transparent)}
 .pin.park .lbl{color:var(--ink-2)}
-.pin.small .lbl{font-size:11px;color:var(--ink-2)}
-.pin:hover .dot,.pin.active .dot{background:var(--yellow);box-shadow:0 0 0 6px color-mix(in srgb,var(--yellow) 30%,transparent)}
+.pin.small .lbl{font-size:10px;color:var(--ink-2)}
+.pin:hover .dot,.pin.active .dot{background:var(--yellow);box-shadow:0 0 10px var(--yellow)}
 .pin.behind{opacity:.25}
 .pin-card{position:absolute;right:0;bottom:12px;width:min(320px,90%);border-radius:var(--radius-lg);padding:14px 16px;pointer-events:auto}
 .pin-card h4{font-family:var(--font-display);font-weight:500;font-size:15px;margin-bottom:4px}
@@ -1144,6 +1149,7 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
 <!-- Three.js UMD build (r128 is the last UMD release on cdnjs) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="config.js"></script>
 <script>
 /* =====================================================================
    UG — data model. Every figure below is an ESTIMATE from a published,
@@ -1185,6 +1191,12 @@ const ROUTES = [
   {id:'kampala-kabale', from:'Kampala', to:'Kabale', km:410, min:480, tolls:0, inter:true, bus:55000},
   {id:'kampala-moroto', from:'Kampala', to:'Moroto (Karamoja)', km:470, min:540, tolls:0, inter:true, bus:60000},
   {id:'kampala-kotido', from:'Kampala', to:'Kotido', km:520, min:600, tolls:0, inter:true, bus:65000},
+  {id:'kampala-kisoro', from:'Kampala', to:'Kisoro', km:450, min:540, tolls:0, inter:true, bus:60000},
+  {id:'kampala-kasese', from:'Kampala', to:'Kasese', km:380, min:420, tolls:0, inter:true, bus:45000},
+  {id:'kampala-qenp', from:'Kampala', to:'Queen Elizabeth (Mweya)', km:420, min:480, tolls:0, inter:true, bus:50000},
+  {id:'kampala-mburo', from:'Kampala', to:'Lake Mburo', km:240, min:270, tolls:0, inter:true, bus:35000},
+  {id:'kampala-semuliki', from:'Kampala', to:'Semuliki (Bundibugyo)', km:370, min:420, tolls:0, inter:true, bus:45000},
+  {id:'kampala-ziwa', from:'Kampala', to:'Ziwa Rhino Sanctuary', km:170, min:180, tolls:0, inter:true, bus:25000},
 ];
 
 /* =====================================================================
@@ -1276,7 +1288,7 @@ const AIRSTRIPS = {'kampala-bwindi':['Kihihi',1100000,75], 'kampala-bunyonyi':['
 const LOCAL = {
   Kampala:['Uber','Bolt','SafeBoda','Faras','Yango','Tinka'], Entebbe:['Uber','Bolt','SafeBoda','Tinka'], Mukono:['Tinka','SafeBoda'], Jinja:['Tinka','8 to 8 (delivery)','SafariShare'],
   Masaka:['Tinka','Jumia upcountry'], Mbarara:['Tinka','Faras','SafariShare'], Bushenyi:['Tinka'], Kabale:['SafariShare'], 'Fort Portal':['Tinka'], Hoima:['Tinka','Abanista'], Masindi:['SafariShare'],
-  Gulu:['Tinka','SafariShare'], Lira:['Tinka','Kweli.shop'], Arua:['Tinka','Abanista'], Soroti:['Tinka'], Mbale:['Tinka','SafariShare'], Tororo:['SafariShare'], Moroto:['SafariShare'], Kotido:['SafariShare'],
+  Gulu:['Tinka','SafariShare'], Lira:['Tinka','Kweli.shop'], Arua:['Tinka','Abanista'], Soroti:['Tinka'], Mbale:['Tinka','SafariShare'], Tororo:['SafariShare'], Moroto:['SafariShare'], Kotido:['SafariShare'], Kisoro:['SafariShare'], Kasese:['Tinka','SafariShare'],
 };
 
 /* Provider fare models. base/perKm/perMin/min in UGX.  kind: boda|car|shared|rent */
@@ -1397,6 +1409,16 @@ const PLACES = [
   {name:'Moroto', lon:34.66, lat:2.53, sub:'Karamoja · 470 km', route:'kampala-moroto'},
   {name:'Kotido', lon:34.12, lat:3.01, sub:'Karamoja north · 520 km', route:'kampala-kotido'},
   {name:'Kidepo', lon:33.85, lat:3.85, sub:'Kidepo Valley NP', route:'kampala-kidepo', park:true},
+  {name:'Kisoro', lon:29.69, lat:-1.28, sub:'Mgahinga gateway · 450 km', route:'kampala-kisoro', off:[-8,14]},
+  {name:'Mgahinga', lon:29.63, lat:-1.37, sub:'Mgahinga Gorilla NP · golden monkeys', route:'kampala-kisoro', park:true, off:[10,26]},
+  {name:'Kasese', lon:30.08, lat:0.18, sub:'Rwenzori gateway · 380 km', route:'kampala-kasese', off:[14,10]},
+  {name:'Rwenzori', lon:29.92, lat:0.36, sub:'Rwenzori Mountains NP · the Mountains of the Moon', route:'kampala-kasese', park:true, off:[-14,-14]},
+  {name:'Queen Elizabeth', lon:29.90, lat:-0.18, sub:'Queen Elizabeth NP · Kazinga Channel, tree lions', route:'kampala-qenp', park:true, off:[-10,14]},
+  {name:'Kibale', lon:30.40, lat:0.50, sub:'Kibale NP · chimpanzees', route:'kampala-fortportal', park:true, off:[16,10]},
+  {name:'Semuliki', lon:30.15, lat:0.82, sub:'Semuliki NP · hot springs', route:'kampala-semuliki', park:true, off:[-10,-14]},
+  {name:'Lake Mburo', lon:30.95, lat:-0.62, sub:'Lake Mburo NP · zebra, the closest park to Kampala', route:'kampala-mburo', park:true, off:[16,12]},
+  {name:'Ziwa', lon:32.10, lat:1.42, sub:'Ziwa Rhino Sanctuary · on the Murchison road', route:'kampala-ziwa', park:true, off:[14,-10]},
+  {name:'Elgon', lon:34.52, lat:1.12, sub:'Mount Elgon NP · Wagagai', route:'kampala-mbale', park:true, off:[18,14]},
 ];
 
 /* =====================================================================
@@ -1985,10 +2007,10 @@ function renderDrive(){
         <div class="o-a">${o.status==='open'?`<button class="btn small primary" type="button" data-acc="${o.id}" ${account.verified?'':'disabled title="Documents must clear before you can accept a funded trip"'}>${account.verified?'Accept · car is full':'Verify to accept'}</button><button class="btn small" type="button" data-dec="${o.id}">Decline, no penalty</button>`:`<span class="chip ${o.status==='accepted'?'good':''}">${o.status}</span>`}${o.status==='accepted'?hookLink('tazama','Watch room for the drive',{trip:o.route}):''}</div></div>`).join(''):'<div class="panel">No offers yet. They arrive as stages on your corridors fill; in this sandbox one comes every half minute or so.</div>'}</div>
     </div></div>`;
   $('#editComfort').addEventListener('click',()=>openHandshake('driver'));
-  const v=$('#verifyNow'); if(v) v.addEventListener('click',()=>{ account.verified=true; saveAccount(); renderDrive(); toast('Verified. Every corridor is open to you.'); });
-  el.querySelectorAll('[data-corr]').forEach(x=>x.addEventListener('click',()=>{ const id=x.dataset.corr; const i=c.corridors.indexOf(id); if(i>=0) c.corridors.splice(i,1); else c.corridors.push(id); saveAccount(); renderDrive(); }));
-  el.querySelectorAll('[data-acc]').forEach(b=>b.addEventListener('click',()=>{ const o=offers.find(x=>x.id===b.dataset.acc); o.status='accepted'; driverStats.accepted++; driverStats.earned+=o.pay; store('driverStats',driverStats); const st=stages.find(s=>s.id===o.stage); if(st) fundStage(st, `${account.name} · ${c.vehicle} · ${c.plate||'plate pending'}`); store('offers',offers); renderDrive(); toast(`Accepted. UGX ${fmt(o.pay)} releases to your MoMo when the trip completes.`); }));
-  el.querySelectorAll('[data-dec]').forEach(b=>b.addEventListener('click',()=>{ const o=offers.find(x=>x.id===b.dataset.dec); o.status='declined'; driverStats.declined++; store('driverStats',driverStats); store('offers',offers); renderDrive(); }));
+  const v=$('#verifyNow'); if(v) v.addEventListener('click',()=>{ if(LIVE){ liveVerify(); return; } account.verified=true; saveAccount(); renderDrive(); toast('Verified. Every corridor is open to you.'); });
+  el.querySelectorAll('[data-corr]').forEach(x=>x.addEventListener('click',()=>{ const id=x.dataset.corr; const i=c.corridors.indexOf(id); if(i>=0) c.corridors.splice(i,1); else c.corridors.push(id); saveAccount(); renderDrive(); if(LIVE) UGAPI.put('/api/comfort', c).catch(e=>toast(e.message)); }));
+  el.querySelectorAll('[data-acc]').forEach(b=>b.addEventListener('click',()=>{ if(LIVE){ liveAccept(b.dataset.acc); return; } const o=offers.find(x=>x.id===b.dataset.acc); o.status='accepted'; driverStats.accepted++; driverStats.earned+=o.pay; store('driverStats',driverStats); const st=stages.find(s=>s.id===o.stage); if(st) fundStage(st, `${account.name} · ${c.vehicle} · ${c.plate||'plate pending'}`); store('offers',offers); renderDrive(); toast(`Accepted. UGX ${fmt(o.pay)} releases to your MoMo when the trip completes.`); }));
+  el.querySelectorAll('[data-dec]').forEach(b=>b.addEventListener('click',()=>{ if(LIVE){ liveDecline(b.dataset.dec); return; } const o=offers.find(x=>x.id===b.dataset.dec); o.status='declined'; driverStats.declined++; store('driverStats',driverStats); store('offers',offers); renderDrive(); }));
 }
 
 /* ---- The Handshake ---- */
@@ -2015,8 +2037,8 @@ function renderHS(){
       <div class="ctl"><label for="hsOtp">Code we sent by SMS (sandbox: any four digits)</label><div class="otp"><input id="hsOtp" type="text" inputmode="numeric" maxlength="4" placeholder="••••" style="width:140px"><button class="btn small" type="button" id="hsSend">Send code</button><span class="mono" id="hsSent" style="font-size:12px;color:var(--ink-3)"></span></div></div>
       ${next()}`;
     body.querySelectorAll('[data-role]').forEach(b=>b.addEventListener('click',()=>{ const r=b.dataset.role; const i=hs.roles.indexOf(r); if(i>=0) hs.roles.splice(i,1); else hs.roles.push(r); b.classList.toggle('on'); }));
-    $('#hsSend').addEventListener('click',()=>{ $('#hsSent').textContent='sent to '+($('#hsPhone').value||'your phone'); });
-    $('#hsNext').addEventListener('click',()=>{ const name=$('#hsName').value.trim(), phone=$('#hsPhone').value.trim(), otp=$('#hsOtp').value.trim(); if(!name||!phone){ toast('Name and phone, please.'); return; } if(!/^\d{4}$/.test(otp)){ toast('Enter the four-digit code (any digits in this sandbox).'); return; } if(!hs.roles.length) hs.roles.push('rider'); d.name=name; d.phone=phone; hs.step=2; renderHS(); });
+    $('#hsSend').addEventListener('click',async ()=>{ if(LIVE){ try{ const r=await liveOtpSend($('#hsPhone').value); $('#hsSent').textContent='sent to '+r.to+(r.sandboxCode?' · sandbox code '+r.sandboxCode:''); if(r.sandboxCode) $('#hsOtp').value=r.sandboxCode; }catch(e){ $('#hsSent').textContent=e.message; } return; } $('#hsSent').textContent='sent to '+($('#hsPhone').value||'your phone'); });
+    $('#hsNext').addEventListener('click',async ()=>{ const name=$('#hsName').value.trim(), phone=$('#hsPhone').value.trim(), otp=$('#hsOtp').value.trim(); if(!name||!phone){ toast('Name and phone, please.'); return; } if(!/^\d{4}$/.test(otp)){ toast('Enter the four-digit code'+(LIVE?'.':' (any digits in this sandbox).')); return; } if(LIVE){ try{ const m=await liveOtpVerify(phone, otp, name); d.id=m.id; d.verified=m.verified; d.vouches=m.vouches; }catch(e){ toast(e.message); return; } } if(!hs.roles.length) hs.roles.push('rider'); d.name=name; d.phone=phone; hs.step=2; renderHS(); });
   } else if(key==='rider'){
     $('#hsTitle').textContent='Where do you usually go?'; const r=d.rider||{home:'Ntinda', to:['Kampala CBD','Entebbe'], circles:['Stanbic circle']};
     body.innerHTML=`<h4>Home and the two places you go most</h4><div class="row2"><div class="ctl"><label for="hsHome">Home</label><select id="hsHome">${SUBURBS.map(x=>`<option ${x===r.home?'selected':''}>${x}</option>`).join('')}</select></div><div class="ctl"><label for="hsTo1">Most days</label><select id="hsTo1">${['Kampala CBD','Nakasero','Kololo','Nakawa','Makerere','Entebbe','Jinja','Mbarara'].map(x=>`<option ${x===r.to[0]?'selected':''}>${x}</option>`).join('')}</select></div></div>
@@ -2060,12 +2082,13 @@ function renderHS(){
     const wasNew=!account;
     account=Object.assign({verified:false, vouches:0, createdAt:Date.now()}, account||{}, d, {roles:hs.roles});
     saveAccount(); store('account',account);
+    if(LIVE) liveSaveProfile(d);
     $('#hsTitle').textContent='Open for business';
     const lines=[]; if(hs.roles.includes('driver')) lines.push('Offers arrive now on your corridors. Accept them once verification clears, usually within a day; in this sandbox, about a minute.'); if(hs.roles.includes('rider')) lines.push('Your stages are live. Take a seat, invite the circle, watch the price fall.'); if(hs.roles.includes('owner')) lines.push('Your car is listed in Rent, per head, and its return legs will sell as empty legs.');
     body.innerHTML=`<div class="done">${document.querySelector('.logo .crest').outerHTML}<div class="big">${esc(account.name)}, you are on UG.</div><p>${lines.join(' ')}</p><div style="display:flex;gap:8px;justify-content:center;margin-top:16px;flex-wrap:wrap">${hs.roles.includes('driver')?'<a class="btn primary" href="#drive" id="hsGoDrive">Go to your offers</a>':'<a class="btn primary" href="#stage" id="hsGoStage">See your stages</a>'}<button class="btn" type="button" id="hsDone">Done</button></div></div>`;
     $('#hsDone').addEventListener('click',()=>{ closeHS(); });
     body.querySelectorAll('a.btn').forEach(a=>a.addEventListener('click',()=>closeHS()));
-    if(hs.roles.includes('driver') && !account.verified){ setTimeout(()=>{ if(account&&!account.verified){ account.verified=true; saveAccount(); renderDrive(); toast('Verification cleared. Every corridor is open to you.'); } }, 60000); setTimeout(simulateOffer, 4000); }
+    if(hs.roles.includes('driver') && !account.verified && !LIVE){ setTimeout(()=>{ if(account&&!account.verified){ account.verified=true; saveAccount(); renderDrive(); toast('Verification cleared. Every corridor is open to you.'); } }, 60000); setTimeout(simulateOffer, 4000); }
     if(hs.roles.includes('owner') && d.owner){ const f=FLEET.find(x=>x.id===d.owner.cls); if(f && !FLEET.find(x=>x.id==='mine')){ FLEET.push({id:'mine', name:f.name+' · '+account.name+"'s", cls:f.cls+' · your listing', day:d.owner.price, kmPerL:f.kmPerL, glyph:f.glyph}); renderFleet(); } }
     renderStages(); renderDrive(); renderTrips();
     if(hs.after){ const f=hs.after; hs.after=null; setTimeout(()=>{ closeHS(); f(); }, 1100); }
@@ -2106,7 +2129,7 @@ function openMe(){
   $('#meRoles').addEventListener('click',()=>{ $('#meModal').hidden=true; openHandshake(); });
   $('#meTheme').addEventListener('click',()=>$('#themeToggle').click());
   $('#meVoice').addEventListener('click',()=>{ $('#meModal').hidden=true; toggleVoice(); });
-  $('#meOut').addEventListener('click',()=>{ account=null; try{ ['account','offers','driverStats'].forEach(k=>localStorage.removeItem('ug:'+k)); }catch(e){} renderAccountUI(); renderDrive(); renderStages(); $('#meModal').hidden=true; toast('Signed out on this device.'); });
+  $('#meOut').addEventListener('click',()=>{ if(LIVE) liveSignOut(); account=null; try{ ['account','offers','driverStats'].forEach(k=>localStorage.removeItem('ug:'+k)); }catch(e){} renderAccountUI(); renderDrive(); renderStages(); $('#meModal').hidden=true; toast('Signed out on this device.'); });
 }
 $('#meClose').addEventListener('click',()=>$('#meModal').hidden=true);
 $('#meModal').addEventListener('click',e=>{ if(e.target===$('#meModal')) $('#meModal').hidden=true; });
@@ -2356,7 +2379,7 @@ function renderRail(open){
     <div class="tl">${steps.map((st,k)=>`<div class="st ${k<rail.step?'done':k===rail.step?'now':''}"><i></i><div>${fill(st[0])}<small>${fill(st[1])}</small></div><span class="t">${k<=rail.step?new Date(rail.started+RAIL_DELAYS[k]).toLocaleTimeString('en-UG',{hour:'2-digit',minute:'2-digit'}):''}</span></div>`).join('')}</div>
     <div class="acts">${rail.step>=2&&rail.step<5?`<a class="btn small" href="tel:+256700000000">Call ${esc(rail.driver.split(' ')[0])}</a><button class="btn small" type="button" id="railShare">Share ETA</button>`:''}${rail.step<2?'<button class="btn small" type="button" id="railCancel">Cancel, no charge</button>':''}${rail.step>=5?'<button class="btn small primary" type="button" id="railRate">Say what happened</button><button class="btn small" type="button" id="railClear">Close</button>':''}${hookLink('tazama','Watch room',{trip:rail.title})}</div>`;
   const sh=$('#railShare'); if(sh) sh.addEventListener('click',()=>{ const t=`${rail.driver} · ${rail.plate} · ${rail.eta} min · UG ${rail.id}`; if(navigator.clipboard) navigator.clipboard.writeText(t).then(()=>toast('ETA copied. Send it to whoever is waiting.')).catch(()=>toast(t)); else toast(t); });
-  const cc=$('#railCancel'); if(cc) cc.addEventListener('click',()=>{ railTimers.forEach(clearTimeout); rail=null; store('rail',null); renderRail(); $('#railModal').hidden=true; toast('Cancelled. Nothing charged.'); });
+  const cc=$('#railCancel'); if(cc) cc.addEventListener('click',()=>{ if(LIVE && rail && rail.id){ UGAPI.post(`/api/bookings/${rail.id}/cancel`).then(()=>{ rail=null; store('rail',null); renderRail(); $('#railModal').hidden=true; toast('Cancelled. Nothing charged.'); }).catch(e=>toast(e.message)); return; } railTimers.forEach(clearTimeout); rail=null; store('rail',null); renderRail(); $('#railModal').hidden=true; toast('Cancelled. Nothing charged.'); });
   const rt=$('#railRate'); if(rt) rt.addEventListener('click',()=>{ $('#railModal').hidden=true; openFeedback(); });
   const cl=$('#railClear'); if(cl) cl.addEventListener('click',()=>{ rail=null; store('rail',null); renderRail(); $('#railModal').hidden=true; });
   if(open) $('#railModal').hidden=false;
@@ -2604,6 +2627,86 @@ function initScene(){
 }
 
 /* =====================================================================
+   LIVE MODE: when the page is served by the UG server (or window.UG_API_BASE points at one), the
+   account, the stages, the offers, the bookings and Pulse come from the API and every action is a
+   real request. Without a server (the Artifact, a file, GitHub Pages with no API) the page keeps the
+   in-browser sandbox above. Live mode is a data layer: it pulls server state into the same arrays the
+   renderers already read, and swaps the action functions.
+   ===================================================================== */
+let LIVE=false; let API_BASE=null; let TOKEN=null;
+const UGAPI = {
+  async call(method, path, body){
+    const res = await fetch(API_BASE+path, { method, headers:{ 'content-type':'application/json', ...(TOKEN?{authorization:'Bearer '+TOKEN}:{}) }, body: body?JSON.stringify(body):undefined });
+    const data = await res.json().catch(()=>({}));
+    if(!res.ok){ const e=new Error(data.error||('HTTP '+res.status)); e.status=res.status; throw e; }
+    return data;
+  },
+  get:(p)=>UGAPI.call('GET',p), post:(p,b)=>UGAPI.call('POST',p,b||{}), put:(p,b)=>UGAPI.call('PUT',p,b||{}), patch:(p,b)=>UGAPI.call('PATCH',p,b||{}), del:(p)=>UGAPI.call('DELETE',p),
+};
+function mapStage(s){ return { id:s.id, route:s.route, day:s.day, win:s.win, cutoff:s.cutoff, pickup:s.pickup, cap:s.cap, seats:s.seats, circles:s.circles||[], riders:(s.riders||[]).map(x=>x), status:s.status==='full'?'full':s.status==='funded'||s.status==='departed'?'funded':'filling', driver:s.driver_label||null, guarantee:s.guarantee, live:true }; }
+function mapOffer(o){ return { id:o.id, stage:o.stage_id, route:`${o.from} → ${String(o.to).split(' (')[0]}`, when:`${o.day} ${o.win}`, seats:o.cap, pay:o.pay_ugx, wage:o.wage_ugx, road:o.road_ugx, km:o.km, status:o.status==='open'?'open':o.status, at:o.created_at }; }
+function mapBooking(b){ if(!b) return null; return { id:b.id, kind:b.kind, partner:{name:b.partner, sub:b.partner_sub, colour:b.colour, logo:null}, title:b.title, price:b.price_ugx, eta:b.eta_min, driver:b.driver, plate:b.plate, step:b.step, started:b.created_at, sign:'Left with the receiver', status:b.status }; }
+async function liveSync(){
+  if(!LIVE) return;
+  try{
+    const ss = await UGAPI.get('/api/stages'); stages.splice(0, stages.length, ...ss.map(mapStage)); renderStages();
+    if(TOKEN){
+      const meS = await UGAPI.get('/api/me');
+      account = Object.assign(account||{}, { id:meS.id, name:meS.name||(account&&account.name)||'You', phone:meS.phone, roles:meS.roles, verified:meS.verified, vouches:meS.vouches, agent:meS.agent, rider:meS.rider||(account&&account.rider), owner:meS.owner||(account&&account.owner), comfort:meS.comfort||(account&&account.comfort) });
+      store('account',account); renderAccountUI();
+      if(hasRole('driver')){ const os = await UGAPI.get('/api/offers'); offers.splice(0, offers.length, ...os.map(mapOffer)); const e = await UGAPI.get('/api/earnings'); driverStats.earned = e.payable_ugx; driverStats.accepted = os.filter(o=>o.status==='accepted').length; driverStats.declined = os.filter(o=>o.status==='declined').length; }
+      renderDrive();
+      const b = await UGAPI.get('/api/bookings/current'); const m = mapBooking(b); if(m && m.status==='active'){ rail = m; store('rail', rail); renderRail(false); } else if(rail && rail.id && String(rail.id).startsWith('b')){ rail = m && m.status!=='active' ? Object.assign(rail,{step:5}) : null; store('rail', rail); renderRail(false); }
+    }
+  }catch(e){ console.warn('live sync', e.message); }
+}
+async function initLive(){
+  const base = window.UG_API_BASE || (location.protocol.startsWith('http') && !location.hostname.endsWith('claude.ai') ? '' : null);
+  if(base===null) return;
+  try{
+    const ctl = new AbortController(); const t = setTimeout(()=>ctl.abort(), 2500);
+    const res = await fetch(base+'/api/health', { signal: ctl.signal }); clearTimeout(t);
+    const h = await res.json(); if(!h.ok) return;
+    LIVE = true; API_BASE = base; TOKEN = load('token', null);
+    const banner = document.querySelector('.proto'); if(banner) banner.innerHTML = `Live · connected to UG server v${esc(h.version)} · ${h.sandbox?'sandbox money and codes':'real money'} · every stage, seat and offer here is shared with everyone on this server`;
+    if (h.flwPublicKey && typeof FLW_PUBLIC_KEY !== 'undefined') { try { FLW_PUBLIC_KEY_LIVE = h.flwPublicKey; } catch(e){} }
+    // swap the simulated world for the server
+    tickStages = function(){}; simulateOffer = function(){}; fundStage = function(){};
+    takeSeat = async function(st){
+      if(!TOKEN){ openHandshake('rider', ()=>takeSeat(st)); return; }
+      try{ const q = await UGAPI.post(`/api/stages/${st.id}/intents`); const r=ROUTES.find(x=>x.id===st.route);
+        openCheckout(q.charge.amount, `Seat · ${r.from} → ${r.to.split(' (')[0]} · ${st.day} ${st.win} (held until departure; refunded in full if the stage does not fill)`, async ()=>{ try{ await UGAPI.post(`/api/intents/${q.intent.id}/confirm`, {}); toast('Seat held on the server.'); await liveSync(); }catch(e){ toast(e.message); } });
+      }catch(e){ toast(e.message); }
+    };
+    startRail = async function(o){
+      if(!TOKEN) return;
+      try{ const b = await UGAPI.post('/api/bookings', { kind:o.kind, partner:o.partner.name, partner_sub:o.partner.sub, colour:o.partner.colour, title:o.title, price_ugx:o.price, eta_min:o.eta });
+        await UGAPI.post(`/api/bookings/${b.booking.id}/confirm`, {}); await liveSync(); renderRail(true); }catch(e){ toast(e.message); }
+    };
+    const _newStage = $('#newStageBtn'); if(_newStage){ const clone=_newStage.cloneNode(true); _newStage.replaceWith(clone); clone.addEventListener('click', async ()=>{ if(!TOKEN){ openHandshake('rider'); return; } const corr=CORRIDORS[Math.floor(Math.random()*CORRIDORS.length)]; try{ await UGAPI.post('/api/stages', { route:corr.id, day:'Sat', win:'06:00–08:00', cutoff:'Fri 20:00', cap:4, circles:(account&&account.rider&&account.rider.circles)||[] }); await liveSync(); toast('Stage started on the server. Invite your circle.'); }catch(e){ toast(e.message); } }); }
+    setInterval(liveSync, 6000);
+    await liveSync();
+  }catch(e){ /* no server: sandbox stays */ }
+}
+/* Live actions used inside existing handlers */
+async function liveAccept(id){ try{ await UGAPI.post(`/api/offers/${id}/accept`); toast('Accepted. The stage is funded; the money releases to your MoMo after departure.'); await liveSync(); }catch(e){ toast(e.message); } }
+async function liveDecline(id){ try{ await UGAPI.post(`/api/offers/${id}/decline`); await liveSync(); }catch(e){ toast(e.message); } }
+async function liveVerify(){ try{ await UGAPI.post('/api/me/verify-sandbox'); await liveSync(); toast('Verified on the server.'); }catch(e){ toast(e.message); } }
+async function liveOtpSend(phone){ const r = await UGAPI.post('/api/auth/otp', { phone }); return r; }
+async function liveOtpVerify(phone, code, name){ const r = await UGAPI.post('/api/auth/verify', { phone, code, name }); TOKEN = r.token; store('token', TOKEN); return r.me; }
+async function liveSaveProfile(d){
+  if(!TOKEN) return;
+  try{
+    await UGAPI.patch('/api/me', { name:d.name, roles:hs.roles, rider:d.rider||undefined, owner:d.owner||undefined, agent:d.agent });
+    if(d.comfort){ await UGAPI.put('/api/comfort', { base:d.comfort.base, radius:d.comfort.radius, corridors:d.comfort.corridors, days:d.comfort.days, hours:d.comfort.hours, vehicle:d.comfort.vehicle, plate:d.comfort.plate, nos:d.comfort.nos }); if(d.comfort.docs && (d.comfort.docs.plate||d.comfort.docs.permit)) await UGAPI.post('/api/me/documents', { plate:d.comfort.docs.plate, permit:d.comfort.docs.permit }); }
+    await liveSync();
+  }catch(e){ toast(e.message); }
+}
+async function liveSignOut(){ try{ if(TOKEN) await UGAPI.del('/api/session'); }catch(e){} TOKEN=null; try{ localStorage.removeItem('ug:token'); }catch(e){} }
+/* Service worker: only when served over http(s) by something that is not the Artifact host */
+if ('serviceWorker' in navigator && location.protocol.startsWith('http') && !location.hostname.endsWith('claude.ai')) { navigator.serviceWorker.register('sw.js').catch(()=>{}); }
+
+/* =====================================================================
    Boot
    ===================================================================== */
 fillRouteSelects();
@@ -2620,6 +2723,7 @@ renderPlugins();
 initV1(); initAtlas(); initBuses(); initDeliver(); initInstall(); if(rail) renderRail(false);
 initReveal(); initVerbs();
 playIntro(false);
+initLive();
 try { initScene(); } catch (e) { console.warn('scene', e); $('#hint').textContent='3D map unavailable here'; }
 </script>
 </body>

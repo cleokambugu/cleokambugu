@@ -1,7 +1,7 @@
 {
   "generated": "2026-09-02",
   "source": "projects/ug/site/index.html data block",
-  "note": "Every figure is an estimate. prov fields: snippet = read from a search snippet or third-party page, modelled = UG assumption, official = read on the operator page, UG model = UG own formula. See docs/arbitrage-model.md.",
+  "note": "Every figure is an estimate. prov fields: snippet = read from a search snippet or third-party page, modelled = UG assumption, official = read on the operator page, UG model = UG own formula. See docs/arbitrage-model.md and docs/atlas.md.",
   "fleet": [
     {
       "id": "premio",
@@ -39,7 +39,7 @@
     {
       "id": "v8",
       "name": "Land Cruiser V8",
-      "cls": "4×4 · 7 seats · kwanjula grade",
+      "cls": "4×4 · 7 seats · the function car",
       "day": 400000,
       "kmPerL": 6,
       "glyph": "suv"
@@ -75,7 +75,7 @@
         "Priority seats on popular pools",
         "8% off UG Rent, per-head billing",
         "Day-chain planner with pre-pay",
-        "Airport lounge-style waiting room at Entebbe pick-up"
+        "Named pickup points with shade at Entebbe and Kampala stages"
       ]
     },
     {
