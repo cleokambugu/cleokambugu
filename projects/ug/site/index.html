@@ -700,7 +700,7 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
 .wl-crest svg{width:64px;height:64px;color:var(--ink)}
 .wl-title{font-family:var(--font-display);font-weight:700;font-size:clamp(22px,3.4vw,34px);letter-spacing:-.01em}
 .wl-sub{color:var(--ink-2);font-size:14px;max-width:52ch}
-.wl-stage{position:relative;width:min(92vw,860px);height:min(46vh,380px);perspective:1100px;touch-action:pan-y;outline:none}
+.wl-stage{position:relative;width:min(92vw,860px);height:min(30vh,230px);perspective:1100px;touch-action:pan-y;outline:none;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent);mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent)}
 .wl-stage:focus-visible{outline:2px solid var(--yellow);outline-offset:6px;border-radius:24px}
 .wl-ring{position:absolute;inset:0;transform-style:preserve-3d;will-change:transform}
 .wl-chip{position:absolute;left:50%;top:50%;transform-style:preserve-3d;background:color-mix(in srgb,var(--surface) 82%,transparent);border:1px solid var(--line-strong);border-radius:16px;padding:12px 18px;cursor:pointer;backface-visibility:hidden;min-width:150px;transition:border-color .2s, box-shadow .2s;color:var(--ink)}
@@ -2714,8 +2714,12 @@ function playIntro(force){
     words.forEach((w,i)=>{ if(t>2.0+i*0.14) w.classList.add('in'); });
     if(t<3.6 && !ended) raf=requestAnimationFrame(frame); else end();
   }
-  function end(){ if(ended) return; ended=true; cancelAnimationFrame(raf); el.classList.add('out'); setTimeout(()=>el.remove(),950); }
-  $('#introSkip').addEventListener('click',end); document.addEventListener('keydown',e=>{ if(e.key==='Escape'||e.key==='Enter') end(); },{once:true});
+  function end(){ if(ended) return; ended=true; cancelAnimationFrame(raf); clearTimeout(hardStop); el.classList.add('out'); setTimeout(()=>{ if(el.isConnected) el.remove(); },950); }
+  /* wall-clock stop: if rAF is throttled (a background tab, a hidden iframe) the frame loop never
+     reaches its own end, so the overlay would sit over the page for good. This always fires. */
+  const hardStop=setTimeout(end, 5200);
+  $('#introSkip').addEventListener('click',end); el.addEventListener('click',end);   // anywhere on the film skips it
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape'||e.key==='Enter'||e.key===' ') end(); },{once:true});
   raf=requestAnimationFrame(frame);
 }
 
@@ -3004,7 +3008,7 @@ function wlGreeting(code){ return (STR['ui.welcome']&&STR['ui.welcome'][code]) |
 function openWelcome(again){
   const el=$('#welcome'); if(!el) return;
   el.hidden=false; el.classList.remove('greeting');
-  const flat = reducedMotion() || el.dataset.flat==='1';
+  const flat = reducedMotion() || el.dataset.flat==='1' || (el.dataset.flat!=='0' && innerWidth<760);
   el.classList.toggle('flat', flat);
   const entries=Object.entries(LANGS);
   $('#wlCount').textContent=entries.length+' languages · '+new Set(entries.map(([k,v])=>v.group||'')).size+' regions';
@@ -3014,21 +3018,41 @@ function openWelcome(again){
     $('#wlList').innerHTML=Object.entries(groups).map(([g,items])=>`<h5>${esc(g)}</h5>`+items.map(chip).join('')).join('');
   } else {
     const ring=$('#wlRing'); const n=entries.length; const r=Math.max(300, n*26);
-    ring.innerHTML=entries.map((e,i)=>{ const a=i*360/n; return chip(e).replace('class="wl-chip"',`class="wl-chip" style="transform:translate(-50%,-50%) rotateY(${a}deg) translateZ(${r}px)" data-ang="${a}"`); }).join('');
+    /* The chips sit at translateZ(r). If r approaches the stage's perspective distance the front
+       chips scale toward infinity (at 41 languages r was 1066 against a 1100px perspective, so
+       every chip projected ~32x its size, far off-screen and impossible to click). Keeping the
+       perspective a fixed multiple of the radius holds the front scale at a steady ~1.6x however
+       many languages there are. */
+    const stageW = $('#wlStage').clientWidth || 860;
+    const R = Math.max(320, Math.min(r, stageW*1.35));   // wide enough that chips do not pile up; the stage clips the sides
+    $('#wlStage').style.perspective = Math.round(R*2.6)+'px';
+    ring.innerHTML=entries.map((e,i)=>{ const a=i*360/n; return chip(e).replace('class="wl-chip"',`class="wl-chip" style="transform:translate(-50%,-50%) rotateY(${a}deg) translateZ(${R}px)" data-ang="${a}"`); }).join('');
     let rot= el.__rot||0, vel=0, drag=null; el.__rot=rot;
     const stage=$('#wlStage');
-    const front=()=>{ let best=null,bd=1e9; ring.querySelectorAll('.wl-chip').forEach(c=>{ const a=((+c.dataset.ang+rot)%360+360)%360; const d=Math.min(a,360-a); c.classList.toggle('front',d<360/n/2); c.style.opacity=String(Math.max(.25,1-d/140)); if(d<bd){ bd=d; best=c; } }); return best; };
-    const draw=()=>{ ring.style.transform=`rotateX(-6deg) rotateY(${rot}deg)`; front(); };
+    const front=()=>{ let best=null,bd=1e9; ring.querySelectorAll('.wl-chip').forEach(c=>{ const a=((+c.dataset.ang+rot)%360+360)%360; const d=Math.min(a,360-a); c.classList.toggle('front',d<360/n/2); c.style.opacity=String(Math.max(0,1-Math.pow(d/34,1.5))); c.style.pointerEvents='none'; c.style.zIndex=String(Math.round(200-d)); if(d<bd){ bd=d; best=c; } });
+      if(best){ best.style.pointerEvents='auto'; best.style.zIndex='300'; }   // the chips overlap, so only the one in front is clickable
+      return best; };
+    const draw=()=>{ ring.style.transform=`rotateX(-2deg) rotateY(${rot}deg)`; front(); };
     draw();
     if(!el.__wired){
       el.__wired=true;
       const step=360/Math.max(1,n);
-      stage.addEventListener('pointerdown',e=>{ drag={x:e.clientX,r:el.__rot}; stage.setPointerCapture(e.pointerId); });
-      stage.addEventListener('pointermove',e=>{ if(!drag) return; el.__rot=drag.r+(e.clientX-drag.x)*.35; rot=el.__rot; draw(); });
-      stage.addEventListener('pointerup',()=>{ drag=null; });
+      /* A press only becomes a drag once it moves; until then the pointer is NOT captured, so a
+         tap still reaches the chip. A press that never moves selects the chip it went down on. */
+      stage.addEventListener('pointerdown',e=>{ const chip=e.target.closest&&e.target.closest('[data-wl]'); drag={x:e.clientX,r:el.__rot,moved:false,id:e.pointerId,chip:chip}; });
+      stage.addEventListener('pointermove',e=>{ if(!drag||e.pointerId!==drag.id) return; const dx=e.clientX-drag.x;
+        if(!drag.moved){ if(Math.abs(dx)<6) return; drag.moved=true; try{ stage.setPointerCapture(e.pointerId); }catch(_){} }
+        el.__rot=drag.r+dx*.35; rot=el.__rot; draw(); });
+      const endDrag=e=>{ if(!drag) return; const d=drag; drag=null; if(d.moved){ try{ stage.releasePointerCapture(d.id); }catch(_){} return; }
+        const pick = (d.chip&&d.chip.dataset&&d.chip.dataset.wl) ? d.chip : front();   // a press anywhere on the stage takes the front language
+        if(pick&&pick.dataset&&pick.dataset.wl) wlChoose(pick.dataset.wl); };
+      stage.addEventListener('pointerup',endDrag); stage.addEventListener('pointercancel',()=>{ drag=null; });
+      /* hold still while someone is aiming at a chip */
+      stage.addEventListener('pointerenter',()=>{ el.__hover=true; }); stage.addEventListener('pointerleave',()=>{ el.__hover=false; });
+      stage.addEventListener('focusin',()=>{ el.__hover=true; }); stage.addEventListener('focusout',()=>{ el.__hover=false; });
       stage.addEventListener('wheel',e=>{ e.preventDefault(); el.__rot+=(e.deltaY+e.deltaX)*.14; rot=el.__rot; draw(); },{passive:false});
       stage.addEventListener('keydown',e=>{ if(e.key==='ArrowLeft'){ el.__rot+=step; } else if(e.key==='ArrowRight'){ el.__rot-=step; } else if(e.key==='Enter'||e.key===' '){ e.preventDefault(); const f=front(); if(f) wlChoose(f.dataset.wl); return; } else return; e.preventDefault(); rot=el.__rot; draw(); });
-      let spin=setInterval(()=>{ if(drag||el.hidden||el.classList.contains('greeting')||el.classList.contains('flat')) return; el.__rot+=.06; rot=el.__rot; draw(); }, 40);
+      let spin=setInterval(()=>{ if(drag||el.__hover||el.hidden||el.classList.contains('greeting')||el.classList.contains('flat')) return; el.__rot+=.06; rot=el.__rot; draw(); }, 40);
       el.__spin=spin;
     } else { rot=el.__rot; draw(); }
   }
@@ -3047,11 +3071,11 @@ function wlChoose(code){
   $('#wlGo').textContent=(STR['ui.continue']&&STR['ui.continue'][code])||'Continue';
   el.classList.add('greeting');
   const back=$('#wlBack'); back.onclick=()=>{ el.classList.remove('greeting'); };
-  $('#wlGo').onclick=()=>{ el.hidden=true; try{ localStorage.setItem('ug:welcomed','1'); }catch(e){} if(conf!=='complete'&&conf!=='reviewed') toast(`${v.native}: ${conf}. ${t('ui.draftNote')}`); if(!el.dataset.again) playIntro(false); };
+  $('#wlGo').onclick=()=>{ el.hidden=true; if(el.isConnected) el.remove(); try{ localStorage.setItem('ug:welcomed','1'); }catch(e){} try{ if(conf!=='complete'&&conf!=='reviewed') toast(`${v.native}: ${conf}. ${t('ui.draftNote')}`); }catch(e){} try{ if(!el.dataset.again) playIntro(false); }catch(e){} };
 }
 function initWelcome(){
   const el=$('#welcome'); if(!el) return;
-  $('#wlFlat').addEventListener('click',()=>{ el.dataset.flat = el.dataset.flat==='1'?'':'1'; $('#wlFlat').textContent = el.dataset.flat==='1'?'Ring view':'List view'; openWelcome(el.dataset.again==='1'); });
+  $('#wlFlat').addEventListener('click',()=>{ el.dataset.flat = (el.dataset.flat==='1'||(el.dataset.flat!=='0'&&innerWidth<760))?'0':'1'; $('#wlFlat').textContent = el.dataset.flat==='1'?'Ring view':'List view'; openWelcome(el.dataset.again==='1'); });
   $('#wlA11y').addEventListener('click',openA11y);
   $('#wlSkip').addEventListener('click',()=>wlChoose('en'));
   let welcomed=false; try{ welcomed=localStorage.getItem('ug:welcomed')==='1'; }catch(e){}
