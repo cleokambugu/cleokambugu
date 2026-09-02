@@ -56,7 +56,7 @@
   "railModal.b.accessibility"
  ],
  "strings": {
-  "page.p.ug_speaks_the_languages": "UG elomaloma chinimi chia Uganda, chia esitundu sino, ne chia abageni bayo. Lobola olwo; byoosi bilondelela.",
+  "page.p.ug_speaks_the_languages": "UG elomaloma chinimi chia Uganda, chia esitundu sino, ne chia abageni bayo. Lobola olulimi lwo; byoosi bilondelela.",
   "page.button.skip": "Bira",
   "ride": "Nina.",
   "pool": "Kabana.",
@@ -91,7 +91,7 @@
   "top.button.show_prices": "Lolesia chibeeyi",
   "top.div.prototype_v1_every_price": "Esigesa v1 · buli beeyi ni okhubalirira okhurula mu nkola yahandikwa · okhurunga khukholwa mu esifwo sia okhugesa · hano khubula mpeereza yafuchiririrwa mu mateeka",
   "compare.div.compare_the_arbitrage_desk": "Linganisa · <b>emeesa ya ebeeyi endayi</b>",
-  "compare.h2.every_ride_on_the": "Buli lugendo mu esoko, khu esikuliini silala, chilondekhana khu ebeeyi.",
+  "compare.h2.every_ride_on_the": "Chingendo chioosi chia mu esoko, khu esikuliini silala, chilondekhana khu ebeeyi.",
   "compare.p.uber_bolt_safeboda_faras": "Uber, Bolt, SafeBoda, Faras, Yango, Tinka, boda ya khu ngira, taxi, sipesulo, ebaasi, eryato, endeke, ne okhukabana ne okhupangisa khwa UG khwene. Olugendo lulala, edakikha ndala. Ebibalirirwa bibolwa nechio khu kaadi, ebirikhwa ebikhanyala okhukhukholera bisikala bisiiwukhe ne esifune siabio, ne peesa buli lwosi eba Tira khu UG.",
   "compare.h3.your_trip": "Olugendo lwo",
   "compare.label.from": "Okhurula",
@@ -145,7 +145,7 @@
   "rent.p.self_drive_by_the": "Wivugire khu lunaku, ne omudereva khu esaa, namwe chimotoka chia Signature ni okhuula nikho esikhulu. Ebeeyi eba ya buli mundu ni okabana.",
   "deliver.div.deliver_send_the_thing": "Ruma · <b>ruma esindu</b>",
   "deliver.h2.send_the_thing_any": "Ruma esindu. Obunene bwoosi, ehale yoosi.",
-  "deliver.p.every_courier_in_town": "Buli kampuni eruma ebindu mu tauni khu esikuliini silala, chilondekhana. Hale ne Kampala, epakati echenda mu buuti ya emotoka ya esiteegi khu esitundu silala khu bine sia endebe, ne mu ebise bia okhukesa, taxi, pikapu namwe loole ne omudereva.",
+  "deliver.p.every_courier_in_town": "Chikampuni chioosi chiruma ebindu mu tauni, khu esikuliini silala, chilondekhana. Hale ne Kampala, epakati echenda mu buuti ya emotoka ya esiteegi khu esitundu silala khu bine sia endebe, ne mu ebise bia okhukesa, taxi, pikapu namwe loole ne omudereva.",
   "deliver.h3.the_parcel": "Epakati",
   "deliver.label.from": "Okhurula",
   "deliver.label.to": "Okhuula",
