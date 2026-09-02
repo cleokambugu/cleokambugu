@@ -31,11 +31,36 @@ stage, special hire, rolex, kwanjula. Never explains those words to Ugandans. Ne
 "seamless", "premium", or "experience". Prices are always shown; where they are estimates, the
 provenance is on the card, not in a footnote.
 
-## Mark
+## Mark: the Crest
 
-A vertical three-band tile in the flag's black, yellow, and red with the crane reduced to a
-white circle ringed in red. The word UG sits beside it in the display face. The mark is the
-only place the flag colours appear as a flag; everywhere else they are used as a palette.
+Three feathers rising from a pearl. Files in [`brand/`](../brand/): `crest.svg` (the mark),
+`wordmark.svg` (crest + UG + catchphrase), `app-icon.svg` (dark tile for the phone).
+
+Why a crest:
+
+- **It is the crested crane's crest**, the bird on the flag, redrawn as three strokes in the
+  flag's black, yellow and red. Nobody in Uganda needs it explained.
+- **Three feathers are the three verbs.** Ride, Pool, Rent, in that order, left to right. The
+  middle feather is the tallest and yellow: Pool is the one UG owns.
+- **A crest is what old money has.** The customer wants to look the part; UG hands them a
+  crest to wear. The joke is gentle and the customer is in on it.
+- **The pearl** is the Pearl of Africa, and a wheel, and a coin. It sits where the feathers
+  meet, so the mark reads as movement fanning out from one point on the map.
+
+Construction: a 64-unit square; three round-capped strokes of 7.5 units from the pearl at
+(32, 48); the outer feathers curve out to (12.5, 17) and (51.5, 17), the middle rises to
+(32, 8.5). The first feather and the pearl take `currentColor`, so the mark holds on any
+ground: cream on night, ink on noon, and the yellow and red never change. Minimum size 20 px;
+below that use the pearl alone.
+
+The wordmark sets UG in Unbounded 900 beside the crest; the catchphrase in IBM Plex Mono
+follows at 70% ink. The app icon puts the crest on a near-black tile with a faint diagonal
+sheen and UG beneath, so it sits comfortably beside the other apps it compares.
+
+Partner marks on the compare screen are UG's own stylised renderings: each operator's name and
+colour drawn in one consistent hand (a helmet for SafeBoda, a horse for Faras, since faras
+means horse). They are placeholders for the operators' official logo files, which production
+must use under each partner's brand guidelines.
 
 ## Palette
 
@@ -65,7 +90,22 @@ Semantic colours (good `#3DBB7A`, warn `#F2A900`, bad `#E5484D`) are separate fr
 Scale: hero 44–96 px fluid, section heads 28–46 px fluid, body 16 px, card body 13–14 px,
 labels 11–12 px uppercase with 0.1 em tracking.
 
+## Glass
+
+Glass is used only where a surface floats over something: the nav over the page, the booking
+strip over the tail of the particle map, the landmark card over the map, the checkout sheet
+over the page, the wallet. It is one token class: 64% surface over a blur, a hairline border
+at 14% ink, a one-pixel inner highlight. Panels that sit in the page flow stay solid, so text
+never fights a background.
+
 ## Motion
+
+Choreography on load, once, in the manner of a product launch page: each verb rises out of a
+blur one after another (0.2 s, 0.5 s, 0.8 s; 1.15 s each on an expo-out curve), a single light
+sweep crosses the letters, the positioning line and buttons follow, the map dollies in from a
+tilted pose while the landmark pins pop in sequence. After the intro the yellow highlight moves
+Ride → Pool → Rent every 3.8 s; hovering a word holds it. The nav tagline echoes the headline
+only once the headline has scrolled away. Sections pick up the same easing when they reveal.
 
 One orchestrated moment: the particle map of Uganda in the hero breathes, ripples, drifts with
 the pointer, tilts with scroll velocity, and can be dragged. Landmark pins project from 3D to

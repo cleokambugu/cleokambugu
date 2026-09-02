@@ -13,11 +13,13 @@ Nothing here is a live fare, a licensed service, or a production payment integra
 | Path | What it is |
 | --- | --- |
 | [`site/index.html`](site/index.html) | The full site and interactive prototype. Single file, no build step. Open it in a browser. |
-| [`data/`](data/) | The fare model, routes, fleet, and destinations as JSON, with provenance tags. Exported from the site's data block. |
+| [`data/`](data/) | The fare model, routes, fleet, and destinations as JSON, with provenance tags. Exported from the site's data block. `uganda-geometry.json` is the border and lakes from Natural Earth 10m, simplified. |
+| [`brand/`](brand/) | The Crest mark, wordmark, and app icon as SVG. |
 | [`docs/business-plan.md`](docs/business-plan.md) | Market, customer, product, revenue model, unit economics, go-to-market, risks. |
 | [`docs/arbitrage-model.md`](docs/arbitrage-model.md) | How the compare engine computes and ranks quotes, and what each number's provenance is. |
 | [`docs/brand.md`](docs/brand.md) | Identity: name, voice, palette, type, motion, the catchphrase and the verbs. |
 | [`docs/payments-flutterwave.md`](docs/payments-flutterwave.md) | Checkout integration as built, what a production deployment must add. |
+| [`docs/integrations.md`](docs/integrations.md) | The plug-in registry: Felt (maps), Infrared City (workflows), Tazama (entertainment), Cephable (automation and hands-free), and what phase 1 must wire. |
 | [`docs/roadmap.md`](docs/roadmap.md) | Phases from this prototype to a licensed operation, plus regulatory notes. |
 | [`../../notes/mobility-market/`](../../notes/mobility-market/) | Study notes on Sixt, Pool, SafariShare, Tinka, the Antigravity landing page, and Ugandan fares, with first-hand versus secondhand provenance marked. |
 
@@ -36,8 +38,9 @@ hides itself and the type falls back to the system stack; everything else works 
 ## What is real and what is modelled
 
 - **Real, read first-hand:** the Flutterwave v3 inline checkout contract (from
-  `Flutterwave/React-v3` on GitHub) and the Antigravity 3D landing-page technique (from
-  `Emmancipated/antigravity-landingpage-clone`). Both were cloned and read.
+  `Flutterwave/React-v3` on GitHub), the Antigravity 3D landing-page technique (from
+  `Emmancipated/antigravity-landingpage-clone`), and Uganda's border and lakes (Natural Earth
+  10m from `nvkelso/natural-earth-vector`). All were cloned and read.
 - **Secondhand (search snippets, not verified on the operator's page):** Uber Kampala 2020
   tariff, UberBoda tariff, Faras and SafeBoda commission rates, UWA park fees to June 2026,
   Entebbe expressway toll, 2026 bus fare ranges, 2026 fuel price, rental day rates.

@@ -16,6 +16,9 @@ Claude Code web session on the Trusted network policy.
 - `Flutterwave/React-v3` — `src/types.ts` (the full checkout config contract) and
   `src/script.ts` (the script URL `https://checkout.flutterwave.com/v3.js`).
 - `mrdoob/three.js` at tag r128 — `build/three.min.js`, used to test the hero offline.
+- `nvkelso/natural-earth-vector` — `geojson/ne_10m_admin_0_countries.geojson` (Uganda's
+  polygon) and `geojson/ne_10m_lakes.geojson` (Victoria, Kyoga, Kwania, Albert, Edward,
+  George), simplified for the particle map. A first hand-drawn outline was wrong and replaced.
 
 **Secondhand (WebSearch snippets only; the pages themselves were blocked by the egress proxy):**
 
