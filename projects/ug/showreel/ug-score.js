@@ -81,12 +81,12 @@
 
     /* ---- graph: buses, sends, sustained voices ---- */
     function build() {
-      var out = gain(ducked ? .4 : 1, dest), trim = gain(.8, out);
+      var out = gain(ducked ? .4 : 1, dest), trim = gain(.7, out);
       var clip = shaper(1.4, trim);                                      // soft-clip limiter: tanh, keeps peaks under the trim
-      var lim = ctx.createDynamicsCompressor(); lim.threshold.value = -3; lim.knee.value = 1; lim.ratio.value = 12; lim.attack.value = .002; lim.release.value = .08; lim.connect(clip);
+      var lim = ctx.createDynamicsCompressor(); lim.threshold.value = -2; lim.knee.value = 1; lim.ratio.value = 8; lim.attack.value = .002; lim.release.value = .08; lim.connect(clip);
       var mk = gain(1.25, lim);                                          // makeup
-      var comp = ctx.createDynamicsCompressor(); comp.threshold.value = -16; comp.knee.value = 10; comp.ratio.value = 2.5; comp.attack.value = .015; comp.release.value = .25; comp.connect(mk);   // bus glue: a few dB on the drops, nothing on the intro
-      var mix = gain(.45, comp);                                          // the sum, before dynamics (peaks ~ -2 dBFS on the drops)
+      var comp = ctx.createDynamicsCompressor(); comp.threshold.value = -12; comp.knee.value = 10; comp.ratio.value = 2; comp.attack.value = .015; comp.release.value = .25; comp.connect(mk);   // bus glue: a few dB on the drops, nothing on the intro
+      var mix = gain(.4, comp);                                          // the sum, before dynamics (peaks ~ -2 dBFS on the drops)
       var rev = ctx.createConvolver(); rev.buffer = plateIR; var revOut = gain(.35, mix), revHP = filt('highpass', 260, .7, revOut); rev.connect(revHP);
       var dly = ctx.createDelay(1); dly.delayTime.value = DOT8; var dLP = filt('lowpass', 2600, .7), dlyOut = gain(.7, mix); dly.connect(dLP); dLP.connect(gain(.36, dly)); dLP.connect(pan(.35, dlyOut)); dLP.connect(gain(.3, rev));   // dotted-8th delay
       var sc = gain(1, mix), pump = gain(1, sc);                          // sc: kick sidechain (everything harmonic); pump: log-drum sidechain (pad + Rhodes)

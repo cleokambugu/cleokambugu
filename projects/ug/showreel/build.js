@@ -12,11 +12,13 @@ const variants = {
   'sound.html': { title: 'UG Showreel with Sound', sound: true, cut: 'long' },
   'short.html': { title: 'UG Short Cut', sound: false, cut: 'short' },
   'short-sound.html': { title: 'UG Short Cut with Sound', sound: true, cut: 'short' },
+  'short-cam.html': { title: 'UG Short Cut · Camera', sound: false, cut: 'short', cam: true },
+  'short-cam-sound.html': { title: 'UG Short Cut · Camera · Sound', sound: true, cut: 'short', cam: true },
 };
 for (const [file, v] of Object.entries(variants)) {
   let out = src.replace('<title>UG Showreel</title>', `<title>${v.title}</title>`)
     .replace(SOUND_LINE, `const SOUND = ${v.sound}; // ${v.sound ? 'the sound cut' : 'silent'}`)
-    .replace(CUT_LINE, `const FORCE_CUT = '${v.cut}';\n${CUT_LINE}`);
+    .replace(CUT_LINE, `const FORCE_CUT = '${v.cut}';${v.cam ? " const FORCE_CAM = true;" : ''}\n${CUT_LINE}`);
   fs.writeFileSync(path.join(__dirname, file), out);
   console.log(file, out.length);
 }

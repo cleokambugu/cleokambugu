@@ -25,7 +25,7 @@ async function main() {
   for (const cut of cuts) {
     const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: 1, colorScheme: 'dark' });
     page.on('pageerror', e => console.error('PAGEERROR', e.message));
-    const file = cut === 'short' ? 'short-sound.html' : 'sound.html';
+    const file = cut === 'short-cam' ? 'short-cam-sound.html' : cut === 'short' ? 'short-sound.html' : 'sound.html';
     await page.goto('file://' + path.join(__dirname, file), { waitUntil: 'load' });
     await page.waitForTimeout(1500); // fonts
     const total = await page.evaluate(() => window.__UG_REEL.total);
@@ -55,12 +55,12 @@ async function main() {
       const sr = 48000, oc = new OfflineAudioContext(2, Math.ceil(sr * (total + 1)), sr);
       const g = oc.createGain(); g.gain.value = 1; g.connect(oc.destination);
       const sc = window.UGScore.create(oc, g);
-      sc.play(cut);
+      sc.play(cut.startsWith('short') ? 'short' : 'long');
       const step = 0.05; let next = 0;
       const plan = [];
       for (let t = step; t < total; t += step) plan.push(t);
-      plan.forEach(t => oc.suspend(t).then(() => { if (cut === 'long') { while (next < offsets.length && offsets[next] <= t + 1e-6) { sc.cue(next); next++; } } sc.tick(); oc.resume(); }));
-      if (cut === 'long') sc.cue(0);
+      plan.forEach(t => oc.suspend(t).then(() => { if (!cut.startsWith('short')) { while (next < offsets.length && offsets[next] <= t + 1e-6) { sc.cue(next); next++; } } sc.tick(); oc.resume(); }));
+      if (!cut.startsWith('short')) sc.cue(0);
       sc.tick();
       const buf = await oc.startRendering();
       // fade the tail, encode 16-bit PCM WAV

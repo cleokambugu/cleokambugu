@@ -1,4 +1,4 @@
-<title>UG Short Cut</title>
+<title>UG Short Cut · Camera · Sound</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Albert+Sans:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
@@ -95,7 +95,7 @@ const W = 1280, H = 720;
 const C = {ground:'#0F0C0A', surface:'#1E1915', ink:'#F4ECDD', yellow:'#F2C200', red:'#D2202F', crane:'#94A8B6', good:'#3DBB7A'};
 const inkA = a => `rgba(244,236,221,${a})`;
 const params = new URLSearchParams(location.search);
-const SOUND = false; // silent
+const SOUND = true; // the sound cut
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const FONT = {
   disp:(w,s)=>`${w} ${s}px Unbounded, "Albert Sans", system-ui, sans-serif`,
@@ -489,7 +489,7 @@ const SCENES = [
 ];
 /* The short cut: five scenes, each run a little faster. index.html?cut=short, or short.html / short-sound.html from build.js. */
 const SHORT = [['opening',1.25],['ride',1.6],['pool',2],['atlas',1.6],['link',1.2]];
-const FORCE_CUT = 'short';
+const FORCE_CUT = 'short'; const FORCE_CAM = true;
 const CUT = (typeof FORCE_CUT!=='undefined' && FORCE_CUT) || params.get('cut') || 'long';
 /* The camera edition (short cut only): a keyframed camera that pushes in on the thing being said and
    punches on the hits — the UG lock (8.4), the Stage drop (49.75), the Atlas lift (64.9). index.html?cut=short&cam=1,

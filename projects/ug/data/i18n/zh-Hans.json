@@ -19,6 +19,7 @@
   "navAtlas"
  ],
  "strings": {
+  "page.p.ug_speaks_the_languages": "UG 会说乌干达的语言、本地区的语言，也会说访客的语言。选择你的语言，一切随之切换。",
   "page.button.skip": "跳过",
   "ride": "打车。",
   "pool": "拼车。",
@@ -169,6 +170,12 @@
   "hsModal.span.phone_verified_account_nothing": "手机号验证账户 · 不会扣款",
   "railModal.b.your_trip": "你的行程",
   "railModal.span.booked_and_tracked_on": "在 UG 预订并跟踪。本原型中的礼宾服务为模拟。",
+  "railModal.b.accessibility": "无障碍",
+  "railModal.div.larger_textscales_the_whole": "<b>放大文字</b><small>整个页面等比放大</small>",
+  "railModal.div.high_contraststronger_text_lines": "<b>高对比度</b><small>更醒目的文字、线条和边框</small>",
+  "railModal.div.reduce_motionno_opening_animation": "<b>减少动态效果</b><small>没有开场动画、漂浮粒子和逐步显现</small>",
+  "railModal.div.underline_linksevery_link_underlined": "<b>链接加下划线</b><small>每个链接都有下划线，不只靠颜色区分</small>",
+  "railModal.p.ug_also_follows_your": "UG 还会遵循你系统里减少动态效果和对比度的设置，支持读屏软件（地标、标签和实时区域），全程可用键盘操作，并能通过麦克风按钮或 Cephable 配置接收语音指令。告诉我们什么对你有帮助：hello@ug.example。",
   "me": "我的",
   "ops.button.reach": "覆盖范围",
   "ops.button.partners": "合作伙伴",

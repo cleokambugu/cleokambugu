@@ -490,6 +490,29 @@ const SCENES = [
 /* The short cut: five scenes, each run a little faster. index.html?cut=short, or short.html / short-sound.html from build.js. */
 const SHORT = [['opening',1.25],['ride',1.6],['pool',2],['atlas',1.6],['link',1.2]];
 const CUT = (typeof FORCE_CUT!=='undefined' && FORCE_CUT) || params.get('cut') || 'long';
+/* The camera edition (short cut only): a keyframed camera that pushes in on the thing being said and
+   punches on the hits — the UG lock (8.4), the Stage drop (49.75), the Atlas lift (64.9). index.html?cut=short&cam=1,
+   or short-cam.html / short-cam-sound.html from build.js. z is zoom (never < 1), x/y the focal point. */
+const CAM_ON = ((typeof FORCE_CAM!=='undefined' && FORCE_CAM) || params.get('cam')==='1') && CUT==='short';
+const CAM_KEYS = [
+  {at:0,   z:1.00, x:640, y:360}, {at:5,    z:1.08, x:640, y:340}, {at:8.1,  z:1.08, x:640, y:345},
+  {at:8.45,z:1.28, x:640, y:350}, {at:10.6, z:1.06, x:640, y:360}, {at:13,   z:1.00, x:640, y:390},
+  {at:16,  z:1.00, x:640, y:360}, {at:18.5, z:1.22, x:580, y:270}, {at:23,   z:1.22, x:580, y:320},
+  {at:26,  z:1.00, x:640, y:360}, {at:30,   z:1.12, x:640, y:450}, {at:34.75,z:1.00, x:640, y:360},
+  {at:37.5,z:1.30, x:390, y:300}, {at:43,   z:1.30, x:410, y:350}, {at:47.4, z:1.10, x:640, y:360},
+  {at:49.7,z:1.02, x:640, y:360}, {at:49.9, z:1.32, x:700, y:330}, {at:51.6, z:1.00, x:640, y:360},
+  {at:54.75,z:1.00,x:640, y:360}, {at:58,   z:1.18, x:640, y:465}, {at:62,   z:1.02, x:640, y:360},
+  {at:64.85,z:1.00,x:640, y:360}, {at:65.05,z:1.22, x:640, y:400}, {at:67,   z:1.05, x:640, y:380},
+  {at:69.5,z:1.16, x:640, y:585}, {at:72.5, z:1.00, x:640, y:360},
+  {at:76,  z:1.16, x:655, y:330}, {at:80,   z:1.00, x:640, y:360}, {at:82.5, z:1.12, x:640, y:310},
+  {at:86,  z:1.04, x:640, y:340}
+];
+function camAt(tt){
+  const K=CAM_KEYS; if(tt<=K[0].at) return K[0];
+  for(let i=0;i<K.length-1;i++){ const a=K[i], b=K[i+1]; if(tt>=a.at&&tt<b.at){ const u=(tt-a.at)/(b.at-a.at); const e=u*u*(3-2*u); return {z:a.z+(b.z-a.z)*e, x:a.x+(b.x-a.x)*e, y:a.y+(b.y-a.y)*e}; } }
+  return K[K.length-1];
+}
+function camApply(ctx, tt){ if(!CAM_ON) return; const c=camAt(tt); const drift=Math.sin(tt*.7)*2.2, drift2=Math.cos(tt*.53)*1.6; ctx.translate(W/2,H/2); ctx.scale(c.z,c.z); ctx.translate(-(c.x+drift), -(c.y+drift2)); }
 if (CUT==='short'){ const picked=[]; SHORT.forEach(([id,k])=>{ const src=SCENES.find(x=>x.id===id); if(!src) return; picked.push({ id:src.id, name:src.name, dur:src.dur/k, voice:src.voice, caps:src.caps.map(c=>Object.assign({},c,{at:c.at/k})), draw:(g,t)=>src.draw(Object.assign({},g,{now:g.now*k,dur:src.dur}),t*k) }); }); SCENES.length=0; picked.forEach(x=>SCENES.push(x)); }
 
 const TOTAL = SCENES.reduce((s,x)=>s+x.dur,0);
@@ -564,7 +587,7 @@ function loop(ts){ if(!RENDERING) requestAnimationFrame(loop); const dt=RENDERIN
   barfill.style.width=(clock/TOTAL*100)+'%';
   if(audio&&playing) audio.tick(clock);
   ctx.setTransform(dpr*S,0,0,dpr*S,0,0); ctx.fillStyle=C.ground; ctx.fillRect(-2,-2,W+4,H+4);
-  ctx.save(); sc.draw({ctx,now:clock,dur:sc.dur},t); ctx.restore();
+  ctx.save(); camApply(ctx, clock); sc.draw({ctx,now:clock,dur:sc.dur},t); ctx.restore();
   ctx.globalAlpha=1; if('filter' in ctx) ctx.filter='none'; fade(ctx,t,sc.dur,i===SCENES.length-1);
   if(!playing&&!ended&&!RENDERING){ ctx.fillStyle='rgba(15,12,10,.35)'; ctx.fillRect(0,0,W,H); pill(ctx,'paused',640,360,{font:FONT.body(700,14),h:36,px:28}); } }
 
@@ -584,7 +607,7 @@ document.addEventListener('keydown',e=>{ if(document.activeElement!==stage && (e
 const fontsReady = Promise.race([ (document.fonts ? Promise.all([document.fonts.load('900 40px Unbounded'),document.fonts.load('700 20px Unbounded'),document.fonts.load('600 14px "Albert Sans"'),document.fonts.load('500 14px "IBM Plex Mono"')]) : Promise.resolve()).catch(()=>{}), new Promise(r=>setTimeout(r,2500)) ]);
 if (!SOUND) fontsReady.then(()=>setTimeout(start,900));
 window.__UG_REEL = {cut:CUT, sound:SOUND, total:TOTAL, voiceLines:SCENES.map(s=>({id:s.id, at:0, lines:s.voice})),
-  render(sec){ if(!started){ RENDERING=true; started=true; poster.classList.add('off'); hud.classList.add('on'); if(SOUND) muteBtn.hidden=false; stage.focus({preventScroll:true}); } RENDERING=true; playing=false; ended=false; hud.style.display='none'; $('bar').style.display='none'; endEl.style.display='none'; clock=clamp(sec,0,TOTAL-.001); let i=SCENES.length-1; while(i>0&&clock<OFFSET[i]) i--; if(i!==sceneI){ sceneI=i; capI=-1; cnt.textContent=`${String(i+1).padStart(2,'0')} / ${SCENES.length}`; cname.textContent=SCENES[i].name; } loop(performance.now()); const ms=Math.max(0,(clock-capT0)*1000); document.getAnimations().forEach(a=>{ a.pause(); try{ a.currentTime=ms; }catch(e){} }); barfill.style.transition='none'; endEl.classList.toggle('on', clock>=TOTAL-.05); return {scene:SCENES[i].id, t:clock-OFFSET[i]}; },
+  render(sec){ if(!started){ RENDERING=true; started=true; poster.remove(); hud.classList.add('on'); if(SOUND) muteBtn.hidden=false; stage.focus({preventScroll:true}); } RENDERING=true; playing=false; ended=false; hud.style.display='none'; $('bar').style.display='none'; endEl.style.display='none'; clock=clamp(sec,0,TOTAL-.001); let i=SCENES.length-1; while(i>0&&clock<OFFSET[i]) i--; if(i!==sceneI){ sceneI=i; capI=-1; cnt.textContent=`${String(i+1).padStart(2,'0')} / ${SCENES.length}`; cname.textContent=SCENES[i].name; } loop(performance.now()); const ms=Math.max(0,(clock-capT0)*1000); document.getAnimations().forEach(a=>{ a.pause(); try{ a.currentTime=ms; }catch(e){} }); barfill.style.transition='none'; endEl.classList.toggle('on', clock>=TOTAL-.05); return {scene:SCENES[i].id, t:clock-OFFSET[i]}; },
   offsets:OFFSET.slice(), scenes:SCENES.map(s=>({id:s.id,name:s.name,dur:s.dur})), particles:MAP.count, lakes:MAP.lakes, seek(sec){ if(!started) start(); clock=clamp(sec,0,TOTAL-.001); let i=SCENES.length-1; while(i>0&&clock<OFFSET[i]) i--; enterScene(i,{sting:false}); }, get clock(){return clock;}, get playing(){return playing;}};
 })();
 </script>
