@@ -1,293 +1,578 @@
 {
-  "generated": "2026-09-02",
-  "source": "projects/ug/site/index.html data block",
-  "note": "Every figure is an estimate. prov fields: snippet = read from a search snippet or third-party page, modelled = UG assumption, official = read on the operator page, UG model = UG own formula. See docs/arbitrage-model.md and docs/atlas.md.",
-  "languages": {
-    "en": {
-      "name": "English",
-      "native": "English",
-      "confidence": "complete"
-    },
-    "sw": {
-      "name": "Swahili",
-      "native": "Kiswahili",
-      "confidence": "complete"
-    },
-    "lg": {
-      "name": "Luganda",
-      "native": "Luganda",
-      "confidence": "draft"
-    },
-    "nyn": {
-      "name": "Runyankore-Rukiga",
-      "native": "Runyankore-Rukiga",
-      "confidence": "draft"
-    },
-    "ach": {
-      "name": "Acholi",
-      "native": "Leb Acoli",
-      "confidence": "draft"
-    },
-    "teo": {
-      "name": "Ateso",
-      "native": "Ateso",
-      "confidence": "early draft"
-    }
+ "generated": "2026-09-02",
+ "source": "data/i18n/*.json via server/scripts/i18n-build.js",
+ "keys": 243,
+ "languages": {
+  "lg": {
+   "name": "Luganda",
+   "native": "Oluganda",
+   "region": "Central Uganda (Buganda): Kampala, Wakiso, Mukono, Masaka and the Buganda kingdom",
+   "family": "Bantu",
+   "dir": "ltr",
+   "script": "Latin",
+   "confidence": "draft",
+   "note": "Everyday Kampala Luganda, the register of a young professional talking to a friend: 'Kwata ku UG' for Book, 'Kubira essimu' for Call ahead, 'awatali jaamu' and 'essaawa za jaamu' for off-peak and rush hour, 'ssente z'oku ssimu' for mobile money. Buganda standard orthography with geminates written double (emmotoka, essimu, ssente, ebbeeyi). The four verbs Linnya, Gabana, Pangisa, Tuma and the older STR renderings are kept as they were. Product and technical terms with no settled Luganda word (plug-in, endpoint, API key, sandbox, arbitrage desk, concierge) are paraphrased or carried as loans and listed under uncertain.",
+   "uncertain": 22,
+   "missing": 0,
+   "review": "",
+   "group": "Uganda · Central"
   },
-  "strings": {
-    "ride": {
-      "en": "Ride.",
-      "sw": "Panda.",
-      "lg": "Linnya.",
-      "nyn": "Shagara.",
-      "ach": "Wot.",
-      "teo": "Alosit."
-    },
-    "pool": {
-      "en": "Pool.",
-      "sw": "Shirikiana.",
-      "lg": "Gabana.",
-      "nyn": "Gaba.",
-      "ach": "Ribbe.",
-      "teo": "Airiamun."
-    },
-    "rent": {
-      "en": "Rent.",
-      "sw": "Kodi.",
-      "lg": "Pangisa.",
-      "nyn": "Pangisa.",
-      "ach": "Yeny.",
-      "teo": "Aipangis."
-    },
-    "deliver": {
-      "en": "Deliver.",
-      "sw": "Tuma.",
-      "lg": "Tuma.",
-      "nyn": "Tuma.",
-      "ach": "Ter.",
-      "teo": "Ayauna."
-    },
-    "flipRide": {
-      "en": "Find a ride.",
-      "sw": "Tafuta usafiri.",
-      "lg": "Funa eky'okuvugamu.",
-      "nyn": "Shaka ekyokutwara.",
-      "ach": "Yeny motoka."
-    },
-    "flipPool": {
-      "en": "Share the ride.",
-      "sw": "Shiriki safari.",
-      "lg": "Gabana olugendo.",
-      "nyn": "Gaba orugyendo.",
-      "ach": "Ribbe wot."
-    },
-    "flipRent": {
-      "en": "Rent the ride.",
-      "sw": "Kodi gari.",
-      "lg": "Pangisa emmotoka.",
-      "nyn": "Pangisa emotoka.",
-      "ach": "Yeny motoka."
-    },
-    "flipDeliver": {
-      "en": "Send the thing.",
-      "sw": "Tuma kitu.",
-      "lg": "Tuma ekintu.",
-      "nyn": "Tuma ekintu.",
-      "ach": "Ter jami."
-    },
-    "position": {
-      "en": "Look the part. Pay the smart price.",
-      "sw": "Onekana vizuri. Lipa bei ya busara.",
-      "lg": "Labika bulungi. Sasula omuwendo omugezi.",
-      "nyn": "Reebeka gye. Shashura omuhendo murungi."
-    },
-    "doorRider": {
-      "en": "I need to get somewhere",
-      "sw": "Nahitaji kufika mahali",
-      "lg": "Njagala kutuuka ewantu",
-      "nyn": "Nyenda kuhika ahantu",
-      "ach": "Amito cito kama",
-      "teo": "Alosi eong nen"
-    },
-    "doorRiderSub": {
-      "en": "Queue a seat, compare every ride, plan the weekend.",
-      "sw": "Weka nafasi, linganisha safari zote, panga wikendi.",
-      "lg": "Kwata entebe, geraageranya olugendo lwonna, teekateeka wiikendi."
-    },
-    "doorDriver": {
-      "en": "I drive, or I have a car",
-      "sw": "Ninaendesha, au nina gari",
-      "lg": "Nvuga, oba nnina emmotoka",
-      "nyn": "Ninvuga, nari nyine emotoka",
-      "ach": "An ariyo, onyo atye ki motoka",
-      "teo": "Eong aiyalaar, arai ejai eong emotoka"
-    },
-    "doorDriverSub": {
-      "en": "Say where you're comfortable. Funded trips come to you.",
-      "sw": "Sema unapopenda kuendesha. Safari zilizolipwa zinakujia.",
-      "lg": "Gamba w'oyagala okuvuga. Entambula ezisasuliddwa zikujjira."
-    },
-    "start": {
-      "en": "Start →",
-      "sw": "Anza →",
-      "lg": "Tandika →",
-      "nyn": "Tandika →",
-      "ach": "Cak →",
-      "teo": "Kigeu →"
-    },
-    "open": {
-      "en": "Open for business →",
-      "sw": "Anza biashara →",
-      "lg": "Tandika bizinensi →",
-      "nyn": "Tandika bizinesi →",
-      "ach": "Cak tic →"
-    },
-    "getStarted": {
-      "en": "Get started",
-      "sw": "Anza",
-      "lg": "Tandika",
-      "nyn": "Tandika",
-      "ach": "Cak",
-      "teo": "Kigeu"
-    },
-    "navStage": {
-      "en": "Stage",
-      "sw": "Kituo",
-      "lg": "Siteegi",
-      "nyn": "Siteegi",
-      "ach": "Ceteci",
-      "teo": "Esiteegi"
-    },
-    "navAtlas": {
-      "en": "Atlas",
-      "sw": "Atlasi",
-      "lg": "Atulasi"
-    },
-    "navCompare": {
-      "en": "Compare",
-      "sw": "Linganisha",
-      "lg": "Geraageranya",
-      "nyn": "Gyeragyeranisa",
-      "ach": "Por"
-    },
-    "navRent": {
-      "en": "Rent",
-      "sw": "Kodi",
-      "lg": "Pangisa",
-      "nyn": "Pangisa",
-      "ach": "Yeny"
-    },
-    "navDeliver": {
-      "en": "Deliver",
-      "sw": "Tuma",
-      "lg": "Tuma",
-      "nyn": "Tuma",
-      "ach": "Ter",
-      "teo": "Ayauna"
-    },
-    "navExplore": {
-      "en": "Explore",
-      "sw": "Tembelea",
-      "lg": "Kyalira",
-      "nyn": "Shagara",
-      "ach": "Lim"
-    },
-    "navDrive": {
-      "en": "Drive",
-      "sw": "Endesha",
-      "lg": "Vuga",
-      "nyn": "Vuga",
-      "ach": "Riyo",
-      "teo": "Aiyalaar"
-    },
-    "navHustle": {
-      "en": "Hustle",
-      "sw": "Kazi",
-      "lg": "Okukola"
-    },
-    "navPlugins": {
-      "en": "Plug-ins",
-      "sw": "Viunganishi"
-    },
-    "navForesight": {
-      "en": "Foresight",
-      "sw": "Mbele",
-      "lg": "Ebigenda okujja"
-    },
-    "me": {
-      "en": "Me",
-      "sw": "Mimi",
-      "lg": "Nze",
-      "nyn": "Nyowe",
-      "ach": "An",
-      "teo": "Eong"
-    },
-    "tabRide": {
-      "en": "Ride",
-      "sw": "Panda",
-      "lg": "Linnya",
-      "nyn": "Shagara",
-      "ach": "Wot",
-      "teo": "Alosit"
-    },
-    "bookOnUG": {
-      "en": "Book on UG",
-      "sw": "Weka nafasi UG",
-      "lg": "Kwata ku UG",
-      "nyn": "Kwata aha UG",
-      "ach": "Mak i UG"
-    },
-    "takeSeat": {
-      "en": "Take a seat",
-      "sw": "Chukua kiti",
-      "lg": "Kwata entebe",
-      "nyn": "Kwata entebe",
-      "ach": "Bed piny",
-      "teo": "Kiboi"
-    },
-    "callAhead": {
-      "en": "Call ahead",
-      "sw": "Piga simu kwanza",
-      "lg": "Kubira essimu",
-      "nyn": "Teera esimu",
-      "ach": "Kong igo cim"
-    },
-    "listed": {
-      "en": "Listed · recognised",
-      "sw": "Imeorodheshwa",
-      "lg": "Kiri ku lukalala",
-      "nyn": "Kiri aha rukaraari"
-    },
-    "coming": {
-      "en": "Coming",
-      "sw": "Inakuja",
-      "lg": "Kijja",
-      "nyn": "Neija",
-      "ach": "Bino",
-      "teo": "Ebuni"
-    },
-    "install": {
-      "en": "Install the app",
-      "sw": "Sakinisha app",
-      "lg": "Teekawo app",
-      "nyn": "Teekaho app"
-    },
-    "languages": {
-      "en": "Language",
-      "sw": "Lugha",
-      "lg": "Olulimi",
-      "nyn": "Orurimi",
-      "ach": "Leb",
-      "teo": "Ajore"
-    },
-    "langNote": {
-      "en": "Drafts written without a native reviewer fall back to English where a word is missing. Help us finish yours.",
-      "sw": "Rasimu zilizoandikwa bila mhakiki wa lugha ya asili hurudi kwa Kiingereza pale neno linapokosekana. Tusaidie kukamilisha yako."
-    },
-    "reviewer": {
-      "en": "Review this language",
-      "sw": "Hakiki lugha hii",
-      "lg": "Kebera olulimi luno"
-    }
+  "xog": {
+   "name": "Lusoga",
+   "native": "Olusoga",
+   "region": "Eastern Uganda (Busoga): Jinja, Iganga, Kamuli, Bugiri, Mayuge, Luuka, Namutumba",
+   "family": "Bantu",
+   "dir": "ltr",
+   "script": "Latin",
+   "confidence": "draft",
+   "note": "Spoken Jinja and Iganga Lusoga, following the Lusoga Language Authority orthography: nh for the ny sound (linhya, enhonhi), dh for the soft j (kidha, eidhula, dhona), single rather than doubled consonants (emotoka, esimu, sente, ebeeyi), ti- negatives (tiwali, tikyetaagisa) and class-10 concord in dh-. Verbs: Linhya, Gabana, Pangisa, Tuma; Kwata ku UG for Book, Kuba esimu for Call ahead, Kulikayo for the welcome greeting. Perfective passives (-ibwa versus past -wa) and app terms with no settled Lusoga word (plug-in, endpoint, API key, sandbox, escrow) are the weakest points and are listed under uncertain; Luganda-shaped loans are used where Busoga town speech already uses them.",
+   "uncertain": 28,
+   "missing": 0,
+   "review": "",
+   "group": "Uganda · East"
+  },
+  "myx": {
+   "name": "Lumasaba",
+   "native": "Lumasaaba",
+   "region": "Eastern Uganda (Bugisu, Mount Elgon): Mbale, Sironko, Manafwa, Bududa, Bulambuli, Namisindwa",
+   "family": "Bantu",
+   "dir": "ltr",
+   "script": "Latin",
+   "confidence": "draft",
+   "note": "Mbale-town Lumasaba (Lugisu) in the Bugisu standard orthography: kh, ts and sh, class prefixes umu-/ba-, shi-/bi-, i-/tsi-, ku-, lu-, khu- for the infinitive, and the Bugisu greeting Mulembe on the welcome screen. Verbs: Nina (board), Kabana (share), Pangisa (rent), Ruma (send); Tila khu UG for Book, Khupa isimu for Call ahead, Runga for pay. Loans that Mbale speech already uses (app, boda, taxi, paaka, jaamu, sikaani, koodi, linki, kaadi, lisiiti) are kept; concepts with no Lumasaba word (plug-in, endpoint, API key, sandbox, concierge, arbitrage desk) are paraphrased. The choice of Runga over the Luganda loan sasula, the perfective passive shapes (-wa versus -ibwa), the words for day (shifukhu), truth (bubwene) and trust (bwisiki), and some Bukusu-shaped forms are the least certain and are listed under uncertain.",
+   "uncertain": 44,
+   "missing": 0,
+   "review": "",
+   "group": "Uganda · East"
+  },
+  "gwr": {
+   "name": "Lugwere",
+   "native": "Lugwere",
+   "region": "Eastern Uganda (Bugwere): Pallisa, Budaka, Kibuku and the Bugwere lowlands between Busoga and Bugisu",
+   "family": "Bantu",
+   "dir": "ltr",
+   "script": "Latin",
+   "confidence": "draft",
+   "note": "Pallisa-town Lugwere in the register a young trader would use, written with the Lugwere Bible orthography: single consonants (emotoka, esimu, sente, ebeeyi), z where Lusoga writes dh and Luganda jj (kiiza, eizula, zona), ny rather than nh, ti- negatives (tiwali, tikyetaagisa), -ire perfectives and okugya for go. Verbs: Linnya, Gabana, Pangisa, Tuma; Kwata ku UG for Book, Kuba esimu for Call ahead, Kulikayo for the welcome. Lugwere sits between Lusoga and Luganda and shares most of this vocabulary with them, so where Bugwere speech has its own word that differs from both (the first-person pronoun, the words for now, say, and put, the perfective passives) the draft may be leaning on the Lusoga form; those keys and all app-only terms (plug-in, endpoint, API key, sandbox, concierge) are listed under uncertain.",
+   "uncertain": 40,
+   "missing": 0,
+   "review": "",
+   "group": "Uganda · East"
+  },
+  "lsm": {
+   "name": "Lusamia",
+   "native": "Olusamia",
+   "region": "Eastern Uganda (Busia, Samia-Bugwe, southern Tororo) and across the border into Busia County, Kenya",
+   "family": "Bantu",
+   "dir": "ltr",
+   "script": "Latin",
+   "confidence": "draft",
+   "note": "Busia-town Lusamia in the Luhya (Saamia) orthography: okhu- infinitives, kh and ch, class prefixes omu-/aba-, esi-/ebi-, e-/chi-, olu-, akha-, ama-, the pronouns ese/ewe/efwe, and the Luhya greeting Mulembe on the welcome screen. Verbs: Nina (board), Kabana (share), Pangisa (rent), Ruma (send); Tira khu UG for Book, Khupa esimu for Call ahead, Runga for pay, Chaka for start. Busia speech mixes in Swahili and Luganda loans freely (app, boda, taxi, paaka, jaamu, karibu, sikaani, koodi, linki, kaadi, lisiiti, amapesa), and those are kept. The perfective passives (sia-...-ibwa versus -wa), the words for day (olunaku), truth (obwene), trust (obwisichi) and market (esoko), and every app-only term (plug-in, endpoint, API key, sandbox, concierge, arbitrage desk) are the least certain and are listed under uncertain.",
+   "uncertain": 45,
+   "missing": 0,
+   "review": "",
+   "group": "Uganda · East"
+  },
+  "teo": {
+   "name": "Ateso",
+   "native": "Ateso",
+   "region": "Teso sub-region, eastern Uganda: Soroti, Kumi, Ngora, Serere, Katakwi, Amuria, Bukedea, Pallisa (and Tororo Iteso)",
+   "family": "Eastern Nilotic",
+   "dir": "ltr",
+   "script": "Latin",
+   "confidence": "draft",
+   "note": "Everyday Soroti Ateso in the voice of a young professional: 'Kobuk ko UG' for Book, 'Koriŋ esimu sodit' for Call ahead, 'aropiyai ka esimu' for mobile money, 'ai ejokuna ijo' (where you are at ease) for 'where you are comfortable'. Standard Ateso orthography with ŋ (ituŋa, koŋolik, eŋiŋai). Earlier STR renderings are kept (Kigeu, Esiteegi, Kiboi, Ebuni, Ajore, Eong, Aiyalaar, Ayauna, Alosi eong nen) except that the four slogan verbs are now imperatives (Kolot. Koriamu. Kopangis. Koya.) instead of the old verbal nouns (Alosit. Airiamun. Aipangis. Ayauna.), which survive as the nav labels. Imperative and passive verb forms, and words for market-app concepts (rank, grey out, sandbox, plug-in, endpoint, wallet, entertainment) are the weakest points and are listed under uncertain.",
+   "uncertain": 73,
+   "missing": 0,
+   "review": "",
+   "group": "Uganda · East"
+  },
+  "kpz": {
+   "name": "Kupsabiny",
+   "native": "Kupsabiny",
+   "region": "Sebei sub-region on the Ugandan slopes of Mount Elgon: Kapchorwa, Kween, Bukwo",
+   "family": "Southern Nilotic",
+   "dir": "ltr",
+   "script": "Latin",
+   "confidence": "draft",
+   "note": "Everyday Kapchorwa Kupsabiny in a young professional's voice, drawing on Kalenjin cognates where a Sebei-specific form was not certain: 'Nam eng UG' (grab it on UG) for Book, 'Kuur simuit tai' for Call ahead, 'rabisyek ab simuit' for mobile money, 'ole ichame' for 'where you are comfortable'. The four slogan verbs are Lany. (board) Tuiyo. (gather) Kodi. Yokto. (send). Written with ŋ (ŋalek, aŋwan, neŋuŋ) and Kalenjin-style b/ch/ny spellings; Sebei orthography prefers p in some words where Nandi writes b, so a native reviewer should settle b/p and vowel length. The verb for 'to drive' is rendered with the noun dereba (I drive = 'Ane ko dereba'); verb inflections, passives and app-market words (rank, sandbox, plug-in, endpoint, wallet, forget) are listed under uncertain.",
+   "uncertain": 75,
+   "missing": 0,
+   "review": "",
+   "group": "Uganda · East"
+  },
+  "ach": {
+   "name": "Acholi",
+   "native": "Leb Acoli",
+   "region": "Northern Uganda (Acholiland): Gulu, Kitgum, Pader, Amuru, Lamwo, Agago, Nwoya, Omoro",
+   "family": "Western Nilotic",
+   "dir": "ltr",
+   "script": "Latin",
+   "confidence": "draft",
+   "note": "Everyday Gulu Acholi in the voice of a young professional talking to a friend: 'Mak i UG' for Book, 'Kong igo cim' for Call ahead, 'cente me cim' for mobile money, 'ka ma cwinyi yom iye' (where your heart is at ease) for 'where you are comfortable'. Standard Acholi orthography with ŋ (poŋ, ŋeyo, lwoŋ). Earlier STR renderings are kept (Wot., Ribbe., Ter., Por, Lim, Riyo, Ceteci, Cak, Bino, Leb, An) except Rent, which the old dictionary rendered with 'Yeny' (to search); it is now 'Pango' (the common loan for renting) everywhere. Technical product words with no settled Acholi term (sandbox, plug-in, endpoint, API key, link, wallet, prototype) are carried as loans or short paraphrases and listed under uncertain.",
+   "uncertain": 37,
+   "missing": 0,
+   "review": "",
+   "group": "Uganda · North"
+  },
+  "laj": {
+   "name": "Lango",
+   "native": "Leb Laŋo",
+   "region": "Lango sub-region, northern Uganda: Lira, Apac, Oyam, Kole, Dokolo, Alebtong, Otuke, Amolatar, Kwania",
+   "family": "Western Nilotic",
+   "dir": "ltr",
+   "script": "Latin",
+   "confidence": "draft",
+   "note": "Everyday Lira Lango, the way a young professional talks to a friend: 'Mak i UG' for Book, 'Go cim kwoŋo' for Call ahead, 'cente me cim' for mobile money, 'ka ame cunyi yom iye' (where your heart is at ease) for 'where you are comfortable'. Lango markers are used throughout rather than Acholi ones: kede (with), ame (that/which), a- adjectives (aber, adit, atek), kop (word/matter), pwod (still), kuca (there), boma (town), ateni (true), leb Munu (English), ŋ in poŋ, ŋeo, lwoŋ. The four verbs are Wot. Nywak. Pango. Ter. Product words with no settled Lango term (sandbox, plug-in, endpoint, API key, link, wallet, prototype) are loans or short paraphrases and are listed under uncertain; the verb 'riyo' for driving also needs a native check.",
+   "uncertain": 40,
+   "missing": 0,
+   "review": "",
+   "group": "Uganda · North"
+  },
+  "kdi": {
+   "name": "Kumam",
+   "native": "Kumam",
+   "region": "Kaberamaido and Kalaki districts, with Kumam communities in Soroti, Dokolo and Amolatar",
+   "family": "Western Nilotic",
+   "dir": "ltr",
+   "script": "Latin",
+   "confidence": "draft",
+   "note": "Kumam is a Southern Luo variety very close to Lango, with Teso influence in vocabulary and pronunciation. This draft was built from the Lango draft and then adjusted where a Kumam form is known (citeci for stage, taun for town, 'Rib.' for Pool alongside 'Wot. Pango. Ter.', kede, ame, a- adjectives, kop, pwod, kuca), so it reads as Lango-flavoured Kumam rather than the Kaberamaido spoken norm. It needs a native Kumam reviewer more than any other draft in this set; product and technical words (sandbox, plug-in, endpoint, API key, link, wallet) are loans or short paraphrases.",
+   "uncertain": 56,
+   "missing": 0,
+   "review": "",
+   "group": "Uganda · North"
+  },
+  "kdj": {
+   "name": "Ngakarimojong",
+   "native": "Ŋakarimojoŋ",
+   "region": "Karamoja sub-region, north-eastern Uganda: Moroto, Kotido, Kaabong, Napak, Nakapiripirit, Abim, Amudat, Karenga",
+   "family": "Eastern Nilotic",
+   "dir": "ltr",
+   "script": "Latin",
+   "confidence": "draft",
+   "note": "Everyday Moroto/Kotido Ŋakarimojoŋ in a young professional's voice: 'Tobuk kotoma UG' for Book, 'Toriŋ esimu ŋaren' for Call ahead, 'ŋiropiyae a esimu' for mobile money, 'ai ejokuna iyoŋ' for 'where you are comfortable'. Standard orthography with ŋ throughout (ŋituŋa, ŋiropiyae, daadaŋ, toŋolik); to- imperatives (Tolot, Toya, Toseu, Totac); ŋi-/ŋa- plurals. The four slogan verbs are Tolot. Toriamu. Topangis. Toya. Because the draft leans on Ateso and Turkana cognates where a Karimojong form was not certain, verb inflections, passives and app-market words (rank, sandbox, plug-in, endpoint, wallet, entertainment) are the weakest points and are listed under uncertain; a native reviewer from Moroto or Kotido should check tone before this goes live.",
+   "uncertain": 76,
+   "missing": 0,
+   "review": "",
+   "group": "Uganda · North"
+  },
+  "alz": {
+   "name": "Alur",
+   "native": "Dhu Alur",
+   "region": "West Nile, Uganda (Nebbi, Zombo, Pakwach) and across the border in Ituri, DR Congo",
+   "family": "Western Nilotic",
+   "dir": "ltr",
+   "script": "Latin",
+   "confidence": "draft",
+   "note": "Drafted from Alur's shared Luo vocabulary (Acholi, Lango, Dholuo cognates) in the everyday spoken register of a young Nebbi or Zombo professional: bare imperatives on buttons (Wot, Ribo, Kodi, Oro), the impersonal ju- subject for things done to the user (juculo = it has been paid), the Alur negative ngo, and the possessives para/peri/pere. App-era concepts use the loans West Nile speech already carries (motoka, siteji, simu, pesa, app, link, kodi, sandbox, plug-in). No native reviewer has read this: verb-final vowels (-o/-u) and the imperative forms in particular need checking, and every long paragraph is a close paraphrase rather than a sentence-by-sentence rendering.",
+   "uncertain": 96,
+   "missing": 0,
+   "review": "",
+   "group": "Uganda · West Nile"
+  },
+  "lgg": {
+   "name": "Lugbara",
+   "native": "Lugbarati",
+   "region": "West Nile, Uganda (Arua, Maracha, Terego, Yumbe) and north-eastern DR Congo",
+   "family": "Central Sudanic",
+   "dir": "ltr",
+   "script": "Latin",
+   "confidence": "draft",
+   "note": "Drafted in everyday Arua Lugbara addressed to one person (mi), with the affirmative ra, the perfective 'bo, the negative ku, the -zu purpose nominal (pimazu = for measuring, a price estimate) and the implosive apostrophes of the standard orthography ('ba, 'du, 'yo, e'yo). Buttons are bare verbs: Tu (board), Awa (share), Kodi (rent), Pe (send), 'Du UG si (take it on UG). Concepts with no settled Lugbara word use the loans heard in Arua town (motoka, siteji, simu, sende, bei, app, link, kodi, sandbox, plug-in). No native reviewer has read this: word order in the longer sentences, the choice of 'du for both drive and book, and eco for choose are the weakest points, and every paragraph is a close paraphrase.",
+   "uncertain": 112,
+   "missing": 0,
+   "review": "",
+   "group": "Uganda · West Nile"
+  },
+  "mhi": {
+   "name": "Ma'di",
+   "native": "Ma'di",
+   "region": "West Nile, Uganda (Adjumani, Moyo) and Magwi county, South Sudan",
+   "family": "Central Sudanic",
+   "dir": "ltr",
+   "script": "Latin",
+   "confidence": "draft",
+   "note": "Drafted in the everyday spoken Ma'di of Adjumani and Moyo, addressed to one person (mi), with the negative ku, the perfective 'bo and the implosive apostrophes of the standard orthography ('ba, 'di, e'yo). Ma'di and Lugbara share most of their Central Sudanic core (mu, emu, fe, le, ni, ti, jo, yi), so where a Ma'di-specific form was not certain the shared form was kept and the Ma'di variants that are certain were used instead (ndre for see, matuka for car, kiti for seat, kuru for now). Buttons are bare verbs: Tu (board), Awa (share), Kodi (rent), Pe (send). No native reviewer has read this: a Ma'di speaker should expect to replace a good share of the vocabulary that reads as Lugbara, and every paragraph is a close paraphrase rather than a sentence-by-sentence rendering.",
+   "uncertain": 117,
+   "missing": 0,
+   "review": "",
+   "group": "Uganda · West Nile"
+  },
+  "keo": {
+   "name": "Kakwa",
+   "native": "Kakwa",
+   "region": "West Nile, Uganda (Koboko, Yumbe), Central Equatoria in South Sudan and Aru in DR Congo",
+   "family": "Eastern Nilotic",
+   "dir": "ltr",
+   "script": "Latin",
+   "confidence": "draft",
+   "note": "Drafted in everyday Koboko Kakwa addressed to one person (do), leaning on the Bari-group core Kakwa shares with Bari and Kuku (nan, do, yi; tu, po, met, dendya, kondya, tindya; ngutu, kadi, kolong, kutuk) and on the loans Koboko speech already carries from Swahili, Arabic and English (motoka, safari, simu, sente, bei, boma, siteji, kodi, app, link, sandbox, plug-in). Buttons are bare verbs: Tu (go), Kapa (share), Kodi (rent), Yoo (send), 'Du UG (book on UG). The implosive apostrophe follows the standard orthography ('bu, 'dit, 'dini). No native reviewer has read this and Kakwa was the thinnest of the five sources: the verbs for book, choose, keep, forget and accept, the negation, and the tense particle a are the weakest points, and every paragraph is a close paraphrase that a Koboko speaker should expect to rewrite.",
+   "uncertain": 213,
+   "missing": 0,
+   "review": "",
+   "group": "Uganda · West Nile"
+  },
+  "nyn": {
+   "name": "Runyankore",
+   "native": "Orunyankore",
+   "region": "Ankole, south-western Uganda (Mbarara, Bushenyi, Ntungamo, Ibanda)",
+   "family": "Bantu",
+   "dir": "ltr",
+   "script": "Latin",
+   "confidence": "draft",
+   "note": "Everyday spoken Runyankore in the standard Runyakitara orthography, addressed in the singular (o-/-awe) the way a Mbarara advert talks to one person. The four verbs keep the earlier STR renderings (Shagara, Gaba, Pangisa, Tuma); Explore was moved from the duplicated Shagara to Zengyerera. App vocabulary with no settled word (app, link, code, sandbox, endpoint, API key, adapter, plug-in, permits) uses the common loan or a short paraphrase, and Hustle/Hustle Mode is kept as a product name; those keys are listed under uncertain.",
+   "uncertain": 30,
+   "missing": 0,
+   "review": "",
+   "group": "Uganda · West"
+  },
+  "cgg": {
+   "name": "Rukiga",
+   "native": "Orukiga",
+   "region": "Ankole, south-western Uganda (Mbarara, Bushenyi, Ntungamo, Ibanda)",
+   "family": "Bantu",
+   "dir": "ltr",
+   "script": "Latin",
+   "confidence": "draft",
+   "note": "Everyday spoken Runyankore in the standard Runyakitara orthography, addressed in the singular (o-/-awe) the way a Mbarara advert talks to one person. The four verbs keep the earlier STR renderings (Shagara, Gaba, Pangisa, Tuma); Explore was moved from the duplicated Shagara to Zengyerera. App vocabulary with no settled word (app, link, code, sandbox, endpoint, API key, adapter, plug-in, permits) uses the common loan or a short paraphrase, and Hustle/Hustle Mode is kept as a product name; those keys are listed under uncertain.",
+   "uncertain": 30,
+   "missing": 0,
+   "review": "",
+   "group": "Uganda · West"
+  },
+  "ttj": {
+   "name": "Rutooro",
+   "native": "Orutooro",
+   "region": "Tooro, western Uganda (Fort Portal, Kabarole, Kyenjojo, Kamwenge)",
+   "family": "Bantu",
+   "dir": "ltr",
+   "script": "Latin",
+   "confidence": "draft",
+   "note": "Everyday spoken Rutooro in the Runyoro-Rutooro orthography (l before i and e, r elsewhere), addressed to one person the way a Fort Portal radio spot would. Verbs: Tambura (ride, travel), Gabana (pool), Pangisa (rent), Tuma (deliver); Explore is Gendagenda and Drive uses the widely understood loan Vuga. App vocabulary with no settled Rutooro word (app, link, code, sandbox, endpoint, API key, adapter, plug-in) keeps the common loan or a short paraphrase and is listed under uncertain, as are a few idioms (keep flat, permits, off-peak) that a native reviewer should confirm.",
+   "uncertain": 37,
+   "missing": 0,
+   "review": "",
+   "group": "Uganda · West"
+  },
+  "nyo": {
+   "name": "Runyoro",
+   "native": "Orunyoro",
+   "region": "Uganda · West (Bunyoro: Hoima, Masindi, Kikuube)",
+   "family": "Bantu",
+   "dir": "ltr",
+   "script": "Latin",
+   "confidence": "draft",
+   "note": "Runyoro and Rutooro are two standards of one Runyoro-Rutooro language and are largely mutually intelligible; this draft is derived from the Rutooro (ttj) draft with Bunyoro spellings and a few lexical swaps (soroza→komma for 'choose' kept as toorana where natural). It needs a Runyoro native reviewer, above all where it still reads as Rutooro. Brand and place names, UGX and numbers are unchanged.",
+   "uncertain": 37,
+   "missing": 0,
+   "review": "",
+   "group": "Uganda · West"
+  },
+  "koo": {
+   "name": "Rukonzo",
+   "native": "Lhukonzo",
+   "region": "Uganda · West (Rwenzori: Kasese, Bundibugyo)",
+   "family": "Bantu",
+   "dir": "ltr",
+   "script": "Latin",
+   "confidence": "early draft",
+   "note": "A starter draft in Lhukonzo covering the strings a user meets first; the rest shows English until a Konzo speaker extends it. Verbs, the greeting and the doors are my best attempt and most are flagged uncertain — Lhukonzo noun-class concord and the app terms need native review. Covers 35 of 243 strings; the rest shows English.",
+   "uncertain": 35,
+   "missing": 208,
+   "review": "",
+   "group": "Uganda · West"
+  },
+  "sw": {
+   "name": "Swahili",
+   "native": "Kiswahili",
+   "region": "East Africa; Uganda's second official language (Kenya, Tanzania, Uganda usage)",
+   "family": "Bantu",
+   "dir": "ltr",
+   "script": "Latin",
+   "confidence": "complete",
+   "note": "Standard East African Swahili in the informal-but-polite register of a Kampala or Nairobi professional: second-person singular, short imperatives on buttons (Panda, Shirikiana, Kodi, Tuma), no honorific plural. Established tech loans are used where Swahili itself uses them (app, sandbox, API, tokeni, prototaipu, kiungo for link, kiunganishi for plug-in); 'mobile money' is rendered as pesa za simu. The renderings already shipped in the site's STR object were kept, with one extension: STR's listed (Imeorodheshwa) had dropped the English key's second half, so it now reads Imeorodheshwa · inatambulika to keep the separator and match ui.listed. The three keys listed as uncertain are ones where the loan versus the coined term is a house-style choice, not a doubt about correctness.",
+   "uncertain": 3,
+   "missing": 0,
+   "review": "",
+   "group": "East Africa · Africa"
+  },
+  "rw": {
+   "name": "Kinyarwanda",
+   "native": "Ikinyarwanda",
+   "region": "Visitors · Rwanda",
+   "family": "Bantu",
+   "dir": "ltr",
+   "script": "Latin",
+   "confidence": "draft",
+   "note": "A Kinyarwanda draft for Rwandan visitors, covering the strings met first; the rest falls back to English. Standard Kinyarwanda; app terms (escrow, plug-in) and a few idioms want a native reviewer. Covers 38 of 243 strings; the rest shows English.",
+   "uncertain": 38,
+   "missing": 205,
+   "review": "",
+   "group": "East Africa · Africa"
+  },
+  "so": {
+   "name": "Somali",
+   "native": "Af-Soomaali",
+   "region": "Visitors · Somalia, the Horn",
+   "family": "Cushitic",
+   "dir": "ltr",
+   "script": "Latin",
+   "confidence": "early draft",
+   "note": "A Somali starter covering the strings met first; the rest shows English. Standard Somali; longer phrasing and app terms want a native reviewer. Covers 35 of 243 strings; the rest shows English.",
+   "uncertain": 35,
+   "missing": 208,
+   "review": "",
+   "group": "East Africa · Africa"
+  },
+  "am": {
+   "name": "Amharic",
+   "native": "አማርኛ",
+   "region": "Ethiopia; the Ethiopian visitor and diaspora in Kampala",
+   "family": "Afro-Asiatic (Semitic)",
+   "dir": "ltr",
+   "script": "Ethiopic",
+   "confidence": "draft",
+   "note": "Follows the register of Android's Amharic localisation: second-person singular imperatives on buttons and slogans (ተሳፈር, ተጋራ, ተከራይ, ላክ, ቀጥል, ዝለል) with Ethiopic punctuation (። ፣ ፤ ፦), except the welcome line, which uses the fixed polite idiom እንኳን በደህና መጡ. Brands and Ugandan words stay in Latin script with an Amharic gloss on first use (ቦዳ boda, ማታቱ matatu, ሮሌክስ rolex, ስቴጅ stage); Kampala, Jinja and Uganda are transliterated. Marked draft because the masculine-singular address reads gendered to some readers and product feature names (Comfort Map, Pulse, Foresight, Crest, the arbitrage desk) are rendered descriptively; a native reviewer should check the long marketing paragraphs for flow.",
+   "uncertain": 8,
+   "missing": 0,
+   "review": "",
+   "group": "East Africa · Africa"
+  },
+  "ar": {
+   "name": "Arabic",
+   "native": "العربية",
+   "region": "Sudan, Egypt, the Gulf, North Africa and Somalia/Djibouti co-official; the Arabic-reading visitor to Uganda",
+   "family": "Afro-Asiatic (Semitic)",
+   "dir": "rtl",
+   "script": "Arabic",
+   "confidence": "reviewed",
+   "note": "Modern Standard Arabic kept deliberately plain, in the register of Careem, Uber and Yango's Arabic interfaces: second-person masculine singular on buttons (اركب، شارك، استأجر، أرسل), short imperatives, no formal plural. Product names, brands and Ugandan words stay in Latin script with an Arabic gloss on first use (بودا boda, ماتاتو matatu, رولكس rolex, ستيج stage); Kampala and Jinja are transliterated with the Latin name kept in the title line. Known gaps: 'Comfort Map', 'Crest', 'Pulse' and 'Foresight' are product feature names rendered descriptively; a Sudanese or Egyptian reviewer may prefer dialect forms for 'rush hour' and 'top up'.",
+   "uncertain": 6,
+   "missing": 0,
+   "review": "",
+   "group": "East Africa · Africa"
+  },
+  "ln": {
+   "name": "Lingala",
+   "native": "Lingála",
+   "region": "Visitors · DR Congo",
+   "family": "Bantu",
+   "dir": "ltr",
+   "script": "Latin",
+   "confidence": "early draft",
+   "note": "A Lingala starter covering the strings met first; the rest shows English. Kinshasa Lingala; app terms and longer phrasing want a native reviewer. Covers 35 of 243 strings; the rest shows English.",
+   "uncertain": 35,
+   "missing": 208,
+   "review": "",
+   "group": "East Africa · Africa"
+  },
+  "ha": {
+   "name": "Hausa",
+   "native": "Hausa",
+   "region": "Visitors · Nigeria, Niger",
+   "family": "Chadic",
+   "dir": "ltr",
+   "script": "Latin",
+   "confidence": "early draft",
+   "note": "A Hausa starter (Boko orthography) covering the strings met first; the rest shows English. Standard Hausa; longer phrasing and app terms want a native reviewer. Covers 35 of 243 strings; the rest shows English.",
+   "uncertain": 35,
+   "missing": 208,
+   "review": "",
+   "group": "East Africa · Africa"
+  },
+  "zu": {
+   "name": "isiZulu",
+   "native": "isiZulu",
+   "region": "Visitors · South Africa",
+   "family": "Bantu",
+   "dir": "ltr",
+   "script": "Latin",
+   "confidence": "early draft",
+   "note": "An isiZulu starter covering the strings met first; the rest shows English. Standard isiZulu; longer phrasing and app terms want a native reviewer. Covers 35 of 243 strings; the rest shows English.",
+   "uncertain": 35,
+   "missing": 208,
+   "review": "",
+   "group": "East Africa · Africa"
+  },
+  "en": {
+   "name": "English",
+   "native": "English",
+   "region": "World",
+   "dir": "ltr",
+   "script": "Latin",
+   "confidence": "complete",
+   "uncertain": 0,
+   "missing": 0,
+   "group": "World"
+  },
+  "fr": {
+   "name": "French",
+   "native": "Français",
+   "region": "Visitors from France, Belgium, Switzerland, Canada, DR Congo, Rwanda, Burundi and francophone Africa",
+   "family": "Indo-European",
+   "dir": "ltr",
+   "script": "Latin",
+   "confidence": "reviewed",
+   "note": "Le vouvoiement chaleureux d'une appli de voyage moderne : « vous » partout, phrases courtes, impératifs publicitaires pour les quatre verbes (Roulez. Covoiturez. Louez. Livrez.). Les termes ougandais (boda, matatu, stage, rolex) sont gardés avec une glose courte à la première apparition dans chaque texte ; « stage » reste en anglais car c'est le nom local de la gare de taxis, pas un stage professionnel. Les noms de fonctions internes (Pulse, Foresight, Crest, Comfort Map) sont rendus en français (Pouls, Prévision, écusson, Carte de confort) ; ce sont les choix les plus discutables.",
+   "uncertain": 10,
+   "missing": 0,
+   "review": "",
+   "group": "World"
+  },
+  "de": {
+   "name": "German",
+   "native": "Deutsch",
+   "region": "Visitors from Germany, Austria, Switzerland, Liechtenstein, Luxembourg and South Tyrol",
+   "family": "Indo-European",
+   "dir": "ltr",
+   "script": "Latin",
+   "confidence": "reviewed",
+   "note": "Freundliches Sie, wie es moderne Reise-Apps im deutschsprachigen Raum verwenden: kurz, direkt, ohne Amtsdeutsch. Die vier Verben sind knappe Werbe-Imperative (Fahren. Mitfahren. Mieten. Liefern.) und bleiben überall gleich. Ugandische Begriffe (Boda, Matatu, Stage, Rolex) bleiben stehen und werden beim ersten Auftreten in einem Text kurz erklärt; interne Funktionsnamen (Pulse, Foresight, Crest, Comfort Map) sind eingedeutscht (Puls, Vorausschau, Wappen, Komfortkarte), was am ehesten Prüfung durch das Produktteam braucht.",
+   "uncertain": 10,
+   "missing": 0,
+   "review": "",
+   "group": "World"
+  },
+  "it": {
+   "name": "Italian",
+   "native": "Italiano",
+   "region": "Visitors from Italy, Switzerland (Ticino), San Marino and Vatican City",
+   "family": "Indo-European",
+   "dir": "ltr",
+   "script": "Latin",
+   "confidence": "reviewed",
+   "note": "Il tu diretto e cordiale delle app di viaggio italiane, con frasi brevi e imperativi pubblicitari per i quattro verbi (Viaggia. Condividi. Noleggia. Spedisci.), ripetuti identici ovunque. I termini ugandesi (boda, matatu, stage, rolex) restano con una breve glossa alla prima comparsa in ogni testo; «stage» resta in inglese perché è il nome locale della fermata dei taxi collettivi. I nomi delle funzioni interne (Pulse, Foresight, Crest, Comfort Map) sono resi in italiano (Polso, Previsione, stemma, Mappa di comfort) e sono i punti che più meritano una verifica del team.",
+   "uncertain": 9,
+   "missing": 0,
+   "review": "",
+   "group": "World"
+  },
+  "es": {
+   "name": "Spanish",
+   "native": "Español",
+   "region": "Visitors from Spain, Equatorial Guinea and Spanish speakers in Europe",
+   "family": "Indo-European",
+   "dir": "ltr",
+   "script": "Latin",
+   "confidence": "reviewed",
+   "note": "Tuteo cálido y directo, como las apps de movilidad en España, con léxico peninsular (coche, alquilar, móvil, hora punta) e imperativos publicitarios breves para los cuatro verbos (Viaja. Comparte. Alquila. Envía.), idénticos en todas partes. Los términos ugandeses (boda, matatu, stage, rolex) se mantienen con una glosa corta la primera vez que aparecen en cada texto; «stage» queda en inglés porque es el nombre local de la parada de taxis colectivos. Los nombres de funciones internas (Pulse, Foresight, Crest, Comfort Map) se traducen (Pulso, Previsión, escudo, Mapa de comodidad) y son lo que más conviene que revise el equipo.",
+   "uncertain": 10,
+   "missing": 0,
+   "review": "",
+   "group": "World"
+  },
+  "es-MX": {
+   "name": "Spanish (Mexico)",
+   "native": "Español de México",
+   "region": "Visitors from Mexico, and Spanish speakers from Central America and the United States",
+   "family": "Indo-European",
+   "dir": "ltr",
+   "script": "Latin",
+   "confidence": "reviewed",
+   "note": "La mezcla de tú y usted que usan las apps mexicanas: tuteo en los botones y textos cortos, «ustedes» (nunca vosotros) para el plural, sin voseo. Léxico mexicano donde difiere del peninsular: carro, rentar y renta, celular, cajuela, camioneta, hora pico, tarifa dinámica, botana, pastel, placas, costales, anticipo; se evita «coger» (Tomar / Apartar un asiento). No aparece ningún boleto en las cadenas, así que ese término no se usa. Los cuatro verbos son imperativos publicitarios breves (Viaja. Comparte. Renta. Envía.), idénticos en todas partes; los términos ugandeses (boda, matatu, stage, rolex) se mantienen con una glosa corta la primera vez que aparecen en cada texto. Los nombres de funciones internas (Pulse, Foresight, Crest, Comfort Map) se traducen y son lo que más conviene que revise el equipo.",
+   "uncertain": 10,
+   "missing": 0,
+   "review": "",
+   "group": "World"
+  },
+  "pt": {
+   "name": "Portuguese",
+   "native": "Português",
+   "region": "Visitors from Portugal, Angola, Mozambique, Cape Verde, Guinea-Bissau, São Tomé and Príncipe and Timor-Leste",
+   "family": "Indo-European",
+   "dir": "ltr",
+   "script": "Latin",
+   "confidence": "reviewed",
+   "note": "Português europeu no registo cordial das apps de mobilidade em Portugal: tratamento na terceira pessoa sem «você» explícito, frases curtas e léxico de Portugal (autocarro, telemóvel, ecrã, comboio, aluguer, boleia, partilhar). Os quatro verbos são imperativos publicitários breves (Viaje. Partilhe. Alugue. Envie.), iguais em todo o lado; os termos ugandeses (boda, matatu, stage, rolex) ficam com uma glosa curta na primeira ocorrência de cada texto, e «stage» fica em inglês por ser o nome local da praça de táxis colectivos. Os nomes de funções internas (Pulse, Foresight, Crest, Comfort Map) foram traduzidos (Pulso, Previsão, brasão, Mapa de conforto) e são o que mais merece revisão da equipa.",
+   "uncertain": 10,
+   "missing": 0,
+   "review": "",
+   "group": "World"
+  },
+  "pt-BR": {
+   "name": "Portuguese (Brazil)",
+   "native": "Português do Brasil",
+   "region": "Visitors from Brazil",
+   "family": "Indo-European",
+   "dir": "ltr",
+   "script": "Latin",
+   "confidence": "reviewed",
+   "note": "Português brasileiro no tom direto e caloroso dos apps de mobilidade do Brasil: «você» explícito, gerúndios (está chovendo, enchendo), e léxico brasileiro onde difere do europeu (ônibus, celular, tela, trem, balsa, aluguel, carona, compartilhar, assento, porta-malas, caminhão, entregador, fazer login, o app no masculino). Os quatro verbos são imperativos publicitários curtos (Viaje. Compartilhe. Alugue. Envie.), iguais em todo lugar; os termos ugandenses (boda, matatu, stage, rolex) ficam com uma glosa curta na primeira ocorrência de cada texto, e «stage» fica em inglês por ser o nome local do ponto de táxi coletivo. Os nomes de funções internas (Pulse, Foresight, Crest, Comfort Map) foram traduzidos (Pulso, Previsão, brasão, Mapa de conforto) e são o que mais merece revisão da equipe.",
+   "uncertain": 9,
+   "missing": 0,
+   "review": "",
+   "group": "World"
+  },
+  "ru": {
+   "name": "Russian",
+   "native": "Русский",
+   "region": "Visitors from Russia, Belarus, Kazakhstan, Kyrgyzstan and Russian speakers across the former Soviet Union and the diaspora",
+   "family": "Indo-European",
+   "dir": "ltr",
+   "script": "Cyrillic",
+   "confidence": "reviewed",
+   "note": "Тёплое «вы» с маленькой буквы, как в современных приложениях для поездок: короткие фразы, прямые глаголы, без канцелярита. Четыре ключевых глагола переданы краткими рекламными императивами (Поезжайте. Делитесь. Арендуйте. Отправляйте.) и повторяются одинаково везде; угандийские слова (бода, матату, стейдж, ролекс) сохранены в транслитерации с короткой пояснительной глоссой при первом появлении в каждом тексте, причём «матату» удачно передаётся как «маршрутка». Названия внутренних функций (Pulse, Foresight, Crest, Comfort Map) переведены (Пульс, Прогноз, герб, Карта комфорта) — это места, которые в первую очередь стоит проверить команде.",
+   "uncertain": 11,
+   "missing": 0,
+   "review": "",
+   "group": "World"
+  },
+  "zh-Hans": {
+   "name": "Chinese, Simplified",
+   "native": "简体中文",
+   "region": "Visitors · China (mainland), Singapore, Malaysia",
+   "family": "Sino-Tibetan",
+   "dir": "ltr",
+   "script": "Han",
+   "confidence": "reviewed",
+   "note": "Mainland usage with full-width punctuation (。、“”) and Chinese quotation marks; UI copy addresses the reader as 你 rather than 您, matching Didi/Meituan-style app tone. The four verbs are two-character imperatives (打车 拼车 租车 寄送) used identically in nav, doors, tabs and footer. Feature names that are not products (Stage, Atlas, Pulse, Foresight, Crest, Comfort Map) are translated (车站, 图册, 脉动, 预见, 徽标, 舒适地图); Hustle Mode and brands stay Latin.",
+   "uncertain": 8,
+   "missing": 0,
+   "review": "",
+   "group": "World"
+  },
+  "ja": {
+   "name": "Japanese",
+   "native": "日本語",
+   "region": "Visitors · Japan",
+   "family": "Japonic",
+   "dir": "ltr",
+   "script": "Japanese",
+   "confidence": "reviewed",
+   "note": "Body copy and notices use the polite です・ます register; buttons, labels, nav and status chips use short dictionary or noun forms (席を取る, リンクをコピー, 認証済み) as Japanese apps do. The four verbs are one-word dictionary-form imperatives (乗る。乗り合う。借りる。届ける。) and recur unchanged in the footer. Ugandan terms are katakana with a one-time gloss (ボダ = バイクタクシー, マタツ = 乗り合いミニバス, ステージ = 乗り合いタクシー乗り場, ロレックス = 屋台の軽食); place names are katakana with the Latin name on first use.",
+   "uncertain": 10,
+   "missing": 0,
+   "review": "",
+   "group": "World"
+  },
+  "ko": {
+   "name": "Korean",
+   "native": "한국어",
+   "region": "Visitors · South Korea",
+   "family": "Koreanic",
+   "dir": "ltr",
+   "script": "Hangul",
+   "confidence": "reviewed",
+   "note": "Body copy and notices use the polite -요/-습니다 register; buttons, labels, nav and status chips use noun forms (좌석 잡기, 링크 복사, 인증됨) in the style of Kakao T and Naver. The four verbs are polite -세요 imperatives (타세요. 합승하세요. 빌리세요. 보내세요.) and recur unchanged in the footer. Ugandan terms are transliterated with a one-time gloss (보다 = 오토바이 택시, 마타투 = 합승 미니버스, 스테이지 = 합승 택시 승차장, 롤렉스 = 길거리 간식); place names are hangul with the Latin name on first use. Non-product feature names (Atlas, Pulse, Foresight, Crest, Comfort Map) are transliterated as 아틀라스, 펄스, 포사이트, 크레스트, 컴포트 맵.",
+   "uncertain": 9,
+   "missing": 0,
+   "review": "",
+   "group": "World"
+  },
+  "hi": {
+   "name": "Hindi",
+   "native": "हिन्दी",
+   "region": "Visitors · India, Nepal, Fiji, Mauritius",
+   "family": "Indo-European (Indo-Aryan)",
+   "dir": "ltr",
+   "script": "Devanagari",
+   "confidence": "reviewed",
+   "note": "Everyday travel-app Hindi with the respectful आप register and common English loans in Devanagari where Ola/Uber/Rapido Hindi use them (ऐप, बुक, राइड, पूल, रेंट, पिक-अप, ड्रॉप-ऑफ़, वॉलेट, इंस्टॉल); nukta forms (फ़, ज़, क़) are written consistently. The four verbs are short आप-imperatives (राइड करें। पूल करें। रेंट करें। भेजें।) and recur unchanged in the footer. Gendered first-person forms are avoided where a button could be pressed by anyone (मैं ड्राइवर हूँ, पहुँचने का वादा). Ugandan terms are transliterated with a one-time gloss (बोडा = मोटरसाइकिल टैक्सी, मटाटू = साझा मिनीबस, स्टेज = टैक्सी अड्डा, रोलेक्स = स्ट्रीट फ़ूड स्नैक).",
+   "uncertain": 11,
+   "missing": 0,
+   "review": "",
+   "group": "World"
   }
+ }
 }
