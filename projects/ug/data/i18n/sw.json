@@ -7,7 +7,7 @@
  "script": "Latin",
  "dir": "ltr",
  "confidence": "complete",
- "translator_note": "Standard East African Swahili in the informal-but-polite register of a Kampala or Nairobi professional: second-person singular, short imperatives on buttons (Panda, Shirikiana, Kodi, Tuma), no honorific plural. Established tech loans are used where Swahili itself uses them (app, sandbox, API, tokeni, prototaipu, kiungo for link, kiunganishi for plug-in); 'mobile money' is rendered as pesa za simu. The renderings already shipped in the site's STR object were kept unchanged. The three keys listed as uncertain are ones where the loan versus the coined term is a house-style choice, not a doubt about correctness.",
+ "translator_note": "Standard East African Swahili in the informal-but-polite register of a Kampala or Nairobi professional: second-person singular, short imperatives on buttons (Panda, Shirikiana, Kodi, Tuma), no honorific plural. Established tech loans are used where Swahili itself uses them (app, sandbox, API, tokeni, prototaipu, kiungo for link, kiunganishi for plug-in); 'mobile money' is rendered as pesa za simu. The renderings already shipped in the site's STR object were kept, with one extension: STR's listed (Imeorodheshwa) had dropped the English key's second half, so it now reads Imeorodheshwa · inatambulika to keep the separator and match ui.listed. The three keys listed as uncertain are ones where the loan versus the coined term is a house-style choice, not a doubt about correctness.",
  "uncertain": [
   "plugModal.label.endpoint",
   "navPlugins",
