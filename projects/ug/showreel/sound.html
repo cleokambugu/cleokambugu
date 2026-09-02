@@ -1,4 +1,4 @@
-<title>UG Showreel</title>
+<title>UG Showreel with Sound</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Albert+Sans:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
@@ -93,7 +93,7 @@ const W = 1280, H = 720;
 const C = {ground:'#0F0C0A', surface:'#1E1915', ink:'#F4ECDD', yellow:'#F2C200', red:'#D2202F', crane:'#94A8B6', good:'#3DBB7A'};
 const inkA = a => `rgba(244,236,221,${a})`;
 const params = new URLSearchParams(location.search);
-const SOUND = params.get('sound') === '1';
+const SOUND = true; // the sound cut
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const FONT = {
   disp:(w,s)=>`${w} ${s}px Unbounded, "Albert Sans", system-ui, sans-serif`,

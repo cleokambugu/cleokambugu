@@ -20,6 +20,7 @@ operator; see `docs/deploy.md` and the panel's list before real money moves.
 | [`site/index.html`](site/index.html) | **v1.** The app shell and the Virtual Stage: two doors, the sixty-second Handshake, paid intents that fill a stage, the driver's Comfort Map and funded-offer feed, empty legs, Pulse, the Tazama dock, voice commands, Me, a bottom tab bar. Single file, no build step. |
 | [`site/v0.html`](site/v0.html) | **v0**, frozen (also git tag `ug-v0`). |
 | [`site/manifest.webmanifest`](site/manifest.webmanifest) | Web app manifest so the site installs as the app. |
+| [`showreel/`](showreel/) | The film: `index.html` (silent, captions, auto-plays) and `sound.html` (generative soundtrack and narration). Twelve scenes, 4:35. |
 | [`docs/versions.md`](docs/versions.md) | What each version is and where it lives. |
 | [`docs/atlas.md`](docs/atlas.md) | The tie-together: one table, one truth about state, one desk, one rail, one formula, one map, one wallet, one crest, one link. |
 | [`docs/stay-on-ug.md`](docs/stay-on-ug.md) | Booking with partners without leaving UG: the trip rail now, and the business and API channels each operator offers (researched by search). |

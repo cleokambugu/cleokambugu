@@ -7,6 +7,8 @@
 | **v1.2** | `server/` + `site/` (current) | **Real.** A Node backend with SQLite: OTP accounts, stages, intents, offers, a double-entry ledger, bookings, Pulse, Flutterwave verify and webhooks, tests, Docker, GitHub Actions for the image and for Pages. The site detects the API and goes live; the sandbox remains the fallback. PWA with a service worker and icons. Kisoro and every major park on the map with the GTA-style terrain labels. v1.3 adds **teleport** (hover or tap a town and every desk moves there), **six languages** with honest confidence, and **Foresight**: seasonal produce, venue rhythms and events forecast a week ahead by place and vehicle class, drivers promise to be there, the gap is visible, amber rings on the map, produce hauling in Deliver, and the same forecast from the server. |
 | **v2** | planned | The backend and the licence: ledger, webhooks, regulatory gate, two launch corridors, the mobile diet, four-tab shell. See `roadmap.md` and `stress-test.md`. |
 
+The showreel lives in `showreel/`: [silent](https://claude.ai/code/artifact/7981c3aa-3783-45e5-8ac2-a5abbb36e8cf) and with sound (published beside it). It is regenerated when the product's scenes change.
+
 Rules: a version is frozen by tag and copy before the next begins. The artifact link for v0
 stays as it was; v1 has its own. The brand, tokens and the Crest are shared across versions so
 the site, the app and the platform read as one thing.
