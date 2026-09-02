@@ -384,6 +384,7 @@ details.reveal .stage-bar{margin-top:0}
 
 /* ---------- Intro overlay ---------- */
 #intro{position:fixed;inset:0;z-index:200;background:var(--ground);display:grid;place-items:center;transition:opacity .9s cubic-bezier(.16,1,.3,1)}
+#intro[hidden],#welcome[hidden]{display:none}
 #intro.out{opacity:0;pointer-events:none}
 #intro canvas{position:absolute;inset:0;width:100%;height:100%}
 #intro .skip{position:absolute;top:18px;right:18px;z-index:2}
@@ -692,17 +693,84 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
 .rv{opacity:1;transform:none;filter:blur(0);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1),filter 1s cubic-bezier(.16,1,.3,1)}
 .js .rv.pending{opacity:0;transform:translateY(22px);filter:blur(6px)}
 @media (prefers-reduced-motion:reduce){.rv,.js .rv.pending{opacity:1;transform:none;transition:none}.car{transition:none}}
+/* ---------- Welcome gate: pick your language first ---------- */
+#welcome{position:fixed;inset:0;z-index:200;background:radial-gradient(70% 60% at 50% 40%,var(--surface) 0%,var(--ground) 78%);display:grid;place-items:center;overflow:hidden}
+#welcome[hidden]{display:none}
+.wl-inner{display:flex;flex-direction:column;align-items:center;gap:18px;width:100%;max-width:980px;padding:24px;text-align:center}
+.wl-crest svg{width:64px;height:64px;color:var(--ink)}
+.wl-title{font-family:var(--font-display);font-weight:700;font-size:clamp(22px,3.4vw,34px);letter-spacing:-.01em}
+.wl-sub{color:var(--ink-2);font-size:14px;max-width:52ch}
+.wl-stage{position:relative;width:min(92vw,860px);height:min(46vh,380px);perspective:1100px;touch-action:pan-y;outline:none}
+.wl-stage:focus-visible{outline:2px solid var(--yellow);outline-offset:6px;border-radius:24px}
+.wl-ring{position:absolute;inset:0;transform-style:preserve-3d;will-change:transform}
+.wl-chip{position:absolute;left:50%;top:50%;transform-style:preserve-3d;background:color-mix(in srgb,var(--surface) 82%,transparent);border:1px solid var(--line-strong);border-radius:16px;padding:12px 18px;cursor:pointer;backface-visibility:hidden;min-width:150px;transition:border-color .2s, box-shadow .2s;color:var(--ink)}
+.wl-chip b{display:block;font-family:var(--font-display);font-size:17px;font-weight:600;white-space:nowrap}
+.wl-chip small{display:block;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-top:3px;white-space:nowrap}
+.wl-chip:hover,.wl-chip.front{border-color:var(--yellow);box-shadow:0 0 0 1px var(--yellow), 0 14px 40px rgba(0,0,0,.35)}
+.wl-hint{color:var(--ink-3);font-size:12px}
+.wl-count{font-family:var(--font-mono);font-size:12px;color:var(--ink-3);letter-spacing:.1em}
+.wl-list{display:none;max-height:52vh;overflow:auto;width:min(92vw,760px);text-align:left;padding:4px}
+.wl-list h5{margin:14px 4px 8px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.wl-list .wl-chip{position:static;transform:none;display:inline-block;margin:0 8px 8px 0;min-width:0}
+#welcome.flat .wl-stage{display:none}
+#welcome.flat .wl-list{display:block}
+.wl-pick{display:flex;flex-direction:column;align-items:center;gap:14px;width:100%}
+.wl-greet{display:none;flex-direction:column;align-items:center;gap:14px}
+#welcome.greeting .wl-pick{display:none}
+#welcome.greeting .wl-greet{display:flex}
+.wl-hello{font-family:var(--font-display);font-weight:800;font-size:clamp(30px,5.6vw,58px);letter-spacing:-.015em;text-wrap:balance;animation:wlrise .9s cubic-bezier(.16,1,.3,1) both}
+.wl-echo{color:var(--ink-2);font-size:16px;animation:wlrise .9s cubic-bezier(.16,1,.3,1) both}
+.wl-echo b{color:var(--ink);font-weight:600}
+.wl-flag{font-family:var(--font-mono);font-size:12px;color:var(--yellow);letter-spacing:.14em;text-transform:uppercase}
+@keyframes wlrise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.wl-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:6px}
+@media (prefers-reduced-motion:reduce){.wl-hello,.wl-echo{animation:none}}
+/* ---------- Accessibility settings ---------- */
+body.a11y-text{zoom:1.18}
+body.a11y-links a{text-decoration:underline}
+body.a11y-contrast{--ink-2:color-mix(in srgb,var(--ink) 86%,transparent);--ink-3:color-mix(in srgb,var(--ink) 70%,transparent);--line:color-mix(in srgb,var(--ink) 34%,transparent);--line-strong:color-mix(in srgb,var(--ink) 48%,transparent)}
+body.a11y-contrast .btn,body.a11y-contrast .seg button,body.a11y-contrast .quote,body.a11y-contrast .st-card{border-width:2px}
+body.a11y-motion *,body.a11y-motion *::before,body.a11y-motion *::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}
+body.a11y-motion .ticker-track{animation:none}
+.a11y-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 4px;border-bottom:1px dashed var(--line)}
+.a11y-row div b{display:block;font-size:14px}
+.a11y-row div small{color:var(--ink-3);font-size:12px}
+.a11y-sw{flex:none;width:52px;height:30px;border-radius:999px;border:1px solid var(--line-strong);background:var(--surface-2);position:relative;cursor:pointer;transition:background .2s}
+.a11y-sw::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:var(--ink-3);transition:transform .2s, background .2s}
+.a11y-sw[aria-checked="true"]{background:color-mix(in srgb,var(--yellow) 45%,var(--surface-2))}
+.a11y-sw[aria-checked="true"]::after{transform:translateX(22px);background:var(--yellow)}
 </style>
 </head>
 <body>
 
-<div id="intro" hidden aria-label="UG opening"><canvas id="introCanvas"></canvas><button class="btn small skip" type="button" id="introSkip">Skip</button><div class="words" id="introWords"><span>Ride.</span><span>Pool.</span><span>Rent.</span><span>Deliver.</span></div></div>
+<div id="welcome" hidden role="dialog" aria-modal="true" aria-labelledby="wlTitle">
+  <div class="wl-inner">
+    <div class="wl-pick">
+      <div class="wl-crest"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true"><path d="M28.5 40.5 Q22 31 12.5 17" fill="none" stroke="currentColor" stroke-width="7.5" stroke-linecap="round"/><path d="M32 38.5 Q32 24 32 8.5" fill="none" stroke="#F2C200" stroke-width="7.5" stroke-linecap="round"/><path d="M35.5 40.5 Q42 31 51.5 17" fill="none" stroke="#D2202F" stroke-width="7.5" stroke-linecap="round"/><circle cx="32" cy="48" r="7.5" fill="currentColor"/><circle cx="32" cy="48" r="3" fill="#F2C200"/></svg></div>
+      <div class="wl-title" id="wlTitle">Choose your language · Londa olulimi lwo · Chagua lugha yako</div>
+      <p data-i18n="page.p.ug_speaks_the_languages" class="wl-sub">UG speaks the languages of Uganda, of the region, and of its visitors. Pick yours; everything follows.</p>
+      <div class="wl-stage" id="wlStage" tabindex="0" role="listbox" aria-label="Languages"><div class="wl-ring" id="wlRing"></div></div>
+      <div class="wl-list" id="wlList"></div>
+      <div class="wl-count" id="wlCount"></div>
+      <div class="wl-hint" id="wlHint">Drag or use ← → to turn · Enter to choose</div>
+      <div class="wl-actions"><button class="btn small" type="button" id="wlFlat">List view</button><button class="btn small" type="button" id="wlA11y">Accessibility</button><button class="btn small" type="button" id="wlSkip">English · skip</button></div>
+    </div>
+    <div class="wl-greet" aria-live="polite">
+      <div class="wl-flag" id="wlLangName"></div>
+      <div class="wl-hello" id="wlHello"></div>
+      <div class="wl-echo" id="wlEchoLg"></div>
+      <div class="wl-echo" id="wlEchoSw" style="animation-delay:.25s"></div>
+      <div class="wl-actions"><button class="btn primary" type="button" id="wlGo">Continue</button><button class="btn" type="button" id="wlBack">Back</button></div>
+    </div>
+  </div>
+</div>
+<div id="intro" hidden aria-label="UG opening"><canvas id="introCanvas"></canvas><button data-i18n="page.button.skip" class="btn small skip" type="button" id="introSkip">Skip</button><div class="words" id="introWords"><span data-i18n="ride">Ride.</span><span data-i18n="pool">Pool.</span><span data-i18n="rent">Rent.</span><span data-i18n="deliver">Deliver.</span></div></div>
 
 <!-- ===================== NAV ===================== -->
 <nav class="nav" aria-label="Primary">
   <div class="wrap">
     <a class="logo" href="#top" aria-label="UG home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true" class="crest">    <path d="M28.5 40.5 Q22 31 12.5 17" fill="none" stroke="currentColor" stroke-width="7.5" stroke-linecap="round"/>  <path d="M32 38.5 Q32 24 32 8.5" fill="none" stroke="#F2C200" stroke-width="7.5" stroke-linecap="round"/>  <path d="M35.5 40.5 Q42 31 51.5 17" fill="none" stroke="#D2202F" stroke-width="7.5" stroke-linecap="round"/>  <circle cx="32" cy="48" r="7.5" fill="currentColor"/>  <circle cx="32" cy="48" r="3" fill="#F2C200"/></svg>UG</a>
-    <span class="tagline" id="tagline" aria-hidden="true"><span>Ride.</span><span>Pool.</span><span>Rent.</span><span>Deliver.</span></span>
+    <span class="tagline" id="tagline" aria-hidden="true"><span data-i18n="ride">Ride.</span><span data-i18n="pool">Pool.</span><span data-i18n="rent">Rent.</span><span data-i18n="deliver">Deliver.</span></span>
     <div class="nav-links">
       <a href="#compare" data-i18n="tabRide">Ride</a>
       <a href="#stage" data-i18n="navStage">Stage</a>
@@ -717,7 +785,7 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
     <button class="railpill" id="railPill" type="button" aria-live="polite"><i></i><span id="railPillT">Trip</span></button>
     <button class="theme-toggle" id="micBtn" type="button" aria-label="Voice commands" title="Voice commands (Cephable / browser speech)">🎤 voice</button>
     <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle colour theme">night / noon</button>
-    <button class="btn primary small" type="button" id="navCta">Get started</button>
+    <button data-i18n="getStarted" class="btn primary small" type="button" id="navCta">Get started</button>
   </div>
 </nav>
 
@@ -725,15 +793,15 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
 <header class="hero" id="top">
   <div class="wrap">
     <div class="hero-copy">
-      <div class="eyebrow fx" style="--d:.05s"><b>UG</b> · Kampala → everywhere</div>
-      <h1 id="verbs" aria-label="Ride. Pool. Rent. Deliver."><span class="w" data-w="Ride." data-flip="Find a ride.">Ride.</span><span class="w hl" data-w="Pool." data-flip="Share the ride.">Pool.</span><span class="w" data-w="Rent." data-flip="Rent the ride.">Rent.</span><span class="w" data-w="Deliver." data-flip="Send the thing.">Deliver.</span></h1>
+      <div data-i18n-html="top.div.ug_kampala_everywhere" class="eyebrow fx" style="--d:.05s"><b>UG</b> · Kampala → everywhere</div>
+      <h1 id="verbs" aria-label="Ride. Pool. Rent. Deliver."><span data-i18n="ride" class="w" data-w="Ride." data-flip="Find a ride.">Ride.</span><span data-i18n="pool" class="w hl" data-w="Pool." data-flip="Share the ride.">Pool.</span><span data-i18n="rent" class="w" data-w="Rent." data-flip="Rent the ride.">Rent.</span><span data-i18n="deliver" class="w" data-w="Deliver." data-flip="Send the thing.">Deliver.</span></h1>
       <p class="lede tag fx" style="--d:1.25s"><span id="flip" class="flip">Share the ride.</span> <span data-i18n="position">Look the part. Pay the smart price.</span></p>
-      <p class="lede fx" style="--d:1.45s">One app that quotes every ride on the Ugandan market side by side, pools the road trip so the Prado costs a quarter, rents the car when you need to arrive, and books the park before the permits go. Paid the way Kampala pays: mobile money.</p>
+      <p data-i18n="top.p.one_app_that_quotes" class="lede fx" style="--d:1.45s">One app that quotes every ride on the Ugandan market side by side, pools the road trip so the Prado costs a quarter, rents the car when you need to arrive, and books the park before the permits go. Paid the way Kampala pays: mobile money.</p>
       <div class="doors fx" style="--d:1.6s">
         <button class="door" type="button" data-door="rider"><span class="d-k" data-i18n="doorRider">I need to get somewhere</span><span class="d-v" data-i18n="doorRiderSub">Queue a seat, compare every ride, plan the weekend.</span><span class="d-go" data-i18n="start">Start →</span></button>
         <button class="door" type="button" data-door="driver"><span class="d-k" data-i18n="doorDriver">I drive, or I have a car</span><span class="d-v" data-i18n="doorDriverSub">Say where you're comfortable. Funded trips come to you.</span><span class="d-go" data-i18n="open">Open for business →</span></button>
       </div>
-      <div class="fx" style="--d:1.7s;margin-top:12px"><a class="quiet" href="#compare">Just compare prices, no account needed</a></div>
+      <div class="fx" style="--d:1.7s;margin-top:12px"><a data-i18n="top.a.just_compare_prices_no" class="quiet" href="#compare">Just compare prices, no account needed</a></div>
     </div>
     <div class="stage" id="map">
       <canvas id="scene" aria-label="Interactive particle map of Uganda. Drag to rotate, hover a place to see it." role="img"></canvas>
@@ -747,23 +815,23 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
   <div class="wrap strip" id="strip">
     <div class="strip-inner glass fx" style="--d:1.9s">
       <div class="verbs" role="tablist" aria-label="What do you need">
-        <button role="tab" class="on" data-verb="ride" aria-selected="true">RIDE<span>Compare every app and go</span></button>
-        <button role="tab" data-verb="pool" aria-selected="false">POOL<span>Share the seat, split the fuel</span></button>
-        <button role="tab" data-verb="rent" aria-selected="false">RENT<span>Self-drive or with driver</span></button>
-        <button role="tab" data-verb="deliver" aria-selected="false">DELIVER<span>Send the thing, any size</span></button>
-        <button role="tab" data-verb="explore" aria-selected="false">EXPLORE<span>Parks, permits, weekends</span></button>
+        <button role="tab" class="on" data-verb="ride" aria-selected="true">RIDE<span data-i18n="top.span.compare_every_app_and">Compare every app and go</span></button>
+        <button role="tab" data-verb="pool" aria-selected="false">POOL<span data-i18n="top.span.share_the_seat_split">Share the seat, split the fuel</span></button>
+        <button role="tab" data-verb="rent" aria-selected="false">RENT<span data-i18n="top.span.self_drive_or_with">Self-drive or with driver</span></button>
+        <button role="tab" data-verb="deliver" aria-selected="false">DELIVER<span data-i18n="top.span.send_the_thing_any">Send the thing, any size</span></button>
+        <button role="tab" data-verb="explore" aria-selected="false">EXPLORE<span data-i18n="top.span.parks_permits_weekends">Parks, permits, weekends</span></button>
       </div>
       <form class="fields" id="stripForm">
-        <div class="field"><label for="sFrom">Pick-up</label><select id="sFrom"></select></div>
-        <div class="field"><label for="sTo">Drop-off / destination</label><select id="sTo"></select></div>
-        <div class="field"><label for="sDate">Date</label><input id="sDate" type="date"></div>
-        <div class="field"><label for="sTime">Time</label><input id="sTime" type="time" value="17:30"></div>
-        <div class="go"><button class="btn primary" type="submit" id="stripGo">Show prices</button></div>
+        <div class="field"><label data-i18n="top.label.pick_up" for="sFrom">Pick-up</label><select id="sFrom"></select></div>
+        <div class="field"><label data-i18n="top.label.drop_off_destination" for="sTo">Drop-off / destination</label><select id="sTo"></select></div>
+        <div class="field"><label data-i18n="top.label.date" for="sDate">Date</label><input id="sDate" type="date"></div>
+        <div class="field"><label data-i18n="top.label.time" for="sTime">Time</label><input id="sTime" type="time" value="17:30"></div>
+        <div class="go"><button data-i18n="top.button.show_prices" class="btn primary" type="submit" id="stripGo">Show prices</button></div>
       </form>
     </div>
   </div>
 
-  <div class="proto" role="note">Prototype v1 · every price is an estimate from a published model · payments run in a sandbox · nothing here is a licensed service yet</div>
+  <div data-i18n="top.div.prototype_v1_every_price" class="proto" role="note">Prototype v1 · every price is an estimate from a published model · payments run in a sandbox · nothing here is a licensed service yet</div>
 </header>
 
 <!-- ===================== COMPARE ===================== -->
@@ -771,48 +839,48 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
   <div class="wrap">
     <div class="sec-head rv">
       <div>
-        <div class="eyebrow">Compare · <b>the arbitrage desk</b></div>
-        <h2>Every ride on the market, one screen, ranked by price.</h2>
+        <div data-i18n-html="compare.div.compare_the_arbitrage_desk" class="eyebrow">Compare · <b>the arbitrage desk</b></div>
+        <h2 data-i18n="compare.h2.every_ride_on_the">Every ride on the market, one screen, ranked by price.</h2>
       </div>
-      <p>Uber, Bolt, SafeBoda, Faras, Yango, Tinka, the street boda, the matatu, a special hire, the bus, the ferry, the flight, and UG’s own pool and rentals. Same trip, same minute. Estimates say so on the card, the ones that cannot serve you stay greyed with the reason, and the button is always Book on UG.</p>
+      <p data-i18n="compare.p.uber_bolt_safeboda_faras">Uber, Bolt, SafeBoda, Faras, Yango, Tinka, the street boda, the matatu, a special hire, the bus, the ferry, the flight, and UG’s own pool and rentals. Same trip, same minute. Estimates say so on the card, the ones that cannot serve you stay greyed with the reason, and the button is always Book on UG.</p>
     </div>
     <div class="desk">
       <div class="panel rv">
-        <h3>Your trip</h3>
-        <div class="ctl"><label for="cFrom">From</label><select id="cFrom"></select></div>
-        <div class="ctl"><label for="cTo">To</label><select id="cTo"></select></div>
+        <h3 data-i18n="compare.h3.your_trip">Your trip</h3>
+        <div class="ctl"><label data-i18n="compare.label.from" for="cFrom">From</label><select id="cFrom"></select></div>
+        <div class="ctl"><label data-i18n="compare.label.to" for="cTo">To</label><select id="cTo"></select></div>
         <div class="route-meta" id="routeMeta"></div>
-        <div class="ctl" style="margin-top:14px"><label>Leaving</label>
+        <div class="ctl" style="margin-top:14px"><label data-i18n="compare.label.leaving">Leaving</label>
           <div class="seg" id="segTime">
-            <button type="button" data-v="off" class="on">Off-peak</button>
-            <button type="button" data-v="peak">Rush hour</button>
-            <button type="button" data-v="night">Night</button>
+            <button data-i18n="compare.button.off_peak" type="button" data-v="off" class="on">Off-peak</button>
+            <button data-i18n="compare.button.rush_hour" type="button" data-v="peak">Rush hour</button>
+            <button data-i18n="compare.button.night" type="button" data-v="night">Night</button>
           </div>
         </div>
-        <div class="ctl"><label>Show</label>
+        <div class="ctl"><label data-i18n="compare.label.show">Show</label>
           <div class="seg" id="segMode" style="flex-wrap:wrap">
-            <button type="button" data-v="all" class="on">All</button>
-            <button type="button" data-v="boda">Boda</button>
-            <button type="button" data-v="car">Car</button>
-            <button type="button" data-v="shared">Shared</button>
-            <button type="button" data-v="more">Air · water · rail</button>
+            <button data-i18n="compare.button.all" type="button" data-v="all" class="on">All</button>
+            <button data-i18n="compare.button.boda" type="button" data-v="boda">Boda</button>
+            <button data-i18n="compare.button.car" type="button" data-v="car">Car</button>
+            <button data-i18n="compare.button.shared" type="button" data-v="shared">Shared</button>
+            <button data-i18n="compare.button.air_water_rail" type="button" data-v="more">Air · water · rail</button>
           </div>
         </div>
-        <div class="ctl"><label for="cPax">People travelling</label><input id="cPax" type="number" min="1" max="7" value="1"></div>
-        <details class="reveal" id="moreOpts" style="margin-top:6px"><summary>More options <small>pick the car, rain, split</small></summary>
-        <div class="ctl"><label>Pick the car</label><div class="pick" id="pickCar"><span class="c on" data-p="any">Any</span><span class="c" data-p="sedan">Signature sedan</span><span class="c" data-p="suv">Signature SUV</span><span class="c" data-p="van">Executive van</span></div></div>
-        <label class="toggle"><span>It is raining (Kampala surge)</span><input type="checkbox" id="cRain"></label>
-        <label class="toggle"><span>Split fare across the group</span><input type="checkbox" id="cSplit" checked></label>
+        <div class="ctl"><label data-i18n="compare.label.people_travelling" for="cPax">People travelling</label><input id="cPax" type="number" min="1" max="7" value="1"></div>
+        <details class="reveal" id="moreOpts" style="margin-top:6px"><summary data-i18n-html="compare.summary.more_options_pick_the">More options <small>pick the car, rain, split</small></summary>
+        <div class="ctl"><label data-i18n="compare.label.pick_the_car">Pick the car</label><div class="pick" id="pickCar"><span data-i18n="compare.span.any" class="c on" data-p="any">Any</span><span data-i18n="compare.span.signature_sedan" class="c" data-p="sedan">Signature sedan</span><span data-i18n="compare.span.signature_suv" class="c" data-p="suv">Signature SUV</span><span data-i18n="compare.span.executive_van" class="c" data-p="van">Executive van</span></div></div>
+        <label class="toggle"><span data-i18n="compare.span.it_is_raining_kampala">It is raining (Kampala surge)</span><input type="checkbox" id="cRain"></label>
+        <label class="toggle"><span data-i18n="compare.span.split_fare_across_the">Split fare across the group</span><input type="checkbox" id="cSplit" checked></label>
         </details>
       </div>
       <div>
-        <details class="reveal" id="spreadWrap" style="margin:0 0 12px;border-top:0"><summary>What choosing badly costs <small>the spread across the market for this trip</small></summary><div class="res-summary" id="resSummary"></div></details>
+        <details class="reveal" id="spreadWrap" style="margin:0 0 12px;border-top:0"><summary data-i18n-html="compare.summary.what_choosing_badly_costs">What choosing badly costs <small>the spread across the market for this trip</small></summary><div class="res-summary" id="resSummary"></div></details>
         <div class="results" id="results" aria-live="polite"></div>
         <p class="disclaimer" id="disclaimer"></p>
       </div>
     </div>
-    <details class="reveal" id="atlas"><summary>The Atlas · every way to move, one table <small>air, bus, water, rail, Signature cars, stays, with the truth about each one's state</small></summary>
-    <p class="note" style="margin:4px 0 12px;max-width:80ch"><b>Book on UG</b> where a channel exists, <b>Call ahead</b> where it does not, <b>Listed</b> for recognition, <b>Coming</b> for what is being built. Fares are modelled and say so.</p>
+    <details class="reveal" id="atlas"><summary data-i18n-html="compare.summary.the_atlas_every_way">The Atlas · every way to move, one table <small>air, bus, water, rail, Signature cars, stays, with the truth about each one's state</small></summary>
+    <p data-i18n-html="compare.p.book_on_ug_where" class="note" style="margin:4px 0 12px;max-width:80ch"><b>Book on UG</b> where a channel exists, <b>Call ahead</b> where it does not, <b>Listed</b> for recognition, <b>Coming</b> for what is being built. Fares are modelled and say so.</p>
     <div class="seg rv" id="segAtlas" style="max-width:720px;margin-bottom:16px"></div>
     <p class="note rv" id="modeLine" style="margin-bottom:12px"></p>
     <div class="atlas-grid rv" id="atlasGrid"></div>
@@ -825,55 +893,55 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
   <div class="wrap">
     <div class="sec-head rv">
       <div>
-        <div class="eyebrow">The Virtual Stage · <b>seats fill first, then the car comes</b></div>
-        <h2>Pay for the seat. The car comes when it fills.</h2>
+        <div data-i18n-html="stage.div.the_virtual_stage_seats" class="eyebrow">The Virtual Stage · <b>seats fill first, then the car comes</b></div>
+        <h2 data-i18n="stage.h2.pay_for_the_seat">Pay for the seat. The car comes when it fills.</h2>
       </div>
-      <p>Like a matatu stage, a car leaves when it is full or at the cut-off. Unlike a stage, you queue money from your sofa, the seat price falls as friends join, and the driver who takes it already said they are comfortable on that road.</p>
+      <p data-i18n="stage.p.like_a_matatu_stage">Like a matatu stage, a car leaves when it is full or at the cut-off. Unlike a stage, you queue money from your sofa, the seat price falls as friends join, and the driver who takes it already said they are comfortable on that road.</p>
     </div>
     <div class="stage-bar rv">
       <div class="seg" id="segStage" style="max-width:420px">
-        <button type="button" data-v="all" class="on">All corridors</button>
-        <button type="button" data-v="mine">Near me</button>
-        <button type="button" data-v="funded">Funded</button>
+        <button data-i18n="stage.button.all_corridors" type="button" data-v="all" class="on">All corridors</button>
+        <button data-i18n="stage.button.near_me" type="button" data-v="mine">Near me</button>
+        <button data-i18n="stage.button.funded" type="button" data-v="funded">Funded</button>
       </div>
       <span class="spacer" style="flex:1"></span>
-      <button class="btn small" type="button" id="newStageBtn">Start a stage</button>
+      <button data-i18n="stage.button.start_a_stage" class="btn small" type="button" id="newStageBtn">Start a stage</button>
     </div>
-    <details class="reveal" id="pulseWrap"><summary>Where stages fill fastest <small>Pulse · paid seats against comfort maps, by town</small></summary><div class="pulse rv" id="pulse"></div></details>
+    <details class="reveal" id="pulseWrap"><summary data-i18n-html="stage.summary.where_stages_fill_fastest">Where stages fill fastest <small>Pulse · paid seats against comfort maps, by town</small></summary><div class="pulse rv" id="pulse"></div></details>
     <div class="stages rv" id="stages" aria-live="polite"></div>
-    <details class="reveal" id="busesWrap"><summary>Buses on this corridor <small>the fallback, side by side with the stage</small></summary>
+    <details class="reveal" id="busesWrap"><summary data-i18n-html="stage.summary.buses_on_this_corridor">Buses on this corridor <small>the fallback, side by side with the stage</small></summary>
     <div class="buses rv">
-      <div class="legs-head"><div><p class="note" style="margin-top:4px;max-width:72ch" hidden>Every corridor also has buses. Compare departure times across operators, see the park you leave from, and book on UG where the operator takes online bookings. Where it does not, we say so and give you the number to call ahead, rather than a dead button.</p></div>
-        <div class="ctl" style="min-width:220px;margin:0"><label for="busCorr">Corridor</label><select id="busCorr"></select></div></div>
+      <div class="legs-head"><div><p data-i18n="stage.p.every_corridor_also_has" class="note" style="margin-top:4px;max-width:72ch" hidden>Every corridor also has buses. Compare departure times across operators, see the park you leave from, and book on UG where the operator takes online bookings. Where it does not, we say so and give you the number to call ahead, rather than a dead button.</p></div>
+        <div class="ctl" style="min-width:220px;margin:0"><label data-i18n="stage.label.corridor" for="busCorr">Corridor</label><select id="busCorr"></select></div></div>
       <div class="bus-list" id="buses"></div>
     </div>
     </details>
-    <details class="reveal" id="legsWrap"><summary>Empty legs <small>the return seats, 40% of the fare</small></summary>
+    <details class="reveal" id="legsWrap"><summary data-i18n-html="stage.summary.empty_legs_the_return">Empty legs <small>the return seats, 40% of the fare</small></summary>
     <div class="legs rv">
-      <div class="legs-head"><div><p class="note" style="margin-top:4px">Every rental with driver and every pool has a way back. The moment the outbound is booked, the return's seats go on sale.</p></div></div>
+      <div class="legs-head"><div><p data-i18n="stage.p.every_rental_with_driver" class="note" style="margin-top:4px">Every rental with driver and every pool has a way back. The moment the outbound is booked, the return's seats go on sale.</p></div></div>
       <div class="legs-list" id="legs"></div>
     </div>
     </details>
-    <details class="reveal" id="pool"><summary>Post a trip of your own, or price a seat <small>Pool · your circles, the true cost of the road divided by seats</small></summary>
+    <details class="reveal" id="pool"><summary data-i18n-html="stage.summary.post_a_trip_of">Post a trip of your own, or price a seat <small>Pool · your circles, the true cost of the road divided by seats</small></summary>
     <div class="pool">
       <div class="rv">
         <div id="trips"></div>
         <div class="circles" id="circles"></div>
       </div>
       <div class="panel rv">
-        <h3>Offer a seat, or see what a seat should cost</h3>
+        <h3 data-i18n="stage.h3.offer_a_seat_or">Offer a seat, or see what a seat should cost</h3>
         <div class="split">
-          <div class="ctl"><label for="pRoute">Route</label><select id="pRoute"></select></div>
-          <div class="ctl"><label for="pSeats">Paying seats</label><input id="pSeats" type="number" min="1" max="6" value="3"></div>
-          <div class="ctl"><label for="pCar">Car</label><select id="pCar"></select></div>
-          <div class="ctl"><label for="pWhen">Departure</label><input id="pWhen" type="time" value="06:00"></div>
+          <div class="ctl"><label data-i18n="stage.label.route" for="pRoute">Route</label><select id="pRoute"></select></div>
+          <div class="ctl"><label data-i18n="stage.label.paying_seats" for="pSeats">Paying seats</label><input id="pSeats" type="number" min="1" max="6" value="3"></div>
+          <div class="ctl"><label data-i18n="stage.label.car" for="pCar">Car</label><select id="pCar"></select></div>
+          <div class="ctl"><label data-i18n="stage.label.departure" for="pWhen">Departure</label><input id="pWhen" type="time" value="06:00"></div>
           <div class="out" id="splitOut"></div>
         </div>
         <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
-          <button class="btn primary" type="button" id="offerBtn">Post this trip</button>
-          <button class="btn" type="button" id="bookSeatBtn">Book a seat with MoMo</button>
+          <button data-i18n="stage.button.post_this_trip" class="btn primary" type="button" id="offerBtn">Post this trip</button>
+          <button data-i18n="stage.button.book_a_seat_with" class="btn" type="button" id="bookSeatBtn">Book a seat with MoMo</button>
         </div>
-        <p class="note">Posted trips live only in this browser until you sign in. Pool follows the same pattern the Pool app popularised: phone-verified accounts, a trip chat, and two-way ratings, plus circles so you ride with people you already half-know.</p>
+        <p data-i18n="stage.p.posted_trips_live_only" class="note">Posted trips live only in this browser until you sign in. Pool follows the same pattern the Pool app popularised: phone-verified accounts, a trip chat, and two-way ratings, plus circles so you ride with people you already half-know.</p>
       </div>
     </div>
     </details>
@@ -885,10 +953,10 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
   <div class="wrap">
     <div class="sec-head rv">
       <div>
-        <div class="eyebrow">Rent · <b>arrive properly</b></div>
-        <h2>Rent the car, or arrive in it.</h2>
+        <div data-i18n-html="rent.div.rent_arrive_properly" class="eyebrow">Rent · <b>arrive properly</b></div>
+        <h2 data-i18n="rent.h2.rent_the_car_or">Rent the car, or arrive in it.</h2>
       </div>
-      <p>Self-drive by the day, chauffeured by the hour, or the Signature fleet when the arrival is the point. The price is per head when you split it.</p>
+      <p data-i18n="rent.p.self_drive_by_the">Self-drive by the day, chauffeured by the hour, or the Signature fleet when the arrival is the point. The price is per head when you split it.</p>
     </div>
     <div class="rent-bar rv">
       <label>Days <input type="range" id="rDays" min="1" max="14" value="3"> <span class="mono" id="rDaysV">3</span></label>
@@ -906,26 +974,26 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
   <div class="wrap">
     <div class="sec-head rv">
       <div>
-        <div class="eyebrow">Deliver · <b>send the thing</b></div>
-        <h2>Send the thing. Any size, any distance.</h2>
+        <div data-i18n-html="deliver.div.deliver_send_the_thing" class="eyebrow">Deliver · <b>send the thing</b></div>
+        <h2 data-i18n="deliver.h2.send_the_thing_any">Send the thing. Any size, any distance.</h2>
       </div>
-      <p>Every courier in town on one screen, ranked. Upcountry, the parcel rides in the boot of a stage car for a quarter of a seat, and in harvest season a minibus, pickup or lorry with a driver.</p>
+      <p data-i18n="deliver.p.every_courier_in_town">Every courier in town on one screen, ranked. Upcountry, the parcel rides in the boot of a stage car for a quarter of a seat, and in harvest season a minibus, pickup or lorry with a driver.</p>
     </div>
     <div class="desk">
       <div class="panel rv">
-        <h3>The parcel</h3>
+        <h3 data-i18n="deliver.h3.the_parcel">The parcel</h3>
         <div class="split">
-          <div class="ctl"><label for="dFrom">From</label><select id="dFrom"></select></div>
-          <div class="ctl"><label for="dTo">To</label><select id="dTo"></select></div>
+          <div class="ctl"><label data-i18n="deliver.label.from" for="dFrom">From</label><select id="dFrom"></select></div>
+          <div class="ctl"><label data-i18n="deliver.label.to" for="dTo">To</label><select id="dTo"></select></div>
         </div>
-        <div class="ctl"><label>What is it</label><div class="corr" id="dWhat"><span class="c on" data-w="envelope">Envelope · documents</span><span class="c" data-w="box">Small box</span><span class="c" data-w="food">Cakes · food, keep flat</span><span class="c" data-w="bag">A bag · shopping</span><span class="c" data-w="bulky">Bulky · needs a car</span><span class="c" data-w="produce">Produce · sacks, crates, a harvest</span></div></div>
-        <label class="toggle"><span>Someone must sign for it</span><input type="checkbox" id="dSign"></label>
-        <label class="toggle"><span>Same hour (otherwise today)</span><input type="checkbox" id="dRush"></label>
+        <div class="ctl"><label data-i18n="deliver.label.what_is_it">What is it</label><div class="corr" id="dWhat"><span data-i18n="deliver.span.envelope_documents" class="c on" data-w="envelope">Envelope · documents</span><span data-i18n="deliver.span.small_box" class="c" data-w="box">Small box</span><span data-i18n="deliver.span.cakes_food_keep_flat" class="c" data-w="food">Cakes · food, keep flat</span><span data-i18n="deliver.span.a_bag_shopping" class="c" data-w="bag">A bag · shopping</span><span data-i18n="deliver.span.bulky_needs_a_car" class="c" data-w="bulky">Bulky · needs a car</span><span data-i18n="deliver.span.produce_sacks_crates_a" class="c" data-w="produce">Produce · sacks, crates, a harvest</span></div></div>
+        <label class="toggle"><span data-i18n="deliver.span.someone_must_sign_for">Someone must sign for it</span><input type="checkbox" id="dSign"></label>
+        <label class="toggle"><span data-i18n="deliver.span.same_hour_otherwise_today">Same hour (otherwise today)</span><input type="checkbox" id="dRush"></label>
         <div class="route-meta" id="dMeta"></div>
       </div>
       <div>
         <div class="results" id="dResults" aria-live="polite"></div>
-        <p class="disclaimer">Courier rates are UG estimates from a published model; 8 to 8 in Jinja is named from the founder's brief and its tariff is modelled. Parcel on the Stage is UG's own price: a quarter of the seat on that stage, paid to the driver with the seats.</p>
+        <p data-i18n="deliver.p.courier_rates_are_ug" class="disclaimer">Courier rates are UG estimates from a published model; 8 to 8 in Jinja is named from the founder's brief and its tariff is modelled. Parcel on the Stage is UG's own price: a quarter of the seat on that stage, paid to the driver with the seats.</p>
       </div>
     </div>
   </div>
@@ -936,24 +1004,24 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
   <div class="wrap">
     <div class="sec-head rv">
       <div>
-        <div class="eyebrow">Explore · <b>the Pearl, priced honestly</b></div>
-        <h2>The whole park weekend, one number.</h2>
+        <div data-i18n-html="explore.div.explore_the_pearl_priced" class="eyebrow">Explore · <b>the Pearl, priced honestly</b></div>
+        <h2 data-i18n="explore.h2.the_whole_park_weekend">The whole park weekend, one number.</h2>
       </div>
-      <p>Park entry, permits, vehicle fees, the lodge, the rolex money and the road there, computed for East African citizens, foreign residents and visitors. East African citizens pay East African prices.</p>
+      <p data-i18n="explore.p.park_entry_permits_vehicle">Park entry, permits, vehicle fees, the lodge, the rolex money and the road there, computed for East African citizens, foreign residents and visitors. East African citizens pay East African prices.</p>
     </div>
     <div class="explore">
       <div class="dests rv" id="dests"></div>
       <div class="panel rv itin">
         <h3 id="itinTitle">Your weekend</h3>
         <div class="split" style="margin-bottom:10px">
-          <div class="ctl"><label for="eCat">Who is travelling</label><select id="eCat">
+          <div class="ctl"><label data-i18n="explore.label.who_is_travelling" for="eCat">Who is travelling</label><select id="eCat">
             <option value="eac">East African citizens</option>
             <option value="fr">Foreign residents</option>
             <option value="fnr">Foreign visitors</option>
           </select></div>
-          <div class="ctl"><label for="ePax">People</label><input id="ePax" type="number" min="1" max="7" value="4"></div>
-          <div class="ctl"><label for="eDays">Days</label><input id="eDays" type="number" min="1" max="10" value="3"></div>
-          <div class="ctl"><label for="eMode">Getting there</label><select id="eMode">
+          <div class="ctl"><label data-i18n="explore.label.people" for="ePax">People</label><input id="ePax" type="number" min="1" max="7" value="4"></div>
+          <div class="ctl"><label data-i18n="explore.label.days" for="eDays">Days</label><input id="eDays" type="number" min="1" max="10" value="3"></div>
+          <div class="ctl"><label data-i18n="explore.label.getting_there" for="eMode">Getting there</label><select id="eMode">
             <option value="pool">UG Pool (shared)</option>
             <option value="rent">UG Rent (self-drive 4×4)</option>
             <option value="rentdrv">UG Rent with driver</option>
@@ -961,27 +1029,27 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
             <option value="fly">Fly (scheduled) + lodge transfer</option>
             <option value="heli">Helicopter charter</option>
           </select></div>
-          <div class="ctl"><label for="eStay">Stay</label><select id="eStay"><option value="1">Mid-range lodge</option><option value="2.2">Premium lodge</option><option value="4">Luxury</option></select></div>
+          <div class="ctl"><label data-i18n="explore.label.stay" for="eStay">Stay</label><select id="eStay"><option value="1">Mid-range lodge</option><option value="2.2">Premium lodge</option><option value="4">Luxury</option></select></div>
         </div>
         <div id="itinLines"></div>
-        <div class="total"><span>Total</span><span class="mono" id="itinTotal">—</span></div>
+        <div class="total"><span data-i18n="explore.span.total">Total</span><span class="mono" id="itinTotal">—</span></div>
         <div class="per" id="itinPer"></div>
         <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap">
-          <button class="btn primary" type="button" id="bookTripBtn">Reserve with a deposit</button>
-          <button class="btn" type="button" id="shareTripBtn">Share plan</button>
+          <button data-i18n="explore.button.reserve_with_a_deposit" class="btn primary" type="button" id="bookTripBtn">Reserve with a deposit</button>
+          <button data-i18n="explore.button.share_plan" class="btn" type="button" id="shareTripBtn">Share plan</button>
         </div>
         <p class="note" id="itinNote"></p>
       </div>
     </div>
-    <details class="reveal" id="hustle"><summary>Chain a whole day <small>Hustle Mode · every leg quoted on the cheapest sensible mode; wallet and plans are sandbox</small></summary>
+    <details class="reveal" id="hustle"><summary data-i18n-html="explore.summary.chain_a_whole_day">Chain a whole day <small>Hustle Mode · every leg quoted on the cheapest sensible mode; wallet and plans are sandbox</small></summary>
     <div class="hustle">
       <div class="day rv" id="day"></div>
       <div class="rv">
         <div class="wallet">
-          <div class="eyebrow">UG Wallet · sandbox balance, not real money</div>
+          <div data-i18n="explore.div.ug_wallet_sandbox_balance" class="eyebrow">UG Wallet · sandbox balance, not real money</div>
           <div class="bal">UGX <span id="walletBal">184,500</span></div>
           <div class="meta"><span>Today's legs: <b id="dayTotal">—</b></span><span>Plan: <b>Boujee</b></span></div>
-          <div style="display:flex;gap:8px;margin-top:14px"><button class="btn small primary" type="button" id="topupBtn">Top up UGX 50,000</button><button class="btn small" type="button" id="payDayBtn">Pre-pay the day</button></div>
+          <div style="display:flex;gap:8px;margin-top:14px"><button data-i18n="explore.button.top_up_ugx_50" class="btn small primary" type="button" id="topupBtn">Top up UGX 50,000</button><button data-i18n="explore.button.pre_pay_the_day" class="btn small" type="button" id="payDayBtn">Pre-pay the day</button></div>
         </div>
         <div class="plans" id="plans"></div>
       </div>
@@ -995,15 +1063,15 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
   <div class="wrap">
     <div class="sec-head rv">
       <div>
-        <div class="eyebrow">Drive · <b>funded trips come to you</b></div>
-        <h2>Say where you are comfortable, once. Accept full cars.</h2>
+        <div data-i18n-html="drive.div.drive_funded_trips_come" class="eyebrow">Drive · <b>funded trips come to you</b></div>
+        <h2 data-i18n="drive.h2.say_where_you_are">Say where you are comfortable, once. Accept full cars.</h2>
       </div>
-      <p>No posting, no waiting at a stage, no bidding. Your Comfort Map is the only thing you maintain: base, radius, corridors, hours, hard no’s. Funded offers arrive with the money already in them.</p>
+      <p data-i18n="drive.p.no_posting_no_waiting">No posting, no waiting at a stage, no bidding. Your Comfort Map is the only thing you maintain: base, radius, corridors, hours, hard no’s. Funded offers arrive with the money already in them.</p>
     </div>
     <div id="driveBody"></div>
-    <details class="reveal" id="foresight"><summary>Where demand is coming this week <small>Foresight · harvests, venue rhythms and events, a week ahead, by vehicle class</small></summary>
-    <p class="note" style="margin:4px 0 12px;max-width:80ch">Promise to be there and the gap closes for everyone. Confidence is shown per signal; seasons are rules until the first harvest teaches them.</p>
-    <div class="stage-bar rv"><div class="seg" id="segVeh" style="flex-wrap:wrap;max-width:720px"></div><span class="spacer" style="flex:1"></span><span class="note">Confidence is shown per signal; seasons are rules until there are fills to learn from.</span></div>
+    <details class="reveal" id="foresight"><summary data-i18n-html="drive.summary.where_demand_is_coming">Where demand is coming this week <small>Foresight · harvests, venue rhythms and events, a week ahead, by vehicle class</small></summary>
+    <p data-i18n="drive.p.promise_to_be_there" class="note" style="margin:4px 0 12px;max-width:80ch">Promise to be there and the gap closes for everyone. Confidence is shown per signal; seasons are rules until the first harvest teaches them.</p>
+    <div class="stage-bar rv"><div class="seg" id="segVeh" style="flex-wrap:wrap;max-width:720px"></div><span class="spacer" style="flex:1"></span><span data-i18n="drive.span.confidence_is_shown_per" class="note">Confidence is shown per signal; seasons are rules until there are fills to learn from.</span></div>
     <div class="fx-grid rv" id="foresightList"></div>
     </details>
   </div>
@@ -1014,22 +1082,22 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
   <div class="wrap">
     <div class="sec-head rv">
       <div>
-        <div class="eyebrow">One link · <b>two ways in</b></div>
-        <h2>The site is the app. Install it, or scan the code.</h2>
+        <div data-i18n-html="install.div.one_link_two_ways" class="eyebrow">One link · <b>two ways in</b></div>
+        <h2 data-i18n="install.h2.the_site_is_the">The site is the app. Install it, or scan the code.</h2>
       </div>
-      <p>One link on the web and on the phone: the same account, the same stages, the same Crest on the home screen. No store visit.</p>
+      <p data-i18n="install.p.one_link_on_the">One link on the web and on the phone: the same account, the same stages, the same Crest on the home screen. No store visit.</p>
     </div>
     <div class="inst rv">
       <div class="inst-card glass">
-        <div class="eyebrow">On this device</div>
-        <h3 style="margin:8px 0 6px">Install UG</h3>
+        <div data-i18n="install.div.on_this_device" class="eyebrow">On this device</div>
+        <h3 data-i18n="install.h3.install_ug" style="margin:8px 0 6px">Install UG</h3>
         <p id="instHow">Add UG to your home screen. It opens full-screen with the Crest as its icon.</p>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px"><button class="btn primary" type="button" id="instBtn" data-i18n="install">Install the app</button><button class="btn" type="button" id="instCopy">Copy the link</button></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px"><button class="btn primary" type="button" id="instBtn" data-i18n="install">Install the app</button><button data-i18n="install.button.copy_the_link" class="btn" type="button" id="instCopy">Copy the link</button></div>
       </div>
       <div class="inst-card glass qr">
-        <div class="eyebrow">On another phone</div>
+        <div data-i18n="install.div.on_another_phone" class="eyebrow">On another phone</div>
         <div class="qr-wrap"><div id="qr" aria-label="QR code that opens UG"></div><div class="qr-crest"></div></div>
-        <p class="note">Scan with the camera. The code opens this same link; sign in with the same number and everything is here.</p>
+        <p data-i18n="install.p.scan_with_the_camera" class="note">Scan with the camera. The code opens this same link; sign in with the same number and everything is here.</p>
       </div>
     </div>
   </div>
@@ -1042,11 +1110,11 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
     <div class="foot">
       <div>
         <a class="logo" href="#top" aria-label="UG home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true" class="crest">    <path d="M28.5 40.5 Q22 31 12.5 17" fill="none" stroke="currentColor" stroke-width="7.5" stroke-linecap="round"/>  <path d="M32 38.5 Q32 24 32 8.5" fill="none" stroke="#F2C200" stroke-width="7.5" stroke-linecap="round"/>  <path d="M35.5 40.5 Q42 31 51.5 17" fill="none" stroke="#D2202F" stroke-width="7.5" stroke-linecap="round"/>  <circle cx="32" cy="48" r="7.5" fill="currentColor"/>  <circle cx="32" cy="48" r="3" fill="#F2C200"/></svg>UG</a>
-        <p style="margin-top:12px">Ride. Pool. Rent. Deliver. A Ugandan mobility marketplace for people who have places to be and a budget to respect.</p>
+        <p data-i18n="install.p.ride_pool_rent_deliver" style="margin-top:12px">Ride. Pool. Rent. Deliver. A Ugandan mobility marketplace for people who have places to be and a budget to respect.</p>
       </div>
-      <div><h4>Product</h4><a href="#compare">Compare</a><a href="#pool">Pool</a><a href="#rent">Rent</a><a href="#explore">Explore</a><a href="#hustle">Hustle Mode</a></div>
-      <div><h4>Company</h4><a href="#" data-ops-open="partners">Partners</a><a href="#" data-ops-open="plugins">Plug-ins</a><a href="#" data-ops-open="reach">Reach</a><a href="#" data-soon>Drive with UG</a><a href="#" data-soon>List a car</a><a href="#" data-soon>Careers</a></div>
-      <div><h4>Trust</h4><a href="#" data-soon>Pricing method</a><a href="#" data-soon>Safety</a><a href="#" data-soon>Privacy</a><a href="#" data-soon>Terms</a></div>
+      <div><h4 data-i18n="install.h4.product">Product</h4><a data-i18n="navCompare" href="#compare">Compare</a><a data-i18n="install.a.pool" href="#pool">Pool</a><a data-i18n="navRent" href="#rent">Rent</a><a data-i18n="navExplore" href="#explore">Explore</a><a data-i18n="install.a.hustle_mode" href="#hustle">Hustle Mode</a></div>
+      <div><h4 data-i18n="install.h4.company">Company</h4><a data-i18n="install.a.partners" href="#" data-ops-open="partners">Partners</a><a data-i18n="navPlugins" href="#" data-ops-open="plugins">Plug-ins</a><a data-i18n="install.a.reach" href="#" data-ops-open="reach">Reach</a><a data-i18n="install.a.drive_with_ug" href="#" data-soon>Drive with UG</a><a data-i18n="install.a.list_a_car" href="#" data-soon>List a car</a><a data-i18n="install.a.careers" href="#" data-soon>Careers</a></div>
+      <div><h4 data-i18n="install.h4.trust">Trust</h4><a data-i18n="install.a.pricing_method" href="#" data-soon>Pricing method</a><a data-i18n="install.a.safety" href="#" data-soon>Safety</a><a data-i18n="install.a.privacy" href="#" data-soon>Privacy</a><a data-i18n="install.a.terms" href="#" data-soon>Terms</a></div>
     </div>
     <div class="socials" aria-label="UG on social media">
       <a class="soc" href="https://instagram.com/ridepoolrent" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg>@ridepoolrent</a>
@@ -1073,23 +1141,23 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
       <div class="net" id="netPick">
         <button type="button" data-net="MTN" class="on">MTN MoMo</button>
         <button type="button" data-net="AIRTEL">Airtel Money</button>
-        <button type="button" data-net="CARD">Card</button>
+        <button data-i18n="modal.button.card" type="button" data-net="CARD">Card</button>
       </div>
-      <div class="ctl"><label for="payPhone">Phone number</label><input id="payPhone" type="tel" placeholder="07XX XXX XXX" value=""></div>
-      <div class="ctl"><label for="payEmail">Email for the receipt</label><input id="payEmail" type="email" placeholder="you@example.com" value=""></div>
-      <button class="btn primary" type="button" id="payBtn" style="width:100%;justify-content:center">Pay now</button>
+      <div class="ctl"><label data-i18n="modal.label.phone_number" for="payPhone">Phone number</label><input id="payPhone" type="tel" placeholder="07XX XXX XXX" value=""></div>
+      <div class="ctl"><label data-i18n="modal.label.email_for_the_receipt" for="payEmail">Email for the receipt</label><input id="payEmail" type="email" placeholder="you@example.com" value=""></div>
+      <button data-i18n="modal.button.pay_now" class="btn primary" type="button" id="payBtn" style="width:100%;justify-content:center">Pay now</button>
       <div class="status" id="payStatus">Flutterwave will send a prompt to your phone. Approve it with your PIN.</div>
     </div>
-    <footer><span id="payBy">Checkout by Flutterwave · sandbox until a live key is set</span><span class="mono" id="payRef"></span></footer>
+    <footer><span data-i18n="modal.span.checkout_by_flutterwave_sandbox" id="payBy">Checkout by Flutterwave · sandbox until a live key is set</span><span class="mono" id="payRef"></span></footer>
   </div>
 </div>
 <div class="modal" id="plugModal" hidden role="dialog" aria-modal="true" aria-labelledby="plugTitle">
   <div class="sheet glass">
-    <header><b id="plugTitle">Connect</b><button class="x" type="button" id="plugClose" aria-label="Close">×</button></header>
+    <header><b data-i18n="plugModal.b.connect" id="plugTitle">Connect</b><button class="x" type="button" id="plugClose" aria-label="Close">×</button></header>
     <div class="body">
-      <div class="ctl"><label for="plugEndpoint">Endpoint</label><input id="plugEndpoint" type="text" placeholder="https://"></div>
-      <div class="ctl"><label for="plugKey">API key or token (kept on this device)</label><input id="plugKey" type="text" placeholder="optional"></div>
-      <div style="display:flex;gap:8px"><button class="btn primary" type="button" id="plugSave" style="flex:1;justify-content:center">Save and connect</button><button class="btn" type="button" id="plugForget">Forget</button></div>
+      <div class="ctl"><label data-i18n="plugModal.label.endpoint" for="plugEndpoint">Endpoint</label><input id="plugEndpoint" type="text" placeholder="https://"></div>
+      <div class="ctl"><label data-i18n="plugModal.label.api_key_or_token" for="plugKey">API key or token (kept on this device)</label><input id="plugKey" type="text" placeholder="optional"></div>
+      <div style="display:flex;gap:8px"><button data-i18n="plugModal.button.save_and_connect" class="btn primary" type="button" id="plugSave" style="flex:1;justify-content:center">Save and connect</button><button data-i18n="plugModal.button.forget" class="btn" type="button" id="plugForget">Forget</button></div>
       <div class="status" id="plugStatus"></div>
     </div>
     <footer><span id="plugFoot"></span><span class="mono">stored locally</span></footer>
@@ -1099,19 +1167,31 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
   <div class="sheet glass hs">
     <header><b id="hsTitle">Set up in sixty seconds</b><div class="dots" id="hsDots"><i class="on"></i><i></i><i></i></div><button class="x" type="button" id="hsClose" aria-label="Close">×</button></header>
     <div class="body" id="hsBody"></div>
-    <footer><span id="hsFoot">Phone-verified account · nothing is charged</span><span class="mono" id="hsStep">1 / 3</span></footer>
+    <footer><span data-i18n="hsModal.span.phone_verified_account_nothing" id="hsFoot">Phone-verified account · nothing is charged</span><span class="mono" id="hsStep">1 / 3</span></footer>
   </div>
 </div>
 <div class="modal" id="railModal" hidden role="dialog" aria-modal="true" aria-labelledby="railTitle">
   <div class="sheet glass rail">
-    <header><b id="railTitle">Your trip</b><button class="x" type="button" id="railClose" aria-label="Close">×</button></header>
+    <header><b data-i18n="railModal.b.your_trip" id="railTitle">Your trip</b><button class="x" type="button" id="railClose" aria-label="Close">×</button></header>
     <div class="body" id="railBody"></div>
-    <footer><span>Booked and tracked on UG. The concierge is simulated in this prototype.</span><span class="mono" id="railRef"></span></footer>
+    <footer><span data-i18n="railModal.span.booked_and_tracked_on">Booked and tracked on UG. The concierge is simulated in this prototype.</span><span class="mono" id="railRef"></span></footer>
+  </div>
+</div>
+<div class="modal" id="a11yModal" hidden role="dialog" aria-modal="true" aria-labelledby="a11yTitle">
+  <div class="sheet glass">
+    <header><b data-i18n="railModal.b.accessibility" id="a11yTitle">Accessibility</b><button class="x" type="button" id="a11yClose" aria-label="Close">×</button></header>
+    <div class="body">
+      <div class="a11y-row"><div data-i18n-html="railModal.div.larger_textscales_the_whole"><b>Larger text</b><small>Scales the whole page up</small></div><button class="a11y-sw" type="button" role="switch" aria-checked="false" data-a11y="text" aria-label="Larger text"></button></div>
+      <div class="a11y-row"><div data-i18n-html="railModal.div.high_contraststronger_text_lines"><b>High contrast</b><small>Stronger text, lines and borders</small></div><button class="a11y-sw" type="button" role="switch" aria-checked="false" data-a11y="contrast" aria-label="High contrast"></button></div>
+      <div class="a11y-row"><div data-i18n-html="railModal.div.reduce_motionno_opening_animation"><b>Reduce motion</b><small>No opening animation, no drifting particles, no reveals</small></div><button class="a11y-sw" type="button" role="switch" aria-checked="false" data-a11y="motion" aria-label="Reduce motion"></button></div>
+      <div class="a11y-row"><div data-i18n-html="railModal.div.underline_linksevery_link_underlined"><b>Underline links</b><small>Every link underlined, not colour alone</small></div><button class="a11y-sw" type="button" role="switch" aria-checked="false" data-a11y="links" aria-label="Underline links"></button></div>
+      <p data-i18n="railModal.p.ug_also_follows_your" class="note" style="margin-top:12px">UG also follows your system settings for reduced motion and contrast, works with a screen reader (landmarks, labels and live regions), is keyboard-navigable end to end, and listens to voice commands through the microphone button or a Cephable profile. Tell us what would help: hello@ug.example.</p>
+    </div>
   </div>
 </div>
 <div class="modal" id="meModal" hidden role="dialog" aria-modal="true" aria-labelledby="meTitle">
   <div class="sheet glass">
-    <header><b id="meTitle">Me</b><button class="x" type="button" id="meClose" aria-label="Close">×</button></header>
+    <header><b data-i18n="me" id="meTitle">Me</b><button class="x" type="button" id="meClose" aria-label="Close">×</button></header>
     <div class="body" id="meBody"></div>
   </div>
 </div>
@@ -1119,36 +1199,36 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
   <div class="sheet glass ops">
     <header><b id="opsTitle">Ops · the back office</b><button class="x" type="button" id="opsClose" aria-label="Close">×</button></header>
     <div class="body">
-      <div class="seg ops-tabs" id="segOps"><button type="button" data-v="reach" class="on">Reach</button><button type="button" data-v="plugins">Plug-ins</button><button type="button" data-v="partners">Partners</button></div>
+      <div class="seg ops-tabs" id="segOps"><button data-i18n="ops.button.reach" type="button" data-v="reach" class="on">Reach</button><button data-i18n="navPlugins" type="button" data-v="plugins">Plug-ins</button><button data-i18n="ops.button.partners" type="button" data-v="partners">Partners</button></div>
       <div data-ops="reach">
     <div class="reach">
       <div class="eyebrow">Reach · <b id="reachCount"></b></div>
-      <p class="note" style="margin-top:4px;max-width:70ch">Every town on the map is a corridor from Kampala and a stage of its own. Where a local app already runs, UG hands the last mile to it rather than pretending to be there.</p>
+      <p data-i18n="ops.p.every_town_on_the" class="note" style="margin-top:4px;max-width:70ch">Every town on the map is a corridor from Kampala and a stage of its own. Where a local app already runs, UG hands the last mile to it rather than pretending to be there.</p>
       <div class="reach-grid" id="reach"></div>
     </div>
       </div>
       <div data-ops="plugins" hidden>
     <div class="sec-head">
       <div>
-        <div class="eyebrow">Plug-ins · <b>UG talks to the tools you already use</b></div>
-        <h2>Maps from Felt. Climate workflows from Infrared City. Entertainment from Tazama. Hands-free control from Cephable.</h2>
+        <div data-i18n-html="ops.div.plug_ins_ug_talks" class="eyebrow">Plug-ins · <b>UG talks to the tools you already use</b></div>
+        <h2 data-i18n="ops.h2.maps_from_felt_climate">Maps from Felt. Climate workflows from Infrared City. Entertainment from Tazama. Hands-free control from Cephable.</h2>
       </div>
-      <p>Each plug-in is an adapter with its own endpoint and key, stored on this device until you sign in. Connect one and the matching buttons light up across Pool, Explore and Hustle Mode. Nothing leaves UG without a plug-in you switched on.</p>
+      <p data-i18n="ops.p.each_plug_in_is">Each plug-in is an adapter with its own endpoint and key, stored on this device until you sign in. Connect one and the matching buttons light up across Pool, Explore and Hustle Mode. Nothing leaves UG without a plug-in you switched on.</p>
     </div>
     <div class="plugs" id="plugs"></div>
       </div>
       <div data-ops="partners" hidden>
     <div class="sec-head">
       <div>
-        <div class="eyebrow">Partners · <b>we send you demand</b></div>
-        <h2>Competitors are listed on purpose. A rider who trusts the comparison comes back for the pool and the rental.</h2>
+        <div data-i18n-html="ops.div.partners_we_send_you" class="eyebrow">Partners · <b>we send you demand</b></div>
+        <h2 data-i18n="ops.h2.competitors_are_listed_on">Competitors are listed on purpose. A rider who trusts the comparison comes back for the pool and the rental.</h2>
       </div>
-      <p>UG is a marketplace first. Ride-hailing apps get pre-filled bookings with no acquisition cost. Rental yards get vetted weekend renters. Lodges get groups arriving on a known date. Drivers get a route full before they leave.</p>
+      <p data-i18n="ops.p.ug_is_a_marketplace">UG is a marketplace first. Ride-hailing apps get pre-filled bookings with no acquisition cost. Rental yards get vetted weekend renters. Lodges get groups arriving on a known date. Drivers get a route full before they leave.</p>
     </div>
     <div class="trust">
-      <div><h3>For riders</h3><p>Verified drivers and plates, an in-trip SOS that shares live location with a contact you choose, helmets on every pooled boda, and a receipt for every shilling.</p></div>
-      <div><h3>For drivers and yards</h3><p>Ten percent on pool, a flat listing fee on rentals, weekly payouts to MoMo through Flutterwave, and demand you did not have to advertise for.</p></div>
-      <div><h3>For the apps we compare</h3><p>Deep links that open your app with pick-up and drop-off filled. We never show a price we did not compute openly, and the method is published.</p></div>
+      <div><h3 data-i18n="ops.h3.for_riders">For riders</h3><p data-i18n="ops.p.verified_drivers_and_plates">Verified drivers and plates, an in-trip SOS that shares live location with a contact you choose, helmets on every pooled boda, and a receipt for every shilling.</p></div>
+      <div><h3 data-i18n="ops.h3.for_drivers_and_yards">For drivers and yards</h3><p data-i18n="ops.p.ten_percent_on_pool">Ten percent on pool, a flat listing fee on rentals, weekly payouts to MoMo through Flutterwave, and demand you did not have to advertise for.</p></div>
+      <div><h3 data-i18n="ops.h3.for_the_apps_we">For the apps we compare</h3><p data-i18n="ops.p.deep_links_that_open">Deep links that open your app with pick-up and drop-off filled. We never show a price we did not compute openly, and the method is published.</p></div>
     </div>
       </div>
     </div>
@@ -2272,6 +2352,8 @@ function openMe(){
       <div class="me-row"><span>Replay the opening</span><button class="btn small" type="button" id="meIntro">Play</button></div>
       <div class="me-row"><span>Roles</span><button class="btn small" type="button" id="meRoles">Add a role</button></div>
       <div class="me-row"><span data-i18n="languages">Language</span><select class="langpick" style="display:inline-block;max-width:170px" id="meLang">${Object.entries(LANGS).map(([k,v])=>`<option value="${k}" ${k===LANG?'selected':''}>${v.native}${v.confidence==='complete'?'':' · '+v.confidence}</option>`).join('')}</select></div>
+      <div class="me-row"><span>Accessibility</span><button class="btn small" type="button" id="meA11y">Open</button></div>
+      <div class="me-row"><span>Welcome screen · change language</span><button class="btn small" type="button" id="meWelcome">Open</button></div>
       <div class="me-row" id="langNoteRow"><span id="langNote" style="font-size:12px;color:var(--ink-3)"></span><a class="btn small" href="mailto:hello@ug.example?subject=Review%20a%20UG%20language" data-i18n="reviewer">Review this language</a></div>
       <div class="me-row"><span>Theme</span><button class="btn small" type="button" id="meTheme">night / noon</button></div>
       <div class="me-row"><span>Voice commands</span><button class="btn small" type="button" id="meVoice">🎤 Listen</button></div>
@@ -2286,6 +2368,8 @@ function openMe(){
   $('#meRoles').addEventListener('click',()=>{ $('#meModal').hidden=true; openHandshake(); });
   $('#meTheme').addEventListener('click',()=>$('#themeToggle').click());
   $('#meLang').addEventListener('change',e=>{ LANG=e.target.value; store('lang',LANG); applyLang(); });
+  const mA=$('#meA11y'); if(mA) mA.addEventListener('click',()=>{ $('#meModal').hidden=true; openA11y(); });
+  const mW=$('#meWelcome'); if(mW) mW.addEventListener('click',()=>{ $('#meModal').hidden=true; openWelcome(true); });
   applyLang();
   $('#meVoice').addEventListener('click',()=>{ $('#meModal').hidden=true; toggleVoice(); });
   $('#meOut').addEventListener('click',()=>{ if(LIVE) liveSignOut(); account=null; try{ ['account','offers','driverStats'].forEach(k=>localStorage.removeItem('ug:'+k)); }catch(e){} renderAccountUI(); renderDrive(); renderStages(); $('#meModal').hidden=true; toast('Signed out on this device.'); });
@@ -2597,7 +2681,8 @@ function initInstall(){
    ===================================================================== */
 function playIntro(force){
   const el=$('#intro'); if(!el) return;
-  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const wl=$('#welcome'); if(wl && !wl.hidden) return;   // the welcome gate runs first; it calls playIntro() on continue
+  const reduce=(typeof reducedMotion==='function') ? reducedMotion() : matchMedia('(prefers-reduced-motion: reduce)').matches;
   let seen=false; try{ seen=sessionStorage.getItem('ug:intro')==='1'; }catch(e){}
   if(reduce || (seen && !force)){ el.remove(); return; }
   try{ sessionStorage.setItem('ug:intro','1'); }catch(e){}
@@ -2929,8 +3014,10 @@ let LANG = load('lang', null) || (navigator.language||'en').slice(0,2);
 if(!LANGS[LANG]) LANG='en';
 const t = (k)=> (STR[k]&&(STR[k][LANG]||STR[k].en)) || k;
 function applyLang(){
-  document.documentElement.lang = LANG==='nyn'?'nyn':LANG==='ach'?'ach':LANG==='teo'?'teo':LANG;
+  document.documentElement.lang = LANG;
+  document.documentElement.dir = (LANGS[LANG]&&LANGS[LANG].dir)||'ltr';
   document.querySelectorAll('[data-i18n]').forEach(el=>{ const k=el.dataset.i18n; if(STR[k]) el.textContent=t(k); });
+  document.querySelectorAll('[data-i18n-html]').forEach(el=>{ const k=el.dataset.i18nHtml; if(STR[k]) el.innerHTML=t(k); });
   const w=document.querySelectorAll('#verbs .w'); const keys=['ride','pool','rent','deliver']; const flips=['flipRide','flipPool','flipRent','flipDeliver']; w.forEach((el,i)=>{ el.textContent=t(keys[i]); el.dataset.w=t(keys[i]); el.dataset.flip=t(flips[i]); }); const f=$('#flip'); if(f){ const on=[...w].findIndex(x=>x.classList.contains('hl')); f.textContent=t(flips[on<0?1:on]); }
   document.querySelectorAll('#tagline span').forEach((el,i)=>el.textContent=t(keys[i]));
   const pick=$('#langPick'); if(pick) pick.value=LANG;
@@ -2938,9 +3025,87 @@ function applyLang(){
   const cta=$('#navCta'); if(cta && !account) cta.textContent=t('getStarted');
   const tm=$('#tabMeLbl'); if(tm && !account) tm.textContent=t('me');
 }
+/* ---------- Accessibility settings: classes on body, persisted, seeded from system preferences ---------- */
+let A11Y = load('a11y', null);
+if(!A11Y){ A11Y={text:false,contrast:false,motion:false,links:false};
+  try{ if(matchMedia('(prefers-reduced-motion: reduce)').matches) A11Y.motion=true; if(matchMedia('(prefers-contrast: more)').matches) A11Y.contrast=true; }catch(e){} }
+function a11yApply(){ Object.entries(A11Y).forEach(([k,v])=>document.body.classList.toggle('a11y-'+k, !!v)); document.querySelectorAll('[data-a11y]').forEach(b=>b.setAttribute('aria-checked', String(!!A11Y[b.dataset.a11y]))); }
+function reducedMotion(){ return A11Y.motion || matchMedia('(prefers-reduced-motion: reduce)').matches; }
+function openA11y(){ const m=$('#a11yModal'); if(m){ m.hidden=false; a11yApply(); } }
+function initA11y(){
+  const m=$('#a11yModal'); if(!m) return;
+  $('#a11yClose').addEventListener('click',()=>{ m.hidden=true; });
+  m.addEventListener('click',e=>{ if(e.target===m) m.hidden=true; });
+  m.querySelectorAll('[data-a11y]').forEach(b=>b.addEventListener('click',()=>{ const k=b.dataset.a11y; A11Y[k]=!A11Y[k]; store('a11y',A11Y); a11yApply(); if(k==='motion'&&A11Y[k]){ const i=$('#intro'); if(i) i.remove(); } }));
+  a11yApply();
+}
+
+/* ---------- The welcome gate: the first thing anyone touches is their language ---------- */
+const WELCOME_FALLBACK={en:'Welcome to Uganda.',sw:'Karibu Uganda.',lg:'Tukusanyukidde mu Uganda.'};
+function wlGreeting(code){ return (STR['ui.welcome']&&STR['ui.welcome'][code]) || WELCOME_FALLBACK[code] || WELCOME_FALLBACK.en; }
+function openWelcome(again){
+  const el=$('#welcome'); if(!el) return;
+  el.hidden=false; el.classList.remove('greeting');
+  const flat = reducedMotion() || el.dataset.flat==='1';
+  el.classList.toggle('flat', flat);
+  const entries=Object.entries(LANGS);
+  $('#wlCount').textContent=entries.length+' languages · '+new Set(entries.map(([k,v])=>v.group||'')).size+' regions';
+  const chip=([k,v])=>`<button class="wl-chip" type="button" role="option" data-wl="${k}"><b>${esc(v.native)}</b><small>${esc((v.group||'').replace('Uganda · ','')||v.name)}</small></button>`;
+  if(flat){
+    const groups={}; entries.forEach(([k,v])=>{ (groups[v.group||'Languages']=groups[v.group||'Languages']||[]).push([k,v]); });
+    $('#wlList').innerHTML=Object.entries(groups).map(([g,items])=>`<h5>${esc(g)}</h5>`+items.map(chip).join('')).join('');
+  } else {
+    const ring=$('#wlRing'); const n=entries.length; const r=Math.max(300, n*26);
+    ring.innerHTML=entries.map((e,i)=>{ const a=i*360/n; return chip(e).replace('class="wl-chip"',`class="wl-chip" style="transform:translate(-50%,-50%) rotateY(${a}deg) translateZ(${r}px)" data-ang="${a}"`); }).join('');
+    let rot= el.__rot||0, vel=0, drag=null; el.__rot=rot;
+    const stage=$('#wlStage');
+    const front=()=>{ let best=null,bd=1e9; ring.querySelectorAll('.wl-chip').forEach(c=>{ const a=((+c.dataset.ang+rot)%360+360)%360; const d=Math.min(a,360-a); c.classList.toggle('front',d<360/n/2); c.style.opacity=String(Math.max(.25,1-d/140)); if(d<bd){ bd=d; best=c; } }); return best; };
+    const draw=()=>{ ring.style.transform=`rotateX(-6deg) rotateY(${rot}deg)`; front(); };
+    draw();
+    if(!el.__wired){
+      el.__wired=true;
+      const step=360/Math.max(1,n);
+      stage.addEventListener('pointerdown',e=>{ drag={x:e.clientX,r:el.__rot}; stage.setPointerCapture(e.pointerId); });
+      stage.addEventListener('pointermove',e=>{ if(!drag) return; el.__rot=drag.r+(e.clientX-drag.x)*.35; rot=el.__rot; draw(); });
+      stage.addEventListener('pointerup',()=>{ drag=null; });
+      stage.addEventListener('wheel',e=>{ e.preventDefault(); el.__rot+=(e.deltaY+e.deltaX)*.14; rot=el.__rot; draw(); },{passive:false});
+      stage.addEventListener('keydown',e=>{ if(e.key==='ArrowLeft'){ el.__rot+=step; } else if(e.key==='ArrowRight'){ el.__rot-=step; } else if(e.key==='Enter'||e.key===' '){ e.preventDefault(); const f=front(); if(f) wlChoose(f.dataset.wl); return; } else return; e.preventDefault(); rot=el.__rot; draw(); });
+      let spin=setInterval(()=>{ if(drag||el.hidden||el.classList.contains('greeting')||el.classList.contains('flat')) return; el.__rot+=.06; rot=el.__rot; draw(); }, 40);
+      el.__spin=spin;
+    } else { rot=el.__rot; draw(); }
+  }
+  el.querySelectorAll('[data-wl]').forEach(b=>{ b.onclick=()=>wlChoose(b.dataset.wl); });
+  if(again) el.dataset.again='1'; else delete el.dataset.again;
+}
+function wlChoose(code){
+  const el=$('#welcome'); if(!LANGS[code]) code='en';
+  LANG=code; store('lang',LANG); applyLang();
+  const v=LANGS[code];
+  $('#wlLangName').textContent=(v.native||code)+(v.group?' · '+v.group:'');
+  $('#wlHello').textContent=wlGreeting(code);
+  $('#wlEchoLg').innerHTML = code==='lg' ? '' : '<b>'+esc(wlGreeting('lg'))+'</b> · Luganda';
+  $('#wlEchoSw').innerHTML = code==='sw' ? '' : '<b>'+esc(wlGreeting('sw'))+'</b> · Kiswahili';
+  const conf=(v.confidence||'draft');
+  $('#wlGo').textContent=(STR['ui.continue']&&STR['ui.continue'][code])||'Continue';
+  el.classList.add('greeting');
+  const back=$('#wlBack'); back.onclick=()=>{ el.classList.remove('greeting'); };
+  $('#wlGo').onclick=()=>{ el.hidden=true; try{ localStorage.setItem('ug:welcomed','1'); }catch(e){} if(conf!=='complete'&&conf!=='reviewed') toast(`${v.native}: ${conf}. ${t('ui.draftNote')}`); if(!el.dataset.again) playIntro(false); };
+}
+function initWelcome(){
+  const el=$('#welcome'); if(!el) return;
+  $('#wlFlat').addEventListener('click',()=>{ el.dataset.flat = el.dataset.flat==='1'?'':'1'; $('#wlFlat').textContent = el.dataset.flat==='1'?'Ring view':'List view'; openWelcome(el.dataset.again==='1'); });
+  $('#wlA11y').addEventListener('click',openA11y);
+  $('#wlSkip').addEventListener('click',()=>wlChoose('en'));
+  let welcomed=false; try{ welcomed=localStorage.getItem('ug:welcomed')==='1'; }catch(e){}
+  const auto=new URLSearchParams(location.search).has('welcome') || !welcomed;
+  if(auto){ openWelcome(false); }
+  return auto;
+}
+
 function initLang(){
   const pick=$('#langPick'); if(!pick) return;
-  pick.innerHTML=Object.entries(LANGS).map(([k,v])=>`<option value="${k}">${v.native}${v.confidence==='complete'?'':' · '+v.confidence}</option>`).join('');
+  { const groups={}; Object.entries(LANGS).forEach(([k,v])=>{ (groups[v.group||'Languages']=groups[v.group||'Languages']||[]).push([k,v]); });
+  pick.innerHTML=Object.entries(groups).map(([g,items])=>`<optgroup label="${g}">`+items.map(([k,v])=>`<option value="${k}">${v.native}${v.confidence==='complete'?'':' · '+v.confidence}</option>`).join('')+'</optgroup>').join(''); }
   pick.addEventListener('change',()=>{ LANG=pick.value; store('lang',LANG); applyLang(); toast(`${LANGS[LANG].native}. ${LANGS[LANG].confidence==='complete'?'':'A draft; missing words show in English.'}`); if(LIVE && TOKEN) UGAPI.patch('/api/me',{lang:LANG}).catch(()=>{}); });
   applyLang();
 }
@@ -3038,9 +3203,9 @@ renderFleet();
 renderDests(); renderItin();
 renderDay();
 renderPlugins();
-initV1(); initAtlas(); initBuses(); initDeliver(); initForesight(); initLang(); initInstall(); if(rail) renderRail(false);
+initV1(); initAtlas(); initBuses(); initDeliver(); initForesight(); initLang(); initA11y(); initInstall(); if(rail) renderRail(false);
 initReveal(); initVerbs();
-playIntro(false);
+initWelcome(); playIntro(false);
 initLive();
 try { initScene(); } catch (e) { console.warn('scene', e); $('#hint').textContent='3D map unavailable here'; }
 </script>

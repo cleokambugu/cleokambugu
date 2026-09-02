@@ -46,9 +46,11 @@ async function main() {
     await new Promise((res, rej) => ff.on('close', c => c === 0 ? res() : rej(new Error('ffmpeg exit ' + c))));
     console.log('  wrote', silent);
     if (!sounds.includes(true)) { await page.close(); continue; }
-    // 2. the score, rendered offline in the same page with the same engine
+    // 2. the music: a produced track in music/<cut>.mp3 when it exists (music/BRIEF.md), else the score rendered offline with the same engine
+    const produced = path.join(__dirname, 'music', `${cut}.mp3`);
     const offsets = await page.evaluate(() => window.__UG_REEL.offsets);
-    const wav = path.join(OUT, `ug-score-${cut}.wav`);
+    let wav = path.join(OUT, `ug-score-${cut}.wav`);
+    if (fs.existsSync(produced)) { wav = produced; console.log('  music: produced track', produced); } else {
     const b64 = await page.evaluate(async ({ total, offsets, cut }) => {
       const sr = 48000, oc = new OfflineAudioContext(2, Math.ceil(sr * (total + 1)), sr);
       const g = oc.createGain(); g.gain.value = 1; g.connect(oc.destination);
@@ -74,7 +76,7 @@ async function main() {
       return btoa(s);
     }, { total, offsets, cut });
     fs.writeFileSync(wav, Buffer.from(b64, 'base64'));
-    console.log('  score', wav, (fs.statSync(wav).size / 1e6).toFixed(1), 'MB');
+    console.log('  score', wav, (fs.statSync(wav).size / 1e6).toFixed(1), 'MB'); }
     // 3. narration, if rendered Ugandan voice files exist
     const manifestPath = path.join(__dirname, 'voice', 'manifest.json');
     const ids = await page.evaluate(() => window.__UG_REEL.voiceLines.map(v => v.id));

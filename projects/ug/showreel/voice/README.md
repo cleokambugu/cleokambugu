@@ -52,6 +52,14 @@ up with no code change. Until then the sound cut uses the browser voice, preferr
 English voice where the browser offers one (Edge ships Kenyan, Tanzanian, Nigerian and South
 African English neural voices; Chrome does not), and shows "placeholder voice" in the HUD.
 
+## The ElevenLabs path
+
+`DIRECTION.md`, `lines.v2.json` and `render-elevenlabs.py` are the voice team's production
+route: a cast Ugandan voice on Eleven v3 with audio tags for tonality, rendered line by line into
+the same `manifest.json`. It needs `ELEVENLABS_API_KEY` and `ELEVENLABS_VOICE_ID` and a network
+that reaches `api.elevenlabs.io`; this sandbox has neither, so nothing was auditioned here. The
+REST contract follows `elevenlabs/skills` on GitHub (cloned and read); see `DIRECTION.md`.
+
 ## The lines
 
 `lines.json` is the master. The register is Ugandan English: direct, warm, no slang for its own

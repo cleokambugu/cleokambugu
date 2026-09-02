@@ -29,6 +29,28 @@ speech synthesis. The fix has two halves:
    South African English), and the HUD says "placeholder voice" so nobody mistakes it for the
    product's voice.
 
+## The voice-over, with ElevenLabs
+
+The founder's second note: the browser voice is still robotic and not Ugandan, and a voice-over
+is tonality and story, not just words. The voice team's answer lives in `voice/`:
+
+- `DIRECTION.md`: the story arc (problem, promise, proof, invitation), per-scene tonality, pace
+  and breath, casting (a Ugandan English voice with Luganda-inflected warmth), three ways to
+  obtain it in ElevenLabs ranked by quality, and a five-point listening checklist for choosing
+  between candidates.
+- `lines.v2.json`: the voice-over script with Eleven v3 audio tags and per-line settings.
+- `render-elevenlabs.py`: renders every line through the ElevenLabs text-to-speech API and writes
+  the same `manifest.json` the reel and the video builder consume. Needs `ELEVENLABS_API_KEY`
+  and a voice id; run it where ElevenLabs is reachable.
+
+ElevenLabs is **not reachable from this build sandbox**: there is no connector or key in the
+session and the API host is blocked by the egress proxy, so nothing here was rendered or
+auditioned. The contract the script follows was read first-hand from ElevenLabs' own skills
+repository (`elevenlabs/skills` on GitHub: `text-to-speech/SKILL.md`,
+`text-to-speech/references/voice-settings.md`, `music/references/api_reference.md`); voice
+library contents come from search snippets only. The ElevenLabs connector in the claude.ai
+directory manages voice agents, not text-to-speech, so the render is a script, not a tool call.
+
 ## The music
 
 A panel of three (a Kampala amapiano and kidandali producer, a film composer, a WebAudio
@@ -43,6 +65,15 @@ ducks 8 dB under narration.
 What a real production replaces: sampled engalabi and congas, a session guitarist, real adungu
 and endingidi players, or a licensed cue from a Ugandan Gen Z producer (nobody has been
 approached; no artist is implied).
+
+The founder's second note called the synth bed "an extra layer of roboticness". The music team's
+answer is in `music/`: `BRIEF.md` (the sound for Gen Z, millennials and young professionals,
+licensing options, ElevenLabs Music prompts and composition plans with the UG lock, the Stage
+drop and the Atlas lift at their timestamps, a mastering spec) and `generate-elevenlabs.py`,
+which writes `music/long.mp3` and `music/short.mp3`. When those files exist the reel plays them
+instead of the score and the video builder muxes them in. The in-browser score was also rewritten
+(v2 in `SCORE.md`) with humanised timing, layered drums, a Rhodes-style electric piano, sidechain,
+reverb and delay, so the fallback is far less mechanical.
 
 ## The films
 

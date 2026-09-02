@@ -520,14 +520,18 @@ new ResizeObserver(resize).observe(stage); resize();
 
 /* ---------- audio: the generative score (ug-score.js, sound mode only; never constructed in silent mode) ---------- */
 const audio = SOUND ? (() => {
-  let ac=null, master=null, score=null, muted=false;
+  let ac=null, master=null, score=null, muted=false, track=null, trackGain=null;
+  const TRACK='music/'+(CUT==='short'?'short':'long')+'.mp3';   // a produced track, when one exists (see music/BRIEF.md)
+  function startScore(){ if(window.UGScore){ score=window.UGScore.create(ac, master); score.play(CUT==='short'?'short':'long'); } }
   function start(){ if(ac){ ac.resume(); return; } ac=new (window.AudioContext||window.webkitAudioContext)(); master=ac.createGain(); master.gain.value=muted?0:.9; master.connect(ac.destination);
-    if(window.UGScore){ score=window.UGScore.create(ac, master); score.play(CUT==='short'?'short':'long'); } }
-  function cue(i){ if(score && CUT!=='short') score.cue(i); }
+    if(location.protocol==='file:'||location.protocol==='http:'||location.protocol==='https:'){
+      fetch(TRACK,{method:'HEAD',cache:'no-store'}).then(r=>{ if(!r.ok||!/audio|octet/.test(r.headers.get('content-type')||'')) throw 0; track=new Audio(TRACK); track.crossOrigin='anonymous'; trackGain=ac.createGain(); trackGain.gain.value=1; ac.createMediaElementSource(track).connect(trackGain); trackGain.connect(master); track.currentTime=Math.max(0,clock); track.play().catch(()=>{}); const vl=document.getElementById('vlabel'); if(vl) vl.textContent=(vl.textContent||'').replace(/ · music.*$/,'')+' · produced track'; }).catch(()=>{ if(!score) startScore(); });
+    } else startScore(); }
+  function cue(i){ if(score && CUT!=='short') score.cue(i); if(track && Math.abs(track.currentTime-clock)>.6) track.currentTime=clock; }
   function tick(){ }
   function sting(){ }
-  function duck(on){ if(score) score.duck(on); }
-  function pause(){ if(ac) ac.suspend(); } function resume(){ if(ac) ac.resume(); }
+  function duck(on){ if(score) score.duck(on); if(trackGain&&ac) trackGain.gain.setTargetAtTime(on?.4:1,ac.currentTime,.06); }
+  function pause(){ if(ac) ac.suspend(); if(track) track.pause(); } function resume(){ if(ac) ac.resume(); if(track){ track.currentTime=clock; track.play().catch(()=>{}); } }
   function setMuted(m){ muted=m; if(master&&ac) master.gain.setTargetAtTime(m?0:.9,ac.currentTime,.05); }
   return {start,tick,sting,cue,duck,pause,resume,setMuted,get muted(){return muted;}};
 })() : null;
