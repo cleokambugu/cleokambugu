@@ -253,6 +253,13 @@
   "ui.language": "Idioma",
   "ui.draftNote": "Um rascunho; as palavras que faltam aparecem em inglês.",
   "ui.reviewNote": "As traduções foram redigidas pela UG e conferidas numa segunda passagem; a revisão por falantes nativos está aberta. As palavras que faltam voltam ao inglês.",
+  "page.p.ug_speaks_the_languages": "A UG fala as línguas de Uganda, da região e dos seus visitantes. Escolha a sua; todo o resto acompanha.",
+  "railModal.b.accessibility": "Acessibilidade",
+  "railModal.div.high_contraststronger_text_lines": "<b>Alto contraste</b><small>Texto, linhas e bordas mais fortes</small>",
+  "railModal.div.larger_textscales_the_whole": "<b>Texto maior</b><small>Aumenta a página inteira</small>",
+  "railModal.div.reduce_motionno_opening_animation": "<b>Reduzir movimento</b><small>Sem animação de abertura, sem partículas flutuando, sem efeitos de revelação</small>",
+  "railModal.div.underline_linksevery_link_underlined": "<b>Sublinhar links</b><small>Todo link sublinhado, não só a cor</small>",
+  "railModal.p.ug_also_follows_your": "A UG também segue as configurações do seu sistema para movimento reduzido e contraste, funciona com leitor de tela (marcos, rótulos e regiões dinâmicas), pode ser navegada de ponta a ponta pelo teclado, e ouve comandos de voz pelo botão do microfone ou por um perfil Cephable. Conte para a gente o que ajudaria: hello@ug.example.",
   "ui.welcome": "Boas-vindas a Uganda.",
   "ui.chooseLanguage": "Escolha seu idioma",
   "ui.continue": "Continuar"

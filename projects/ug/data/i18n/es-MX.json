@@ -7,7 +7,7 @@
  "script": "Latin",
  "dir": "ltr",
  "confidence": "reviewed",
- "translator_note": "La mezcla de tú y usted que usan las apps mexicanas: tuteo en los botones y textos cortos, «ustedes» (nunca vosotros) para el plural, sin voseo. Léxico mexicano donde difiere del peninsular: carro, rentar y renta, celular, cajuela, camioneta, hora pico, tarifa dinámica, botana, pastel, placas, boleto; se evita «coger» (Tomar / Apartar un asiento). Los cuatro verbos son imperativos publicitarios breves (Viaja. Comparte. Renta. Envía.), idénticos en todas partes; los términos ugandeses (boda, matatu, stage, rolex) se mantienen con una glosa corta la primera vez que aparecen en cada texto. Los nombres de funciones internas (Pulse, Foresight, Crest, Comfort Map) se traducen y son lo que más conviene que revise el equipo.",
+ "translator_note": "La mezcla de tú y usted que usan las apps mexicanas: tuteo en los botones y textos cortos, «ustedes» (nunca vosotros) para el plural, sin voseo. Léxico mexicano donde difiere del peninsular: carro, rentar y renta, celular, cajuela, camioneta, hora pico, tarifa dinámica, botana, pastel, placas, costales, anticipo; se evita «coger» (Tomar / Apartar un asiento). No aparece ningún boleto en las cadenas, así que ese término no se usa. Los cuatro verbos son imperativos publicitarios breves (Viaja. Comparte. Renta. Envía.), idénticos en todas partes; los términos ugandeses (boda, matatu, stage, rolex) se mantienen con una glosa corta la primera vez que aparecen en cada texto. Los nombres de funciones internas (Pulse, Foresight, Crest, Comfort Map) se traducen y son lo que más conviene que revise el equipo.",
  "uncertain": [
   "stage.div.the_virtual_stage_seats",
   "stage.summary.where_stages_fill_fastest",
@@ -254,6 +254,13 @@
   "ui.language": "Idioma",
   "ui.draftNote": "Un borrador; las palabras que faltan se muestran en inglés.",
   "ui.reviewNote": "Las traducciones fueron redactadas por UG y revisadas en una segunda pasada; la revisión por hablantes nativos está abierta. Las palabras que faltan vuelven al inglés.",
+  "page.p.ug_speaks_the_languages": "UG habla las lenguas de Uganda, de la región y de sus visitantes. Elige la tuya; todo lo demás sigue.",
+  "railModal.b.accessibility": "Accesibilidad",
+  "railModal.div.high_contraststronger_text_lines": "<b>Alto contraste</b><small>Texto, líneas y bordes más marcados</small>",
+  "railModal.div.larger_textscales_the_whole": "<b>Texto más grande</b><small>Amplía toda la página</small>",
+  "railModal.div.reduce_motionno_opening_animation": "<b>Reducir el movimiento</b><small>Sin animación de apertura, sin partículas flotantes, sin efectos de aparición</small>",
+  "railModal.div.underline_linksevery_link_underlined": "<b>Subrayar enlaces</b><small>Cada enlace subrayado, no solo en color</small>",
+  "railModal.p.ug_also_follows_your": "UG también sigue la configuración de tu sistema para movimiento reducido y contraste, funciona con un lector de pantalla (puntos de referencia, etiquetas y regiones dinámicas), se navega por completo con el teclado, y escucha comandos de voz a través del botón del micrófono o de un perfil de Cephable. Dinos qué te ayudaría: hello@ug.example.",
   "ui.welcome": "Te damos la bienvenida a Uganda.",
   "ui.chooseLanguage": "Elige tu idioma",
   "ui.continue": "Continuar"

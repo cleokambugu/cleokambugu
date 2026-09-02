@@ -254,6 +254,13 @@
   "ui.language": "Langue",
   "ui.draftNote": "Un brouillon ; les mots manquants s'affichent en anglais.",
   "ui.reviewNote": "Les traductions ont été rédigées par UG et vérifiées par une seconde passe ; la relecture par des locuteurs natifs est ouverte. Les mots manquants reviennent à l'anglais.",
+  "page.p.ug_speaks_the_languages": "UG parle les langues de l'Ouganda, de la région et de ses visiteurs. Choisissez la vôtre ; tout suit.",
+  "railModal.b.accessibility": "Accessibilité",
+  "railModal.div.high_contraststronger_text_lines": "<b>Contraste élevé</b><small>Texte, lignes et bordures plus marqués</small>",
+  "railModal.div.larger_textscales_the_whole": "<b>Texte plus grand</b><small>Agrandit toute la page</small>",
+  "railModal.div.reduce_motionno_opening_animation": "<b>Réduire les animations</b><small>Pas d'animation d'ouverture, pas de particules flottantes, pas d'effets d'apparition</small>",
+  "railModal.div.underline_linksevery_link_underlined": "<b>Souligner les liens</b><small>Chaque lien souligné, pas seulement en couleur</small>",
+  "railModal.p.ug_also_follows_your": "UG suit aussi les réglages de votre système pour les animations réduites et le contraste, fonctionne avec un lecteur d'écran (repères, libellés et régions dynamiques), se parcourt entièrement au clavier, et écoute les commandes vocales via le bouton micro ou un profil Cephable. Dites-nous ce qui vous aiderait : hello@ug.example.",
   "ui.welcome": "Bienvenue en Ouganda.",
   "ui.chooseLanguage": "Choisissez votre langue",
   "ui.continue": "Continuer"
