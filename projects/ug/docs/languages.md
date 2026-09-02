@@ -10,9 +10,9 @@ screen.
 
 ## The languages
 
-Every string in the app (243 keys: the verbs, the doors, headings, sections, buttons, modals,
+**41 languages, 243 keys each.** Every string in the app (the verbs, the doors, headings, sections, buttons, modals,
 and the strings the JavaScript renders) is translated per language in `data/i18n/<code>.json`
-and assembled into the site by `server/scripts/i18n-build.js`. The picker groups by region:
+and assembled into the site by `server/scripts/i18n-build.cjs`. The picker groups by region:
 
 | Group | Languages |
 | --- | --- |
@@ -24,7 +24,7 @@ and assembled into the site by `server/scripts/i18n-build.js`. The picker groups
 | East Africa · Africa | Swahili, Kinyarwanda, Somali, Amharic, Arabic (RTL), Lingala, Hausa, isiZulu |
 | World | English, French, German, Italian, Spanish (Spain and Mexico), Portuguese (Portugal and Brazil), Russian, Chinese (Simplified), Japanese, Korean, Hindi |
 
-The African visitor group exists so a traveller from Kigali, Addis, Khartoum, Kinshasa, Kano or
+Confidence runs from **complete** (Swahili) and **reviewed** (English and the world languages, drafted then read back by the translation teams) through **draft** (the Ugandan languages) to **early draft** (Rukonzo and the African visitor starters, which cover the strings a user meets first and fall back to English for the rest). The African visitor group exists so a traveller from Kigali, Addis, Khartoum, Kinshasa, Kano or
 Durban lands in a language of theirs; the world group is for tourists who do not read English.
 Arabic sets `dir="rtl"` on the whole document.
 
@@ -45,7 +45,7 @@ markup did not survive translation, the app shows English rather than a guess. M
    (idempotent) and writes the source strings to `data/i18n/en.json`.
 2. Translators edit one `data/i18n/<code>.json` each; the schema carries name, native name,
    region, family, script, direction, confidence, a translator note and the uncertain list.
-3. `node server/scripts/i18n-build.js` validates every file (all keys present, HTML tags
+3. `node server/scripts/i18n-build.cjs` validates every file (all keys present, HTML tags
    intact), rewrites the generated LANGS and STR block in the site, and exports
    `data/languages.json`. Bad strings are dropped to the English fallback, never shipped broken.
 
