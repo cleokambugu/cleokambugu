@@ -7,13 +7,19 @@
 
 ## Catchphrase
 
-**Ride. Pool. Rent.**
+**Ride. Pool. Rent. Deliver.**
 
-Three verbs, three full stops, always in this order: the daily habit first (Ride), the social
-saving second (Pool), the aspiration last (Rent). Written with full stops as a line and with
-middle dots when it runs inline: Ride · Pool · Rent. It sits beside the logo in the nav and is
-the hero headline. Explore is a section and a feature, not part of the catchphrase; when it is
-listed, it comes after: "Ride. Pool. Rent. Explore the weekend."
+Four verbs, four full stops, always in this order: the daily habit first (Ride), the social
+saving second (Pool), the aspiration third (Rent), and the parcel last (Deliver), because the
+flip side of a ride is a thing that needs to move. Written with full stops as a line and with
+middle dots when it runs inline. It sits beside the logo in the nav and is the hero headline.
+
+**The flip.** Every verb has a demand-side reading that the hero shows beneath the highlighted
+word: Find a ride. Share the ride. Rent the ride. Send the thing. The verbs are what UG does;
+the flip is what the customer came for.
+
+Explore is a section and a feature, not part of the catchphrase; when it is listed, it comes
+after: "Ride. Pool. Rent. Deliver. Explore the weekend."
 
 ## Positioning line
 
@@ -40,8 +46,9 @@ Why a crest:
 
 - **It is the crested crane's crest**, the bird on the flag, redrawn as three strokes in the
   flag's black, yellow and red. Nobody in Uganda needs it explained.
-- **Three feathers are the three verbs.** Ride, Pool, Rent, in that order, left to right. The
-  middle feather is the tallest and yellow: Pool is the one UG owns.
+- **Three feathers are the three moving verbs.** Ride, Pool, Rent, in that order, left to
+  right. The middle feather is the tallest and yellow: Pool is the one UG owns. **The pearl
+  is Deliver**: the thing that travels, the parcel in the boot. Four verbs, one mark.
 - **A crest is what old money has.** The customer wants to look the part; UG hands them a
   crest to wear. The joke is gentle and the customer is in on it.
 - **The pearl** is the Pearl of Africa, and a wheel, and a coin. It sits where the feathers
@@ -117,9 +124,24 @@ HTML so they stay crisp and clickable. Everything else is quiet: prices roll up 
 when a comparison recomputes, fleet cards tilt a few degrees on hover, sections fade in from a
 visible resting state. `prefers-reduced-motion` turns all of it off and leaves the map static.
 
+## The opening
+
+The app and the site open the same way, once per session, three and a half seconds, skippable,
+off under reduced motion: Uganda assembles from scattered particles (land in cream and yellow,
+lakes in crane), fourteen vehicles dash the corridors from Kampala to the towns and back with
+lit trails in the flag colours, U flies in from the left and G from the right and lock with a
+flash of yellow, then Ride. Pool. Rent. Deliver. appear beneath. The hero is already running
+underneath when the overlay dissolves, so the map the opening drew is the map you land on.
+
+## Staying on UG
+
+A partner's name and colour appear on a quote, and the primary action is always "Book on UG":
+the trip rail in the nav shows placed, driver and plate, arriving, on trip, done. The partner
+link is a quiet secondary. The product rule: nobody is sent away to finish what they started.
+
 ## The verbs, as UI
 
-Ride, Pool, Rent and Explore live in one booking strip under the hero, as tabs in that order.
+Ride, Pool, Rent, Deliver and Explore live in one booking strip under the hero, as tabs in that order.
 That strip is the Sixt pattern (rent, share, ride, plus) rebuilt: the tab changes the button's verb ("Show prices", "Find a
 seat", "See the fleet", "Price the weekend") and routes the same pick-up, destination, date
 and time to the matching section. One form, four outcomes.

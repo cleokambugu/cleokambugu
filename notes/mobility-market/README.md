@@ -7,6 +7,8 @@ Claude Code web session on the Trusted network policy.
 | --- | --- |
 | [`competitors.md`](competitors.md) | Sixt (rent · share · ride · plus), Pool (poolapp.io), SafariShare, Tinka, the Antigravity landing page, Flutterwave's inline checkout. |
 | [`uganda-fares.md`](uganda-fares.md) | Everything found on Kampala and intercity fares, commissions, tolls, park fees, rental rates, and the middle-class income band, with dates. |
+| [`onboarding.md`](onboarding.md) | How Uber, Bolt, SafeBoda, Faras, BlaBlaCar, inDrive and Swvl onboard drivers and riders. |
+| [`safarishare.md`](safarishare.md) | SafariShare benchmarked: what its site and app do, what UG took, what UG does differently. |
 
 ## Provenance, stated plainly
 
