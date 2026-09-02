@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>UG Mobility</title>
-<meta name="description" content="UG — Rent. Pool. Ride. Explore. One Ugandan app that compares every ride on the market, pools the road trip, rents the car, and books the park. Pay by mobile money through Flutterwave.">
+<meta name="description" content="UG — Ride. Pool. Rent. One Ugandan app that compares every ride on the market, pools the road trip, rents the car, and books the park. Pay by mobile money through Flutterwave.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Albert+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
@@ -82,6 +82,8 @@ section{padding:96px 0;border-top:1px solid var(--line)}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--font-display);font-weight:900;font-size:22px;letter-spacing:-.02em}
 .logo .mark{width:34px;height:34px;border-radius:8px;background:linear-gradient(180deg,#111 0 33%,var(--yellow) 33% 66%,var(--red) 66%);display:grid;place-items:center;position:relative}
 .logo .mark::after{content:"";width:10px;height:10px;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 3px var(--red)}
+.tagline{font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-left:-14px}
+@media (max-width:600px){.tagline{display:none}}
 .nav-links{display:flex;gap:4px;margin-left:12px}
 .nav-links a{text-decoration:none;padding:8px 12px;border-radius:999px;font-size:14px;color:var(--ink-2)}
 .nav-links a:hover{color:var(--ink);background:var(--surface)}
@@ -93,7 +95,7 @@ section{padding:96px 0;border-top:1px solid var(--line)}
 .hero{position:relative;overflow:hidden;border-top:0;padding:0}
 .hero .wrap{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);min-height:640px;align-items:center;position:relative;z-index:2}
 .hero-copy{padding:72px 0 56px}
-.hero h1{font-size:clamp(44px,7vw,96px);line-height:.95;margin:16px 0 22px}
+.hero h1{font-size:clamp(52px,8vw,112px);line-height:.92;margin:16px 0 22px;letter-spacing:-.03em}
 .hero h1 .hl{color:var(--yellow)}
 .hero .lede{font-size:clamp(17px,1.6vw,21px);color:var(--ink-2);max-width:46ch}
 .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
@@ -117,7 +119,7 @@ section{padding:96px 0;border-top:1px solid var(--line)}
 .hint{position:absolute;left:0;bottom:12px;font-family:var(--font-mono);font-size:11px;color:var(--ink-3);letter-spacing:.08em}
 @media (max-width:960px){.hero .wrap{grid-template-columns:1fr;min-height:0}.stage{min-height:420px}.hero-copy{padding-top:48px}}
 
-/* ---------- Booking strip (the four verbs) ---------- */
+/* ---------- Booking strip (Ride. Pool. Rent. plus Explore) ---------- */
 .strip{position:relative;z-index:3;margin-top:-28px}
 .strip-inner{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow);overflow:hidden}
 .verbs{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--line)}
@@ -319,6 +321,7 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
 <nav class="nav" aria-label="Primary">
   <div class="wrap">
     <a class="logo" href="#top" aria-label="UG home"><span class="mark" aria-hidden="true"></span>UG</a>
+    <span class="tagline">Ride. Pool. Rent.</span>
     <div class="nav-links">
       <a href="#compare">Compare</a>
       <a href="#pool">Pool</a>
@@ -337,8 +340,9 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
 <header class="hero" id="top">
   <div class="wrap">
     <div class="hero-copy">
-      <div class="eyebrow"><b>UG</b> · Rent · Pool · Ride · Explore · Kampala → everywhere</div>
-      <h1>Look the part.<br>Pay the <span class="hl">smart</span> price.</h1>
+      <div class="eyebrow"><b>UG</b> · Kampala → everywhere</div>
+      <h1>Ride.<br><span class="hl">Pool.</span><br>Rent.</h1>
+      <p class="lede" style="font-family:var(--font-display);font-weight:500;color:var(--ink);margin-bottom:14px">Look the part. Pay the smart price.</p>
       <p class="lede">One app that quotes every ride on the Ugandan market side by side, pools the road trip so the Prado costs a quarter, rents the car when you need to arrive, and books the park before the permits go. Paid the way Kampala pays: mobile money.</p>
       <div class="hero-cta">
         <a class="btn primary" href="#compare">Compare a ride now</a>
@@ -346,7 +350,7 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
       </div>
       <div class="hero-stats" aria-label="Key figures">
         <div><div class="v mono" id="statProviders">10</div><div class="k">quotes per search</div></div>
-        <div><div class="v mono">4 verbs</div><div class="k">rent · pool · ride · explore</div></div>
+        <div><div class="v mono">3 verbs</div><div class="k">ride · pool · rent, plus Explore for the weekend</div></div>
         <div><div class="v mono">UGX</div><div class="k">MTN MoMo · Airtel Money · cards</div></div>
       </div>
     </div>
@@ -358,7 +362,7 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
     </div>
   </div>
 
-  <!-- Booking strip: Sixt's four verbs, re-cut for Uganda -->
+  <!-- Booking strip: the three verbs plus Explore, after Sixt's rent/share/ride/plus pattern -->
   <div class="wrap strip" id="strip">
     <div class="strip-inner">
       <div class="verbs" role="tablist" aria-label="What do you need">
@@ -573,7 +577,7 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
     <div class="foot">
       <div>
         <a class="logo" href="#top" aria-label="UG home"><span class="mark" aria-hidden="true"></span>UG</a>
-        <p style="margin-top:12px">Rent. Pool. Ride. Explore. A Ugandan mobility marketplace for people who have places to be and a budget to respect.</p>
+        <p style="margin-top:12px">Ride. Pool. Rent. A Ugandan mobility marketplace for people who have places to be and a budget to respect.</p>
       </div>
       <div><h4>Product</h4><a href="#compare">Compare</a><a href="#pool">Pool</a><a href="#rent">Rent</a><a href="#explore">Explore</a><a href="#hustle">Hustle Mode</a></div>
       <div><h4>Company</h4><a href="#partners">Partners</a><a href="#" data-soon>Drive with UG</a><a href="#" data-soon>List a car</a><a href="#" data-soon>Careers</a></div>

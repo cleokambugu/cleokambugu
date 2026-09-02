@@ -1,9 +1,10 @@
-# UG — Rent. Pool. Ride. Explore.
+# UG — Ride. Pool. Rent.
 
 A Ugandan mobility and tourism marketplace for people who have places to be and a budget to
-respect. UG puts every ride on the Kampala market on one screen (the **arbitrage desk**), pools
-road trips so a Prado costs a quarter (**Pool**), rents the car when you need to arrive
-(**Rent**), and prices the whole park weekend in one number (**Explore**). Payment is mobile
+respect. **Ride. Pool. Rent.** is the catchphrase and the order of the product: UG puts every ride on the
+Kampala market on one screen (the **arbitrage desk**), pools road trips so a Prado costs a
+quarter (**Pool**), and rents the car when you need to arrive (**Rent**). **Explore** prices the
+whole park weekend in one number and is where all three verbs get used at once. Payment is mobile
 money through Flutterwave.
 
 Status: **PROTOTYPE**. The site is a working single-file web app with a published fare model.
@@ -15,7 +16,7 @@ Nothing here is a live fare, a licensed service, or a production payment integra
 | [`data/`](data/) | The fare model, routes, fleet, and destinations as JSON, with provenance tags. Exported from the site's data block. |
 | [`docs/business-plan.md`](docs/business-plan.md) | Market, customer, product, revenue model, unit economics, go-to-market, risks. |
 | [`docs/arbitrage-model.md`](docs/arbitrage-model.md) | How the compare engine computes and ranks quotes, and what each number's provenance is. |
-| [`docs/brand.md`](docs/brand.md) | Identity: name, voice, palette, type, motion, the four verbs. |
+| [`docs/brand.md`](docs/brand.md) | Identity: name, voice, palette, type, motion, the catchphrase and the verbs. |
 | [`docs/payments-flutterwave.md`](docs/payments-flutterwave.md) | Checkout integration as built, what a production deployment must add. |
 | [`docs/roadmap.md`](docs/roadmap.md) | Phases from this prototype to a licensed operation, plus regulatory notes. |
 | [`../../notes/mobility-market/`](../../notes/mobility-market/) | Study notes on Sixt, Pool, SafariShare, Tinka, the Antigravity landing page, and Ugandan fares, with first-hand versus secondhand provenance marked. |

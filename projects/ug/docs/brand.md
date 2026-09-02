@@ -3,14 +3,24 @@
 ## Name
 
 **UG.** Two letters, the country code, what people already type. Pronounced "you-gee". Never
-"U.G." with stops, never spelled out. The four verbs follow it in this order, always with
-middle dots when written on one line: **Rent · Pool · Ride · Explore.**
+"U.G." with stops, never spelled out.
 
-## Line
+## Catchphrase
+
+**Ride. Pool. Rent.**
+
+Three verbs, three full stops, always in this order: the daily habit first (Ride), the social
+saving second (Pool), the aspiration last (Rent). Written with full stops as a line and with
+middle dots when it runs inline: Ride · Pool · Rent. It sits beside the logo in the nav and is
+the hero headline. Explore is a section and a feature, not part of the catchphrase; when it is
+listed, it comes after: "Ride. Pool. Rent. Explore the weekend."
+
+## Positioning line
 
 **Look the part. Pay the smart price.**
 
-It names the tension the customer lives with, and takes their side. Secondary lines used in
+The line under the catchphrase. It names the tension the customer lives with, and takes their
+side. Secondary lines used in
 sections: "Arrive properly." (Rent), "Share the seat, split the fuel." (Pool), "The Pearl,
 priced honestly." (Explore), "For people running three lives." (Hustle Mode).
 
@@ -63,9 +73,9 @@ HTML so they stay crisp and clickable. Everything else is quiet: prices roll up 
 when a comparison recomputes, fleet cards tilt a few degrees on hover, sections fade in from a
 visible resting state. `prefers-reduced-motion` turns all of it off and leaves the map static.
 
-## The four verbs, as UI
+## The verbs, as UI
 
-They live in one booking strip under the hero, as tabs. That strip is the Sixt pattern
-(rent, share, ride, plus) rebuilt: the tab changes the button's verb ("Show prices", "Find a
+Ride, Pool, Rent and Explore live in one booking strip under the hero, as tabs in that order.
+That strip is the Sixt pattern (rent, share, ride, plus) rebuilt: the tab changes the button's verb ("Show prices", "Find a
 seat", "See the fleet", "Price the weekend") and routes the same pick-up, destination, date
 and time to the matching section. One form, four outcomes.

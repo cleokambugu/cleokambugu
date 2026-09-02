@@ -32,10 +32,11 @@ What they have in common:
   June 2026)*. Park entry for citizens is UGX 20,000–25,000. The barrier is transport and
   planning, not fees.
 
-## 3. The product: four verbs
+## 3. The product: Ride. Pool. Rent.
 
-Sixt's product architecture is the template: one app, four verbs, one account. UG re-cuts them
-for Uganda.
+Sixt's product architecture is the template: one app, a few verbs, one account. UG's
+catchphrase is the product in order of use: Ride (daily), Pool (weekly), Rent (the occasion).
+Explore is the weekend planner that uses all three.
 
 | Verb | What it does | UG's edge |
 | --- | --- | --- |

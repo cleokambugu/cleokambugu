@@ -2,7 +2,7 @@
 
 ## Phase 0 — this prototype (done)
 
-- Single-file site with the four verbs, the arbitrage desk, Pool, Rent, Explore, Hustle
+- Single-file site with Ride (the arbitrage desk), Pool, Rent, Explore, Hustle
   Mode, UG Plus, and a Flutterwave checkout with a sandbox fallback.
 - Published fare model with provenance on every card.
 - Interactive 3D particle map of Uganda as the hero.
