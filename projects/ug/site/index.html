@@ -104,10 +104,11 @@ section{padding:96px 0;border-top:1px solid var(--line)}
 .theme-toggle{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 10px;font-family:var(--font-mono);font-size:12px}
 @media (max-width:900px){.nav-links{display:none}}
 .nav-links a,.theme-toggle{white-space:nowrap}
-@media (max-width:1320px){.nav-links a[href="#hustle"],.nav-links a[href="#plugins"]{display:none}}
+@media (max-width:1400px){.nav-links a[href="#hustle"],.nav-links a[href="#plugins"]{display:none}}
+@media (max-width:1250px){.nav-links a[href="#foresight"],.nav-links a[href="#atlas"]{display:none}}
 @media (max-width:1140px){.nav-links a[href="#deliver"],.nav-links a[href="#drive"]{display:none}}
 @media (max-width:1000px){#micBtn{display:none}}
-@media (max-width:640px){#micBtn,#themeToggle{display:none}.nav .wrap{gap:12px}}
+@media (max-width:640px){#micBtn,#themeToggle{display:none}.nav .wrap{gap:12px}#navCta.pchip{font-size:0;padding:4px}#navCta.pchip i{font-size:11px}}
 
 /* ---------- Hero ---------- */
 .hero{position:relative;overflow:hidden;border-top:0;padding:0}
@@ -401,6 +402,38 @@ section{padding:96px 0;border-top:1px solid var(--line)}
 @media (max-width:640px){.bus{grid-template-columns:44px 1fr}.bus>div:last-child{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center}.bus .p{text-align:left}}
 @media (max-width:640px){.buses .legs-head .ctl{min-width:0;width:100%}}
 
+/* ---------- Foresight ---------- */
+.fx-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.fday{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:12px 14px}
+.fday-h{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+.fday-h b{font-family:var(--font-display);font-weight:500;font-size:14px}
+.fday-h span{font-size:12px;color:var(--ink-3)}
+.fx-row{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) auto;gap:10px;align-items:center;padding:9px 0;border-top:1px solid var(--line)}
+.fx-row.season{border-left:3px solid var(--warn);padding-left:8px}
+.fx-row.event{border-left:3px solid var(--yellow);padding-left:8px}
+.fx-row.rhythm{border-left:3px solid var(--crane);padding-left:8px}
+.fx-town b{font-size:14px}.fx-town small{display:block;font-size:12px;color:var(--ink-2)}
+.fx-need{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.fx-need b{font-family:var(--font-mono);font-size:18px}
+.fx-need small{font-size:11px;color:var(--ink-3)}
+.fx-act{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.fx-note{grid-column:1/-1;font-size:11px;color:var(--ink-3)}
+@media (max-width:960px){.fx-grid{grid-template-columns:1fr}}
+@media (max-width:600px){.fx-row{grid-template-columns:1fr}.fx-act{justify-content:flex-start}}
+/* teleport */
+.tppill{display:none;align-items:center;gap:8px;padding:6px 10px 6px 12px;border-radius:999px;font-size:13px;font-weight:600;border:1px solid var(--crane);background:color-mix(in srgb,var(--crane) 14%,var(--surface))}
+.tppill:not([hidden]){display:inline-flex}
+.tppill i{width:8px;height:8px;border-radius:50%;background:var(--crane)}
+.tppill button{border:0;background:transparent;color:var(--ink-3);font-size:16px;line-height:1;padding:0 2px;cursor:pointer}
+.warp{position:fixed;inset:0;z-index:150;pointer-events:none;background:radial-gradient(circle at 70% 45%,color-mix(in srgb,var(--yellow) 35%,transparent),transparent 55%);animation:warp .7s cubic-bezier(.16,1,.3,1) forwards}
+@keyframes warp{0%{opacity:0;transform:scale(.6)}30%{opacity:1}100%{opacity:0;transform:scale(1.4)}}
+@media (prefers-reduced-motion:reduce){.warp{display:none}}
+/* language */
+.langpick{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 10px;font-size:12px;color:var(--ink-2);max-width:150px}
+@media (max-width:640px){.langpick{display:none}}
+.pin{transition:opacity .2s,transform .15s}
+.pin.tp .lbl{color:var(--yellow)}
+
 /* ---------- Partners / trust ---------- */
 .trust{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .trust div{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:20px}
@@ -648,17 +681,20 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
     <a class="logo" href="#top" aria-label="UG home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true" class="crest">    <path d="M28.5 40.5 Q22 31 12.5 17" fill="none" stroke="currentColor" stroke-width="7.5" stroke-linecap="round"/>  <path d="M32 38.5 Q32 24 32 8.5" fill="none" stroke="#F2C200" stroke-width="7.5" stroke-linecap="round"/>  <path d="M35.5 40.5 Q42 31 51.5 17" fill="none" stroke="#D2202F" stroke-width="7.5" stroke-linecap="round"/>  <circle cx="32" cy="48" r="7.5" fill="currentColor"/>  <circle cx="32" cy="48" r="3" fill="#F2C200"/></svg>UG</a>
     <span class="tagline" id="tagline" aria-hidden="true"><span>Ride.</span><span>Pool.</span><span>Rent.</span><span>Deliver.</span></span>
     <div class="nav-links">
-      <a href="#stage">Stage</a>
-      <a href="#atlas">Atlas</a>
-      <a href="#compare">Compare</a>
-      <a href="#rent">Rent</a>
-      <a href="#deliver">Deliver</a>
-      <a href="#explore">Explore</a>
-      <a href="#drive">Drive</a>
-      <a href="#hustle">Hustle</a>
-      <a href="#plugins">Plug-ins</a>
+      <a href="#stage" data-i18n="navStage">Stage</a>
+      <a href="#atlas" data-i18n="navAtlas">Atlas</a>
+      <a href="#compare" data-i18n="navCompare">Compare</a>
+      <a href="#rent" data-i18n="navRent">Rent</a>
+      <a href="#deliver" data-i18n="navDeliver">Deliver</a>
+      <a href="#explore" data-i18n="navExplore">Explore</a>
+      <a href="#foresight" data-i18n="navForesight">Foresight</a>
+      <a href="#drive" data-i18n="navDrive">Drive</a>
+      <a href="#hustle" data-i18n="navHustle">Hustle</a>
+      <a href="#plugins" data-i18n="navPlugins">Plug-ins</a>
     </div>
     <span class="spacer"></span>
+    <span class="tppill" id="tpPill" hidden></span>
+    <select class="langpick" id="langPick" aria-label="Language"></select>
     <button class="railpill" id="railPill" type="button" aria-live="polite"><i></i><span id="railPillT">Trip</span></button>
     <button class="theme-toggle" id="micBtn" type="button" aria-label="Voice commands" title="Voice commands (Cephable / browser speech)">🎤 voice</button>
     <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle colour theme">night / noon</button>
@@ -672,11 +708,11 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
     <div class="hero-copy">
       <div class="eyebrow fx" style="--d:.05s"><b>UG</b> · Kampala → everywhere</div>
       <h1 id="verbs" aria-label="Ride. Pool. Rent. Deliver."><span class="w" data-w="Ride." data-flip="Find a ride.">Ride.</span><span class="w hl" data-w="Pool." data-flip="Share the ride.">Pool.</span><span class="w" data-w="Rent." data-flip="Rent the ride.">Rent.</span><span class="w" data-w="Deliver." data-flip="Send the thing.">Deliver.</span></h1>
-      <p class="lede tag fx" style="--d:1.25s"><span id="flip" class="flip">Share the ride.</span> Look the part. Pay the smart price.</p>
+      <p class="lede tag fx" style="--d:1.25s"><span id="flip" class="flip">Share the ride.</span> <span data-i18n="position">Look the part. Pay the smart price.</span></p>
       <p class="lede fx" style="--d:1.45s">One app that quotes every ride on the Ugandan market side by side, pools the road trip so the Prado costs a quarter, rents the car when you need to arrive, and books the park before the permits go. Paid the way Kampala pays: mobile money.</p>
       <div class="doors fx" style="--d:1.6s">
-        <button class="door" type="button" data-door="rider"><span class="d-k">I need to get somewhere</span><span class="d-v">Queue a seat, compare every ride, plan the weekend.</span><span class="d-go">Start →</span></button>
-        <button class="door" type="button" data-door="driver"><span class="d-k">I drive, or I have a car</span><span class="d-v">Say where you're comfortable. Funded trips come to you.</span><span class="d-go">Open for business →</span></button>
+        <button class="door" type="button" data-door="rider"><span class="d-k" data-i18n="doorRider">I need to get somewhere</span><span class="d-v" data-i18n="doorRiderSub">Queue a seat, compare every ride, plan the weekend.</span><span class="d-go" data-i18n="start">Start →</span></button>
+        <button class="door" type="button" data-door="driver"><span class="d-k" data-i18n="doorDriver">I drive, or I have a car</span><span class="d-v" data-i18n="doorDriverSub">Say where you're comfortable. Funded trips come to you.</span><span class="d-go" data-i18n="open">Open for business →</span></button>
       </div>
       <div class="fx" style="--d:1.7s;margin-top:12px"><a class="quiet" href="#compare">Just compare prices, no account needed</a></div>
       <div class="hero-stats fx" style="--d:1.75s" aria-label="Key figures">
@@ -773,6 +809,21 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
   </div>
 </section>
 
+<!-- ===================== FORESIGHT ===================== -->
+<section id="foresight">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <div class="eyebrow">Foresight · <b>demand before it happens</b></div>
+        <h2>Mango season needs minibuses in Masaka. Entebbe needs cars at midnight. Namboole needs sixty special hires at four. UG says so a week ahead, and counts who promised to be there.</h2>
+      </div>
+      <p>The system behind the app reads three calendars: the harvests by region, the rhythms of airports, hospitals, markets, campuses, churches and stadiums, and the named events of the year. From those it forecasts loads per day by place and vehicle class, shows the gap between what is needed and what drivers have promised, and points the right vehicle to the right place. As stages fill and trips complete, the forecast learns from what actually happened.</p>
+    </div>
+    <div class="stage-bar rv"><div class="seg" id="segVeh" style="flex-wrap:wrap;max-width:720px"></div><span class="spacer" style="flex:1"></span><span class="note">Confidence is shown per signal; seasons are rules until there are fills to learn from.</span></div>
+    <div class="fx-grid rv" id="foresightList"></div>
+  </div>
+</section>
+
 <!-- ===================== DRIVE ===================== -->
 <section id="drive">
   <div class="wrap">
@@ -850,7 +901,7 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
           <div class="ctl"><label for="dFrom">From</label><select id="dFrom"></select></div>
           <div class="ctl"><label for="dTo">To</label><select id="dTo"></select></div>
         </div>
-        <div class="ctl"><label>What is it</label><div class="corr" id="dWhat"><span class="c on" data-w="envelope">Envelope · documents</span><span class="c" data-w="box">Small box</span><span class="c" data-w="food">Cakes · food, keep flat</span><span class="c" data-w="bag">A bag · shopping</span><span class="c" data-w="bulky">Bulky · needs a car</span></div></div>
+        <div class="ctl"><label>What is it</label><div class="corr" id="dWhat"><span class="c on" data-w="envelope">Envelope · documents</span><span class="c" data-w="box">Small box</span><span class="c" data-w="food">Cakes · food, keep flat</span><span class="c" data-w="bag">A bag · shopping</span><span class="c" data-w="bulky">Bulky · needs a car</span><span class="c" data-w="produce">Produce · sacks, crates, a harvest</span></div></div>
         <label class="toggle"><span>Someone must sign for it</span><input type="checkbox" id="dSign"></label>
         <label class="toggle"><span>Same hour (otherwise today)</span><input type="checkbox" id="dRush"></label>
         <div class="route-meta" id="dMeta"></div>
@@ -1036,7 +1087,7 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
         <div class="eyebrow">On this device</div>
         <h3 style="margin:8px 0 6px">Install UG</h3>
         <p id="instHow">Add UG to your home screen. It opens full-screen with the Crest as its icon.</p>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px"><button class="btn primary" type="button" id="instBtn">Install the app</button><button class="btn" type="button" id="instCopy">Copy the link</button></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px"><button class="btn primary" type="button" id="instBtn" data-i18n="install">Install the app</button><button class="btn" type="button" id="instCopy">Copy the link</button></div>
       </div>
       <div class="inst-card glass qr">
         <div class="eyebrow">On another phone</div>
@@ -1135,10 +1186,10 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
   <button class="dock-next" type="button" id="dockNext" aria-label="Next">›</button>
 </aside>
 <nav class="tabbar glass" id="tabbar" aria-label="App sections">
-  <a href="#stage"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="11" rx="2"/><path d="M7 18v2M17 18v2M3 12h18"/></svg>Stage</a>
-  <a href="#compare"><svg viewBox="0 0 24 24"><path d="M4 17h16M4 12h10M4 7h16"/></svg>Ride</a>
-  <a href="#rent"><svg viewBox="0 0 24 24"><path d="M5 16l2-6h10l2 6v3H5z"/><circle cx="8" cy="18" r="1.5"/><circle cx="16" cy="18" r="1.5"/></svg>Rent</a>
-  <a href="#deliver"><svg viewBox="0 0 24 24"><path d="M3 8l9-4 9 4v9l-9 4-9-4z"/><path d="M3 8l9 4 9-4M12 12v9"/></svg>Deliver</a>
+  <a href="#stage"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="11" rx="2"/><path d="M7 18v2M17 18v2M3 12h18"/></svg><span data-i18n="navStage">Stage</span></a>
+  <a href="#compare"><svg viewBox="0 0 24 24"><path d="M4 17h16M4 12h10M4 7h16"/></svg><span data-i18n="tabRide">Ride</span></a>
+  <a href="#rent"><svg viewBox="0 0 24 24"><path d="M5 16l2-6h10l2 6v3H5z"/><circle cx="8" cy="18" r="1.5"/><circle cx="16" cy="18" r="1.5"/></svg><span data-i18n="navRent">Rent</span></a>
+  <a href="#deliver"><svg viewBox="0 0 24 24"><path d="M3 8l9-4 9 4v9l-9 4-9-4z"/><path d="M3 8l9 4 9-4M12 12v9"/></svg><span data-i18n="navDeliver">Deliver</span></a>
   <button type="button" id="tabMe"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg><span id="tabMeLbl">Me</span></button>
 </nav>
 <div class="toast" id="toast" role="status" hidden></div>
@@ -1278,6 +1329,58 @@ const MODE_META = {
 };
 /* Airstrips: which destinations a scheduled flight serves, and the strip's name. Used by the compare desk. */
 const AIRSTRIPS = {'kampala-bwindi':['Kihihi',1100000,75], 'kampala-bunyonyi':['Kisoro',1100000,80], 'kampala-murchison':['Pakuba',1000000,60], 'kampala-kidepo':['Kidepo (Lomej)',1300000,90], 'kampala-gulu':['Gulu',900000,55], 'kampala-arua':['Arua',950000,70], 'kampala-fortportal':['Kasese',950000,60], 'kampala-mbarara':['Mbarara',900000,50], 'kampala-moroto':['Moroto',1200000,80], 'kampala-kotido':['Kidepo (Lomej)',1300000,90]};
+
+/* =====================================================================
+   FORESIGHT: demand before it happens. Two calendars and an event list drive a forecast of loads
+   per day by place and vehicle class, so supply can be placed ahead and the right vehicle goes to
+   the right place. Seasons and venue rhythms are general knowledge of Uganda's year, written as
+   rules; they are the seed a learning system replaces once there are fills to learn from.
+   ===================================================================== */
+const VEHICLE_CLASSES = { boda:'Boda', car:'Car', minibus:'Minibus · 14 seats or 1.5 t', pickup:'Pickup · 1 t', lorry:'Lorry · 3–7 t', bus:'Bus' };
+const SEASONS = [
+  {crop:'Mangoes', region:'Central and Eastern', towns:['Masaka','Luwero','Soroti','Lira'], months:[11,12,1], vehicle:'minibus', loadsPerDay:14, note:'Ripe from November; Soroti and Lira in December'},
+  {crop:'Coffee (Robusta harvest)', region:'Central and Western', towns:['Masaka','Mukono','Mbarara','Bushenyi'], months:[5,6,7,11,12], vehicle:'lorry', loadsPerDay:22, note:'Two flushes: May to July, and November to December'},
+  {crop:'Arabica coffee', region:'Elgon', towns:['Mbale','Sipi'], months:[10,11,12,1], vehicle:'pickup', loadsPerDay:9, note:'Slopes of Elgon'},
+  {crop:'Maize (first season)', region:'Eastern and Northern', towns:['Mbale','Tororo','Soroti','Lira','Gulu'], months:[7,8], vehicle:'lorry', loadsPerDay:30, note:'Harvest after the long rains'},
+  {crop:'Maize (second season)', region:'Eastern and Northern', towns:['Mbale','Tororo','Soroti','Lira','Gulu'], months:[12,1], vehicle:'lorry', loadsPerDay:26, note:'Harvest after the short rains'},
+  {crop:'Matooke', region:'Western and Central', towns:['Mbarara','Bushenyi','Masaka','Mukono'], months:[1,2,3,4,5,6,7,8,9,10,11,12], vehicle:'lorry', loadsPerDay:40, note:'Year-round; peaks in the dry months'},
+  {crop:'Rice', region:'Eastern', towns:['Tororo','Mbale','Soroti'], months:[6,7,12,1], vehicle:'lorry', loadsPerDay:12, note:'Doho and Kibimba schemes'},
+  {crop:'Fish (Nile perch, tilapia)', region:'Lake Victoria and Albert', towns:['Entebbe','Jinja','Masaka','Hoima'], months:[1,2,3,4,5,6,7,8,9,10,11,12], vehicle:'pickup', loadsPerDay:18, note:'Daily landings; iced pickups before 07:00'},
+  {crop:'Cassava', region:'Northern', towns:['Lira','Gulu','Arua'], months:[1,2,3,4,5,6,7,8,9,10,11,12], vehicle:'lorry', loadsPerDay:10, note:'Year-round'},
+  {crop:'Tea', region:'Western', towns:['Fort Portal','Bushenyi','Kasese'], months:[1,2,3,4,5,6,7,8,9,10,11,12], vehicle:'lorry', loadsPerDay:16, note:'Plucked every week; wetter months heavier'},
+  {crop:'Beans and groundnuts', region:'Northern and Eastern', towns:['Gulu','Lira','Soroti','Arua'], months:[7,8,12], vehicle:'pickup', loadsPerDay:8, note:'After each rains'},
+  {crop:'Pineapples', region:'Central', towns:['Masaka','Mukono','Kayunga'], months:[6,7,8,12,1], vehicle:'minibus', loadsPerDay:11, note:'Kayunga and Masaka belts'},
+  {crop:'Cattle and goats to market', region:'Karamoja and Western', towns:['Moroto','Kotido','Mbarara'], months:[1,2,3,4,5,6,7,8,9,10,11,12], vehicle:'lorry', loadsPerDay:6, note:'Market days; festive peaks in December'},
+  {crop:'Sugarcane', region:'Busoga', towns:['Jinja'], months:[1,2,3,4,5,6,7,8,9,10,11,12], vehicle:'lorry', loadsPerDay:35, note:'Kakira and Lugazi; year-round'},
+];
+/* Venue rhythms: weekday (0 Sun … 6 Sat) and hour windows when people surge, with the vehicle that fits. */
+const VENUES = [
+  {name:'Entebbe Airport arrivals', town:'Entebbe', lon:32.44, lat:0.04, days:[0,1,2,3,4,5,6], hours:[[22,24],[0,2],[12,15]], people:900, vehicle:'car', note:'Evening and night arrival banks; passengers want a car, not a boda'},
+  {name:'Entebbe Airport departures', town:'Entebbe', lon:32.44, lat:0.04, days:[0,1,2,3,4,5,6], hours:[[3,6],[14,17]], people:700, vehicle:'car', note:'Three hours before the morning and afternoon banks'},
+  {name:'Mulago Hospital visiting hours', town:'Kampala', lon:32.575, lat:0.34, days:[0,1,2,3,4,5,6], hours:[[12,14],[17,19]], people:1200, vehicle:'boda', note:'Two visiting windows a day'},
+  {name:'Namboole Stadium', town:'Kampala', lon:32.65, lat:0.33, days:[6,0], hours:[[13,17],[18,21]], people:8000, vehicle:'car', note:'Match and concert days; check the fixture list', event:true},
+  {name:'Lugogo (Cricket Oval, Indoor Stadium)', town:'Kampala', lon:32.60, lat:0.33, days:[5,6,0], hours:[[16,23]], people:3000, vehicle:'car', note:'Concerts and games', event:true},
+  {name:'Kololo Independence Grounds', town:'Kampala', lon:32.59, lat:0.33, days:[6,0], hours:[[8,12],[16,22]], people:5000, vehicle:'car', note:'National days and large events', event:true},
+  {name:'Makerere University', town:'Kampala', lon:32.57, lat:0.335, days:[1,2,3,4,5], hours:[[7,9],[17,19]], people:6000, vehicle:'boda', note:'Term time; graduation weeks are car days'},
+  {name:'Owino and Nakasero markets', town:'Kampala', lon:32.575, lat:0.31, days:[1,2,3,4,5,6], hours:[[5,8],[16,18]], people:4000, vehicle:'pickup', note:'Produce in before dawn, stock out at close'},
+  {name:'Sunday services (Namirembe, Rubaga, Watoto, Miracle Centre)', town:'Kampala', lon:32.56, lat:0.31, days:[0], hours:[[7,9],[11,13]], people:15000, vehicle:'car', note:'Families; matatus and cars'},
+  {name:'Friday prayers (Old Kampala, Gaddafi mosque)', town:'Kampala', lon:32.565, lat:0.315, days:[5], hours:[[12,14]], people:5000, vehicle:'boda', note:'Short window'},
+  {name:'Jinja Source of the Nile and Nyege Nyege', town:'Jinja', lon:33.20, lat:0.43, days:[5,6,0], hours:[[8,12],[15,19]], people:2500, vehicle:'car', note:'Weekend crowds; the festival weekend in November is a bus day', event:true},
+  {name:'Gulu regional referral and university', town:'Gulu', lon:32.30, lat:2.77, days:[1,2,3,4,5], hours:[[7,9],[16,18]], people:2000, vehicle:'boda', note:'Working days'},
+  {name:'Mbarara university and referral hospital', town:'Mbarara', lon:30.66, lat:-0.61, days:[1,2,3,4,5], hours:[[7,9],[16,18]], people:2500, vehicle:'boda', note:'Working days'},
+  {name:'Kisoro and Bwindi trekking briefings', town:'Kisoro', lon:29.69, lat:-1.28, days:[0,1,2,3,4,5,6], hours:[[6,8]], people:120, vehicle:'car', note:'Every trek starts at 08:00; a 4×4 the evening before'},
+  {name:'Bugembe and Jinja sugar belt shift change', town:'Jinja', lon:33.22, lat:0.46, days:[1,2,3,4,5,6], hours:[[6,7],[14,15],[22,23]], people:3000, vehicle:'minibus', note:'Three shifts'},
+];
+/* Named events the operator or partners add (the API accepts more). */
+const EVENTS = [
+  {name:'Kampala City Festival', town:'Kampala', month:10, day:5, people:200000, vehicle:'boda', note:'Roads closed in the centre; bodas to the edge'},
+  {name:'Nyege Nyege festival', town:'Jinja', month:11, day:14, days:4, people:12000, vehicle:'bus', note:'Buses and pools from Kampala all weekend'},
+  {name:'Kabaka birthday run', town:'Kampala', month:4, day:6, people:80000, vehicle:'boda', note:'Early start, closed roads'},
+  {name:'Independence Day', town:'Kampala', month:10, day:9, people:20000, vehicle:'car', note:'National celebrations at Kololo'},
+  {name:'Christmas travel', town:'Kampala', month:12, day:20, days:6, people:300000, vehicle:'bus', note:'Everyone goes to the village; every corridor fills'},
+  {name:'Return from the village', town:'Kampala', month:1, day:2, days:5, people:300000, vehicle:'bus', note:'The reverse flow'},
+  {name:'Martyrs Day, Namugongo', town:'Kampala', month:6, day:3, people:500000, vehicle:'boda', note:'Pilgrims; buses from every region the week before'},
+];
 
 /* Towns UG reaches, and the local apps a rider is handed to there. Provenance: Tinka's own site says
    it runs in 15+ towns (snippet); 8 to 8 in Jinja is from the founder's brief and could not be verified
@@ -1918,6 +2021,7 @@ function renderStages(){
   const el=$('#stages'); el.innerHTML=''; if(typeof renderPulse==='function' && $('#pulse')) setTimeout(renderPulse,0);
   let list=stages.slice();
   if (stageFilter==='funded') list=list.filter(s=>s.status==='funded');
+  if (stageFilter.startsWith('corridor:')) list=list.filter(s=>s.route===stageFilter.slice(9));
   if (stageFilter==='mine'){ const home=(account&&account.rider&&account.rider.home)||'Ntinda'; list=list.filter(s=>{ const r=ROUTES.find(x=>x.id===s.route); return r.from===home||r.to.includes(home)||r.from==='Kampala'; }); }
   list.forEach(st=>{
     const r=ROUTES.find(x=>x.id===st.route); const full=st.seats>=st.cap; const pct=Math.min(100,Math.round(st.seats/st.cap*100));
@@ -2113,6 +2217,8 @@ function openMe(){
       <div class="me-row"><span>Ask a circle member to vouch (sandbox)</span><button class="btn small" type="button" id="meVouch">+1 vouch</button></div>
       <div class="me-row"><span>Replay the opening</span><button class="btn small" type="button" id="meIntro">Play</button></div>
       <div class="me-row"><span>Roles</span><button class="btn small" type="button" id="meRoles">Add a role</button></div>
+      <div class="me-row"><span data-i18n="languages">Language</span><select class="langpick" style="display:inline-block;max-width:170px" id="meLang">${Object.entries(LANGS).map(([k,v])=>`<option value="${k}" ${k===LANG?'selected':''}>${v.native}${v.confidence==='complete'?'':' · '+v.confidence}</option>`).join('')}</select></div>
+      <div class="me-row" id="langNoteRow"><span id="langNote" style="font-size:12px;color:var(--ink-3)"></span><a class="btn small" href="mailto:hello@ug.example?subject=Review%20a%20UG%20language" data-i18n="reviewer">Review this language</a></div>
       <div class="me-row"><span>Theme</span><button class="btn small" type="button" id="meTheme">night / noon</button></div>
       <div class="me-row"><span>Voice commands</span><button class="btn small" type="button" id="meVoice">🎤 Listen</button></div>
       <div class="me-row"><span>Sign out</span><button class="btn small" type="button" id="meOut">Sign out</button></div>
@@ -2125,6 +2231,8 @@ function openMe(){
   $('#meIntro').addEventListener('click',()=>{ $('#meModal').hidden=true; const el=document.createElement('div'); el.id='intro'; el.hidden=true; el.setAttribute('aria-label','UG opening'); el.innerHTML='<canvas id="introCanvas"></canvas><button class="btn small skip" type="button" id="introSkip">Skip</button><div class="words" id="introWords"><span>Ride.</span><span>Pool.</span><span>Rent.</span><span>Deliver.</span></div>'; document.body.prepend(el); playIntro(true); });
   $('#meRoles').addEventListener('click',()=>{ $('#meModal').hidden=true; openHandshake(); });
   $('#meTheme').addEventListener('click',()=>$('#themeToggle').click());
+  $('#meLang').addEventListener('change',e=>{ LANG=e.target.value; store('lang',LANG); applyLang(); });
+  applyLang();
   $('#meVoice').addEventListener('click',()=>{ $('#meModal').hidden=true; toggleVoice(); });
   $('#meOut').addEventListener('click',()=>{ if(LIVE) liveSignOut(); account=null; try{ ['account','offers','driverStats'].forEach(k=>localStorage.removeItem('ug:'+k)); }catch(e){} renderAccountUI(); renderDrive(); renderStages(); $('#meModal').hidden=true; toast('Signed out on this device.'); });
 }
@@ -2317,7 +2425,12 @@ const COURIERS = [
   {id:'streetdel', name:'Street boda', sub:'Negotiated at the stage', kind:'boda', base:2000, perKm:600, min:3000, colour:'#6B7280', prov:'modelled', haggle:true, town:'any', logo:'streetboda'},
   {id:'specialdel', name:'Special hire', sub:'Car, for bulky things', kind:'car', base:5000, perKm:1200, min:15000, colour:'#6B7280', prov:'modelled', town:'any', logo:'special'},
 ];
-const WHAT_FACTOR = {envelope:1, box:1.1, food:1.25, bag:1.15, bulky:1};
+const WHAT_FACTOR = {envelope:1, box:1.1, food:1.25, bag:1.15, bulky:1, produce:1};
+const HAULERS = [
+  {id:'minibus', name:'UG Minibus', sub:'Hiace, 1.5 t or 14 seats · with driver', colour:'#B45309', base:60000, perKm:1800, min:120000, prov:'UG model', ug:true, logo:'matatu'},
+  {id:'pickup', name:'UG Pickup', sub:'1 t · with driver', colour:'#0F766E', base:40000, perKm:1500, min:90000, prov:'UG model', ug:true, logo:'special'},
+  {id:'lorry', name:'UG Lorry', sub:'Fuso 3–7 t · with driver', colour:'#7C2D12', base:120000, perKm:2600, min:250000, prov:'UG model', ug:true, logo:'bus'},
+];
 function initDeliver(){
   const towns=[...Object.keys(SUBURB_XY), ...PLACES.filter(p=>!p.park && !SUBURB_XY[p.name]).map(p=>p.name)];
   $('#dFrom').innerHTML=Object.keys(SUBURB_XY).map(x=>`<option ${x==='Bugolobi'?'selected':''}>${x}</option>`).join('');
@@ -2332,7 +2445,11 @@ function renderDeliver(){
   const route = inTown ? null : ROUTES.find(r=>r.to.split(' (')[0]===to || r.to===to);
   $('#dMeta').innerHTML = inTown ? `<span>${km.toFixed(1)} km in town</span><span>${what}</span>` : route ? `<span>${route.km} km · upcountry</span><span>rides on the next stage</span>` : '';
   const out=[];
-  if (inTown){
+  if (what==='produce'){
+    const km = inTown ? kmBetween(from,to) : (route?route.km:100);
+    HAULERS.forEach(h=>out.push({c:h, price:Math.max(h.min, h.base+h.perKm*km), eta: inTown? 90 : (route?route.min+90:240)}));
+    const fx = foresightRows.filter(r=>r.kind==='season' && (r.town===to || r.town===from)).slice(0,1); if(fx.length) $('#dMeta').innerHTML += `<span>Foresight: ${esc(fx[0].what)} · ${fx[0].loads} loads/day expected</span>`;
+  } else if (inTown){
     COURIERS.filter(c=>c.town==='Kampala'||c.town==='any').forEach(c=>{ if(what==='bulky'&&c.kind==='boda') return; if(what!=='bulky'&&c.id==='specialdel') return; let f=Math.max(c.min, c.base+c.perKm*km)*WHAT_FACTOR[what]; if(sign) f+=1000; if(rush) f*=1.3; out.push({c, price:f, eta: rush?15:45}); });
     if (to==='Entebbe'||from==='Entebbe') out.push({c:{id:'ugstage', name:'UG', sub:'Parcel on the airport stage', colour:'#D2202F', prov:'UG model', ug:true, logo:'ugpool'}, price: Math.round(poolSeatCost(ROUTES.find(r=>r.id==='cbd-entebbe'),4).riderPays*0.25/500)*500, eta:120});
   } else if (route){
@@ -2587,12 +2704,14 @@ function initScene(){
 
   const card=$('#pinCard');
   function showPin(p){ active=p; pins.forEach(q=>q.el.classList.toggle('active',q===p)); const r=ROUTES.find(x=>x.id===p.pl.route); const c=r?poolSeatCost(r,4):null; card.hidden=false; card.innerHTML=`<h4>${p.pl.name}</h4><p>${p.pl.sub}</p>${LOCAL[p.pl.name]?`<p style="margin-top:4px">Local apps here: ${LOCAL[p.pl.name].join(', ')}</p>`:''}<div class="row"><span>${r?r.km+' km · ~'+Math.round(r.min/60*10)/10+' h':''}</span><span>${c?'pool seat UGX '+fmt(c.riderPays):''}</span></div><div style="margin-top:10px;display:flex;gap:8px"><a class="btn small primary" href="#compare" data-route="${p.pl.route}">Compare rides</a>${DESTS.find(d=>d.id===p.pl.route)?`<a class="btn small" href="#explore" data-dest="${p.pl.route}">Plan weekend</a>`:''}</div>`; }
-  pins.forEach(p=>{ p.el.addEventListener('mouseenter',()=>showPin(p)); p.el.addEventListener('focus',()=>showPin(p)); p.el.addEventListener('click',()=>showPin(p)); });
+  pins.forEach(p=>{ p.el.addEventListener('mouseenter',()=>{ showPin(p); clearTimeout(tpTimer); tpTimer=setTimeout(()=>{ if(tpLast!==p.pl.name) teleport(p.pl.name); },450); }); p.el.addEventListener('mouseleave',()=>clearTimeout(tpTimer)); p.el.addEventListener('focus',()=>showPin(p)); p.el.addEventListener('click',()=>{ showPin(p); clearTimeout(tpTimer); teleport(p.pl.name); }); });
   card.addEventListener('click', e=>{ const a=e.target.closest('a'); if(!a) return; if(a.dataset.route){ const r=ROUTES.find(x=>x.id===a.dataset.route); if(r){ $('#cFrom').value=r.from; syncTo('cFrom','cTo'); $('#cTo').value=r.id; renderCompare(); } } if(a.dataset.dest){ const d=DESTS.find(x=>x.id===a.dataset.dest); if(d){ dest=d; renderDests(); renderItin(); } } });
   showPin(pins[0]);
   // Pulse heat: one glowing sprite per town, sized by demand (yellow) or by gap (red); breathes.
   const heat=[]; function setHeat(d){ heat.forEach(h=>group.remove(h.pts)); heat.length=0; d.forEach(t=>{ const p=pins.find(x=>x.pl.name===t.name); if(!p||t.demand<1) return; const g=new THREE.BufferGeometry(); g.setAttribute('position',new THREE.BufferAttribute(new Float32Array([p.v.x,p.v.y,p.v.z-.05]),3)); const m=new THREE.PointsMaterial({size:.35+Math.min(1.2,t.demand*0.12), map:tex, transparent:true, opacity:.35, depthWrite:false, color:new THREE.Color(t.gap>0?'#D2202F':'#F2C200'), blending:THREE.AdditiveBlending}); const pts=new THREE.Points(g,m); group.add(pts); heat.push({pts,m,base:m.size,ph:Math.random()*6}); }); }
-  function focus(name){ const p=pins.find(x=>x.pl.name===name); if(!p) return; rot.y = -p.v.x*0.22; rot.x = p.v.y*0.2; showPin(p); }
+  function focus(name){ const p=pins.find(x=>x.pl.name===name); if(!p) return; rot.y = clamp(-p.v.x*0.2,-0.9,0.9); rot.x = clamp(p.v.y*0.18,-0.6,0.6); pins.forEach(q=>q.el.classList.toggle('tp', q===p)); showPin(p); }
+  const fxGeo=new THREE.BufferGeometry(); fxGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(0),3)); const fxMat=new THREE.PointsMaterial({size:.9, map:tex, transparent:true, opacity:.3, depthWrite:false, color:new THREE.Color('#F2A900'), blending:THREE.AdditiveBlending}); group.add(new THREE.Points(fxGeo,fxMat));
+  function foresight(list){ const arr=new Float32Array(list.length*3); list.forEach((h,i)=>{ const [x,y]=P(h.lon,h.lat); arr.set([x,y,.4],i*3); }); fxGeo.setAttribute('position', new THREE.BufferAttribute(arr,3)); fxGeo.attributes.position.needsUpdate=true; fxMat.size = .6 + Math.min(1.2, (list.reduce((s,h)=>s+h.loads,0)/Math.max(1,list.length))/40); }
 
   function resize(){ const w=stage.clientWidth, h=stage.clientHeight; renderer.setSize(w,h,false); cam.aspect=w/h; cam.updateProjectionMatrix(); const fit = Math.max(6.2, 7.6*(1/Math.min(1,cam.aspect))); baseZ = fit + (w<640?2.2:1.6); cam.position.z = baseZ; }
   new ResizeObserver(resize).observe(stage); resize();
@@ -2606,7 +2725,7 @@ function initScene(){
     const ease = drag.on ? 0.18 : 0.045; group.rotation.y += (tx-group.rotation.y)*ease; group.rotation.x += (ty-group.rotation.x)*ease;
     scrollV *= 0.9;
     if (!reduce){
-      const breath = 1 + 0.015*Math.sin(t*0.6);
+      const breath = 1 + 0.015*Math.sin(t*0.6); fxMat.opacity = 0.2 + 0.15*Math.sin(t*1.8);
       for (const p of [landP,edgeP,waterP,shoreP]){ const pos=p.geometry.attributes.position, b=p.userData.base, ph=p.userData.ph; for(let i=0;i<p.userData.n;i++){ const bx=b[i*3],by=b[i*3+1],bz=b[i*3+2]; const d=Math.hypot(bx,by); const wave=Math.sin(d*2.2 - t*1.6 + ph[i])*0.03; pos.setXYZ(i, bx*breath + Math.sin(t*0.7+ph[i])*0.012, by*breath + Math.cos(t*0.6+ph[i])*0.012, bz + wave + Math.sin(t*0.9+ph[i])*0.02); } pos.needsUpdate=true; }
     }
     if(!reduce) heat.forEach(h=>{ h.m.size=h.base*(1+0.18*Math.sin(t*2+h.ph)); h.m.opacity=.28+.14*Math.sin(t*2+h.ph); });
@@ -2619,8 +2738,138 @@ function initScene(){
   let visible=true; if('IntersectionObserver' in window){ new IntersectionObserver(en=>{ const was=visible; visible=en[0].isIntersecting; if(visible&&!was) requestAnimationFrame(frame); },{threshold:0}).observe(stage); }
   requestAnimationFrame(frame);
   matchMedia('(prefers-color-scheme: dark)').addEventListener('change', recolour);
-  scene = {recolour, setHeat, focus};
+  scene = {recolour, setHeat, focus, foresight};
+  if (typeof foresightHeat==='function' && foresightRows.length) foresight(foresightHeat());
   if(typeof renderPulse==='function') renderPulse();
+}
+
+/* =====================================================================
+   Foresight UI: the next seven days of predicted demand, by place and vehicle class, with a way for
+   a driver to say "I'll be there" so supply counts against demand, and "Point me there" on the map.
+   ===================================================================== */
+function forecast(days=7, from=new Date()){
+  const rows=[];
+  for(let d=0; d<days; d++){
+    const day=new Date(from.getFullYear(), from.getMonth(), from.getDate()+d); const m=day.getMonth()+1, dow=day.getDay();
+    for(const s of SEASONS){ if(!s.months.includes(m)) continue; const peak = s.months.indexOf(m)===0 ? 0.8 : 1; for(const t of s.towns){ if(!PLACES.find(p=>p.name===t) && !SUBURB_XY[t]) continue; rows.push({kind:'season', day, town:t, what:`${s.crop} · harvest`, vehicle:s.vehicle, loads:Math.round(s.loadsPerDay*peak/ s.towns.length), people:0, confidence:0.6, note:s.note}); } }
+    for(const v of VENUES){ if(!v.days.includes(dow)) continue; const hrs=v.hours.map(h=>`${String(h[0]).padStart(2,'0')}:00–${String(h[1]%24).padStart(2,'0')}:00`).join(', '); rows.push({kind:v.event?'event':'rhythm', day, town:v.town, what:`${v.name} · ${hrs}`, vehicle:v.vehicle, loads:Math.round(v.people/ (v.vehicle==='boda'?1.2:v.vehicle==='car'?3.5:v.vehicle==='minibus'?14:40)/ 10), people:v.people, confidence:v.event?0.45:0.75, note:v.note, lon:v.lon, lat:v.lat}); }
+    for(const e of EVENTS){ const span=e.days||1; const start=new Date(day.getFullYear(), e.month-1, e.day); const diff=(day-start)/86400000; if(diff<0||diff>=span) continue; rows.push({kind:'event', day, town:e.town, what:e.name, vehicle:e.vehicle, loads:Math.round(e.people/(e.vehicle==='boda'?1.2:e.vehicle==='car'?3.5:40)/50), people:e.people, confidence:0.85, note:e.note}); }
+  }
+  return rows;
+}
+let foresightRows=[]; let foresightFilter='all'; let commitments = load('commit', {});
+function renderForesight(){
+  foresightRows = forecast(7);
+  const el=$('#foresightList'); if(!el) return;
+  const byDay={}; for(const r of foresightRows){ if(foresightFilter!=='all' && r.vehicle!==foresightFilter) continue; const k=r.day.toDateString(); (byDay[k]=byDay[k]||[]).push(r); }
+  const supply = (town, vehicle)=> Object.values(commitments).filter(c=>c.town===town && c.vehicle===vehicle).length + (LIVE ? 0 : Math.floor(Math.random()*0)) ;
+  el.innerHTML = Object.entries(byDay).slice(0,7).map(([k,rows])=>{ rows.sort((a,b)=>b.loads-a.loads); return `<div class="fday"><div class="fday-h"><b>${k.slice(0,3)} ${k.slice(4,10)}</b><span>${rows.length} signals</span></div>${rows.slice(0,6).map(r=>{ const sup=supply(r.town,r.vehicle); const gap=Math.max(0,r.loads-sup); const key=r.town+'|'+r.vehicle+'|'+k; const mine=!!commitments[key]; return `<div class="fx-row ${r.kind}"><div class="fx-town"><b>${esc(r.town)}</b><small>${esc(r.what)}</small></div><div class="fx-need"><span class="chip ${r.kind==='season'?'warn':r.kind==='event'?'hot':''}">${VEHICLE_CLASSES[r.vehicle].split(' ·')[0]}</span><b>${r.loads}</b><small>${r.kind==='season'?'loads':'trips'} needed · ${sup} promised · <span style="color:${gap?'var(--red)':'var(--good)'}">${gap?gap+' short':'covered'}</span></small></div><div class="fx-act"><button class="btn small" type="button" data-fpoint="${esc(r.town)}">Point me there</button>${hasRole('driver')?`<button class="btn small ${mine?'':'primary'}" type="button" data-fcommit="${esc(key)}" data-town="${esc(r.town)}" data-veh="${r.vehicle}">${mine?'Promised ✓':"I'll be there"}</button>`:''}</div><div class="fx-note">${esc(r.note)} · confidence ${Math.round(r.confidence*100)}%</div></div>`; }).join('')}</div>`; }).join('') || '<div class="panel">Nothing forecast in this filter this week.</div>';
+  el.querySelectorAll('[data-fpoint]').forEach(b=>b.addEventListener('click',()=>{ teleport(b.dataset.fpoint, {quiet:true}); location.hash='#top'; }));
+  el.querySelectorAll('[data-fcommit]').forEach(b=>b.addEventListener('click',()=>{ const k=b.dataset.fcommit; if(commitments[k]) delete commitments[k]; else commitments[k]={town:b.dataset.town, vehicle:b.dataset.veh, at:Date.now()}; store('commit',commitments); renderForesight(); if(LIVE) UGAPI.post('/api/foresight/commit',{town:b.dataset.town, vehicle:b.dataset.veh, day:k.split('|')[2], on:!!commitments[k]}).catch(()=>{}); toast(commitments[k]?`Promised. UG counts your ${VEHICLE_CLASSES[b.dataset.veh].split(' ·')[0].toLowerCase()} against ${b.dataset.town}'s need.`:'Promise withdrawn.'); }));
+  if (typeof scene!=='undefined' && scene && scene.foresight) scene.foresight(foresightHeat());
+}
+function foresightHeat(){ const today=new Date().toDateString(); const agg={}; for(const r of foresightRows){ if(r.day.toDateString()!==today && r.day.toDateString()!==new Date(Date.now()+86400000).toDateString()) continue; const p=PLACES.find(x=>x.name===r.town); if(!p) continue; agg[r.town]=agg[r.town]||{lon:p.lon,lat:p.lat,loads:0}; agg[r.town].loads+=r.loads; } return Object.values(agg); }
+function initForesight(){
+  const seg=$('#segVeh'); if(seg){ seg.innerHTML=`<button type="button" data-v="all" class="on">All</button>`+Object.keys(VEHICLE_CLASSES).map(k=>`<button type="button" data-v="${k}">${VEHICLE_CLASSES[k].split(' ·')[0]}</button>`).join(''); seg.addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; seg.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); foresightFilter=b.dataset.v; renderForesight(); }); }
+  renderForesight();
+}
+
+/* =====================================================================
+   Teleport: hovering (with a short dwell) or tapping a town on the map moves the whole app there.
+   ===================================================================== */
+let tpTimer=null, tpLast=null;
+function teleport(townName, opts={}){
+  const pl=PLACES.find(p=>p.name===townName); if(!pl) return;
+  const r=ROUTES.find(x=>x.id===pl.route); if(!r) return;
+  tpLast=townName;
+  // compare desk
+  $('#cFrom').value=r.from; syncTo('cFrom','cTo'); $('#cTo').value=r.id; renderCompare();
+  // stages: filter to the corridor
+  stageFilter='corridor:'+r.id; $('#segStage').querySelectorAll('button').forEach(x=>x.classList.remove('on')); renderStages();
+  // deliver: destination
+  const dTo=$('#dTo'); if(dTo){ const t=r.inter||r.entebbe ? r.to.split(' (')[0] : r.to; if([...dTo.options].some(o=>o.value===t)){ dTo.value=t; renderDeliver(); } }
+  // explore: a park destination
+  const d=DESTS.find(x=>x.id===pl.route); if(d){ dest=d; renderDests(); renderItin(); }
+  // buses
+  const bc=$('#busCorr'); if(bc && [...bc.options].some(o=>o.value===r.id)){ bc.value=r.id; renderBuses(); }
+  // the map focuses and the pill says where you are
+  if(scene && scene.focus) scene.focus(townName);
+  const pill=$('#tpPill'); if(pill){ pill.hidden=false; pill.innerHTML=`<i></i>${esc(townName)} · <button type="button" id="tpClear" aria-label="Leave">×</button>`; $('#tpClear').addEventListener('click',()=>{ pill.hidden=true; stageFilter='all'; $('#segStage').querySelector('button').classList.add('on'); renderStages(); tpLast=null; }); }
+  if(!opts.quiet){ const flash=document.createElement('div'); flash.className='warp'; document.body.appendChild(flash); setTimeout(()=>flash.remove(),700); toast(`You are in ${townName}. Every desk now points here.`); }
+}
+
+/* =====================================================================
+   LANGUAGES. English and Swahili are complete. Luganda (Central and South), Runyankore-Rukiga (West and
+   South-west), Acholi (North) and Ateso (East) carry the words a person meets first; anything missing
+   falls back to English and the language card says so. These drafts were written without a native
+   reviewer: docs/languages.md holds the review process and the sign-off list. Confidence per language
+   is shown in the picker, honestly.
+   ===================================================================== */
+const LANGS = {
+  en:{name:'English', native:'English', confidence:'complete'},
+  sw:{name:'Swahili', native:'Kiswahili', confidence:'complete'},
+  lg:{name:'Luganda', native:'Luganda', confidence:'draft'},
+  nyn:{name:'Runyankore-Rukiga', native:'Runyankore-Rukiga', confidence:'draft'},
+  ach:{name:'Acholi', native:'Leb Acoli', confidence:'draft'},
+  teo:{name:'Ateso', native:'Ateso', confidence:'early draft'},
+};
+const STR = {
+  ride:{en:'Ride.',sw:'Panda.',lg:'Linnya.',nyn:'Shagara.',ach:'Wot.',teo:'Alosit.'},
+  pool:{en:'Pool.',sw:'Shirikiana.',lg:'Gabana.',nyn:'Gaba.',ach:'Ribbe.',teo:'Airiamun.'},
+  rent:{en:'Rent.',sw:'Kodi.',lg:'Pangisa.',nyn:'Pangisa.',ach:'Yeny.',teo:'Aipangis.'},
+  deliver:{en:'Deliver.',sw:'Tuma.',lg:'Tuma.',nyn:'Tuma.',ach:'Ter.',teo:'Ayauna.'},
+  flipRide:{en:'Find a ride.',sw:'Tafuta usafiri.',lg:"Funa eky'okuvugamu.",nyn:'Shaka ekyokutwara.',ach:'Yeny motoka.'},
+  flipPool:{en:'Share the ride.',sw:'Shiriki safari.',lg:'Gabana olugendo.',nyn:'Gaba orugyendo.',ach:'Ribbe wot.'},
+  flipRent:{en:'Rent the ride.',sw:'Kodi gari.',lg:'Pangisa emmotoka.',nyn:'Pangisa emotoka.',ach:'Yeny motoka.'},
+  flipDeliver:{en:'Send the thing.',sw:'Tuma kitu.',lg:'Tuma ekintu.',nyn:'Tuma ekintu.',ach:'Ter jami.'},
+  position:{en:'Look the part. Pay the smart price.',sw:'Onekana vizuri. Lipa bei ya busara.',lg:'Labika bulungi. Sasula omuwendo omugezi.',nyn:'Reebeka gye. Shashura omuhendo murungi.'},
+  doorRider:{en:'I need to get somewhere',sw:'Nahitaji kufika mahali',lg:'Njagala kutuuka ewantu',nyn:'Nyenda kuhika ahantu',ach:'Amito cito kama',teo:'Alosi eong nen'},
+  doorRiderSub:{en:'Queue a seat, compare every ride, plan the weekend.',sw:'Weka nafasi, linganisha safari zote, panga wikendi.',lg:'Kwata entebe, geraageranya olugendo lwonna, teekateeka wiikendi.'},
+  doorDriver:{en:'I drive, or I have a car',sw:'Ninaendesha, au nina gari',lg:'Nvuga, oba nnina emmotoka',nyn:'Ninvuga, nari nyine emotoka',ach:'An ariyo, onyo atye ki motoka',teo:'Eong aiyalaar, arai ejai eong emotoka'},
+  doorDriverSub:{en:"Say where you're comfortable. Funded trips come to you.",sw:'Sema unapopenda kuendesha. Safari zilizolipwa zinakujia.',lg:"Gamba w'oyagala okuvuga. Entambula ezisasuliddwa zikujjira."},
+  start:{en:'Start →',sw:'Anza →',lg:'Tandika →',nyn:'Tandika →',ach:'Cak →',teo:'Kigeu →'},
+  open:{en:'Open for business →',sw:'Anza biashara →',lg:'Tandika bizinensi →',nyn:'Tandika bizinesi →',ach:'Cak tic →'},
+  getStarted:{en:'Get started',sw:'Anza',lg:'Tandika',nyn:'Tandika',ach:'Cak',teo:'Kigeu'},
+  navStage:{en:'Stage',sw:'Kituo',lg:'Siteegi',nyn:'Siteegi',ach:'Ceteci',teo:'Esiteegi'},
+  navAtlas:{en:'Atlas',sw:'Atlasi',lg:'Atulasi'},
+  navCompare:{en:'Compare',sw:'Linganisha',lg:'Geraageranya',nyn:'Gyeragyeranisa',ach:'Por'},
+  navRent:{en:'Rent',sw:'Kodi',lg:'Pangisa',nyn:'Pangisa',ach:'Yeny'},
+  navDeliver:{en:'Deliver',sw:'Tuma',lg:'Tuma',nyn:'Tuma',ach:'Ter',teo:'Ayauna'},
+  navExplore:{en:'Explore',sw:'Tembelea',lg:'Kyalira',nyn:'Shagara',ach:'Lim'},
+  navDrive:{en:'Drive',sw:'Endesha',lg:'Vuga',nyn:'Vuga',ach:'Riyo',teo:'Aiyalaar'},
+  navHustle:{en:'Hustle',sw:'Kazi',lg:'Okukola'},
+  navPlugins:{en:'Plug-ins',sw:'Viunganishi'},
+  navForesight:{en:'Foresight',sw:'Mbele',lg:'Ebigenda okujja'},
+  me:{en:'Me',sw:'Mimi',lg:'Nze',nyn:'Nyowe',ach:'An',teo:'Eong'},
+  tabRide:{en:'Ride',sw:'Panda',lg:'Linnya',nyn:'Shagara',ach:'Wot',teo:'Alosit'},
+  bookOnUG:{en:'Book on UG',sw:'Weka nafasi UG',lg:'Kwata ku UG',nyn:'Kwata aha UG',ach:'Mak i UG'},
+  takeSeat:{en:'Take a seat',sw:'Chukua kiti',lg:'Kwata entebe',nyn:'Kwata entebe',ach:'Bed piny',teo:'Kiboi'},
+  callAhead:{en:'Call ahead',sw:'Piga simu kwanza',lg:'Kubira essimu',nyn:'Teera esimu',ach:'Kong igo cim'},
+  listed:{en:'Listed · recognised',sw:'Imeorodheshwa',lg:'Kiri ku lukalala',nyn:'Kiri aha rukaraari'},
+  coming:{en:'Coming',sw:'Inakuja',lg:'Kijja',nyn:'Neija',ach:'Bino',teo:'Ebuni'},
+  install:{en:'Install the app',sw:'Sakinisha app',lg:'Teekawo app',nyn:'Teekaho app'},
+  languages:{en:'Language',sw:'Lugha',lg:'Olulimi',nyn:'Orurimi',ach:'Leb',teo:'Ajore'},
+  langNote:{en:'Drafts written without a native reviewer fall back to English where a word is missing. Help us finish yours.',sw:'Rasimu zilizoandikwa bila mhakiki wa lugha ya asili hurudi kwa Kiingereza pale neno linapokosekana. Tusaidie kukamilisha yako.'},
+  reviewer:{en:'Review this language',sw:'Hakiki lugha hii',lg:'Kebera olulimi luno'},
+};
+let LANG = load('lang', null) || (navigator.language||'en').slice(0,2);
+if(!LANGS[LANG]) LANG='en';
+const t = (k)=> (STR[k]&&(STR[k][LANG]||STR[k].en)) || k;
+function applyLang(){
+  document.documentElement.lang = LANG==='nyn'?'nyn':LANG==='ach'?'ach':LANG==='teo'?'teo':LANG;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{ const k=el.dataset.i18n; if(STR[k]) el.textContent=t(k); });
+  const w=document.querySelectorAll('#verbs .w'); const keys=['ride','pool','rent','deliver']; const flips=['flipRide','flipPool','flipRent','flipDeliver']; w.forEach((el,i)=>{ el.textContent=t(keys[i]); el.dataset.w=t(keys[i]); el.dataset.flip=t(flips[i]); }); const f=$('#flip'); if(f){ const on=[...w].findIndex(x=>x.classList.contains('hl')); f.textContent=t(flips[on<0?1:on]); }
+  document.querySelectorAll('#tagline span').forEach((el,i)=>el.textContent=t(keys[i]));
+  const pick=$('#langPick'); if(pick) pick.value=LANG;
+  const note=$('#langNote'); if(note) note.textContent = LANGS[LANG].confidence==='complete' ? '' : `${LANGS[LANG].name}: ${LANGS[LANG].confidence}. ${t('langNote')}`;
+  const cta=$('#navCta'); if(cta && !account) cta.textContent=t('getStarted');
+  const tm=$('#tabMeLbl'); if(tm && !account) tm.textContent=t('me');
+}
+function initLang(){
+  const pick=$('#langPick'); if(!pick) return;
+  pick.innerHTML=Object.entries(LANGS).map(([k,v])=>`<option value="${k}">${v.native}${v.confidence==='complete'?'':' · '+v.confidence}</option>`).join('');
+  pick.addEventListener('change',()=>{ LANG=pick.value; store('lang',LANG); applyLang(); toast(`${LANGS[LANG].native}. ${LANGS[LANG].confidence==='complete'?'':'A draft; missing words show in English.'}`); if(LIVE && TOKEN) UGAPI.patch('/api/me',{lang:LANG}).catch(()=>{}); });
+  applyLang();
 }
 
 /* =====================================================================
@@ -2717,7 +2966,7 @@ renderFleet();
 renderDests(); renderItin();
 renderDay();
 renderPlugins();
-initV1(); initAtlas(); initBuses(); initDeliver(); initInstall(); if(rail) renderRail(false);
+initV1(); initAtlas(); initBuses(); initDeliver(); initForesight(); initLang(); initInstall(); if(rail) renderRail(false);
 initReveal(); initVerbs();
 playIntro(false);
 initLive();

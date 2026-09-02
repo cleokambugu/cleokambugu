@@ -65,6 +65,24 @@ Every payment is a Flutterwave checkout in UGX, sandboxed until a live key and a
 arrangement exist. Every surface wears the Crest. The site and the app are one link: install it
 from the page, or scan the code, and the same account, stages and rail are there.
 
+## One forecast
+
+Foresight reads the seasons, the venue rhythms and the events of the year and produces one
+forecast by day, place and vehicle class. Drivers promise against it, the gap shows, the map
+breathes amber where demand is coming, and Deliver's produce quotes name the season. The same
+rows come from the server when the app is live. See `foresight.md`.
+
+## One place at a time
+
+Hover or tap a town on the map and the whole app is there: the compare desk, the stages, the
+parcel destination, the weekend, the buses on that corridor, the map turned to face it, a pill
+in the nav saying where you are. One teleport, every desk.
+
+## One voice, six languages
+
+The same strings in English, Swahili, Luganda, Runyankore-Rukiga, Acholi and Ateso, with the
+confidence of each shown and English as the honest fallback. See `languages.md`.
+
 ## One rule for adding anything
 
 Before a feature ships it must answer: which row of the table is it, what state is it in, does

@@ -4,6 +4,7 @@ import { id, now } from './db.js';
 import { httpError } from './stages.js';
 import { pulse, pulseGeoJSON } from './pulse.js';
 import { ROUTES, route, capFor } from './model.js';
+import { forecast, foresightGeoJSON, commit as fxCommit, addEvent as fxAddEvent } from './foresight.js';
 
 export function createApi({ db, ledger, stages, bookings, otp, flw, sandbox, version }) {
   const routes = [];
@@ -37,6 +38,7 @@ export function createApi({ db, ledger, stages, bookings, otp, flw, sandbox, ver
     if (b.rider) { sets.push('rider = ?'); args.push(JSON.stringify(b.rider)); }
     if (b.owner) { sets.push('owner = ?'); args.push(JSON.stringify(b.owner)); }
     if (b.agent != null) { sets.push('agent = ?'); args.push(b.agent ? 1 : 0); }
+    if (b.lang && /^[a-z]{2,3}$/.test(b.lang)) { sets.push('lang = ?'); args.push(b.lang); }
     if (sets.length) { args.push(req.user.id); db.prepare(`update users set ${sets.join(', ')} where id = ?`).run(...args); }
     return me(user(req.user.id));
   }, true);
@@ -113,6 +115,12 @@ export function createApi({ db, ledger, stages, bookings, otp, flw, sandbox, ver
     return { ok: true };
   }, true);
   on('GET', '/api/plugins', (req) => db.prepare('select plugin, endpoint, consent, connected_at from plugins where user_id = ?').all(req.user.id), true);
+
+  // ---- foresight: demand before it happens ----
+  on('GET', '/api/foresight', (req) => forecast(db, { days: Math.min(14, Number(req.query.days) || 7) }));
+  on('GET', '/api/foresight.geojson', () => foresightGeoJSON(db));
+  on('POST', '/api/foresight/commit', (req) => fxCommit(db, req.user.id, req.body), true);
+  on('POST', '/api/foresight/events', (req) => { const u = user(req.user.id); if (!u.agent && !u.comfort) throw httpError(403, 'agents and drivers can add events'); return fxAddEvent(db, req.user.id, req.body); }, true);
 
   // ---- Flutterwave webhook: verified against the processor, idempotent through the ledger refs ----
   on('POST', '/api/webhooks/flutterwave', async (req) => {

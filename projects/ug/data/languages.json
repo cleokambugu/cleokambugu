@@ -1,0 +1,293 @@
+{
+  "generated": "2026-09-02",
+  "source": "projects/ug/site/index.html data block",
+  "note": "Every figure is an estimate. prov fields: snippet = read from a search snippet or third-party page, modelled = UG assumption, official = read on the operator page, UG model = UG own formula. See docs/arbitrage-model.md and docs/atlas.md.",
+  "languages": {
+    "en": {
+      "name": "English",
+      "native": "English",
+      "confidence": "complete"
+    },
+    "sw": {
+      "name": "Swahili",
+      "native": "Kiswahili",
+      "confidence": "complete"
+    },
+    "lg": {
+      "name": "Luganda",
+      "native": "Luganda",
+      "confidence": "draft"
+    },
+    "nyn": {
+      "name": "Runyankore-Rukiga",
+      "native": "Runyankore-Rukiga",
+      "confidence": "draft"
+    },
+    "ach": {
+      "name": "Acholi",
+      "native": "Leb Acoli",
+      "confidence": "draft"
+    },
+    "teo": {
+      "name": "Ateso",
+      "native": "Ateso",
+      "confidence": "early draft"
+    }
+  },
+  "strings": {
+    "ride": {
+      "en": "Ride.",
+      "sw": "Panda.",
+      "lg": "Linnya.",
+      "nyn": "Shagara.",
+      "ach": "Wot.",
+      "teo": "Alosit."
+    },
+    "pool": {
+      "en": "Pool.",
+      "sw": "Shirikiana.",
+      "lg": "Gabana.",
+      "nyn": "Gaba.",
+      "ach": "Ribbe.",
+      "teo": "Airiamun."
+    },
+    "rent": {
+      "en": "Rent.",
+      "sw": "Kodi.",
+      "lg": "Pangisa.",
+      "nyn": "Pangisa.",
+      "ach": "Yeny.",
+      "teo": "Aipangis."
+    },
+    "deliver": {
+      "en": "Deliver.",
+      "sw": "Tuma.",
+      "lg": "Tuma.",
+      "nyn": "Tuma.",
+      "ach": "Ter.",
+      "teo": "Ayauna."
+    },
+    "flipRide": {
+      "en": "Find a ride.",
+      "sw": "Tafuta usafiri.",
+      "lg": "Funa eky'okuvugamu.",
+      "nyn": "Shaka ekyokutwara.",
+      "ach": "Yeny motoka."
+    },
+    "flipPool": {
+      "en": "Share the ride.",
+      "sw": "Shiriki safari.",
+      "lg": "Gabana olugendo.",
+      "nyn": "Gaba orugyendo.",
+      "ach": "Ribbe wot."
+    },
+    "flipRent": {
+      "en": "Rent the ride.",
+      "sw": "Kodi gari.",
+      "lg": "Pangisa emmotoka.",
+      "nyn": "Pangisa emotoka.",
+      "ach": "Yeny motoka."
+    },
+    "flipDeliver": {
+      "en": "Send the thing.",
+      "sw": "Tuma kitu.",
+      "lg": "Tuma ekintu.",
+      "nyn": "Tuma ekintu.",
+      "ach": "Ter jami."
+    },
+    "position": {
+      "en": "Look the part. Pay the smart price.",
+      "sw": "Onekana vizuri. Lipa bei ya busara.",
+      "lg": "Labika bulungi. Sasula omuwendo omugezi.",
+      "nyn": "Reebeka gye. Shashura omuhendo murungi."
+    },
+    "doorRider": {
+      "en": "I need to get somewhere",
+      "sw": "Nahitaji kufika mahali",
+      "lg": "Njagala kutuuka ewantu",
+      "nyn": "Nyenda kuhika ahantu",
+      "ach": "Amito cito kama",
+      "teo": "Alosi eong nen"
+    },
+    "doorRiderSub": {
+      "en": "Queue a seat, compare every ride, plan the weekend.",
+      "sw": "Weka nafasi, linganisha safari zote, panga wikendi.",
+      "lg": "Kwata entebe, geraageranya olugendo lwonna, teekateeka wiikendi."
+    },
+    "doorDriver": {
+      "en": "I drive, or I have a car",
+      "sw": "Ninaendesha, au nina gari",
+      "lg": "Nvuga, oba nnina emmotoka",
+      "nyn": "Ninvuga, nari nyine emotoka",
+      "ach": "An ariyo, onyo atye ki motoka",
+      "teo": "Eong aiyalaar, arai ejai eong emotoka"
+    },
+    "doorDriverSub": {
+      "en": "Say where you're comfortable. Funded trips come to you.",
+      "sw": "Sema unapopenda kuendesha. Safari zilizolipwa zinakujia.",
+      "lg": "Gamba w'oyagala okuvuga. Entambula ezisasuliddwa zikujjira."
+    },
+    "start": {
+      "en": "Start →",
+      "sw": "Anza →",
+      "lg": "Tandika →",
+      "nyn": "Tandika →",
+      "ach": "Cak →",
+      "teo": "Kigeu →"
+    },
+    "open": {
+      "en": "Open for business →",
+      "sw": "Anza biashara →",
+      "lg": "Tandika bizinensi →",
+      "nyn": "Tandika bizinesi →",
+      "ach": "Cak tic →"
+    },
+    "getStarted": {
+      "en": "Get started",
+      "sw": "Anza",
+      "lg": "Tandika",
+      "nyn": "Tandika",
+      "ach": "Cak",
+      "teo": "Kigeu"
+    },
+    "navStage": {
+      "en": "Stage",
+      "sw": "Kituo",
+      "lg": "Siteegi",
+      "nyn": "Siteegi",
+      "ach": "Ceteci",
+      "teo": "Esiteegi"
+    },
+    "navAtlas": {
+      "en": "Atlas",
+      "sw": "Atlasi",
+      "lg": "Atulasi"
+    },
+    "navCompare": {
+      "en": "Compare",
+      "sw": "Linganisha",
+      "lg": "Geraageranya",
+      "nyn": "Gyeragyeranisa",
+      "ach": "Por"
+    },
+    "navRent": {
+      "en": "Rent",
+      "sw": "Kodi",
+      "lg": "Pangisa",
+      "nyn": "Pangisa",
+      "ach": "Yeny"
+    },
+    "navDeliver": {
+      "en": "Deliver",
+      "sw": "Tuma",
+      "lg": "Tuma",
+      "nyn": "Tuma",
+      "ach": "Ter",
+      "teo": "Ayauna"
+    },
+    "navExplore": {
+      "en": "Explore",
+      "sw": "Tembelea",
+      "lg": "Kyalira",
+      "nyn": "Shagara",
+      "ach": "Lim"
+    },
+    "navDrive": {
+      "en": "Drive",
+      "sw": "Endesha",
+      "lg": "Vuga",
+      "nyn": "Vuga",
+      "ach": "Riyo",
+      "teo": "Aiyalaar"
+    },
+    "navHustle": {
+      "en": "Hustle",
+      "sw": "Kazi",
+      "lg": "Okukola"
+    },
+    "navPlugins": {
+      "en": "Plug-ins",
+      "sw": "Viunganishi"
+    },
+    "navForesight": {
+      "en": "Foresight",
+      "sw": "Mbele",
+      "lg": "Ebigenda okujja"
+    },
+    "me": {
+      "en": "Me",
+      "sw": "Mimi",
+      "lg": "Nze",
+      "nyn": "Nyowe",
+      "ach": "An",
+      "teo": "Eong"
+    },
+    "tabRide": {
+      "en": "Ride",
+      "sw": "Panda",
+      "lg": "Linnya",
+      "nyn": "Shagara",
+      "ach": "Wot",
+      "teo": "Alosit"
+    },
+    "bookOnUG": {
+      "en": "Book on UG",
+      "sw": "Weka nafasi UG",
+      "lg": "Kwata ku UG",
+      "nyn": "Kwata aha UG",
+      "ach": "Mak i UG"
+    },
+    "takeSeat": {
+      "en": "Take a seat",
+      "sw": "Chukua kiti",
+      "lg": "Kwata entebe",
+      "nyn": "Kwata entebe",
+      "ach": "Bed piny",
+      "teo": "Kiboi"
+    },
+    "callAhead": {
+      "en": "Call ahead",
+      "sw": "Piga simu kwanza",
+      "lg": "Kubira essimu",
+      "nyn": "Teera esimu",
+      "ach": "Kong igo cim"
+    },
+    "listed": {
+      "en": "Listed · recognised",
+      "sw": "Imeorodheshwa",
+      "lg": "Kiri ku lukalala",
+      "nyn": "Kiri aha rukaraari"
+    },
+    "coming": {
+      "en": "Coming",
+      "sw": "Inakuja",
+      "lg": "Kijja",
+      "nyn": "Neija",
+      "ach": "Bino",
+      "teo": "Ebuni"
+    },
+    "install": {
+      "en": "Install the app",
+      "sw": "Sakinisha app",
+      "lg": "Teekawo app",
+      "nyn": "Teekaho app"
+    },
+    "languages": {
+      "en": "Language",
+      "sw": "Lugha",
+      "lg": "Olulimi",
+      "nyn": "Orurimi",
+      "ach": "Leb",
+      "teo": "Ajore"
+    },
+    "langNote": {
+      "en": "Drafts written without a native reviewer fall back to English where a word is missing. Help us finish yours.",
+      "sw": "Rasimu zilizoandikwa bila mhakiki wa lugha ya asili hurudi kwa Kiingereza pale neno linapokosekana. Tusaidie kukamilisha yako."
+    },
+    "reviewer": {
+      "en": "Review this language",
+      "sw": "Hakiki lugha hii",
+      "lg": "Kebera olulimi luno"
+    }
+  }
+}

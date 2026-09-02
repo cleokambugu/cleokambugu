@@ -38,6 +38,8 @@ const SCHEMA = [
 `create table if not exists feedback (id integer primary key autoincrement, user_id text, booking_id text, text text, tags text, rating integer, at integer not null)`,
 `create table if not exists plugins (user_id text not null, plugin text not null, endpoint text, consent integer not null default 0, connected_at integer not null, primary key (user_id, plugin))`,
 `create table if not exists events (id integer primary key autoincrement, kind text not null, ref text, payload text, at integer not null)`,
+`create table if not exists commitments (user_id text not null, town text not null, vehicle text not null, day text not null, on_ integer not null default 1, at integer not null, primary key (user_id, town, vehicle, day))`,
+`create table if not exists events_calendar (id integer primary key autoincrement, name text not null, town text not null, month integer not null, day integer not null, days integer default 1, people integer not null, vehicle text not null, note text, created_by text, at integer not null)`,
 ];
 
 export function openDb(path = process.env.UG_DB || './data/ug.sqlite') {
@@ -45,6 +47,7 @@ export function openDb(path = process.env.UG_DB || './data/ug.sqlite') {
   const db = new DatabaseSync(path);
   db.exec('pragma journal_mode = wal; pragma foreign_keys = on;');
   for (const s of SCHEMA) db.exec(s);
+  try { db.exec('alter table users add column lang text'); } catch {}
   return db;
 }
 

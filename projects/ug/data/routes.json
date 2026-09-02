@@ -430,7 +430,11 @@
       "lat": -1.05,
       "sub": "Mountain gorillas",
       "route": "kampala-bwindi",
-      "park": true
+      "park": true,
+      "off": [
+        26,
+        -12
+      ]
     },
     {
       "name": "Fort Portal",
@@ -606,7 +610,7 @@
       "route": "kampala-qenp",
       "park": true,
       "off": [
-        -10,
+        44,
         14
       ]
     },
