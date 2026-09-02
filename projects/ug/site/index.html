@@ -2141,6 +2141,7 @@ const MIN_FILL = st => (ROUTES.find(x=>x.id===st.route).entebbe ? 2 : 3);   // o
 function seatPrice(stage){ const r=ROUTES.find(x=>x.id===stage.route); return poolSeatCost(r, Math.max(MIN_FILL(stage), stage.seats)).riderPays; }   // ceiling: never charge early riders more than late ones; the difference rebates at departure
 function fullPrice(stage){ const r=ROUTES.find(x=>x.id===stage.route); return poolSeatCost(r, stage.cap).riderPays; }
 const SEED_STAGES = [
+  {id:'s0', route:'kampala-fortportal', day:'Fri', win:'17:00–19:00', cutoff:'Fri 15:30', pickup:'Shell Naalya, 17:15', cap:4, seats:2, circles:['Kibale weekenders','Stanbic circle'], riders:['AN','BK'], status:'filling'},
   {id:'s1', route:'kampala-jinja', day:'Fri', win:'17:00–19:00', cutoff:'Fri 15:30', pickup:'Total Ntinda, 17:15', cap:4, seats:3, circles:['Stanbic circle','MUBS alumni'], riders:['BK','IT','AN'], status:'filling'},
   {id:'s2', route:'cbd-entebbe', day:'Sun', win:'03:00–04:00', cutoff:'Sat 22:00', pickup:'Shell Bugolobi, 03:00', guarantee:true, cap:6, seats:5, circles:['Airport regulars'], riders:['DO','PM','SN','JK','RA'], status:'filling'},
   {id:'s3', route:'kampala-mbarara', day:'Sat', win:'05:30–07:00', cutoff:'Fri 20:00', pickup:'Shoprite Lubowa, 05:45', cap:6, seats:2, circles:['MUBS alumni'], riders:['CN','EW'], status:'filling'},

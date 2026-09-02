@@ -317,11 +317,11 @@ const SCENES = [
   draw(g,t){ const {ctx,now}=g;
     const ap=E.outExpo(seg(t,.3,1.4));
     // corridor strip
-    card(ctx,120,90,520,84,{alpha:ap}); eyebrow(ctx,'Corridor',142,116,{alpha:ap}); txt(ctx,'Kampala → Jinja',142,152,{font:FONT.disp(700,22),alpha:ap}); txt(ctx,'80 km · Friday · 17:00–19:00',618,152,{font:FONT.mono(400,13),align:'right',color:inkA(.55),alpha:ap});
+    card(ctx,120,90,520,84,{alpha:ap}); eyebrow(ctx,'Corridor',142,116,{alpha:ap}); txt(ctx,'Kampala → Fort Portal',142,152,{font:FONT.disp(700,20),alpha:ap}); txt(ctx,'300 km · Fri 17:00–19:00',618,152,{font:FONT.mono(400,13),align:'right',color:inkA(.55),alpha:ap});
     // stage card
-    card(ctx,120,196,520,364,{alpha:ap}); eyebrow(ctx,'Virtual stage · Jinja · Fri 17:00–19:00',142,226,{alpha:ap});
-    const seats=Math.min(4, t<4?0:t<9?1:t<14?2:t<19?3:4); const prices=[36000,36000,31000,28000,26000]; const pt=[0,4,9,14,19][seats]; const price=roll(prices[seats],seg(t,pt,pt+1.1))+(seg(t,pt,pt+1.1)<1?prices[seats-1>=0?seats-1:0]-roll(prices[seats-1>=0?seats-1:0],seg(t,pt,pt+1.1))+0:0);
-    const shown = seats===0 ? 36000 : Math.round(lerp(prices[seats-1],prices[seats],E.outCubic(seg(t,pt,pt+1.1)))/100)*100;
+    card(ctx,120,196,520,364,{alpha:ap}); eyebrow(ctx,'Virtual stage · Fort Portal · Fri 17:00–19:00',142,226,{alpha:ap});
+    const seats=Math.min(4, t<4?0:t<9?1:t<14?2:t<19?3:4); const prices=[389400,389400,194700,129800,97350]; const pt=[0,4,9,14,19][seats]; const price=roll(prices[seats],seg(t,pt,pt+1.1))+(seg(t,pt,pt+1.1)<1?prices[seats-1>=0?seats-1:0]-roll(prices[seats-1>=0?seats-1:0],seg(t,pt,pt+1.1))+0:0);
+    const shown = seats===0 ? 389400 : Math.round(lerp(prices[seats-1],prices[seats],E.outCubic(seg(t,pt,pt+1.1)))/50)*50;
     money(ctx,shown,142,300,{size:56,alpha:ap}); txt(ctx,'per seat · paid into escrow',142,326,{font:FONT.body(400,14),color:inkA(.55),alpha:ap});
     // fill bar
     for(let i=0;i<4;i++){ const x=142+i*120, y=352; const on=i<seats; const st=[4,9,14,19][i]; const q=E.outBack(seg(t,st,st+.6)); rr(ctx,x,y,110,34,8); ctx.fillStyle=on?C.yellow:inkA(.08); ctx.globalAlpha=ap; ctx.fill(); ctx.globalAlpha=1; if(on){ txt(ctx,['AN','BK','CM','DO'][i],x+55,y+18,{font:FONT.body(700,13),color:'#17120E',align:'center',base:'middle',alpha:q}); } else txt(ctx,'seat '+(i+1),x+55,y+18,{font:FONT.body(600,12),color:inkA(.35),align:'center',base:'middle',alpha:ap}); }
@@ -329,14 +329,14 @@ const SCENES = [
     // cut-off chip
     pill(ctx,full?'Full · departs 17:30':'cut-off 16:30',618,412,{align:'right',font:FONT.mono(500,12),h:26,px:18,fill:full?'rgba(61,187,122,.16)':undefined,stroke:full?'rgba(61,187,122,.6)':undefined,color:full?C.good:inkA(.75),alpha:ap});
     // paid ticks
-    for(let i=0;i<seats;i++){ const st=[4,9,14,19][i]; const q=E.outExpo(seg(t,st+.2,st+1)); txt(ctx,`✓ ${['Anita','Brian','Cissy','Deo'][i]} paid UGX ${fmt(prices[i+1])}`,142,458+i*22,{font:FONT.mono(400,13),color:C.good,alpha:q*ap}); }
+    for(let i=0;i<seats;i++){ const st=[4,9,14,19][i]; const q=E.outExpo(seg(t,st+.2,st+1)); txt(ctx,`✓ ${['Anita','Brian','Cissy','Deo'][i]} paid UGX ${fmt(shown)}`,142,458+i*22,{font:FONT.mono(400,13),color:C.good,alpha:q*ap}); }
     // right: car + offer
     const cx=760, cy=300;
     if(t<24.6){ const dp=E.outExpo(seg(t,1.2,2.2)); ctx.save(); ctx.globalAlpha=dp*.35; ctx.setLineDash([6,8]); ctx.strokeStyle=C.ink; ctx.lineWidth=1.5; rr(ctx,700,180,440,240,24); ctx.stroke(); ctx.restore(); txt(ctx,'no car yet',920,310,{font:FONT.body(600,15),color:inkA(.4),align:'center',alpha:dp*(1-seg(t,23.8,24.6))}); }
     const mp=seg(t,24,29.5); if(mp>0){ const r=rng(3); const n=340; ctx.save(); const pa=E.outCubic(seg(mp,0,.95)); // particles converge onto the silhouette, then the solid car fades in
       for(let i=0;i<n;i++){ const u=r(), v=r(); const tx=cx+u*202*1.9, ty=cy+lerp(6,46,v)*1.9; const inside = v>0.45 || (u>.3&&u<.75&&v>.15) || (u>.2&&u<.9&&v>.3); if(!inside) continue; const d=r()*.5; const q=E.outExpo(seg(mp,d,d+.5)); const x=lerp(690+r()*560,tx,q), y=lerp(60+r()*520,ty,q); ctx.fillStyle=r()<.2?C.yellow:C.ink; ctx.globalAlpha=(1-E.inCubic(seg(mp,.8,1)))*.9; ctx.fillRect(x,y,2,2); }
       ctx.restore(); carSide(ctx,cx,cy,1.9,{alpha:E.smooth(seg(mp,.7,1)),heads:[[75,15],[95,15],[115,15],[135,15]]}); if(mp>.9) txt(ctx,'manufactured · 4 seats · Ntinda pick-up 17:30',cx+192,cy+130,{font:FONT.mono(400,12),color:inkA(.5),align:'center',alpha:seg(mp,.9,1)}); }
-    const op=E.outExpo(seg(t,30,31.2)); if(op>0){ const acc=t>=34.6; const ox=720, oy=lerp(560,420,op); offerCard(ctx,ox,oy,{alpha:op,amount:84000,line:'Jinja · Fri 17:30 · 4 seats · from Ntinda',accepted:acc,driver:'Ronald · RAV4',plate:'UBK 412X',split: acc?'4 × 26,000 = 104,000 · driver 84,000 · UG 20,000':null}); tap(ctx,ox+360,oy+142,seg(t,33.9,34.7)); }
+    const op=E.outExpo(seg(t,30,31.2)); if(op>0){ const acc=t>=34.6; const ox=720, oy=lerp(560,420,op); offerCard(ctx,ox,oy,{alpha:op,amount:354000,line:'Fort Portal · Fri 17:30 · 4 seats · from Ntinda',accepted:acc,driver:'Ronald · RAV4',plate:'UBK 412X',split: acc?'4 × 97,350 = 389,400 · driver 354,000 · UG 35,400':null}); tap(ctx,ox+360,oy+142,seg(t,33.9,34.7)); }
     vignette(ctx); }
 },
 { id:'drive', name:'Drive', dur:25,
@@ -346,12 +346,12 @@ const SCENES = [
     const ap=E.outExpo(seg(t,.3,1.4));
     // map (zoomed on the centre), clipped right
     ctx.save(); rr(ctx,600,80,600,520,24); ctx.clip(); ctx.fillStyle='#120F0C'; ctx.fillRect(600,80,600,520);
-    const k=1100/5.693; const [kl,kt]=[TOWNS.Kampala[0],TOWNS.Kampala[1]]; const P=MAP.proj(940-(kl-32.277)*k, 400+(kt-1.3735)*k, 1100);
+    const k=900/5.693; const [kl,kt]=[TOWNS.Kampala[0],TOWNS.Kampala[1]]; const P=MAP.proj(1033-(kl-32.277)*k, 400+(kt-1.3735)*k, 900);
     MAP.draw(ctx,P,{now,alpha:.55*ap,breathe:.6});
-    const corr=[['Jinja',2],['Entebbe',3.5],['Mbarara',5],['Entebbe',6.5]]; const chips=['Kampala–Jinja','Kampala–Entebbe','Kampala–Mbarara','Airport, any night'];
+    const corr=[['Fort Portal',2],['Jinja',3.5],['Entebbe',5],['Entebbe',6.5]]; const chips=['Kampala–Fort Portal','Kampala–Jinja','Kampala–Entebbe','Airport, any night'];
     corr.forEach(([to,st],i)=>{ const q=E.outCubic(seg(t,st,st+1)); if(q<=0) return; const path=pathBetween(P.t('Kampala'),P.t(to),i%2?-.08:.08); strokePath(ctx,path,0,q,C.yellow,3,.9); const h=path(q); glow(ctx,h[0],h[1],'rgba(242,194,0,.6)',14,q<1?1:0); });
     const [nx,ny]=P.t('Ntinda'); const rq=E.outBack(seg(t,8,9.2)); if(rq>0){ const R=15*k/111*rq; ctx.save(); ctx.fillStyle='rgba(148,168,182,.16)'; ctx.strokeStyle=C.crane; ctx.lineWidth=1.5; ctx.beginPath(); ctx.arc(nx,ny,R,0,7); ctx.fill(); ctx.stroke(); ctx.restore(); dot(ctx,nx,ny,4,C.crane); pill(ctx,'Ntinda · 15 km',nx,ny-R-14,{font:FONT.body(600,11),h:22,px:16,alpha:rq}); }
-    for(const n of ['Kampala','Jinja','Entebbe','Mbarara']){ const [x,y]=P.t(n); if(x<610||x>1190||y<90||y>590) continue; dot(ctx,x,y,3,C.yellow,ap); pill(ctx,n,x,y-16,{font:FONT.body(600,11),h:22,px:16,alpha:ap}); }
+    for(const n of ['Kampala','Fort Portal','Jinja','Entebbe','Mbarara']){ const [x,y]=P.t(n); if(x<610||x>1190||y<90||y>590) continue; dot(ctx,x,y,3,C.yellow,ap); pill(ctx,n,x,y-16,{font:FONT.body(600,11),h:22,px:16,alpha:ap}); }
     ctx.restore(); ctx.save(); ctx.globalAlpha=ap; ctx.strokeStyle=inkA(.14); rr(ctx,600,80,600,520,24); ctx.stroke(); ctx.restore();
     // panel
     card(ctx,90,80,486,520,{alpha:ap}); eyebrow(ctx,'Comfort map · Ronald · RAV4 · 4 seats',112,110,{alpha:ap}); txt(ctx,'Where I am comfortable',112,150,{font:FONT.disp(700,24),alpha:ap});
@@ -361,7 +361,7 @@ const SCENES = [
     txt(ctx,'Days and hours',112,cyp+92,{font:FONT.body(600,12),color:inkA(.45),alpha:ap}); const days=['Mo','Tu','We','Th','Fr','Sa','Su']; days.forEach((d,i)=>{ const on=i!==5; const q=E.outCubic(seg(t,10+i*.12,10.5+i*.12)); rr(ctx,112+i*44,cyp+106,36,30,8); ctx.fillStyle=on&&q>0?`rgba(242,194,0,${.85*q})`:inkA(.08); ctx.globalAlpha=ap; ctx.fill(); ctx.globalAlpha=1; txt(ctx,d,130+i*44,cyp+121,{font:FONT.body(700,12),color:on&&q>.5?'#17120E':inkA(.6),align:'center',base:'middle',alpha:ap}); });
     const hq=E.outCubic(seg(t,11,12.4)); rr(ctx,112,cyp+150,448,10,5); ctx.fillStyle=inkA(.08); ctx.globalAlpha=ap; ctx.fill(); rr(ctx,112+448*(6/24),cyp+150,448*(16/24)*hq,10,5); ctx.fillStyle=C.yellow; ctx.fill(); ctx.globalAlpha=1; txt(ctx,'06:00',112,cyp+178,{font:FONT.mono(400,11),color:inkA(.45),alpha:ap}); txt(ctx,'22:00',560,cyp+178,{font:FONT.mono(400,11),color:inkA(.45),align:'right',alpha:ap*hq});
     // offers slide in over the map
-    const o1=E.outExpo(seg(t,15,16.1)); if(o1>0) offerCard(ctx,lerp(1300,740,o1),150,{alpha:o1,amount:84000,line:'Jinja · Fri 17:30 · 4 seats · from Ntinda'});
+    const o1=E.outExpo(seg(t,15,16.1)); if(o1>0) offerCard(ctx,lerp(1300,740,o1),150,{alpha:o1,amount:354000,line:'Fort Portal · Fri 17:30 · 4 seats · from Ntinda'});
     const o2=E.outExpo(seg(t,19,20.1)); if(o2>0) offerCard(ctx,lerp(1300,740,o2),340,{alpha:o2,amount:32000,line:'Entebbe Airport · Sat 23:10 · 2 seats · from Ntinda'});
     vignette(ctx); }
 },
@@ -379,8 +379,8 @@ const SCENES = [
     vignette(ctx); }
 },
 { id:'deliver', name:'Deliver', dur:20,
-  caps:[{at:3.5,eb:'Deliver',main:'A quarter of a seat.',sub:'A seat to Jinja is UGX 26,000. The parcel rides in the boot for 6,500.'},{at:11,main:'Send the thing. It runs on the same rail.',sub:'Placed, courier assigned, picked up, on the way, delivered.'}],
-  voice:['Your parcel rides in the boot of the stage car to Jinja.','A quarter of a seat. That is it.'],
+  caps:[{at:3.5,eb:'Deliver',main:'A quarter of a seat.',sub:'A seat to Fort Portal is UGX 97,350. The parcel rides in the boot for 24,350.'},{at:11,main:'Send the thing. It runs on the same rail.',sub:'Placed, courier assigned, picked up, on the way, delivered.'}],
+  voice:['Your parcel rides in the boot of the stage car to Fort Portal.','A quarter of a seat. That is it.'],
   draw(g,t){ const {ctx,now}=g;
     // road
     ctx.fillStyle='#14100D'; ctx.fillRect(0,300,W,200); ctx.fillStyle='#1c1713'; ctx.fillRect(0,300,W,4); const off=(t*260)%80; ctx.save(); ctx.strokeStyle=inkA(.35); ctx.lineWidth=3; ctx.setLineDash([40,40]); ctx.lineDashOffset=off; ctx.beginPath(); ctx.moveTo(0,405); ctx.lineTo(W,405); ctx.stroke(); ctx.restore();
@@ -388,9 +388,9 @@ const SCENES = [
     const P=MAP.proj(1040,140,260); MAP.draw(ctx,P,{now,alpha:.22,breathe:.4});
     const cx=lerp(-500,300,E.outExpo(seg(t,0,2.6))); const bob=Math.sin(t*9)*1.2; const pp=E.outBack(seg(t,3,3.8));
     carSide(ctx,cx,300+bob,2.6,{heads:[[75,15],[95,15],[115,15],[135,15]],parcel:pp});
-    if(pp>0){ const bx=cx+24*2.6, by=300+37*2.6; const pulse=.5+.5*Math.sin(t*4); glow(ctx,bx,by,`rgba(242,194,0,${.35+.25*pulse})`,60,pp); pill(ctx,'Parcel · UGX 6,500 · Jinja',bx,by-80,{font:FONT.mono(500,13),h:30,px:20,fill:C.yellow,color:'#17120E',stroke:null,scale:pp}); ctx.save(); ctx.globalAlpha=pp; ctx.strokeStyle=C.yellow; ctx.lineWidth=1.5; ctx.beginPath(); ctx.moveTo(bx,by-65); ctx.lineTo(bx,by-12); ctx.stroke(); ctx.restore(); }
+    if(pp>0){ const bx=cx+24*2.6, by=300+37*2.6; const pulse=.5+.5*Math.sin(t*4); glow(ctx,bx,by,`rgba(242,194,0,${.35+.25*pulse})`,60,pp); pill(ctx,'Parcel · UGX 24,350 · Fort Portal',bx,by-80,{font:FONT.mono(500,13),h:30,px:20,fill:C.yellow,color:'#17120E',stroke:null,scale:pp}); ctx.save(); ctx.globalAlpha=pp; ctx.strokeStyle=C.yellow; ctx.lineWidth=1.5; ctx.beginPath(); ctx.moveTo(bx,by-65); ctx.lineTo(bx,by-12); ctx.stroke(); ctx.restore(); }
     // seats vs parcel legend
-    const lq=E.outExpo(seg(t,5,6)); if(lq>0){ ctx.save(); ctx.globalAlpha=lq; const x=120; txt(ctx,'seat',x,190,{font:FONT.body(600,12),color:inkA(.45)}); money(ctx,26000,x,224,{size:28}); txt(ctx,'parcel · ¼',x,264,{font:FONT.body(600,12),color:inkA(.45)}); money(ctx,6500,x,298,{size:28,color:C.yellow}); ctx.restore(); }
+    const lq=E.outExpo(seg(t,5,6)); if(lq>0){ ctx.save(); ctx.globalAlpha=lq; const x=120; txt(ctx,'seat',x,190,{font:FONT.body(600,12),color:inkA(.45)}); money(ctx,97350,x,224,{size:28}); txt(ctx,'parcel · ¼',x,264,{font:FONT.body(600,12),color:inkA(.45)}); money(ctx,24350,x,298,{size:28,color:C.yellow}); ctx.restore(); }
     const rq=E.outExpo(seg(t,10,11)); if(rq>0) railSteps(ctx,['placed','courier assigned','picked up','on the way','delivered'],240,1040,540,seg(t,10.6,18),{alpha:rq,fs:13,dy:26,r:7});
     vignette(ctx); }
 },
@@ -432,9 +432,9 @@ const SCENES = [
       for(let i=0;i<40;i++){ const h=18+Math.abs(Math.sin(t*3.1+i*.6)*Math.cos(t*1.7+i*.21))*110; rr(ctx,sx+26+i*13.6,sy+300-h,9,h,3); ctx.fillStyle=i%7===3?C.yellow:inkA(.7); ctx.fill(); }
       ctx.save(); rr(ctx,sx+26,sy+322,sw-52,44,10); ctx.clip(); ctx.fillStyle=inkA(.05); ctx.fillRect(sx,sy+322,sw,44); const bl='UG Bulletin · Fuel today UGX 5,200/L · Entebbe expressway toll UGX 5,000 · Jinja stage 3 of 4 filling · Gorilla permits Apr–May discounted · '; const bw=measure(ctx,bl,FONT.mono(500,13)); const bx=sx+26-((bt*90)%bw); txt(ctx,bl+bl,bx,sy+349,{font:FONT.mono(500,13),color:inkA(.75)}); ctx.restore();
       pill(ctx,'❚❚ Pause',sx+sw-26,sy+80,{align:'right',font:FONT.body(600,12),h:28,px:18}); pill(ctx,'Next mix ›',sx+sw-120,sy+80,{align:'right',font:FONT.body(600,12),h:28,px:18}); }
-    if(beat===1){ eyebrow(ctx,'Pulse · the demand map',sx+26,sy+36); ctx.save(); rr(ctx,sx+1,sy+56,sw-2,sh-57,18); ctx.clip(); const zq=E.inOutCubic(seg(bt,2.2,3.6)); const P0=MAP.proj(sx+300,sy+250,300*(1+.5*zq)); const [jx,jy]=P0.t('Jinja'); const P=MAP.proj(sx+300-(jx-(sx+300))*zq,sy+250-(jy-(sy+250))*zq,300*(1+.5*zq)); MAP.draw(ctx,P,{now,alpha:.5,breathe:.5});
-      [['Kampala',C.yellow,52],['Jinja',C.yellow,40],['Mbarara',C.yellow,30],['Gulu',C.red,36],['Mbale',C.red,26]].forEach(([n,c,r])=>{ const [x,y]=P.t(n); const br=r*(1+.1*Math.sin(now*2+x)); glow(ctx,x,y,c===C.red?'rgba(210,32,47,.55)':'rgba(242,194,0,.5)',br,1); });
-      const [Jx,Jy]=P.t('Jinja'); if(zq>0){ pill(ctx,'Jinja · 11 seats paid · 2 drivers near',Jx,Jy-22,{font:FONT.body(700,12),h:26,px:18,alpha:zq}); }
+    if(beat===1){ eyebrow(ctx,'Pulse · the demand map',sx+26,sy+36); ctx.save(); rr(ctx,sx+1,sy+56,sw-2,sh-57,18); ctx.clip(); const zq=E.inOutCubic(seg(bt,2.2,3.6)); const P0=MAP.proj(sx+300,sy+250,300*(1+.5*zq)); const [jx,jy]=P0.t('Fort Portal'); const P=MAP.proj(sx+300-(jx-(sx+300))*zq,sy+250-(jy-(sy+250))*zq,300*(1+.5*zq)); MAP.draw(ctx,P,{now,alpha:.5,breathe:.5});
+      [['Kampala',C.yellow,52],['Fort Portal',C.red,44],['Jinja',C.yellow,34],['Mbarara',C.yellow,28],['Gulu',C.red,32]].forEach(([n,c,r])=>{ const [x,y]=P.t(n); const br=r*(1+.1*Math.sin(now*2+x)); glow(ctx,x,y,c===C.red?'rgba(210,32,47,.55)':'rgba(242,194,0,.5)',br,1); });
+      const [Jx,Jy]=P.t('Fort Portal'); if(zq>0){ pill(ctx,'Fort Portal · 14 seats paid · 2 drivers near',Jx,Jy-22,{font:FONT.body(700,12),h:26,px:18,alpha:zq}); }
       ctx.restore(); pill(ctx,'Point me there',sx+sw-26,sy+sh-30,{align:'right',font:FONT.body(700,13),h:32,px:22,fill:C.yellow,color:'#17120E',stroke:null}); tap(ctx,sx+sw-90,sy+sh-30,seg(bt,1.6,2.4));
       txt(ctx,'yellow: demand · red: a gap, seats paid and no car',sx+sw-26,sy+36,{font:FONT.body(400,12),color:inkA(.5),align:'right'}); }
     if(beat===2){ eyebrow(ctx,'Felt · export Pulse layer',sx+26,sy+36); const P=MAP.proj(sx+165,sy+205,250); MAP.draw(ctx,P,{now,alpha:.35,breathe:.4});
@@ -608,7 +608,7 @@ document.addEventListener('keydown',e=>{ if(document.activeElement!==stage && (e
 const fontsReady = Promise.race([ (document.fonts ? Promise.all([document.fonts.load('900 40px Unbounded'),document.fonts.load('700 20px Unbounded'),document.fonts.load('600 14px "Albert Sans"'),document.fonts.load('500 14px "IBM Plex Mono"')]) : Promise.resolve()).catch(()=>{}), new Promise(r=>setTimeout(r,2500)) ]);
 if (!SOUND) fontsReady.then(()=>setTimeout(start,900));
 window.__UG_REEL = {cut:CUT, sound:SOUND, total:TOTAL, voiceLines:SCENES.map(s=>({id:s.id, at:0, lines:s.voice})),
-  render(sec){ if(!started){ RENDERING=true; started=true; poster.remove(); hud.classList.add('on'); if(SOUND) muteBtn.hidden=false; stage.focus({preventScroll:true}); } RENDERING=true; playing=false; ended=false; hud.style.display='none'; $('bar').style.display='none'; endEl.style.display='none'; clock=clamp(sec,0,TOTAL-.001); let i=SCENES.length-1; while(i>0&&clock<OFFSET[i]) i--; if(i!==sceneI){ sceneI=i; capI=-1; cnt.textContent=`${String(i+1).padStart(2,'0')} / ${SCENES.length}`; cname.textContent=SCENES[i].name; } loop(performance.now()); const ms=Math.max(0,(clock-capT0)*1000); document.getAnimations().forEach(a=>{ a.pause(); try{ a.currentTime=ms; }catch(e){} }); barfill.style.transition='none'; endEl.classList.toggle('on', clock>=TOTAL-.05); return {scene:SCENES[i].id, t:clock-OFFSET[i]}; },
+  render(sec){ if(poster&&poster.isConnected) poster.remove(); if(!started){ RENDERING=true; started=true; hud.classList.add('on'); if(SOUND) muteBtn.hidden=false; stage.focus({preventScroll:true}); } RENDERING=true; playing=false; ended=false; hud.style.display='none'; $('bar').style.display='none'; endEl.style.display='none'; clock=clamp(sec,0,TOTAL-.001); let i=SCENES.length-1; while(i>0&&clock<OFFSET[i]) i--; if(i!==sceneI){ sceneI=i; capI=-1; cnt.textContent=`${String(i+1).padStart(2,'0')} / ${SCENES.length}`; cname.textContent=SCENES[i].name; } loop(performance.now()); const ms=Math.max(0,(clock-capT0)*1000); document.getAnimations().forEach(a=>{ a.pause(); try{ a.currentTime=ms; }catch(e){} }); barfill.style.transition='none'; endEl.classList.toggle('on', clock>=TOTAL-.05); return {scene:SCENES[i].id, t:clock-OFFSET[i]}; },
   offsets:OFFSET.slice(), scenes:SCENES.map(s=>({id:s.id,name:s.name,dur:s.dur})), particles:MAP.count, lakes:MAP.lakes, seek(sec){ if(!started) start(); clock=clamp(sec,0,TOTAL-.001); let i=SCENES.length-1; while(i>0&&clock<OFFSET[i]) i--; enterScene(i,{sting:false}); }, get clock(){return clock;}, get playing(){return playing;}};
 })();
 </script>

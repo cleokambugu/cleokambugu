@@ -90,8 +90,8 @@
        "el": {"tags": "[pause] [calm]", "stability": 0.5, "similarity": 0.8, "style": 0.3, "speed": 1.0}}
     ]},
     {"id": "deliver", "budget_seconds": 20, "lines": [
-      {"lang": "en", "text": "Your parcel? It rides in the boot of the stage car to Jinja.",
-       "text_v3": "[calm] Your parcel? It rides in the boot of the stage car to Jinja.",
+      {"lang": "en", "text": "Your parcel? It rides in the boot of the stage car to Fort Portal.",
+       "text_v3": "[calm] Your parcel? It rides in the boot of the stage car to Fort Portal.",
        "el": {"tags": "[calm]", "stability": 0.5, "similarity": 0.8, "style": 0.2, "speed": 1.0}},
       {"lang": "en", "text": "A seat is twenty-six thousand. The parcel, six thousand five hundred. A quarter of a seat.",
        "text_v3": "A seat is twenty-six thousand. The parcel, six thousand five hundred. [pause] A quarter of a seat.",
