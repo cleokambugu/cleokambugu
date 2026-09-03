@@ -19,3 +19,8 @@ downloads/
 
 # OS
 .DS_Store
+
+# the site tests fetch a browser into the checkout; neither belongs in the repo
+projects/ug/site/package.json
+projects/ug/site/package-lock.json
+projects/ug/site/node_modules/

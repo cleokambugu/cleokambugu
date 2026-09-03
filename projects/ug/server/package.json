@@ -9,6 +9,7 @@
     "start": "node src/index.js",
     "dev": "UG_SANDBOX=1 UG_DEMO_SEED=1 node --watch src/index.js",
     "test": "node --test",
+    "test:site": "node --test ../site/test/",
     "export-data": "node scripts/export-data.js",
     "icons": "node scripts/icons.js"
   },

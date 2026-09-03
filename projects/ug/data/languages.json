@@ -1,7 +1,7 @@
 {
  "generated": "2026-09-03",
  "source": "data/i18n/*.json via server/scripts/i18n-build.cjs",
- "keys": 262,
+ "keys": 259,
  "languages": {
   "lg": {
    "name": "Luganda",

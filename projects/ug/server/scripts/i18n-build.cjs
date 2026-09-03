@@ -27,7 +27,8 @@ const ORDER = { // picker groups, in the order they appear
   'World': ['en', 'fr', 'de', 'it', 'es', 'es-MX', 'pt', 'pt-BR', 'ru', 'zh-Hans', 'ja', 'ko', 'hi'],
 };
 /* keys the JavaScript looks up through a variable, so the source scan cannot see them */
-const DYNAMIC = ['ride', 'pool', 'rent', 'deliver', 'flipRide', 'flipPool', 'flipRent', 'flipDeliver'];
+const DYNAMIC = ['ride', 'pool', 'rent', 'deliver', 'flipRide', 'flipPool', 'flipRent', 'flipDeliver',
+  'ui.requested', 'ui.placed', 'ui.driverAssigned', 'ui.arriving', 'ui.onTrip', 'ui.done'];   // the trip rail's steps
 const en = JSON.parse(fs.readFileSync(path.join(DIR, 'en.json'), 'utf8'));
 const keys = Object.keys(en.strings);
 const files = fs.readdirSync(DIR).filter(f => f.endsWith('.json') && !f.startsWith('.')).map(f => f.replace(/\.json$/, ''));

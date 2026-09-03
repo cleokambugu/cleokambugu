@@ -1165,11 +1165,6 @@
    "html": false,
    "where": "rendered by JavaScript"
   },
-  "ui.openIn": {
-   "text": "or open",
-   "html": false,
-   "where": "rendered by JavaScript"
-  },
   "ui.directions": {
    "text": "directions",
    "html": false,
@@ -1255,11 +1250,6 @@
    "html": false,
    "where": "rendered by JavaScript"
   },
-  "ui.chooseLanguage": {
-   "text": "Choose your language",
-   "html": false,
-   "where": "rendered by JavaScript"
-  },
   "ui.continue": {
    "text": "Continue",
    "html": false,
@@ -1287,11 +1277,6 @@
   },
   "flipDeliver": {
    "text": "Send the thing.",
-   "html": false,
-   "where": "rendered by JavaScript"
-  },
-  "languages": {
-   "text": "Language",
    "html": false,
    "where": "rendered by JavaScript"
   },

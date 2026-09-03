@@ -1,0 +1,37 @@
+name: UG site
+
+# The product is one HTML file, so a single syntax error is a blank page and a shadowed variable is
+# a section that silently stops translating. Neither is visible in a diff; both are visible to a
+# browser. These tests drive the real file in real Chromium — no build step, no test hooks in the
+# shipped artefact.
+
+on:
+  push:
+    paths: ['projects/ug/site/**', 'projects/ug/data/i18n/**', 'projects/ug/showreel/*.html', '.github/workflows/ug-site.yml']
+  pull_request:
+    paths: ['projects/ug/site/**', 'projects/ug/data/i18n/**', 'projects/ug/showreel/*.html', '.github/workflows/ug-site.yml']
+  workflow_dispatch:
+
+jobs:
+  client:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '22' }
+      - name: The dictionaries agree with the site
+        working-directory: projects/ug
+        run: node server/scripts/i18n-build.cjs
+      # data/languages.json carries a generation date, so only the shipped file is compared
+      - name: The site is unchanged by its own build
+        working-directory: projects/ug
+        run: git diff --exit-code site/index.html
+      - name: Install a browser
+        working-directory: projects/ug/site
+        run: |
+          npm init -y > /dev/null
+          npm i --no-save playwright@1.49.1
+          npx playwright install --with-deps chromium
+      - name: Drive the real file
+        working-directory: projects/ug
+        run: node --test site/test/

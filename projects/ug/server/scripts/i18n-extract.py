@@ -25,11 +25,11 @@ UI_KEYS = {
   'ui.bookOnUG': 'Book on UG', 'ui.sendOnUG': 'Send on UG', 'ui.takeSeat': 'Take a seat', 'ui.callAhead': 'Call ahead', 'ui.askToAdd': 'Ask UG to add it',
   'ui.tellMeWhen': 'Tell me when', 'ui.listed': 'Listed · recognised', 'ui.coming': 'Coming', 'ui.likelyCheapest': 'Likely cheapest', 'ui.cheapest': 'Cheapest',
   'ui.ugPrice': 'UG price', 'ui.ugEstimate': 'UG estimate, unverified', 'ui.min': 'min', 'ui.filling': 'Filling', 'ui.funded': 'Funded', 'ui.full': 'Full · offered to drivers',
-  'ui.perSeatNow': 'per seat now', 'ui.invite': 'Invite', 'ui.accept': 'Accept', 'ui.decline': 'Decline', 'ui.atTheStage': 'At the stage', 'ui.openIn': 'or open', 'ui.directions': 'directions',
+  'ui.perSeatNow': 'per seat now', 'ui.invite': 'Invite', 'ui.accept': 'Accept', 'ui.decline': 'Decline', 'ui.atTheStage': 'At the stage', 'ui.directions': 'directions',
   'ui.takeEmptyLeg': 'Take the empty leg', 'ui.pointMeThere': 'Point me there', 'ui.illBeThere': "I'll be there", 'ui.signOut': 'Sign out', 'ui.copyLink': 'Copy link',
   'ui.verified': 'Verified', 'ui.pending': 'Pending', 'ui.driverAssigned': 'Driver assigned', 'ui.done': 'Done', 'ui.requested': 'Requested', 'ui.placed': 'Placed with the partner',
   'ui.arriving': 'Arriving', 'ui.onTrip': 'On trip', 'ui.trip': 'Trip', 'ui.language': 'Language',
-  'ui.welcome': 'Welcome to Uganda.', 'ui.chooseLanguage': 'Choose your language', 'ui.continue': 'Continue',
+  'ui.welcome': 'Welcome to Uganda.', 'ui.continue': 'Continue',
   'ui.reviewNote': 'UG wrote these translations and a second pass checked them; native-speaker review is open. Missing words fall back to English.',
 }
 
