@@ -68,6 +68,10 @@ async function openPage({ viewport = { width: 390, height: 844 }, offline3p = tr
   const page = await c.newPage();
   await page.goto(`${origin}/index.html`, { waitUntil: 'load', timeout: 120000 });
   await page.waitForFunction(() => typeof qaScore === 'function', null, { timeout: 30000 });
+  /* Boot is no longer one synchronous task: what the first screen needs runs immediately and the
+     rest drains through requestIdleCallback. Tests that measure the painted page wait for the end
+     of that drain, which is also the honest definition of "the app is up". */
+  await page.waitForFunction(() => window.__ugReady === true, null, { timeout: 30000 });
   return { c, page };
 }
 
@@ -359,16 +363,18 @@ describe('6. every language renders, and no key is left showing', () => {
     const errors = [];
     page.on('pageerror', (e) => errors.push(String(e.message)));
     try {
-      const r = await page.evaluate(() => {
+      const r = await page.evaluate(async () => {
         const RENDERERS = ['renderCompare', 'renderStages', 'renderAtlas', 'renderFleet', 'renderDeliver',
           'renderForesight', 'renderWall', 'renderLegs', 'renderOffers', 'renderTrips', 'renderDrive', 'renderDests'];
         /* a key looks like ui.something, flipSomething, or section.tag.slug — never a word a page
            would legitimately contain, which is why 'ride' and 'me' are not tested for */
         const keys = Object.keys(STR).filter((k) => k.includes('.') || /^flip[A-Z]/.test(k));
-        const thrown = [], showing = [];
+        const thrown = [], showing = [], unfetched = [];
         for (const code of Object.keys(LANGS)) {
-          LANG = code;
-          try { applyLang(); } catch (e) { thrown.push([code, 'applyLang', String(e.message)]); }
+          /* setLang fetches the pack, so this also proves every pack the picker offers exists and
+             parses — the split shipped forty files, and a missing one is a silently English page. */
+          try { await setLang(code, { keep: true }); } catch (e) { thrown.push([code, 'setLang', String(e.message)]); }
+          if (code !== 'en' && !PACK) unfetched.push(code);
           for (const f of RENDERERS) {
             if (typeof window[f] !== 'function') continue;
             try { window[f](); } catch (e) { thrown.push([code, f, String(e.message)]); }
@@ -376,8 +382,9 @@ describe('6. every language renders, and no key is left showing', () => {
           const text = document.body.innerText;
           for (const k of keys) if (text.includes(k)) showing.push([code, k]);
         }
-        return { thrown, showing, languages: Object.keys(LANGS).length };
+        return { thrown, showing, unfetched, languages: Object.keys(LANGS).length };
       });
+      assert.deepEqual(r.unfetched, [], `the picker offers languages with no pack behind them: ${r.unfetched.join(', ')}`);
       assert.equal(r.languages, 41);
       assert.deepEqual(r.thrown, [], `a render threw while a language was applied:\n${JSON.stringify(r.thrown, null, 1)}`);
       assert.deepEqual(r.showing, [], `raw dictionary keys rendered to the screen:\n${JSON.stringify(r.showing, null, 1)}`);
@@ -388,14 +395,14 @@ describe('6. every language renders, and no key is left showing', () => {
   test('the trip rail speaks the chosen language', async () => {
     const { c, page } = await openPage();
     try {
-      const r = await page.evaluate(() => {
-        const read = (code) => {
-          LANG = code; applyLang();
+      const r = await page.evaluate(async () => {
+        const read = async (code) => {
+          await setLang(code, { keep: true });
           startRail({ kind: 'ride', partner: { name: 'Bolt', sub: 'Bolt car', colour: '#111' }, title: 'Ntinda → CBD', price: 5220, eta: 7 });
           renderRail();
           return document.querySelector('#railBody').innerText;
         };
-        const en = read('en'), lg = read('lg');
+        const en = await read('en'), lg = await read('lg');
         localStorage.removeItem('ug:rail');
         return { en, lg };
       });
@@ -419,7 +426,7 @@ describe('7. the single script parses', () => {
          reach it and `window.STR` cannot. */
       const defined = await page.evaluate(() => [
         ['STR', typeof STR], ['LANGS', typeof LANGS], ['t', typeof t], ['LANG', typeof LANG],
-        ['applyLang', typeof applyLang], ['qaScore', typeof qaScore],
+        ['applyLang', typeof applyLang], ['setLang', typeof setLang], ['qaScore', typeof qaScore],
         ['renderCompare', typeof renderCompare], ['renderRail', typeof renderRail],
       ]);
       for (const [name, kind] of defined) {

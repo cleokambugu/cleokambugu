@@ -13,11 +13,29 @@
 //
 // So: the document goes to the network first and falls back to cache only when offline. Static
 // shell assets stay cache-first, because a frozen icon hurts nobody.
-const CACHE = 'ug-shell-v1.3.0';
+const CACHE = 'ug-shell-v1.4.0';
 const SHELL = ['./', './index.html', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png'];
+
+/* The forty language packs. The document used to carry all of them and cost four seconds of every
+   cold load; now a person fetches only the one they chose. The cost of that trade is that the FIRST
+   switch to a new language needs the network — so once the shell is in, warm them all in the
+   background, quietly, one at a time, at the lowest priority the platform gives us. After that the
+   picker is instant and works on a dead connection, which is the promise the welcome screen makes. */
+const PACK_DIR = './i18n/';
+async function warmPacks(codes) {
+  const c = await caches.open(CACHE);
+  for (const code of codes) {
+    const url = PACK_DIR + code + '.json';
+    if (await c.match(url)) continue;
+    try { const r = await fetch(url, { cache: 'no-cache' }); if (r && r.ok) await c.put(url, r.clone()); } catch { /* try again next activation */ }
+  }
+}
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(SHELL).catch(() => {})).then(() => self.skipWaiting()));
+});
+self.addEventListener('message', (e) => {
+  if (e.data && e.data.type === 'warm-packs' && Array.isArray(e.data.codes)) e.waitUntil(warmPacks(e.data.codes));
 });
 self.addEventListener('activate', (e) => {
   e.waitUntil(caches.keys()

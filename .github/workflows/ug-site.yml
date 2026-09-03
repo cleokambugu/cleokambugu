@@ -34,4 +34,4 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Drive the real file
         working-directory: projects/ug
-        run: node --test site/test/
+        run: node --test site/test/*.test.mjs
