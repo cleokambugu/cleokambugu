@@ -242,6 +242,12 @@ section.secondary .sec-head h2{font-size:var(--t6);font-stretch:110%;letter-spac
 .pin-card .row{display:flex;justify-content:space-between;gap:12px;margin-top:10px;font-family:var(--font-money);font-size:var(--t2)}
 .hint{position:absolute;left:0;bottom:12px;font-family:var(--font-body);font-size:var(--t2);color:var(--ink-3)}
 @media (max-width:960px){.hero .wrap{grid-template-columns:1fr;min-height:0}.stage{min-height:420px}.hero-copy{padding-top:48px}}
+/* On a phone the map is barely 360 px wide but still carries all 30-odd place labels,
+   so Fort Portal, Kampala, Jinja and Mbale print on top of one another and the country
+   is unreadable. Below 560 px the towns keep their dots, their positions, their stars
+   and their tooltips, and drop only their printed names — the map reads as the shape of
+   Uganda, and the card underneath still names whichever town is active. */
+@media (max-width:560px){.pin .lbl{display:none}}
 
 /* ---------- Booking strip (Ride. Pool. Rent. plus Explore) ---------- */
 .strip{position:relative;z-index:3;margin-top:-28px}
