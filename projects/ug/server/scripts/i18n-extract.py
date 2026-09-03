@@ -39,7 +39,7 @@ def slug(text, n=4):
 
 def main():
     s = open(SITE, encoding='utf-8').read()
-    b0 = s.index('<body>'); b1 = s.index('<script src="https://cdnjs')
+    b0 = s.index('<body>'); b1 = s.index('<script defer src="https://cdnjs')
     body = s[b0:b1]
     # section id in scope for each position
     sections = [(m.start(), m.group(1)) for m in re.finditer(r'<(?:section|header|footer|nav|div class="modal"|aside)[^>]*\bid="([a-zA-Z]+)"', body)]

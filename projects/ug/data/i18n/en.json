@@ -1,1234 +1,1279 @@
 {
-  "language": "en",
-  "name": "English",
-  "native": "English",
-  "confidence": "complete",
-  "note": "Source strings. Keys are section.tag.slug for page markup, bare names for the original STR keys, ui.* for strings the JavaScript renders. Values marked html keep their <b>, <small> and <br> tags in every language.",
-  "strings": {
-    "page.p.ug_speaks_the_languages": {
-      "text": "UG speaks the languages of Uganda, of the region, and of its visitors. Pick yours; everything follows.",
-      "html": false,
-      "where": "page <p>"
-    },
-    "page.button.skip": {
-      "text": "Skip",
-      "html": false,
-      "where": "page <button>"
-    },
-    "ride": {
-      "text": "Ride.",
-      "html": false,
-      "where": "top <span>"
-    },
-    "pool": {
-      "text": "Pool.",
-      "html": false,
-      "where": "top <span>"
-    },
-    "rent": {
-      "text": "Rent.",
-      "html": false,
-      "where": "top <span>"
-    },
-    "deliver": {
-      "text": "Deliver.",
-      "html": false,
-      "where": "top <span>"
-    },
-    "tabRide": {
-      "text": "Ride",
-      "html": false,
-      "where": "tabbar <span>"
-    },
-    "navStage": {
-      "text": "Stage",
-      "html": false,
-      "where": "tabbar <span>"
-    },
-    "navRent": {
-      "text": "Rent",
-      "html": false,
-      "where": "install <a>"
-    },
-    "navDeliver": {
-      "text": "Deliver",
-      "html": false,
-      "where": "tabbar <span>"
-    },
-    "navExplore": {
-      "text": "Explore",
-      "html": false,
-      "where": "install <a>"
-    },
-    "navDrive": {
-      "text": "Drive",
-      "html": false,
-      "where": "page <a>"
-    },
-    "getStarted": {
-      "text": "Get started",
-      "html": false,
-      "where": "page <button>"
-    },
-    "top.div.ug_kampala_everywhere": {
-      "text": "<b>UG</b> · Kampala → everywhere",
-      "html": true,
-      "where": "top <div>"
-    },
-    "position": {
-      "text": "Look the part. Pay the smart price.",
-      "html": false,
-      "where": "top <span>"
-    },
-    "top.p.one_app_that_quotes": {
-      "text": "One app that quotes every ride on the Ugandan market side by side, pools the road trip so the Prado costs a quarter, rents the car when you need to arrive, and books the park before the permits go. Paid the way Kampala pays: mobile money.",
-      "html": false,
-      "where": "top <p>"
-    },
-    "doorRider": {
-      "text": "I need to get somewhere",
-      "html": false,
-      "where": "top <span>"
-    },
-    "doorRiderSub": {
-      "text": "Queue a seat, compare every ride, plan the weekend.",
-      "html": false,
-      "where": "top <span>"
-    },
-    "start": {
-      "text": "Start →",
-      "html": false,
-      "where": "top <span>"
-    },
-    "doorDriver": {
-      "text": "I drive, or I have a car",
-      "html": false,
-      "where": "top <span>"
-    },
-    "doorDriverSub": {
-      "text": "Say where you're comfortable. Funded trips come to you.",
-      "html": false,
-      "where": "top <span>"
-    },
-    "open": {
-      "text": "Open for business →",
-      "html": false,
-      "where": "top <span>"
-    },
-    "top.a.just_compare_prices_no": {
-      "text": "Just compare prices, no account needed",
-      "html": false,
-      "where": "top <a>"
-    },
-    "top.span.compare_every_app_and": {
-      "text": "Compare every app and go",
-      "html": false,
-      "where": "top <span>"
-    },
-    "top.span.share_the_seat_split": {
-      "text": "Share the seat, split the fuel",
-      "html": false,
-      "where": "top <span>"
-    },
-    "top.span.self_drive_or_with": {
-      "text": "Self-drive or with driver",
-      "html": false,
-      "where": "top <span>"
-    },
-    "top.span.send_the_thing_any": {
-      "text": "Send the thing, any size",
-      "html": false,
-      "where": "top <span>"
-    },
-    "top.span.parks_permits_weekends": {
-      "text": "Parks, permits, weekends",
-      "html": false,
-      "where": "top <span>"
-    },
-    "top.label.pick_up": {
-      "text": "Pick-up",
-      "html": false,
-      "where": "top <label>"
-    },
-    "top.label.drop_off_destination": {
-      "text": "Drop-off / destination",
-      "html": false,
-      "where": "top <label>"
-    },
-    "top.label.date": {
-      "text": "Date",
-      "html": false,
-      "where": "top <label>"
-    },
-    "top.label.time": {
-      "text": "Time",
-      "html": false,
-      "where": "top <label>"
-    },
-    "top.button.show_prices": {
-      "text": "Show prices",
-      "html": false,
-      "where": "top <button>"
-    },
-    "top.div.prototype_v1_every_price": {
-      "text": "Prototype v1 · every price is an estimate from a published model · payments run in a sandbox · nothing here is a licensed service yet",
-      "html": false,
-      "where": "top <div>"
-    },
-    "compare.div.compare_the_arbitrage_desk": {
-      "text": "Compare · <b>the arbitrage desk</b>",
-      "html": true,
-      "where": "compare <div>"
-    },
-    "compare.h2.every_ride_on_the": {
-      "text": "Every ride on the market, one screen, ranked by price.",
-      "html": false,
-      "where": "compare <h2>"
-    },
-    "compare.p.uber_bolt_safeboda_faras": {
-      "text": "Uber, Bolt, SafeBoda, Faras, Yango, Tinka, the street boda, the matatu, a special hire, the bus, the ferry, the flight, and UG’s own pool and rentals. Same trip, same minute. Estimates say so on the card, the ones that cannot serve you stay greyed with the reason, and the button is always Book on UG.",
-      "html": false,
-      "where": "compare <p>"
-    },
-    "compare.h3.your_trip": {
-      "text": "Your trip",
-      "html": false,
-      "where": "compare <h3>"
-    },
-    "compare.label.from": {
-      "text": "From",
-      "html": false,
-      "where": "compare <label>"
-    },
-    "compare.label.to": {
-      "text": "To",
-      "html": false,
-      "where": "compare <label>"
-    },
-    "compare.label.leaving": {
-      "text": "Leaving",
-      "html": false,
-      "where": "compare <label>"
-    },
-    "compare.button.off_peak": {
-      "text": "Off-peak",
-      "html": false,
-      "where": "compare <button>"
-    },
-    "compare.button.rush_hour": {
-      "text": "Rush hour",
-      "html": false,
-      "where": "compare <button>"
-    },
-    "compare.button.night": {
-      "text": "Night",
-      "html": false,
-      "where": "compare <button>"
-    },
-    "compare.label.show": {
-      "text": "Show",
-      "html": false,
-      "where": "compare <label>"
-    },
-    "compare.button.all": {
-      "text": "All",
-      "html": false,
-      "where": "compare <button>"
-    },
-    "compare.button.boda": {
-      "text": "Boda",
-      "html": false,
-      "where": "compare <button>"
-    },
-    "compare.button.car": {
-      "text": "Car",
-      "html": false,
-      "where": "compare <button>"
-    },
-    "compare.button.shared": {
-      "text": "Shared",
-      "html": false,
-      "where": "compare <button>"
-    },
-    "compare.button.air_water_rail": {
-      "text": "Air · water · rail",
-      "html": false,
-      "where": "compare <button>"
-    },
-    "compare.label.people_travelling": {
-      "text": "People travelling",
-      "html": false,
-      "where": "compare <label>"
-    },
-    "compare.summary.more_options_pick_the": {
-      "text": "More options <small>pick the car, rain, split</small>",
-      "html": true,
-      "where": "compare <summary>"
-    },
-    "compare.label.pick_the_car": {
-      "text": "Pick the car",
-      "html": false,
-      "where": "compare <label>"
-    },
-    "compare.span.any": {
-      "text": "Any",
-      "html": false,
-      "where": "compare <span>"
-    },
-    "compare.span.signature_sedan": {
-      "text": "Signature sedan",
-      "html": false,
-      "where": "compare <span>"
-    },
-    "compare.span.signature_suv": {
-      "text": "Signature SUV",
-      "html": false,
-      "where": "compare <span>"
-    },
-    "compare.span.executive_van": {
-      "text": "Executive van",
-      "html": false,
-      "where": "compare <span>"
-    },
-    "compare.span.it_is_raining_kampala": {
-      "text": "It is raining (Kampala surge)",
-      "html": false,
-      "where": "compare <span>"
-    },
-    "compare.span.split_fare_across_the": {
-      "text": "Split fare across the group",
-      "html": false,
-      "where": "compare <span>"
-    },
-    "compare.summary.what_choosing_badly_costs": {
-      "text": "What choosing badly costs <small>the spread across the market for this trip</small>",
-      "html": true,
-      "where": "compare <summary>"
-    },
-    "compare.summary.the_atlas_every_way": {
-      "text": "The Atlas · every way to move, one table <small>air, bus, water, rail, Signature cars, stays, with the truth about each one's state</small>",
-      "html": true,
-      "where": "compare <summary>"
-    },
-    "compare.p.book_on_ug_where": {
-      "text": "<b>Book on UG</b> where a channel exists, <b>Call ahead</b> where it does not, <b>Listed</b> for recognition, <b>Coming</b> for what is being built. Fares are modelled and say so.",
-      "html": true,
-      "where": "compare <p>"
-    },
-    "stage.div.the_virtual_stage_seats": {
-      "text": "The Virtual Stage · <b>seats fill first, then the car comes</b>",
-      "html": true,
-      "where": "stage <div>"
-    },
-    "stage.h2.pay_for_the_seat": {
-      "text": "Pay for the seat. The car comes when it fills.",
-      "html": false,
-      "where": "stage <h2>"
-    },
-    "stage.p.like_a_matatu_stage": {
-      "text": "Like a matatu stage, a car leaves when it is full or at the cut-off. Unlike a stage, you queue money from your sofa, the seat price falls as friends join, and the driver who takes it already said they are comfortable on that road.",
-      "html": false,
-      "where": "stage <p>"
-    },
-    "stage.button.all_corridors": {
-      "text": "All corridors",
-      "html": false,
-      "where": "stage <button>"
-    },
-    "stage.button.near_me": {
-      "text": "Near me",
-      "html": false,
-      "where": "stage <button>"
-    },
-    "stage.button.funded": {
-      "text": "Funded",
-      "html": false,
-      "where": "stage <button>"
-    },
-    "stage.button.start_a_stage": {
-      "text": "Start a stage",
-      "html": false,
-      "where": "stage <button>"
-    },
-    "stage.summary.where_stages_fill_fastest": {
-      "text": "Where stages fill fastest <small>Pulse · paid seats against comfort maps, by town</small>",
-      "html": true,
-      "where": "stage <summary>"
-    },
-    "stage.summary.buses_on_this_corridor": {
-      "text": "Buses on this corridor <small>the fallback, side by side with the stage</small>",
-      "html": true,
-      "where": "stage <summary>"
-    },
-    "stage.p.every_corridor_also_has": {
-      "text": "Every corridor also has buses. Compare departure times across operators, see the park you leave from, and book on UG where the operator takes online bookings. Where it does not, we say so and give you the number to call ahead, rather than a dead button.",
-      "html": false,
-      "where": "stage <p>"
-    },
-    "stage.label.corridor": {
-      "text": "Corridor",
-      "html": false,
-      "where": "stage <label>"
-    },
-    "stage.summary.empty_legs_the_return": {
-      "text": "Empty legs <small>the return seats, 40% of the fare</small>",
-      "html": true,
-      "where": "stage <summary>"
-    },
-    "stage.p.every_rental_with_driver": {
-      "text": "Every rental with driver and every pool has a way back. The moment the outbound is booked, the return's seats go on sale.",
-      "html": false,
-      "where": "stage <p>"
-    },
-    "stage.summary.post_a_trip_of": {
-      "text": "Post a trip of your own, or price a seat <small>Pool · your circles, the true cost of the road divided by seats</small>",
-      "html": true,
-      "where": "stage <summary>"
-    },
-    "stage.h3.offer_a_seat_or": {
-      "text": "Offer a seat, or see what a seat should cost",
-      "html": false,
-      "where": "stage <h3>"
-    },
-    "stage.label.route": {
-      "text": "Route",
-      "html": false,
-      "where": "stage <label>"
-    },
-    "stage.label.paying_seats": {
-      "text": "Paying seats",
-      "html": false,
-      "where": "stage <label>"
-    },
-    "stage.label.car": {
-      "text": "Car",
-      "html": false,
-      "where": "stage <label>"
-    },
-    "stage.label.departure": {
-      "text": "Departure",
-      "html": false,
-      "where": "stage <label>"
-    },
-    "stage.button.post_this_trip": {
-      "text": "Post this trip",
-      "html": false,
-      "where": "stage <button>"
-    },
-    "stage.button.book_a_seat_with": {
-      "text": "Book a seat with MoMo",
-      "html": false,
-      "where": "stage <button>"
-    },
-    "stage.p.posted_trips_live_only": {
-      "text": "Posted trips live only in this browser until you sign in. Pool follows the same pattern the Pool app popularised: phone-verified accounts, a trip chat, and two-way ratings, plus circles so you ride with people you already half-know.",
-      "html": false,
-      "where": "stage <p>"
-    },
-    "rent.div.rent_arrive_properly": {
-      "text": "Rent · <b>arrive properly</b>",
-      "html": true,
-      "where": "rent <div>"
-    },
-    "rent.h2.rent_the_car_or": {
-      "text": "Rent the car, or arrive in it.",
-      "html": false,
-      "where": "rent <h2>"
-    },
-    "rent.p.self_drive_by_the": {
-      "text": "Self-drive by the day, chauffeured by the hour, or the Signature fleet when the arrival is the point. The price is per head when you split it.",
-      "html": false,
-      "where": "rent <p>"
-    },
-    "deliver.div.deliver_send_the_thing": {
-      "text": "Deliver · <b>send the thing</b>",
-      "html": true,
-      "where": "deliver <div>"
-    },
-    "deliver.h2.send_the_thing_any": {
-      "text": "Send the thing. Any size, any distance.",
-      "html": false,
-      "where": "deliver <h2>"
-    },
-    "deliver.p.every_courier_in_town": {
-      "text": "Every courier in town on one screen, ranked. Upcountry, the parcel rides in the boot of a stage car for a quarter of a seat, and in harvest season a minibus, pickup or lorry with a driver.",
-      "html": false,
-      "where": "deliver <p>"
-    },
-    "deliver.h3.the_parcel": {
-      "text": "The parcel",
-      "html": false,
-      "where": "deliver <h3>"
-    },
-    "deliver.label.from": {
-      "text": "From",
-      "html": false,
-      "where": "deliver <label>"
-    },
-    "deliver.label.to": {
-      "text": "To",
-      "html": false,
-      "where": "deliver <label>"
-    },
-    "deliver.label.what_is_it": {
-      "text": "What is it",
-      "html": false,
-      "where": "deliver <label>"
-    },
-    "deliver.span.envelope_documents": {
-      "text": "Envelope · documents",
-      "html": false,
-      "where": "deliver <span>"
-    },
-    "deliver.span.small_box": {
-      "text": "Small box",
-      "html": false,
-      "where": "deliver <span>"
-    },
-    "deliver.span.cakes_food_keep_flat": {
-      "text": "Cakes · food, keep flat",
-      "html": false,
-      "where": "deliver <span>"
-    },
-    "deliver.span.a_bag_shopping": {
-      "text": "A bag · shopping",
-      "html": false,
-      "where": "deliver <span>"
-    },
-    "deliver.span.bulky_needs_a_car": {
-      "text": "Bulky · needs a car",
-      "html": false,
-      "where": "deliver <span>"
-    },
-    "deliver.span.produce_sacks_crates_a": {
-      "text": "Produce · sacks, crates, a harvest",
-      "html": false,
-      "where": "deliver <span>"
-    },
-    "deliver.span.someone_must_sign_for": {
-      "text": "Someone must sign for it",
-      "html": false,
-      "where": "deliver <span>"
-    },
-    "deliver.span.same_hour_otherwise_today": {
-      "text": "Same hour (otherwise today)",
-      "html": false,
-      "where": "deliver <span>"
-    },
-    "deliver.p.courier_rates_are_ug": {
-      "text": "Courier rates are UG estimates from a published model; 8 to 8 in Jinja is named from the founder's brief and its tariff is modelled. Parcel on the Stage is UG's own price: a quarter of the seat on that stage, paid to the driver with the seats.",
-      "html": false,
-      "where": "deliver <p>"
-    },
-    "explore.div.explore_the_pearl_priced": {
-      "text": "Explore · <b>the Pearl, priced honestly</b>",
-      "html": true,
-      "where": "explore <div>"
-    },
-    "explore.h2.the_whole_park_weekend": {
-      "text": "The whole park weekend, one number.",
-      "html": false,
-      "where": "explore <h2>"
-    },
-    "explore.p.park_entry_permits_vehicle": {
-      "text": "Park entry, permits, vehicle fees, the lodge, the rolex money and the road there, computed for East African citizens, foreign residents and visitors. East African citizens pay East African prices.",
-      "html": false,
-      "where": "explore <p>"
-    },
-    "explore.label.who_is_travelling": {
-      "text": "Who is travelling",
-      "html": false,
-      "where": "explore <label>"
-    },
-    "explore.label.people": {
-      "text": "People",
-      "html": false,
-      "where": "explore <label>"
-    },
-    "explore.label.days": {
-      "text": "Days",
-      "html": false,
-      "where": "explore <label>"
-    },
-    "explore.label.getting_there": {
-      "text": "Getting there",
-      "html": false,
-      "where": "explore <label>"
-    },
-    "explore.label.stay": {
-      "text": "Stay",
-      "html": false,
-      "where": "explore <label>"
-    },
-    "explore.span.total": {
-      "text": "Total",
-      "html": false,
-      "where": "explore <span>"
-    },
-    "explore.button.reserve_with_a_deposit": {
-      "text": "Reserve with a deposit",
-      "html": false,
-      "where": "explore <button>"
-    },
-    "explore.button.share_plan": {
-      "text": "Share plan",
-      "html": false,
-      "where": "explore <button>"
-    },
-    "explore.summary.chain_a_whole_day": {
-      "text": "Chain a whole day <small>Hustle Mode · every leg quoted on the cheapest sensible mode; wallet and plans are sandbox</small>",
-      "html": true,
-      "where": "explore <summary>"
-    },
-    "explore.div.ug_wallet_sandbox_balance": {
-      "text": "UG Wallet · sandbox balance, not real money",
-      "html": false,
-      "where": "explore <div>"
-    },
-    "explore.button.top_up_ugx_50": {
-      "text": "Top up UGX 50,000",
-      "html": false,
-      "where": "explore <button>"
-    },
-    "explore.button.pre_pay_the_day": {
-      "text": "Pre-pay the day",
-      "html": false,
-      "where": "explore <button>"
-    },
-    "drive.div.drive_funded_trips_come": {
-      "text": "Drive · <b>funded trips come to you</b>",
-      "html": true,
-      "where": "drive <div>"
-    },
-    "drive.h2.say_where_you_are": {
-      "text": "Say where you are comfortable, once. Accept full cars.",
-      "html": false,
-      "where": "drive <h2>"
-    },
-    "drive.p.no_posting_no_waiting": {
-      "text": "No posting, no waiting at a stage, no bidding. Your Comfort Map is the only thing you maintain: base, radius, corridors, hours, hard no’s. Funded offers arrive with the money already in them.",
-      "html": false,
-      "where": "drive <p>"
-    },
-    "drive.summary.where_demand_is_coming": {
-      "text": "Where demand is coming this week <small>Foresight · harvests, venue rhythms and events, a week ahead, by vehicle class</small>",
-      "html": true,
-      "where": "drive <summary>"
-    },
-    "drive.p.promise_to_be_there": {
-      "text": "Promise to be there and the gap closes for everyone. Confidence is shown per signal; seasons are rules until the first harvest teaches them.",
-      "html": false,
-      "where": "drive <p>"
-    },
-    "drive.span.confidence_is_shown_per": {
-      "text": "Confidence is shown per signal; seasons are rules until there are fills to learn from.",
-      "html": false,
-      "where": "drive <span>"
-    },
-    "install.div.one_link_two_ways": {
-      "text": "One link · <b>two ways in</b>",
-      "html": true,
-      "where": "install <div>"
-    },
-    "install.h2.the_site_is_the": {
-      "text": "The site is the app. Install it, or scan the code.",
-      "html": false,
-      "where": "install <h2>"
-    },
-    "install.p.one_link_on_the": {
-      "text": "One link on the web and on the phone: the same account, the same stages, the same Crest on the home screen. No store visit.",
-      "html": false,
-      "where": "install <p>"
-    },
-    "install.div.on_this_device": {
-      "text": "On this device",
-      "html": false,
-      "where": "install <div>"
-    },
-    "install.h3.install_ug": {
-      "text": "Install UG",
-      "html": false,
-      "where": "install <h3>"
-    },
-    "install": {
-      "text": "Install the app",
-      "html": false,
-      "where": "install <button>"
-    },
-    "install.button.copy_the_link": {
-      "text": "Copy the link",
-      "html": false,
-      "where": "install <button>"
-    },
-    "install.div.on_another_phone": {
-      "text": "On another phone",
-      "html": false,
-      "where": "install <div>"
-    },
-    "install.p.scan_with_the_camera": {
-      "text": "Scan with the camera. The code opens this same link; sign in with the same number and everything is here.",
-      "html": false,
-      "where": "install <p>"
-    },
-    "install.p.ride_pool_rent_deliver": {
-      "text": "Ride. Pool. Rent. Deliver. A Ugandan mobility marketplace for people who have places to be and a budget to respect.",
-      "html": false,
-      "where": "install <p>"
-    },
-    "install.h4.product": {
-      "text": "Product",
-      "html": false,
-      "where": "install <h4>"
-    },
-    "navCompare": {
-      "text": "Compare",
-      "html": false,
-      "where": "install <a>"
-    },
-    "install.a.pool": {
-      "text": "Pool",
-      "html": false,
-      "where": "install <a>"
-    },
-    "install.a.hustle_mode": {
-      "text": "Hustle Mode",
-      "html": false,
-      "where": "install <a>"
-    },
-    "install.h4.company": {
-      "text": "Company",
-      "html": false,
-      "where": "install <h4>"
-    },
-    "install.a.partners": {
-      "text": "Partners",
-      "html": false,
-      "where": "install <a>"
-    },
-    "navPlugins": {
-      "text": "Plug-ins",
-      "html": false,
-      "where": "ops <button>"
-    },
-    "install.a.reach": {
-      "text": "Reach",
-      "html": false,
-      "where": "install <a>"
-    },
-    "install.a.drive_with_ug": {
-      "text": "Drive with UG",
-      "html": false,
-      "where": "install <a>"
-    },
-    "install.a.list_a_car": {
-      "text": "List a car",
-      "html": false,
-      "where": "install <a>"
-    },
-    "install.a.careers": {
-      "text": "Careers",
-      "html": false,
-      "where": "install <a>"
-    },
-    "install.h4.trust": {
-      "text": "Trust",
-      "html": false,
-      "where": "install <h4>"
-    },
-    "install.a.pricing_method": {
-      "text": "Pricing method",
-      "html": false,
-      "where": "install <a>"
-    },
-    "install.a.safety": {
-      "text": "Safety",
-      "html": false,
-      "where": "install <a>"
-    },
-    "install.a.privacy": {
-      "text": "Privacy",
-      "html": false,
-      "where": "install <a>"
-    },
-    "install.a.terms": {
-      "text": "Terms",
-      "html": false,
-      "where": "install <a>"
-    },
-    "modal.button.card": {
-      "text": "Card",
-      "html": false,
-      "where": "modal <button>"
-    },
-    "modal.label.phone_number": {
-      "text": "Phone number",
-      "html": false,
-      "where": "modal <label>"
-    },
-    "modal.label.email_for_the_receipt": {
-      "text": "Email for the receipt",
-      "html": false,
-      "where": "modal <label>"
-    },
-    "modal.button.pay_now": {
-      "text": "Pay now",
-      "html": false,
-      "where": "modal <button>"
-    },
-    "modal.span.checkout_by_flutterwave_sandbox": {
-      "text": "Checkout by Flutterwave · sandbox until a live key is set",
-      "html": false,
-      "where": "modal <span>"
-    },
-    "plugModal.b.connect": {
-      "text": "Connect",
-      "html": false,
-      "where": "plugModal <b>"
-    },
-    "plugModal.label.endpoint": {
-      "text": "Endpoint",
-      "html": false,
-      "where": "plugModal <label>"
-    },
-    "plugModal.label.api_key_or_token": {
-      "text": "API key or token (kept on this device)",
-      "html": false,
-      "where": "plugModal <label>"
-    },
-    "plugModal.button.save_and_connect": {
-      "text": "Save and connect",
-      "html": false,
-      "where": "plugModal <button>"
-    },
-    "plugModal.button.forget": {
-      "text": "Forget",
-      "html": false,
-      "where": "plugModal <button>"
-    },
-    "hsModal.span.phone_verified_account_nothing": {
-      "text": "Phone-verified account · nothing is charged",
-      "html": false,
-      "where": "hsModal <span>"
-    },
-    "railModal.b.your_trip": {
-      "text": "Your trip",
-      "html": false,
-      "where": "railModal <b>"
-    },
-    "railModal.span.booked_and_tracked_on": {
-      "text": "Booked and tracked on UG. The concierge is simulated in this prototype.",
-      "html": false,
-      "where": "railModal <span>"
-    },
-    "railModal.b.accessibility": {
-      "text": "Accessibility",
-      "html": false,
-      "where": "railModal <b>"
-    },
-    "railModal.div.larger_textscales_the_whole": {
-      "text": "<b>Larger text</b><small>Scales the whole page up</small>",
-      "html": true,
-      "where": "railModal <div>"
-    },
-    "railModal.div.high_contraststronger_text_lines": {
-      "text": "<b>High contrast</b><small>Stronger text, lines and borders</small>",
-      "html": true,
-      "where": "railModal <div>"
-    },
-    "railModal.div.reduce_motionno_opening_animation": {
-      "text": "<b>Reduce motion</b><small>No opening animation, no drifting particles, no reveals</small>",
-      "html": true,
-      "where": "railModal <div>"
-    },
-    "railModal.div.underline_linksevery_link_underlined": {
-      "text": "<b>Underline links</b><small>Every link underlined, not colour alone</small>",
-      "html": true,
-      "where": "railModal <div>"
-    },
-    "railModal.p.ug_also_follows_your": {
-      "text": "UG also follows your system settings for reduced motion and contrast, works with a screen reader (landmarks, labels and live regions), is keyboard-navigable end to end, and listens to voice commands through the microphone button or a Cephable profile. Tell us what would help: hello@ug.example.",
-      "html": false,
-      "where": "railModal <p>"
-    },
-    "me": {
-      "text": "Me",
-      "html": false,
-      "where": "meModal <b>"
-    },
-    "ops.button.reach": {
-      "text": "Reach",
-      "html": false,
-      "where": "ops <button>"
-    },
-    "ops.button.partners": {
-      "text": "Partners",
-      "html": false,
-      "where": "ops <button>"
-    },
-    "ops.p.every_town_on_the": {
-      "text": "Every town on the map is a corridor from Kampala and a stage of its own. Where a local app already runs, UG hands the last mile to it rather than pretending to be there.",
-      "html": false,
-      "where": "ops <p>"
-    },
-    "ops.div.plug_ins_ug_talks": {
-      "text": "Plug-ins · <b>UG talks to the tools you already use</b>",
-      "html": true,
-      "where": "ops <div>"
-    },
-    "ops.h2.maps_from_felt_climate": {
-      "text": "Maps from Felt. Climate workflows from Infrared City. Entertainment from Tazama. Hands-free control from Cephable.",
-      "html": false,
-      "where": "ops <h2>"
-    },
-    "ops.p.each_plug_in_is": {
-      "text": "Each plug-in is an adapter with its own endpoint and key, stored on this device until you sign in. Connect one and the matching buttons light up across Pool, Explore and Hustle Mode. Nothing leaves UG without a plug-in you switched on.",
-      "html": false,
-      "where": "ops <p>"
-    },
-    "ops.div.partners_we_send_you": {
-      "text": "Partners · <b>we send you demand</b>",
-      "html": true,
-      "where": "ops <div>"
-    },
-    "ops.h2.competitors_are_listed_on": {
-      "text": "Competitors are listed on purpose. A rider who trusts the comparison comes back for the pool and the rental.",
-      "html": false,
-      "where": "ops <h2>"
-    },
-    "ops.p.ug_is_a_marketplace": {
-      "text": "UG is a marketplace first. Ride-hailing apps get pre-filled bookings with no acquisition cost. Rental yards get vetted weekend renters. Lodges get groups arriving on a known date. Drivers get a route full before they leave.",
-      "html": false,
-      "where": "ops <p>"
-    },
-    "ops.h3.for_riders": {
-      "text": "For riders",
-      "html": false,
-      "where": "ops <h3>"
-    },
-    "ops.p.verified_drivers_and_plates": {
-      "text": "Verified drivers and plates, an in-trip SOS that shares live location with a contact you choose, helmets on every pooled boda, and a receipt for every shilling.",
-      "html": false,
-      "where": "ops <p>"
-    },
-    "ops.h3.for_drivers_and_yards": {
-      "text": "For drivers and yards",
-      "html": false,
-      "where": "ops <h3>"
-    },
-    "ops.p.ten_percent_on_pool": {
-      "text": "Ten percent on pool, a flat listing fee on rentals, weekly payouts to MoMo through Flutterwave, and demand you did not have to advertise for.",
-      "html": false,
-      "where": "ops <p>"
-    },
-    "ops.h3.for_the_apps_we": {
-      "text": "For the apps we compare",
-      "html": false,
-      "where": "ops <h3>"
-    },
-    "ops.p.deep_links_that_open": {
-      "text": "Deep links that open your app with pick-up and drop-off filled. We never show a price we did not compute openly, and the method is published.",
-      "html": false,
-      "where": "ops <p>"
-    },
-    "flipRide": {
-      "text": "Find a ride.",
-      "html": false,
-      "where": "STR (nav, verbs, doors, tabs)"
-    },
-    "flipPool": {
-      "text": "Share the ride.",
-      "html": false,
-      "where": "STR (nav, verbs, doors, tabs)"
-    },
-    "flipRent": {
-      "text": "Rent the ride.",
-      "html": false,
-      "where": "STR (nav, verbs, doors, tabs)"
-    },
-    "flipDeliver": {
-      "text": "Send the thing.",
-      "html": false,
-      "where": "STR (nav, verbs, doors, tabs)"
-    },
-    "navAtlas": {
-      "text": "Atlas",
-      "html": false,
-      "where": "STR (nav, verbs, doors, tabs)"
-    },
-    "navHustle": {
-      "text": "Hustle",
-      "html": false,
-      "where": "STR (nav, verbs, doors, tabs)"
-    },
-    "navForesight": {
-      "text": "Foresight",
-      "html": false,
-      "where": "STR (nav, verbs, doors, tabs)"
-    },
-    "bookOnUG": {
-      "text": "Book on UG",
-      "html": false,
-      "where": "STR (nav, verbs, doors, tabs)"
-    },
-    "takeSeat": {
-      "text": "Take a seat",
-      "html": false,
-      "where": "STR (nav, verbs, doors, tabs)"
-    },
-    "callAhead": {
-      "text": "Call ahead",
-      "html": false,
-      "where": "STR (nav, verbs, doors, tabs)"
-    },
-    "listed": {
-      "text": "Listed · recognised",
-      "html": false,
-      "where": "STR (nav, verbs, doors, tabs)"
-    },
-    "coming": {
-      "text": "Coming",
-      "html": false,
-      "where": "STR (nav, verbs, doors, tabs)"
-    },
-    "languages": {
-      "text": "Language",
-      "html": false,
-      "where": "STR (nav, verbs, doors, tabs)"
-    },
-    "langNote": {
-      "text": "Every language here carries the whole interface. Where a word is still ours rather than a first-language speaker’s, tell us and we will change it.",
-      "html": false,
-      "where": "STR (nav, verbs, doors, tabs)"
-    },
-    "reviewer": {
-      "text": "Review this language",
-      "html": false,
-      "where": "STR (nav, verbs, doors, tabs)"
-    },
-    "ui.bookOnUG": {
-      "text": "Book on UG",
-      "html": false,
-      "where": "rendered by JavaScript"
-    },
-    "ui.sendOnUG": {
-      "text": "Send on UG",
-      "html": false,
-      "where": "rendered by JavaScript"
-    },
-    "ui.takeSeat": {
-      "text": "Take a seat",
-      "html": false,
-      "where": "rendered by JavaScript"
-    },
-    "ui.callAhead": {
-      "text": "Call ahead",
-      "html": false,
-      "where": "rendered by JavaScript"
-    },
-    "ui.askToAdd": {
-      "text": "Ask UG to add it",
-      "html": false,
-      "where": "rendered by JavaScript"
-    },
-    "ui.tellMeWhen": {
-      "text": "Tell me when",
-      "html": false,
-      "where": "rendered by JavaScript"
-    },
-    "ui.listed": {
-      "text": "Listed · recognised",
-      "html": false,
-      "where": "rendered by JavaScript"
-    },
-    "ui.coming": {
-      "text": "Coming",
-      "html": false,
-      "where": "rendered by JavaScript"
-    },
-    "ui.likelyCheapest": {
-      "text": "Likely cheapest",
-      "html": false,
-      "where": "rendered by JavaScript"
-    },
-    "ui.cheapest": {
-      "text": "Cheapest",
-      "html": false,
-      "where": "rendered by JavaScript"
-    },
-    "ui.ugPrice": {
-      "text": "UG price",
-      "html": false,
-      "where": "rendered by JavaScript"
-    },
-    "ui.ugEstimate": {
-      "text": "UG estimate, unverified",
-      "html": false,
-      "where": "rendered by JavaScript"
-    },
-    "ui.min": {
-      "text": "min",
-      "html": false,
-      "where": "rendered by JavaScript"
-    },
-    "ui.filling": {
-      "text": "Filling",
-      "html": false,
-      "where": "rendered by JavaScript"
-    },
-    "ui.funded": {
-      "text": "Funded",
-      "html": false,
-      "where": "rendered by JavaScript"
-    },
-    "ui.full": {
-      "text": "Full · offered to drivers",
-      "html": false,
-      "where": "rendered by JavaScript"
-    },
-    "ui.perSeatNow": {
-      "text": "per seat now",
-      "html": false,
-      "where": "rendered by JavaScript"
-    },
-    "ui.invite": {
-      "text": "Invite",
-      "html": false,
-      "where": "rendered by JavaScript"
-    },
-    "ui.accept": {
-      "text": "Accept",
-      "html": false,
-      "where": "rendered by JavaScript"
-    },
-    "ui.decline": {
-      "text": "Decline",
-      "html": false,
-      "where": "rendered by JavaScript"
-    },
-    "ui.atTheStage": {
-      "text": "At the stage",
-      "html": false,
-      "where": "rendered by JavaScript"
-    },
-    "ui.openIn": {
-      "text": "or open",
-      "html": false,
-      "where": "rendered by JavaScript"
-    },
-    "ui.directions": {
-      "text": "directions",
-      "html": false,
-      "where": "rendered by JavaScript"
-    },
-    "ui.takeEmptyLeg": {
-      "text": "Take the empty leg",
-      "html": false,
-      "where": "rendered by JavaScript"
-    },
-    "ui.pointMeThere": {
-      "text": "Point me there",
-      "html": false,
-      "where": "rendered by JavaScript"
-    },
-    "ui.illBeThere": {
-      "text": "I'll be there",
-      "html": false,
-      "where": "rendered by JavaScript"
-    },
-    "ui.signOut": {
-      "text": "Sign out",
-      "html": false,
-      "where": "rendered by JavaScript"
-    },
-    "ui.copyLink": {
-      "text": "Copy link",
-      "html": false,
-      "where": "rendered by JavaScript"
-    },
-    "ui.verified": {
-      "text": "Verified",
-      "html": false,
-      "where": "rendered by JavaScript"
-    },
-    "ui.pending": {
-      "text": "Pending",
-      "html": false,
-      "where": "rendered by JavaScript"
-    },
-    "ui.driverAssigned": {
-      "text": "Driver assigned",
-      "html": false,
-      "where": "rendered by JavaScript"
-    },
-    "ui.done": {
-      "text": "Done",
-      "html": false,
-      "where": "rendered by JavaScript"
-    },
-    "ui.requested": {
-      "text": "Requested",
-      "html": false,
-      "where": "rendered by JavaScript"
-    },
-    "ui.placed": {
-      "text": "Placed with the partner",
-      "html": false,
-      "where": "rendered by JavaScript"
-    },
-    "ui.arriving": {
-      "text": "Arriving",
-      "html": false,
-      "where": "rendered by JavaScript"
-    },
-    "ui.onTrip": {
-      "text": "On trip",
-      "html": false,
-      "where": "rendered by JavaScript"
-    },
-    "ui.trip": {
-      "text": "Trip",
-      "html": false,
-      "where": "rendered by JavaScript"
-    },
-    "ui.language": {
-      "text": "Language",
-      "html": false,
-      "where": "rendered by JavaScript"
-    },
-    "ui.welcome": {
-      "text": "Welcome to Uganda.",
-      "html": false,
-      "where": "rendered by JavaScript"
-    },
-    "ui.chooseLanguage": {
-      "text": "Choose your language",
-      "html": false,
-      "where": "rendered by JavaScript"
-    },
-    "ui.continue": {
-      "text": "Continue",
-      "html": false,
-      "where": "rendered by JavaScript"
-    },
-    "ui.reviewNote": {
-      "text": "Written by UG and checked a second time. First-language review is open and every screen has a correction button.",
-      "html": false,
-      "where": "rendered by JavaScript"
-    },
-    "ui.inService": {
-      "text": "In service",
-      "html": false,
-      "where": "language picker"
-    },
-    "ui.correctWord": {
-      "text": "Suggest a better word",
-      "html": false,
-      "where": "language picker"
-    },
-    "ui.serviceNote": {
-      "text": "In service. If a word is wrong, say so and it changes for everyone.",
-      "html": false,
-      "where": "rendered by JavaScript"
-    }
+ "language": "en",
+ "name": "English",
+ "native": "English",
+ "confidence": "complete",
+ "note": "Source strings. Keys are section.tag.slug for page markup, bare names for the original STR keys, ui.* for strings the JavaScript renders. Values marked html keep their <b>, <small> and <br> tags in every language.",
+ "strings": {
+  "page.p.ug_speaks_the_languages": {
+   "text": "UG speaks the languages of Uganda, of the region, and of its visitors. Pick yours; everything follows.",
+   "html": false,
+   "where": "page <p>"
+  },
+  "page.button.skip": {
+   "text": "Skip",
+   "html": false,
+   "where": "page <button>"
+  },
+  "ride": {
+   "text": "Ride.",
+   "html": false,
+   "where": "top <span>"
+  },
+  "pool": {
+   "text": "Pool.",
+   "html": false,
+   "where": "top <span>"
+  },
+  "rent": {
+   "text": "Rent.",
+   "html": false,
+   "where": "top <span>"
+  },
+  "deliver": {
+   "text": "Deliver.",
+   "html": false,
+   "where": "top <span>"
+  },
+  "tabRide": {
+   "text": "Ride",
+   "html": false,
+   "where": "tabbar <span>"
+  },
+  "navQuality": {
+   "text": "Quality",
+   "html": false,
+   "where": "page <a>"
+  },
+  "navStage": {
+   "text": "Stage",
+   "html": false,
+   "where": "tabbar <span>"
+  },
+  "navRent": {
+   "text": "Rent",
+   "html": false,
+   "where": "install <a>"
+  },
+  "navDeliver": {
+   "text": "Deliver",
+   "html": false,
+   "where": "tabbar <span>"
+  },
+  "navExplore": {
+   "text": "Explore",
+   "html": false,
+   "where": "install <a>"
+  },
+  "navDrive": {
+   "text": "Drive",
+   "html": false,
+   "where": "page <a>"
+  },
+  "getStarted": {
+   "text": "Get started",
+   "html": false,
+   "where": "page <button>"
+  },
+  "top.div.ug_kampala_everywhere": {
+   "text": "<b>UG</b> · Kampala → everywhere",
+   "html": true,
+   "where": "top <div>"
+  },
+  "position": {
+   "text": "Look the part. Pay the smart price.",
+   "html": false,
+   "where": "top <span>"
+  },
+  "top.p.one_app_that_quotes": {
+   "text": "One app that quotes every ride on the Ugandan market side by side, pools the road trip so the Prado costs a quarter, rents the car when you need to arrive, and books the park before the permits go. Paid the way Kampala pays: mobile money.",
+   "html": false,
+   "where": "top <p>"
+  },
+  "doorRider": {
+   "text": "I need to get somewhere",
+   "html": false,
+   "where": "top <span>"
+  },
+  "doorRiderSub": {
+   "text": "Queue a seat, compare every ride, plan the weekend.",
+   "html": false,
+   "where": "top <span>"
+  },
+  "start": {
+   "text": "Start →",
+   "html": false,
+   "where": "top <span>"
+  },
+  "doorDriver": {
+   "text": "I drive, or I have a car",
+   "html": false,
+   "where": "top <span>"
+  },
+  "doorDriverSub": {
+   "text": "Say where you're comfortable. Funded trips come to you.",
+   "html": false,
+   "where": "top <span>"
+  },
+  "open": {
+   "text": "Open for business →",
+   "html": false,
+   "where": "top <span>"
+  },
+  "top.a.just_compare_prices_no": {
+   "text": "Just compare prices, no account needed",
+   "html": false,
+   "where": "top <a>"
+  },
+  "top.span.compare_every_app_and": {
+   "text": "Compare every app and go",
+   "html": false,
+   "where": "top <span>"
+  },
+  "top.span.share_the_seat_split": {
+   "text": "Share the seat, split the fuel",
+   "html": false,
+   "where": "top <span>"
+  },
+  "top.span.self_drive_or_with": {
+   "text": "Self-drive or with driver",
+   "html": false,
+   "where": "top <span>"
+  },
+  "top.span.send_the_thing_any": {
+   "text": "Send the thing, any size",
+   "html": false,
+   "where": "top <span>"
+  },
+  "top.span.parks_permits_weekends": {
+   "text": "Parks, permits, weekends",
+   "html": false,
+   "where": "top <span>"
+  },
+  "top.label.pick_up": {
+   "text": "Pick-up",
+   "html": false,
+   "where": "top <label>"
+  },
+  "top.label.drop_off_destination": {
+   "text": "Drop-off / destination",
+   "html": false,
+   "where": "top <label>"
+  },
+  "top.label.date": {
+   "text": "Date",
+   "html": false,
+   "where": "top <label>"
+  },
+  "top.label.time": {
+   "text": "Time",
+   "html": false,
+   "where": "top <label>"
+  },
+  "top.button.show_prices": {
+   "text": "Show prices",
+   "html": false,
+   "where": "top <button>"
+  },
+  "top.div.prototype_v1_every_price": {
+   "text": "Prototype v1 · every price is an estimate from a published model · payments run in a sandbox · nothing here is a licensed service yet",
+   "html": false,
+   "where": "top <div>"
+  },
+  "compare.div.compare_the_arbitrage_desk": {
+   "text": "Compare · <b>the arbitrage desk</b>",
+   "html": true,
+   "where": "compare <div>"
+  },
+  "compare.h2.every_ride_on_the": {
+   "text": "Every ride on the market, one screen, ranked by price.",
+   "html": false,
+   "where": "compare <h2>"
+  },
+  "compare.p.uber_bolt_safeboda_faras": {
+   "text": "Uber, Bolt, SafeBoda, Faras, Yango, Tinka, the street boda, the matatu, a special hire, the bus, the ferry, the flight, and UG’s own pool and rentals. Same trip, same minute. Estimates say so on the card, and the ones that cannot serve you stay on the screen, greyed, with the reason. UG takes payment only for its own seats and cars; every other row shows you the fare and opens that operator's app, because we will not take your money for a ride we have no contract to place.",
+   "html": false,
+   "where": "compare <p>"
+  },
+  "compare.h3.your_trip": {
+   "text": "Your trip",
+   "html": false,
+   "where": "compare <h3>"
+  },
+  "compare.label.from": {
+   "text": "From",
+   "html": false,
+   "where": "compare <label>"
+  },
+  "compare.label.to": {
+   "text": "To",
+   "html": false,
+   "where": "compare <label>"
+  },
+  "compare.label.leaving": {
+   "text": "Leaving",
+   "html": false,
+   "where": "compare <label>"
+  },
+  "compare.button.off_peak": {
+   "text": "Off-peak",
+   "html": false,
+   "where": "compare <button>"
+  },
+  "compare.button.rush_hour": {
+   "text": "Rush hour",
+   "html": false,
+   "where": "compare <button>"
+  },
+  "compare.button.night": {
+   "text": "Night",
+   "html": false,
+   "where": "compare <button>"
+  },
+  "compare.label.order_by": {
+   "text": "Order by",
+   "html": false,
+   "where": "compare <label>"
+  },
+  "compare.button.cheapest": {
+   "text": "Cheapest",
+   "html": false,
+   "where": "compare <button>"
+  },
+  "compare.button.most_promised": {
+   "text": "Most promised",
+   "html": false,
+   "where": "compare <button>"
+  },
+  "compare.label.show": {
+   "text": "Show",
+   "html": false,
+   "where": "compare <label>"
+  },
+  "compare.button.all": {
+   "text": "All",
+   "html": false,
+   "where": "compare <button>"
+  },
+  "compare.button.boda": {
+   "text": "Boda",
+   "html": false,
+   "where": "compare <button>"
+  },
+  "compare.button.car": {
+   "text": "Car",
+   "html": false,
+   "where": "compare <button>"
+  },
+  "compare.button.shared": {
+   "text": "Shared",
+   "html": false,
+   "where": "compare <button>"
+  },
+  "compare.button.air_water_rail": {
+   "text": "Atlas",
+   "html": false,
+   "where": "compare <button>"
+  },
+  "compare.label.people_travelling": {
+   "text": "People travelling",
+   "html": false,
+   "where": "compare <label>"
+  },
+  "compare.summary.more_options_pick_the": {
+   "text": "More options <small>pick the car, rain, split</small>",
+   "html": true,
+   "where": "compare <summary>"
+  },
+  "compare.label.pick_the_car": {
+   "text": "Pick the car",
+   "html": false,
+   "where": "compare <label>"
+  },
+  "compare.span.any": {
+   "text": "Any",
+   "html": false,
+   "where": "compare <span>"
+  },
+  "compare.span.signature_sedan": {
+   "text": "Signature sedan",
+   "html": false,
+   "where": "compare <span>"
+  },
+  "compare.span.signature_suv": {
+   "text": "Signature SUV",
+   "html": false,
+   "where": "compare <span>"
+  },
+  "compare.span.executive_van": {
+   "text": "Executive van",
+   "html": false,
+   "where": "compare <span>"
+  },
+  "compare.span.it_is_raining_kampala": {
+   "text": "It is raining (Kampala surge)",
+   "html": false,
+   "where": "compare <span>"
+  },
+  "compare.span.split_fare_across_the": {
+   "text": "Split fare across the group",
+   "html": false,
+   "where": "compare <span>"
+  },
+  "compare.summary.what_choosing_badly_costs": {
+   "text": "What choosing badly costs <small>the spread across the market for this trip</small>",
+   "html": true,
+   "where": "compare <summary>"
+  },
+  "compare.summary.the_atlas_every_way": {
+   "text": "The Atlas · every way to move, one table <small>air, bus, water, rail, Signature cars, stays, with the truth about each one's state</small>",
+   "html": true,
+   "where": "compare <summary>"
+  },
+  "compare.p.book_on_ug_where": {
+   "text": "<b>Book on UG</b> where a channel exists, <b>Call ahead</b> where it does not, <b>Listed</b> for recognition, <b>Coming</b> for what is being built. Fares are modelled and say so.",
+   "html": true,
+   "where": "compare <p>"
+  },
+  "quality.div.quality": {
+   "text": "Quality",
+   "html": false,
+   "where": "quality <div>"
+  },
+  "quality.h2.what_each_operator_has": {
+   "text": "What each operator has promised, in writing. That is all this board can honestly show you today.",
+   "html": false,
+   "where": "quality <h2>"
+  },
+  "quality.p.rating_other_people_s": {
+   "text": "Rating other people's companies is easy to do badly. A score printed next to a registered name is a claim about that business, and UG has not run enough trips to make one. So this board shows what each operator has published — the fare table, the helmet, the receipt — and where we read it. The performance column stays empty until the trips behind it are ours. Below, the same arithmetic runs on four operators we invented, so you can check the method before it is ever pointed at a real name.",
+   "html": false,
+   "where": "quality <p>"
+  },
+  "quality.button.everything": {
+   "text": "Everything",
+   "html": false,
+   "where": "quality <button>"
+  },
+  "quality.button.apps": {
+   "text": "Apps",
+   "html": false,
+   "where": "quality <button>"
+  },
+  "quality.button.street": {
+   "text": "Street",
+   "html": false,
+   "where": "quality <button>"
+  },
+  "quality.button.stage_amp_coach": {
+   "text": "Stage &amp; coach",
+   "html": false,
+   "where": "quality <button>"
+  },
+  "quality.button.scheduled": {
+   "text": "Scheduled",
+   "html": false,
+   "where": "quality <button>"
+  },
+  "quality.summary.the_arithmetic_demonstrated_four": {
+   "text": "The arithmetic, demonstrated <small>four invented operators, so the method can be checked before it touches a real name</small>",
+   "html": true,
+   "where": "quality <summary>"
+  },
+  "quality.p.operators_a_to_e": {
+   "text": "Operators A to E do not exist. Their figures are written by UG so that every rule on this page can be watched doing its work: one that keeps its word and has the trips to prove it; one that is steady but slow to put things right; one that keeps the fare and is chronically late, held at Watch by a safety breach whatever the rest says; one that always turns up, argues about money afterwards and has published almost nothing, so the ceiling holds it down; and one whose numbers are excellent on eighteen trips, pulled back toward the market baseline because eighteen trips is not a record.",
+   "html": false,
+   "where": "quality <p>"
+  },
+  "quality.h4.what_counts": {
+   "text": "What counts",
+   "html": false,
+   "where": "quality <h4>"
+  },
+  "quality.h4.what_does_not_count": {
+   "text": "What does not count",
+   "html": false,
+   "where": "quality <h4>"
+  },
+  "quality.li.the_brand_and_how": {
+   "text": "The brand, and how long it has existed",
+   "html": false,
+   "where": "quality <li>"
+  },
+  "quality.li.how_big_the_fleet": {
+   "text": "How big the fleet is, or how much it raised",
+   "html": false,
+   "where": "quality <li>"
+  },
+  "quality.li.money_paid_to_ug": {
+   "text": "Money paid to UG by a supplier for position — there is no such payment and no way to make one. UG's own commission, ten percent on a pooled seat, is charged to the rider and never to a supplier for placement",
+   "html": false,
+   "where": "quality <li>"
+  },
+  "quality.li.how_much_it_advertises": {
+   "text": "How much it advertises, here or anywhere",
+   "html": false,
+   "where": "quality <li>"
+  },
+  "quality.li.whether_ug_competes_with": {
+   "text": "Whether UG competes with it",
+   "html": false,
+   "where": "quality <li>"
+  },
+  "quality.li.whether_it_has_a": {
+   "text": "Whether it has a press office to publish promises with — which is why this board is not ranked by the promise count",
+   "html": false,
+   "where": "quality <li>"
+  },
+  "quality.summary.how_the_numbers_get": {
+   "text": "How the numbers get better <small>six practices, each with a button, in your language</small>",
+   "html": true,
+   "where": "quality <summary>"
+  },
+  "quality.summary.the_method_in_full": {
+   "text": "The method, in full <small>meters, weights, priors, thresholds, and what is simulated in this build</small>",
+   "html": true,
+   "where": "quality <summary>"
+  },
+  "stage.div.the_virtual_stage_seats": {
+   "text": "The Virtual Stage · <b>seats fill first, then the car comes</b>",
+   "html": true,
+   "where": "stage <div>"
+  },
+  "stage.h2.pay_for_the_seat": {
+   "text": "Pay for the seat. The car comes when it fills.",
+   "html": false,
+   "where": "stage <h2>"
+  },
+  "stage.p.like_a_matatu_stage": {
+   "text": "Like a matatu stage, a car leaves when it is full or at the cut-off. Unlike a stage, you queue money from your sofa, the seat price falls as friends join, and the driver who takes it already said they are comfortable on that road.",
+   "html": false,
+   "where": "stage <p>"
+  },
+  "stage.button.all_corridors": {
+   "text": "All corridors",
+   "html": false,
+   "where": "stage <button>"
+  },
+  "stage.button.near_me": {
+   "text": "Near me",
+   "html": false,
+   "where": "stage <button>"
+  },
+  "stage.button.funded": {
+   "text": "Funded",
+   "html": false,
+   "where": "stage <button>"
+  },
+  "stage.button.start_a_stage": {
+   "text": "Start a stage",
+   "html": false,
+   "where": "stage <button>"
+  },
+  "stage.summary.where_stages_fill_fastest": {
+   "text": "Where stages fill fastest <small>Pulse · paid seats against comfort maps, by town</small>",
+   "html": true,
+   "where": "stage <summary>"
+  },
+  "stage.summary.buses_on_this_corridor": {
+   "text": "Buses on this corridor <small>the fallback, side by side with the stage</small>",
+   "html": true,
+   "where": "stage <summary>"
+  },
+  "stage.p.every_corridor_also_has": {
+   "text": "Every corridor also has buses. Compare departure times across operators, see the park you leave from, and book on UG where the operator takes online bookings. Where it does not, we say so and give you the number to call ahead, rather than a dead button.",
+   "html": false,
+   "where": "stage <p>"
+  },
+  "stage.label.corridor": {
+   "text": "Corridor",
+   "html": false,
+   "where": "stage <label>"
+  },
+  "stage.summary.empty_legs_the_return": {
+   "text": "Empty legs <small>the return seats, 40% of the fare</small>",
+   "html": true,
+   "where": "stage <summary>"
+  },
+  "stage.p.every_rental_with_driver": {
+   "text": "Every rental with driver and every pool has a way back. The moment the outbound is booked, the return's seats go on sale.",
+   "html": false,
+   "where": "stage <p>"
+  },
+  "stage.summary.post_a_trip_of": {
+   "text": "Post a trip of your own, or price a seat <small>Pool · your circles, the true cost of the road divided by seats</small>",
+   "html": true,
+   "where": "stage <summary>"
+  },
+  "stage.h3.offer_a_seat_or": {
+   "text": "Offer a seat, or see what a seat should cost",
+   "html": false,
+   "where": "stage <h3>"
+  },
+  "stage.label.route": {
+   "text": "Route",
+   "html": false,
+   "where": "stage <label>"
+  },
+  "stage.label.paying_seats": {
+   "text": "Paying seats",
+   "html": false,
+   "where": "stage <label>"
+  },
+  "stage.label.car": {
+   "text": "Car",
+   "html": false,
+   "where": "stage <label>"
+  },
+  "stage.label.departure": {
+   "text": "Departure",
+   "html": false,
+   "where": "stage <label>"
+  },
+  "stage.button.post_this_trip": {
+   "text": "Post this trip",
+   "html": false,
+   "where": "stage <button>"
+  },
+  "stage.button.book_a_seat_with": {
+   "text": "Book a seat with MoMo",
+   "html": false,
+   "where": "stage <button>"
+  },
+  "stage.p.posted_trips_live_only": {
+   "text": "Posted trips live only in this browser until you sign in. Pool follows the same pattern the Pool app popularised: phone-verified accounts, a trip chat, and two-way ratings, plus circles so you ride with people you already half-know.",
+   "html": false,
+   "where": "stage <p>"
+  },
+  "rent.div.rent_arrive_properly": {
+   "text": "Rent",
+   "html": true,
+   "where": "rent <div>"
+  },
+  "rent.h2.rent_the_car_or": {
+   "text": "Self-drive by the day. Chauffeured by the hour.",
+   "html": false,
+   "where": "rent <h2>"
+  },
+  "rent.p.self_drive_by_the": {
+   "text": "Self-drive by the day, chauffeured by the hour, or the Signature fleet when the arrival is the point. The price is per head when you split it.",
+   "html": false,
+   "where": "rent <p>"
+  },
+  "deliver.div.deliver_send_the_thing": {
+   "text": "Deliver",
+   "html": true,
+   "where": "deliver <div>"
+  },
+  "deliver.h2.send_the_thing_any": {
+   "text": "Send the thing. Any size, any distance.",
+   "html": false,
+   "where": "deliver <h2>"
+  },
+  "deliver.p.every_courier_in_town": {
+   "text": "Every courier in town on one screen, ranked. Upcountry, the parcel rides in the boot of a stage car for a quarter of a seat, and in harvest season a minibus, pickup or lorry with a driver.",
+   "html": false,
+   "where": "deliver <p>"
+  },
+  "deliver.h3.the_parcel": {
+   "text": "The parcel",
+   "html": false,
+   "where": "deliver <h3>"
+  },
+  "deliver.label.from": {
+   "text": "From",
+   "html": false,
+   "where": "deliver <label>"
+  },
+  "deliver.label.to": {
+   "text": "To",
+   "html": false,
+   "where": "deliver <label>"
+  },
+  "deliver.label.what_is_it": {
+   "text": "What is it",
+   "html": false,
+   "where": "deliver <label>"
+  },
+  "deliver.span.envelope_documents": {
+   "text": "Envelope · documents",
+   "html": false,
+   "where": "deliver <span>"
+  },
+  "deliver.span.small_box": {
+   "text": "Small box",
+   "html": false,
+   "where": "deliver <span>"
+  },
+  "deliver.span.cakes_food_keep_flat": {
+   "text": "Cakes · food, keep flat",
+   "html": false,
+   "where": "deliver <span>"
+  },
+  "deliver.span.a_bag_shopping": {
+   "text": "A bag · shopping",
+   "html": false,
+   "where": "deliver <span>"
+  },
+  "deliver.span.bulky_needs_a_car": {
+   "text": "Bulky · needs a car",
+   "html": false,
+   "where": "deliver <span>"
+  },
+  "deliver.span.produce_sacks_crates_a": {
+   "text": "Produce · sacks, crates, a harvest",
+   "html": false,
+   "where": "deliver <span>"
+  },
+  "deliver.span.someone_must_sign_for": {
+   "text": "Someone must sign for it",
+   "html": false,
+   "where": "deliver <span>"
+  },
+  "deliver.span.same_hour_otherwise_today": {
+   "text": "Same hour (otherwise today)",
+   "html": false,
+   "where": "deliver <span>"
+  },
+  "deliver.p.courier_rates_are_ug": {
+   "text": "Courier rates are UG estimates from a published model; 8 to 8 in Jinja is named from the founder's brief and its tariff is modelled. Parcel on the Stage is UG's own price: a quarter of the seat on that stage, paid to the driver with the seats.",
+   "html": false,
+   "where": "deliver <p>"
+  },
+  "explore.div.explore_the_pearl_priced": {
+   "text": "Explore · <b>the Pearl, priced honestly</b>",
+   "html": true,
+   "where": "explore <div>"
+  },
+  "explore.h2.the_whole_park_weekend": {
+   "text": "The whole park weekend, one number.",
+   "html": false,
+   "where": "explore <h2>"
+  },
+  "explore.p.park_entry_permits_vehicle": {
+   "text": "Park entry, permits, vehicle fees, the lodge, the rolex money and the road there, computed for East African citizens, foreign residents and visitors. East African citizens pay East African prices.",
+   "html": false,
+   "where": "explore <p>"
+  },
+  "explore.label.who_is_travelling": {
+   "text": "Who is travelling",
+   "html": false,
+   "where": "explore <label>"
+  },
+  "explore.label.people": {
+   "text": "People",
+   "html": false,
+   "where": "explore <label>"
+  },
+  "explore.label.days": {
+   "text": "Days",
+   "html": false,
+   "where": "explore <label>"
+  },
+  "explore.label.getting_there": {
+   "text": "Getting there",
+   "html": false,
+   "where": "explore <label>"
+  },
+  "explore.label.stay": {
+   "text": "Stay",
+   "html": false,
+   "where": "explore <label>"
+  },
+  "explore.span.total": {
+   "text": "Total",
+   "html": false,
+   "where": "explore <span>"
+  },
+  "explore.button.reserve_with_a_deposit": {
+   "text": "Reserve with a deposit",
+   "html": false,
+   "where": "explore <button>"
+  },
+  "explore.button.share_plan": {
+   "text": "Share plan",
+   "html": false,
+   "where": "explore <button>"
+  },
+  "explore.summary.chain_a_whole_day": {
+   "text": "Chain a whole day <small>Hustle Mode · every leg quoted on the cheapest sensible mode; wallet and plans are sandbox</small>",
+   "html": true,
+   "where": "explore <summary>"
+  },
+  "explore.div.ug_wallet_sandbox_balance": {
+   "text": "UG Wallet · sandbox balance, not real money",
+   "html": false,
+   "where": "explore <div>"
+  },
+  "explore.button.top_up_ugx_50": {
+   "text": "Top up UGX 50,000",
+   "html": false,
+   "where": "explore <button>"
+  },
+  "explore.button.pre_pay_the_day": {
+   "text": "Pre-pay the day",
+   "html": false,
+   "where": "explore <button>"
+  },
+  "drive.div.drive_funded_trips_come": {
+   "text": "Drive · <b>funded trips come to you</b>",
+   "html": true,
+   "where": "drive <div>"
+  },
+  "drive.h2.say_where_you_are": {
+   "text": "Say where you are comfortable, once. Accept full cars.",
+   "html": false,
+   "where": "drive <h2>"
+  },
+  "drive.p.no_posting_no_waiting": {
+   "text": "No posting, no waiting at a stage, no bidding. Your Comfort Map is the only thing you maintain: base, radius, corridors, hours, hard no’s. Funded offers arrive with the money already in them.",
+   "html": false,
+   "where": "drive <p>"
+  },
+  "drive.summary.where_demand_is_coming": {
+   "text": "Where demand is coming this week <small>Foresight · harvests, venue rhythms and events, a week ahead, by vehicle class</small>",
+   "html": true,
+   "where": "drive <summary>"
+  },
+  "drive.p.promise_to_be_there": {
+   "text": "Promise to be there and the gap closes for everyone. Confidence is shown per signal; seasons are rules until the first harvest teaches them.",
+   "html": false,
+   "where": "drive <p>"
+  },
+  "drive.span.confidence_is_shown_per": {
+   "text": "Confidence is shown per signal; seasons are rules until there are fills to learn from.",
+   "html": false,
+   "where": "drive <span>"
+  },
+  "install.div.one_link_two_ways": {
+   "text": "One link · <b>two ways in</b>",
+   "html": true,
+   "where": "install <div>"
+  },
+  "install.h2.the_site_is_the": {
+   "text": "The site is the app. Install it, or scan the code.",
+   "html": false,
+   "where": "install <h2>"
+  },
+  "install.p.one_link_on_the": {
+   "text": "One link on the web and on the phone: the same account, the same stages, the same Crest on the home screen. No store visit.",
+   "html": false,
+   "where": "install <p>"
+  },
+  "install.div.on_this_device": {
+   "text": "On this device",
+   "html": false,
+   "where": "install <div>"
+  },
+  "install.h3.install_ug": {
+   "text": "Install UG",
+   "html": false,
+   "where": "install <h3>"
+  },
+  "install": {
+   "text": "Install the app",
+   "html": false,
+   "where": "install <button>"
+  },
+  "install.button.copy_the_link": {
+   "text": "Copy the link",
+   "html": false,
+   "where": "install <button>"
+  },
+  "install.div.on_another_phone": {
+   "text": "On another phone",
+   "html": false,
+   "where": "install <div>"
+  },
+  "install.p.scan_with_the_camera": {
+   "text": "Scan with the camera. The code opens this same link; sign in with the same number and everything is here.",
+   "html": false,
+   "where": "install <p>"
+  },
+  "install.p.ride_pool_rent_deliver": {
+   "text": "Ride. Pool. Rent. Deliver. A Ugandan mobility marketplace for people who have places to be and a budget to respect.",
+   "html": false,
+   "where": "install <p>"
+  },
+  "install.h4.product": {
+   "text": "Product",
+   "html": false,
+   "where": "install <h4>"
+  },
+  "navCompare": {
+   "text": "Compare",
+   "html": false,
+   "where": "install <a>"
+  },
+  "install.a.pool": {
+   "text": "Pool",
+   "html": false,
+   "where": "install <a>"
+  },
+  "install.a.hustle_mode": {
+   "text": "Hustle Mode",
+   "html": false,
+   "where": "install <a>"
+  },
+  "install.h4.company": {
+   "text": "Company",
+   "html": false,
+   "where": "install <h4>"
+  },
+  "install.a.partners": {
+   "text": "Partners",
+   "html": false,
+   "where": "install <a>"
+  },
+  "navPlugins": {
+   "text": "Plug-ins",
+   "html": false,
+   "where": "ops <button>"
+  },
+  "install.a.reach": {
+   "text": "Reach",
+   "html": false,
+   "where": "install <a>"
+  },
+  "install.a.drive_with_ug": {
+   "text": "Drive with UG",
+   "html": false,
+   "where": "install <a>"
+  },
+  "install.a.list_a_car": {
+   "text": "List a car",
+   "html": false,
+   "where": "install <a>"
+  },
+  "install.a.careers": {
+   "text": "Careers",
+   "html": false,
+   "where": "install <a>"
+  },
+  "install.h4.trust": {
+   "text": "Trust",
+   "html": false,
+   "where": "install <h4>"
+  },
+  "install.a.pricing_method": {
+   "text": "Pricing method",
+   "html": false,
+   "where": "install <a>"
+  },
+  "install.a.safety": {
+   "text": "Safety",
+   "html": false,
+   "where": "install <a>"
+  },
+  "install.a.privacy": {
+   "text": "Privacy",
+   "html": false,
+   "where": "install <a>"
+  },
+  "install.a.terms": {
+   "text": "Terms",
+   "html": false,
+   "where": "install <a>"
+  },
+  "modal.button.card": {
+   "text": "Card",
+   "html": false,
+   "where": "modal <button>"
+  },
+  "modal.label.phone_number": {
+   "text": "Phone number",
+   "html": false,
+   "where": "modal <label>"
+  },
+  "modal.label.email_for_the_receipt": {
+   "text": "Email for the receipt",
+   "html": false,
+   "where": "modal <label>"
+  },
+  "modal.button.pay_now": {
+   "text": "Pay now",
+   "html": false,
+   "where": "modal <button>"
+  },
+  "modal.span.checkout_by_flutterwave_sandbox": {
+   "text": "Checkout by Flutterwave · sandbox until a live key is set",
+   "html": false,
+   "where": "modal <span>"
+  },
+  "plugModal.b.connect": {
+   "text": "Connect",
+   "html": false,
+   "where": "plugModal <b>"
+  },
+  "plugModal.label.endpoint": {
+   "text": "Endpoint",
+   "html": false,
+   "where": "plugModal <label>"
+  },
+  "plugModal.label.api_key_or_token": {
+   "text": "API key or token (kept on this device)",
+   "html": false,
+   "where": "plugModal <label>"
+  },
+  "plugModal.button.save_and_connect": {
+   "text": "Save and connect",
+   "html": false,
+   "where": "plugModal <button>"
+  },
+  "plugModal.button.forget": {
+   "text": "Forget",
+   "html": false,
+   "where": "plugModal <button>"
+  },
+  "authModal.b.sign_in": {
+   "text": "Sign in",
+   "html": false,
+   "where": "authModal <b>"
+  },
+  "authModal.span.your_line_is_your": {
+   "text": "Your line is your account · nothing is charged to sign in",
+   "html": false,
+   "where": "authModal <span>"
+  },
+  "hsModal.span.phone_verified_account_nothing": {
+   "text": "Phone-verified account · nothing is charged",
+   "html": false,
+   "where": "hsModal <span>"
+  },
+  "railModal.b.your_trip": {
+   "text": "Your trip",
+   "html": false,
+   "where": "railModal <b>"
+  },
+  "railModal.span.booked_and_tracked_on": {
+   "text": "Booked and tracked on UG. The concierge is simulated in this prototype.",
+   "html": false,
+   "where": "railModal <span>"
+  },
+  "railModal.b.accessibility": {
+   "text": "Accessibility",
+   "html": false,
+   "where": "railModal <b>"
+  },
+  "railModal.div.larger_textscales_the_whole": {
+   "text": "<b>Larger text</b><small>Scales the whole page up</small>",
+   "html": true,
+   "where": "railModal <div>"
+  },
+  "railModal.div.high_contraststronger_text_lines": {
+   "text": "<b>High contrast</b><small>Stronger text, lines and borders</small>",
+   "html": true,
+   "where": "railModal <div>"
+  },
+  "railModal.div.reduce_motionno_opening_animation": {
+   "text": "<b>Reduce motion</b><small>No opening animation, no drifting particles, no reveals</small>",
+   "html": true,
+   "where": "railModal <div>"
+  },
+  "railModal.div.underline_linksevery_link_underlined": {
+   "text": "<b>Underline links</b><small>Every link underlined, not colour alone</small>",
+   "html": true,
+   "where": "railModal <div>"
+  },
+  "railModal.p.ug_also_follows_your": {
+   "text": "UG also follows your system settings for reduced motion and contrast, works with a screen reader (landmarks, labels and live regions), is keyboard-navigable end to end, and listens to voice commands through the microphone button or a Cephable profile. Tell us what would help: hello@ug.example.",
+   "html": false,
+   "where": "railModal <p>"
+  },
+  "me": {
+   "text": "Me",
+   "html": false,
+   "where": "meModal <b>"
+  },
+  "ops.button.reach": {
+   "text": "Reach",
+   "html": false,
+   "where": "ops <button>"
+  },
+  "ops.button.partners": {
+   "text": "Partners",
+   "html": false,
+   "where": "ops <button>"
+  },
+  "ops.p.every_town_on_the": {
+   "text": "Every town on the map is a corridor from Kampala and a stage of its own. Where a local app already runs, UG hands the last mile to it rather than pretending to be there.",
+   "html": false,
+   "where": "ops <p>"
+  },
+  "ops.div.plug_ins_ug_talks": {
+   "text": "Plug-ins · <b>UG talks to the tools you already use</b>",
+   "html": true,
+   "where": "ops <div>"
+  },
+  "ops.h2.maps_from_felt_climate": {
+   "text": "Maps from Felt. Climate workflows from Infrared City. Entertainment from Tazama. Hands-free control from Cephable.",
+   "html": false,
+   "where": "ops <h2>"
+  },
+  "ops.p.each_plug_in_is": {
+   "text": "Each plug-in is an adapter with its own endpoint and key, stored on this device until you sign in. Connect one and the matching buttons light up across Pool, Explore and Hustle Mode. Nothing leaves UG without a plug-in you switched on.",
+   "html": false,
+   "where": "ops <p>"
+  },
+  "ops.div.partners_we_send_you": {
+   "text": "Partners · <b>we send you demand</b>",
+   "html": true,
+   "where": "ops <div>"
+  },
+  "ops.h2.competitors_are_listed_on": {
+   "text": "Competitors are listed on purpose. A rider who trusts the comparison comes back for the pool and the rental.",
+   "html": false,
+   "where": "ops <h2>"
+  },
+  "ops.p.ug_is_a_marketplace": {
+   "text": "UG is a marketplace first. Ride-hailing apps get pre-filled bookings with no acquisition cost. Rental yards get vetted weekend renters. Lodges get groups arriving on a known date. Drivers get a route full before they leave.",
+   "html": false,
+   "where": "ops <p>"
+  },
+  "ops.h3.for_riders": {
+   "text": "For riders",
+   "html": false,
+   "where": "ops <h3>"
+  },
+  "ops.p.verified_drivers_and_plates": {
+   "text": "Verified drivers and plates, an in-trip SOS that shares live location with a contact you choose, helmets on every pooled boda, and a receipt for every shilling.",
+   "html": false,
+   "where": "ops <p>"
+  },
+  "ops.h3.for_drivers_and_yards": {
+   "text": "For drivers and yards",
+   "html": false,
+   "where": "ops <h3>"
+  },
+  "ops.p.ten_percent_on_pool": {
+   "text": "Ten percent on pool, a flat listing fee on rentals, weekly payouts to MoMo through Flutterwave, and demand you did not have to advertise for.",
+   "html": false,
+   "where": "ops <p>"
+  },
+  "ops.h3.for_the_apps_we": {
+   "text": "For the apps we compare",
+   "html": false,
+   "where": "ops <h3>"
+  },
+  "ops.p.deep_links_that_open": {
+   "text": "Deep links that open your app with pick-up and drop-off filled. We never show a price we did not compute openly, and the method is published.",
+   "html": false,
+   "where": "ops <p>"
+  },
+  "ui.bookOnUG": {
+   "text": "Book on UG",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.sendOnUG": {
+   "text": "Send on UG",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.takeSeat": {
+   "text": "Take a seat",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.callAhead": {
+   "text": "Call ahead",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.askToAdd": {
+   "text": "Ask UG to add it",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.tellMeWhen": {
+   "text": "Tell me when",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.listed": {
+   "text": "Listed · recognised",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.coming": {
+   "text": "Coming",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.likelyCheapest": {
+   "text": "Likely cheapest",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.cheapest": {
+   "text": "Cheapest",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.ugPrice": {
+   "text": "UG price",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.ugEstimate": {
+   "text": "UG estimate, unverified",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.min": {
+   "text": "min",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.filling": {
+   "text": "Filling",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.funded": {
+   "text": "Funded",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.full": {
+   "text": "Full · offered to drivers",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.perSeatNow": {
+   "text": "per seat now",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.invite": {
+   "text": "Invite",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.accept": {
+   "text": "Accept",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.decline": {
+   "text": "Decline",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.atTheStage": {
+   "text": "At the stage",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.openIn": {
+   "text": "or open",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.directions": {
+   "text": "directions",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.takeEmptyLeg": {
+   "text": "Take the empty leg",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.pointMeThere": {
+   "text": "Point me there",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.illBeThere": {
+   "text": "I'll be there",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.signOut": {
+   "text": "Sign out",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.copyLink": {
+   "text": "Copy link",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.verified": {
+   "text": "Verified",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.pending": {
+   "text": "Pending",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.driverAssigned": {
+   "text": "Driver assigned",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.done": {
+   "text": "Done",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.requested": {
+   "text": "Requested",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.placed": {
+   "text": "Placed with the partner",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.arriving": {
+   "text": "Arriving",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.onTrip": {
+   "text": "On trip",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.trip": {
+   "text": "Trip",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.language": {
+   "text": "Language",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.draftNote": {
+   "text": "A draft; missing words show in English.",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.welcome": {
+   "text": "Welcome to Uganda.",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.chooseLanguage": {
+   "text": "Choose your language",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.continue": {
+   "text": "Continue",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.reviewNote": {
+   "text": "Translations were drafted by UG and checked by a second pass; native-speaker review is open. Missing words fall back to English.",
+   "html": false,
+   "where": "rendered by JavaScript"
   }
+ }
 }

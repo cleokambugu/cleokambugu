@@ -10,11 +10,16 @@ screen.
 
 ## The languages
 
-**41 languages, 245 keys each, complete.** Every string in the app — the verbs, the doors, headings,
-sections, buttons, modals, and the strings the JavaScript renders — exists in every language in
-`data/i18n/<code>.json` and is assembled into the site by `server/scripts/i18n-build.cjs`. Nothing
-falls back to English any more. Run the build to check: it prints coverage per language and fails
-loudly on a bad tag.
+**41 languages. 239 of 254 strings in every one of them.** Every string a person taps or reads in
+the ordinary run of the app — the verbs, the doors, headings, sections, buttons, modals, and the
+strings the JavaScript renders — exists in all 41 languages in `data/i18n/<code>.json`, assembled
+into the site by `server/scripts/i18n-build.cjs`. Run the build: it prints coverage per language
+and flags any translation whose inline markup does not match the English.
+
+The fifteen that are still English are the Quality section's long method paragraphs, added in the
+same change that wrote this line. They are the deepest prose in the app and the least likely to be
+read on a phone; the full method is in [quality.md](quality.md) either way. They are the next
+batch, and the build will keep saying 239 until they are done rather than rounding up.
 
 An earlier version of this page said "243 keys each" while five dictionaries held 35 of them, so a
 reader who chose Zulu, Lingala, Somali, Hausa or Kinyarwanda got a page that was mostly English
