@@ -1250,11 +1250,6 @@
    "html": false,
    "where": "rendered by JavaScript"
   },
-  "ui.draftNote": {
-   "text": "A draft; missing words show in English.",
-   "html": false,
-   "where": "rendered by JavaScript"
-  },
   "ui.welcome": {
    "text": "Welcome to Uganda.",
    "html": false,
@@ -1271,7 +1266,52 @@
    "where": "rendered by JavaScript"
   },
   "ui.reviewNote": {
-   "text": "Translations were drafted by UG and checked by a second pass; native-speaker review is open. Missing words fall back to English.",
+   "text": "UG wrote these translations and a second pass checked them; native-speaker review is open. Missing words fall back to English.",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "flipRide": {
+   "text": "Find a ride.",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "flipPool": {
+   "text": "Share the ride.",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "flipRent": {
+   "text": "Rent the ride.",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "flipDeliver": {
+   "text": "Send the thing.",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "languages": {
+   "text": "Language",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "reviewer": {
+   "text": "Review this language",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "langNote": {
+   "text": "Anything a native speaker has not checked yet falls back to English where a word is missing. Help us finish yours.",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.correctWord": {
+   "text": "Suggest a better word",
+   "html": false,
+   "where": "rendered by JavaScript"
+  },
+  "ui.inService": {
+   "text": "in service",
    "html": false,
    "where": "rendered by JavaScript"
   }
