@@ -6,6 +6,10 @@ import { pulse, pulseGeoJSON } from './pulse.js';
 import { ROUTES, route, capFor } from './model.js';
 import { forecast, foresightGeoJSON, commit as fxCommit, addEvent as fxAddEvent } from './foresight.js';
 
+/* A session token lifted from a shared phone or a proxy log used to be valid forever: the sessions
+   table had no expiry column and nothing checked one. Ninety days, sliding on use. */
+export const SESSION_TTL = 90 * 24 * 60 * 60 * 1000;
+
 export function createApi({ db, ledger, stages, bookings, otp, flw, sandbox, version }) {
   const routes = [];
   const on = (method, pattern, handler, auth = false) => routes.push({ method, re: new RegExp('^' + pattern.replace(/:(\w+)/g, '(?<$1>[^/]+)') + '$'), handler, auth });
@@ -30,15 +34,16 @@ export function createApi({ db, ledger, stages, bookings, otp, flw, sandbox, ver
     return { verified: false, sandbox: true,
       reason: 'No carrier agreement in this build. Wire MTN or Airtel Number Verification here; it only works over mobile data.' };
   });
-  on('POST', '/api/auth/otp', async (req) => otp.send(req.body.phone));
+  on('POST', '/api/auth/otp', async (req) => otp.send(req.body.phone, { ip: req.ip }));
   on('POST', '/api/auth/verify', async (req) => {
     const r = otp.check(req.body.phone, req.body.code); if (!r.ok) throw httpError(401, r.why);
     let u = db.prepare('select * from users where phone = ?').get(r.to);
     if (!u) { const uid = id('u'); db.prepare('insert into users (id, phone, name, roles, created_at) values (?,?,?,?,?)').run(uid, r.to, String(req.body.name || '').slice(0, 40) || null, JSON.stringify(['rider']), now()); u = user(uid); }
     else if (req.body.name && !u.name) { db.prepare('update users set name = ? where id = ?').run(String(req.body.name).slice(0, 40), u.id); u = user(u.id); }
     const token = randomBytes(24).toString('hex');
-    db.prepare('insert into sessions (token, user_id, device, created_at) values (?,?,?,?)').run(token, u.id, String(req.headers['user-agent'] || '').slice(0, 120), now());
-    return { token, me: me(u) };
+    const t = now();
+    db.prepare('insert into sessions (token, user_id, device, created_at, expires_at, last_seen_at) values (?,?,?,?,?,?)').run(token, u.id, String(req.headers['user-agent'] || '').slice(0, 120), t, t + SESSION_TTL, t);
+    return { token, me: me(u), expiresAt: t + SESSION_TTL };
   });
   on('GET', '/api/me', (req) => { sweep(); return me(user(req.user.id)); }, true);
   on('PATCH', '/api/me', (req) => {
@@ -53,6 +58,10 @@ export function createApi({ db, ledger, stages, bookings, otp, flw, sandbox, ver
     return me(user(req.user.id));
   }, true);
   on('DELETE', '/api/session', (req) => { db.prepare('delete from sessions where token = ?').run(req.token); return { ok: true }; }, true);
+  on('GET', '/api/sessions', (req) => ({ sessions: db.prepare('select device, created_at as createdAt, last_seen_at as lastSeenAt, coalesce(expires_at, created_at + ?) as expiresAt, token = ? as current from sessions where user_id = ? order by last_seen_at desc').all(SESSION_TTL, req.token, req.user.id).map((r) => ({ ...r, current: !!r.current })) }), true);
+  /* Phones here are shared, resold and repaired by other people. Signing every other device out is a
+     thing a person needs to be able to do on their own, from the phone in their hand. */
+  on('DELETE', '/api/sessions', (req) => ({ signedOut: db.prepare('delete from sessions where user_id = ? and token <> ?').run(req.user.id, req.token).changes }), true);
 
   on('GET', '/api/comfort', (req) => me(user(req.user.id)).comfort, true);
   on('PUT', '/api/comfort', (req) => {
@@ -87,7 +96,8 @@ export function createApi({ db, ledger, stages, bookings, otp, flw, sandbox, ver
     if (flw.live) {
       if (!req.body.transaction_id) throw httpError(400, 'transaction_id required');
       const v = await flw.verify(req.body.transaction_id);
-      if (!v.ok || v.tx_ref !== it.tx_ref || v.currency !== 'UGX' || Number(v.amount) < it.amount_ugx) throw httpError(402, `payment ${v.status}; nothing held`);
+      // !== , not < : an overpayment used to be accepted, leaving the excess unreconciled in processor:clearing
+      if (!v.ok || v.tx_ref !== it.tx_ref || v.currency !== 'UGX' || Number(v.amount) !== it.amount_ugx) throw httpError(402, `payment ${v.status}; nothing held`);
       return stages.hold(it.id, { flwId: String(v.id) });
     }
     if (!sandbox) throw httpError(503, 'payments not configured');
@@ -132,10 +142,21 @@ export function createApi({ db, ledger, stages, bookings, otp, flw, sandbox, ver
   on('POST', '/api/foresight/commit', (req) => fxCommit(db, req.user.id, req.body), true);
   on('POST', '/api/foresight/events', (req) => { const u = user(req.user.id); if (!u.agent && !u.comfort) throw httpError(403, 'agents and drivers can add events'); return fxAddEvent(db, req.user.id, req.body); }, true);
 
-  // ---- Flutterwave webhook: verified against the processor, idempotent through the ledger refs ----
+  /* ---- Flutterwave webhook ----
+     Three lines of defence against a replay, in this order: the provider's own event id is a unique
+     index, so recording the event IS the idempotency check and a duplicate stops right here; the body
+     is never trusted for amount or status, only `verify()`; and the ledger is keyed on its ref. */
   on('POST', '/api/webhooks/flutterwave', async (req) => {
     if (!flw.webhookValid(req.headers)) throw httpError(401, 'bad webhook hash');
-    const ev = req.body; db.prepare('insert into events (kind, ref, payload, at) values (?,?,?,?)').run(ev.event || 'unknown', ev.data?.tx_ref || null, JSON.stringify(ev).slice(0, 20000), now());
+    const ev = req.body;
+    const kind = ev.event || 'unknown';
+    const eventId = ev.data?.id != null ? String(ev.data.id) : null;
+    try {
+      db.prepare('insert into events (kind, ref, payload, event_id, at) values (?,?,?,?,?)').run(kind, ev.data?.tx_ref || null, JSON.stringify(ev).slice(0, 20000), eventId, now());
+    } catch (e) {
+      if (eventId && /unique/i.test(String(e.message))) return { ok: true, duplicate: eventId };
+      throw e;
+    }
     if (ev.event === 'charge.completed' && ev.data?.status === 'successful') {
       const v = flw.live ? await flw.verify(ev.data.id) : { ok: true, tx_ref: ev.data.tx_ref, id: ev.data.id, amount: ev.data.amount };
       if (!v.ok) return { ok: true, ignored: 'not successful on verify' };
@@ -160,11 +181,15 @@ export async function handle(api, db, req, res, { serveStatic }) {
     try {
       let body = {};
       if (['POST', 'PUT', 'PATCH', 'DELETE'].includes(req.method)) { const raw = await readBody(req, 64 * 1024); body = raw ? JSON.parse(raw) : {}; }
-      const ctx = { params: m.groups || {}, query, body, headers: req.headers, user: null, token: null };
+      const ctx = { params: m.groups || {}, query, body, headers: req.headers, ip: clientIp(req), user: null, token: null };
       if (r.auth) {
         const auth = String(req.headers.authorization || ''); const token = auth.startsWith('Bearer ') ? auth.slice(7) : null;
-        const s = token && db.prepare('select user_id from sessions where token = ?').get(token);
+        const s = token && db.prepare('select user_id, created_at, coalesce(expires_at, created_at + ?) as expires_at, last_seen_at from sessions where token = ?').get(SESSION_TTL, token);
         if (!s) return send(401, { error: 'sign in first' }, cors());
+        const t = now();
+        if (s.expires_at < t) { db.prepare('delete from sessions where token = ?').run(token); return send(401, { error: 'that session has expired — sign in again' }, cors()); }
+        // slide the window, but not on every request: one write an hour is enough to keep a live session alive
+        if (!s.last_seen_at || t - s.last_seen_at > 60 * 60 * 1000) db.prepare('update sessions set expires_at = ?, last_seen_at = ? where token = ?').run(t + SESSION_TTL, t, token);
         ctx.user = { id: s.user_id }; ctx.token = token;
       }
       const out = await r.handler(ctx);
@@ -172,11 +197,21 @@ export async function handle(api, db, req, res, { serveStatic }) {
     } catch (e) {
       const status = e.status || (e instanceof SyntaxError ? 400 : 500);
       if (status === 500) console.error(e);
-      return send(status, { error: status === 500 ? 'something broke on our side' : e.message }, cors());
+      const extra = status === 429 && e.retryIn ? { 'retry-after': String(e.retryIn) } : {};
+      return send(status, { error: status === 500 ? 'something broke on our side' : e.message, ...(e.retryIn ? { retryIn: e.retryIn } : {}) }, { ...cors(), ...extra });
     }
   }
   if (url.pathname.startsWith('/api/')) return send(404, { error: 'no such endpoint' }, cors());
   return serveStatic(url.pathname, res);
+}
+/* Behind a proxy the socket address is the proxy. Only trust the forwarded header when the deploy says
+   there is one, or every rate limit is bypassable with a header. */
+function clientIp(req) {
+  if (process.env.UG_TRUST_PROXY === '1') {
+    const f = String(req.headers['x-forwarded-for'] || '').split(',')[0].trim();
+    if (f) return f.slice(0, 45);
+  }
+  return req.socket && req.socket.remoteAddress ? String(req.socket.remoteAddress).slice(0, 45) : null;
 }
 const cors = () => ({ 'access-control-allow-origin': process.env.UG_CORS_ORIGIN || '*', 'access-control-allow-headers': 'authorization, content-type, verif-hash', 'access-control-allow-methods': 'GET,POST,PUT,PATCH,DELETE,OPTIONS' });
 function readBody(req, limit) { return new Promise((resolve, reject) => { let data = ''; req.on('data', (c) => { data += c; if (data.length > limit) { reject(httpError(413, 'body too large')); req.destroy(); } }); req.on('end', () => resolve(data)); req.on('error', reject); }); }

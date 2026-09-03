@@ -10,11 +10,18 @@ import { Bookings } from './bookings.js';
 import { Otp } from './otp.js';
 import { Flutterwave } from './flutterwave.js';
 import { createApi, handle } from './api.js';
+import { assertInvariants } from './ledger.js';
 import { seed } from './seed.js';
 
 const here = fileURLToPath(new URL('.', import.meta.url));
 const VERSION = '1.2.0';
-const sandbox = process.env.UG_SANDBOX === '1' || !process.env.FLW_SECRET_KEY;
+/* Sandbox is a deliberate choice, never a consequence of a missing key. It used to be
+   `UG_SANDBOX === '1' || !FLW_SECRET_KEY`, so a deploy that forgot the Flutterwave key came up in
+   sandbox — with sandbox document verification and a sandbox payment path — and nothing said so.
+   Missing configuration now stops the process instead of quietly relaxing it. */
+const sandbox = process.env.UG_SANDBOX === '1';
+if (sandbox && process.env.NODE_ENV === 'production') throw new Error('refusing to run the sandbox in production: unset UG_SANDBOX');
+if (!sandbox && !process.env.FLW_SECRET_KEY) throw new Error('FLW_SECRET_KEY is required outside the sandbox: set it, or set UG_SANDBOX=1 to run without payments');
 const siteDir = process.env.UG_SITE_DIR || join(here, '..', '..', 'site');
 const brandDir = join(here, '..', '..', 'brand');
 
@@ -47,6 +54,16 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   const app = buildApp();
   const port = Number(process.env.PORT) || 8787;
   http.createServer((req, res) => handle(app.api, app.db, req, res, { serveStatic })).listen(port, () => {
-    console.log(`UG ${VERSION} · ${sandbox ? 'SANDBOX (no real money, OTP codes returned to the client)' : 'LIVE'} · http://localhost:${port}`);
+    console.log(`UG ${VERSION} · ${sandbox ? 'SANDBOX (no real money; OTP codes go to this log)' : 'LIVE'} · http://localhost:${port}`);
   });
+  /* Two things a ledger cannot do for itself: give money back when a car never filled, and notice that
+     it has stopped agreeing with the world. Both on a timer, both loud. The sweep also runs lazily on
+     stage reads, so a stopped timer delays a refund rather than losing it. */
+  setInterval(() => {
+    try { const n = app.stages.sweepCutoffs(); if (n) console.log(`[sweep] refunded ${n} seat(s) on stages that did not fill`); }
+    catch (e) { console.error('[sweep]', e); }
+  }, 5 * 60 * 1000).unref();
+  setInterval(() => {
+    try { assertInvariants(app.db); } catch (e) { console.error('[invariants]', e.message); }
+  }, 60 * 60 * 1000).unref();
 }

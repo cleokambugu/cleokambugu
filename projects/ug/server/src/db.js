@@ -10,8 +10,13 @@ const SCHEMA = [
   rider text, owner text, comfort text, documents text, payout_limit_ugx integer not null default 200000,
   created_at integer not null, number_changed_at integer
 )`,
-`create table if not exists sessions (token text primary key, user_id text not null, device text, created_at integer not null)`,
+`create table if not exists sessions (token text primary key, user_id text not null, device text, created_at integer not null, expires_at integer, last_seen_at integer)`,
 `create table if not exists otps (phone text primary key, code text not null, expires_at integer not null, attempts integer not null default 0)`,
+/* Every send, kept long enough to rate-limit by number and by caller. Resending used to reset the
+   attempt counter, which turned five guesses per code into unlimited guesses per number. */
+`create table if not exists otp_sends (id integer primary key autoincrement, phone text not null, ip text, at integer not null)`,
+`create index if not exists otp_sends_phone_at on otp_sends(phone, at)`,
+`create index if not exists otp_sends_ip_at on otp_sends(ip, at)`,
 `create table if not exists vouches (voucher_id text not null, driver_id text not null, circle text, created_at integer not null, primary key (voucher_id, driver_id))`,
 `create table if not exists stages (
   id text primary key, route text not null, day text not null, win text not null, cutoff text not null, pickup text,
@@ -48,6 +53,14 @@ export function openDb(path = process.env.UG_DB || './data/ug.sqlite') {
   db.exec('pragma journal_mode = wal; pragma foreign_keys = on;');
   for (const s of SCHEMA) db.exec(s);
   try { db.exec('alter table users add column lang text'); } catch {}
+  try { db.exec('alter table sessions add column expires_at integer'); } catch {}
+  try { db.exec('alter table sessions add column last_seen_at integer'); } catch {}
+  // the cut-off used to be prose only, so nothing could sweep against it
+  try { db.exec('alter table stages add column cutoff_at integer'); } catch {}
+  try { db.exec('alter table stages add column depart_by integer'); } catch {}
+  // a provider's own event id, so a replayed webhook is rejected by the schema rather than by luck
+  try { db.exec('alter table events add column event_id text'); } catch {}
+  try { db.exec('create unique index if not exists events_provider_event on events(kind, event_id)'); } catch {}
   return db;
 }
 

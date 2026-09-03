@@ -28,9 +28,9 @@ UI_KEYS = {
   'ui.perSeatNow': 'per seat now', 'ui.invite': 'Invite', 'ui.accept': 'Accept', 'ui.decline': 'Decline', 'ui.atTheStage': 'At the stage', 'ui.openIn': 'or open', 'ui.directions': 'directions',
   'ui.takeEmptyLeg': 'Take the empty leg', 'ui.pointMeThere': 'Point me there', 'ui.illBeThere': "I'll be there", 'ui.signOut': 'Sign out', 'ui.copyLink': 'Copy link',
   'ui.verified': 'Verified', 'ui.pending': 'Pending', 'ui.driverAssigned': 'Driver assigned', 'ui.done': 'Done', 'ui.requested': 'Requested', 'ui.placed': 'Placed with the partner',
-  'ui.arriving': 'Arriving', 'ui.onTrip': 'On trip', 'ui.trip': 'Trip', 'ui.language': 'Language', 'ui.draftNote': 'A draft; missing words show in English.',
+  'ui.arriving': 'Arriving', 'ui.onTrip': 'On trip', 'ui.trip': 'Trip', 'ui.language': 'Language',
   'ui.welcome': 'Welcome to Uganda.', 'ui.chooseLanguage': 'Choose your language', 'ui.continue': 'Continue',
-  'ui.reviewNote': 'Translations were drafted by UG and checked by a second pass; native-speaker review is open. Missing words fall back to English.',
+  'ui.reviewNote': 'UG wrote these translations and a second pass checked them; native-speaker review is open. Missing words fall back to English.',
 }
 
 def slug(text, n=4):
@@ -94,6 +94,20 @@ def main():
     a = s.index('const STR = {'); b = s.index('\n};', a)
     for m in re.finditer(r"^  ([a-zA-Z]+):\{en:(['\"])(.*?)\2", s[a:b], re.M):
         entries.setdefault(m.group(1), {'text': m.group(3).replace("\\'", "'"), 'html': False, 'where': 'STR (nav, verbs, doors, tabs)'})
+    # Keys this pass cannot see are kept, not dropped. A key looked up through a variable
+    # (t(flips[i])) or added by hand is invisible to a scan of the markup, and rebuilding en.json
+    # from the scan alone silently deletes it — which is how the English hero came to render the
+    # literal string "flipDeliver" in every language that had translated it.
+    kept = []
+    try:
+        with open(os.path.join(OUT, 'en.json'), encoding='utf-8') as f:
+            prev = json.load(f)['strings']
+        for k, v in prev.items():
+            if k not in entries:
+                entries[k] = v
+                kept.append(k)
+    except FileNotFoundError:
+        prev = {}
     for k, v in UI_KEYS.items():
         entries.setdefault(k, {'text': v, 'html': False, 'where': 'rendered by JavaScript'})
     en = {'language': 'en', 'name': 'English', 'native': 'English', 'confidence': 'complete',
@@ -102,6 +116,9 @@ def main():
     with open(os.path.join(OUT, 'en.json'), 'w', encoding='utf-8') as f:
         json.dump(en, f, ensure_ascii=False, indent=1)
     print('marked', len(edits), 'elements;', len(entries), 'keys ->', os.path.relpath(os.path.join(OUT, 'en.json'), ROOT))
+    if kept:
+        print('kept %d key(s) this scan cannot see (looked up through a variable, or added by hand):' % len(kept))
+        print('  ' + ', '.join(sorted(kept)))
 
 if __name__ == '__main__':
     main()

@@ -14,9 +14,13 @@ const call = async (method, path, body, token) => { const res = await fetch(base
 
 test('health, otp, session, comfort, a seat, an offer, the rail', async () => {
   const h = await call('GET', '/api/health'); assert.equal(h.body.ok, true); assert.equal(h.body.sandbox, true);
-  const o = await call('POST', '/api/auth/otp', { phone: '0772 123 456' }); assert.equal(o.status, 200); assert.match(o.body.sandboxCode, /^\d{4}$/);
-  const bad = await call('POST', '/api/auth/verify', { phone: '0772123456', code: '0000' }); assert.equal(bad.status, 401);
-  const v = await call('POST', '/api/auth/verify', { phone: '0772123456', code: o.body.sandboxCode, name: 'Brenda' }); assert.equal(v.status, 200); const tok = v.body.token; assert.equal(v.body.me.name, 'Brenda');
+  const o = await call('POST', '/api/auth/otp', { phone: '0772 123 456' }); assert.equal(o.status, 200);
+  // the code is never in the response: an operator reads it from the log, a test reads it from the table
+  assert.equal(o.body.sandboxCode, undefined);
+  const code = app.db.prepare('select code from otps where phone = ?').get('+256772123456').code;
+  assert.match(code, /^\d{6}$/);
+  const bad = await call('POST', '/api/auth/verify', { phone: '0772123456', code: '000000' }); assert.equal(bad.status, 401);
+  const v = await call('POST', '/api/auth/verify', { phone: '0772123456', code, name: 'Brenda' }); assert.equal(v.status, 200); const tok = v.body.token; assert.equal(v.body.me.name, 'Brenda');
   const unauth = await call('GET', '/api/me'); assert.equal(unauth.status, 401);
   const c = await call('PUT', '/api/comfort', { base: 'Ntinda', radius: 15, corridors: ['kampala-jinja', 'nope'], vehicle: 'RAV4', plate: 'ubh 123x' }, tok); assert.deepEqual(c.body.corridors, ['kampala-jinja']); assert.equal(c.body.plate, 'UBH 123X');
   const me = await call('GET', '/api/me', null, tok); assert.ok(me.body.roles.includes('driver'));

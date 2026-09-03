@@ -81,3 +81,36 @@ export class Ledger {
     ]);
   }
 }
+
+/* The ledger enforces that every journal balances. That is necessary and it holds — but a ledger can
+   balance perfectly while disagreeing with the world, and it did: ten riders funded a four-seat car,
+   six seats' worth of escrow was stranded with no path out, and `debits == credits` stayed true the
+   whole time. These are the checks that would have caught it. Run them in the test suite, after every
+   write in development, and on a timer in production. */
+export function assertInvariants(db) {
+  const fail = [];
+  const s = db.prepare('select coalesce(sum(debit),0) d, coalesce(sum(credit),0) c from postings').get();
+  if (Number(s.d) !== Number(s.c)) fail.push(`ledger out of balance: ${s.d} debit vs ${s.c} credit`);
+
+  // a liability that has gone negative means money was released or refunded that was never held
+  const neg = db.prepare(`select account, sum(credit) - sum(debit) bal from postings
+                           where account like 'escrow:%' or account like 'payable:%'
+                           group by account having bal < 0`).all();
+  for (const r of neg) fail.push(`negative liability ${r.account}: ${r.bal}`);
+
+  // a stage that is over holds no money: everyone was paid, refunded, or the trip did not happen
+  const stuck = db.prepare(`select s.id, s.status, count(i.id) n from stages s join intents i on i.stage_id = s.id
+     where s.status in ('departed','expired','cancelled') and i.state in ('held','manufactured','accepted')
+     group by s.id`).all();
+  for (const r of stuck) fail.push(`escrow stranded on ${r.status} stage ${r.id}: ${r.n} intent(s)`);
+
+  // seats that hold money never exceed the car
+  const over = db.prepare(`select s.id, s.cap, count(i.id) seats from stages s join intents i on i.stage_id = s.id
+     where i.state in ('held','manufactured','accepted','departed','settled')
+     group by s.id having seats > s.cap`).all();
+  for (const r of over) fail.push(`oversold stage ${r.id}: ${r.seats} seats in a car of ${r.cap}`);
+
+  if (fail.length) throw new Error('ledger invariants violated:\n  ' + fail.join('\n  '));
+  return true;
+}
+
