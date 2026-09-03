@@ -24,6 +24,10 @@ const PACKS = path.join(ROOT, 'site', 'i18n');
 const INLINE_ALL = ['ui.welcome', 'ui.continue'];
 const SNAP = path.join(DIR, '.sources.json');
 const ACCEPT = process.argv.includes('--accept');
+/* A published artifact is one file with nowhere to fetch a pack from. --inline-all writes
+   site/i18n/all.json — every language in one object — so the artifact build can put the
+   dictionaries back into the document it ships, and the demo speaks 41 languages again. */
+const INLINE_ALL_FILE = process.argv.includes('--inline-all');
 const ORDER = { // picker groups, in the order they appear
   'Uganda · Central': ['lg'], 'Uganda · East': ['xog', 'myx', 'gwr', 'lsm', 'teo', 'kpz'], 'Uganda · North': ['ach', 'laj', 'kdi', 'kdj'],
   'Uganda · West Nile': ['alz', 'lgg', 'mhi', 'keo'], 'Uganda · West': ['nyn', 'cgg', 'ttj', 'nyo', 'koo'],
@@ -71,7 +75,7 @@ const scan = cut(site0, 'const STR = ', '\n/* i18n:end */');
 const asked = new Set(DYNAMIC);
 for (const m of scan.matchAll(/\bt\(\s*['"]([^'"]+)['"]\s*\)/g)) asked.add(m[1]);
 for (const m of scan.matchAll(/data-i18n(?:-html)?=["']([^"']+)["']/g)) asked.add(m[1]);
-for (const m of scan.matchAll(/STR\[\s*['"]([^'"]+)['"]\s*\]/g)) asked.add(m[1]);
+for (const m of scan.matchAll(/(?:STR|WL|PACK)\[\s*['"]([^'"]+)['"]\s*\]/g)) asked.add(m[1]);
 const unused = keys.filter(k => !asked.has(k));
 // order LANGS by the picker groups; unknown codes go last
 const ordered = {};
@@ -96,6 +100,12 @@ for (const code of files) {
   packBytes += body.length;
 }
 const strEn = {}; for (const k of keys) strEn[k] = str[k].en;
+if (INLINE_ALL_FILE) {
+  const all = {};
+  for (const code of files) { if (code === 'en') continue; all[code] = {}; for (const k of keys) if (str[k][code] != null) all[code][k] = str[k][code]; }
+  fs.writeFileSync(path.join(PACKS, 'all.json'), JSON.stringify({ generated: new Date().toISOString().slice(0, 10), note: 'Every pack in one object, for a single-file build that cannot fetch. Written only by --inline-all.', packs: all }) + '\n');
+  console.log(`all.json written for a single-file build: ${Math.round(fs.statSync(path.join(PACKS, 'all.json')).size / 1024)} KB`);
+}
 const wl = {}; for (const k of INLINE_ALL) if (str[k]) wl[k] = str[k];
 /* The picker's metadata only. The translator notes are prose about a language, not part of using
    it, and they were 12 KB of the 12.6 KB that LANGS cost; they live in the packs now. */

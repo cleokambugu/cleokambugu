@@ -24,3 +24,4 @@ downloads/
 projects/ug/site/package.json
 projects/ug/site/package-lock.json
 projects/ug/site/node_modules/
+projects/ug/site/i18n/all.json
