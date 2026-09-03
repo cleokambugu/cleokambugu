@@ -50,7 +50,14 @@ async function main() {
     page = await browser.newPage({ viewport: vp, deviceScaleFactor: 2, colorScheme: scheme });
     if (THREE) await page.route('**/three.js/r128/three.min.js', r => r.fulfill({ path: THREE, contentType: 'application/javascript' }));
     await page.goto(site, { waitUntil: 'load' });
-    await page.evaluate(() => { try { sessionStorage.setItem('ug:intro', '1'); } catch (e) {} const i = document.querySelector('#intro'); if (i) i.remove(); });
+    /* Dismiss BOTH gates. The welcome screen shipped after this script was written, so every
+       site-* still since then has been a photograph of the language picker filed under the name
+       of the screen it was supposed to show. */
+    await page.evaluate(() => {
+      try { sessionStorage.setItem('ug:intro', '1'); localStorage.setItem('ug:welcomed', '1'); } catch (e) {}
+      const i = document.querySelector('#intro'); if (i) i.remove();
+      const w = document.querySelector('#welcome'); if (w) { w.hidden = true; w.remove(); }
+    });
     if (scheme === 'light') await page.evaluate(() => { document.documentElement.dataset.theme = 'light'; });
     await page.waitForTimeout(2600);
     if (pre) await page.evaluate(pre);
