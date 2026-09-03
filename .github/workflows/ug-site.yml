@@ -11,9 +11,9 @@ name: UG site
 
 on:
   push:
-    paths: ['projects/ug/site/**', 'projects/ug/data/i18n/**', 'projects/ug/showreel/*.html', 'projects/ug/server/scripts/i18n-build.cjs', '.github/workflows/ug-site.yml']
+    paths: ['projects/ug/site/**', 'projects/ug/data/i18n/**', 'projects/ug/showreel/*.html', 'projects/ug/showreel/voice/**', 'projects/ug/server/scripts/i18n-build.cjs', '.github/workflows/ug-site.yml']
   pull_request:
-    paths: ['projects/ug/site/**', 'projects/ug/data/i18n/**', 'projects/ug/showreel/*.html', 'projects/ug/server/scripts/i18n-build.cjs', '.github/workflows/ug-site.yml']
+    paths: ['projects/ug/site/**', 'projects/ug/data/i18n/**', 'projects/ug/showreel/*.html', 'projects/ug/showreel/voice/**', 'projects/ug/server/scripts/i18n-build.cjs', '.github/workflows/ug-site.yml']
   workflow_dispatch:
 
 jobs:
@@ -30,6 +30,9 @@ jobs:
       - name: The site is unchanged by its own build
         working-directory: projects/ug
         run: git diff --exit-code site/index.html
+      - name: The films speak the script
+        working-directory: projects/ug/showreel
+        run: python3 voice/sync-voice.py --check
       - name: Install a browser
         working-directory: projects/ug/site
         run: |

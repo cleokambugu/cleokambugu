@@ -60,12 +60,40 @@ the same `manifest.json`. It needs `ELEVENLABS_API_KEY` and `ELEVENLABS_VOICE_ID
 that reaches `api.elevenlabs.io`; this sandbox has neither, so nothing was auditioned here. The
 REST contract follows `elevenlabs/skills` on GitHub (cloned and read); see `DIRECTION.md`.
 
-## The lines
+## The lines: one master, and the check that keeps it one
 
-`lines.json` is the master. The register is Ugandan English: direct, warm, no slang for its own
-sake, with a Luganda or Swahili word where a Kampala voice would use one ("Tugende", "Twende",
-"Weebale"). Two lines are wholly in Swahili and Luganda so the local-language speakers are heard.
-The same text lives in `sound.html` as the fallback; `render.py --check` fails if they drift.
+**`lines.v2.json` is the master.** The register is Ugandan English: direct, warm, no slang for
+its own sake, with a Luganda or Swahili word where a Kampala voice would use one ("Tugende",
+"Twende", "Weebale", "Banange", "kwanjula"). Two lines are wholly in Swahili and Luganda so the
+local-language speakers are heard.
+
+The narration used to live in three places at once, and they drifted:
+
+| Where | Read by | Was |
+|---|---|---|
+| `lines.json` | `render.py` (Spark-TTS) | declared the master here, in this file |
+| `lines.v2.json` | `render-elevenlabs.py`, `DIRECTION.md`, `CASTING.md` | the production script everything else described |
+| `voice:[…]` in each of the six reel HTMLs | **the film itself** — rendered files if present, browser speech otherwise, and `build-video.js` via `window.__UG_REEL.voiceLines` | what audiences actually heard |
+
+Nothing reconciled them, so the films shipped the older, blander v1 text while every voice
+document in the repo directed v2. The reels spoke *about* drivers in the third person where the
+script speaks *to* them; the Ugandan register the whole casting sheet is built around — the
+"Banange", the kwanjula — never reached the screen at all.
+
+`sync-voice.py` fixes that by making the master the only writer:
+
+```
+python3 voice/sync-voice.py           # write lines.v2.json into all six reels
+python3 voice/sync-voice.py --check   # exit 1 if any reel drifted, or a scene cannot say its lines
+```
+
+`--check` runs in CI (`.github/workflows/ug-site.yml`). It fails on two things: a reel whose
+`voice:[…]` no longer matches the master, and a scene whose words cannot be spoken in the time
+the film gives it — both cuts share one script, so the real budget is the shorter of the
+long-cut duration and the compressed short-cut one, and `budget_seconds` must equal it.
+
+`lines.json` is kept for `render.py`, which still reads it, but it is no longer the master and
+edits belong in `lines.v2.json`.
 
 ## The music
 

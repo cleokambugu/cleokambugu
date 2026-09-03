@@ -253,7 +253,7 @@ const GLYPH={
 const SCENES = [
 { id:'opening', name:'Opening', dur:20,
   caps:[{at:1.2,eb:'UG · Showreel',main:'The map you watch assemble is the map you land on.'},{at:8.6,main:''}],
-  voice:['UG. Ride. Pool. Rent. Deliver.','One app for every way to move in Uganda. Tugende.'],
+  voice:['Kampala. Six in the evening, the whole city moving at once.','UG. Ride. Pool. Rent. Deliver.','One app for every way to move in Uganda. Tugende.'],
   draw(g,t){ const {ctx,now}=g; const P=MAP.proj(640,330,600);
     const dim = 1-.62*E.outCubic(seg(t,9,10.6));
     MAP.draw(ctx,P,{assemble:t,now,alpha:dim});
@@ -281,7 +281,7 @@ const SCENES = [
 },
 { id:'problem', name:'The problem', dur:20,
   caps:[{at:1.5,eb:'The problem',main:'Kampala checks three apps before every trip.'},{at:11,eb:'One crest',main:'Every way, one screen.',sub:'Every partner quote, drawn in one consistent hand, ranked on one desk.'}],
-  voice:['In Kampala we check three apps before every trip, and still ask the boda man.','UG puts every way on one screen.'],
+  voice:['Banange. Three apps for one trip, and you still ask the boda man.','Two prices for the same road, and no special hire anywhere.','UG puts every way on one screen, ranked and honest.'],
   draw(g,t){ const {ctx,now}=g;
     const px=640,py=330, pw=300,ph=560; const pp=E.outExpo(seg(t,0,1.2));
     ctx.save(); ctx.globalAlpha=pp; card(ctx,px-pw/2,py-ph/2+30*(1-pp),pw,ph,{r:44,fill:'#161210'}); rr(ctx,px-40,py-ph/2+12+30*(1-pp),80,14,7); ctx.fillStyle='#0a0807'; ctx.fill(); ctx.restore();
@@ -296,7 +296,7 @@ const SCENES = [
 },
 { id:'ride', name:'Ride', dur:30,
   caps:[{at:1,eb:'Ride · the compare desk',main:'Every way, one screen.'},{at:8.5,main:'Ranked by price. Estimates say so.',sub:'Every quote carries its provenance in words, on the card.'},{at:14,main:'The ones that cannot serve you stay on the screen.',sub:'Greyed, with the reason.'},{at:20,main:'Every fare on one screen.',sub:'And we tell you plainly which of them UG can actually book.'}],
-  voice:['Every quote, ranked by price, and it tells you which ones are estimates.','Every fare on one screen, and we tell you which ones we can book.'],
+  voice:['This is the desk. Every quote, ranked by price. An estimate says it is an estimate.','The button is always Book on UG. Nobody sends you away.','Same trip, smarter price.'],
   draw(g,t){ const {ctx,now}=g;
     const hp=E.outExpo(seg(t,.3,1.4)); eyebrow(ctx,'Ride · Ntinda → Downtown Kampala',200,86,{alpha:hp}); txt(ctx,'Ntinda → Downtown Kampala',200,128,{font:FONT.disp(700,32),alpha:hp}); txt(ctx,'8 km · 25 min · now',1080,128,{font:FONT.mono(400,15),align:'right',color:inkA(.55),alpha:hp});
     const rk=E.inOutCubic(seg(t,8.5,10)); const y0=168, rh=42;
@@ -316,7 +316,7 @@ const SCENES = [
 },
 { id:'pool', name:'Pool', dur:40,
   caps:[{at:1,eb:'Pool · the Virtual Stage',main:'A stage that fills before the car exists.'},{at:5,main:'Riders queue money, not requests.',sub:'Where, roughly when, and the seat paid into escrow.'},{at:13,main:'The price falls as the car fills.',sub:'Invite the circle; the seat gets cheaper for everyone.'},{at:22,main:'Full early, leave early.',sub:'Not full at cut-off: top up from the empty-leg pool, or refund.'},{at:30,main:'UG manufactures the trip and offers it with the money already in it.'},{at:35.5,main:'One tap. The riders get a car, a plate and a face.'}],
-  voice:['The Virtual Stage. You pay for your seat first, and the price drops as the car fills.','When the money is in, UG makes the trip and hands it to a driver who is comfortable on that road.'],
+  voice:['Now this one is ours. The Virtual Stage.','You pay for your seat first; friends join and the price drops for everyone.','Money in first, and a driver who knows the road takes it. Twende.'],
   draw(g,t){ const {ctx,now}=g;
     const ap=E.outExpo(seg(t,.3,1.4));
     // corridor strip
@@ -344,7 +344,7 @@ const SCENES = [
 },
 { id:'drive', name:'Drive', dur:25,
   caps:[{at:1,eb:'Drive · the Comfort Map',main:'Drivers declare a comfort map, not trips.'},{at:9,sub:'Base, radius, corridors, days, hours, car. Hard no’s stay no.',main:'One screen. Never post a trip again.'},{at:15,main:'Funded offers come to you.'},{at:20,main:'Offers arrive now. Accept after verification.',sub:'Usually within a day.'}],
-  voice:['Drivers do not chase trips. They say where they are comfortable, once.','Funded offers come to them. Accept, and go.'],
+  voice:['Drivers, you do not chase trips here.','You say once where you are comfortable working: your stage, your roads, your hours, and the no\'s that stay no.','Then funded offers come to you, with the money already in. Accept, and go.'],
   draw(g,t){ const {ctx,now}=g;
     const ap=E.outExpo(seg(t,.3,1.4));
     // map (zoomed on the centre), clipped right
@@ -370,7 +370,7 @@ const SCENES = [
 },
 { id:'rent', name:'Rent and Signature', dur:20,
   caps:[{at:1,eb:'Rent',main:'Arrive properly.',sub:'Rent the ride. Split it four ways.'},{at:6,main:'UGX 300,000 becomes 75,000 each.',sub:'Per head, with the empty leg on sale the moment you book.'},{at:11,eb:'Signature',main:'The Signature fleet. Chauffeured, priced through the same desk.'}],
-  voice:['Rent a Prado for the weekend and split it four ways.','Or arrive in the Signature fleet, and look the part.'],
+  voice:['The kwanjula is Saturday. Rent the Prado, split it four ways.','Three hundred thousand becomes seventy-five each. And you arrive properly.','Or the Signature fleet, chauffeured, priced through the same desk.'],
   draw(g,t){ const {ctx,now}=g;
     const a1=E.outExpo(seg(t,.3,1.4))*(1-E.inCubic(seg(t,9.6,10.6)));
     if(a1>0){ card(ctx,190,120,900,400,{alpha:a1}); eyebrow(ctx,'Rent · per day · with driver or self-drive',220,156,{alpha:a1}); txt(ctx,'Land Cruiser Prado',220,200,{font:FONT.disp(700,30),alpha:a1}); txt(ctx,'4×4 · 7 seats · arrive properly',220,228,{font:FONT.body(400,15),color:inkA(.6),alpha:a1});
@@ -383,7 +383,7 @@ const SCENES = [
 },
 { id:'deliver', name:'Deliver', dur:20,
   caps:[{at:3.5,eb:'Deliver',main:'A quarter of a seat.',sub:'A seat to Fort Portal is UGX 97,350. The parcel rides in the boot for 24,350.'},{at:11,main:'Send the thing. It runs on the same rail.',sub:'Placed, courier assigned, picked up, on the way, delivered.'}],
-  voice:['Your parcel rides in the boot of the stage car to Fort Portal.','A quarter of a seat. That is it.'],
+  voice:['Your parcel rides in the boot of the stage car to Fort Portal.','The seat is ninety-seven thousand; the parcel, twenty-four. A quarter of a seat, on a car already going.','Send the thing.'],
   draw(g,t){ const {ctx,now}=g;
     // road
     ctx.fillStyle='#14100D'; ctx.fillRect(0,300,W,200); ctx.fillStyle='#1c1713'; ctx.fillRect(0,300,W,4); const off=(t*260)%80; ctx.save(); ctx.strokeStyle=inkA(.35); ctx.lineWidth=3; ctx.setLineDash([40,40]); ctx.lineDashOffset=off; ctx.beginPath(); ctx.moveTo(0,405); ctx.lineTo(W,405); ctx.stroke(); ctx.restore();
@@ -399,7 +399,7 @@ const SCENES = [
 },
 { id:'atlas', name:'The Atlas', dur:30,
   caps:[{at:1,eb:'The Atlas',main:'Every way to move in Uganda is a row in one table.'},{at:13,main:'Four honest states, always shown.'},{at:22,sub:'Nothing is hidden, nothing is faked. Fares are modelled and marked so.',main:'Book on UG. Call ahead. Listed. Coming.'}],
-  voice:['Air, bus, water, rail, Signature, stays. One table.','Four honest states, always on the screen.'],
+  voice:['Every way to move in Uganda in one table — air, bus, water, rail, stays.','Four honest states, always on screen: Book on UG. Call ahead. Listed. Coming.','Nothing hidden, nothing faked.'],
   draw(g,t){ const {ctx,now}=g;
     const P=MAP.proj(640,250,420); const ma=E.outCubic(seg(t,0,1.5)); MAP.draw(ctx,P,{now,alpha:.38*ma,breathe:.5});
     const modes=['air','bus','water','rail','signature','stays'], labels=['Air','Bus','Water','Rail','Signature','Stays'];
@@ -414,7 +414,7 @@ const SCENES = [
 },
 { id:'explore', name:'Explore', dur:20,
   caps:[{at:1,eb:'Explore · the weekend',main:'The Pearl, priced honestly.'},{at:7,main:'A Bwindi weekend, totalled in shillings.'},{at:12,main:'The permit: UGX 300,000 for East African citizens. USD 800 for visitors.',sub:'Fees from UWA snippets, marked as such. Lodge and seats modelled.'}],
-  voice:['The Pearl, priced honestly. The whole weekend in one number.','East African citizens pay East African prices.'],
+  voice:['The Pearl, priced honestly. A Bwindi weekend, totalled in shillings.','The permit is three hundred thousand for an East African, eight hundred dollars for a visitor. We ask which you are rather than guess.'],
   draw(g,t){ const {ctx,now}=g;
     const P=MAP.proj(960,370,400); const ma=E.outCubic(seg(t,0,1.5)); MAP.draw(ctx,P,{now,alpha:.42*ma,breathe:.5});
     const path=pathBetween(P.t('Kampala'),P.t('Bwindi'),.12); const rp=E.outCubic(seg(t,1,3.5)); strokePath(ctx,path,0,rp,C.yellow,2.5,.9); const [bx,by]=P.t('Bwindi'); if(rp>=1){ const pq=E.outBack(seg(t,3.5,4.1)); glow(ctx,bx,by,'rgba(210,32,47,.5)',22*pq,1); dot(ctx,bx,by,5,C.red); pill(ctx,'Bwindi · mountain gorillas',bx+96,by-24,{scale:pq,font:FONT.body(700,12),h:24,px:18}); }
@@ -428,7 +428,7 @@ const SCENES = [
 },
 { id:'plugins', name:'Plug-ins', dur:20,
   caps:[{at:.8,eb:'Plug-ins · Tazama',main:'Tazama in the dock. The drive starts with the first tap.'},{at:5.8,eb:'Plug-ins · Pulse',main:'Pulse: where paid demand outruns cars. Point me there.'},{at:10.8,eb:'Plug-ins · Felt',main:'Export the layer to Felt. A shared map, not a pin.'},{at:15.8,eb:'Plug-ins · Cephable',main:'Cephable: hands-free. Say it, UG does it.'}],
-  voice:['Tazama plays in the dock. Pulse shows where the demand is.','Send it to Felt. Talk to it through Cephable.'],
+  voice:['Tazama in the dock; the drive starts on the first tap.','Pulse shows where the paid demand is.','Send the route to Felt, or run the whole thing hands-free through Cephable.'],
   draw(g,t){ const {ctx,now}=g; const beat=Math.min(3,Math.floor(t/5)); const bt=t-beat*5; const ba=Math.min(E.outExpo(seg(bt,0,.8)),1-E.inCubic(seg(bt,4.5,5)));
     ctx.save(); ctx.globalAlpha=ba; const sx=340,sy=150,sw=600,sh=400; card(ctx,sx,sy,sw,sh);
     if(beat===0){ eyebrow(ctx,'Tazama · the dock',sx+26,sy+36); txt(ctx,'UG mix 03',sx+26,sy+76,{font:FONT.disp(700,24)}); txt(ctx,'96 bpm · warm chords · sized to the trip',sx+26,sy+100,{font:FONT.body(400,14),color:inkA(.55)});
@@ -458,7 +458,7 @@ const SCENES = [
 },
 { id:'rail', name:'Stay on UG', dur:15,
   caps:[{at:1,eb:'Stay on UG',main:'Whatever you book, one rail.'},{at:7,main:'What UG books, UG carries to done.'},{at:12,sub:'Timers stand in for the concierge in this prototype. UG takes payment only for its own seats and cars.',main:'One rail, from paid to done.'}],
-  voice:['Whatever you book, the same trip rail carries it to done.','Hakuna anayetumwa mbali. Twende.'],
+  voice:['Whatever you book, one rail carries it to done.','The same steps every time, in your own language.','Hakuna anayetumwa mbali. Twende.'],
   draw(g,t){ const {ctx,now}=g; const ap=E.outExpo(seg(t,.3,1.3));
     eyebrow(ctx,'Trip rail · Ntinda → Downtown Kampala · Bolt · Book on UG',640,150,{align:'center',alpha:ap});
     const lit=seg(t,1,13); railSteps(ctx,RAIL,140,1140,300,lit,{alpha:ap,fs:15,dy:36,times:RAIL_T,r:10});
@@ -470,7 +470,7 @@ const SCENES = [
 },
 { id:'link', name:'One link', dur:15,
   caps:[{at:1,eb:'One link',main:'Install it. Same crest, same account.',sub:'The site is the app. Scan from the desktop and the screen is in your hand.'},{at:7.6,main:''}],
-  voice:['Install it. Same crest, same account, same shillings.','UG. Weebale. Tugende.'],
+  voice:['Install it. Same crest, same account, same shillings.','Look the part. Pay the smart price.','UG. Weebale. Tugende.'],
   draw(g,t){ const {ctx,now}=g; const a1=E.outExpo(seg(t,.3,1.4))*(1-E.inCubic(seg(t,7.2,8.2)));
     if(a1>0){ ctx.save(); ctx.globalAlpha=a1; const qx=430,qy=330,size=300,n=25,m=size/n; rr(ctx,qx-size/2-22,qy-size/2-22,size+44,size+44,22); ctx.fillStyle=C.ink; ctx.fill();
       const r=rng(7); const reveal=E.outCubic(seg(t,.6,2.4)); const finder=(i,j)=>(i<7&&j<7)||(i>=n-7&&j<7)||(i<7&&j>=n-7); const ring=(i,j,ox,oy)=>{ const a=i-ox,b=j-oy; return (a===0||a===6||b===0||b===6)||(a>=2&&a<=4&&b>=2&&b<=4); };

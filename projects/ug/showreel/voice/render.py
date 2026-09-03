@@ -6,10 +6,10 @@ text-to-speech model fine-tuned on the SALT studio corpus for Acholi, Ateso, Lug
 Runyankore, Swahili and Ugandan-accented English. The prompt format and the detokenise step
 below follow ``notebooks/evaluation/spark-tts-inference-example.ipynb`` in the SunbirdAI/salt
 repository, read first-hand. Speaker ids are the ones listed in that notebook; add or change
-them in ``lines.json`` per line.
+them in ``lines.json``'s speakers block; the narration itself lives in ``lines.v2.json``.
 
 Usage
-  python render.py --check                 # validate lines.json against sound.html, no model
+  python render.py --check                 # validate lines.v2.json against sound.html, no model
   python render.py --dry-run               # print what would render
   python render.py                         # render voice/*.wav and voice/manifest.json
   python render.py --device cpu            # slow but works without a GPU (minutes per line)
@@ -25,7 +25,12 @@ these files, otherwise it falls back to the browser's speech synthesis and says 
 import argparse, json, os, re, sys, time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-LINES = os.path.join(HERE, 'lines.json')
+# The narration comes from the master, lines.v2.json, so this renderer and the
+# ElevenLabs one and the six reel HTMLs all say the same words. Spark's studio
+# speaker ids are engine-specific and stay in lines.json, which is otherwise
+# superseded: lines.v2.json's speakers block holds ElevenLabs voice ids.
+LINES = os.path.join(HERE, 'lines.v2.json')
+SPEAKERS = os.path.join(HERE, 'lines.json')
 REEL = os.path.join(HERE, '..', 'sound.html')
 MODEL = os.environ.get('UG_TTS_MODEL', 'Sunbird/spark-tts-salt')
 CODEC = os.environ.get('UG_TTS_CODEC', 'unsloth/Spark-TTS-0.5B')
@@ -34,8 +39,9 @@ CODEC = os.environ.get('UG_TTS_CODEC', 'unsloth/Spark-TTS-0.5B')
 def load_lines():
     with open(LINES, encoding='utf-8') as f:
         data = json.load(f)
-    assert isinstance(data.get('scenes'), list), 'lines.json needs a scenes list'
-    spk = data.get('speakers', {})
+    assert isinstance(data.get('scenes'), list), 'lines.v2.json needs a scenes list'
+    with open(SPEAKERS, encoding='utf-8') as f:
+        spk = json.load(f).get('speakers', {})
     for sc in data['scenes']:
         assert sc.get('id') and isinstance(sc.get('lines'), list), f'bad scene {sc}'
         for ln in sc['lines']:
@@ -52,8 +58,16 @@ def require_speakers(data):
 
 
 def check(data):
-    """The fallback text in sound.html must match lines.json, so both cuts say the same thing."""
+    """The fallback text in sound.html must match the master, so every cut says the same thing.
+
+    sync-voice.py is what writes it there, across all six reels; this is a second pair of eyes
+    on the one reel this renderer targets."""
     src = open(REEL, encoding='utf-8').read()
+    # The reel stores these as JS single-quoted literals, so an apostrophe in the
+    # script ("the no's that stay no") is a backslash-escaped pair on disk. Undo
+    # that before matching, or the check fails on punctuation and reports drift
+    # where there is none.
+    src = re.sub(r"\\(['\"\\])", r'\1', src)
     ids = re.findall(r"^\{ id:'([a-z]+)'", src, re.M)
     ok = True
     for sc in data['scenes']:
@@ -62,7 +76,7 @@ def check(data):
         for ln in sc['lines']:
             if ln['text'] not in src:
                 print('line not in sound.html:', ln['text']); ok = False
-    print('lines.json:', len(data['scenes']), 'scenes,', sum(len(s['lines']) for s in data['scenes']), 'lines,', 'ok' if ok else 'MISMATCH')
+    print('lines.v2.json:', len(data['scenes']), 'scenes,', sum(len(s['lines']) for s in data['scenes']), 'lines,', 'ok' if ok else 'MISMATCH - run: python3 sync-voice.py')
     return ok
 
 

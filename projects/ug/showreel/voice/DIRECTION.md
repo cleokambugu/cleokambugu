@@ -39,12 +39,27 @@ is a full stop or `[pause]` on v3, never a comma.
 | pool | Lean in; pride in "ours"; lift on "drops"; "Twende" a full stop | medium, slower last line | before "Money in" | "Ah, this is the clever one." |
 | drive | To drivers directly, respectful, no hype | medium | after "Once." | Dignity: I choose; the money is already there. |
 | rent | A real Saturday; arithmetic like a friend splitting a bill | quick on the numbers | before "Or the Signature" | Aspiration without shame. |
-| deliver | Plain, amused at how small the number is | medium | after "Jinja." | "That is it?" |
+| deliver | Plain; the point is the proportion, not a bargain | medium | after "Fort Portal." | "A quarter of a seat — of course." |
 | atlas | Even list rhythm; firm on "Nothing faked" | steady | before "Four honest states" | Trust: everything on the table, labelled. |
-| explore | Warm on "The Pearl", pointed on the two permit prices | medium | before "East African citizens" | Pride, and a fair deal. |
-| plugins | Brisk, four beats matching the four captions | quicker | between products | Delight: it plugs into what I use. |
-| rail | Slow, resolved; the Swahili line a promise, not a slogan | slow | before "Hakuna" | Safe: whatever I book finishes here. |
+| explore | Warm on "The Pearl"; even-handed on both permit prices, favouring neither listener | medium | before "The permit" | Pride, and a straight answer. |
+| plugins | Brisk, one beat per integration | quicker | between products | Delight: it plugs into what I use. |
+| rail | Slow, resolved; "in your own language" said as fact, not a boast; the Swahili line a promise, not a slogan | slow | before "Hakuna" | Safe: whatever I book finishes here, in my words. |
 | link | Warmest read; positioning line, then goodbye | slow, final | before "Look the part" and "UG." | Invited, thanked, ready to install. |
+
+## Money: the voice rounds, the screen is exact
+
+The narration says "ninety-seven thousand" while the caption under it reads UGX 97,350, and
+"twenty-four" against 24,350. That is deliberate and it is how the number is said out loud in
+Kampala. The rule: **the voice speaks the number a person would speak, the screen carries the
+figure to the shilling, and the two are on screen together.** Never let the voice round in a
+direction that flatters the product, and never let it quote a figure the screen does not show.
+
+An earlier draft of this script broke that rule by accident — it spoke a seat at "twenty-six
+thousand" and a parcel at "six thousand five hundred" while the reel drew 97,350 and 24,350.
+Those were the old Jinja corridor's fares, left behind when the route became Fort Portal. Both
+were internally consistent as a quarter of a seat, which is exactly why nobody noticed: the
+ratio was right and the money was wrong. A reel whose whole argument is honest pricing cannot
+contradict its own caption out loud.
 
 ## Casting
 
@@ -53,7 +68,7 @@ app is for. Gender open; audition one of each. Ugandan English with Luganda unde
 vowels, even syllable timing, a melody that rises through a thought and settles at the full
 stop, unhurried consonants, light "r", final syllables fully voiced. Radio-literate (a Capital
 FM or Sanyu evening presenter), not a newsreader. Not a generic "African accent": not
-Nigerian, South African or Nairobi Sheng. "Tugende", "Weebale", "boda", "Jinja", "kwanjula"
+Nigerian, South African or Nairobi Sheng. "Tugende", "Weebale", "boda", "kwanjula", "Fort Portal", "Ntinda", "Bwindi"
 must land as Kampala says them.
 
 **Three ways to get it, best first.**
