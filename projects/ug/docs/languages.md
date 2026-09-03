@@ -10,9 +10,16 @@ screen.
 
 ## The languages
 
-**41 languages, 243 keys each.** Every string in the app (the verbs, the doors, headings, sections, buttons, modals,
-and the strings the JavaScript renders) is translated per language in `data/i18n/<code>.json`
-and assembled into the site by `server/scripts/i18n-build.cjs`. The picker groups by region:
+**41 languages, 245 keys each, complete.** Every string in the app — the verbs, the doors, headings,
+sections, buttons, modals, and the strings the JavaScript renders — exists in every language in
+`data/i18n/<code>.json` and is assembled into the site by `server/scripts/i18n-build.cjs`. Nothing
+falls back to English any more. Run the build to check: it prints coverage per language and fails
+loudly on a bad tag.
+
+An earlier version of this page said "243 keys each" while five dictionaries held 35 of them, so a
+reader who chose Zulu, Lingala, Somali, Hausa or Kinyarwanda got a page that was mostly English
+under a heading about language justice. Those five were finished, along with Rukonzo, before this
+sentence was allowed to change.
 
 | Group | Languages |
 | --- | --- |
@@ -24,9 +31,28 @@ and assembled into the site by `server/scripts/i18n-build.cjs`. The picker group
 | East Africa · Africa | Swahili, Kinyarwanda, Somali, Amharic, Arabic (RTL), Lingala, Hausa, isiZulu |
 | World | English, French, German, Italian, Spanish (Spain and Mexico), Portuguese (Portugal and Brazil), Russian, Chinese (Simplified), Japanese, Korean, Hindi |
 
-Confidence runs from **complete** (Swahili) and **reviewed** (English and the world languages, drafted then read back by the translation teams) through **draft** (the Ugandan languages) to **early draft** (Rukonzo and the African visitor starters, which cover the strings a user meets first and fall back to English for the rest). The African visitor group exists so a traveller from Kigali, Addis, Khartoum, Kinshasa, Kano or
-Durban lands in a language of theirs; the world group is for tourists who do not read English.
-Arabic sets `dir="rtl"` on the whole document.
+## Status, and why it is not a grade
+
+Every language is **in service**, with a version and a date. There is no ladder of draft, reviewed
+and complete any more, and the word *draft* does not appear in the product.
+
+That is not a relabelling exercise. Twenty-six languages were carrying a "draft" label while
+already holding every string — the label had simply never been updated. Six really were
+incomplete; they were finished. What was left was a framing problem: describing a language by what
+it lacks is the wrong model for a translation, which is a living thing in every product that has
+ever shipped one and does not need apologising for.
+
+What replaces it is provenance and a correction path, which is what a reader actually needs:
+
+- **Who wrote it.** UG, not first-language speakers. Every dictionary says so in its
+  `translator_note`, along with the register aimed at and any construction we are unsure of.
+- **How to fix it.** *Suggest a better word* is in Me, in every language, and takes three fields:
+  the word we used, the word you would use, where you saw it. A correction from somebody who
+  speaks the language outranks anything UG wrote.
+
+The African group exists so a traveller from Kigali, Addis, Khartoum, Kinshasa, Kano or Durban
+lands in a language of theirs; the world group is for visitors who do not read English. Arabic
+sets `dir="rtl"` on the whole document.
 
 ## The honest rule
 
