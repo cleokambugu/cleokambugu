@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-02",
+ "generated": "2026-09-03",
  "source": "data/i18n/*.json via server/scripts/i18n-build.js",
  "keys": 243,
  "languages": {

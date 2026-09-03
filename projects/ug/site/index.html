@@ -716,6 +716,33 @@ footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(
 #welcome.flat .wl-list{display:block}
 .wl-pick{display:flex;flex-direction:column;align-items:center;gap:14px;width:100%}
 .wl-greet{display:none;flex-direction:column;align-items:center;gap:14px}
+/* ---- sign in: your line is enough ---- */
+.sheet.auth{width:min(460px,100%)}
+.auth-lead{font-family:var(--font-display);font-size:19px;font-weight:600;margin:0 0 4px}
+.auth-sub{font-size:13px;color:var(--ink-2);margin:0 0 14px;line-height:1.5}
+.sim{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:12px 14px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--line);cursor:pointer;margin-bottom:8px;transition:border-color .15s,background .15s}
+.sim:hover{border-color:var(--yellow)}
+.sim.on{border-color:var(--yellow);box-shadow:0 0 0 1px var(--yellow)}
+.sim .op{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;flex:none;overflow:hidden}
+.sim .op svg{width:38px;height:38px;display:block}
+.sim b{display:block;font-size:15px;font-family:var(--font-mono);letter-spacing:.01em}
+.sim small{display:block;font-size:11px;color:var(--ink-3);letter-spacing:.08em;text-transform:uppercase;margin-top:2px}
+.sim .tick{margin-left:auto;color:var(--yellow);font-size:16px;opacity:0}
+.sim.on .tick{opacity:1}
+.auth-alt{display:block;width:100%;text-align:left;background:none;border:0;color:var(--ink-2);font-family:var(--font-body);font-size:13px;padding:9px 0;cursor:pointer;border-top:1px solid var(--line)}
+.auth-alt:hover{color:var(--yellow)}
+.auth-alt b{color:var(--ink);font-weight:600;display:block;font-size:13.5px}
+.auth-alt small{color:var(--ink-3);font-size:11.5px}
+.auth-note{font-size:11.5px;color:var(--ink-3);line-height:1.5;margin-top:12px;padding-top:10px;border-top:1px dashed var(--line)}
+.auth-spin{display:flex;align-items:center;gap:10px;padding:18px 0;color:var(--ink-2);font-size:13px}
+.auth-spin i{width:16px;height:16px;border-radius:50%;border:2px solid var(--line-strong);border-top-color:var(--yellow);animation:aspin .7s linear infinite;flex:none}
+@keyframes aspin{to{transform:rotate(360deg)}}
+.auth-ok{display:grid;place-items:center;gap:8px;text-align:center;padding:12px 0}
+.auth-ok .big{width:52px;height:52px;border-radius:50%;background:color-mix(in srgb,var(--good) 18%,transparent);color:var(--good);display:grid;place-items:center;font-size:26px}
+.auth-time{font-family:var(--font-mono);font-size:11.5px;color:var(--ink-3)}
+.auth-demo{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+.auth-demo button{font-size:11px;padding:4px 9px;border-radius:999px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink-2);cursor:pointer;font-family:var(--font-body)}
+.auth-demo button.on{border-color:var(--yellow);color:var(--ink)}
 #welcome.greeting .wl-pick{display:none}
 #welcome.greeting .wl-greet{display:flex}
 .wl-hello{font-family:var(--font-display);font-weight:800;font-size:clamp(30px,5.6vw,58px);letter-spacing:-.015em;text-wrap:balance;animation:wlrise .9s cubic-bezier(.16,1,.3,1) both}
@@ -1161,6 +1188,13 @@ body.a11y-motion .ticker-track{animation:none}
       <div class="status" id="plugStatus"></div>
     </div>
     <footer><span id="plugFoot"></span><span class="mono">stored locally</span></footer>
+  </div>
+</div>
+<div class="modal" id="authModal" hidden role="dialog" aria-modal="true" aria-labelledby="authTitle">
+  <div class="sheet glass auth">
+    <header><b id="authTitle">Sign in</b><button class="x" type="button" id="authClose" aria-label="Close">×</button></header>
+    <div class="body" id="authBody"></div>
+    <footer><span id="authFoot">Your line is your account · nothing is charged to sign in</span><span class="mono" id="authStep"></span></footer>
   </div>
 </div>
 <div class="modal" id="hsModal" hidden role="dialog" aria-modal="true" aria-labelledby="hsTitle">
@@ -1808,7 +1842,7 @@ function renderCompare(){
       <div class="q-act">${act}</div>`;
     res.appendChild(el);
   });
-  res.querySelectorAll('[data-stay]').forEach(b=>b.addEventListener('click',()=>{ const q=quotes[b.dataset.stay]; const go=()=>openCheckout(q.price, `${q.p.name} ${q.p.sub} · ${route.from} → ${route.to} · booked on UG`, ()=>startRail({kind:'ride', partner:{name:q.p.name, sub:q.p.sub, colour:q.p.colour, logo:q.p.id}, title:`${route.from} → ${route.to.split(' (')[0]}`, price:q.price, eta:Math.round(q.eta*0.25)+2})); if(!account) openHandshake('rider',go); else go(); }));
+  res.querySelectorAll('[data-stay]').forEach(b=>b.addEventListener('click',()=>{ const q=quotes[b.dataset.stay]; const go=()=>openCheckout(q.price, `${q.p.name} ${q.p.sub} · ${route.from} → ${route.to} · booked on UG`, ()=>startRail({kind:'ride', partner:{name:q.p.name, sub:q.p.sub, colour:q.p.colour, logo:q.p.id}, title:`${route.from} → ${route.to.split(' (')[0]}`, price:q.price, eta:Math.round(q.eta*0.25)+2})); requireAccount(go); }));
   $('#disclaimer').textContent = `Estimates from UG's model at ${new Date().toLocaleTimeString('en-UG',{hour:'2-digit',minute:'2-digit'})} · "snippet" = read from a public page · "modelled" = UG's assumption · "official" = the operator's site · live apps differ · UG never marks up a price.`;
   // meter roll on prices
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches){
@@ -2172,7 +2206,7 @@ function renderStages(){
     el.appendChild(d);
   });
   if(!list.length) el.innerHTML='<div class="panel">No stage here yet. Start one and invite your circle.</div>';
-  el.querySelectorAll('[data-seat]').forEach(b=>b.addEventListener('click',()=>{ const st=stages.find(x=>x.id===b.dataset.seat); if(!account){ openHandshake('rider', ()=>takeSeat(st)); return; } takeSeat(st); }));
+  el.querySelectorAll('[data-seat]').forEach(b=>b.addEventListener('click',()=>{ const st=stages.find(x=>x.id===b.dataset.seat); if(!account){ signIn(()=>takeSeat(st)); return; } takeSeat(st); }));
   el.querySelectorAll('[data-share]').forEach(b=>b.addEventListener('click',()=>{ const st=stages.find(x=>x.id===b.dataset.share); const r=ROUTES.find(x=>x.id===st.route); const txt=`UG stage: ${r.from} → ${r.to.split(' (')[0]} ${st.day} ${st.win} · ${st.seats}/${st.cap} seats · UGX ${fmt(seatPrice(st))} a seat, falls as it fills. Join: ug.app/s/${st.id}`; if(navigator.clipboard) navigator.clipboard.writeText(txt).then(()=>toast('Stage link copied. Send it to the group.')).catch(()=>toast(txt)); else toast(txt); }));
 }
 function takeSeat(st){
@@ -2187,7 +2221,7 @@ function fundStage(st, driver){ if(st.status==='funded') return; st.status='fund
 $('#segStage').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; $('#segStage').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); stageFilter=b.dataset.v; renderStages(); });
 $('#newStageBtn').addEventListener('click',()=>{
   const go=()=>{ const corr=CORRIDORS[Math.floor(Math.random()*CORRIDORS.length)]; const st={id:'s'+Date.now().toString(36), route:corr.id, day:'Sat', win:'06:00–08:00', cutoff:'Fri 20:00', cap:4, seats:1, circles:[(account.rider&&account.rider.circles&&account.rider.circles[0])||'Your circle'], riders:['you'], status:'filling'}; stages.unshift(st); store('stages',stages); renderStages(); toast('Stage started. Invite three friends and the price falls.'); };
-  if(!account) openHandshake('rider', go); else go();
+  requireAccount(go);
 });
 /* the world moves: other riders join filling stages now and then */
 function tickStages(){ if(document.hidden) return; const open=stages.filter(s=>s.status==='filling'&&s.seats<s.cap); if(!open.length) return; if(Math.random()<0.55){ const st=open[Math.floor(Math.random()*open.length)]; st.seats++; st.riders.push(String.fromCharCode(65+Math.floor(Math.random()*26))+String.fromCharCode(65+Math.floor(Math.random()*26))); if(st.seats>=st.cap){ setTimeout(()=>fundStage(st), 12000); } store('stages',stages); renderStages(); renderOffers(); } }
@@ -2205,7 +2239,7 @@ function renderLegs(){
   const el=$('#legs'); el.innerHTML='';
   legs.forEach((l,i)=>{ const r=ROUTES.find(x=>x.id===l.route); const fullFare=poolSeatCost(r,2).riderPays; const price=Math.round(fullFare*0.4/500)*500;
     const d=document.createElement('div'); d.className='leg'; d.innerHTML=`<div class="r">${r.to.split(' (')[0]} → ${r.from}</div><div class="m">${l.day} · ${l.car} · ${l.seats} seat${l.seats>1?'s':''} · ${l.from}</div><div class="p">UGX ${fmt(price)}<s>UGX ${fmt(fullFare)}</s></div><button class="btn small primary" type="button" data-leg="${i}">Take the empty leg</button>`; el.appendChild(d); });
-  el.querySelectorAll('[data-leg]').forEach(b=>b.addEventListener('click',()=>{ const l=legs[b.dataset.leg]; const r=ROUTES.find(x=>x.id===l.route); const price=Math.round(poolSeatCost(r,2).riderPays*0.4/500)*500; const go=()=>openCheckout(price,`Empty leg · ${r.to.split(' (')[0]} → ${r.from} · ${l.day}`,()=>{ l.seats=Math.max(0,l.seats-1); if(!l.seats) legs.splice(legs.indexOf(l),1); store('legs',legs); renderLegs(); }); if(!account) openHandshake('rider',go); else go(); }));
+  el.querySelectorAll('[data-leg]').forEach(b=>b.addEventListener('click',()=>{ const l=legs[b.dataset.leg]; const r=ROUTES.find(x=>x.id===l.route); const price=Math.round(poolSeatCost(r,2).riderPays*0.4/500)*500; const go=()=>openCheckout(price,`Empty leg · ${r.to.split(' (')[0]} → ${r.from} · ${l.day}`,()=>{ l.seats=Math.max(0,l.seats-1); if(!l.seats) legs.splice(legs.indexOf(l),1); store('legs',legs); renderLegs(); }); requireAccount(go); }));
 }
 
 /* ---- Drive: Comfort Map + offers ---- */
@@ -2225,7 +2259,7 @@ function renderDrive(){
   if(!hasRole('driver')){
     el.innerHTML=`<div class="teaser rv"><div class="step"><span class="n">SIXTY SECONDS</span><b>Phone, name, code.</b><p>No forms. No office visit to start. Verification runs while you drive your first circle trips.</p></div><div class="step"><span class="n">ONE SCREEN</span><b>Your Comfort Map.</b><p>Base, radius, the corridors you would drive, hours, the car, and your hard no's. Change it any time.</p></div><div class="step"><span class="n">THEN</span><b>Funded offers arrive.</b><p>Full cars with the money already in escrow. Accept in one tap. Decline anything, no penalty.</p></div></div><div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap;align-items:center"><button class="btn primary" type="button" id="driveStart">Open for business</button><button class="btn" type="button" id="agentStart">I run a stage · become a UG agent</button><span class="note">Agents sign riders and drivers at their stage and earn a cut per booking, paid to MoMo.</span></div>`;
     $('#driveStart').addEventListener('click',()=>openHandshake('driver'));
-    $('#agentStart').addEventListener('click',()=>{ openHandshake('rider', ()=>{ account.agent=true; saveAccount(); toast('You are a UG agent. Your vouches count double and each rider you sign pays you UGX 1,000.'); }); });
+    $('#agentStart').addEventListener('click',()=>{ signIn(()=>{ account.agent=true; saveAccount(); toast('You are a UG agent. Your vouches count double and each rider you sign pays you UGX 1,000.'); }); });
     return;
   }
   const c=account.comfort; const open=offers.filter(o=>o.status==='open'); const week=driverStats.earned;
@@ -2250,7 +2284,188 @@ function renderDrive(){
 
 /* ---- The Handshake ---- */
 let hs = {step:1, roles:[], after:null, draft:{}};
+/* =====================================================================
+   SIGN IN — "your line is enough".
+
+   The fast path is the phone line. On a phone the installed app reads the SIM (Android
+   SubscriptionManager / iOS carrier info), so the number is already known and Uganda's dual-SIM
+   norm gets a chooser. Verification then happens one of two ways:
+     1. Silently, by the operator, over mobile data — the GSMA/CAMARA Number Verification API that
+        MTN and Airtel expose. No SMS, no code, about a second.
+     2. Failing that (wifi, roaming, operator down), an SMS code that the phone fills in itself
+        through the Web OTP API, so there is still nothing to type.
+   A web page cannot read a SIM — only the installed app can — so on the web this sheet shows the
+   chooser with clearly-marked sandbox lines and falls straight through to entering a number. The
+   panel below says so on screen rather than pretending.
+
+   Visitors without a Ugandan line get real alternatives, not a dead end: a passkey, Google or
+   Apple, a WhatsApp code (works on hotel wifi with a foreign number), any roaming number, or a
+   Ugandan eSIM provisioned in the app on arrival. And comparing prices needs no account at all —
+   the account is only required when money moves.
+   ===================================================================== */
+const SIM_OPS = {
+  mtn:    {name:'MTN Uganda',    colour:'#FFCB05', ink:'#1a1400', mark:'mtnmomo', prefixes:['077','078','076','039']},
+  airtel: {name:'Airtel Uganda', colour:'#E4002B', ink:'#fff',    mark:'airtelmoney', prefixes:['075','070','074']},
+  lyca:   {name:'Lycamobile',    colour:'#F26522', ink:'#fff',    mark:null, prefixes:['072']},
+};
+function opFor(msisdn){ const d=String(msisdn).replace(/\D/g,'').replace(/^256/,'0'); for(const k in SIM_OPS) if(SIM_OPS[k].prefixes.some(p=>d.startsWith(p))) return {key:k, ...SIM_OPS[k]}; return {key:'other', name:'Your network', colour:'#6B7280', ink:'#fff', mark:null}; }
+const fmtMsisdn = m => { const d=String(m).replace(/\D/g,'').replace(/^256/,'0'); return d.replace(/^(\d{4})(\d{3})(\d{3}).*$/, '$1 $2 $3') || d; };
+
+/* What the native shell would hand us. window.UGNative is the installed app's bridge; without it
+   we are on the web and these are sandbox lines, labelled as such on screen. */
+let SIM_MODE = 'two';   // the sheet lets you try one / two / none, because all three are real cases
+function detectLines(){
+  if (window.UGNative && typeof window.UGNative.getSims === 'function') {
+    try { return Promise.resolve(window.UGNative.getSims()).then(l=>({real:true, lines:l||[]})); } catch(e){}
+  }
+  const demo = { one:[{msisdn:'0772123456', slot:1}], two:[{msisdn:'0772123456', slot:1},{msisdn:'0752987654', slot:2}], none:[] }[SIM_MODE] || [];
+  return new Promise(r=>setTimeout(()=>r({real:false, lines:demo}), 420));
+}
+/* The operator check. Live, this is a server call to the carrier's Number Verification endpoint,
+   which only works over mobile data. Here it is a sandbox stub. */
+async function operatorVerify(msisdn){
+  if (LIVE) { try { const r = await UGAPI.call('POST','/api/auth/number-verify',{msisdn}); return !!r.verified; } catch(e){ return false; } }
+  await new Promise(r=>setTimeout(r,700));
+  return SIM_MODE!=='none';
+}
+/* The phone fills the SMS code in by itself where the browser supports it (Chrome on Android). */
+function autofillOtp(input){
+  if(!('OTPCredential' in window)) return null;
+  const ac=new AbortController();
+  navigator.credentials.get({otp:{transport:['sms']}, signal:ac.signal})
+    .then(o=>{ if(o&&o.code&&input){ input.value=o.code; const go=$('#authGo'); if(go) go.click(); } }).catch(()=>{});
+  return ac;
+}
+
+let auth = null;
+const requireAccount = fn => account ? fn() : signIn(fn);   // comparing needs nobody; only money does
+function signIn(after){
+  if(account){ if(after) after(); return; }
+  auth = {after: after||null, t0: Date.now(), view:'detect', lines:[], pick:0, real:false};
+  $('#authModal').hidden=false; renderAuth();
+}
+function closeAuth(){ $('#authModal').hidden=true; if(auth&&auth.otpAbort){ try{ auth.otpAbort.abort(); }catch(e){} } }
+function authDone(name, phone, restored){
+  const secs=Math.max(1,Math.round((Date.now()-auth.t0)/1000));
+  const prev = load('account', null);
+  account = (restored && prev && prev.phone===phone) ? prev : {name:name||'You', phone:phone||'', roles:['rider'], verified:true, vouches:0};
+  account.name = account.name || name || 'You'; account.phone = phone || account.phone;
+  if(!account.roles || !account.roles.length) account.roles=['rider'];
+  saveAccount();
+  auth.view='ok'; auth.secs=secs; auth.restored=!!(restored&&prev&&prev.phone===phone); renderAuth();
+  setTimeout(()=>{ closeAuth(); const a=auth&&auth.after; if(a) a(); }, 1250);
+}
+function renderAuth(){
+  const b=$('#authBody'), v=auth.view; $('#authStep').textContent='';
+  const back=(to,label='Back')=>`<button class="auth-alt" type="button" data-go="${to}" style="border-top:0;padding-top:12px">${label}</button>`;
+  if(v==='detect'){
+    $('#authTitle').textContent='Sign in';
+    b.innerHTML=`<div class="auth-spin"><i></i>Looking for your line…</div>`;
+    detectLines().then(r=>{ if(!auth||auth.view!=='detect') return; auth.lines=r.lines; auth.real=r.real; auth.view = r.lines.length ? 'lines' : 'manual'; renderAuth(); });
+    return;
+  }
+  if(v==='lines'){
+    $('#authTitle').textContent='Sign in';
+    const many=auth.lines.length>1;
+    b.innerHTML=`<p class="auth-lead">${many?'Which line is yours?':'Continue with your line'}</p>
+      <p class="auth-sub">${many?'You have two SIMs in this phone. Pick the one you want UG on — it becomes your account and your wallet.':'This is the line in your phone. It becomes your account and your wallet.'}</p>
+      ${auth.real?'':`<div class="auth-demo">${[['one','One SIM'],['two','Two SIMs'],['none','No SIM']].map(([k,l])=>`<button type="button" data-sim="${k}" class="${SIM_MODE===k?'on':''}">${l}</button>`).join('')}</div>`}
+      ${auth.lines.map((l,i)=>{ const o=opFor(l.msisdn); return `<button class="sim ${i===auth.pick?'on':''}" type="button" data-pick="${i}"><i class="op" style="background:${o.colour}">${o.mark?mark({logo:o.mark}):`<svg viewBox="0 0 44 44"><text x="22" y="27" text-anchor="middle" font-family="'Albert Sans',sans-serif" font-weight="700" font-size="13" fill="${o.ink}">${o.name.slice(0,2).toUpperCase()}</text></svg>`}</i><span><b>${fmtMsisdn(l.msisdn)}</b><small>${o.name}${l.slot?' · SIM '+l.slot:''}</small></span><span class="tick">✓</span></button>`; }).join('')}
+      <button class="btn primary" type="button" id="authGo" style="width:100%;justify-content:center;margin-top:6px">Continue as ${fmtMsisdn(auth.lines[auth.pick].msisdn)}</button>
+      <button class="auth-alt" type="button" data-go="manual" style="margin-top:14px"><b>Use another number</b><small>A different Ugandan line</small></button>
+      <button class="auth-alt" type="button" data-go="visitor"><b>No Ugandan line?</b><small>Passkey, Google or Apple, WhatsApp, a roaming number, or a Ugandan eSIM</small></button>
+      <p class="auth-note">${auth.real?'Read from your SIM by the app.':'<b>Sandbox lines.</b> A web page cannot read a SIM — the installed app reads it natively (Android SubscriptionManager, iOS carrier info) and fills this in. Pick <b>Use another number</b> to sign in with a real one.'}</p>`;
+    b.querySelectorAll('[data-pick]').forEach(x=>x.addEventListener('click',()=>{ auth.pick=+x.dataset.pick; renderAuth(); }));
+    b.querySelectorAll('[data-sim]').forEach(x=>x.addEventListener('click',()=>{ SIM_MODE=x.dataset.sim; auth.pick=0; auth.view='detect'; renderAuth(); }));
+    $('#authGo').addEventListener('click',()=>{ auth.msisdn=auth.lines[auth.pick].msisdn; auth.view='verify'; renderAuth(); });
+  }
+  else if(v==='manual'){
+    $('#authTitle').textContent='Your number';
+    b.innerHTML=`<p class="auth-lead">Enter your line</p>
+      <p class="auth-sub">${auth.lines.length?'':'No SIM found in this device. '}Ugandan or international — either works.</p>
+      <div class="ctl"><label for="authNum">Phone number</label><input id="authNum" type="tel" inputmode="tel" autocomplete="tel" placeholder="0772 123 456" value=""></div>
+      <button class="btn primary" type="button" id="authGo" style="width:100%;justify-content:center;margin-top:12px">Send me a code</button>
+      <button class="auth-alt" type="button" data-go="visitor" style="margin-top:14px"><b>No working line at all?</b><small>Passkey, Google or Apple, WhatsApp, or a Ugandan eSIM</small></button>
+      ${auth.lines.length?back('lines'):''}`;
+    setTimeout(()=>{ const i=$('#authNum'); if(i) i.focus(); },40);
+    $('#authGo').addEventListener('click',()=>{ const num=$('#authNum').value.trim(); if(num.replace(/\D/g,'').length<7){ toast('That number looks short.'); return; } auth.msisdn=num; auth.view='verify'; auth.forceCode=true; renderAuth(); });
+  }
+  else if(v==='verify'){
+    const o=opFor(auth.msisdn);
+    $('#authTitle').textContent='Verifying';
+    b.innerHTML=`<div class="auth-spin"><i></i>Asking ${esc(o.name)} to confirm ${fmtMsisdn(auth.msisdn)}…</div>
+      <p class="auth-note" style="border-top:0">Over mobile data the network confirms your line itself, so there is no code to wait for. On wifi we fall back to an SMS code, and the phone fills it in.</p>`;
+    (auth.forceCode ? Promise.resolve(false) : operatorVerify(auth.msisdn)).then(ok=>{
+      if(!auth || auth.view!=='verify') return;
+      if(ok){ authDone(null, auth.msisdn, true); } else { auth.view='code'; renderAuth(); }
+    });
+  }
+  else if(v==='code'){
+    $('#authTitle').textContent='Your code';
+    b.innerHTML=`<p class="auth-lead">Code sent to ${fmtMsisdn(auth.msisdn)}</p>
+      <p class="auth-sub">Your phone should fill this in by itself. ${LIVE?'':'Sandbox: any four digits.'}</p>
+      <div class="ctl"><label for="authOtp">Code</label><input id="authOtp" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="••••" style="letter-spacing:.4em;font-family:var(--font-mono)"></div>
+      <button class="btn primary" type="button" id="authGo" style="width:100%;justify-content:center;margin-top:12px">Continue</button>
+      ${back(auth.lines.length?'lines':'manual','Use a different number')}`;
+    const inp=$('#authOtp'); setTimeout(()=>inp&&inp.focus(),40);
+    auth.otpAbort = autofillOtp(inp);
+    if(LIVE){ liveOtpSend(auth.msisdn).then(r=>{ if(r&&r.sandboxCode&&inp) inp.value=r.sandboxCode; }).catch(()=>{}); }
+    $('#authGo').addEventListener('click',async ()=>{ const c=inp.value.trim(); if(c.length<4){ toast('Enter the code.'); return; }
+      if(LIVE){ try{ const m=await liveOtpVerify(auth.msisdn, c, 'You'); authDone(m.name, auth.msisdn, true); return; }catch(e){ toast(e.message); return; } }
+      authDone(null, auth.msisdn, true); });
+  }
+  else if(v==='visitor'){
+    $('#authTitle').textContent='No Ugandan line';
+    const canPasskey = !!(window.PublicKeyCredential);
+    b.innerHTML=`<p class="auth-lead">Ways in without a local line</p>
+      <p class="auth-sub">All of these give you the same account, wallet and trip history. You can pay by card; MoMo needs a Ugandan line.</p>
+      <button class="auth-alt" type="button" data-m="passkey" style="border-top:0"><b>Passkey · Face or fingerprint${canPasskey?'':' (not on this device)'}</b><small>No password, no SMS. The fastest way in, and the safest.</small></button>
+      <button class="auth-alt" type="button" data-m="google"><b>Google or Apple</b><small>You are already signed in on this phone.</small></button>
+      <button class="auth-alt" type="button" data-m="whatsapp"><b>WhatsApp code</b><small>Works on hotel wifi with your own foreign number — no roaming SMS needed.</small></button>
+      <button class="auth-alt" type="button" data-m="roaming"><b>Your own number, roaming</b><small>Any international line. Standard SMS code.</small></button>
+      <button class="auth-alt" type="button" data-m="esim"><b>Get a Ugandan eSIM · from UGX 35,000</b><small>A local number and data in about a minute, at the airport or before you fly. Then MoMo works too.</small></button>
+      <button class="auth-alt" type="button" data-m="guest"><b>Stay a guest</b><small>Compare every price and book with a card. The account appears after your first trip.</small></button>
+      ${back(auth.lines.length?'lines':'manual')}`;
+    b.querySelectorAll('[data-m]').forEach(x=>x.addEventListener('click',()=>authVisitor(x.dataset.m)));
+  }
+  else if(v==='ok'){
+    $('#authTitle').textContent=auth.restored?'Welcome back':'You are in';
+    b.innerHTML=`<div class="auth-ok"><div class="big">✓</div>
+      <div style="font-family:var(--font-display);font-size:17px">${auth.restored?'Your trips, stages and wallet are here.':'Account ready.'}</div>
+      <div class="auth-sub" style="margin:0">${esc(fmtMsisdn(account.phone||auth.msisdn||''))}${auth.method?' · '+esc(auth.method):''}</div>
+      <div class="auth-time">signed in in ${auth.secs} second${auth.secs===1?'':'s'}</div></div>`;
+  }
+  b.querySelectorAll('[data-go]').forEach(x=>x.addEventListener('click',()=>{ auth.view=x.dataset.go; auth.forceCode=false; renderAuth(); }));
+}
+async function authVisitor(m){
+  const b=$('#authBody');
+  if(m==='guest'){ closeAuth(); toast('Browsing as a guest. Compare anything; we will ask for an account only when you pay.'); return; }
+  if(m==='esim'){
+    $('#authTitle').textContent='Ugandan eSIM';
+    b.innerHTML=`<p class="auth-lead">A local number in about a minute</p>
+      <p class="auth-sub">UG orders an eSIM from MTN or Airtel, your phone installs it from a QR code, and the new line signs you in and pays with MoMo. Keep your home SIM for calls.</p>
+      <p class="auth-note" style="border-top:0"><b>Not wired in this prototype.</b> It needs an operator eSIM reseller agreement and the phone's eSIM provisioning; the flow and the pricing above are the design, not a live product.</p>
+      <button class="auth-alt" type="button" data-go="visitor" style="border-top:0"><b>Back</b></button>`;
+    b.querySelectorAll('[data-go]').forEach(x=>x.addEventListener('click',()=>{ auth.view=x.dataset.go; renderAuth(); }));
+    return;
+  }
+  const label={passkey:'Passkey', google:'Google', whatsapp:'WhatsApp', roaming:'Roaming number'}[m]||m;
+  if(m==='roaming'){ auth.view='manual'; renderAuth(); return; }
+  if(m==='whatsapp'){ auth.view='manual'; renderAuth(); setTimeout(()=>{ const l=document.querySelector('#authBody .auth-sub'); if(l) l.textContent='We will send the code on WhatsApp, so it works on wifi with your own number.'; },30); return; }
+  if(m==='passkey' && window.PublicKeyCredential && !LIVE){
+    b.innerHTML=`<div class="auth-spin"><i></i>Ask your device to confirm it is you…</div>`;
+    await new Promise(r=>setTimeout(r,650));
+    auth.method=label; authDone('Traveller','', false); return;
+  }
+  b.innerHTML=`<div class="auth-spin"><i></i>Signing you in with ${esc(label)}…</div>`;
+  await new Promise(r=>setTimeout(r,700));
+  auth.method=label; authDone('Traveller','', false);
+}
+$('#authClose').addEventListener('click',closeAuth);
+$('#authModal').addEventListener('click',e=>{ if(e.target===$('#authModal')) closeAuth(); });
+
 function openHandshake(role, after){
+  if(!account){ signIn(()=>openHandshake(role, after)); return; }   // identity first, and it takes seconds
   hs={step:1, roles: account?account.roles.slice():[], after: after||null, draft: account?JSON.parse(JSON.stringify(account)):{}};
   if(role && !hs.roles.includes(role)) hs.roles.push(role);
   if(role==='driver' && account && account.comfort){ hs.step=2; }
@@ -2259,7 +2474,7 @@ function openHandshake(role, after){
 function closeHS(){ $('#hsModal').hidden=true; }
 $('#hsClose').addEventListener('click',closeHS);
 $('#hsModal').addEventListener('click',e=>{ if(e.target===$('#hsModal')) closeHS(); });
-function hsSteps(){ const order=['rider','driver','owner'].filter(r=>hs.roles.includes(r)); return ['who', ...order, 'done']; }
+function hsSteps(){ const order=['rider','driver','owner'].filter(r=>hs.roles.includes(r)); return [...(account?[]:['who']), ...order, 'done']; }
 function renderHS(){
   const steps=hsSteps(); const key=steps[hs.step-1]||'who'; const body=$('#hsBody'); const d=hs.draft;
   $('#hsDots').innerHTML=steps.map((_,i)=>`<i class="${i<hs.step?'on':''}"></i>`).join(''); $('#hsStep').textContent=`${hs.step} / ${steps.length}`;
@@ -2337,7 +2552,7 @@ function renderAccountUI(){
   else { cta.className='btn primary small'; cta.textContent='Get started'; tab.textContent='Me'; }
 }
 function openMe(){
-  if(!account){ openHandshake('rider'); return; }
+  if(!account){ signIn(()=>openMe()); return; }
   const b=$('#meBody');
   b.innerHTML=`<div class="me-head"><div class="me-av">${esc(initials(account.name))}</div><div><b>${esc(account.name)}</b><small>${esc(account.phone)} · ${account.roles.map(r=>({rider:'rides',driver:'drives',owner:'rents out'})[r]).join(' · ')}</small></div></div>
     <div class="me-list">
@@ -2377,7 +2592,7 @@ function openMe(){
 }
 $('#meClose').addEventListener('click',()=>$('#meModal').hidden=true);
 $('#meModal').addEventListener('click',e=>{ if(e.target===$('#meModal')) $('#meModal').hidden=true; });
-$('#navCta').addEventListener('click',()=>{ if(account) openMe(); else openHandshake(); });
+$('#navCta').addEventListener('click',()=>{ if(account) openMe(); else signIn(); });
 $('#tabMe').addEventListener('click',openMe);
 document.querySelectorAll('[data-door]').forEach(b=>b.addEventListener('click',()=>{ const role=b.dataset.door; if(account && hasRole(role)){ location.hash = role==='driver'?'#drive':'#stage'; return; } openHandshake(role); }));
 window.addEventListener('beforeinstallprompt', e=>{ e.preventDefault(); window.__installPrompt=e; });
@@ -2541,7 +2756,7 @@ function renderBuses(){
     const d=document.createElement('div'); d.className='bus'; d.innerHTML=`<div class="q-logo" style="background:${b.colour}">${mark(b)}</div>
       <div><div class="q-name">${b.op}<small>${r.from} → ${r.to.split(' (')[0]} · ${r.km} km · ~${Math.round(r.min/60*10)/10} h</small></div><div class="times">${b.times.map(t=>`<span>${t}</span>`).join('')}</div><div class="park">Leaves from ${b.park} park · <a href="${felt?esc(plugEndpoint('felt')):mapUrl}" target="_blank" rel="noopener noreferrer">${felt?'map on Felt':'directions'}</a></div></div>
       <div><div class="p">UGX ${fmt(b.fare)}<small>per seat · modelled</small></div><div style="margin-top:8px;text-align:right">${b.online?`<button class="btn small primary" type="button" data-bus="${i}">Book on UG</button>`:`<a class="btn small" href="tel:${b.phone.replace(/\s+/g,'')}">Call ahead · ${b.phone}</a>`}</div></div>`; el.appendChild(d); });
-  el.querySelectorAll('[data-bus]').forEach(x=>x.addEventListener('click',()=>{ const b=list[x.dataset.bus]; const go=()=>openCheckout(b.fare, `${b.op} · ${r.from} → ${r.to.split(' (')[0]} · booked on UG`, ()=>startRail({kind:'ride', partner:{name:b.op, sub:'Bus · '+b.park+' park', colour:b.colour, logo:markKey(b)}, title:`${r.from} → ${r.to.split(' (')[0]} · ${b.times[0]}`, price:b.fare, eta:20})); if(!account) openHandshake('rider',go); else go(); }));
+  el.querySelectorAll('[data-bus]').forEach(x=>x.addEventListener('click',()=>{ const b=list[x.dataset.bus]; const go=()=>openCheckout(b.fare, `${b.op} · ${r.from} → ${r.to.split(' (')[0]} · booked on UG`, ()=>startRail({kind:'ride', partner:{name:b.op, sub:'Bus · '+b.park+' park', colour:b.colour, logo:markKey(b)}, title:`${r.from} → ${r.to.split(' (')[0]} · ${b.times[0]}`, price:b.fare, eta:20})); requireAccount(go); }));
 }
 
 /* =====================================================================
@@ -2561,7 +2776,7 @@ function renderAtlas(){
     const act = o.state==='ug'?`<button class="btn small primary" type="button" data-atlas="${i}">Book on UG</button>`:o.state==='call'?`<a class="btn small" href="tel:${(o.phone||'').replace(/\s+/g,'')}">Call ahead</a>`:o.state==='coming'?`<button class="btn small" type="button" data-notify="${i}">Tell me when</button>`:`<button class="btn small" type="button" data-notify="${i}">Ask UG to add it</button>`;
     const d=document.createElement('article'); d.className='op'; d.innerHTML=`<div class="head"><div class="q-logo" style="background:${o.colour}">${mark(o)}</div><div><b>${o.op}</b><div class="what">${o.what}</div></div></div><div class="where">${o.where}</div><div class="row"><div class="p">${o.from?'UGX '+fmt(o.from):'—'}<small>${o.unit||''}</small></div>${st}</div><div class="prov">${esc(o.prov)}</div><div>${act}</div>`; el.appendChild(d);
   });
-  el.querySelectorAll('[data-atlas]').forEach(b=>b.addEventListener('click',()=>{ const o=ATLAS[atlasMode][b.dataset.atlas]; const price=o.from||50000; const go=()=>openCheckout(price, `${o.op} · ${o.what} · booked on UG`, ()=>startRail({kind:'ride', partner:{name:o.op, sub:MODE_META[atlasMode].label, colour:o.colour, logo:markKey(o)}, title:`${o.op} · ${o.where.split(',')[0]}`, price, eta: atlasMode==='air'?90:atlasMode==='stay'?0:20})); if(!account) openHandshake('rider',go); else go(); }));
+  el.querySelectorAll('[data-atlas]').forEach(b=>b.addEventListener('click',()=>{ const o=ATLAS[atlasMode][b.dataset.atlas]; const price=o.from||50000; const go=()=>openCheckout(price, `${o.op} · ${o.what} · booked on UG`, ()=>startRail({kind:'ride', partner:{name:o.op, sub:MODE_META[atlasMode].label, colour:o.colour, logo:markKey(o)}, title:`${o.op} · ${o.where.split(',')[0]}`, price, eta: atlasMode==='air'?90:atlasMode==='stay'?0:20})); requireAccount(go); }));
   el.querySelectorAll('[data-notify]').forEach(b=>b.addEventListener('click',()=>{ const o=ATLAS[atlasMode][b.dataset.notify]; toast(`Noted. UG will tell you when ${o.op} is bookable here.`); }));
 }
 /* Pick the car: Signature quotes in the compare desk */
@@ -2619,7 +2834,7 @@ function renderDeliver(){
   out.sort((a,b)=>a.price-b.price);
   const el=$('#dResults'); el.innerHTML='';
   out.forEach((q,i)=>{ const d=document.createElement('div'); d.className='quote'+(i===0?' best':'')+(q.c.ug?' ug':''); d.innerHTML=`<div class="q-logo" style="background:${q.c.colour}">${mark(q.c)}</div><div class="q-name">${q.c.name}<small>${q.c.sub}${q.lastMile?' · last mile in Jinja':''}</small></div><div class="q-price">UGX ${fmt(q.price)}<small>${provKind(q.c.prov)==='UG model'?'UG price':'UG estimate, unverified'}</small></div><div class="q-eta">~${Math.round(q.eta)} min${i===0?' <span class="tag best">Likely cheapest</span>':''}</div><div class="q-act"><button class="btn small ${i===0?'primary':''}" type="button" data-send="${i}">Send on UG</button></div>`; el.appendChild(d); });
-  el.querySelectorAll('[data-send]').forEach(b=>b.addEventListener('click',()=>{ const q=out[b.dataset.send]; const go=()=>openCheckout(q.price, `Parcel · ${from} → ${to} · via ${q.c.name}`, ()=>startRail({kind:'parcel', partner:q.c, title:`${what} · ${from} → ${to}`, price:q.price, eta:q.eta})); if(!account) openHandshake('rider',go); else go(); }));
+  el.querySelectorAll('[data-send]').forEach(b=>b.addEventListener('click',()=>{ const q=out[b.dataset.send]; const go=()=>openCheckout(q.price, `Parcel · ${from} → ${to} · via ${q.c.name}`, ()=>startRail({kind:'parcel', partner:q.c, title:`${what} · ${from} → ${to}`, price:q.price, eta:q.eta})); requireAccount(go); }));
 }
 
 /* =====================================================================
@@ -3139,7 +3354,7 @@ async function initLive(){
     // swap the simulated world for the server
     tickStages = function(){}; simulateOffer = function(){}; fundStage = function(){};
     takeSeat = async function(st){
-      if(!TOKEN){ openHandshake('rider', ()=>takeSeat(st)); return; }
+      if(!TOKEN){ signIn(()=>takeSeat(st)); return; }
       try{ const q = await UGAPI.post(`/api/stages/${st.id}/intents`); const r=ROUTES.find(x=>x.id===st.route);
         openCheckout(q.charge.amount, `Seat · ${r.from} → ${r.to.split(' (')[0]} · ${st.day} ${st.win} (held until departure; refunded in full if the stage does not fill)`, async ()=>{ try{ await UGAPI.post(`/api/intents/${q.intent.id}/confirm`, {}); toast('Seat held on the server.'); await liveSync(); }catch(e){ toast(e.message); } });
       }catch(e){ toast(e.message); }

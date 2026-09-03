@@ -20,6 +20,16 @@ export function createApi({ db, ledger, stages, bookings, otp, flw, sandbox, ver
   on('GET', '/api/health', () => ({ ok: true, version, sandbox, flwPublicKey: flw.publicKey || null, routes: ROUTES.length, time: now() }));
 
   // ---- identity ----
+  /* Operator number verification (GSMA Mobile Connect / CAMARA Number Verification). Live, this
+     proxies the carrier endpoint, which can only confirm a line over that carrier's mobile data —
+     so it returns verified:false on wifi and the caller falls back to an SMS code. There is no
+     carrier contract here, so it is a sandbox stub that says so in the response. */
+  on('POST', '/api/auth/number-verify', async (req) => {
+    const msisdn = String(req.body.msisdn || '').replace(/\D/g, '');
+    if (msisdn.length < 9) throw httpError(400, 'msisdn required');
+    return { verified: false, sandbox: true,
+      reason: 'No carrier agreement in this build. Wire MTN or Airtel Number Verification here; it only works over mobile data.' };
+  });
   on('POST', '/api/auth/otp', async (req) => otp.send(req.body.phone));
   on('POST', '/api/auth/verify', async (req) => {
     const r = otp.check(req.body.phone, req.body.code); if (!r.ok) throw httpError(401, r.why);

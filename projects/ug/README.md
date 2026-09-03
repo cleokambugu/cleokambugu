@@ -29,6 +29,7 @@ operator; see `docs/deploy.md` and the panel's list before real money moves.
 | [`docs/stress-test.md`](docs/stress-test.md) | The panel of sharks and maestros: verdicts, what v1 changed, what v2 must do. Full critiques in [`docs/panel/`](docs/panel/). |
 | [`server/`](server/) | **The backend.** Node 22, no dependencies, SQLite: `src/` (api, stages, ledger, bookings, pulse, otp, flutterwave), `test/`, a Dockerfile, `.env.example`, `scripts/` (data export, icons). `README.md` there is the system shape; `openapi.yaml` the contract. |
 | [`docs/foresight.md`](docs/foresight.md) | Demand before it happens: the three calendars, the forecast, promises against need, the right vehicle to the right place, confidence and learning. |
+| [`docs/accounts.md`](docs/accounts.md) | Signing in: the line is the account, the dual-SIM chooser, silent operator verification, and the ways in for visitors with no Ugandan line. |
 | [`docs/languages.md`](docs/languages.md) | Language justice: English, Swahili, Luganda, Runyankore-Rukiga, Acholi and Ateso, with honest confidence and a review process. |
 | [`docs/deploy.md`](docs/deploy.md) | Run it locally in two minutes; three ways to put it on the internet; what live and sandbox mean. |
 | [`site/sw.js`](site/sw.js), [`site/icons/`](site/icons/), [`site/config.js`](site/config.js) | Service worker for the offline shell, PNG icons from the Crest, the API base override. |
