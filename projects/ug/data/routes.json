@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-02",
+  "generated": "2026-09-03",
   "source": "projects/ug/site/index.html data block",
   "note": "Every figure is an estimate. prov fields: snippet = read from a search snippet or third-party page, modelled = UG assumption, official = read on the operator page, UG model = UG own formula. See docs/arbitrage-model.md and docs/atlas.md.",
   "routes": [

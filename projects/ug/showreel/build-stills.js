@@ -59,7 +59,10 @@ async function main() {
       const w = document.querySelector('#welcome'); if (w) { w.hidden = true; w.remove(); }
     });
     if (scheme === 'light') await page.evaluate(() => { document.documentElement.dataset.theme = 'light'; });
-    await page.waitForTimeout(2600);
+    /* Boot drains through requestIdleCallback now, so a fixed wait photographs a half-built page.
+       __ugReady is set when the last piece has run. */
+    await page.waitForFunction(() => window.__ugReady === true, null, { timeout: 30000 }).catch(() => {});
+    await page.waitForTimeout(1400);
     if (pre) await page.evaluate(pre);
     await page.evaluate(s => document.querySelector(s).scrollIntoView({ block: 'start' }), sel);
     await page.waitForTimeout(1200);
