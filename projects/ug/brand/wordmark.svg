@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 96" width="360" height="96" role="img" aria-label="UG. Ride. Pool. Rent.">
-  <!-- Horizontal lock-up: crest, UG, catchphrase. Text uses Unbounded and IBM Plex Mono when available. -->
+  <!-- Horizontal lock-up: crest, UG, catchphrase. Text uses Archivo and Martian Mono when available. -->
   <g transform="translate(8 16)">
     <path d="M28.5 40.5 Q22 31 12.5 17" fill="none" stroke="currentColor" stroke-width="7.5" stroke-linecap="round"/>
     <path d="M32 38.5 Q32 24 32 8.5" fill="none" stroke="#F2C200" stroke-width="7.5" stroke-linecap="round"/>
@@ -7,6 +7,6 @@
     <circle cx="32" cy="48" r="7.5" fill="currentColor"/>
     <circle cx="32" cy="48" r="3" fill="#F2C200"/>
   </g>
-  <text x="84" y="62" font-family="Unbounded, 'Albert Sans', system-ui, sans-serif" font-weight="900" font-size="44" letter-spacing="-1" fill="currentColor">UG</text>
-  <text x="170" y="60" font-family="'IBM Plex Mono', ui-monospace, monospace" font-weight="500" font-size="15" letter-spacing="2.4" fill="currentColor" opacity=".7">RIDE. POOL. RENT.</text>
+  <text x="84" y="62" font-family="Archivo, system-ui, sans-serif" font-weight="800" font-size="44" letter-spacing="-1" fill="currentColor">UG</text>
+  <text x="170" y="60" font-family="'Martian Mono', ui-monospace, monospace" font-weight="500" font-size="15" letter-spacing="2.4" fill="currentColor" opacity=".7">RIDE. POOL. RENT.</text>
 </svg>

@@ -60,8 +60,8 @@ Construction: a 64-unit square; three round-capped strokes of 7.5 units from the
 ground: cream on night, ink on noon, and the yellow and red never change. Minimum size 20 px;
 below that use the pearl alone.
 
-The wordmark sets UG in Unbounded 900 beside the crest; the catchphrase in IBM Plex Mono
-follows at 70% ink. The app icon puts the crest on a near-black tile with a faint diagonal
+The wordmark sets UG in Archivo 800, run wide on its width axis, beside the crest; the
+catchphrase follows in Martian Mono at 70% ink. The app icon puts the crest on a near-black tile with a faint diagonal
 sheen and UG beneath, so it sits comfortably beside the other apps it compares.
 
 Partner marks on the compare screen are UG's own stylised renderings: each operator's name and
@@ -88,15 +88,25 @@ Semantic colours (good `#3DBB7A`, warn `#F2A900`, bad `#E5484D`) are separate fr
 
 ## Type
 
-- **Display: Unbounded** (900 for the headline, 700 for section heads, 500 for card titles). A
-  wide, geometric face that reads like a number plate from across a car park.
-- **Body: Albert Sans.** Quiet, humanist, works at 13 px on a price card.
-- **Data: IBM Plex Mono** with tabular numerals for every price, distance and time. The meter
-  look is deliberate: money in this app is always in the monospace face.
-- **Labels are Albert Sans**, semibold, 11–13 px: eyebrows, chips, badges, map labels, the tab
-  bar, the footer headings. v0 set these in uppercase mono and they read as retro; v1 moved every
-  label to the body face so only figures carry the meter look. Map labels are glass pills in
-  the body face, bolder for the big towns, muted for parks.
+Two families, three registers, and the registers are genuinely different jobs rather than three
+fashionable faces stacked on top of each other.
+
+- **Display: Archivo**, run expanded on its width axis (`font-stretch: 118%`) at 700–800. The
+  reference is not a tech brand, it is the lettering on the flank of an upcountry coach and the
+  destination board above a taxi park: wide, weighty, readable at an angle in bad light. Archivo
+  is a variable superfamily, so the display voice and the reading voice come out of one design.
+- **Text: Archivo** at normal width, 400–600. Works at 13 px on a price card.
+- **Money: Archivo** with `tabular-nums` and `slashed-zero`, right-aligned at a fixed measure so
+  the column lines up down the page. Deliberately **not** monospaced. A fare is the product
+  speaking to you, not the system reporting; putting it in a typewriter face makes it look like
+  output rather than a price. What matters is that the digits align, and tabular figures do that.
+- **Machine voice: Martian Mono**, condensed, for the things a machine is actually saying —
+  reference numbers, timestamps, the ticker. Rare enough not to read as a developer default.
+
+An earlier version of this page described three families — Unbounded, Albert Sans, IBM Plex Mono —
+which is the exact trio a generated page reaches for, and in the build all three CSS tokens had
+quietly ended up pointing at one face anyway, so the type was carrying no information beyond size.
+Both problems are fixed above.
 
 Scale: hero 44–96 px fluid, section heads 28–46 px fluid, body 16 px, card body 13–14 px,
 labels 11–12 px uppercase with 0.1 em tracking.

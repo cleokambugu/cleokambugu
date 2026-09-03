@@ -2829,7 +2829,7 @@ $('#newStageBtn').addEventListener('click',()=>{
   requireAccount(go);
 });
 /* the world moves: other riders join filling stages now and then */
-function tickStages(){ if(document.hidden) return; const open=stages.filter(s=>s.status==='filling'&&s.seats<s.cap); if(!open.length) return; if(Math.random()<0.55){ const st=open[Math.floor(Math.random()*open.length)]; st.seats++; st.riders.push(String.fromCharCode(65+Math.floor(Math.random()*26))+String.fromCharCode(65+Math.floor(Math.random()*26))); if(st.seats>=st.cap){ setTimeout(()=>fundStage(st), 12000); } store('stages',stages); renderStages(); renderOffers(); } }
+function tickStages(){ if(document.hidden) return; const open=stages.filter(s=>s.status==='filling'&&s.seats<s.cap); if(!open.length) return; if(Math.random()<0.55){ const st=open[Math.floor(Math.random()*open.length)]; st.seats++; haptic('fill'); st.riders.push(String.fromCharCode(65+Math.floor(Math.random()*26))+String.fromCharCode(65+Math.floor(Math.random()*26))); if(st.seats>=st.cap){ setTimeout(()=>fundStage(st), 12000); } store('stages',stages); renderStages(); renderOffers(); } }
 
 /* ---- Empty legs ---- */
 const SEED_LEGS = [
@@ -3329,8 +3329,33 @@ function openFeedback(){
   m.hidden=false;
   $('#fbTags').querySelectorAll('[data-t]').forEach(x=>x.addEventListener('click',()=>x.classList.toggle('on')));
   $('#fbMic').addEventListener('click',()=>{ const SR=window.SpeechRecognition||window.webkitSpeechRecognition; if(!SR){ toast('Dictation needs Chrome or Edge here.'); return; } const r=new SR(); r.lang='en-UG'; r.onresult=e=>{ $('#fbText').value=e.results[0][0].transcript; }; r.onerror=e=>toast('Voice: '+e.error); r.start(); });
-  $('#fbSend').addEventListener('click',()=>{ const fb=load('feedback',[]); fb.unshift({at:Date.now(), text:$('#fbText').value.trim(), tags:[...$('#fbTags').querySelectorAll('.on')].map(x=>x.dataset.t)}); store('feedback',fb); $('#fbStatus').className='status ok'; $('#fbStatus').textContent='Thank you. Logged (sandbox). Clarifom would tag and route this in production.'; setTimeout(()=>m.hidden=true,1200); });
+  $('#fbSend').addEventListener('click',()=>{ const fb=load('feedback',[]); fb.unshift({at:Date.now(), text:$('#fbText').value.trim(), tags:[...$('#fbTags').querySelectorAll('.on')].map(x=>x.dataset.t)}); store('feedback',fb); haptic('tick'); $('#fbStatus').className='status ok'; $('#fbStatus').textContent='Thank you. Logged (sandbox). Clarifom would tag and route this in production.'; setTimeout(()=>m.hidden=true,1200); });
 }
+
+/* =====================================================================
+   Touch. The screen is the only sense this product has been designing for, and a phone can
+   speak to the hand. Not decoration: each pattern means one thing, and the vocabulary is small
+   enough to be learned without being taught.
+
+     tick     something you did registered            10ms
+     fill     a seat went in, the price moved         two short, rising
+     land     a driver, a plate, a real thing         one firm
+     done     money moved, and it worked              short-long
+     stop     something needs you                     two firm, spaced
+
+   Off under reduced motion, off when the accessibility panel says so, and silently absent on
+   iOS, which does not implement the Vibration API — so nothing depends on it.
+   ===================================================================== */
+const haptic = (()=>{
+  const P = { tick:[10], fill:[12,40,18], land:[26], done:[16,60,40], stop:[30,90,30] };
+  const ok = () => {
+    if (!('vibrate' in navigator)) return false;
+    try { if (load('hapticsOff', false)) return false; } catch(e){}
+    if (typeof reducedMotion === 'function' ? reducedMotion() : matchMedia('(prefers-reduced-motion: reduce)').matches) return false;
+    return true;
+  };
+  return (kind) => { if (!ok()) return; try { navigator.vibrate(P[kind] || P.tick); } catch(e){} };
+})();
 
 /* =====================================================================
    Quality: the Wall, the supplier cards, the practices
@@ -3488,7 +3513,7 @@ function initQuality(){
       if(halts[id]){ delete halts[id]; store('qaHalts',halts); toast(qaWho(id).name+' is back on your board.'); }
       else { halts[id]={at:Date.now(), by:'this device'}; store('qaHalts',halts);
              const fx=qaFixes(); fx.unshift({at:Date.now(), supplier:id, text:'Stopped the line — hidden by a rider, reason not yet given', halt:true}); store('qaFixes',fx);
-             toast(qaWho(id).name+' is hidden from your board, and a ticket is open. Nobody else’s board changed.'); }
+             haptic('stop'); toast(qaWho(id).name+' is hidden from your board, and a ticket is open. Nobody else’s board changed.'); }
       renderWall(); renderDemo(); renderCompare(); openQaCard(id); return; }
     const f=e.target.closest('[data-qa-fix]'); if(f){ openFix(f.dataset.qaFix); }
   });
@@ -3662,7 +3687,7 @@ function startRail(o){
   const d=DRIVERS[Math.floor(Math.random()*DRIVERS.length)];
   rail={ id:'UG-'+Date.now().toString(36).toUpperCase(), kind:o.kind, partner:{name:o.partner.name, sub:o.partner.sub, colour:o.partner.colour, logo:o.partner.logo||null}, title:o.title, price:o.price, eta:o.eta||6, driver:d[0], plate:d[1], step:0, started:Date.now(), sign:($('#dSign')&&$('#dSign').checked)?'Signed for by the receiver':'Left with the receiver' };
   store('rail',rail); railTimers.forEach(clearTimeout); railTimers=[];
-  RAIL_DELAYS.slice(1).forEach((ms,k)=>railTimers.push(setTimeout(()=>{ if(!rail) return; rail.step=k+1; store('rail',rail); renderRail(); if(rail.step===2) toast(`${rail.driver} · ${rail.plate} is on the way.`); if(rail.step===5){ toast('Done. Say what happened, in Me.'); } }, ms)));
+  RAIL_DELAYS.slice(1).forEach((ms,k)=>railTimers.push(setTimeout(()=>{ if(!rail) return; rail.step=k+1; store('rail',rail); renderRail(); if(rail.step===2){ haptic('land'); toast(`${rail.driver} · ${rail.plate} is on the way.`); } if(rail.step===5){ haptic('done'); toast('Done. Say what happened, in Me.'); } }, ms)));
   renderRail(true);
 }
 function renderRail(open){

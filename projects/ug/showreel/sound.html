@@ -1,59 +1,60 @@
+<meta charset="utf-8">
 <title>UG Showreel with Sound</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Albert+Sans:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@88..120,400..800&family=Martian+Mono:wdth,wght@88..100,400..500&display=swap">
 <script src="ug-score.js"></script>
 <style>
 :root{--ground:#0F0C0A;--surface:#1E1915;--ink:#F4ECDD;--yellow:#F2C200;--red:#D2202F;--crane:#94A8B6;--u:1px;color-scheme:dark}
 html,body{margin:0;height:100%;background:var(--ground);color:var(--ink)}
-#app{position:fixed;inset:0;background:var(--ground);display:grid;place-items:center;font-family:"Albert Sans",system-ui,sans-serif;overflow:hidden;-webkit-font-smoothing:antialiased}
+#app{position:fixed;inset:0;background:var(--ground);display:grid;place-items:center;font-family:Archivo,system-ui,sans-serif;overflow:hidden;-webkit-font-smoothing:antialiased}
 #stage{position:relative;width:min(100vw,177.777vh);aspect-ratio:16/9;overflow:hidden;background:var(--ground);outline:none}
 #c{position:absolute;inset:0;width:100%;height:100%;display:block}
 #cap{position:absolute;left:8%;right:8%;bottom:9.5%;text-align:center;pointer-events:none}
-#cap .eb{font:600 calc(var(--u)*12) "Albert Sans",system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--yellow);margin-bottom:calc(var(--u)*10);opacity:0}
-#cap .main{font:700 calc(var(--u)*30)/1.2 Unbounded,"Albert Sans",system-ui,sans-serif;text-wrap:balance;opacity:0;text-shadow:0 2px 24px rgba(15,12,10,.9)}
-#cap .sub{font:400 calc(var(--u)*17)/1.4 "Albert Sans",system-ui,sans-serif;color:rgba(244,236,221,.72);margin-top:calc(var(--u)*10);opacity:0;text-wrap:balance;text-shadow:0 2px 16px rgba(15,12,10,.9)}
+#cap .eb{font:600 calc(var(--u)*12) Archivo,system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--yellow);margin-bottom:calc(var(--u)*10);opacity:0}
+#cap .main{font:700 calc(var(--u)*30)/1.2 Archivo,system-ui,sans-serif;text-wrap:balance;opacity:0;text-shadow:0 2px 24px rgba(15,12,10,.9)}
+#cap .sub{font:400 calc(var(--u)*17)/1.4 Archivo,system-ui,sans-serif;color:rgba(244,236,221,.72);margin-top:calc(var(--u)*10);opacity:0;text-wrap:balance;text-shadow:0 2px 16px rgba(15,12,10,.9)}
 #cap .in{animation:rise 1.15s cubic-bezier(.16,1,.3,1) forwards}
 #cap .sub.in{animation-delay:.18s}
 @keyframes rise{from{opacity:0;transform:translateY(calc(var(--u)*16));filter:blur(6px)}to{opacity:1;transform:none;filter:blur(0)}}
 #hud{position:absolute;left:0;right:0;bottom:3px;height:calc(var(--u)*44);display:flex;align-items:center;justify-content:space-between;padding:0 calc(var(--u)*22);font-size:calc(var(--u)*12);opacity:0;transition:opacity .5s}
 #hud.on{opacity:1}
 #counter{display:flex;gap:calc(var(--u)*10);align-items:center;color:rgba(244,236,221,.7)}
-#counter b{font:500 calc(var(--u)*12) "IBM Plex Mono",monospace;color:var(--ink);font-variant-numeric:tabular-nums}
+#counter b{font:500 calc(var(--u)*12) "Martian Mono",monospace;color:var(--ink);font-variant-numeric:tabular-nums}
 #counter i{font-style:normal;color:rgba(244,236,221,.4)}
-.vlabel{color:rgba(244,236,221,.45);font:500 calc(var(--u)*11) "IBM Plex Mono",monospace}
+.vlabel{color:rgba(244,236,221,.45);font:500 calc(var(--u)*11) "Martian Mono",monospace}
 .btns{display:flex;gap:calc(var(--u)*8);align-items:center}
-.btn{font:600 calc(var(--u)*12) "Albert Sans",system-ui,sans-serif;color:var(--ink);background:rgba(30,25,21,.64);border:1px solid rgba(244,236,221,.14);box-shadow:inset 0 1px 0 rgba(244,236,221,.08);backdrop-filter:blur(8px);border-radius:999px;padding:calc(var(--u)*7) calc(var(--u)*14);cursor:pointer;line-height:1}
+.btn{font:600 calc(var(--u)*12) Archivo,system-ui,sans-serif;color:var(--ink);background:rgba(30,25,21,.64);border:1px solid rgba(244,236,221,.14);box-shadow:inset 0 1px 0 rgba(244,236,221,.08);backdrop-filter:blur(8px);border-radius:999px;padding:calc(var(--u)*7) calc(var(--u)*14);cursor:pointer;line-height:1}
 .btn:hover{border-color:rgba(244,236,221,.35)}
 .btn.y{background:var(--yellow);color:#17120E;border-color:transparent}
-.hint{color:rgba(244,236,221,.35);font:500 calc(var(--u)*11) "IBM Plex Mono",monospace;margin-right:calc(var(--u)*6)}
+.hint{color:rgba(244,236,221,.35);font:500 calc(var(--u)*11) "Martian Mono",monospace;margin-right:calc(var(--u)*6)}
 #bar{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(244,236,221,.12)}
 #bar i{display:block;height:100%;width:0;background:var(--yellow);transition:width .2s linear}
 #poster{position:absolute;inset:0;display:grid;place-items:center;background:radial-gradient(60% 60% at 50% 45%,#1E1915 0%,#0F0C0A 72%);z-index:5;transition:opacity .8s ease}
 #poster.off{opacity:0;pointer-events:none}
 #poster .col{display:flex;flex-direction:column;align-items:center;gap:calc(var(--u)*14);text-align:center}
 #poster svg{width:calc(var(--u)*112);height:calc(var(--u)*112);color:var(--ink)}
-#poster h1{margin:0;font:900 calc(var(--u)*76)/1 Unbounded,"Albert Sans",sans-serif;letter-spacing:-.02em}
-#poster .cp{font:500 calc(var(--u)*16) "IBM Plex Mono",monospace;color:rgba(244,236,221,.7);letter-spacing:.02em}
+#poster h1{margin:0;font:900 calc(var(--u)*76)/1 Archivo,system-ui,sans-serif;letter-spacing:-.02em}
+#poster .cp{font:500 calc(var(--u)*16) "Martian Mono",monospace;color:rgba(244,236,221,.7);letter-spacing:.02em}
 #play{margin-top:calc(var(--u)*18);width:calc(var(--u)*96);height:calc(var(--u)*96);border-radius:50%;background:var(--yellow);border:0;cursor:pointer;display:grid;place-items:center;box-shadow:0 0 0 0 rgba(242,194,0,.45);animation:pulse 2.4s ease-out infinite}
 #play svg{width:calc(var(--u)*38);height:calc(var(--u)*38);color:#17120E}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(242,194,0,.45)}100%{box-shadow:0 0 0 calc(var(--u)*26) rgba(242,194,0,0)}}
-#poster .meta{font:600 calc(var(--u)*12) "Albert Sans",sans-serif;letter-spacing:.1em;text-transform:uppercase;color:rgba(244,236,221,.5)}
+#poster .meta{font:600 calc(var(--u)*12) Archivo,system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:rgba(244,236,221,.5)}
 #end{position:absolute;left:0;right:0;bottom:15%;display:flex;justify-content:center;gap:calc(var(--u)*10);opacity:0;pointer-events:none;transition:opacity .6s}
 #end.on{opacity:1;pointer-events:auto}
 #end .btn{font-size:calc(var(--u)*14);padding:calc(var(--u)*12) calc(var(--u)*22)}
 #static{display:none;max-width:760px;width:100%;box-sizing:border-box;padding:40px 28px;max-height:100vh;overflow:auto;font-size:16px;line-height:1.5}
 #static header{display:flex;align-items:center;gap:18px;margin-bottom:8px}
 #static header svg{width:64px;height:64px;color:var(--ink)}
-#static h1{margin:0;font:900 44px/1 Unbounded,"Albert Sans",sans-serif}
-#static .cp{font:500 15px "IBM Plex Mono",monospace;color:rgba(244,236,221,.7);margin:4px 0 26px}
+#static h1{margin:0;font:900 44px/1 Archivo,system-ui,sans-serif}
+#static .cp{font:500 15px "Martian Mono",monospace;color:rgba(244,236,221,.7);margin:4px 0 26px}
 #static ol{padding-left:0;list-style:none;margin:0}
 #static li{padding:14px 0;border-top:1px solid rgba(244,236,221,.12)}
-#static li h2{margin:0 0 4px;font:700 17px Unbounded,"Albert Sans",sans-serif}
-#static li h2 span{font:500 12px "IBM Plex Mono",monospace;color:var(--yellow);margin-right:10px}
+#static li h2{margin:0 0 4px;font:700 17px Archivo,system-ui,sans-serif}
+#static li h2 span{font:500 12px "Martian Mono",monospace;color:var(--yellow);margin-right:10px}
 #static li p{margin:2px 0;color:rgba(244,236,221,.8)}
 #static li p.s{color:rgba(244,236,221,.55);font-size:14px}
-#static .note{margin-top:22px;font:500 12px "IBM Plex Mono",monospace;color:rgba(244,236,221,.45)}
+#static .note{margin-top:22px;font:500 12px "Martian Mono",monospace;color:rgba(244,236,221,.45)}
 @media (prefers-reduced-motion:reduce){#stage{display:none}#static{display:block}}
 </style>
 
@@ -98,9 +99,11 @@ const params = new URLSearchParams(location.search);
 const SOUND = true; // the sound cut
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const FONT = {
-  disp:(w,s)=>`${w} ${s}px Unbounded, "Albert Sans", system-ui, sans-serif`,
-  body:(w,s)=>`${w} ${s}px "Albert Sans", system-ui, sans-serif`,
-  mono:(w,s)=>`${w} ${s}px "IBM Plex Mono", ui-monospace, monospace`
+  /* Same faces as the product: Archivo run expanded and heavy for display, Archivo for text,
+     Martian Mono only where a machine is speaking. */
+  disp:(w,s)=>`${w} ${s}px Archivo, system-ui, sans-serif`,
+  body:(w,s)=>`${w} ${s}px Archivo, system-ui, sans-serif`,
+  mono:(w,s)=>`${w} ${s}px "Martian Mono", ui-monospace, monospace`
 };
 
 /* ---------- maths ---------- */
@@ -292,8 +295,8 @@ const SCENES = [
     vignette(ctx); }
 },
 { id:'ride', name:'Ride', dur:30,
-  caps:[{at:1,eb:'Ride · the compare desk',main:'Every way, one screen.'},{at:8.5,main:'Ranked by price. Estimates say so.',sub:'Every quote carries its provenance in words, on the card.'},{at:14,main:'The ones that cannot serve you stay on the screen.',sub:'Greyed, with the reason.'},{at:20,main:'Nobody is sent away.',sub:'The button is always Book on UG. The partner link is a quiet secondary.'}],
-  voice:['Every quote, ranked by price, and it tells you which ones are estimates.','The button is always Book on UG. Nobody sends you away.'],
+  caps:[{at:1,eb:'Ride · the compare desk',main:'Every way, one screen.'},{at:8.5,main:'Ranked by price. Estimates say so.',sub:'Every quote carries its provenance in words, on the card.'},{at:14,main:'The ones that cannot serve you stay on the screen.',sub:'Greyed, with the reason.'},{at:20,main:'Every fare on one screen.',sub:'And we tell you plainly which of them UG can actually book.'}],
+  voice:['Every quote, ranked by price, and it tells you which ones are estimates.','Every fare on one screen, and we tell you which ones we can book.'],
   draw(g,t){ const {ctx,now}=g;
     const hp=E.outExpo(seg(t,.3,1.4)); eyebrow(ctx,'Ride · Ntinda → Downtown Kampala',200,86,{alpha:hp}); txt(ctx,'Ntinda → Downtown Kampala',200,128,{font:FONT.disp(700,32),alpha:hp}); txt(ctx,'8 km · 25 min · now',1080,128,{font:FONT.mono(400,15),align:'right',color:inkA(.55),alpha:hp});
     const rk=E.inOutCubic(seg(t,8.5,10)); const y0=168, rh=42;
@@ -454,7 +457,7 @@ const SCENES = [
     vignette(ctx); }
 },
 { id:'rail', name:'Stay on UG', dur:15,
-  caps:[{at:1,eb:'Stay on UG',main:'Whatever you book, one rail.'},{at:7,main:'Nobody is sent away to finish what they started.'},{at:12,sub:'Timers stand in for partner channels in the prototype. Production wires Uber Central, Bolt Ride Booker, SB Business.',main:'The partner link is a quiet secondary.'}],
+  caps:[{at:1,eb:'Stay on UG',main:'Whatever you book, one rail.'},{at:7,main:'What UG books, UG carries to done.'},{at:12,sub:'Timers stand in for the concierge in this prototype. UG takes payment only for its own seats and cars.',main:'One rail, from paid to done.'}],
   voice:['Whatever you book, the same trip rail carries it to done.','Hakuna anayetumwa mbali. Twende.'],
   draw(g,t){ const {ctx,now}=g; const ap=E.outExpo(seg(t,.3,1.3));
     eyebrow(ctx,'Trip rail · Ntinda → Downtown Kampala · Bolt · Book on UG',640,150,{align:'center',alpha:ap});
@@ -605,7 +608,7 @@ stage.addEventListener('keydown',e=>{ if(!started){ if(e.key===' '||e.key==='Ent
 document.addEventListener('keydown',e=>{ if(document.activeElement!==stage && (e.key===' '||e.key.startsWith('Arrow'))){ stage.focus({preventScroll:true}); stage.dispatchEvent(new KeyboardEvent('keydown',{key:e.key})); e.preventDefault(); } });
 
 /* fonts, then go */
-const fontsReady = Promise.race([ (document.fonts ? Promise.all([document.fonts.load('900 40px Unbounded'),document.fonts.load('700 20px Unbounded'),document.fonts.load('600 14px "Albert Sans"'),document.fonts.load('500 14px "IBM Plex Mono"')]) : Promise.resolve()).catch(()=>{}), new Promise(r=>setTimeout(r,2500)) ]);
+const fontsReady = Promise.race([ (document.fonts ? Promise.all([document.fonts.load('800 40px Archivo'),document.fonts.load('700 20px Archivo'),document.fonts.load('600 14px Archivo'),document.fonts.load('500 14px "Martian Mono"')]) : Promise.resolve()).catch(()=>{}), new Promise(r=>setTimeout(r,2500)) ]);
 if (!SOUND) fontsReady.then(()=>setTimeout(start,900));
 window.__UG_REEL = {cut:CUT, sound:SOUND, total:TOTAL, voiceLines:SCENES.map(s=>({id:s.id, at:0, lines:s.voice})),
   render(sec){ if(poster&&poster.isConnected) poster.remove(); if(!started){ RENDERING=true; started=true; hud.classList.add('on'); if(SOUND) muteBtn.hidden=false; stage.focus({preventScroll:true}); } RENDERING=true; playing=false; ended=false; hud.style.display='none'; $('bar').style.display='none'; endEl.style.display='none'; clock=clamp(sec,0,TOTAL-.001); let i=SCENES.length-1; while(i>0&&clock<OFFSET[i]) i--; if(i!==sceneI){ sceneI=i; capI=-1; cnt.textContent=`${String(i+1).padStart(2,'0')} / ${SCENES.length}`; cname.textContent=SCENES[i].name; } loop(performance.now()); const ms=Math.max(0,(clock-capT0)*1000); document.getAnimations().forEach(a=>{ a.pause(); try{ a.currentTime=ms; }catch(e){} }); barfill.style.transition='none'; endEl.classList.toggle('on', clock>=TOTAL-.05); return {scene:SCENES[i].id, t:clock-OFFSET[i]}; },
