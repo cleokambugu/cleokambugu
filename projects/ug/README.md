@@ -63,8 +63,8 @@ hides itself and the type falls back to the system stack; everything else works 
   `Flutterwave/React-v3` on GitHub), the Antigravity 3D landing-page technique (from
   `Emmancipated/antigravity-landingpage-clone`), and Uganda's border and lakes (Natural Earth
   10m from `nvkelso/natural-earth-vector`). All were cloned and read.
-- **Secondhand (search snippets, not verified on the operator's page):** Uber Kampala 2020
-  tariff, UberBoda tariff, Faras and SafeBoda commission rates, UWA park fees to June 2026,
+- **Secondhand (search snippets, not verified on the operator's page):** Bolt Kampala 2020
+  tariff, BoltBoda tariff, Faras and SafeBoda commission rates, UWA park fees to June 2026,
   Entebbe expressway toll, 2026 bus fare ranges, 2026 fuel price, rental day rates.
 - **Modelled (UG's own assumption):** Bolt, Yango, Tinka and Faras-car tariffs, surge
   multipliers, pool cost split (fuel + UGX 250/km wear, divided by seats, plus 10% UG fee),

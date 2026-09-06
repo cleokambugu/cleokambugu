@@ -11,9 +11,9 @@ name: UG site
 
 on:
   push:
-    paths: ['projects/ug/site/**', 'projects/ug/data/i18n/**', 'projects/ug/showreel/*.html', 'projects/ug/showreel/voice/**', 'projects/ug/server/scripts/i18n-build.cjs', '.github/workflows/ug-site.yml']
+    paths: ['projects/ug/site/**', 'projects/ug/data/i18n/**', 'projects/ug/showreel/*.html', 'projects/ug/showreel/voice/**', 'projects/ug/server/scripts/i18n-build.cjs', 'projects/ug/server/scripts/i18n-coverage.cjs', '.github/workflows/ug-site.yml']
   pull_request:
-    paths: ['projects/ug/site/**', 'projects/ug/data/i18n/**', 'projects/ug/showreel/*.html', 'projects/ug/showreel/voice/**', 'projects/ug/server/scripts/i18n-build.cjs', '.github/workflows/ug-site.yml']
+    paths: ['projects/ug/site/**', 'projects/ug/data/i18n/**', 'projects/ug/showreel/*.html', 'projects/ug/showreel/voice/**', 'projects/ug/server/scripts/i18n-build.cjs', 'projects/ug/server/scripts/i18n-coverage.cjs', '.github/workflows/ug-site.yml']
   workflow_dispatch:
 
 jobs:
@@ -30,6 +30,14 @@ jobs:
       - name: The site is unchanged by its own build
         working-directory: projects/ug
         run: git diff --exit-code site/index.html
+      # A key table that says "missing 15 of 278" is true and useless: most of what the page prints is
+      # not a key at all, it is English written into a render function, where no dictionary can reach
+      # it. This counts what a reader actually sees and holds the number down, so the gap can only
+      # shrink. Raise the ceiling only by translating something, never to make a build pass.
+      - name: Untranslated text a reader still sees
+        working-directory: projects/ug
+        run: node server/scripts/i18n-coverage.cjs --max 210
+
       - name: The films speak the script
         working-directory: projects/ug/showreel
         run: python3 voice/sync-voice.py --check

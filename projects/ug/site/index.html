@@ -981,7 +981,176 @@ body.a11y-motion .ticker-track{animation:none}
 .a11y-sw::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:var(--ink-3);transition:transform var(--fast) var(--ease), background var(--fast) var(--ease)}
 .a11y-sw[aria-checked="true"]{background:color-mix(in srgb,var(--yellow) 45%,var(--surface-2))}
 .a11y-sw[aria-checked="true"]::after{transform:translateX(22px);background:var(--yellow)}
+/* A word we have not written in your language yet. Dotted, never coloured over the text, so it
+   marks without shouting; tapping it asks you for the word. */
+.i18n-todo{text-decoration:underline dotted color-mix(in srgb,var(--hour) 55%,transparent);text-underline-offset:3px;text-decoration-thickness:1px;cursor:help}
+.i18n-todo:hover{text-decoration-color:var(--hour)}
+@media (prefers-reduced-motion:no-preference){.i18n-todo{transition:text-decoration-color var(--fast) var(--ease)}}
+
+/* ---------- The day: the palette is a clock, and the weather bends it ----------
+   Tokens are written on :root by the pre-paint script in the head (search __UG_DAY). Everything
+   below is only the furniture that lets a person see what the colour is doing and turn it off. */
+:root{--hour:#F2C200}
+/* Nothing transitions on the drift: the palette moves by less than one just-noticeable difference a
+   minute, so a transition would have nothing to smooth. The class is added for a quarter of a second
+   only when a person changes the mode by hand, where there IS a step to smooth. */
+html.day-shift,html.day-shift body,html.day-shift .panel,html.day-shift .glass,html.day-shift .nav{transition:background-color .45s var(--ease),color .45s var(--ease),border-color .45s var(--ease)}
+@media (prefers-reduced-motion:reduce){html.day-shift,html.day-shift body,html.day-shift .panel,html.day-shift .glass,html.day-shift .nav{transition:none}}
+
+/* The rail is not a picture of the flag. It is a strip of the page's own ground colour sampled at
+   every quarter hour, so what you are looking at is literally the palette you will be handed at that
+   time of day. The flag's three colours turn up in it because the palette is built out of them. */
+.dayrail{display:block;width:100%;height:30px;border:1px solid var(--line);border-radius:var(--radius)}
+.dayrail-ticks{display:flex;justify-content:space-between;font-family:var(--font-machine);font-size:var(--t1);color:var(--ink-3);margin-top:5px}
+.dayrail-ticks b{color:var(--ink-2);font-weight:400}
+
+/* The weather chip. It sits on the map because that is where the weather is: the rain in the scene
+   behind it is falling on the same country. Transparent by construction — .glass is the house
+   treatment, a blurred pane of --surface, so the country reads through it. */
+.wx{position:absolute;left:12px;top:12px;z-index:3;display:flex;align-items:center;gap:9px;
+    padding:7px 12px;border-radius:var(--radius-pill);font-size:var(--t2);max-width:calc(100% - 24px);pointer-events:none}
+.wx b{font-family:var(--font-money);font-variant-numeric:var(--figures);font-weight:600;white-space:nowrap}
+.wx small{color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wx .band{width:8px;height:8px;border-radius:50%;background:var(--hour);flex:none;
+          box-shadow:0 0 0 3px color-mix(in srgb,var(--hour) 20%,transparent)}
+@media (max-width:560px){.wx{left:8px;top:8px;padding:5px 9px;font-size:var(--t1);gap:7px}.wx small{display:none}}
 </style>
+<script>
+/* ---------- The day, as UG keeps it -------------------------------------------------------------
+   The palette is a clock, not a switch.
+
+   Uganda is on the equator, so its day has no seasons: the sun is up at about 06:54 and down at
+   about 18:54 every day of the year, and civil twilight runs barely twenty minutes — the shortest on
+   earth. That is why this is a fixed table and not a seasonal almanac, why the two crossings are
+   fast, and why the long stretches between them are almost flat.
+
+   The sky hands over the three colours the flag is made of, in the order it hands them over:
+   black, red, gold, red, black. Night is a warm near-black with the blue taken out of it and the ink
+   brought down a step, because nobody should be handed a white page at one in the morning. Noon is
+   the brightest the page ever gets. The two horizons are red because that is what they are. It is
+   not the flag's band order and does not pretend to be; it is the flag's three colours in the order
+   the sky gives them.
+
+   Interpolation only ever runs inside one family — six anchors, seven segments — and the two family
+   changes sit exactly on sunrise and sunset, so the page never drifts through the unreadable middle
+   where a dark ground and a light ground would meet.
+
+   Weather bends this, it does not replace it. Cloud flattens the light: overcast at noon really is
+   dimmer and less contrasty than clear noon, and an overcast night in a city really is brighter than
+   a clear one, because the cloud is holding the town's own light down. Rain cools the ground toward
+   --crane, which is already the brand's grey-blue, the crowned crane's own colour. Nothing else in
+   the palette moves, and none of it can cross a family or a contrast floor: see the sampler in
+   server/test/site.test.js, which walks every minute of the day against every weather state.
+
+   This runs before first paint on purpose. A page that loaded dark and then flashed bright would be
+   the precise thing this feature exists to prevent. */
+(function(){
+  var P = {
+    /* d:1 = the dark family. g ground, g2 ground-2, s surface, s2 surface-2, l line, ls line-strong,
+       i/i2/i3 the three inks, y yellow, yt yellow-text, r red, p/p2/p3 the map's particles. */
+    night:   {d:1, g:'#0B0907', g2:'#12100C', s:'#191510', s2:'#221C16', l:'#2F2822', ls:'#4B4038', i:'#E9DFCF', i2:'#B5A794', i3:'#9C8E7C', y:'#D8AD0C', yt:'#D8AD0C', r:'#C0333C', p:'#E9DFCF', p2:'#D8AD0C', p3:'#C0333C'},
+    dawn:    {d:1, g:'#150A08', g2:'#1D0F0C', s:'#251410', s2:'#301A15', l:'#452520', ls:'#6D3B32', i:'#F2E4D7', i2:'#CBB1A1', i3:'#A98F7C', y:'#EDA81C', yt:'#EDA81C', r:'#E84941', p:'#F2E4D7', p2:'#EDA81C', p3:'#E84941'},
+    morning:   {d:0, g:'#F7EBD8', g2:'#F0E1CA', s:'#FFFAF0', s2:'#FAF1E1', l:'#E1D0B7', ls:'#BFA98A', i:'#191009', i2:'#4C3B2A', i3:'#68533B', y:'#D89A00', yt:'#6A4A00', r:'#B8161F', p:'#2A211B', p2:'#B98600', p3:'#B8161F'},
+    midday: {d:0, g:'#F3EEE3', g2:'#EAE3D4', s:'#FFFDF8', s2:'#F7F2E8', l:'#D9CFBE', ls:'#B9AB95', i:'#17120E', i2:'#4A4038', i3:'#645848', y:'#E0B300', yt:'#6B5200', r:'#B8161F', p:'#2A211B', p2:'#C99F00', p3:'#B8161F'},
+    afternoon:  {d:0, g:'#F6E9D5', g2:'#EFDFC6', s:'#FFF9EE', s2:'#F9EFDD', l:'#DFCCB1', ls:'#BDA483', i:'#1B100A', i2:'#503A27', i3:'#6B5138', y:'#D69100', yt:'#6B4600', r:'#B8161F', p:'#2C2019', p2:'#B48000', p3:'#B8161F'},
+    dusk:    {d:1, g:'#120B0A', g2:'#1A1210', s:'#221814', s2:'#2C1F1A', l:'#3F2D26', ls:'#66493E', i:'#F0E3D3', i2:'#C6B4A2', i3:'#A2927F', y:'#E2AA00', yt:'#E2AA00', r:'#D2202F', p:'#F0E3D3', p2:'#E2AA00', p3:'#D2202F'}
+  };
+  /* Kampala, 0°19′N. Sunrise 06:54, sunset 18:54, all year round. The family changes on those two
+     lines and nowhere else, so every interpolation below stays inside one family. */
+  var SUNUP = 6.9, SUNDOWN = 18.9;
+  var SEG = [
+    [0.0,     5.0,     'night',   'night'  ],   /* the flat middle of the night */
+    [5.0,     SUNUP,   'night',   'dawn'   ],   /* the black lifts into the red horizon */
+    [SUNUP,   10.0,    'morning',   'midday'],   /* sunrise: the ground turns over */
+    [10.0,    15.5,    'midday', 'midday'],   /* the flat middle of the day */
+    [15.5,    SUNDOWN, 'midday', 'afternoon' ],   /* the gold warms back down */
+    [SUNDOWN, 21.5,    'dusk',    'night'  ],   /* sunset: the ground turns over */
+    [21.5,    24.0,    'night',   'night'  ]
+  ];
+  var KEYS = {g:'--ground',g2:'--ground-2',s:'--surface',s2:'--surface-2',l:'--line',ls:'--line-strong',
+              i:'--ink',i2:'--ink-2',i3:'--ink-3',y:'--yellow',yt:'--yellow-text',r:'--red',
+              p:'--particle',p2:'--particle-2',p3:'--particle-3'};
+  /* How far weather is allowed to move each thing. These are the whole dose; there is no other knob. */
+  var W = {overcastLight:'#E4DCCE', overcastDark:'#1A1613', craneDark:'#94A8B6', craneLight:'#4E6B7C',
+           cloudLight:0.42, cloudDark:0.14, cloudGold:0.34, rainGround:0.16, rainLine:0.26};
+
+  function hex(h){ h=h.slice(1); return [parseInt(h.slice(0,2),16), parseInt(h.slice(2,4),16), parseInt(h.slice(4,6),16)]; }
+  function str(c){ var s='#',i,v; for(i=0;i<3;i++){ v=Math.round(Math.max(0,Math.min(255,c[i]))).toString(16); s += v.length<2?'0'+v:v; } return s; }
+  function mix(a,b,t){ var x=hex(a), y=hex(b), o=[],i; for(i=0;i<3;i++) o[i]=x[i]+(y[i]-x[i])*t; return str(o); }
+  function ease(t){ return t*t*(3-2*t); }   /* no corners in the drift */
+
+  /* The hour of the day as a fraction, from the visitor's own clock. UG keeps Kampala's daylight
+     wherever it is opened — the app is Ugandan and so is its sun — but it reads the local hour, so a
+     visitor's own night is still their night. */
+  function hours(now){ now = now || new Date(); return now.getHours() + now.getMinutes()/60 + now.getSeconds()/3600; }
+
+  function at(h, w){
+    h = ((h % 24) + 24) % 24;
+    var s = null, k;
+    for (k=0;k<SEG.length;k++){ if (h >= SEG[k][0] && (h < SEG[k][1] || k === SEG.length-1)){ s = SEG[k]; break; } }
+    if (!s) s = SEG[0];
+    var t = s[1] === s[0] ? 0 : ease((h - s[0]) / (s[1] - s[0]));
+    var a = P[s[2]], b = P[s[3]], out = {dark: a.d === 1, phase: t < 0.5 ? s[2] : s[3]}, key;
+    for (key in KEYS) out[key] = a[key] === b[key] ? a[key] : mix(a[key], b[key], t);
+
+    if (w && (w.cloud || w.rain)){
+      var cloud = Math.max(0, Math.min(1, w.cloud || 0)), rain = Math.max(0, Math.min(1, w.rain || 0));
+      if (cloud){
+        /* Light: the sun goes behind, so the paper flattens toward a colder cream and the gold dulls.
+           Dark: the cloud holds the town's light down, so the ground comes up a little. */
+        var toward = out.dark ? W.overcastDark : W.overcastLight;
+        var amt = out.dark ? W.cloudDark : W.cloudLight;
+        out.g  = mix(out.g,  toward, cloud*amt);
+        out.g2 = mix(out.g2, toward, cloud*amt*0.7);
+        out.s  = mix(out.s,  toward, cloud*amt*0.5);
+        out.s2 = mix(out.s2, toward, cloud*amt*0.5);
+        out.y  = mix(out.y,  out.i3, cloud*W.cloudGold);   /* the sun colour loses its sun */
+      }
+      if (rain){
+        var crane = out.dark ? W.craneDark : W.craneLight;
+        out.g  = mix(out.g,  crane, rain*W.rainGround);
+        out.g2 = mix(out.g2, crane, rain*W.rainGround);
+        out.s  = mix(out.s,  crane, rain*W.rainGround*0.6);
+        out.s2 = mix(out.s2, crane, rain*W.rainGround*0.6);
+        out.l  = mix(out.l,  crane, rain*W.rainLine);
+        out.ls = mix(out.ls, crane, rain*W.rainLine);
+      }
+    }
+    return out;
+  }
+
+  /* The band the sky is in — the flag's own three and nothing between them, because a flag has hard
+     edges even where the sky has none. */
+  function band(h){ h=((h%24)+24)%24; return (h < 5 || h >= 21.5) ? 'black' : (h < SUNUP || h >= 17.5) ? 'red' : 'gold'; }
+
+  function paint(h, w){
+    var v = at(h, w), root = document.documentElement, key;
+    for (key in KEYS) root.style.setProperty(KEYS[key], v[key]);
+    root.style.setProperty('--hour', band(h) === 'gold' ? '#F2C200' : band(h) === 'red' ? '#D2202F' : v.i3);
+    root.setAttribute('data-theme', v.dark ? 'dark' : 'light');
+    root.setAttribute('data-phase', v.phase);
+    var m = document.querySelector('meta[name="theme-color"]'); if (m) m.setAttribute('content', v.g);
+    return v;
+  }
+  function clear(){
+    var root = document.documentElement, key;
+    for (key in KEYS) root.style.removeProperty(KEYS[key]);
+    root.style.removeProperty('--hour');
+    root.removeAttribute('data-phase');
+  }
+
+  /* auto | dark | light. Auto is the default; a deliberate choice is kept and wins for good. */
+  var mode = 'auto';
+  try { var raw = localStorage.getItem('ug:theme'); if (raw) mode = JSON.parse(raw); } catch(e){}
+  if (mode !== 'dark' && mode !== 'light') mode = 'auto';
+
+  window.__UG_DAY = {P:P, SEG:SEG, W:W, SUNUP:SUNUP, SUNDOWN:SUNDOWN,
+                     at:at, band:band, paint:paint, clear:clear, hours:hours, mode:mode, weather:null};
+
+  if (mode === 'auto') paint(hours(), null);
+  else document.documentElement.setAttribute('data-theme', mode);
+})();
+</script>
 </head>
 <body>
 
@@ -1053,6 +1222,7 @@ body.a11y-motion .ticker-track{animation:none}
       <div class="pins" id="pins"></div>
       <div class="pin-card glass" id="pinCard" hidden></div>
       <div class="hint" id="hint">Drag to rotate · hover a town</div>
+      <div class="wx glass" id="wx" hidden><span class="band" aria-hidden="true"></span><b id="wxT"></b><small id="wxS"></small></div>
     </div>
   </div>
 
@@ -1087,7 +1257,7 @@ body.a11y-motion .ticker-track{animation:none}
         <div data-i18n-html="compare.div.compare_the_arbitrage_desk" class="eyebrow">Compare · <b>the arbitrage desk</b></div>
         <h2 data-i18n="compare.h2.every_ride_on_the">Every ride on the market, one screen, ranked by price.</h2>
       </div>
-      <p data-i18n="compare.p.uber_bolt_safeboda_faras">Uber, Bolt, SafeBoda, Faras, Yango, Tinka, the street boda, the matatu, a special hire, the bus, the ferry, the flight, and UG’s own pool and rentals. Same trip, same minute. Estimates say so on the card, and the ones that cannot serve you stay on the screen, greyed, with the reason. UG takes payment only for its own seats and cars; every other row shows you the fare and opens that operator's app, because we will not take your money for a ride we have no contract to place.</p>
+      <p data-i18n="compare.p.bolt_safeboda_faras_yango">Bolt, SafeBoda, Faras, Yango, Tinka, the street boda, the matatu, a special hire, the bus, the ferry, the flight, and UG’s own pool and rentals. Same trip, same minute. Estimates say so on the card, and the ones that cannot serve you stay on the screen, greyed, with the reason. UG takes payment only for its own seats and cars; every other row shows you the fare and opens that operator's app, because we will not take your money for a ride we have no contract to place.</p>
     </div>
     <div class="desk">
       <div class="panel rv">
@@ -1503,6 +1673,12 @@ body.a11y-motion .ticker-track{animation:none}
       <div class="a11y-row"><div data-i18n-html="railModal.div.high_contraststronger_text_lines"><b>High contrast</b><small>Stronger text, lines and borders</small></div><button class="a11y-sw" type="button" role="switch" aria-checked="false" data-a11y="contrast" aria-label="High contrast"></button></div>
       <div class="a11y-row"><div data-i18n-html="railModal.div.reduce_motionno_opening_animation"><b>Reduce motion</b><small>No opening animation, no drifting particles, no reveals</small></div><button class="a11y-sw" type="button" role="switch" aria-checked="false" data-a11y="motion" aria-label="Reduce motion"></button></div>
       <div class="a11y-row"><div data-i18n-html="railModal.div.underline_linksevery_link_underlined"><b>Underline links</b><small>Every link underlined, not colour alone</small></div><button class="a11y-sw" type="button" role="switch" aria-checked="false" data-a11y="links" aria-label="Underline links"></button></div>
+      <div class="a11y-row" style="display:block">
+        <div data-i18n-html="railModal.div.the_day"><b>The day</b><small>The page keeps Kampala's hours. On the equator the sun is up at 06:54 and down at 18:54 all year, so the palette walks black → red → gold → red → black and never hands you a white page at one in the morning. Weather bends it: cloud flattens the light, rain cools it toward the crane's grey-blue.</small></div>
+        <canvas class="dayrail" id="dayRail" width="480" height="30" style="margin-top:10px" aria-hidden="true"></canvas>
+        <div class="dayrail-ticks"><span>00:00</span><b id="dayRailUp">06:54</b><span>12:00</span><b id="dayRailDown">18:54</b><span>24:00</span></div>
+        <div class="seg" id="segDay" style="margin-top:10px"><button type="button" data-day="auto" data-i18n="day.auto">Follow the day</button><button type="button" data-day="light" data-i18n="day.alwaysNoon">Always noon</button><button type="button" data-day="dark" data-i18n="day.alwaysNight">Always night</button></div>
+      </div>
       <p data-i18n="railModal.p.ug_also_follows_your" class="note" style="margin-top:12px">UG also follows your system settings for reduced motion and contrast, works with a screen reader (landmarks, labels and live regions), is keyboard-navigable end to end, and listens to voice commands through the microphone button or a Cephable profile. Tell us what would help: hello@ug.example.</p>
     </div>
   </div>
@@ -1773,7 +1949,7 @@ const EVENTS = [
    it runs in 15+ towns (snippet); 8 to 8 in Jinja is from the founder's brief and could not be verified
    online; Abanista, Kweli.shop and Jumia upcountry delivery from snippets. Verify each before launch. */
 const LOCAL = {
-  Kampala:['Uber','Bolt','SafeBoda','Faras','Yango','Tinka'], Entebbe:['Uber','Bolt','SafeBoda','Tinka'], Mukono:['Tinka','SafeBoda'], Jinja:['Tinka','8 to 8 (delivery)','SafariShare'],
+  Kampala:['Bolt','SafeBoda','Faras','Yango','Tinka'], Entebbe:['Bolt','SafeBoda','Tinka'], Mukono:['Tinka','SafeBoda'], Jinja:['Tinka','8 to 8 (delivery)','SafariShare'],
   Masaka:['Tinka','Jumia upcountry'], Mbarara:['Tinka','Faras','SafariShare'], Bushenyi:['Tinka'], Kabale:['SafariShare'], 'Fort Portal':['Tinka'], Hoima:['Tinka','Abanista'], Masindi:['SafariShare'],
   Gulu:['Tinka','SafariShare'], Lira:['Tinka','Kweli.shop'], Arua:['Tinka','Abanista'], Soroti:['Tinka'], Mbale:['Tinka','SafariShare'], Tororo:['SafariShare'], Moroto:['SafariShare'], Kotido:['SafariShare'], Kisoro:['SafariShare'], Kasese:['Tinka','SafariShare'],
 };
@@ -1829,8 +2005,6 @@ const QA_P = Object.fromEntries(QA_PROMISES.map(p=>[p.id,p]));
    a claim UG invents on a supplier's behalf — an empty list means "has not published a promise",
    which is a fact about the market, not a judgement. */
 const QA_OFFER = {
-  uber:       ['price_published','no_surprise','meter_or_quote','window','accepts','cancel_free','belt','insurance','receipt','night','luggage','support','complaint_sla','driver_pay'],
-  uberboda:   ['price_published','no_surprise','meter_or_quote','window','accepts','cancel_free','helmet','insurance','receipt','night','support','driver_pay'],
   bolt:       ['price_published','no_surprise','meter_or_quote','window','accepts','cancel_free','belt','receipt','night','luggage','support','driver_pay'],
   boltboda:   ['price_published','no_surprise','meter_or_quote','window','accepts','helmet','receipt','night','support','driver_pay'],
   safeboda:   ['price_published','no_surprise','meter_or_quote','window','accepts','helmet','insurance','receipt','support','complaint_sla','own_language','driver_pay','driver_rate'],
@@ -1852,7 +2026,6 @@ const QA_OFFER = {
 /* Where each offer was read. A promise with no address behind it is not published on the board:
    the list renders as "not published", which is a statement about the record and nothing else. */
 const QA_OFFER_SRC = {
-  uber:'https://www.uber.com/ug/en/', uberboda:'https://www.uber.com/ug/en/',
   bolt:'https://bolt.eu/en/cities/kampala/', boltboda:'https://bolt.eu/en/cities/kampala/',
   safeboda:'https://safeboda.com/', faras:'https://faras.com/', farascar:'https://faras.com/',
   yango:'https://yango.com/', tinka:'https://tinkataxi.com/',
@@ -1862,7 +2035,7 @@ const QA_OFFER_SRC = {
 /* Deliberately absent: streetboda, special, matatu. They publish nothing, so nothing is
    published about them. That is the honest state of the record, not a mark against them. */
 
-const QA_CAT = { uber:'app', uberboda:'app', bolt:'app', boltboda:'app', safeboda:'app', faras:'app', farascar:'app',
+const QA_CAT = { bolt:'app', boltboda:'app', safeboda:'app', faras:'app', farascar:'app',
   yango:'app', tinka:'app', streetboda:'street', special:'street', matatu:'stage', bus:'coach', ugpool:'ug', ugrent:'ug',
   air:'scheduled', heli:'charter', ferry:'scheduled', train:'scheduled',
   'demo-a':'stage', 'demo-b':'street', 'demo-c':'coach', 'demo-d':'app', 'demo-e':'app' };
@@ -2134,8 +2307,6 @@ const ugCanBook = p => !!(p.ug || p.pool || p.rent || p.sig || UG_CHANNELS.has(p
 
 /* Provider fare models. base/perKm/perMin/min in UGX.  kind: boda|car|shared|rent */
 const PROVIDERS = [
-  {id:'uber', name:'Uber', sub:'UberX', kind:'car', base:1250, perKm:850, perMin:130, min:6000, colour:'#000000', link:'https://m.uber.com/ul/?action=setPickup', prov:'snippet (Uber UG blog, Jan 2020 rates)', surge:1.35},
-  {id:'uberboda', name:'Uber', sub:'UberBoda', kind:'boda', base:500, perKm:450, perMin:70, min:1500, colour:'#000000', link:'https://m.uber.com/ul/?action=setPickup', prov:'snippet (Uber UG blog)', surge:1.25},
   {id:'bolt', name:'Bolt', sub:'Bolt car', kind:'car', base:1000, perKm:800, perMin:120, min:5000, colour:'#34D186', link:'https://bolt.eu/en/cities/kampala/', prov:'modelled (no public tariff found)', surge:1.4},
   {id:'boltboda', name:'Bolt', sub:'Bolt Boda', kind:'boda', base:500, perKm:400, perMin:60, min:1500, colour:'#34D186', link:'https://bolt.eu/en/cities/kampala/', prov:'modelled', surge:1.3},
   {id:'safeboda', name:'SafeBoda', sub:'Boda', kind:'boda', base:500, perKm:450, perMin:60, min:1500, colour:'#F7941D', link:'https://safeboda.com/', prov:'base fare from snippet; per-km modelled', surge:1.2},
@@ -2198,8 +2369,6 @@ const SVG = (inner) => `<svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/s
 const T = (txt, size=13, y=27, w=600, extra='') => `<text x="22" y="${y}" text-anchor="middle" font-family="Archivo,system-ui,sans-serif" font-weight="${w}" font-size="${size}" fill="#fff" ${extra}>${txt}</text>`;
 const CREST = (c='#F4ECDD') => `<g transform="translate(8 6) scale(.45)"><path d="M28.5 40.5 Q22 31 12.5 17" fill="none" stroke="${c}" stroke-width="7.5" stroke-linecap="round"/><path d="M32 38.5 Q32 24 32 8.5" fill="none" stroke="#F2C200" stroke-width="7.5" stroke-linecap="round"/><path d="M35.5 40.5 Q42 31 51.5 17" fill="none" stroke="#D2202F" stroke-width="7.5" stroke-linecap="round"/><circle cx="32" cy="48" r="7.5" fill="${c}"/><circle cx="32" cy="48" r="3" fill="#F2C200"/></g>`;
 const LOGOS = {
-  uber: SVG(T('Uber',14,27,600,'letter-spacing="-.4"')),
-  uberboda: SVG(T('Uber',12,21,600,'letter-spacing="-.3"')+T('BODA',7,33,500,'letter-spacing="1.4" opacity=".8"')),
   bolt: SVG(T('bolt',15,28,800,'letter-spacing="-.6"')),
   boltboda: SVG(T('bolt',13,22,800,'letter-spacing="-.5"')+T('BODA',7,33,500,'letter-spacing="1.4" opacity=".85"')),
   safeboda: SVG(`<path d="M11 25a11 11 0 0 1 22 0v2H11z" fill="#fff"/><path d="M13 29h18a2 2 0 0 1 0 4H13a2 2 0 0 1 0-4z" fill="#fff" opacity=".75"/><circle cx="22" cy="21" r="2.2" fill="#F7941D"/>`),
@@ -2286,7 +2455,7 @@ const LOGOS = {
 /* Every supplier wears its own mark wherever it is named. mark() resolves an object (with logo/id/name/op) or a
    name to a LOGOS entry by explicit key, then by a slug of the name, then falls back to a monogram; markBox()
    wraps it in the small tile with the brand colour. */
-const BRAND = {uber:'#000000', uberboda:'#000000', bolt:'#34D186', boltboda:'#34D186', safeboda:'#F7941D', faras:'#1F6FEB', yango:'#FC3F1D', tinka:'#E11D48', eightto8:'#0EA5E9', safarishare:'#0EA5E9', jumia:'#F68B1E', abanista:'#7C3AED', kwelishop:'#16A34A', flutterwave:'#F5A623', mtnmomo:'#FFCB05', airtelmoney:'#E4002B', ugandawildlifeauthority:'#2F6B3A', ugpool:'#D2202F', ugrent:'#F2C200', streetboda:'#6B7280', special:'#6B7280', matatu:'#2563EB'};
+const BRAND = {bolt:'#34D186', boltboda:'#34D186', safeboda:'#F7941D', faras:'#1F6FEB', yango:'#FC3F1D', tinka:'#E11D48', eightto8:'#0EA5E9', safarishare:'#0EA5E9', jumia:'#F68B1E', abanista:'#7C3AED', kwelishop:'#16A34A', flutterwave:'#F5A623', mtnmomo:'#FFCB05', airtelmoney:'#E4002B', ugandawildlifeauthority:'#2F6B3A', ugpool:'#D2202F', ugrent:'#F2C200', streetboda:'#6B7280', special:'#6B7280', matatu:'#2563EB'};
 const MARK_ALIAS = {air:'aerolinkuganda', heli:'helicoptercharter', ferry:'mvkalangala', train:'urccommutertrain', '8to8':'eightto8','8to8delivery':'eightto8','jumiaupcountry':'jumia','uwa':'ugandawildlifeauthority','momo':'mtnmomo','mtnmomo':'mtnmomo','matatu':'matatu','matatustagetaxis':'matatustagetaxis','postbuspostauganda':'postbus','helicopter':'helicoptercharter'};
 const markSlug = s => String(s||'').toLowerCase().replace(/\(.*?\)/g,'').replace(/[^a-z0-9]/g,'');
 function markKey(o){ if(!o) return ''; if(typeof o==='string'){ const k=markSlug(o); return MARK_ALIAS[k]||k; } for(const k of [o.logo, o.id, markSlug(o.name||o.op)]){ if(!k) continue; const kk=MARK_ALIAS[k]||k; if(LOGOS[kk]) return kk; } const k=markSlug(o.name||o.op); return MARK_ALIAS[k]||k; }
@@ -2408,7 +2577,6 @@ function quoteAll(route, timeKey, rain, pax){
       if (p.kind==='boda' && route.km>60){ out.push({p, price:null, eta:null, note:[], why:'bodas do not take trips over 60 km'}); continue; }
       if (p.kind==='car' && route.km>120 && !p.haggle){ out.push({p, price:null, eta:null, note:[], why:'app drivers rarely accept trips over 120 km'}); continue; }
       let f = p.base + p.perKm*route.km + p.perMin*route.min*(timeKey==='peak'?1.45:1);
-      if (route.entebbe && p.id==='uber') f += Math.max(0,route.km-5)*1200;   // snippet: Entebbe surcharge
       f = Math.max(p.min, f);
       const s = surgeOn ? (p.surge || 1) * (rain?1.1:1) : 1;
       f *= s;
@@ -3288,6 +3456,10 @@ function openMe(){
   $('#meVoice').addEventListener('click',()=>{ $('#meModal').hidden=true; toggleVoice(); });
   $('#meOut').addEventListener('click',()=>{ if(LIVE) liveSignOut(); account=null; try{ ['account','offers','driverStats'].forEach(k=>localStorage.removeItem('ug:'+k)); }catch(e){} renderAccountUI(); renderDrive(); renderStages(); $('#meModal').hidden=true; toast('Signed out on this device.'); });
 }
+document.addEventListener('click', e=>{
+  const el = e.target.closest('[data-todo]');
+  if (el && LANG !== 'en'){ e.preventDefault(); openWordFix(el.getAttribute('data-todo'), el.textContent); }
+});
 $('#meClose').addEventListener('click',()=>$('#meModal').hidden=true);
 $('#meModal').addEventListener('click',e=>{ if(e.target===$('#meModal')) $('#meModal').hidden=true; });
 $('#navCta').addEventListener('click',()=>{ if(account) openMe(); else signIn(); });
@@ -3389,8 +3561,8 @@ function handleCommand(text){
   if((m=t.match(/(take|book) (a |me a )?seat (to|for) (.+)/))){ const st=stages.find(s=>{ const r=ROUTES.find(x=>x.id===s.route); return r.to.toLowerCase().includes(m[4].trim()); }); if(st){ location.hash='#stage'; takeSeat(st); say(`Opening a seat to ${m[4]}.`); return; } }
   if(/my offers|open offers|drive/.test(t)){ location.hash='#drive'; say(hasRole('driver')?`You have ${offers.filter(o=>o.status==='open').length} open offers.`:'Open for business in sixty seconds.'); return; }
   if(/stage|stages/.test(t)){ location.hash='#stage'; say('Here are the stages.'); return; }
-  if(/night mode|dark mode/.test(t)){ document.documentElement.setAttribute('data-theme','dark'); store('theme','dark'); scene&&scene.recolour(); say('Night.'); return; }
-  if(/day mode|light mode|noon/.test(t)){ document.documentElement.setAttribute('data-theme','light'); store('theme','light'); scene&&scene.recolour(); say('Noon.'); return; }
+  if(/night mode|dark mode/.test(t)){ daySet('dark'); say('Night.'); return; }
+  if(/day mode|light mode|noon/.test(t)){ daySet('light'); say('Noon.'); return; }
   if(/(start|play).*(music|drive|tazama)/.test(t)){ dock.toggle(true); say('Starting the drive.'); return; }
   if(/(stop|pause).*(music|drive|tazama)/.test(t)){ dock.toggle(false); say('Paused.'); return; }
   if(/next (song|track|mix)/.test(t)){ dock.next(); say('Next mix.'); return; }
@@ -3627,7 +3799,7 @@ function initQuality(){
 /* The living translation. A dictionary is never finished in any product; the honest thing is not
    to label it unfinished but to make correcting it trivial. Same mechanism as the quality fixes:
    the person who can see the mistake is the person who files it. */
-function openWordFix(){
+function openWordFix(key, saw){
   const m=$('#plugModal'); const v=LANGS[LANG]||{native:'English',name:'English'};
   $('#plugTitle').textContent=t('ui.correctWord');
   $('#plugFoot').textContent=v.native+' · '+t('ui.inService');
@@ -3639,6 +3811,9 @@ function openWordFix(){
     <div style="display:flex;gap:8px;margin-top:12px"><button class="btn primary" type="button" id="wfSend" style="flex:1;justify-content:center">${esc(t('ui.correctWord'))}</button></div>
     <div class="status" id="wfStatus">Kept on this device in the prototype. In production it goes into the dictionary with your name against it.</div>`;
   m.hidden=false;
+  if (saw) $('#wfWrong').value = String(saw).trim().slice(0,120);
+  if (key) $('#wfWhere').value = key;
+  ($('#wfRight')||{focus(){}}).focus();
   $('#wfSend').addEventListener('click',()=>{
     const right=$('#wfRight').value.trim(); if(!right){ $('#wfStatus').textContent='Type the word you would use.'; return; }
     const w=load('wordFixes',[]); w.unshift({at:Date.now(), lang:LANG, where:$('#wfWhere').value.trim(), wrong:$('#wfWrong').value.trim(), right}); store('wordFixes',w);
@@ -3929,14 +4104,158 @@ function initStrip(){
   });
   ['pRoute','pSeats','pCar','pWhen'].forEach(id=>$('#'+id).addEventListener('input', renderSplit));
 }
-function initTheme(){
-  const root=document.documentElement;
-  const saved = load('theme',null); if (saved) root.setAttribute('data-theme',saved);
-  $('#themeToggle').addEventListener('click', ()=>{
-    const dark = getComputedStyle(root).getPropertyValue('color-scheme').trim()==='dark';
-    const next = dark?'light':'dark'; root.setAttribute('data-theme',next); store('theme',next); scene && scene.recolour();
-  });
+/* =====================================================================
+   The day, and the sky over it
+
+   The palette table and the painter run in the head, before first paint, so the page is never handed
+   to you in the wrong light and then corrected (search __UG_DAY). Everything here is the part that
+   keeps it moving: a tick, a control, and one call to Open-Meteo.
+
+   Doses, deliberately small. The weather bends the light; it does not repaint the brand. Yellow is
+   still the action, red is still the alert, green is still money you keep — the design council fixed
+   those meanings and the weather is not allowed to borrow them. What weather touches is the ground,
+   the two surfaces, the lines, and how sunny the sun colour looks. That is all.
+   ===================================================================== */
+const SKY = window.__UG_DAY || null;
+const PHASE_KEY = {night:'day.night', dawn:'day.dawn', morning:'day.morning',
+                   midday:'day.midday', afternoon:'day.afternoon', dusk:'day.dusk'};
+let dayLastParticle = '', dayTimer = null;
+
+function dayPhase(){ return (SKY && SKY.mode === 'auto') ? SKY.at(SKY.hours(), SKY.weather).phase
+                          : (SKY && SKY.mode === 'light') ? 'midday' : 'night'; }
+function dayModeName(){
+  if (!SKY || SKY.mode === 'auto') return t('day.auto') + ' · ' + t(PHASE_KEY[dayPhase()]);
+  return SKY.mode === 'light' ? t('day.midday') : t('day.night');
 }
+function dayLabel(){
+  const name = dayModeName();
+  const b = $('#themeToggle');
+  if (b){ b.textContent = name; b.setAttribute('aria-label', t('day.control') + ': ' + name); }
+  const m = $('#meTheme'); if (m) m.textContent = name;
+  document.querySelectorAll('#segDay button').forEach(x =>
+    x.classList.toggle('on', x.dataset.day === (SKY ? SKY.mode : 'dark')));
+}
+/* Repaint. Cheap enough to run every minute: it writes fifteen custom properties and, only when the
+   map's own colour has actually moved, asks the scene to re-tint its particles. */
+function dayApply(){
+  if (!SKY) return;
+  if (SKY.mode === 'auto'){
+    const v = SKY.paint(SKY.hours(), SKY.weather);
+    if (scene && scene.recolour && v.p2 !== dayLastParticle){ dayLastParticle = v.p2; scene.recolour(); }
+  }
+  dayLabel(); dayRail();
+}
+function daySet(mode){
+  if (!SKY) return;
+  SKY.mode = mode; store('theme', mode);
+  const root = document.documentElement;
+  root.classList.add('day-shift'); setTimeout(() => root.classList.remove('day-shift'), 700);
+  if (mode === 'auto'){ dayLastParticle = ''; SKY.paint(SKY.hours(), SKY.weather); }
+  else { SKY.clear(); root.setAttribute('data-theme', mode); }
+  if (scene && scene.recolour) scene.recolour();
+  dayLabel(); dayRail(); wxChip();
+}
+/* Twenty-four hours of the page's own ground colour, drawn from the same table the page is using. */
+function dayRail(){
+  const c = $('#dayRail'); if (!c || !SKY || !c.getContext) return;
+  const g = c.getContext('2d'); if (!g) return;
+  const w = c.width, h = c.height, n = 96;                     // a cell every quarter hour
+  for (let i = 0; i < n; i++){
+    g.fillStyle = SKY.at(i * 24 / n, SKY.weather).g;
+    g.fillRect(Math.floor(i * w / n), 0, Math.ceil(w / n) + 1, h);
+  }
+  const cs = getComputedStyle(document.documentElement);
+  [SKY.SUNUP, SKY.SUNDOWN].forEach(x => {                      // sunrise and sunset, the two crossings
+    g.fillStyle = cs.getPropertyValue('--line-strong').trim() || '#888';
+    g.fillRect(Math.round(x / 24 * w), 0, 1, h);
+  });
+  if (SKY.mode === 'auto'){                                    // and where you are standing in it
+    const x = Math.round(SKY.hours() / 24 * w);
+    g.fillStyle = cs.getPropertyValue('--hour').trim() || '#F2C200';
+    g.fillRect(Math.max(0, Math.min(w - 3, x - 1)), 0, 3, h);
+  }
+}
+
+/* ---------- The sky over Kampala ----------------------------------------------------------------
+   Open-Meteo: no key, no attribution beacon, CORS open. It is asked once, idle, well after the page
+   is usable, and the answer is kept for twenty minutes. If the network is not there the page keeps
+   its clock and simply has no weather — nothing about the day depends on the call succeeding.
+
+   NOT VERIFIED AGAINST THE LIVE ENDPOINT. This sandbox's egress proxy blocks the host, so the reader
+   below is written to the documented `current` response shape and is exercised in
+   server/test/site.test.js against a recorded fixture, not against api.open-meteo.com. The first
+   person with a network should open the page and confirm the chip fills in. */
+const WX_URL = 'https://api.open-meteo.com/v1/forecast?latitude=0.3476&longitude=32.5825' +
+               '&current=temperature_2m,precipitation,weather_code,cloud_cover,is_day&timezone=Africa%2FKampala';
+const WX_TTL = 20 * 60 * 1000;
+/* WMO present-weather codes, collapsed to the four things a colour can honestly say. */
+function wxRead(c){
+  if (!c) return null;
+  const code = +c.weather_code || 0, mm = +c.precipitation || 0;
+  const cloud = Math.max(0, Math.min(1, (+c.cloud_cover || 0) / 100));
+  const rain = code >= 95 ? 1
+             : code >= 80 ? Math.min(1, 0.55 + mm / 6)
+             : code >= 61 ? Math.min(1, 0.35 + mm / 8)
+             : code >= 51 ? Math.min(0.45, 0.15 + mm / 10)
+             : mm > 0     ? Math.min(0.30, mm / 6) : 0;
+  return {cloud, rain, code, temp: Math.round(+c.temperature_2m), day: +c.is_day === 1, at: Date.now()};
+}
+function wxWord(w){
+  if (!w) return '';
+  if (w.code >= 95) return t('wx.storm');
+  if (w.rain > 0.05) return t('wx.rain');
+  if (w.code === 45 || w.code === 48) return t('wx.mist');
+  return w.cloud > 0.55 ? t('wx.cloud') : t('wx.clear');
+}
+function wxChip(){
+  const el = $('#wx'); if (!el) return;
+  const w = SKY && SKY.weather;
+  if (!w){ el.hidden = true; return; }
+  el.hidden = false;
+  $('#wxT').textContent = (isFinite(w.temp) ? w.temp + '°' : '') ;
+  $('#wxS').textContent = wxWord(w) + ' · ' + t(PHASE_KEY[dayPhase()]);
+  el.setAttribute('aria-label', t('wx.label') + ': ' + wxWord(w) + ', ' + w.temp + '°C, ' + t(PHASE_KEY[dayPhase()]));
+}
+function wxUse(w){
+  if (!SKY || !w) return;
+  SKY.weather = w;
+  dayLastParticle = '';            // the ground moved for a reason other than the clock
+  dayApply(); wxChip();
+  if (scene && scene.setWeather) scene.setWeather(w);
+}
+function initWeather(){
+  if (!SKY) return;
+  let cached = null; try { cached = load('wx', null); } catch(e){}
+  if (cached && cached.at && Date.now() - cached.at < WX_TTL) wxUse(cached);
+  const ask = () => fetch(WX_URL, {mode:'cors'})
+    .then(r => r.ok ? r.json() : Promise.reject(r.status))
+    .then(j => { const w = wxRead(j && j.current); if (w){ store('wx', w); wxUse(w); } })
+    .catch(() => {});   /* no weather is a fine state; the clock does not need it */
+  const idle = window.requestIdleCallback || (f => setTimeout(f, 2500));
+  idle(() => ask());
+  setInterval(() => { if (!document.hidden) ask(); }, WX_TTL);
+}
+
+function initDay(){
+  if (!SKY){ const b = $('#themeToggle'); if (b) b.addEventListener('click', () => {}); return; }
+  /* auto → always noon → always night → auto. Three states, one button, in that order because it
+     walks from "let it decide" through the two ways of overriding it. */
+  const next = {auto:'light', light:'dark', dark:'auto'};
+  const b = $('#themeToggle'); if (b) b.addEventListener('click', () => daySet(next[SKY.mode] || 'auto'));
+  const seg = $('#segDay');
+  if (seg) seg.addEventListener('click', e => { const x = e.target.closest('button'); if (x) daySet(x.dataset.day); });
+  const up = $('#dayRailUp'), dn = $('#dayRailDown');
+  const clock = x => String(Math.floor(x)).padStart(2,'0') + ':' + String(Math.round((x % 1) * 60)).padStart(2,'0');
+  if (up) up.textContent = clock(SKY.SUNUP);
+  if (dn) dn.textContent = clock(SKY.SUNDOWN);
+  dayApply();
+  /* A minute is finer than the eye: across a whole minute the ground moves by well under one
+     just-noticeable difference, which is the entire point — you are never shown a step. */
+  dayTimer = setInterval(dayApply, 60000);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) dayApply(); });
+  initWeather();
+}
+
 function initVerbs(){
   const words=[...document.querySelectorAll('#verbs .w')]; const tagline=$('#tagline'); const h1=$('#verbs');
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -3989,6 +4308,10 @@ function initSceneWhenSeen(){
 }
 function initScene(){
   const canvas = $('#scene'); const stage = $('#map');
+  /* The weather handles are declared here, with the rest of the scene's state, and not down beside
+     setWeather: recolour() runs before that block, so a `let` there sits in its temporal dead zone.
+     It threw, initScene caught it, and the map silently became "3D map unavailable here". */
+  let wxRain=null, wxVeil=null, wxCur=null;
   if (!window.THREE || !canvas.getContext('webgl')){ canvas.style.display='none'; $('#hint').textContent='The 3D map needs WebGL'; return; }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const renderer = new THREE.WebGLRenderer({canvas, alpha:true, antialias:true, powerPreference:'high-performance'});
@@ -4038,6 +4361,7 @@ function initScene(){
     paint(edgeP,()=>c2.clone());
     paint(waterP,()=>cw.clone()); paint(shoreP,()=>cw.clone().lerp(c1,.35));
     nodeMat.color=c3;
+    if (typeof setWeather==='function' && wxCur) setWeather(wxCur);   // rain and cloud are tokens too
   }
   recolour();
 
@@ -4059,6 +4383,36 @@ function initScene(){
   card.addEventListener('click', e=>{ const a=e.target.closest('a'); if(!a) return; if(a.dataset.route){ const r=ROUTES.find(x=>x.id===a.dataset.route); if(r){ $('#cFrom').value=r.from; syncTo('cFrom','cTo'); $('#cTo').value=r.id; renderCompare(); } } if(a.dataset.dest){ const d=DESTS.find(x=>x.id===a.dataset.dest); if(d){ dest=d; renderDests(); renderItin(); } } });
   showPin(pins[0]);
   // Pulse heat: one glowing sprite per town, sized by demand (yellow) or by gap (red); breathes.
+  /* ---------- Weather over the map ---------------------------------------------------------------
+     The weather does not get a canvas of its own. It falls on the actual country, in the scene that
+     is already running, already paused when it scrolls out of view, and already bound to the day's
+     colour tokens — so it costs one buffer and no second WebGL context. Rain is fine streaks in the
+     crane's grey-blue falling onto the plate; cloud is a slow translucent veil that takes the land's
+     contrast down the way real cloud does. Both are transparent, so Uganda reads straight through
+     them, and both are off entirely under reduced motion. */
+  function wxDrop(o){ if(!o) return null; group.remove(o); o.geometry.dispose(); o.material.dispose(); return null; }
+  function setWeather(w){
+    wxCur = w || null;
+    wxRain = wxDrop(wxRain); wxVeil = wxDrop(wxVeil);
+    if (!w || reduce) return;
+    const cs = getComputedStyle(document.documentElement);
+    if (w.cloud > 0.18){
+      const n = Math.round(220 + w.cloud*520), pos = new Float32Array(n*3), ph = new Float32Array(n);
+      for (let i=0;i<n;i++){ pos[i*3]=(Math.random()-.5)*9.6; pos[i*3+1]=(Math.random()-.5)*9.6; pos[i*3+2]=1.9+Math.random()*1.0; ph[i]=Math.random()*6.283; }
+      const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(pos,3));
+      const m = new THREE.PointsMaterial({size:.62, map:tex, transparent:true, opacity:.05+w.cloud*.08, depthWrite:false,
+        color:new THREE.Color(cs.getPropertyValue('--ink-3').trim()||'#888')});
+      wxVeil = new THREE.Points(g,m); wxVeil.userData={n, ph}; group.add(wxVeil);
+    }
+    if (w.rain > 0.05){
+      const n = Math.round(120 + w.rain*460), pos = new Float32Array(n*3), sp = new Float32Array(n);
+      for (let i=0;i<n;i++){ pos[i*3]=(Math.random()-.5)*8.6; pos[i*3+1]=(Math.random()-.5)*8.6; pos[i*3+2]=Math.random()*2.4; sp[i]=.03+Math.random()*.045; }
+      const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(pos,3));
+      const m = new THREE.PointsMaterial({size:.12, map:tex, transparent:true, opacity:.26+w.rain*.34, depthWrite:false,
+        color:new THREE.Color(cs.getPropertyValue('--crane').trim()||'#94A8B6')});
+      wxRain = new THREE.Points(g,m); wxRain.userData={n, sp}; group.add(wxRain);
+    }
+  }
   const heat=[]; function setHeat(d){ heat.forEach(h=>group.remove(h.pts)); heat.length=0; d.forEach(t=>{ const p=pins.find(x=>x.pl.name===t.name); if(!p||t.demand<1) return; const g=new THREE.BufferGeometry(); g.setAttribute('position',new THREE.BufferAttribute(new Float32Array([p.v.x,p.v.y,p.v.z-.05]),3)); const m=new THREE.PointsMaterial({size:.35+Math.min(1.2,t.demand*0.12), map:tex, transparent:true, opacity:.35, depthWrite:false, color:new THREE.Color(t.gap>0?'#D2202F':'#F2C200'), blending:THREE.AdditiveBlending}); const pts=new THREE.Points(g,m); group.add(pts); heat.push({pts,m,base:m.size,ph:Math.random()*6}); }); }
   function focus(name){ const p=pins.find(x=>x.pl.name===name); if(!p) return; rot.y = clamp(-p.v.x*0.2,-0.9,0.9); rot.x = clamp(p.v.y*0.18,-0.6,0.6); pins.forEach(q=>q.el.classList.toggle('tp', q===p)); showPin(p); }
   const fxGeo=new THREE.BufferGeometry(); fxGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(0),3)); const fxMat=new THREE.PointsMaterial({size:.9, map:tex, transparent:true, opacity:.3, depthWrite:false, color:new THREE.Color('#F2A900'), blending:THREE.AdditiveBlending}); group.add(new THREE.Points(fxGeo,fxMat));
@@ -4079,6 +4433,10 @@ function initScene(){
       const breath = 1 + 0.015*Math.sin(t*0.6); fxMat.opacity = 0.2 + 0.15*Math.sin(t*1.8);
       for (const p of [landP,edgeP,waterP,shoreP]){ const pos=p.geometry.attributes.position, b=p.userData.base, ph=p.userData.ph; for(let i=0;i<p.userData.n;i++){ const bx=b[i*3],by=b[i*3+1],bz=b[i*3+2]; const d=Math.hypot(bx,by); const wave=Math.sin(d*2.2 - t*1.6 + ph[i])*0.03; pos.setXYZ(i, bx*breath + Math.sin(t*0.7+ph[i])*0.012, by*breath + Math.cos(t*0.6+ph[i])*0.012, bz + wave + Math.sin(t*0.9+ph[i])*0.02); } pos.needsUpdate=true; }
     }
+    if(!reduce && wxRain){ const p=wxRain.geometry.attributes.position, u=wxRain.userData;
+      for(let i=0;i<u.n;i++){ let z=p.getZ(i)-u.sp[i]; if(z<0.02) z=2.4; p.setZ(i,z); } p.needsUpdate=true; }
+    if(!reduce && wxVeil){ const p=wxVeil.geometry.attributes.position, u=wxVeil.userData;
+      for(let i=0;i<u.n;i++){ let x=p.getX(i)+0.0045; if(x>4.7) x=-4.7; p.setX(i,x); p.setY(i,p.getY(i)+Math.sin(t*0.5+u.ph[i])*0.0016); } p.needsUpdate=true; }
     if(!reduce) heat.forEach(h=>{ h.m.size=h.base*(1+0.18*Math.sin(t*2+h.ph)); h.m.opacity=.28+.14*Math.sin(t*2+h.ph); });
     renderer.render(sc,cam);
     // project pins
@@ -4089,7 +4447,8 @@ function initScene(){
   let visible=true; if('IntersectionObserver' in window){ new IntersectionObserver(en=>{ const was=visible; visible=en[0].isIntersecting; if(visible&&!was) requestAnimationFrame(frame); },{threshold:0}).observe(stage); }
   requestAnimationFrame(frame);
   matchMedia('(prefers-color-scheme: dark)').addEventListener('change', recolour);
-  scene = {recolour, setHeat, focus, foresight};
+  scene = {recolour, setHeat, focus, foresight, setWeather};
+  if (window.__UG_DAY && window.__UG_DAY.weather) setWeather(window.__UG_DAY.weather);
   if (typeof foresightHeat==='function' && foresightRows.length) foresight(foresightHeat());
   if(typeof renderPulse==='function') renderPulse();
 }
@@ -4159,8 +4518,8 @@ function teleport(townName, opts={}){
    word, so that button is in Me, in every language. Method and per-language notes: docs/languages.md.
    ===================================================================== */
 /* i18n:begin (generated by server/scripts/i18n-build.cjs from data/i18n/*.json; do not edit by hand) */
-const LANGS = JSON.parse("{\"lg\":{\"name\":\"Luganda\",\"native\":\"Oluganda\",\"region\":\"Central Uganda (Buganda): Kampala, Wakiso, Mukono, Masaka and the Buganda kingdom\",\"family\":\"Bantu\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"Uganda · Central\",\"uncertain\":6,\"missing\":15},\"xog\":{\"name\":\"Lusoga\",\"native\":\"Olusoga\",\"region\":\"Eastern Uganda (Busoga): Jinja, Iganga, Kamuli, Bugiri, Mayuge, Luuka, Namutumba\",\"family\":\"Bantu\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"Uganda · East\",\"uncertain\":6,\"missing\":15},\"myx\":{\"name\":\"Lumasaba\",\"native\":\"Lumasaaba\",\"region\":\"Eastern Uganda (Bugisu, Mount Elgon): Mbale, Sironko, Manafwa, Bududa, Bulambuli, Namisindwa\",\"family\":\"Bantu\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"Uganda · East\",\"uncertain\":11,\"missing\":15},\"gwr\":{\"name\":\"Lugwere\",\"native\":\"Lugwere\",\"region\":\"Eastern Uganda (Bugwere): Pallisa, Budaka, Kibuku and the Bugwere lowlands between Busoga and Bugisu\",\"family\":\"Bantu\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"Uganda · East\",\"uncertain\":10,\"missing\":15},\"lsm\":{\"name\":\"Lusamia\",\"native\":\"Olusamia\",\"region\":\"Eastern Uganda (Busia, Samia-Bugwe, southern Tororo) and across the border into Busia County, Kenya\",\"family\":\"Bantu\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"Uganda · East\",\"uncertain\":11,\"missing\":15},\"teo\":{\"name\":\"Ateso\",\"native\":\"Ateso\",\"region\":\"Teso sub-region, eastern Uganda: Soroti, Kumi, Ngora, Serere, Katakwi, Amuria, Bukedea, Pallisa (and Tororo Iteso)\",\"family\":\"Eastern Nilotic\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"Uganda · East\",\"uncertain\":9,\"missing\":15},\"kpz\":{\"name\":\"Kupsabiny\",\"native\":\"Kupsabiny\",\"region\":\"Sebei sub-region on the Ugandan slopes of Mount Elgon: Kapchorwa, Kween, Bukwo\",\"family\":\"Southern Nilotic\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"Uganda · East\",\"uncertain\":10,\"missing\":15},\"ach\":{\"name\":\"Acholi\",\"native\":\"Leb Acoli\",\"region\":\"Northern Uganda (Acholiland): Gulu, Kitgum, Pader, Amuru, Lamwo, Agago, Nwoya, Omoro\",\"family\":\"Western Nilotic\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"Uganda · North\",\"uncertain\":7,\"missing\":15},\"laj\":{\"name\":\"Lango\",\"native\":\"Leb Laŋo\",\"region\":\"Lango sub-region, northern Uganda: Lira, Apac, Oyam, Kole, Dokolo, Alebtong, Otuke, Amolatar, Kwania\",\"family\":\"Western Nilotic\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"Uganda · North\",\"uncertain\":8,\"missing\":15},\"kdi\":{\"name\":\"Kumam\",\"native\":\"Kumam\",\"region\":\"Kaberamaido and Kalaki districts, with Kumam communities in Soroti, Dokolo and Amolatar\",\"family\":\"Western Nilotic\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"Uganda · North\",\"uncertain\":0,\"missing\":15},\"kdj\":{\"name\":\"Ngakarimojong\",\"native\":\"Ŋakarimojoŋ\",\"region\":\"Karamoja sub-region, north-eastern Uganda: Moroto, Kotido, Kaabong, Napak, Nakapiripirit, Abim, Amudat, Karenga\",\"family\":\"Eastern Nilotic\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"Uganda · North\",\"uncertain\":8,\"missing\":15},\"alz\":{\"name\":\"Alur\",\"native\":\"Dhu Alur\",\"region\":\"West Nile, Uganda (Nebbi, Zombo, Pakwach) and across the border in Ituri, DR Congo\",\"family\":\"Western Nilotic\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"Uganda · West Nile\",\"uncertain\":0,\"missing\":15},\"lgg\":{\"name\":\"Lugbara\",\"native\":\"Lugbarati\",\"region\":\"West Nile, Uganda (Arua, Maracha, Terego, Yumbe) and north-eastern DR Congo\",\"family\":\"Central Sudanic\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"Uganda · West Nile\",\"uncertain\":0,\"missing\":15},\"mhi\":{\"name\":\"Ma'di\",\"native\":\"Ma'di\",\"region\":\"West Nile, Uganda (Adjumani, Moyo) and Magwi county, South Sudan\",\"family\":\"Central Sudanic\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"Uganda · West Nile\",\"uncertain\":0,\"missing\":15},\"keo\":{\"name\":\"Kakwa\",\"native\":\"Kakwa\",\"region\":\"West Nile, Uganda (Koboko, Yumbe), Central Equatoria in South Sudan and Aru in DR Congo\",\"family\":\"Eastern Nilotic\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"Uganda · West Nile\",\"uncertain\":0,\"missing\":15},\"nyn\":{\"name\":\"Runyankore\",\"native\":\"Orunyankore\",\"region\":\"Ankole, south-western Uganda (Mbarara, Bushenyi, Ntungamo, Ibanda)\",\"family\":\"Bantu\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"Uganda · West\",\"uncertain\":10,\"missing\":15},\"cgg\":{\"name\":\"Rukiga\",\"native\":\"Orukiga\",\"region\":\"Ankole, south-western Uganda (Mbarara, Bushenyi, Ntungamo, Ibanda)\",\"family\":\"Bantu\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"Uganda · West\",\"uncertain\":10,\"missing\":15},\"ttj\":{\"name\":\"Rutooro\",\"native\":\"Orutooro\",\"region\":\"Tooro, western Uganda (Fort Portal, Kabarole, Kyenjojo, Kamwenge)\",\"family\":\"Bantu\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"Uganda · West\",\"uncertain\":11,\"missing\":15},\"nyo\":{\"name\":\"Runyoro\",\"native\":\"Orunyoro\",\"region\":\"Uganda · West (Bunyoro: Hoima, Masindi, Kikuube)\",\"family\":\"Bantu\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"Uganda · West\",\"uncertain\":0,\"missing\":15},\"koo\":{\"name\":\"Rukonzo\",\"native\":\"Lhukonzo\",\"region\":\"Uganda · West (Rwenzori: Kasese, Bundibugyo)\",\"family\":\"Bantu\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"Uganda · West\",\"uncertain\":0,\"missing\":15},\"sw\":{\"name\":\"Swahili\",\"native\":\"Kiswahili\",\"region\":\"East Africa; Uganda's second official language (Kenya, Tanzania, Uganda usage)\",\"family\":\"Bantu\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"East Africa · Africa\",\"uncertain\":3,\"missing\":15},\"rw\":{\"name\":\"Kinyarwanda\",\"native\":\"Ikinyarwanda\",\"region\":\"Visitors · Rwanda\",\"family\":\"Bantu\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"East Africa · Africa\",\"uncertain\":0,\"missing\":15},\"so\":{\"name\":\"Somali\",\"native\":\"Af-Soomaali\",\"region\":\"Visitors · Somalia, the Horn\",\"family\":\"Cushitic\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"East Africa · Africa\",\"uncertain\":0,\"missing\":15},\"am\":{\"name\":\"Amharic\",\"native\":\"አማርኛ\",\"region\":\"Ethiopia; the Ethiopian visitor and diaspora in Kampala\",\"family\":\"Afro-Asiatic (Semitic)\",\"dir\":\"ltr\",\"script\":\"Ethiopic\",\"confidence\":\"in service\",\"group\":\"East Africa · Africa\",\"uncertain\":0,\"missing\":15},\"ar\":{\"name\":\"Arabic\",\"native\":\"العربية\",\"region\":\"Sudan, Egypt, the Gulf, North Africa and Somalia/Djibouti co-official; the Arabic-reading visitor to Uganda\",\"family\":\"Afro-Asiatic (Semitic)\",\"dir\":\"rtl\",\"script\":\"Arabic\",\"confidence\":\"in service\",\"group\":\"East Africa · Africa\",\"uncertain\":0,\"missing\":15},\"ln\":{\"name\":\"Lingala\",\"native\":\"Lingála\",\"region\":\"Visitors · DR Congo\",\"family\":\"Bantu\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"East Africa · Africa\",\"uncertain\":0,\"missing\":15},\"ha\":{\"name\":\"Hausa\",\"native\":\"Hausa\",\"region\":\"Visitors · Nigeria, Niger\",\"family\":\"Chadic\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"East Africa · Africa\",\"uncertain\":0,\"missing\":15},\"zu\":{\"name\":\"isiZulu\",\"native\":\"isiZulu\",\"region\":\"Visitors · South Africa\",\"family\":\"Bantu\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"East Africa · Africa\",\"uncertain\":0,\"missing\":15},\"en\":{\"name\":\"English\",\"native\":\"English\",\"region\":\"World\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"complete\",\"group\":\"World\",\"uncertain\":0,\"missing\":0},\"fr\":{\"name\":\"French\",\"native\":\"Français\",\"region\":\"Visitors from France, Belgium, Switzerland, Canada, DR Congo, Rwanda, Burundi and francophone Africa\",\"family\":\"Indo-European\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"World\",\"uncertain\":0,\"missing\":15},\"de\":{\"name\":\"German\",\"native\":\"Deutsch\",\"region\":\"Visitors from Germany, Austria, Switzerland, Liechtenstein, Luxembourg and South Tyrol\",\"family\":\"Indo-European\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"World\",\"uncertain\":0,\"missing\":15},\"it\":{\"name\":\"Italian\",\"native\":\"Italiano\",\"region\":\"Visitors from Italy, Switzerland (Ticino), San Marino and Vatican City\",\"family\":\"Indo-European\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"World\",\"uncertain\":0,\"missing\":15},\"es\":{\"name\":\"Spanish\",\"native\":\"Español\",\"region\":\"Visitors from Spain, Equatorial Guinea and Spanish speakers in Europe\",\"family\":\"Indo-European\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"World\",\"uncertain\":0,\"missing\":15},\"es-MX\":{\"name\":\"Spanish (Mexico)\",\"native\":\"Español de México\",\"region\":\"Visitors from Mexico, and Spanish speakers from Central America and the United States\",\"family\":\"Indo-European\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"World\",\"uncertain\":0,\"missing\":15},\"pt\":{\"name\":\"Portuguese\",\"native\":\"Português\",\"region\":\"Visitors from Portugal, Angola, Mozambique, Cape Verde, Guinea-Bissau, São Tomé and Príncipe and Timor-Leste\",\"family\":\"Indo-European\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"World\",\"uncertain\":0,\"missing\":15},\"pt-BR\":{\"name\":\"Portuguese (Brazil)\",\"native\":\"Português do Brasil\",\"region\":\"Visitors from Brazil\",\"family\":\"Indo-European\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"World\",\"uncertain\":0,\"missing\":15},\"ru\":{\"name\":\"Russian\",\"native\":\"Русский\",\"region\":\"Visitors from Russia, Belarus, Kazakhstan, Kyrgyzstan and Russian speakers across the former Soviet Union and the diaspora\",\"family\":\"Indo-European\",\"dir\":\"ltr\",\"script\":\"Cyrillic\",\"confidence\":\"in service\",\"group\":\"World\",\"uncertain\":0,\"missing\":15},\"zh-Hans\":{\"name\":\"Chinese, Simplified\",\"native\":\"简体中文\",\"region\":\"Visitors · China (mainland), Singapore, Malaysia\",\"family\":\"Sino-Tibetan\",\"dir\":\"ltr\",\"script\":\"Han\",\"confidence\":\"in service\",\"group\":\"World\",\"uncertain\":0,\"missing\":15},\"ja\":{\"name\":\"Japanese\",\"native\":\"日本語\",\"region\":\"Visitors · Japan\",\"family\":\"Japonic\",\"dir\":\"ltr\",\"script\":\"Japanese\",\"confidence\":\"in service\",\"group\":\"World\",\"uncertain\":0,\"missing\":15},\"ko\":{\"name\":\"Korean\",\"native\":\"한국어\",\"region\":\"Visitors · South Korea\",\"family\":\"Koreanic\",\"dir\":\"ltr\",\"script\":\"Hangul\",\"confidence\":\"in service\",\"group\":\"World\",\"uncertain\":0,\"missing\":15},\"hi\":{\"name\":\"Hindi\",\"native\":\"हिन्दी\",\"region\":\"Visitors · India, Nepal, Fiji, Mauritius\",\"family\":\"Indo-European (Indo-Aryan)\",\"dir\":\"ltr\",\"script\":\"Devanagari\",\"confidence\":\"in service\",\"group\":\"World\",\"uncertain\":0,\"missing\":15}}");
-const STR = JSON.parse("{\"page.p.ug_speaks_the_languages\":\"UG speaks the languages of Uganda, of the region, and of its visitors. Pick yours; everything follows.\",\"page.button.skip\":\"Skip\",\"ride\":\"Ride.\",\"pool\":\"Pool.\",\"rent\":\"Rent.\",\"deliver\":\"Deliver.\",\"tabRide\":\"Ride\",\"navQuality\":\"Quality\",\"navStage\":\"Stage\",\"navRent\":\"Rent\",\"navDeliver\":\"Deliver\",\"navExplore\":\"Explore\",\"navDrive\":\"Drive\",\"getStarted\":\"Get started\",\"top.div.ug_kampala_everywhere\":\"<b>UG</b> · Kampala → everywhere\",\"position\":\"Look the part. Pay the smart price.\",\"top.p.one_app_that_quotes\":\"One app that quotes every ride on the Ugandan market side by side, pools the road trip so the Prado costs a quarter, rents the car when you need to arrive, and books the park before the permits go. Paid the way Kampala pays: mobile money.\",\"doorRider\":\"I need to get somewhere\",\"doorRiderSub\":\"Queue a seat, compare every ride, plan the weekend.\",\"start\":\"Start →\",\"doorDriver\":\"I drive, or I have a car\",\"doorDriverSub\":\"Say where you're comfortable. Funded trips come to you.\",\"open\":\"Open for business →\",\"top.a.just_compare_prices_no\":\"Just compare prices, no account needed\",\"top.span.compare_every_app_and\":\"Compare every app and go\",\"top.span.share_the_seat_split\":\"Share the seat, split the fuel\",\"top.span.self_drive_or_with\":\"Self-drive or with driver\",\"top.span.send_the_thing_any\":\"Send the thing, any size\",\"top.span.parks_permits_weekends\":\"Parks, permits, weekends\",\"top.label.pick_up\":\"Pick-up\",\"top.label.drop_off_destination\":\"Drop-off / destination\",\"top.label.date\":\"Date\",\"top.label.time\":\"Time\",\"top.button.show_prices\":\"Show prices\",\"top.div.prototype_v1_every_price\":\"Prototype v1 · every price is an estimate from a published model · payments run in a sandbox · nothing here is a licensed service yet\",\"compare.div.compare_the_arbitrage_desk\":\"Compare · <b>the arbitrage desk</b>\",\"compare.h2.every_ride_on_the\":\"Every ride on the market, one screen, ranked by price.\",\"compare.p.uber_bolt_safeboda_faras\":\"Uber, Bolt, SafeBoda, Faras, Yango, Tinka, the street boda, the matatu, a special hire, the bus, the ferry, the flight, and UG’s own pool and rentals. Same trip, same minute. Estimates say so on the card, and the ones that cannot serve you stay on the screen, greyed, with the reason. UG takes payment only for its own seats and cars; every other row shows you the fare and opens that operator's app, because we will not take your money for a ride we have no contract to place.\",\"compare.h3.your_trip\":\"Your trip\",\"compare.label.from\":\"From\",\"compare.label.to\":\"To\",\"compare.label.leaving\":\"Leaving\",\"compare.button.off_peak\":\"Off-peak\",\"compare.button.rush_hour\":\"Rush hour\",\"compare.button.night\":\"Night\",\"compare.label.order_by\":\"Order by\",\"compare.button.cheapest\":\"Cheapest\",\"compare.button.most_promised\":\"Most promised\",\"compare.label.show\":\"Show\",\"compare.button.all\":\"All\",\"compare.button.boda\":\"Boda\",\"compare.button.car\":\"Car\",\"compare.button.shared\":\"Shared\",\"compare.button.air_water_rail\":\"Atlas\",\"compare.label.people_travelling\":\"People travelling\",\"compare.summary.more_options_pick_the\":\"More options <small>pick the car, rain, split</small>\",\"compare.label.pick_the_car\":\"Pick the car\",\"compare.span.any\":\"Any\",\"compare.span.signature_sedan\":\"Signature sedan\",\"compare.span.signature_suv\":\"Signature SUV\",\"compare.span.executive_van\":\"Executive van\",\"compare.span.it_is_raining_kampala\":\"It is raining (Kampala surge)\",\"compare.span.split_fare_across_the\":\"Split fare across the group\",\"compare.summary.what_choosing_badly_costs\":\"What choosing badly costs <small>the spread across the market for this trip</small>\",\"compare.summary.the_atlas_every_way\":\"The Atlas · every way to move, one table <small>air, bus, water, rail, Signature cars, stays, with the truth about each one's state</small>\",\"compare.p.book_on_ug_where\":\"<b>Book on UG</b> where a channel exists, <b>Call ahead</b> where it does not, <b>Listed</b> for recognition, <b>Coming</b> for what is being built. Fares are modelled and say so.\",\"quality.div.quality\":\"Quality\",\"quality.h2.what_each_operator_has\":\"What each operator has promised, in writing. That is all this board can honestly show you today.\",\"quality.p.rating_other_people_s\":\"Rating other people's companies is easy to do badly. A score printed next to a registered name is a claim about that business, and UG has not run enough trips to make one. So this board shows what each operator has published — the fare table, the helmet, the receipt — and where we read it. The performance column stays empty until the trips behind it are ours. Below, the same arithmetic runs on four operators we invented, so you can check the method before it is ever pointed at a real name.\",\"quality.button.everything\":\"Everything\",\"quality.button.apps\":\"Apps\",\"quality.button.street\":\"Street\",\"quality.button.stage_amp_coach\":\"Stage &amp; coach\",\"quality.button.scheduled\":\"Scheduled\",\"quality.summary.the_arithmetic_demonstrated_four\":\"The arithmetic, demonstrated <small>four invented operators, so the method can be checked before it touches a real name</small>\",\"quality.p.operators_a_to_e\":\"Operators A to E do not exist. Their figures are written by UG so that every rule on this page can be watched doing its work: one that keeps its word and has the trips to prove it; one that is steady but slow to put things right; one that keeps the fare and is chronically late, held at Watch by a safety breach whatever the rest says; one that always turns up, argues about money afterwards and has published almost nothing, so the ceiling holds it down; and one whose numbers are excellent on eighteen trips, pulled back toward the market baseline because eighteen trips is not a record.\",\"quality.h4.what_counts\":\"What counts\",\"quality.h4.what_does_not_count\":\"What does not count\",\"quality.li.the_brand_and_how\":\"The brand, and how long it has existed\",\"quality.li.how_big_the_fleet\":\"How big the fleet is, or how much it raised\",\"quality.li.money_paid_to_ug\":\"Money paid to UG by a supplier for position — there is no such payment and no way to make one. UG's own commission, ten percent on a pooled seat, is charged to the rider and never to a supplier for placement\",\"quality.li.how_much_it_advertises\":\"How much it advertises, here or anywhere\",\"quality.li.whether_ug_competes_with\":\"Whether UG competes with it\",\"quality.li.whether_it_has_a\":\"Whether it has a press office to publish promises with — which is why this board is not ranked by the promise count\",\"quality.summary.how_the_numbers_get\":\"How the numbers get better <small>six practices, each with a button, in your language</small>\",\"quality.summary.the_method_in_full\":\"The method, in full <small>meters, weights, priors, thresholds, and what is simulated in this build</small>\",\"stage.div.the_virtual_stage_seats\":\"The Virtual Stage · <b>seats fill first, then the car comes</b>\",\"stage.h2.pay_for_the_seat\":\"Pay for the seat. The car comes when it fills.\",\"stage.p.like_a_matatu_stage\":\"Like a matatu stage, a car leaves when it is full or at the cut-off. Unlike a stage, you queue money from your sofa, the seat price falls as friends join, and the driver who takes it already said they are comfortable on that road.\",\"stage.button.all_corridors\":\"All corridors\",\"stage.button.near_me\":\"Near me\",\"stage.button.funded\":\"Funded\",\"stage.button.start_a_stage\":\"Start a stage\",\"stage.summary.where_stages_fill_fastest\":\"Where stages fill fastest <small>Pulse · paid seats against comfort maps, by town</small>\",\"stage.summary.buses_on_this_corridor\":\"Buses on this corridor <small>the fallback, side by side with the stage</small>\",\"stage.p.every_corridor_also_has\":\"Every corridor also has buses. Compare departure times across operators, see the park you leave from, and book on UG where the operator takes online bookings. Where it does not, we say so and give you the number to call ahead, rather than a dead button.\",\"stage.label.corridor\":\"Corridor\",\"stage.summary.empty_legs_the_return\":\"Empty legs <small>the return seats, 40% of the fare</small>\",\"stage.p.every_rental_with_driver\":\"Every rental with driver and every pool has a way back. The moment the outbound is booked, the return's seats go on sale.\",\"stage.summary.post_a_trip_of\":\"Post a trip of your own, or price a seat <small>Pool · your circles, the true cost of the road divided by seats</small>\",\"stage.h3.offer_a_seat_or\":\"Offer a seat, or see what a seat should cost\",\"stage.label.route\":\"Route\",\"stage.label.paying_seats\":\"Paying seats\",\"stage.label.car\":\"Car\",\"stage.label.departure\":\"Departure\",\"stage.button.post_this_trip\":\"Post this trip\",\"stage.button.book_a_seat_with\":\"Book a seat with MoMo\",\"stage.p.posted_trips_live_only\":\"Posted trips live only in this browser until you sign in. Pool follows the same pattern the Pool app popularised: phone-verified accounts, a trip chat, and two-way ratings, plus circles so you ride with people you already half-know.\",\"rent.div.rent_arrive_properly\":\"Rent\",\"rent.h2.rent_the_car_or\":\"Self-drive by the day. Chauffeured by the hour.\",\"rent.p.self_drive_by_the\":\"Self-drive by the day, chauffeured by the hour, or the Signature fleet when the arrival is the point. The price is per head when you split it.\",\"deliver.div.deliver_send_the_thing\":\"Deliver\",\"deliver.h2.send_the_thing_any\":\"Send the thing. Any size, any distance.\",\"deliver.p.every_courier_in_town\":\"Every courier in town on one screen, ranked. Upcountry, the parcel rides in the boot of a stage car for a quarter of a seat, and in harvest season a minibus, pickup or lorry with a driver.\",\"deliver.h3.the_parcel\":\"The parcel\",\"deliver.label.from\":\"From\",\"deliver.label.to\":\"To\",\"deliver.label.what_is_it\":\"What is it\",\"deliver.span.envelope_documents\":\"Envelope · documents\",\"deliver.span.small_box\":\"Small box\",\"deliver.span.cakes_food_keep_flat\":\"Cakes · food, keep flat\",\"deliver.span.a_bag_shopping\":\"A bag · shopping\",\"deliver.span.bulky_needs_a_car\":\"Bulky · needs a car\",\"deliver.span.produce_sacks_crates_a\":\"Produce · sacks, crates, a harvest\",\"deliver.span.someone_must_sign_for\":\"Someone must sign for it\",\"deliver.span.same_hour_otherwise_today\":\"Same hour (otherwise today)\",\"deliver.p.courier_rates_are_ug\":\"Courier rates are UG estimates from a published model; 8 to 8 in Jinja is named from the founder's brief and its tariff is modelled. Parcel on the Stage is UG's own price: a quarter of the seat on that stage, paid to the driver with the seats.\",\"explore.div.explore_the_pearl_priced\":\"Explore · <b>the Pearl, priced honestly</b>\",\"explore.h2.the_whole_park_weekend\":\"The whole park weekend, one number.\",\"explore.p.park_entry_permits_vehicle\":\"Park entry, permits, vehicle fees, the lodge, the rolex money and the road there, computed for East African citizens, foreign residents and visitors. East African citizens pay East African prices.\",\"explore.label.who_is_travelling\":\"Who is travelling\",\"explore.label.people\":\"People\",\"explore.label.days\":\"Days\",\"explore.label.getting_there\":\"Getting there\",\"explore.label.stay\":\"Stay\",\"explore.span.total\":\"Total\",\"explore.button.reserve_with_a_deposit\":\"Reserve with a deposit\",\"explore.button.share_plan\":\"Share plan\",\"explore.summary.chain_a_whole_day\":\"Chain a whole day <small>Hustle Mode · every leg quoted on the cheapest sensible mode; wallet and plans are sandbox</small>\",\"explore.div.ug_wallet_sandbox_balance\":\"UG Wallet · sandbox balance, not real money\",\"explore.button.top_up_ugx_50\":\"Top up UGX 50,000\",\"explore.button.pre_pay_the_day\":\"Pre-pay the day\",\"drive.div.drive_funded_trips_come\":\"Drive · <b>funded trips come to you</b>\",\"drive.h2.say_where_you_are\":\"Say where you are comfortable, once. Accept full cars.\",\"drive.p.no_posting_no_waiting\":\"No posting, no waiting at a stage, no bidding. Your Comfort Map is the only thing you maintain: base, radius, corridors, hours, hard no’s. Funded offers arrive with the money already in them.\",\"drive.summary.where_demand_is_coming\":\"Where demand is coming this week <small>Foresight · harvests, venue rhythms and events, a week ahead, by vehicle class</small>\",\"drive.p.promise_to_be_there\":\"Promise to be there and the gap closes for everyone. Confidence is shown per signal; seasons are rules until the first harvest teaches them.\",\"drive.span.confidence_is_shown_per\":\"Confidence is shown per signal; seasons are rules until there are fills to learn from.\",\"install.div.one_link_two_ways\":\"One link · <b>two ways in</b>\",\"install.h2.the_site_is_the\":\"The site is the app. Install it, or scan the code.\",\"install.p.one_link_on_the\":\"One link on the web and on the phone: the same account, the same stages, the same Crest on the home screen. No store visit.\",\"install.div.on_this_device\":\"On this device\",\"install.h3.install_ug\":\"Install UG\",\"install\":\"Install the app\",\"install.button.copy_the_link\":\"Copy the link\",\"install.div.on_another_phone\":\"On another phone\",\"install.p.scan_with_the_camera\":\"Scan with the camera. The code opens this same link; sign in with the same number and everything is here.\",\"install.p.ride_pool_rent_deliver\":\"Ride. Pool. Rent. Deliver. A Ugandan mobility marketplace for people who have places to be and a budget to respect.\",\"install.h4.product\":\"Product\",\"navCompare\":\"Compare\",\"install.a.pool\":\"Pool\",\"install.a.hustle_mode\":\"Hustle Mode\",\"install.h4.company\":\"Company\",\"install.a.partners\":\"Partners\",\"navPlugins\":\"Plug-ins\",\"install.a.reach\":\"Reach\",\"install.a.drive_with_ug\":\"Drive with UG\",\"install.a.list_a_car\":\"List a car\",\"install.a.careers\":\"Careers\",\"install.h4.trust\":\"Trust\",\"install.a.pricing_method\":\"Pricing method\",\"install.a.safety\":\"Safety\",\"install.a.privacy\":\"Privacy\",\"install.a.terms\":\"Terms\",\"modal.button.card\":\"Card\",\"modal.label.phone_number\":\"Phone number\",\"modal.label.email_for_the_receipt\":\"Email for the receipt\",\"modal.button.pay_now\":\"Pay now\",\"modal.span.checkout_by_flutterwave_sandbox\":\"Checkout by Flutterwave · sandbox until a live key is set\",\"plugModal.b.connect\":\"Connect\",\"plugModal.label.endpoint\":\"Endpoint\",\"plugModal.label.api_key_or_token\":\"API key or token (kept on this device)\",\"plugModal.button.save_and_connect\":\"Save and connect\",\"plugModal.button.forget\":\"Forget\",\"authModal.b.sign_in\":\"Sign in\",\"authModal.span.your_line_is_your\":\"Your line is your account · nothing is charged to sign in\",\"hsModal.span.phone_verified_account_nothing\":\"Phone-verified account · nothing is charged\",\"railModal.b.your_trip\":\"Your trip\",\"railModal.span.booked_and_tracked_on\":\"Booked and tracked on UG. The concierge is simulated in this prototype.\",\"railModal.b.accessibility\":\"Accessibility\",\"railModal.div.larger_textscales_the_whole\":\"<b>Larger text</b><small>Scales the whole page up</small>\",\"railModal.div.high_contraststronger_text_lines\":\"<b>High contrast</b><small>Stronger text, lines and borders</small>\",\"railModal.div.reduce_motionno_opening_animation\":\"<b>Reduce motion</b><small>No opening animation, no drifting particles, no reveals</small>\",\"railModal.div.underline_linksevery_link_underlined\":\"<b>Underline links</b><small>Every link underlined, not colour alone</small>\",\"railModal.p.ug_also_follows_your\":\"UG also follows your system settings for reduced motion and contrast, works with a screen reader (landmarks, labels and live regions), is keyboard-navigable end to end, and listens to voice commands through the microphone button or a Cephable profile. Tell us what would help: hello@ug.example.\",\"me\":\"Me\",\"ops.button.reach\":\"Reach\",\"ops.button.partners\":\"Partners\",\"ops.p.every_town_on_the\":\"Every town on the map is a corridor from Kampala and a stage of its own. Where a local app already runs, UG hands the last mile to it rather than pretending to be there.\",\"ops.div.plug_ins_ug_talks\":\"Plug-ins · <b>UG talks to the tools you already use</b>\",\"ops.h2.maps_from_felt_climate\":\"Maps from Felt. Climate workflows from Infrared City. Entertainment from Tazama. Hands-free control from Cephable.\",\"ops.p.each_plug_in_is\":\"Each plug-in is an adapter with its own endpoint and key, stored on this device until you sign in. Connect one and the matching buttons light up across Pool, Explore and Hustle Mode. Nothing leaves UG without a plug-in you switched on.\",\"ops.div.partners_we_send_you\":\"Partners · <b>we send you demand</b>\",\"ops.h2.competitors_are_listed_on\":\"Competitors are listed on purpose. A rider who trusts the comparison comes back for the pool and the rental.\",\"ops.p.ug_is_a_marketplace\":\"UG is a marketplace first. Ride-hailing apps get pre-filled bookings with no acquisition cost. Rental yards get vetted weekend renters. Lodges get groups arriving on a known date. Drivers get a route full before they leave.\",\"ops.h3.for_riders\":\"For riders\",\"ops.p.verified_drivers_and_plates\":\"Verified drivers and plates, an in-trip SOS that shares live location with a contact you choose, helmets on every pooled boda, and a receipt for every shilling.\",\"ops.h3.for_drivers_and_yards\":\"For drivers and yards\",\"ops.p.ten_percent_on_pool\":\"Ten percent on pool, a flat listing fee on rentals, weekly payouts to MoMo through Flutterwave, and demand you did not have to advertise for.\",\"ops.h3.for_the_apps_we\":\"For the apps we compare\",\"ops.p.deep_links_that_open\":\"Deep links that open your app with pick-up and drop-off filled. We never show a price we did not compute openly, and the method is published.\",\"ui.bookOnUG\":\"Book on UG\",\"ui.sendOnUG\":\"Send on UG\",\"ui.takeSeat\":\"Take a seat\",\"ui.callAhead\":\"Call ahead\",\"ui.askToAdd\":\"Ask UG to add it\",\"ui.tellMeWhen\":\"Tell me when\",\"ui.listed\":\"Listed · recognised\",\"ui.coming\":\"Coming\",\"ui.likelyCheapest\":\"Likely cheapest\",\"ui.cheapest\":\"Cheapest\",\"ui.ugPrice\":\"UG price\",\"ui.ugEstimate\":\"UG estimate, unverified\",\"ui.min\":\"min\",\"ui.filling\":\"Filling\",\"ui.funded\":\"Funded\",\"ui.full\":\"Full · offered to drivers\",\"ui.perSeatNow\":\"per seat now\",\"ui.invite\":\"Invite\",\"ui.accept\":\"Accept\",\"ui.decline\":\"Decline\",\"ui.atTheStage\":\"At the stage\",\"ui.directions\":\"directions\",\"ui.takeEmptyLeg\":\"Take the empty leg\",\"ui.pointMeThere\":\"Point me there\",\"ui.illBeThere\":\"I'll be there\",\"ui.signOut\":\"Sign out\",\"ui.copyLink\":\"Copy link\",\"ui.verified\":\"Verified\",\"ui.pending\":\"Pending\",\"ui.driverAssigned\":\"Driver assigned\",\"ui.done\":\"Done\",\"ui.requested\":\"Requested\",\"ui.placed\":\"Placed with the partner\",\"ui.arriving\":\"Arriving\",\"ui.onTrip\":\"On trip\",\"ui.trip\":\"Trip\",\"ui.language\":\"Language\",\"ui.welcome\":\"Welcome to Uganda.\",\"ui.continue\":\"Continue\",\"ui.reviewNote\":\"UG wrote these translations and a second pass checked them; native-speaker review is open. Missing words fall back to English.\",\"flipRide\":\"Find a ride.\",\"flipPool\":\"Share the ride.\",\"flipRent\":\"Rent the ride.\",\"flipDeliver\":\"Send the thing.\",\"reviewer\":\"Review this language\",\"langNote\":\"Anything a native speaker has not checked yet falls back to English where a word is missing. Help us finish yours.\",\"ui.correctWord\":\"Suggest a better word\",\"ui.inService\":\"in service\"}");          /* English: the source, and the fallback for every missing string */
+const LANGS = JSON.parse("{\"lg\":{\"name\":\"Luganda\",\"native\":\"Oluganda\",\"region\":\"Central Uganda (Buganda): Kampala, Wakiso, Mukono, Masaka and the Buganda kingdom\",\"family\":\"Bantu\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"Uganda · Central\",\"uncertain\":9,\"missing\":16},\"xog\":{\"name\":\"Lusoga\",\"native\":\"Olusoga\",\"region\":\"Eastern Uganda (Busoga): Jinja, Iganga, Kamuli, Bugiri, Mayuge, Luuka, Namutumba\",\"family\":\"Bantu\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"Uganda · East\",\"uncertain\":6,\"missing\":34},\"myx\":{\"name\":\"Lumasaba\",\"native\":\"Lumasaaba\",\"region\":\"Eastern Uganda (Bugisu, Mount Elgon): Mbale, Sironko, Manafwa, Bududa, Bulambuli, Namisindwa\",\"family\":\"Bantu\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"Uganda · East\",\"uncertain\":11,\"missing\":34},\"gwr\":{\"name\":\"Lugwere\",\"native\":\"Lugwere\",\"region\":\"Eastern Uganda (Bugwere): Pallisa, Budaka, Kibuku and the Bugwere lowlands between Busoga and Bugisu\",\"family\":\"Bantu\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"Uganda · East\",\"uncertain\":10,\"missing\":34},\"lsm\":{\"name\":\"Lusamia\",\"native\":\"Olusamia\",\"region\":\"Eastern Uganda (Busia, Samia-Bugwe, southern Tororo) and across the border into Busia County, Kenya\",\"family\":\"Bantu\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"Uganda · East\",\"uncertain\":11,\"missing\":34},\"teo\":{\"name\":\"Ateso\",\"native\":\"Ateso\",\"region\":\"Teso sub-region, eastern Uganda: Soroti, Kumi, Ngora, Serere, Katakwi, Amuria, Bukedea, Pallisa (and Tororo Iteso)\",\"family\":\"Eastern Nilotic\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"Uganda · East\",\"uncertain\":9,\"missing\":34},\"kpz\":{\"name\":\"Kupsabiny\",\"native\":\"Kupsabiny\",\"region\":\"Sebei sub-region on the Ugandan slopes of Mount Elgon: Kapchorwa, Kween, Bukwo\",\"family\":\"Southern Nilotic\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"Uganda · East\",\"uncertain\":10,\"missing\":34},\"ach\":{\"name\":\"Acholi\",\"native\":\"Leb Acoli\",\"region\":\"Northern Uganda (Acholiland): Gulu, Kitgum, Pader, Amuru, Lamwo, Agago, Nwoya, Omoro\",\"family\":\"Western Nilotic\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"Uganda · North\",\"uncertain\":7,\"missing\":34},\"laj\":{\"name\":\"Lango\",\"native\":\"Leb Laŋo\",\"region\":\"Lango sub-region, northern Uganda: Lira, Apac, Oyam, Kole, Dokolo, Alebtong, Otuke, Amolatar, Kwania\",\"family\":\"Western Nilotic\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"Uganda · North\",\"uncertain\":8,\"missing\":34},\"kdi\":{\"name\":\"Kumam\",\"native\":\"Kumam\",\"region\":\"Kaberamaido and Kalaki districts, with Kumam communities in Soroti, Dokolo and Amolatar\",\"family\":\"Western Nilotic\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"Uganda · North\",\"uncertain\":0,\"missing\":34},\"kdj\":{\"name\":\"Ngakarimojong\",\"native\":\"Ŋakarimojoŋ\",\"region\":\"Karamoja sub-region, north-eastern Uganda: Moroto, Kotido, Kaabong, Napak, Nakapiripirit, Abim, Amudat, Karenga\",\"family\":\"Eastern Nilotic\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"Uganda · North\",\"uncertain\":8,\"missing\":34},\"alz\":{\"name\":\"Alur\",\"native\":\"Dhu Alur\",\"region\":\"West Nile, Uganda (Nebbi, Zombo, Pakwach) and across the border in Ituri, DR Congo\",\"family\":\"Western Nilotic\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"Uganda · West Nile\",\"uncertain\":0,\"missing\":34},\"lgg\":{\"name\":\"Lugbara\",\"native\":\"Lugbarati\",\"region\":\"West Nile, Uganda (Arua, Maracha, Terego, Yumbe) and north-eastern DR Congo\",\"family\":\"Central Sudanic\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"Uganda · West Nile\",\"uncertain\":0,\"missing\":34},\"mhi\":{\"name\":\"Ma'di\",\"native\":\"Ma'di\",\"region\":\"West Nile, Uganda (Adjumani, Moyo) and Magwi county, South Sudan\",\"family\":\"Central Sudanic\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"Uganda · West Nile\",\"uncertain\":0,\"missing\":34},\"keo\":{\"name\":\"Kakwa\",\"native\":\"Kakwa\",\"region\":\"West Nile, Uganda (Koboko, Yumbe), Central Equatoria in South Sudan and Aru in DR Congo\",\"family\":\"Eastern Nilotic\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"Uganda · West Nile\",\"uncertain\":0,\"missing\":34},\"nyn\":{\"name\":\"Runyankore\",\"native\":\"Orunyankore\",\"region\":\"Ankole, south-western Uganda (Mbarara, Bushenyi, Ntungamo, Ibanda)\",\"family\":\"Bantu\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"Uganda · West\",\"uncertain\":10,\"missing\":34},\"cgg\":{\"name\":\"Rukiga\",\"native\":\"Orukiga\",\"region\":\"Ankole, south-western Uganda (Mbarara, Bushenyi, Ntungamo, Ibanda)\",\"family\":\"Bantu\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"Uganda · West\",\"uncertain\":10,\"missing\":34},\"ttj\":{\"name\":\"Rutooro\",\"native\":\"Orutooro\",\"region\":\"Tooro, western Uganda (Fort Portal, Kabarole, Kyenjojo, Kamwenge)\",\"family\":\"Bantu\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"Uganda · West\",\"uncertain\":11,\"missing\":34},\"nyo\":{\"name\":\"Runyoro\",\"native\":\"Orunyoro\",\"region\":\"Uganda · West (Bunyoro: Hoima, Masindi, Kikuube)\",\"family\":\"Bantu\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"Uganda · West\",\"uncertain\":0,\"missing\":34},\"koo\":{\"name\":\"Rukonzo\",\"native\":\"Lhukonzo\",\"region\":\"Uganda · West (Rwenzori: Kasese, Bundibugyo)\",\"family\":\"Bantu\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"Uganda · West\",\"uncertain\":0,\"missing\":34},\"sw\":{\"name\":\"Swahili\",\"native\":\"Kiswahili\",\"region\":\"East Africa; Uganda's second official language (Kenya, Tanzania, Uganda usage)\",\"family\":\"Bantu\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"East Africa · Africa\",\"uncertain\":5,\"missing\":16},\"rw\":{\"name\":\"Kinyarwanda\",\"native\":\"Ikinyarwanda\",\"region\":\"Visitors · Rwanda\",\"family\":\"Bantu\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"East Africa · Africa\",\"uncertain\":0,\"missing\":34},\"so\":{\"name\":\"Somali\",\"native\":\"Af-Soomaali\",\"region\":\"Visitors · Somalia, the Horn\",\"family\":\"Cushitic\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"East Africa · Africa\",\"uncertain\":0,\"missing\":34},\"am\":{\"name\":\"Amharic\",\"native\":\"አማርኛ\",\"region\":\"Ethiopia; the Ethiopian visitor and diaspora in Kampala\",\"family\":\"Afro-Asiatic (Semitic)\",\"dir\":\"ltr\",\"script\":\"Ethiopic\",\"confidence\":\"in service\",\"group\":\"East Africa · Africa\",\"uncertain\":0,\"missing\":34},\"ar\":{\"name\":\"Arabic\",\"native\":\"العربية\",\"region\":\"Sudan, Egypt, the Gulf, North Africa and Somalia/Djibouti co-official; the Arabic-reading visitor to Uganda\",\"family\":\"Afro-Asiatic (Semitic)\",\"dir\":\"rtl\",\"script\":\"Arabic\",\"confidence\":\"in service\",\"group\":\"East Africa · Africa\",\"uncertain\":0,\"missing\":34},\"ln\":{\"name\":\"Lingala\",\"native\":\"Lingála\",\"region\":\"Visitors · DR Congo\",\"family\":\"Bantu\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"East Africa · Africa\",\"uncertain\":0,\"missing\":34},\"ha\":{\"name\":\"Hausa\",\"native\":\"Hausa\",\"region\":\"Visitors · Nigeria, Niger\",\"family\":\"Chadic\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"East Africa · Africa\",\"uncertain\":0,\"missing\":34},\"zu\":{\"name\":\"isiZulu\",\"native\":\"isiZulu\",\"region\":\"Visitors · South Africa\",\"family\":\"Bantu\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"East Africa · Africa\",\"uncertain\":0,\"missing\":34},\"en\":{\"name\":\"English\",\"native\":\"English\",\"region\":\"World\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"complete\",\"group\":\"World\",\"uncertain\":0,\"missing\":0},\"fr\":{\"name\":\"French\",\"native\":\"Français\",\"region\":\"Visitors from France, Belgium, Switzerland, Canada, DR Congo, Rwanda, Burundi and francophone Africa\",\"family\":\"Indo-European\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"World\",\"uncertain\":0,\"missing\":34},\"de\":{\"name\":\"German\",\"native\":\"Deutsch\",\"region\":\"Visitors from Germany, Austria, Switzerland, Liechtenstein, Luxembourg and South Tyrol\",\"family\":\"Indo-European\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"World\",\"uncertain\":0,\"missing\":34},\"it\":{\"name\":\"Italian\",\"native\":\"Italiano\",\"region\":\"Visitors from Italy, Switzerland (Ticino), San Marino and Vatican City\",\"family\":\"Indo-European\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"World\",\"uncertain\":0,\"missing\":34},\"es\":{\"name\":\"Spanish\",\"native\":\"Español\",\"region\":\"Visitors from Spain, Equatorial Guinea and Spanish speakers in Europe\",\"family\":\"Indo-European\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"World\",\"uncertain\":0,\"missing\":34},\"es-MX\":{\"name\":\"Spanish (Mexico)\",\"native\":\"Español de México\",\"region\":\"Visitors from Mexico, and Spanish speakers from Central America and the United States\",\"family\":\"Indo-European\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"World\",\"uncertain\":0,\"missing\":34},\"pt\":{\"name\":\"Portuguese\",\"native\":\"Português\",\"region\":\"Visitors from Portugal, Angola, Mozambique, Cape Verde, Guinea-Bissau, São Tomé and Príncipe and Timor-Leste\",\"family\":\"Indo-European\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"World\",\"uncertain\":0,\"missing\":34},\"pt-BR\":{\"name\":\"Portuguese (Brazil)\",\"native\":\"Português do Brasil\",\"region\":\"Visitors from Brazil\",\"family\":\"Indo-European\",\"dir\":\"ltr\",\"script\":\"Latin\",\"confidence\":\"in service\",\"group\":\"World\",\"uncertain\":0,\"missing\":34},\"ru\":{\"name\":\"Russian\",\"native\":\"Русский\",\"region\":\"Visitors from Russia, Belarus, Kazakhstan, Kyrgyzstan and Russian speakers across the former Soviet Union and the diaspora\",\"family\":\"Indo-European\",\"dir\":\"ltr\",\"script\":\"Cyrillic\",\"confidence\":\"in service\",\"group\":\"World\",\"uncertain\":0,\"missing\":34},\"zh-Hans\":{\"name\":\"Chinese, Simplified\",\"native\":\"简体中文\",\"region\":\"Visitors · China (mainland), Singapore, Malaysia\",\"family\":\"Sino-Tibetan\",\"dir\":\"ltr\",\"script\":\"Han\",\"confidence\":\"in service\",\"group\":\"World\",\"uncertain\":0,\"missing\":34},\"ja\":{\"name\":\"Japanese\",\"native\":\"日本語\",\"region\":\"Visitors · Japan\",\"family\":\"Japonic\",\"dir\":\"ltr\",\"script\":\"Japanese\",\"confidence\":\"in service\",\"group\":\"World\",\"uncertain\":0,\"missing\":34},\"ko\":{\"name\":\"Korean\",\"native\":\"한국어\",\"region\":\"Visitors · South Korea\",\"family\":\"Koreanic\",\"dir\":\"ltr\",\"script\":\"Hangul\",\"confidence\":\"in service\",\"group\":\"World\",\"uncertain\":0,\"missing\":34},\"hi\":{\"name\":\"Hindi\",\"native\":\"हिन्दी\",\"region\":\"Visitors · India, Nepal, Fiji, Mauritius\",\"family\":\"Indo-European (Indo-Aryan)\",\"dir\":\"ltr\",\"script\":\"Devanagari\",\"confidence\":\"in service\",\"group\":\"World\",\"uncertain\":0,\"missing\":34}}");
+const STR = JSON.parse("{\"page.p.ug_speaks_the_languages\":\"UG speaks the languages of Uganda, of the region, and of its visitors. Pick yours; everything follows.\",\"page.button.skip\":\"Skip\",\"ride\":\"Ride.\",\"pool\":\"Pool.\",\"rent\":\"Rent.\",\"deliver\":\"Deliver.\",\"tabRide\":\"Ride\",\"navQuality\":\"Quality\",\"navStage\":\"Stage\",\"navRent\":\"Rent\",\"navDeliver\":\"Deliver\",\"navExplore\":\"Explore\",\"navDrive\":\"Drive\",\"getStarted\":\"Get started\",\"top.div.ug_kampala_everywhere\":\"<b>UG</b> · Kampala → everywhere\",\"position\":\"Look the part. Pay the smart price.\",\"top.p.one_app_that_quotes\":\"One app that quotes every ride on the Ugandan market side by side, pools the road trip so the Prado costs a quarter, rents the car when you need to arrive, and books the park before the permits go. Paid the way Kampala pays: mobile money.\",\"doorRider\":\"I need to get somewhere\",\"doorRiderSub\":\"Queue a seat, compare every ride, plan the weekend.\",\"start\":\"Start →\",\"doorDriver\":\"I drive, or I have a car\",\"doorDriverSub\":\"Say where you're comfortable. Funded trips come to you.\",\"open\":\"Open for business →\",\"top.a.just_compare_prices_no\":\"Just compare prices, no account needed\",\"top.span.compare_every_app_and\":\"Compare every app and go\",\"top.span.share_the_seat_split\":\"Share the seat, split the fuel\",\"top.span.self_drive_or_with\":\"Self-drive or with driver\",\"top.span.send_the_thing_any\":\"Send the thing, any size\",\"top.span.parks_permits_weekends\":\"Parks, permits, weekends\",\"top.label.pick_up\":\"Pick-up\",\"top.label.drop_off_destination\":\"Drop-off / destination\",\"top.label.date\":\"Date\",\"top.label.time\":\"Time\",\"top.button.show_prices\":\"Show prices\",\"top.div.prototype_v1_every_price\":\"Prototype v1 · every price is an estimate from a published model · payments run in a sandbox · nothing here is a licensed service yet\",\"compare.div.compare_the_arbitrage_desk\":\"Compare · <b>the arbitrage desk</b>\",\"compare.h2.every_ride_on_the\":\"Every ride on the market, one screen, ranked by price.\",\"compare.h3.your_trip\":\"Your trip\",\"compare.label.from\":\"From\",\"compare.label.to\":\"To\",\"compare.label.leaving\":\"Leaving\",\"compare.button.off_peak\":\"Off-peak\",\"compare.button.rush_hour\":\"Rush hour\",\"compare.button.night\":\"Night\",\"compare.label.order_by\":\"Order by\",\"compare.button.cheapest\":\"Cheapest\",\"compare.button.most_promised\":\"Most promised\",\"compare.label.show\":\"Show\",\"compare.button.all\":\"All\",\"compare.button.boda\":\"Boda\",\"compare.button.car\":\"Car\",\"compare.button.shared\":\"Shared\",\"compare.button.air_water_rail\":\"Atlas\",\"compare.label.people_travelling\":\"People travelling\",\"compare.summary.more_options_pick_the\":\"More options <small>pick the car, rain, split</small>\",\"compare.label.pick_the_car\":\"Pick the car\",\"compare.span.any\":\"Any\",\"compare.span.signature_sedan\":\"Signature sedan\",\"compare.span.signature_suv\":\"Signature SUV\",\"compare.span.executive_van\":\"Executive van\",\"compare.span.it_is_raining_kampala\":\"It is raining (Kampala surge)\",\"compare.span.split_fare_across_the\":\"Split fare across the group\",\"compare.summary.what_choosing_badly_costs\":\"What choosing badly costs <small>the spread across the market for this trip</small>\",\"compare.summary.the_atlas_every_way\":\"The Atlas · every way to move, one table <small>air, bus, water, rail, Signature cars, stays, with the truth about each one's state</small>\",\"compare.p.book_on_ug_where\":\"<b>Book on UG</b> where a channel exists, <b>Call ahead</b> where it does not, <b>Listed</b> for recognition, <b>Coming</b> for what is being built. Fares are modelled and say so.\",\"quality.div.quality\":\"Quality\",\"quality.h2.what_each_operator_has\":\"What each operator has promised, in writing. That is all this board can honestly show you today.\",\"quality.p.rating_other_people_s\":\"Rating other people's companies is easy to do badly. A score printed next to a registered name is a claim about that business, and UG has not run enough trips to make one. So this board shows what each operator has published — the fare table, the helmet, the receipt — and where we read it. The performance column stays empty until the trips behind it are ours. Below, the same arithmetic runs on four operators we invented, so you can check the method before it is ever pointed at a real name.\",\"quality.button.everything\":\"Everything\",\"quality.button.apps\":\"Apps\",\"quality.button.street\":\"Street\",\"quality.button.stage_amp_coach\":\"Stage &amp; coach\",\"quality.button.scheduled\":\"Scheduled\",\"quality.summary.the_arithmetic_demonstrated_four\":\"The arithmetic, demonstrated <small>four invented operators, so the method can be checked before it touches a real name</small>\",\"quality.p.operators_a_to_e\":\"Operators A to E do not exist. Their figures are written by UG so that every rule on this page can be watched doing its work: one that keeps its word and has the trips to prove it; one that is steady but slow to put things right; one that keeps the fare and is chronically late, held at Watch by a safety breach whatever the rest says; one that always turns up, argues about money afterwards and has published almost nothing, so the ceiling holds it down; and one whose numbers are excellent on eighteen trips, pulled back toward the market baseline because eighteen trips is not a record.\",\"quality.h4.what_counts\":\"What counts\",\"quality.h4.what_does_not_count\":\"What does not count\",\"quality.li.the_brand_and_how\":\"The brand, and how long it has existed\",\"quality.li.how_big_the_fleet\":\"How big the fleet is, or how much it raised\",\"quality.li.money_paid_to_ug\":\"Money paid to UG by a supplier for position — there is no such payment and no way to make one. UG's own commission, ten percent on a pooled seat, is charged to the rider and never to a supplier for placement\",\"quality.li.how_much_it_advertises\":\"How much it advertises, here or anywhere\",\"quality.li.whether_ug_competes_with\":\"Whether UG competes with it\",\"quality.li.whether_it_has_a\":\"Whether it has a press office to publish promises with — which is why this board is not ranked by the promise count\",\"quality.summary.how_the_numbers_get\":\"How the numbers get better <small>six practices, each with a button, in your language</small>\",\"quality.summary.the_method_in_full\":\"The method, in full <small>meters, weights, priors, thresholds, and what is simulated in this build</small>\",\"stage.div.the_virtual_stage_seats\":\"The Virtual Stage · <b>seats fill first, then the car comes</b>\",\"stage.h2.pay_for_the_seat\":\"Pay for the seat. The car comes when it fills.\",\"stage.p.like_a_matatu_stage\":\"Like a matatu stage, a car leaves when it is full or at the cut-off. Unlike a stage, you queue money from your sofa, the seat price falls as friends join, and the driver who takes it already said they are comfortable on that road.\",\"stage.button.all_corridors\":\"All corridors\",\"stage.button.near_me\":\"Near me\",\"stage.button.funded\":\"Funded\",\"stage.button.start_a_stage\":\"Start a stage\",\"stage.summary.where_stages_fill_fastest\":\"Where stages fill fastest <small>Pulse · paid seats against comfort maps, by town</small>\",\"stage.summary.buses_on_this_corridor\":\"Buses on this corridor <small>the fallback, side by side with the stage</small>\",\"stage.p.every_corridor_also_has\":\"Every corridor also has buses. Compare departure times across operators, see the park you leave from, and book on UG where the operator takes online bookings. Where it does not, we say so and give you the number to call ahead, rather than a dead button.\",\"stage.label.corridor\":\"Corridor\",\"stage.summary.empty_legs_the_return\":\"Empty legs <small>the return seats, 40% of the fare</small>\",\"stage.p.every_rental_with_driver\":\"Every rental with driver and every pool has a way back. The moment the outbound is booked, the return's seats go on sale.\",\"stage.summary.post_a_trip_of\":\"Post a trip of your own, or price a seat <small>Pool · your circles, the true cost of the road divided by seats</small>\",\"stage.h3.offer_a_seat_or\":\"Offer a seat, or see what a seat should cost\",\"stage.label.route\":\"Route\",\"stage.label.paying_seats\":\"Paying seats\",\"stage.label.car\":\"Car\",\"stage.label.departure\":\"Departure\",\"stage.button.post_this_trip\":\"Post this trip\",\"stage.button.book_a_seat_with\":\"Book a seat with MoMo\",\"stage.p.posted_trips_live_only\":\"Posted trips live only in this browser until you sign in. Pool follows the same pattern the Pool app popularised: phone-verified accounts, a trip chat, and two-way ratings, plus circles so you ride with people you already half-know.\",\"rent.div.rent_arrive_properly\":\"Rent\",\"rent.h2.rent_the_car_or\":\"Self-drive by the day. Chauffeured by the hour.\",\"rent.p.self_drive_by_the\":\"Self-drive by the day, chauffeured by the hour, or the Signature fleet when the arrival is the point. The price is per head when you split it.\",\"deliver.div.deliver_send_the_thing\":\"Deliver\",\"deliver.h2.send_the_thing_any\":\"Send the thing. Any size, any distance.\",\"deliver.p.every_courier_in_town\":\"Every courier in town on one screen, ranked. Upcountry, the parcel rides in the boot of a stage car for a quarter of a seat, and in harvest season a minibus, pickup or lorry with a driver.\",\"deliver.h3.the_parcel\":\"The parcel\",\"deliver.label.from\":\"From\",\"deliver.label.to\":\"To\",\"deliver.label.what_is_it\":\"What is it\",\"deliver.span.envelope_documents\":\"Envelope · documents\",\"deliver.span.small_box\":\"Small box\",\"deliver.span.cakes_food_keep_flat\":\"Cakes · food, keep flat\",\"deliver.span.a_bag_shopping\":\"A bag · shopping\",\"deliver.span.bulky_needs_a_car\":\"Bulky · needs a car\",\"deliver.span.produce_sacks_crates_a\":\"Produce · sacks, crates, a harvest\",\"deliver.span.someone_must_sign_for\":\"Someone must sign for it\",\"deliver.span.same_hour_otherwise_today\":\"Same hour (otherwise today)\",\"deliver.p.courier_rates_are_ug\":\"Courier rates are UG estimates from a published model; 8 to 8 in Jinja is named from the founder's brief and its tariff is modelled. Parcel on the Stage is UG's own price: a quarter of the seat on that stage, paid to the driver with the seats.\",\"explore.div.explore_the_pearl_priced\":\"Explore · <b>the Pearl, priced honestly</b>\",\"explore.h2.the_whole_park_weekend\":\"The whole park weekend, one number.\",\"explore.p.park_entry_permits_vehicle\":\"Park entry, permits, vehicle fees, the lodge, the rolex money and the road there, computed for East African citizens, foreign residents and visitors. East African citizens pay East African prices.\",\"explore.label.who_is_travelling\":\"Who is travelling\",\"explore.label.people\":\"People\",\"explore.label.days\":\"Days\",\"explore.label.getting_there\":\"Getting there\",\"explore.label.stay\":\"Stay\",\"explore.span.total\":\"Total\",\"explore.button.reserve_with_a_deposit\":\"Reserve with a deposit\",\"explore.button.share_plan\":\"Share plan\",\"explore.summary.chain_a_whole_day\":\"Chain a whole day <small>Hustle Mode · every leg quoted on the cheapest sensible mode; wallet and plans are sandbox</small>\",\"explore.div.ug_wallet_sandbox_balance\":\"UG Wallet · sandbox balance, not real money\",\"explore.button.top_up_ugx_50\":\"Top up UGX 50,000\",\"explore.button.pre_pay_the_day\":\"Pre-pay the day\",\"drive.div.drive_funded_trips_come\":\"Drive · <b>funded trips come to you</b>\",\"drive.h2.say_where_you_are\":\"Say where you are comfortable, once. Accept full cars.\",\"drive.p.no_posting_no_waiting\":\"No posting, no waiting at a stage, no bidding. Your Comfort Map is the only thing you maintain: base, radius, corridors, hours, hard no’s. Funded offers arrive with the money already in them.\",\"drive.summary.where_demand_is_coming\":\"Where demand is coming this week <small>Foresight · harvests, venue rhythms and events, a week ahead, by vehicle class</small>\",\"drive.p.promise_to_be_there\":\"Promise to be there and the gap closes for everyone. Confidence is shown per signal; seasons are rules until the first harvest teaches them.\",\"drive.span.confidence_is_shown_per\":\"Confidence is shown per signal; seasons are rules until there are fills to learn from.\",\"install.div.one_link_two_ways\":\"One link · <b>two ways in</b>\",\"install.h2.the_site_is_the\":\"The site is the app. Install it, or scan the code.\",\"install.p.one_link_on_the\":\"One link on the web and on the phone: the same account, the same stages, the same Crest on the home screen. No store visit.\",\"install.div.on_this_device\":\"On this device\",\"install.h3.install_ug\":\"Install UG\",\"install\":\"Install the app\",\"install.button.copy_the_link\":\"Copy the link\",\"install.div.on_another_phone\":\"On another phone\",\"install.p.scan_with_the_camera\":\"Scan with the camera. The code opens this same link; sign in with the same number and everything is here.\",\"install.p.ride_pool_rent_deliver\":\"Ride. Pool. Rent. Deliver. A Ugandan mobility marketplace for people who have places to be and a budget to respect.\",\"install.h4.product\":\"Product\",\"navCompare\":\"Compare\",\"install.a.pool\":\"Pool\",\"install.a.hustle_mode\":\"Hustle Mode\",\"install.h4.company\":\"Company\",\"install.a.partners\":\"Partners\",\"navPlugins\":\"Plug-ins\",\"install.a.reach\":\"Reach\",\"install.a.drive_with_ug\":\"Drive with UG\",\"install.a.list_a_car\":\"List a car\",\"install.a.careers\":\"Careers\",\"install.h4.trust\":\"Trust\",\"install.a.pricing_method\":\"Pricing method\",\"install.a.safety\":\"Safety\",\"install.a.privacy\":\"Privacy\",\"install.a.terms\":\"Terms\",\"modal.button.card\":\"Card\",\"modal.label.phone_number\":\"Phone number\",\"modal.label.email_for_the_receipt\":\"Email for the receipt\",\"modal.button.pay_now\":\"Pay now\",\"modal.span.checkout_by_flutterwave_sandbox\":\"Checkout by Flutterwave · sandbox until a live key is set\",\"plugModal.b.connect\":\"Connect\",\"plugModal.label.endpoint\":\"Endpoint\",\"plugModal.label.api_key_or_token\":\"API key or token (kept on this device)\",\"plugModal.button.save_and_connect\":\"Save and connect\",\"plugModal.button.forget\":\"Forget\",\"authModal.b.sign_in\":\"Sign in\",\"authModal.span.your_line_is_your\":\"Your line is your account · nothing is charged to sign in\",\"hsModal.span.phone_verified_account_nothing\":\"Phone-verified account · nothing is charged\",\"railModal.b.your_trip\":\"Your trip\",\"railModal.span.booked_and_tracked_on\":\"Booked and tracked on UG. The concierge is simulated in this prototype.\",\"railModal.b.accessibility\":\"Accessibility\",\"railModal.div.larger_textscales_the_whole\":\"<b>Larger text</b><small>Scales the whole page up</small>\",\"railModal.div.high_contraststronger_text_lines\":\"<b>High contrast</b><small>Stronger text, lines and borders</small>\",\"railModal.div.reduce_motionno_opening_animation\":\"<b>Reduce motion</b><small>No opening animation, no drifting particles, no reveals</small>\",\"railModal.div.underline_linksevery_link_underlined\":\"<b>Underline links</b><small>Every link underlined, not colour alone</small>\",\"railModal.p.ug_also_follows_your\":\"UG also follows your system settings for reduced motion and contrast, works with a screen reader (landmarks, labels and live regions), is keyboard-navigable end to end, and listens to voice commands through the microphone button or a Cephable profile. Tell us what would help: hello@ug.example.\",\"me\":\"Me\",\"ops.button.reach\":\"Reach\",\"ops.button.partners\":\"Partners\",\"ops.p.every_town_on_the\":\"Every town on the map is a corridor from Kampala and a stage of its own. Where a local app already runs, UG hands the last mile to it rather than pretending to be there.\",\"ops.div.plug_ins_ug_talks\":\"Plug-ins · <b>UG talks to the tools you already use</b>\",\"ops.h2.maps_from_felt_climate\":\"Maps from Felt. Climate workflows from Infrared City. Entertainment from Tazama. Hands-free control from Cephable.\",\"ops.p.each_plug_in_is\":\"Each plug-in is an adapter with its own endpoint and key, stored on this device until you sign in. Connect one and the matching buttons light up across Pool, Explore and Hustle Mode. Nothing leaves UG without a plug-in you switched on.\",\"ops.div.partners_we_send_you\":\"Partners · <b>we send you demand</b>\",\"ops.h2.competitors_are_listed_on\":\"Competitors are listed on purpose. A rider who trusts the comparison comes back for the pool and the rental.\",\"ops.p.ug_is_a_marketplace\":\"UG is a marketplace first. Ride-hailing apps get pre-filled bookings with no acquisition cost. Rental yards get vetted weekend renters. Lodges get groups arriving on a known date. Drivers get a route full before they leave.\",\"ops.h3.for_riders\":\"For riders\",\"ops.p.verified_drivers_and_plates\":\"Verified drivers and plates, an in-trip SOS that shares live location with a contact you choose, helmets on every pooled boda, and a receipt for every shilling.\",\"ops.h3.for_drivers_and_yards\":\"For drivers and yards\",\"ops.p.ten_percent_on_pool\":\"Ten percent on pool, a flat listing fee on rentals, weekly payouts to MoMo through Flutterwave, and demand you did not have to advertise for.\",\"ops.h3.for_the_apps_we\":\"For the apps we compare\",\"ops.p.deep_links_that_open\":\"Deep links that open your app with pick-up and drop-off filled. We never show a price we did not compute openly, and the method is published.\",\"ui.bookOnUG\":\"Book on UG\",\"ui.sendOnUG\":\"Send on UG\",\"ui.takeSeat\":\"Take a seat\",\"ui.callAhead\":\"Call ahead\",\"ui.askToAdd\":\"Ask UG to add it\",\"ui.tellMeWhen\":\"Tell me when\",\"ui.listed\":\"Listed · recognised\",\"ui.coming\":\"Coming\",\"ui.likelyCheapest\":\"Likely cheapest\",\"ui.cheapest\":\"Cheapest\",\"ui.ugPrice\":\"UG price\",\"ui.ugEstimate\":\"UG estimate, unverified\",\"ui.min\":\"min\",\"ui.filling\":\"Filling\",\"ui.funded\":\"Funded\",\"ui.full\":\"Full · offered to drivers\",\"ui.perSeatNow\":\"per seat now\",\"ui.invite\":\"Invite\",\"ui.accept\":\"Accept\",\"ui.decline\":\"Decline\",\"ui.atTheStage\":\"At the stage\",\"ui.directions\":\"directions\",\"ui.takeEmptyLeg\":\"Take the empty leg\",\"ui.pointMeThere\":\"Point me there\",\"ui.illBeThere\":\"I'll be there\",\"ui.signOut\":\"Sign out\",\"ui.copyLink\":\"Copy link\",\"ui.verified\":\"Verified\",\"ui.pending\":\"Pending\",\"ui.driverAssigned\":\"Driver assigned\",\"ui.done\":\"Done\",\"ui.requested\":\"Requested\",\"ui.placed\":\"Placed with the partner\",\"ui.arriving\":\"Arriving\",\"ui.onTrip\":\"On trip\",\"ui.trip\":\"Trip\",\"ui.language\":\"Language\",\"ui.welcome\":\"Welcome to Uganda.\",\"ui.continue\":\"Continue\",\"ui.reviewNote\":\"UG wrote these translations and a second pass checked them; native-speaker review is open. Missing words fall back to English.\",\"flipRide\":\"Find a ride.\",\"flipPool\":\"Share the ride.\",\"flipRent\":\"Rent the ride.\",\"flipDeliver\":\"Send the thing.\",\"reviewer\":\"Review this language\",\"langNote\":\"Anything a native speaker has not checked yet falls back to English where a word is missing. Help us finish yours.\",\"ui.correctWord\":\"Suggest a better word\",\"ui.inService\":\"in service\",\"compare.p.bolt_safeboda_faras_yango\":\"Bolt, SafeBoda, Faras, Yango, Tinka, the street boda, the matatu, a special hire, the bus, the ferry, the flight, and UG’s own pool and rentals. Same trip, same minute. Estimates say so on the card, and the ones that cannot serve you stay on the screen, greyed, with the reason. UG takes payment only for its own seats and cars; every other row shows you the fare and opens that operator's app, because we will not take your money for a ride we have no contract to place.\",\"day.auto\":\"Follow the day\",\"day.alwaysNoon\":\"Always noon\",\"day.alwaysNight\":\"Always night\",\"day.control\":\"Colour follows the day\",\"day.night\":\"Night\",\"day.dawn\":\"Dawn\",\"day.morning\":\"Morning\",\"day.midday\":\"Midday\",\"day.afternoon\":\"Afternoon\",\"day.dusk\":\"Dusk\",\"wx.label\":\"Weather\",\"wx.clear\":\"Clear\",\"wx.cloud\":\"Cloudy\",\"wx.rain\":\"Rain\",\"wx.storm\":\"Storm\",\"wx.mist\":\"Mist\",\"railModal.div.the_day\":\"<b>The day</b><small>The page keeps Kampala's hours. On the equator the sun is up at 06:54 and down at 18:54 all year, so the palette walks black → red → gold → red → black and never hands you a white page at one in the morning. Weather bends it: cloud flattens the light, rain cools it toward the crane's grey-blue.</small>\",\"ui.stillEnglish\":\"words are still in English. Tap any of them and tell us yours.\",\"ui.allTranslated\":\"every word on this page is in your language.\"}");          /* English: the source, and the fallback for every missing string */
 const WL = JSON.parse("{\"ui.welcome\":{\"en\":\"Welcome to Uganda.\",\"ach\":\"Apwoyo bino i Uganda.\",\"alz\":\"Ibino maber i Uganda.\",\"am\":\"እንኳን ወደ ዩጋንዳ በደህና መጡ።\",\"ar\":\"أهلًا بك في أوغندا.\",\"cgg\":\"Waije omu Uganda.\",\"de\":\"Willkommen in Uganda.\",\"es-MX\":\"Te damos la bienvenida a Uganda.\",\"es\":\"Te damos la bienvenida a Uganda.\",\"fr\":\"Bienvenue en Ouganda.\",\"gwr\":\"Kulikayo mu Uganda.\",\"ha\":\"Barka da zuwa Uganda.\",\"hi\":\"युगांडा में आपका स्वागत है।\",\"it\":\"Benvenuti in Uganda.\",\"ja\":\"ようこそ、ウガンダへ。\",\"kdi\":\"Apwoyo bino i Uganda.\",\"kdj\":\"Alakara abunere kon Uganda.\",\"keo\":\"Do a po 'bu i Uganda.\",\"ko\":\"우간다에 오신 것을 환영합니다.\",\"koo\":\"Wasingya erisya e Uganda.\",\"kpz\":\"Kongoi konyo Uganda.\",\"laj\":\"Apwoyo bino i Uganda.\",\"lg\":\"Tukwanirizza mu Uganda.\",\"lgg\":\"Mi emu muke Uganda ma alia.\",\"ln\":\"Boyei malamu na Uganda.\",\"lsm\":\"Mulembe! Karibu mu Uganda.\",\"mhi\":\"Mi emu muke Uganda ma alia.\",\"myx\":\"Mulembe! Karibu mu Uganda.\",\"nyn\":\"Waije omu Uganda.\",\"nyo\":\"Webale kwija omu Uganda.\",\"pt-BR\":\"Boas-vindas a Uganda.\",\"pt\":\"Bem-vindo ao Uganda.\",\"ru\":\"Добро пожаловать в Уганду.\",\"rw\":\"Murakaza neza muri Uganda.\",\"so\":\"Ku soo dhawoow Uganda.\",\"sw\":\"Karibu Uganda.\",\"teo\":\"Eyalama abunere kon ko Uganda.\",\"ttj\":\"Webale kwija omu Uganda.\",\"xog\":\"Kulikayo mu Uganda.\",\"zh-Hans\":\"欢迎来到乌干达。\",\"zu\":\"Wamukelekile e-Uganda.\"},\"ui.continue\":{\"en\":\"Continue\",\"ach\":\"Mede anyim\",\"alz\":\"Cidh anyim\",\"am\":\"ቀጥል\",\"ar\":\"متابعة\",\"cgg\":\"Gumizamu\",\"de\":\"Weiter\",\"es-MX\":\"Continuar\",\"es\":\"Continuar\",\"fr\":\"Continuer\",\"gwr\":\"Gya mu maiso\",\"ha\":\"Ci gaba\",\"hi\":\"आगे बढ़ें\",\"it\":\"Continua\",\"ja\":\"次へ\",\"kdi\":\"Mede anyim\",\"kdj\":\"Tolot ŋaren\",\"keo\":\"Tu kwedri\",\"ko\":\"계속\",\"koo\":\"Ghenda embere\",\"kpz\":\"Wo tai\",\"laj\":\"Mede anyim\",\"lg\":\"Weeyongereyo\",\"lgg\":\"Mu drile\",\"ln\":\"Koba\",\"lsm\":\"Tsia embeli\",\"mhi\":\"Mu drile\",\"myx\":\"Tsya imbeli\",\"nyn\":\"Gumizamu\",\"nyo\":\"Gumizamu\",\"pt-BR\":\"Continuar\",\"pt\":\"Continuar\",\"ru\":\"Продолжить\",\"rw\":\"Komeza\",\"so\":\"Sii wad\",\"sw\":\"Endelea\",\"teo\":\"Kolot ŋaren\",\"ttj\":\"Gumizamu\",\"xog\":\"Gya mu maiso\",\"zh-Hans\":\"继续\",\"zu\":\"Qhubeka\"}}");              /* the welcome gate greets in all of them before any pack loads */
 const I18N_DIR = 'i18n/';
 let PACK = null;                    /* the chosen language, fetched on demand */
@@ -4203,20 +4562,47 @@ async function setLang(code, opts={}){
   if (typeof rerenderAll==='function') rerenderAll();
   return PACK;
 }
-/* Everything the language touches that is drawn by JavaScript rather than marked up. */
+/* Everything the language touches that is drawn by JavaScript rather than marked up.
+   This list used to name eleven of the thirty render functions, and the other nineteen kept whatever
+   language they had last been drawn in. Switch from Runyoro to Amharic and the bus rows still said
+   "Teera esimu", the Foresight board still said "Nyuta yo" — not a translation bug, a redraw bug, and
+   the worse kind, because the words were real words in a language the reader had not asked for.
+   server/test/site.test.js walks every `function render*` in this file and fails if one is neither
+   listed here nor named in RERENDER_EXEMPT with a reason, so the list cannot fall behind again. */
+const RERENDER = ['renderCompare','renderStages','renderAtlas','renderFleet','renderDeliver','renderTrips',
+  'renderLegs','renderOffers','renderWall','renderDests','renderRail','renderBuses','renderForesight',
+  'renderPulse','renderDemo','renderQaMethod','renderPractice','renderItin','renderSplit','renderDrive',
+  'renderHS','renderPartners','renderPlugins','renderReach','renderHooks','renderCounts','renderTicker',
+  'renderAccountUI','renderAuth','renderDay'];
 function rerenderAll(){
-  for (const f of ['renderCompare','renderStages','renderAtlas','renderFleet','renderDeliver','renderTrips','renderLegs','renderOffers','renderWall','renderDests','renderRail'])
-    { try { if (typeof window[f]==='function') window[f](); } catch(e){} }
+  for (const f of RERENDER){ try { if (typeof window[f]==='function') window[f](); } catch(e){} }
 }
+/* A string with no translation in your language falls back to English. That is the right behaviour
+   and the wrong silence: the reader cannot tell the difference between a word UG chose and a word UG
+   never wrote, and the person best placed to fix it — the one reading it — is given no way to say so.
+   So say so. Anything still in English under a non-English language gets a dotted rule under it and
+   opens the correction sheet with the key and the offending words already filled in. The gap is not
+   hidden, and it is handed to the only people who can close it. */
+function i18nFellBack(k){ return LANG !== 'en' && !(PACK && PACK[k]); }
+function i18nMark(el, k){
+  const todo = i18nFellBack(k);
+  el.classList.toggle('i18n-todo', todo);
+  if (todo) el.setAttribute('data-todo', k); else el.removeAttribute('data-todo');
+}
+function i18nGap(){ return Object.keys(STR).filter(i18nFellBack).length; }
 function applyLang(){
   document.documentElement.lang = LANG;
   document.documentElement.dir = (LANGS[LANG]&&LANGS[LANG].dir)||'ltr';
-  document.querySelectorAll('[data-i18n]').forEach(el=>{ const k=el.dataset.i18n; if(STR[k]) el.textContent=t(k); });
-  document.querySelectorAll('[data-i18n-html]').forEach(el=>{ const k=el.dataset.i18nHtml; if(STR[k]) el.innerHTML=t(k); });
+  document.querySelectorAll('[data-i18n]').forEach(el=>{ const k=el.dataset.i18n; if(STR[k]){ el.textContent=t(k); i18nMark(el,k); } });
+  document.querySelectorAll('[data-i18n-html]').forEach(el=>{ const k=el.dataset.i18nHtml; if(STR[k]){ el.innerHTML=t(k); i18nMark(el,k); } });
   const w=document.querySelectorAll('#verbs .w'); const keys=['ride','pool','rent','deliver']; const flips=['flipRide','flipPool','flipRent','flipDeliver']; w.forEach((el,i)=>{ el.textContent=t(keys[i]); el.dataset.w=t(keys[i]); el.dataset.flip=t(flips[i]); }); const f=$('#flip'); if(f){ const on=[...w].findIndex(x=>x.classList.contains('hl')); f.textContent=t(flips[on<0?1:on]); }
   document.querySelectorAll('#tagline span').forEach((el,i)=>el.textContent=t(keys[i]));
   const pick=$('#langPick'); if(pick) pick.value=LANG;
-  const note=$('#langNote'); if(note) note.textContent = LANGS[LANG].confidence==='complete' ? '' : `${LANGS[LANG].name}: ${LANGS[LANG].confidence}. ${t('langNote')}`;
+  const note=$('#langNote');
+  if(note){ const gap=i18nGap();
+    note.textContent = LANG==='en' ? ''
+      : gap ? `${LANGS[LANG].native}: ${gap} ${t('ui.stillEnglish')}`
+            : `${LANGS[LANG].native}: ${t('ui.allTranslated')}`; }
   const cta=$('#navCta'); if(cta && !account) cta.textContent=t('getStarted');
   const tm=$('#tabMeLbl'); if(tm && !account) tm.textContent=t('me');
 }
@@ -4426,7 +4812,7 @@ if ('serviceWorker' in navigator && location.protocol.startsWith('http') && !loc
    fold runs when the main thread is free, in small pieces, so nothing blocks the first tap. */
 fillRouteSelects();
 initStrip();
-initTheme();
+initDay();
 $('#cFrom').value='Ntinda'; syncTo('cFrom','cTo'); renderCompare();
 initVerbs(); initReveal();
 initWelcome(); playIntro(false);

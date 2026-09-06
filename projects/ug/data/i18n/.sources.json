@@ -1,6 +1,6 @@
 {
  "note": "Hash of each English source string as of the last accepted build. Drift against this is reported by i18n-build.cjs; refresh it with --accept once the translations have caught up.",
- "generated": "2026-09-03",
+ "generated": "2026-09-06",
  "sources": {
   "page.p.ug_speaks_the_languages": "cb1691491034",
   "page.button.skip": "28d03596d24e",
@@ -39,7 +39,6 @@
   "top.div.prototype_v1_every_price": "b2d5335ca5f0",
   "compare.div.compare_the_arbitrage_desk": "91175002631f",
   "compare.h2.every_ride_on_the": "ec552682eb3b",
-  "compare.p.uber_bolt_safeboda_faras": "b62734caf6f4",
   "compare.h3.your_trip": "d06eed3207ef",
   "compare.label.from": "218197693424",
   "compare.label.to": "f4b06ef6d3c8",
@@ -260,6 +259,26 @@
   "reviewer": "de3f574529ce",
   "langNote": "5aef1c5789a4",
   "ui.correctWord": "cf51e837b0b1",
-  "ui.inService": "4ce9a8914dc0"
+  "ui.inService": "4ce9a8914dc0",
+  "compare.p.bolt_safeboda_faras_yango": "9894ddc6d9c0",
+  "day.auto": "f20b1916df9c",
+  "day.alwaysNoon": "00ec8ed5f1fa",
+  "day.alwaysNight": "b6f7dd6a10b4",
+  "day.control": "ccfaa5d751f2",
+  "day.night": "4e9f8db8242b",
+  "day.dawn": "0dfd8feb99c0",
+  "day.morning": "e9376a281aac",
+  "day.midday": "66c33cf7da99",
+  "day.afternoon": "fb847b43637e",
+  "day.dusk": "abd7160c1f46",
+  "wx.label": "a0bba6381246",
+  "wx.clear": "83b12c2216ef",
+  "wx.cloud": "c63401aba20f",
+  "wx.rain": "a6d20aa6a4c7",
+  "wx.storm": "5870f9bfd157",
+  "wx.mist": "eaae3408200c",
+  "railModal.div.the_day": "2e7a5fc0f1d1",
+  "ui.stillEnglish": "a695cc0d567f",
+  "ui.allTranslated": "2f2ecd2ef13a"
  }
 }

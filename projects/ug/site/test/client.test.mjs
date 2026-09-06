@@ -435,3 +435,162 @@ describe('7. the single script parses', () => {
     } finally { await c.close(); }
   });
 });
+
+/* ------------------------------------------------------------------ 8 */
+/* The palette is now a clock, so "does it pass contrast" is no longer one question with two answers
+   (night, noon) — it is 1,440 questions a day, times the weather. A colour system that drifts is only
+   as good as its worst minute, and the worst minute is never the one you look at. So look at all of
+   them: every minute of the day against clear, overcast, rain and storm, on every ink/ground pair
+   that carries text. The two family changes are checked separately: they must happen exactly at
+   sunrise and sunset and nowhere else, because a crossing anywhere else is the page walking through
+   the unreadable middle where a dark ground meets a light one. */
+describe('8. the day palette holds contrast at every minute, in any weather', () => {
+  test('no minute of any day drops a text pair below its floor', async () => {
+    const { c, page } = await openPage();
+    try {
+      const bad = await page.evaluate(() => {
+        const lin = v => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); };
+        const L = h => { const n = parseInt(h.slice(1), 16);
+          return 0.2126 * lin((n >> 16) & 255) + 0.7152 * lin((n >> 8) & 255) + 0.0722 * lin(n & 255); };
+        const ratio = (a, b) => { const x = L(a), y = L(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); };
+        const D = window.__UG_DAY;
+        const skies = [{cloud:0,rain:0}, {cloud:1,rain:0}, {cloud:.8,rain:.6}, {cloud:1,rain:1}];
+        /* pair, floor. 7 is AAA body text; 4.5 is AA, which is where the quiet labels live. */
+        const pairs = [['i','g',7], ['i','s',7], ['i2','s',4.5], ['i3','s',4.5], ['i3','g',4.5],
+                       ['yt','s',4.5], ['yt','g',4.5], ['i','s2',7], ['i2','g',4.5]];
+        const out = [];
+        for (let m = 0; m < 1440; m++){
+          const h = m / 60;
+          for (const w of skies){
+            const v = D.at(h, w);
+            for (const [a, b, floor] of pairs){
+              const r = ratio(v[a], v[b]);
+              if (r < floor) out.push({at: h.toFixed(2), sky: JSON.stringify(w), pair: a + ' on ' + b,
+                                       got: +r.toFixed(2), floor, colours: v[a] + ' / ' + v[b]});
+            }
+          }
+        }
+        return out.slice(0, 8);
+      });
+      assert.deepEqual(bad, [], 'the drifting palette drops below its contrast floor:\n' +
+        bad.map(b => `  ${b.at}h ${b.sky} — ${b.pair} = ${b.got} (needs ${b.floor}) ${b.colours}`).join('\n'));
+    } finally { await c.close(); }
+  });
+
+  test('the ground only crosses between dark and light at sunrise and sunset', async () => {
+    const { c, page } = await openPage();
+    try {
+      const r = await page.evaluate(() => {
+        const D = window.__UG_DAY, flips = [];
+        let prev = D.at(0, null).dark;
+        for (let m = 1; m < 1440; m++){
+          const now = D.at(m / 60, null).dark;
+          if (now !== prev) flips.push(+(m / 60).toFixed(3));
+          prev = now;
+        }
+        return {flips, up: D.SUNUP, down: D.SUNDOWN};
+      });
+      assert.equal(r.flips.length, 2, `the palette changes family ${r.flips.length} times a day, at ${r.flips}; it must be exactly twice`);
+      assert.ok(Math.abs(r.flips[0] - r.up) < 0.02, `first crossing at ${r.flips[0]}h, sunrise is ${r.up}h`);
+      assert.ok(Math.abs(r.flips[1] - r.down) < 0.02, `second crossing at ${r.flips[1]}h, sunset is ${r.down}h`);
+    } finally { await c.close(); }
+  });
+
+  test('a minute of drift is never a visible step', async () => {
+    const { c, page } = await openPage();
+    try {
+      const worst = await page.evaluate(() => {
+        const D = window.__UG_DAY;
+        const rgb = h => { const n = parseInt(h.slice(1), 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; };
+        let worst = {d: 0};
+        for (let m = 0; m < 1440; m++){
+          const a = D.at(m / 60, null), b = D.at((m + 1) / 60, null);
+          if (a.dark !== b.dark) continue;          // the two crossings are meant to be events
+          for (const k of ['g', 's', 'i']){
+            const x = rgb(a[k]), y = rgb(b[k]);
+            const d = Math.max(Math.abs(x[0] - y[0]), Math.abs(x[1] - y[1]), Math.abs(x[2] - y[2]));
+            if (d > worst.d) worst = {d, at: +(m / 60).toFixed(2), key: k};
+          }
+        }
+        return worst;
+      });
+      /* Two 8-bit steps in a minute is far under a just-noticeable difference; the point of the whole
+         design is that you never catch it moving. */
+      assert.ok(worst.d <= 2, `the palette jumps ${worst.d}/255 in one minute at ${worst.at}h on --${worst.key}; that is a step, not a drift`);
+    } finally { await c.close(); }
+  });
+});
+
+/* ------------------------------------------------------------------ 9 */
+/* DEFECT, found by a reader: switching to Amharic left the bus rows saying "Teera esimu" and the
+   Foresight board saying "Nyuta yo". Both are real words — in Runyoro and Acholi — left behind by
+   the previous language because rerenderAll() named eleven of the thirty render functions. A reader
+   was being handed a language they had not asked for and could not read. The list is the fix; this
+   test is what keeps it a fix. */
+describe('9. changing language redraws every view', () => {
+  test('rerenderAll names every render function in the file', async () => {
+    const src = readFileSync(join(SITE, 'index.html'), 'utf8');
+    const declared = [...src.matchAll(/^function (render[A-Za-z0-9_]*)\s*\(/gm)].map(m => m[1]);
+    const listed = new Set([...src.matchAll(/'(render[A-Za-z0-9_]*)'/g)].map(m => m[1]));
+    const missing = [...new Set(declared)].filter(n => !listed.has(n));
+    assert.deepEqual(missing, [],
+      'these render functions are never redrawn when the language changes, so they keep the previous ' +
+      'language on screen — add them to RERENDER in index.html:\n  ' + missing.join('\n  '));
+  });
+
+  test('the bus rows and the foresight board follow the language', async () => {
+    const { c, page } = await openPage();
+    try {
+      /* Runyoro first, so there is a previous language to be left behind, then Amharic. */
+      const r = await page.evaluate(async () => {
+        await setLang('nyo'); await new Promise(r => setTimeout(r, 60));
+        await setLang('am');  await new Promise(r => setTimeout(r, 60));
+        const grab = id => (document.getElementById(id) || {}).textContent || '';
+        return {buses: grab('buses'), foresight: grab('foresightList')};
+      });
+      const strays = /Teera esimu|Kwata ha UG|Nyuta yo|omuhanda|Kwata aha UG/;
+      assert.ok(!strays.test(r.buses), `the bus rows kept Runyoro after switching to Amharic:\n${r.buses.slice(0, 240)}`);
+      assert.ok(!strays.test(r.foresight), `the foresight board kept Runyoro after switching to Amharic:\n${r.foresight.slice(0, 240)}`);
+    } finally { await c.close(); }
+  });
+});
+
+/* ------------------------------------------------------------------ 10 */
+/* Uber left Uganda. A board that claims to list every way to move in the country must not offer a
+   ride from a company that is not there — that is not a stale logo, it is a quote a rider cannot
+   take. */
+describe('10. the board only lists operators that are actually here', () => {
+  test('no departed operator survives anywhere in the shipped page', async () => {
+    const src = readFileSync(join(SITE, 'index.html'), 'utf8');
+    const hits = [...src.matchAll(/.{0,60}[Uu]ber.{0,60}/g)].map(m => m[0].replace(/\s+/g, ' '));
+    assert.deepEqual(hits, [], 'Uber is still in the page:\n  ' + hits.join('\n  '));
+  });
+});
+
+/* ------------------------------------------------------------------ 11 */
+/* DEFECT: initScene() is wrapped in a try/catch that turns any error into the words "3D map
+   unavailable here" — so a broken scene looks exactly like a machine without WebGL, and ships. It
+   already happened once: a `let` declared beside the weather layer sat in its temporal dead zone
+   when recolour() reached it, and the whole map went dark on every browser in the world while every
+   test still passed. If three.js loads at all, the scene must be alive. */
+describe('11. the map survives its own initialisation', () => {
+  test('when three.js loads, the scene is built and takes weather', async () => {
+    const { c, page } = await openPage();
+    try {
+      const r = await page.evaluate(async () => {
+        for (let i = 0; i < 60 && typeof THREE === 'undefined'; i++) await new Promise(r => setTimeout(r, 100));
+        if (typeof THREE === 'undefined') return {skipped: 'three.js did not load in this environment'};
+        for (let i = 0; i < 60 && (typeof scene === 'undefined' || scene === null); i++) await new Promise(r => setTimeout(r, 100));
+        const alive = typeof scene !== 'undefined' && scene !== null;
+        let wx = 'not tried';
+        if (alive && scene.setWeather){ try { scene.setWeather({cloud:.9, rain:.7}); scene.setWeather(null); wx = 'ok'; }
+                                        catch(e){ wx = 'threw: ' + e.message; } }
+        return {alive, wx, hint: (document.getElementById('hint') || {}).textContent};
+      });
+      if (r.skipped) return;   /* no CDN in this sandbox: the point is only tested where it can be */
+      assert.ok(r.alive, `three.js loaded but scene is null — initScene threw and was swallowed. Hint reads: "${r.hint}"`);
+      assert.equal(r.wx, 'ok', `scene.setWeather is broken: ${r.wx}`);
+      assert.ok(!/unavailable/.test(r.hint || ''), `the map fell back to "${r.hint}" even though three.js loaded`);
+    } finally { await c.close(); }
+  });
+});

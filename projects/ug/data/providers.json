@@ -9,34 +9,6 @@
   },
   "providers": [
     {
-      "id": "uber",
-      "name": "Uber",
-      "sub": "UberX",
-      "kind": "car",
-      "base": 1250,
-      "perKm": 850,
-      "perMin": 130,
-      "min": 6000,
-      "colour": "#000000",
-      "link": "https://m.uber.com/ul/?action=setPickup",
-      "prov": "snippet (Uber UG blog, Jan 2020 rates)",
-      "surge": 1.35
-    },
-    {
-      "id": "uberboda",
-      "name": "Uber",
-      "sub": "UberBoda",
-      "kind": "boda",
-      "base": 500,
-      "perKm": 450,
-      "perMin": 70,
-      "min": 1500,
-      "colour": "#000000",
-      "link": "https://m.uber.com/ul/?action=setPickup",
-      "prov": "snippet (Uber UG blog)",
-      "surge": 1.25
-    },
-    {
       "id": "bolt",
       "name": "Bolt",
       "sub": "Bolt car",
