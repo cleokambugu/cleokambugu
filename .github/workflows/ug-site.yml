@@ -36,7 +36,7 @@ jobs:
       # shrink. Raise the ceiling only by translating something, never to make a build pass.
       - name: Untranslated text a reader still sees
         working-directory: projects/ug
-        run: node server/scripts/i18n-coverage.cjs --max 210
+        run: node server/scripts/i18n-coverage.cjs --max 206
 
       - name: The films speak the script
         working-directory: projects/ug/showreel

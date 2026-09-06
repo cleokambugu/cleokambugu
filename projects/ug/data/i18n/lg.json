@@ -13,11 +13,16 @@
     "Goberera obudde",
     "Matulutulu",
     "Olweggulo",
+    "amasitegi",
     "arbitrage desk",
     "concierge",
     "endpoint",
+    "ey'ebbeeyi ensinga obutono",
+    "nsonga y'ekibiina",
+    "olukusa lw'engagi",
     "plug-in",
-    "sandbox"
+    "sandbox",
+    "takuweesa kitiibwa"
   ],
   "strings": {
     "page.p.ug_speaks_the_languages": "UG eyogera ennimi za Uganda, ez'ekitundu kino, n'ez'abagenyi baayo. Londa olulimi lwo; byonna bigoberera.",
@@ -281,9 +286,19 @@
     "wx.storm": "Kibuyaga",
     "wx.mist": "Olufu",
     "ui.stillEnglish": "ebigambo bikyali mu Lungereza. Kwata ku kimu okutubuulira ekyo ky’oyagala.",
-    "ui.allTranslated": "buli kigambo ku lupapula luno kiri mu lulimi lwo."
+    "ui.allTranslated": "buli kigambo ku lupapula luno kiri mu lulimi lwo.",
+    "ticker.pooled": "buli ntebe, nga mugabana",
+    "ticker.cheapest": "ey'ebbeeyi ensinga obutono kaakati",
+    "ticker.quoted": "apps, amasitegi, bbaasi n'amaato tubiwa ebbeeyi buli lw'onoonya",
+    "ticker.permit": "olukusa lw'engagi mu Bwindi, abatuuze ba East Africa",
+    "ticker.toll": "ssente z'oluguudo olw'embiro olw'e Entebbe, emmotoka",
+    "ticker.fuel": "amafuta mu Kampala leero",
+    "compare.p.we_earn_a_referral": "Tufuna ku kusindika omuguzi oba ku bbukingi ya UG. Tetugattako ku bbeeyi gy'olaba.",
+    "rent.p.the_price_is_shown": "Ebbeeyi tugiraga ku buli muntu era ne ku lunaku, kubanga mu Kampala Prado ye nsonga y'ekibiina.",
+    "stage.p.someone_in_your_circle": "Omuntu mu kibiina kyo atambula dda. Tewali surge, tewali mita, tewali nsonyi za ssente — ebbeeyi ye nsaasaanya entuufu ey'oluguudo, egabanyizibwa mu ntebe.",
+    "explore.p.for_people_running_three": "Ku bantu abatambuza obulamu busatu. UG ewa ebbeeyi ku buli kitundu ky'olugendo mu ngeri esinga okuba ey'amagezi, era ekubuulira we boda ali ow'amangu naye nga takuweesa kitiibwa."
   },
   "version": 1,
-  "updated": "2026-09-03",
-  "covered": 256
+  "updated": "2026-09-06",
+  "covered": 272
 }

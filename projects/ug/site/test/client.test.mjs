@@ -594,3 +594,36 @@ describe('11. the map survives its own initialisation', () => {
     } finally { await c.close(); }
   });
 });
+
+/* ------------------------------------------------------------------ 12 */
+/* DEFECT, found by diffing this build against the one before it: renderTicker() and forty lines of
+   .ticker CSS were still here, and the element they write to was not. The fares band had been lost
+   in a markup edit, and nothing said so — the render function was simply never called, and if it
+   had been it would have thrown on a null. Every id the JavaScript reaches for must exist, and the
+   band it fills must fill. */
+describe('12. every element the code reaches for is actually on the page', () => {
+  test('no id is queried that no markup declares', () => {
+    const src = readFileSync(join(SITE, 'index.html'), 'utf8');
+    const want = new Set();
+    for (const m of src.matchAll(/\$\('#([A-Za-z0-9_-]+)'\)|getElementById\('([A-Za-z0-9_-]+)'\)/g)) want.add(m[1] || m[2]);
+    const have = new Set([...src.matchAll(/\bid=["']([A-Za-z0-9_-]+)["']/g)].map(m => m[1]));
+    const orphans = [...want].filter(id => !have.has(id)).sort();
+    assert.deepEqual(orphans, [], 'queried but never declared: ' + orphans.join(', '));
+  });
+
+  test('the fares band fills, and speaks the reader’s language', async () => {
+    const { c, page } = await openPage();
+    try {
+      const r = await page.evaluate(async () => {
+        for (let i = 0; i < 60 && !window.__ugReady; i++) await new Promise(r => setTimeout(r, 100));
+        const el = document.getElementById('ticker');
+        const en = el ? el.textContent : '';
+        await setLang('sw'); await new Promise(r => setTimeout(r, 80));
+        return {en, sw: el ? el.textContent : '', spans: el ? el.children.length : 0};
+      });
+      assert.ok(r.spans >= 8, `the fares band drew ${r.spans} items; it should carry the routes twice over`);
+      assert.match(r.en, /UGX/, 'the fares band carries no fare');
+      assert.match(r.sw, /rahisi zaidi sasa hivi/, 'the fares band stayed English after switching to Swahili');
+    } finally { await c.close(); }
+  });
+});

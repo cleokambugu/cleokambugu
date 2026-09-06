@@ -279,6 +279,16 @@
   "wx.mist": "eaae3408200c",
   "railModal.div.the_day": "2e7a5fc0f1d1",
   "ui.stillEnglish": "a695cc0d567f",
-  "ui.allTranslated": "2f2ecd2ef13a"
+  "ui.allTranslated": "2f2ecd2ef13a",
+  "ticker.pooled": "0aa1228d86a9",
+  "ticker.cheapest": "e7061d2ee89a",
+  "ticker.quoted": "2dc910a17fce",
+  "ticker.permit": "0b4019233dd4",
+  "ticker.toll": "6f516f3018b7",
+  "ticker.fuel": "1163059b00cf",
+  "compare.p.we_earn_a_referral": "a6e9b8965afe",
+  "rent.p.the_price_is_shown": "9ac70857752e",
+  "stage.p.someone_in_your_circle": "fa007b2984f9",
+  "explore.p.for_people_running_three": "733137a011e4"
  }
 }

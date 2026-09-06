@@ -1394,6 +1394,56 @@
       "text": "every word on this page is in your language.",
       "html": false,
       "where": "language note"
+    },
+    "ticker.pooled": {
+      "text": "per seat, pooled",
+      "html": false,
+      "where": "fares ticker"
+    },
+    "ticker.cheapest": {
+      "text": "cheapest right now",
+      "html": false,
+      "where": "fares ticker"
+    },
+    "ticker.quoted": {
+      "text": "apps, stages, buses and boats quoted on every search",
+      "html": false,
+      "where": "fares ticker"
+    },
+    "ticker.permit": {
+      "text": "Bwindi gorilla permit, East African citizens",
+      "html": false,
+      "where": "fares ticker"
+    },
+    "ticker.toll": {
+      "text": "Entebbe expressway toll, car",
+      "html": false,
+      "where": "fares ticker"
+    },
+    "ticker.fuel": {
+      "text": "petrol in Kampala today",
+      "html": false,
+      "where": "fares ticker"
+    },
+    "compare.p.we_earn_a_referral": {
+      "text": "We earn a referral or a UG booking. Never a mark-up on the quote you are shown.",
+      "html": false,
+      "where": "compare <p>"
+    },
+    "rent.p.the_price_is_shown": {
+      "text": "The price is per head as well as per day, because in Kampala the Prado is a group decision.",
+      "html": false,
+      "where": "rent <p>"
+    },
+    "stage.p.someone_in_your_circle": {
+      "text": "Someone in your circle is already driving. No surge, no meter, no awkward cash — the fare is the true cost of the road, divided by the seats.",
+      "html": false,
+      "where": "stage <p>"
+    },
+    "explore.p.for_people_running_three": {
+      "text": "For people running three lives. UG quotes each leg on the cheapest sensible mode, and says where a boda is faster than your dignity is worth.",
+      "html": false,
+      "where": "explore <p>"
     }
   }
 }

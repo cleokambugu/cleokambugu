@@ -11,9 +11,12 @@
   "uncertain": [
     "Adhuhuri",
     "Alasiri",
+    "heshima yako inavyostahili",
+    "hunukuliwa",
     "link (kiungo)",
     "plug-in (kiunganishi)",
-    "prototype (prototaipu)"
+    "prototype (prototaipu)",
+    "sokwe wa Bwindi"
   ],
   "strings": {
     "page.p.ug_speaks_the_languages": "UG inazungumza lugha za Uganda, za ukanda huu, na za wageni wake. Chagua yako; kila kitu kinafuata.",
@@ -277,9 +280,19 @@
     "wx.storm": "Dhoruba",
     "wx.mist": "Ukungu",
     "ui.stillEnglish": "maneno bado yako kwa Kiingereza. Gusa lolote uliambie letu.",
-    "ui.allTranslated": "kila neno kwenye ukurasa huu liko kwa lugha yako."
+    "ui.allTranslated": "kila neno kwenye ukurasa huu liko kwa lugha yako.",
+    "ticker.pooled": "kwa kiti, mkishirikiana",
+    "ticker.cheapest": "rahisi zaidi sasa hivi",
+    "ticker.quoted": "programu, stendi, mabasi na boti hunukuliwa kila utafutapo",
+    "ticker.permit": "kibali cha sokwe wa Bwindi, raia wa Afrika Mashariki",
+    "ticker.toll": "ushuru wa barabara ya mwendokasi ya Entebbe, gari",
+    "ticker.fuel": "petroli Kampala leo",
+    "compare.p.we_earn_a_referral": "Tunapata kwa rufaa au kwa booking ya UG. Kamwe hatuongezi juu ya bei unayoonyeshwa.",
+    "rent.p.the_price_is_shown": "Bei ni kwa kila mtu na pia kwa siku, kwa sababu Kampala Prado ni uamuzi wa kikundi.",
+    "stage.p.someone_in_your_circle": "Mtu katika mzunguko wako tayari anaendesha. Hakuna surge, hakuna mita, hakuna aibu ya pesa — nauli ni gharama halisi ya barabara, imegawanywa kwa viti.",
+    "explore.p.for_people_running_three": "Kwa watu wanaoendesha maisha matatu. UG hunukuu kila hatua kwa njia rahisi yenye maana, na hukuambia mahali boda ni mwepesi kuliko heshima yako inavyostahili."
   },
   "version": 1,
-  "updated": "2026-09-03",
-  "covered": 256
+  "updated": "2026-09-06",
+  "covered": 272
 }
