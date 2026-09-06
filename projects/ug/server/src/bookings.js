@@ -1,5 +1,5 @@
 // Partner bookings on the trip rail. The concierge is an adapter: `sim` advances states on a clock (the prototype);
-// production adapters call a partner channel (Uber Guest Trips API, Bolt Ride Booker console, a staffed line) and
+// production adapters call a partner channel (Bolt Ride Booker console, a SafeBoda business line, a staffed phone) and
 // update the step from their callbacks. Steps: 0 requested · 1 placed · 2 driver assigned · 3 arriving · 4 on trip · 5 done.
 import { id, now } from './db.js';
 

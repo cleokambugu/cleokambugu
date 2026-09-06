@@ -226,9 +226,9 @@ function offerCard(ctx,x,y,o){ // x,y top-left, 420 x 168
   ctx.restore(); }
 
 /* ---------- data for scenes ---------- */
-const APPS=[['Uber','#1a1a1a',C.ink],['Bolt','#34D186','#0b2a1c'],['SafeBoda','#F7941D','#2a1500'],['Faras','#1F6FEB',C.ink],['Yango','#FF3B30',C.ink],['Tinka','#7C3AED',C.ink],['inDrive','#C1F11D','#1d2400']];
+const APPS=[['Bolt','#34D186','#0b2a1c'],['SafeBoda','#F7941D','#2a1500'],['Faras','#1F6FEB',C.ink],['Yango','#FF3B30',C.ink],['Tinka','#7C3AED',C.ink],['inDrive','#C1F11D','#1d2400']];
 const QUOTES=[ // arrival order; price = base + perKm x 8 km from data/providers.json (estimates)
-  {n:'Uber',k:'car',p:8050,c:'#333'},{n:'SafeBoda',k:'boda',p:4100,c:'#F7941D'},{n:'Bolt',k:'car',p:7400,c:'#34D186'},{n:'Matatu',k:'shared',p:2200,c:'#2563EB'},
+  {n:'SafeBoda',k:'boda',p:4100,c:'#F7941D'},{n:'Bolt',k:'car',p:7400,c:'#34D186'},{n:'Matatu',k:'shared',p:2200,c:'#2563EB'},
   {n:'Yango',k:'car',p:7600,c:'#FF3B30'},{n:'Tinka',k:'car',p:6600,c:'#7C3AED'},{n:'Faras',k:'boda',p:3700,c:'#1F6FEB'},{n:'Special hire',k:'car',p:12600,c:'#6B7280'}];
 const RANK=QUOTES.map((q,i)=>i).sort((a,b)=>QUOTES[a].p-QUOTES[b].p); const rankOf=i=>RANK.indexOf(i);
 const VEH=[ ['Kampala','Jinja','road',2.6,5.5,.08],['Kampala','Mbarara','road',2.9,6.5,-.08],['Kampala','Gulu','road',3.2,7,.06],['Kampala','Fort Portal','road',3.5,6,.1],['Kampala','Mbale','road',3.8,6,-.1],
