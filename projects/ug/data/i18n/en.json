@@ -1444,6 +1444,996 @@
       "text": "For people running three lives. UG quotes each leg on the cheapest sensible mode, and says where a boda is faster than your dignity is worth.",
       "html": false,
       "where": "explore <p>"
+    },
+    "ui.toastVouched": {
+      "text": "A circle member vouched for you.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.toastAccepted": {
+      "text": "Accepted. The stage is funded; the money releases to your MoMo after departure.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.toastNoAudio": {
+      "text": "Audio is not available here.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.toastInstallMenu": {
+      "text": "Browser menu → Install app / Add to Home screen.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.toastGuest": {
+      "text": "Browsing as a guest. Compare anything; we will ask for an account only when you pay.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.toastCancelled": {
+      "text": "Cancelled. Nothing charged.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.toastComingBeta": {
+      "text": "Coming with the public beta.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.toastNoListen": {
+      "text": "Could not start listening.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.toastDictation": {
+      "text": "Dictation needs Chrome or Edge here.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.toastDoneSay": {
+      "text": "Done. Say what happened, in Me.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.toastEtaCopied": {
+      "text": "ETA copied. Send it to whoever is waiting.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.toastSixDigits": {
+      "text": "Enter the six-digit code.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.toastGeojson": {
+      "text": "GeoJSON printed to the console.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.toastLinkPhone": {
+      "text": "Link copied. Open it on your phone; sign in with the same number.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.toastLinkCopied": {
+      "text": "Link copied.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.toastMarkedVerified": {
+      "text": "Marked verified in this prototype. In production the permit, registration and insurance are checked by a person before this changes.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.toastNamePhone": {
+      "text": "Name and phone, please.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.toastNewOffer": {
+      "text": "New funded offer on your corridor.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.toastPaid": {
+      "text": "Payment recorded (sandbox).",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.toastPlanCopied": {
+      "text": "Plan copied. Paste it in the group chat.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.toastPulseCopied": {
+      "text": "Pulse layer copied as GeoJSON. In Felt: New map → Upload → paste.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.toastSeatHeld": {
+      "text": "Seat held on the server.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.toastShareHome": {
+      "text": "Share → Add to Home Screen.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.toastSignedOut": {
+      "text": "Signed out on this device.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.toastStageFull": {
+      "text": "Stage full. Offered to drivers on this corridor.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.toastStageFunded": {
+      "text": "Stage funded. Driver, plate and ETA are on the card.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.toastStageLink": {
+      "text": "Stage link copied. Send it to the group.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.toastStageServer": {
+      "text": "Stage started on the server. Invite your circle.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.toastStageStarted": {
+      "text": "Stage started. Invite three friends and the price falls.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.toastShortNumber": {
+      "text": "That number looks short.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.toastTripPosted": {
+      "text": "Trip posted to your circles.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.toastBrowserMenu": {
+      "text": "Use your browser menu: Add to Home screen.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.toastVerified": {
+      "text": "Verification cleared. Every corridor is open to you.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.toastVerifiedServer": {
+      "text": "Verified on the server.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.toastVoiceNeeds": {
+      "text": "Voice needs Chrome, Edge, or the Cephable app for face and switch control.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.toastAgent": {
+      "text": "You are a UG agent. Your vouches count double and each rider you sign pays you UGX 1,000.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.toastAlreadyIn": {
+      "text": "You are already in this stage.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.verification": {
+      "text": "Verification",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.ugAgent": {
+      "text": "UG agent",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.stageAgentPay": {
+      "text": "Stage agent · UGX 1,000 per rider signed",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.vouches": {
+      "text": "Vouches",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.visibleInCircle": {
+      "text": "· visible in circle",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.homeCircles": {
+      "text": "Home · circles",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.comfortMap": {
+      "text": "Comfort Map",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.corridorsEdit": {
+      "text": "corridors · edit",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.continuePhone": {
+      "text": "Continue on your phone",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.opsRow": {
+      "text": "Ops · reach, plug-ins, partners",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.open": {
+      "text": "Open",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.installRow": {
+      "text": "Install UG on this device",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.install": {
+      "text": "Install",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.addFromMenu": {
+      "text": "Add from browser menu",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.askVouch": {
+      "text": "Ask a circle member to vouch (sandbox)",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.plusVouch": {
+      "text": "+1 vouch",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.replayOpening": {
+      "text": "Replay the opening",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.play": {
+      "text": "Play",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.roles": {
+      "text": "Roles",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.addRole": {
+      "text": "Add a role",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.accessibility": {
+      "text": "Accessibility",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.welcomeRow": {
+      "text": "Welcome screen · change language",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.theme": {
+      "text": "Theme",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.nightNoon": {
+      "text": "night / noon",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.voiceCommands": {
+      "text": "Voice commands",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.listen": {
+      "text": "Listen",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.roleRides": {
+      "text": "rides",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.roleDrives": {
+      "text": "drives",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.roleRentsOut": {
+      "text": "rents out",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.getStarted": {
+      "text": "Get started",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.me": {
+      "text": "Me",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.noProviderFilter": {
+      "text": "No provider in this filter will take that trip. Try \"All\" or a shorter route.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.nothingServes": {
+      "text": "Nothing serves this route in this filter yet.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.cheapestNow": {
+      "text": "Cheapest right now",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.spread": {
+      "text": "Spread across the market",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.badChoiceCost": {
+      "text": "what choosing badly costs",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.quotesReturned": {
+      "text": "Quotes returned",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.of": {
+      "text": "of",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.ways": {
+      "text": "ways",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.perPerson": {
+      "text": "per person",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.total": {
+      "text": "total",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.haggleScript": {
+      "text": "Haggle script",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.orderedBy": {
+      "text": "Ordered by",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.byRecord": {
+      "text": "how much each operator has put on the record",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.byFare": {
+      "text": "the fare alone",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.toll": {
+      "text": "toll",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.driveStep1": {
+      "text": "<span class=\"n\">SIXTY SECONDS</span><b>Phone, name, code.</b><p>No forms. No office visit to start. Verification runs while you drive your first circle trips.</p>",
+      "html": true,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.driveStep2": {
+      "text": "<span class=\"n\">ONE SCREEN</span><b>Your Comfort Map.</b><p>Base, radius, the corridors you would drive, hours, the car, and your hard no's. Change it any time.</p>",
+      "html": true,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.driveStep3": {
+      "text": "<span class=\"n\">THEN</span><b>Funded offers arrive.</b><p>Full cars with the money already in escrow. Accept in one tap. Decline anything, no penalty.</p>",
+      "html": true,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.openForBusiness": {
+      "text": "Open for business",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.becomeAgent": {
+      "text": "I run a stage · become a UG agent",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.agentNote": {
+      "text": "Agents sign riders and drivers at their stage and earn a cut per booking, paid to MoMo.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.yourComfortMap": {
+      "text": "Your Comfort Map",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.base": {
+      "text": "Base",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.radiusInTown": {
+      "text": "Radius in town",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.days": {
+      "text": "Days",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.hours": {
+      "text": "Hours",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.vehicle": {
+      "text": "Vehicle",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.corridors": {
+      "text": "Corridors",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.editMap": {
+      "text": "Edit map",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.earnedThisWeek": {
+      "text": "Earned this week",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.openOffers": {
+      "text": "Open offers",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.acceptance": {
+      "text": "Acceptance",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.signIn": {
+      "text": "Sign in",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.lookingForLine": {
+      "text": "Looking for your line…",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.whichLine": {
+      "text": "Which line is yours?",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.continueWithLine": {
+      "text": "Continue with your line",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.twoSims": {
+      "text": "You have two SIMs in this phone. Pick the one you want UG on — it becomes your account and your wallet.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.oneSim": {
+      "text": "This is the line in your phone. It becomes your account and your wallet.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.simOne": {
+      "text": "One SIM",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.simTwo": {
+      "text": "Two SIMs",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.simNone": {
+      "text": "No SIM",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.continueAs": {
+      "text": "Continue as",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.useAnotherNumber": {
+      "text": "Use another number",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.differentLine": {
+      "text": "A different Ugandan line",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.noUgLine": {
+      "text": "No Ugandan line?",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.waysInLong": {
+      "text": "Passkey, Google or Apple, WhatsApp, a roaming number, or a Ugandan eSIM",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.readFromSim": {
+      "text": "Read from your SIM by the app.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.yourNumber": {
+      "text": "Your number",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.enterLine": {
+      "text": "Enter your line",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.noSimFound": {
+      "text": "No SIM found in this device.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.eitherWorks": {
+      "text": "Ugandan or international — either works.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.phoneNumber": {
+      "text": "Phone number",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.sendCode": {
+      "text": "Send me a code",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.noLineAtAll": {
+      "text": "No working line at all?",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.waysInShort": {
+      "text": "Passkey, Google or Apple, WhatsApp, or a Ugandan eSIM",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.verifying": {
+      "text": "Verifying",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.askingConfirm": {
+      "text": "Asking {op} to confirm {n}…",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.mobileDataNote": {
+      "text": "Over mobile data the network confirms your line itself, so there is no code to wait for. On wifi we fall back to an SMS code, and the phone fills it in.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.yourCode": {
+      "text": "Your code",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.codeSentTo": {
+      "text": "Code sent to",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.phoneFills": {
+      "text": "Your phone should fill this in by itself.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.sandboxSix": {
+      "text": "Sandbox: any six digits.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.code": {
+      "text": "Code",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.useDifferentNumber": {
+      "text": "Use a different number",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.back": {
+      "text": "Back",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.noUgLineTitle": {
+      "text": "No Ugandan line",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.waysInTitle": {
+      "text": "Ways in without a local line",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.sameAccount": {
+      "text": "All of these give you the same account, wallet and trip history. You can pay by card; MoMo needs a Ugandan line.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.passkey": {
+      "text": "Passkey · Face or fingerprint",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.notOnDevice": {
+      "text": "(not on this device)",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.passkeySub": {
+      "text": "No password, no SMS. The fastest way in, and the safest.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.googleApple": {
+      "text": "Google or Apple",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.googleAppleSub": {
+      "text": "You are already signed in on this phone.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.whatsappCode": {
+      "text": "WhatsApp code",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.whatsappSub": {
+      "text": "Works on hotel wifi with your own foreign number — no roaming SMS needed.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.roaming": {
+      "text": "Your own number, roaming",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.roamingSub": {
+      "text": "Any international line. Standard SMS code.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.esim": {
+      "text": "Get a Ugandan eSIM · from UGX 35,000",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.esimSub": {
+      "text": "A local number and data in about a minute, at the airport or before you fly. Then MoMo works too.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.stayGuest": {
+      "text": "Stay a guest",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.stayGuestSub": {
+      "text": "Compare every price and book with a card. The account appears after your first trip.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.welcomeBack": {
+      "text": "Welcome back",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.youAreIn": {
+      "text": "You are in",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.tripsHere": {
+      "text": "Your trips, stages and wallet are here.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.accountReady": {
+      "text": "Account ready.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.signedInIn": {
+      "text": "signed in in {s} s",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.esimTitle": {
+      "text": "Ugandan eSIM",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.esimLead": {
+      "text": "A local number in about a minute",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.esimHow": {
+      "text": "UG orders an eSIM from MTN or Airtel, your phone installs it from a QR code, and the new line signs you in and pays with MoMo. Keep your home SIM for calls.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.notWired": {
+      "text": "Not wired in this prototype.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.notWiredWhy": {
+      "text": "It needs an operator eSIM reseller agreement and the phone's eSIM provisioning; the flow and the pricing above are the design, not a live product.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.whatsappSend": {
+      "text": "We will send the code on WhatsApp, so it works on wifi with your own number.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.deviceConfirm": {
+      "text": "Ask your device to confirm it is you…",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.signingWith": {
+      "text": "Signing you in with {m}…",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.hsTitleWho": {
+      "text": "Set up in sixty seconds",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.whoAreYou": {
+      "text": "Who are you on UG?",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.roleRider": {
+      "text": "I need rides",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.roleRiderSub": {
+      "text": "queue seats, compare",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.roleDriver": {
+      "text": "I drive",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.roleDriverSub": {
+      "text": "get funded trips",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.roleOwner": {
+      "text": "I have a car",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.roleOwnerSub": {
+      "text": "rent it per head",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.firstName": {
+      "text": "First name",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.phone": {
+      "text": "Phone",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.codeBySms": {
+      "text": "Code we sent by SMS (sandbox: any six digits)",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.sendCodeShort": {
+      "text": "Send code",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.hsTitleRider": {
+      "text": "Where do you usually go?",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.homeAndTwo": {
+      "text": "Home and the two places you go most",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.home": {
+      "text": "Home",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.mostDays": {
+      "text": "Most days",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.weekends": {
+      "text": "Weekends",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.yourCircles": {
+      "text": "Your circles (ride with people you half-know)",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.whereWhenDrive": {
+      "text": "Where and when are you comfortable driving?",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.corridorsYouWouldDrive": {
+      "text": "Corridors you would drive",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.plate": {
+      "text": "Plate",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.snapNowLater": {
+      "text": "Snap now or later (verification runs while you drive circle trips)",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.hardNos": {
+      "text": "Hard no's",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.noNights": {
+      "text": "No nights",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.noBoda": {
+      "text": "No boda passengers",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.noUpcountry": {
+      "text": "No upcountry",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.noAirport": {
+      "text": "No airport runs",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.hsTitleOwner": {
+      "text": "Your car, priced per head",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.listTheCarLead": {
+      "text": "List the car. Empty legs sell themselves.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.carClass": {
+      "text": "Class",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.comesWithDriver": {
+      "text": "Comes with a driver (+UGX 90,000/day)",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.circlesAllowed": {
+      "text": "Circles allowed to book",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.photos": {
+      "text": "Photos",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.listTheCar": {
+      "text": "List the car",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.youAreOnUG": {
+      "text": "you are on UG.",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
+    },
+    "ui.listedBtn": {
+      "text": "Listed",
+      "html": false,
+      "where": "ui: rendered by the JavaScript"
     }
   }
 }
