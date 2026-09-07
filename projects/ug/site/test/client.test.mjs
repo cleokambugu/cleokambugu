@@ -627,3 +627,39 @@ describe('12. every element the code reaches for is actually on the page', () =>
     } finally { await c.close(); }
   });
 });
+
+/* ------------------------------------------------------------------ 13 */
+/* A reader in Amharic was seeing "Mukono" and "Kampala" in Latin letters on a page that was
+   otherwise in their script. Place names now carry a native form in every non-Latin dictionary,
+   the helper rewrites them wherever a name is printed, and the map pins carry the native form
+   alone. Latin-script languages must be untouched — Luganda is not owed 'ካምፓላ' — and must not
+   be charged for the keys in the "still English" count. */
+describe('13. place names are written in the reader’s script', () => {
+  test('Amharic sees Ethiopic names; Luganda sees Latin and is not charged for it', async () => {
+    const { c, page } = await openPage({ viewport: { width: 1280, height: 900 } });
+    try {
+      const r = await page.evaluate(async () => {
+        for (let i = 0; i < 60 && !window.__ugReady; i++) await new Promise(r => setTimeout(r, 100));
+        const opt = id => [...document.querySelector('#' + id).options].map(o => o.textContent);
+        await setLang('lg'); await new Promise(r => setTimeout(r, 80));
+        const lg = { from: opt('sFrom')[0], gap: i18nGap(), ticker: document.getElementById('ticker').textContent.slice(0, 80) };
+        await setLang('am'); await new Promise(r => setTimeout(r, 80));
+        const am = { from: opt('sFrom'), to: opt('cTo'), gap: i18nGap(), ticker: document.getElementById('ticker').textContent.slice(0, 120),
+                     pins: [...document.querySelectorAll('#pins .pin .lbl')].map(l => l.textContent), route: document.getElementById('resSummary').textContent };
+        await setLang('en'); await new Promise(r => setTimeout(r, 80));
+        const en = { from: opt('sFrom')[0], ticker: document.getElementById('ticker').textContent.slice(0, 80) };
+        return { lg, am, en };
+      });
+      const eth = /[ሀ-፿]/;
+      assert.match(r.am.from.join(' '), eth, 'the pick-up select stayed Latin in Amharic: ' + r.am.from.join(', '));
+      assert.match(r.am.to.join(' '), eth, 'the destination select stayed Latin in Amharic');
+      assert.match(r.am.ticker, eth, 'the fares band stayed Latin in Amharic: ' + r.am.ticker);
+      assert.match(r.am.route, eth, 'the compare summary stayed Latin in Amharic');
+      assert.ok(/\(Kampala\)|\(Kololo\)|\(Ntinda\)/.test(r.am.from.join(' ')), 'the Latin form must stay beside the native one in prose');
+      if (r.am.pins.length) { assert.match(r.am.pins[0], eth, 'the map pins stayed Latin'); assert.ok(!/\(/.test(r.am.pins[0]), 'pins carry the native form alone'); }
+      assert.ok(!eth.test(r.lg.from) && !eth.test(r.lg.ticker), 'Luganda must not be rewritten');
+      assert.ok(!eth.test(r.en.from) && !eth.test(r.en.ticker), 'switching back to English must restore Latin');
+      assert.ok(r.lg.gap < 100, `Luganda is being charged for the place keys: gap ${r.lg.gap}`);
+    } finally { await c.close(); }
+  });
+});

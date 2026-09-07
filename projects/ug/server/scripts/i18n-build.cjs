@@ -47,10 +47,12 @@ const report = [], orphans = new Map();
 for (const code of files) {
   if (code === 'en') { langs.en = { name: 'English', native: 'English', region: 'World', dir: 'ltr', script: 'Latin', confidence: 'complete', uncertain: 0, missing: 0 }; continue; }
   const d = JSON.parse(fs.readFileSync(path.join(DIR, code + '.json'), 'utf8'));
-  let missing = 0, bad = 0;
+  let missing = 0, bad = 0, applicable = keys.length;
   for (const k of Object.keys(d.strings || {})) if (!(k in en.strings)) { if (!orphans.has(k)) orphans.set(k, []); orphans.get(k).push(code); }
   for (const k of keys) {
     const v = d.strings && d.strings[k];
+    /* place.* keys are script work: a Latin-script language neither ships nor lacks them */
+    if (k.startsWith('place.') && (d.script || 'Latin') === 'Latin' && !(typeof v === 'string' && v.trim())) { applicable--; continue; }
     if (typeof v !== 'string' || !v.trim()) { missing++; continue; }
     if (en.strings[k].html) { // tags must survive translation
       const tags = s => (s.match(/<\/?[a-z]+/g) || []).sort().join(',');
@@ -59,7 +61,7 @@ for (const code of files) {
     str[k][code] = v;
   }
   langs[code] = { name: d.name, native: d.native, region: d.region || '', family: d.family || '', dir: d.dir || 'ltr', script: d.script || 'Latin', confidence: d.confidence || 'unreviewed', note: d.translator_note || '', uncertain: (d.uncertain || []).length, missing, review: d.review_note || '' };
-  report.push(`${code.padEnd(8)} ${String(keys.length - missing).padStart(3)}/${keys.length}  ${String(bad).padStart(2)} bad-tags  ${String((d.uncertain || []).length).padStart(3)} uncertain  ${(d.confidence || 'unreviewed').padEnd(11)} ${d.name}`);
+  report.push(`${code.padEnd(8)} ${String(applicable - missing).padStart(3)}/${applicable}  ${String(bad).padStart(2)} bad-tags  ${String((d.uncertain || []).length).padStart(3)} uncertain  ${(d.confidence || 'unreviewed').padEnd(11)} ${d.name}`);
 }
 /* ---- ORPHANS: translated everywhere, absent from en.json, therefore never shipped ---- */
 const orphanList = [...orphans.keys()].sort();
@@ -74,6 +76,7 @@ const site0 = fs.readFileSync(SITE, 'utf8');
 const cut = (s, a, b) => { const i = s.indexOf(a), j = s.indexOf(b); return i < 0 || j < 0 ? s : s.slice(0, i) + s.slice(j); };
 const scan = cut(site0, 'const STR = ', '\n/* i18n:end */');
 const asked = new Set(DYNAMIC);
+for (const k of keys) if (k.startsWith('place.')) asked.add(k);   // looked up through place()
 for (const m of scan.matchAll(/\bt\(\s*['"]([^'"]+)['"]\s*\)/g)) asked.add(m[1]);
 for (const m of scan.matchAll(/data-i18n(?:-html)?=["']([^"']+)["']/g)) asked.add(m[1]);
 for (const m of scan.matchAll(/(?:STR|WL|PACK)\[\s*['"]([^'"]+)['"]\s*\]/g)) asked.add(m[1]);

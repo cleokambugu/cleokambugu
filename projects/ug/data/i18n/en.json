@@ -2434,6 +2434,311 @@
       "text": "Listed",
       "html": false,
       "where": "ui: rendered by the JavaScript"
+    },
+    "place.kampala": {
+      "text": "Kampala",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.entebbe": {
+      "text": "Entebbe",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.mukono": {
+      "text": "Mukono",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.jinja": {
+      "text": "Jinja",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.masaka": {
+      "text": "Masaka",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.mbarara": {
+      "text": "Mbarara",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.bushenyi": {
+      "text": "Bushenyi",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.kabale": {
+      "text": "Kabale",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.bwindi": {
+      "text": "Bwindi",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.fort-portal": {
+      "text": "Fort Portal",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.hoima": {
+      "text": "Hoima",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.masindi": {
+      "text": "Masindi",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.murchison": {
+      "text": "Murchison",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.gulu": {
+      "text": "Gulu",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.lira": {
+      "text": "Lira",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.arua": {
+      "text": "Arua",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.soroti": {
+      "text": "Soroti",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.mbale": {
+      "text": "Mbale",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.tororo": {
+      "text": "Tororo",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.sipi": {
+      "text": "Sipi",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.moroto": {
+      "text": "Moroto",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.kotido": {
+      "text": "Kotido",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.kidepo": {
+      "text": "Kidepo",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.kisoro": {
+      "text": "Kisoro",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.mgahinga": {
+      "text": "Mgahinga",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.kasese": {
+      "text": "Kasese",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.rwenzori": {
+      "text": "Rwenzori",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.queen-elizabeth": {
+      "text": "Queen Elizabeth",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.kibale": {
+      "text": "Kibale",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.semuliki": {
+      "text": "Semuliki",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.lake-mburo": {
+      "text": "Lake Mburo",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.ziwa": {
+      "text": "Ziwa",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.elgon": {
+      "text": "Elgon",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.kololo": {
+      "text": "Kololo",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.nakasero": {
+      "text": "Nakasero",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.ntinda": {
+      "text": "Ntinda",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.bugolobi": {
+      "text": "Bugolobi",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.kira": {
+      "text": "Kira",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.naalya": {
+      "text": "Naalya",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.muyenga": {
+      "text": "Muyenga",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.makindye": {
+      "text": "Makindye",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.kansanga": {
+      "text": "Kansanga",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.najjera": {
+      "text": "Najjera",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.bukoto": {
+      "text": "Bukoto",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.naguru": {
+      "text": "Naguru",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.mengo": {
+      "text": "Mengo",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.rubaga": {
+      "text": "Rubaga",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.kawempe": {
+      "text": "Kawempe",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.nakawa": {
+      "text": "Nakawa",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.makerere": {
+      "text": "Makerere",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.bunyonyi": {
+      "text": "Bunyonyi",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.ssese": {
+      "text": "Ssese",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.buhoma": {
+      "text": "Buhoma",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.paraa": {
+      "text": "Paraa",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.uganda": {
+      "text": "Uganda",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.downtown-kampala": {
+      "text": "Downtown Kampala",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.entebbe-airport": {
+      "text": "Entebbe Airport",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.sipi-falls": {
+      "text": "Sipi Falls",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.murchison-falls": {
+      "text": "Murchison Falls",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.lake-bunyonyi": {
+      "text": "Lake Bunyonyi",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
+    },
+    "place.downtown": {
+      "text": "Downtown",
+      "html": false,
+      "where": "place name: rewritten into the reader's script by place()"
     }
   }
 }

@@ -1,7 +1,7 @@
 {
  "generated": "2026-09-07",
  "source": "data/i18n/*.json via server/scripts/i18n-build.cjs",
- "keys": 486,
+ "keys": 547,
  "languages": {
   "lg": {
    "name": "Luganda",
@@ -333,8 +333,8 @@
    "dir": "ltr",
    "script": "Ethiopic",
    "confidence": "in service",
-   "note": "Follows the register of Android's Amharic localisation: second-person singular imperatives on buttons and slogans (ተሳፈር, ተጋራ, ተከራይ, ላክ, ቀጥል, ዝለል) with Ethiopic punctuation (። ፣ ፤ ፦), except the welcome line, which uses the fixed polite idiom እንኳን በደህና መጡ. Brands and Ugandan words stay in Latin script with an Amharic gloss on first use (ቦዳ boda, ማታቱ matatu, ሮሌክስ rolex, ስቴጅ stage); Kampala, Jinja and Uganda are transliterated. Worth flagging: the masculine-singular address reads gendered to some readers and product feature names (Comfort Map, Pulse, Foresight, Crest, the arbitrage desk) are rendered descriptively; a native reviewer should check the long marketing paragraphs for flow.",
-   "uncertain": 0,
+   "note": "Follows the register of Android's Amharic localisation: second-person singular imperatives on buttons and slogans (ተሳፈር, ተጋራ, ተከራይ, ላክ, ቀጥል, ዝለል) with Ethiopic punctuation (። ፣ ፤ ፦), except the welcome line, which uses the fixed polite idiom እንኳን በደህና መጡ. Brands and Ugandan words stay in Latin script with an Amharic gloss on first use (ቦዳ boda, ማታቱ matatu, ሮሌክስ rolex, ስቴጅ stage); Kampala, Jinja and Uganda are transliterated. Worth flagging: the masculine-singular address reads gendered to some readers and product feature names (Comfort Map, Pulse, Foresight, Crest, the arbitrage desk) are rendered descriptively; a native reviewer should check the long marketing paragraphs for flow. Place names (the place.* keys, added 2026-09-07) are transliterations into this script made by UG, not by a first-language speaker, and are listed under uncertain; the Latin form is kept beside each one in prose so a road sign still matches.",
+   "uncertain": 61,
    "missing": 242,
    "review": "",
    "group": "East Africa · Africa"
@@ -347,8 +347,8 @@
    "dir": "rtl",
    "script": "Arabic",
    "confidence": "in service",
-   "note": "Modern Standard Arabic kept deliberately plain, in the register of Careem, Uber and Yango's Arabic interfaces: second-person masculine singular on buttons (اركب، شارك، استأجر، أرسل), short imperatives, no formal plural. Product names, brands and Ugandan words stay in Latin script with an Arabic gloss on first use (بودا boda, ماتاتو matatu, رولكس rolex, ستيج stage); Kampala and Jinja are transliterated with the Latin name kept in the title line. Known gaps: 'Comfort Map', 'Crest', 'Pulse' and 'Foresight' are product feature names rendered descriptively; a Sudanese or Egyptian reviewer may prefer dialect forms for 'rush hour' and 'top up'.",
-   "uncertain": 0,
+   "note": "Modern Standard Arabic kept deliberately plain, in the register of Careem, Uber and Yango's Arabic interfaces: second-person masculine singular on buttons (اركب، شارك، استأجر، أرسل), short imperatives, no formal plural. Product names, brands and Ugandan words stay in Latin script with an Arabic gloss on first use (بودا boda, ماتاتو matatu, رولكس rolex, ستيج stage); Kampala and Jinja are transliterated with the Latin name kept in the title line. Known gaps: 'Comfort Map', 'Crest', 'Pulse' and 'Foresight' are product feature names rendered descriptively; a Sudanese or Egyptian reviewer may prefer dialect forms for 'rush hour' and 'top up'. Place names (the place.* keys, added 2026-09-07) are transliterations into this script made by UG, not by a first-language speaker, and are listed under uncertain; the Latin form is kept beside each one in prose so a road sign still matches.",
+   "uncertain": 61,
    "missing": 242,
    "review": "",
    "group": "East Africa · Africa"
@@ -512,8 +512,8 @@
    "dir": "ltr",
    "script": "Cyrillic",
    "confidence": "in service",
-   "note": "Тёплое «вы» с маленькой буквы, как в современных приложениях для поездок: короткие фразы, прямые глаголы, без канцелярита. Четыре ключевых глагола переданы краткими рекламными императивами (Поезжайте. Делитесь. Арендуйте. Отправляйте.) и повторяются одинаково везде; угандийские слова (бода, матату, стейдж, ролекс) сохранены в транслитерации с короткой пояснительной глоссой при первом появлении в каждом тексте, причём «матату» удачно передаётся как «маршрутка». Названия внутренних функций (Pulse, Foresight, Crest, Comfort Map) переведены (Пульс, Прогноз, герб, Карта комфорта) — это места, которые в первую очередь стоит проверить команде.",
-   "uncertain": 0,
+   "note": "Тёплое «вы» с маленькой буквы, как в современных приложениях для поездок: короткие фразы, прямые глаголы, без канцелярита. Четыре ключевых глагола переданы краткими рекламными императивами (Поезжайте. Делитесь. Арендуйте. Отправляйте.) и повторяются одинаково везде; угандийские слова (бода, матату, стейдж, ролекс) сохранены в транслитерации с короткой пояснительной глоссой при первом появлении в каждом тексте, причём «матату» удачно передаётся как «маршрутка». Названия внутренних функций (Pulse, Foresight, Crest, Comfort Map) переведены (Пульс, Прогноз, герб, Карта комфорта) — это места, которые в первую очередь стоит проверить команде. Place names (the place.* keys, added 2026-09-07) are transliterations into this script made by UG, not by a first-language speaker, and are listed under uncertain; the Latin form is kept beside each one in prose so a road sign still matches.",
+   "uncertain": 61,
    "missing": 242,
    "review": "",
    "group": "World"
@@ -526,8 +526,8 @@
    "dir": "ltr",
    "script": "Han",
    "confidence": "in service",
-   "note": "Mainland usage with full-width punctuation (。、“”) and Chinese quotation marks; UI copy addresses the reader as 你 rather than 您, matching Didi/Meituan-style app tone. The four verbs are two-character imperatives (打车 拼车 租车 寄送) used identically in nav, doors, tabs and footer. Feature names that are not products (Stage, Atlas, Pulse, Foresight, Crest, Comfort Map) are translated (车站, 图册, 脉动, 预见, 徽标, 舒适地图); Hustle Mode and brands stay Latin.",
-   "uncertain": 0,
+   "note": "Mainland usage with full-width punctuation (。、“”) and Chinese quotation marks; UI copy addresses the reader as 你 rather than 您, matching Didi/Meituan-style app tone. The four verbs are two-character imperatives (打车 拼车 租车 寄送) used identically in nav, doors, tabs and footer. Feature names that are not products (Stage, Atlas, Pulse, Foresight, Crest, Comfort Map) are translated (车站, 图册, 脉动, 预见, 徽标, 舒适地图); Hustle Mode and brands stay Latin. Place names (the place.* keys, added 2026-09-07) are transliterations into this script made by UG, not by a first-language speaker, and are listed under uncertain; the Latin form is kept beside each one in prose so a road sign still matches.",
+   "uncertain": 61,
    "missing": 242,
    "review": "",
    "group": "World"
@@ -540,8 +540,8 @@
    "dir": "ltr",
    "script": "Japanese",
    "confidence": "in service",
-   "note": "Body copy and notices use the polite です・ます register; buttons, labels, nav and status chips use short dictionary or noun forms (席を取る, リンクをコピー, 認証済み) as Japanese apps do. The four verbs are one-word dictionary-form imperatives (乗る。乗り合う。借りる。届ける。) and recur unchanged in the footer. Ugandan terms are katakana with a one-time gloss (ボダ = バイクタクシー, マタツ = 乗り合いミニバス, ステージ = 乗り合いタクシー乗り場, ロレックス = 屋台の軽食); place names are katakana with the Latin name on first use.",
-   "uncertain": 0,
+   "note": "Body copy and notices use the polite です・ます register; buttons, labels, nav and status chips use short dictionary or noun forms (席を取る, リンクをコピー, 認証済み) as Japanese apps do. The four verbs are one-word dictionary-form imperatives (乗る。乗り合う。借りる。届ける。) and recur unchanged in the footer. Ugandan terms are katakana with a one-time gloss (ボダ = バイクタクシー, マタツ = 乗り合いミニバス, ステージ = 乗り合いタクシー乗り場, ロレックス = 屋台の軽食); place names are katakana with the Latin name on first use. Place names (the place.* keys, added 2026-09-07) are transliterations into this script made by UG, not by a first-language speaker, and are listed under uncertain; the Latin form is kept beside each one in prose so a road sign still matches.",
+   "uncertain": 61,
    "missing": 242,
    "review": "",
    "group": "World"
@@ -554,8 +554,8 @@
    "dir": "ltr",
    "script": "Hangul",
    "confidence": "in service",
-   "note": "Body copy and notices use the polite -요/-습니다 register; buttons, labels, nav and status chips use noun forms (좌석 잡기, 링크 복사, 인증됨) in the style of Kakao T and Naver. The four verbs are polite -세요 imperatives (타세요. 합승하세요. 빌리세요. 보내세요.) and recur unchanged in the footer. Ugandan terms are transliterated with a one-time gloss (보다 = 오토바이 택시, 마타투 = 합승 미니버스, 스테이지 = 합승 택시 승차장, 롤렉스 = 길거리 간식); place names are hangul with the Latin name on first use. Non-product feature names (Atlas, Pulse, Foresight, Crest, Comfort Map) are transliterated as 아틀라스, 펄스, 포사이트, 크레스트, 컴포트 맵.",
-   "uncertain": 0,
+   "note": "Body copy and notices use the polite -요/-습니다 register; buttons, labels, nav and status chips use noun forms (좌석 잡기, 링크 복사, 인증됨) in the style of Kakao T and Naver. The four verbs are polite -세요 imperatives (타세요. 합승하세요. 빌리세요. 보내세요.) and recur unchanged in the footer. Ugandan terms are transliterated with a one-time gloss (보다 = 오토바이 택시, 마타투 = 합승 미니버스, 스테이지 = 합승 택시 승차장, 롤렉스 = 길거리 간식); place names are hangul with the Latin name on first use. Non-product feature names (Atlas, Pulse, Foresight, Crest, Comfort Map) are transliterated as 아틀라스, 펄스, 포사이트, 크레스트, 컴포트 맵. Place names (the place.* keys, added 2026-09-07) are transliterations into this script made by UG, not by a first-language speaker, and are listed under uncertain; the Latin form is kept beside each one in prose so a road sign still matches.",
+   "uncertain": 61,
    "missing": 242,
    "review": "",
    "group": "World"
@@ -568,8 +568,8 @@
    "dir": "ltr",
    "script": "Devanagari",
    "confidence": "in service",
-   "note": "Everyday travel-app Hindi with the respectful आप register and common English loans in Devanagari where Ola/Uber/Rapido Hindi use them (ऐप, बुक, राइड, पूल, रेंट, पिक-अप, ड्रॉप-ऑफ़, वॉलेट, इंस्टॉल); nukta forms (फ़, ज़, क़) are written consistently. The four verbs are short आप-imperatives (राइड करें। पूल करें। रेंट करें। भेजें।) and recur unchanged in the footer. Gendered first-person forms are avoided where a button could be pressed by anyone (मैं ड्राइवर हूँ, पहुँचने का वादा). Ugandan terms are transliterated with a one-time gloss (बोडा = मोटरसाइकिल टैक्सी, मटाटू = साझा मिनीबस, स्टेज = टैक्सी अड्डा, रोलेक्स = स्ट्रीट फ़ूड स्नैक).",
-   "uncertain": 0,
+   "note": "Everyday travel-app Hindi with the respectful आप register and common English loans in Devanagari where Ola/Uber/Rapido Hindi use them (ऐप, बुक, राइड, पूल, रेंट, पिक-अप, ड्रॉप-ऑफ़, वॉलेट, इंस्टॉल); nukta forms (फ़, ज़, क़) are written consistently. The four verbs are short आप-imperatives (राइड करें। पूल करें। रेंट करें। भेजें।) and recur unchanged in the footer. Gendered first-person forms are avoided where a button could be pressed by anyone (मैं ड्राइवर हूँ, पहुँचने का वादा). Ugandan terms are transliterated with a one-time gloss (बोडा = मोटरसाइकिल टैक्सी, मटाटू = साझा मिनीबस, स्टेज = टैक्सी अड्डा, रोलेक्स = स्ट्रीट फ़ूड स्नैक). Place names (the place.* keys, added 2026-09-07) are transliterations into this script made by UG, not by a first-language speaker, and are listed under uncertain; the Latin form is kept beside each one in prose so a road sign still matches.",
+   "uncertain": 61,
    "missing": 242,
    "review": "",
    "group": "World"
