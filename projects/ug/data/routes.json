@@ -1,0 +1,813 @@
+{
+  "generated": "2026-09-03",
+  "source": "projects/ug/site/index.html data block",
+  "note": "Every figure is an estimate. prov fields: snippet = read from a search snippet or third-party page, modelled = UG assumption, official = read on the operator page, UG model = UG own formula. See docs/arbitrage-model.md and docs/atlas.md.",
+  "routes": [
+    {
+      "id": "kololo-nakasero",
+      "from": "Kololo",
+      "to": "Nakasero (Downtown)",
+      "km": 2.5,
+      "min": 12,
+      "tolls": 0,
+      "city": true
+    },
+    {
+      "id": "ntinda-cbd",
+      "from": "Ntinda",
+      "to": "Downtown Kampala",
+      "km": 7,
+      "min": 32,
+      "tolls": 0,
+      "city": true
+    },
+    {
+      "id": "bugolobi-makerere",
+      "from": "Bugolobi",
+      "to": "Makerere",
+      "km": 8,
+      "min": 36,
+      "tolls": 0,
+      "city": true
+    },
+    {
+      "id": "kira-nakawa",
+      "from": "Kira",
+      "to": "Nakawa",
+      "km": 11,
+      "min": 45,
+      "tolls": 0,
+      "city": true
+    },
+    {
+      "id": "cbd-entebbe",
+      "from": "Downtown Kampala",
+      "to": "Entebbe Airport",
+      "km": 40,
+      "min": 60,
+      "tolls": 5000,
+      "entebbe": true
+    },
+    {
+      "id": "kampala-jinja",
+      "from": "Kampala",
+      "to": "Jinja (Source of the Nile)",
+      "km": 80,
+      "min": 150,
+      "tolls": 0,
+      "inter": true,
+      "bus": 25000
+    },
+    {
+      "id": "kampala-mbarara",
+      "from": "Kampala",
+      "to": "Mbarara",
+      "km": 270,
+      "min": 300,
+      "tolls": 0,
+      "inter": true,
+      "bus": 40000
+    },
+    {
+      "id": "kampala-fortportal",
+      "from": "Kampala",
+      "to": "Fort Portal",
+      "km": 300,
+      "min": 300,
+      "tolls": 0,
+      "inter": true,
+      "bus": 40000
+    },
+    {
+      "id": "kampala-murchison",
+      "from": "Kampala",
+      "to": "Murchison Falls (Paraa)",
+      "km": 305,
+      "min": 360,
+      "tolls": 0,
+      "inter": true,
+      "bus": 45000
+    },
+    {
+      "id": "kampala-gulu",
+      "from": "Kampala",
+      "to": "Gulu",
+      "km": 335,
+      "min": 360,
+      "tolls": 0,
+      "inter": true,
+      "bus": 45000
+    },
+    {
+      "id": "kampala-sipi",
+      "from": "Kampala",
+      "to": "Sipi Falls",
+      "km": 275,
+      "min": 330,
+      "tolls": 0,
+      "inter": true,
+      "bus": 40000
+    },
+    {
+      "id": "kampala-bunyonyi",
+      "from": "Kampala",
+      "to": "Lake Bunyonyi",
+      "km": 410,
+      "min": 480,
+      "tolls": 0,
+      "inter": true,
+      "bus": 55000
+    },
+    {
+      "id": "kampala-bwindi",
+      "from": "Kampala",
+      "to": "Bwindi (Buhoma)",
+      "km": 470,
+      "min": 540,
+      "tolls": 0,
+      "inter": true,
+      "bus": 60000
+    },
+    {
+      "id": "kampala-kidepo",
+      "from": "Kampala",
+      "to": "Kidepo Valley",
+      "km": 520,
+      "min": 660,
+      "tolls": 0,
+      "inter": true,
+      "bus": 70000
+    },
+    {
+      "id": "kampala-ssese",
+      "from": "Kampala",
+      "to": "Ssese Islands (via Bukakata ferry)",
+      "km": 130,
+      "min": 240,
+      "tolls": 0,
+      "inter": true,
+      "bus": 35000,
+      "ferry": 14000
+    },
+    {
+      "id": "kampala-mukono",
+      "from": "Kampala",
+      "to": "Mukono",
+      "km": 25,
+      "min": 60,
+      "tolls": 0,
+      "inter": true,
+      "bus": 5000
+    },
+    {
+      "id": "kampala-masaka",
+      "from": "Kampala",
+      "to": "Masaka",
+      "km": 130,
+      "min": 150,
+      "tolls": 0,
+      "inter": true,
+      "bus": 20000
+    },
+    {
+      "id": "kampala-mbale",
+      "from": "Kampala",
+      "to": "Mbale",
+      "km": 225,
+      "min": 270,
+      "tolls": 0,
+      "inter": true,
+      "bus": 30000
+    },
+    {
+      "id": "kampala-tororo",
+      "from": "Kampala",
+      "to": "Tororo",
+      "km": 210,
+      "min": 240,
+      "tolls": 0,
+      "inter": true,
+      "bus": 30000
+    },
+    {
+      "id": "kampala-soroti",
+      "from": "Kampala",
+      "to": "Soroti",
+      "km": 300,
+      "min": 330,
+      "tolls": 0,
+      "inter": true,
+      "bus": 40000
+    },
+    {
+      "id": "kampala-hoima",
+      "from": "Kampala",
+      "to": "Hoima",
+      "km": 200,
+      "min": 240,
+      "tolls": 0,
+      "inter": true,
+      "bus": 30000
+    },
+    {
+      "id": "kampala-masindi",
+      "from": "Kampala",
+      "to": "Masindi",
+      "km": 215,
+      "min": 240,
+      "tolls": 0,
+      "inter": true,
+      "bus": 30000
+    },
+    {
+      "id": "kampala-lira",
+      "from": "Kampala",
+      "to": "Lira",
+      "km": 340,
+      "min": 360,
+      "tolls": 0,
+      "inter": true,
+      "bus": 45000
+    },
+    {
+      "id": "kampala-arua",
+      "from": "Kampala",
+      "to": "Arua",
+      "km": 470,
+      "min": 480,
+      "tolls": 0,
+      "inter": true,
+      "bus": 60000
+    },
+    {
+      "id": "kampala-bushenyi",
+      "from": "Kampala",
+      "to": "Bushenyi",
+      "km": 320,
+      "min": 360,
+      "tolls": 0,
+      "inter": true,
+      "bus": 45000
+    },
+    {
+      "id": "kampala-kabale",
+      "from": "Kampala",
+      "to": "Kabale",
+      "km": 410,
+      "min": 480,
+      "tolls": 0,
+      "inter": true,
+      "bus": 55000
+    },
+    {
+      "id": "kampala-moroto",
+      "from": "Kampala",
+      "to": "Moroto (Karamoja)",
+      "km": 470,
+      "min": 540,
+      "tolls": 0,
+      "inter": true,
+      "bus": 60000
+    },
+    {
+      "id": "kampala-kotido",
+      "from": "Kampala",
+      "to": "Kotido",
+      "km": 520,
+      "min": 600,
+      "tolls": 0,
+      "inter": true,
+      "bus": 65000
+    },
+    {
+      "id": "kampala-kisoro",
+      "from": "Kampala",
+      "to": "Kisoro",
+      "km": 450,
+      "min": 540,
+      "tolls": 0,
+      "inter": true,
+      "bus": 60000
+    },
+    {
+      "id": "kampala-kasese",
+      "from": "Kampala",
+      "to": "Kasese",
+      "km": 380,
+      "min": 420,
+      "tolls": 0,
+      "inter": true,
+      "bus": 45000
+    },
+    {
+      "id": "kampala-qenp",
+      "from": "Kampala",
+      "to": "Queen Elizabeth (Mweya)",
+      "km": 420,
+      "min": 480,
+      "tolls": 0,
+      "inter": true,
+      "bus": 50000
+    },
+    {
+      "id": "kampala-mburo",
+      "from": "Kampala",
+      "to": "Lake Mburo",
+      "km": 240,
+      "min": 270,
+      "tolls": 0,
+      "inter": true,
+      "bus": 35000
+    },
+    {
+      "id": "kampala-semuliki",
+      "from": "Kampala",
+      "to": "Semuliki (Bundibugyo)",
+      "km": 370,
+      "min": 420,
+      "tolls": 0,
+      "inter": true,
+      "bus": 45000
+    },
+    {
+      "id": "kampala-ziwa",
+      "from": "Kampala",
+      "to": "Ziwa Rhino Sanctuary",
+      "km": 170,
+      "min": 180,
+      "tolls": 0,
+      "inter": true,
+      "bus": 25000
+    }
+  ],
+  "places": [
+    {
+      "name": "Kampala",
+      "lon": 32.58,
+      "lat": 0.32,
+      "sub": "Capital · UG home base",
+      "route": "ntinda-cbd",
+      "big": true,
+      "off": [
+        -14,
+        -14
+      ]
+    },
+    {
+      "name": "Entebbe",
+      "lon": 32.46,
+      "lat": 0.05,
+      "sub": "Airport · expressway toll UGX 5,000",
+      "route": "cbd-entebbe",
+      "off": [
+        -6,
+        14
+      ]
+    },
+    {
+      "name": "Mukono",
+      "lon": 32.75,
+      "lat": 0.35,
+      "sub": "25 km east · the kwanjula belt",
+      "route": "kampala-mukono",
+      "off": [
+        30,
+        10
+      ]
+    },
+    {
+      "name": "Jinja",
+      "lon": 33.2,
+      "lat": 0.43,
+      "sub": "Source of the Nile · 80 km",
+      "route": "kampala-jinja",
+      "big": true,
+      "off": [
+        16,
+        -14
+      ]
+    },
+    {
+      "name": "Masaka",
+      "lon": 31.73,
+      "lat": -0.33,
+      "sub": "On the road south-west · 130 km",
+      "route": "kampala-masaka"
+    },
+    {
+      "name": "Mbarara",
+      "lon": 30.66,
+      "lat": -0.61,
+      "sub": "South-west hub · 270 km",
+      "route": "kampala-mbarara",
+      "big": true,
+      "off": [
+        10,
+        14
+      ]
+    },
+    {
+      "name": "Bushenyi",
+      "lon": 30.19,
+      "lat": -0.54,
+      "sub": "Tea country · 320 km",
+      "route": "kampala-bushenyi",
+      "off": [
+        -12,
+        -14
+      ]
+    },
+    {
+      "name": "Kabale",
+      "lon": 29.99,
+      "lat": -1.25,
+      "sub": "Lake Bunyonyi gateway · 410 km",
+      "route": "kampala-bunyonyi"
+    },
+    {
+      "name": "Bwindi",
+      "lon": 29.65,
+      "lat": -1.05,
+      "sub": "Mountain gorillas",
+      "route": "kampala-bwindi",
+      "park": true,
+      "off": [
+        26,
+        -12
+      ]
+    },
+    {
+      "name": "Fort Portal",
+      "lon": 30.27,
+      "lat": 0.67,
+      "sub": "Kibale chimps · crater lakes · 300 km",
+      "route": "kampala-fortportal",
+      "big": true
+    },
+    {
+      "name": "Hoima",
+      "lon": 31.35,
+      "lat": 1.43,
+      "sub": "Oil city · 200 km",
+      "route": "kampala-hoima",
+      "off": [
+        -8,
+        12
+      ]
+    },
+    {
+      "name": "Masindi",
+      "lon": 31.72,
+      "lat": 1.67,
+      "sub": "Gateway to Murchison · 215 km",
+      "route": "kampala-masindi",
+      "off": [
+        14,
+        -12
+      ]
+    },
+    {
+      "name": "Murchison",
+      "lon": 31.7,
+      "lat": 2.28,
+      "sub": "Murchison Falls NP",
+      "route": "kampala-murchison",
+      "park": true
+    },
+    {
+      "name": "Gulu",
+      "lon": 32.3,
+      "lat": 2.77,
+      "sub": "Northern hub · 335 km",
+      "route": "kampala-gulu",
+      "big": true
+    },
+    {
+      "name": "Lira",
+      "lon": 32.9,
+      "lat": 2.25,
+      "sub": "Lango · 340 km",
+      "route": "kampala-lira"
+    },
+    {
+      "name": "Arua",
+      "lon": 30.91,
+      "lat": 3.02,
+      "sub": "West Nile · 470 km",
+      "route": "kampala-arua"
+    },
+    {
+      "name": "Soroti",
+      "lon": 33.61,
+      "lat": 1.71,
+      "sub": "Teso · 300 km",
+      "route": "kampala-soroti"
+    },
+    {
+      "name": "Mbale",
+      "lon": 34.18,
+      "lat": 1.08,
+      "sub": "Mt Elgon · 225 km",
+      "route": "kampala-mbale",
+      "big": true,
+      "off": [
+        -10,
+        -6
+      ]
+    },
+    {
+      "name": "Tororo",
+      "lon": 34.18,
+      "lat": 0.69,
+      "sub": "Border town · 210 km",
+      "route": "kampala-tororo",
+      "off": [
+        0,
+        14
+      ]
+    },
+    {
+      "name": "Sipi",
+      "lon": 34.37,
+      "lat": 1.33,
+      "sub": "Sipi Falls · Mt Elgon",
+      "route": "kampala-sipi",
+      "park": true
+    },
+    {
+      "name": "Moroto",
+      "lon": 34.66,
+      "lat": 2.53,
+      "sub": "Karamoja · 470 km",
+      "route": "kampala-moroto"
+    },
+    {
+      "name": "Kotido",
+      "lon": 34.12,
+      "lat": 3.01,
+      "sub": "Karamoja north · 520 km",
+      "route": "kampala-kotido"
+    },
+    {
+      "name": "Kidepo",
+      "lon": 33.85,
+      "lat": 3.85,
+      "sub": "Kidepo Valley NP",
+      "route": "kampala-kidepo",
+      "park": true
+    },
+    {
+      "name": "Kisoro",
+      "lon": 29.69,
+      "lat": -1.28,
+      "sub": "Mgahinga gateway · 450 km",
+      "route": "kampala-kisoro",
+      "off": [
+        -8,
+        14
+      ]
+    },
+    {
+      "name": "Mgahinga",
+      "lon": 29.63,
+      "lat": -1.37,
+      "sub": "Mgahinga Gorilla NP · golden monkeys",
+      "route": "kampala-kisoro",
+      "park": true,
+      "off": [
+        10,
+        26
+      ]
+    },
+    {
+      "name": "Kasese",
+      "lon": 30.08,
+      "lat": 0.18,
+      "sub": "Rwenzori gateway · 380 km",
+      "route": "kampala-kasese",
+      "off": [
+        14,
+        10
+      ]
+    },
+    {
+      "name": "Rwenzori",
+      "lon": 29.92,
+      "lat": 0.36,
+      "sub": "Rwenzori Mountains NP · the Mountains of the Moon",
+      "route": "kampala-kasese",
+      "park": true,
+      "off": [
+        -14,
+        -14
+      ]
+    },
+    {
+      "name": "Queen Elizabeth",
+      "lon": 29.9,
+      "lat": -0.18,
+      "sub": "Queen Elizabeth NP · Kazinga Channel, tree lions",
+      "route": "kampala-qenp",
+      "park": true,
+      "off": [
+        44,
+        14
+      ]
+    },
+    {
+      "name": "Kibale",
+      "lon": 30.4,
+      "lat": 0.5,
+      "sub": "Kibale NP · chimpanzees",
+      "route": "kampala-fortportal",
+      "park": true,
+      "off": [
+        16,
+        10
+      ]
+    },
+    {
+      "name": "Semuliki",
+      "lon": 30.15,
+      "lat": 0.82,
+      "sub": "Semuliki NP · hot springs",
+      "route": "kampala-semuliki",
+      "park": true,
+      "off": [
+        -10,
+        -14
+      ]
+    },
+    {
+      "name": "Lake Mburo",
+      "lon": 30.95,
+      "lat": -0.62,
+      "sub": "Lake Mburo NP · zebra, the closest park to Kampala",
+      "route": "kampala-mburo",
+      "park": true,
+      "off": [
+        16,
+        12
+      ]
+    },
+    {
+      "name": "Ziwa",
+      "lon": 32.1,
+      "lat": 1.42,
+      "sub": "Ziwa Rhino Sanctuary · on the Murchison road",
+      "route": "kampala-ziwa",
+      "park": true,
+      "off": [
+        14,
+        -10
+      ]
+    },
+    {
+      "name": "Elgon",
+      "lon": 34.52,
+      "lat": 1.12,
+      "sub": "Mount Elgon NP · Wagagai",
+      "route": "kampala-mbale",
+      "park": true,
+      "off": [
+        18,
+        14
+      ]
+    }
+  ],
+  "local_apps": {
+    "Kampala": [
+      "Bolt",
+      "SafeBoda",
+      "Faras",
+      "Yango",
+      "Tinka"
+    ],
+    "Entebbe": [
+      "Bolt",
+      "SafeBoda",
+      "Tinka"
+    ],
+    "Mukono": [
+      "Tinka",
+      "SafeBoda"
+    ],
+    "Jinja": [
+      "Tinka",
+      "8 to 8 (delivery)",
+      "SafariShare"
+    ],
+    "Masaka": [
+      "Tinka",
+      "Jumia upcountry"
+    ],
+    "Mbarara": [
+      "Tinka",
+      "Faras",
+      "SafariShare"
+    ],
+    "Bushenyi": [
+      "Tinka"
+    ],
+    "Kabale": [
+      "SafariShare"
+    ],
+    "Fort Portal": [
+      "Tinka"
+    ],
+    "Hoima": [
+      "Tinka",
+      "Abanista"
+    ],
+    "Masindi": [
+      "SafariShare"
+    ],
+    "Gulu": [
+      "Tinka",
+      "SafariShare"
+    ],
+    "Lira": [
+      "Tinka",
+      "Kweli.shop"
+    ],
+    "Arua": [
+      "Tinka",
+      "Abanista"
+    ],
+    "Soroti": [
+      "Tinka"
+    ],
+    "Mbale": [
+      "Tinka",
+      "SafariShare"
+    ],
+    "Tororo": [
+      "SafariShare"
+    ],
+    "Moroto": [
+      "SafariShare"
+    ],
+    "Kotido": [
+      "SafariShare"
+    ],
+    "Kisoro": [
+      "SafariShare"
+    ],
+    "Kasese": [
+      "Tinka",
+      "SafariShare"
+    ]
+  },
+  "airstrips": {
+    "kampala-bwindi": [
+      "Kihihi",
+      1100000,
+      75
+    ],
+    "kampala-bunyonyi": [
+      "Kisoro",
+      1100000,
+      80
+    ],
+    "kampala-murchison": [
+      "Pakuba",
+      1000000,
+      60
+    ],
+    "kampala-kidepo": [
+      "Kidepo (Lomej)",
+      1300000,
+      90
+    ],
+    "kampala-gulu": [
+      "Gulu",
+      900000,
+      55
+    ],
+    "kampala-arua": [
+      "Arua",
+      950000,
+      70
+    ],
+    "kampala-fortportal": [
+      "Kasese",
+      950000,
+      60
+    ],
+    "kampala-mbarara": [
+      "Mbarara",
+      900000,
+      50
+    ],
+    "kampala-moroto": [
+      "Moroto",
+      1200000,
+      80
+    ],
+    "kampala-kotido": [
+      "Kidepo (Lomej)",
+      1300000,
+      90
+    ]
+  }
+}

@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UG Mobility</title>
+<meta name="description" content="UG — Ride. Pool. Rent. One Ugandan app that compares every ride on the market, pools the road trip, rents the car, and books the park. Pay by mobile money through Flutterwave.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20128%20128%22%20width%3D%22128%22%20height%3D%22128%22%20role%3D%22img%22%20aria-label%3D%22UG%20app%20icon%22%3E%20%3Cdefs%3E%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%20%3Cstop%20offset%3D%220%22%20stop-color%3D%22%231B1612%22/%3E%20%3Cstop%20offset%3D%221%22%20stop-color%3D%22%230F0C0A%22/%3E%20%3C/linearGradient%3E%20%3ClinearGradient%20id%3D%22sheen%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%20%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23ffffff%22%20stop-opacity%3D%22.10%22/%3E%20%3Cstop%20offset%3D%22.5%22%20stop-color%3D%22%23ffffff%22%20stop-opacity%3D%220%22/%3E%20%3C/linearGradient%3E%20%3C/defs%3E%20%3Crect%20width%3D%22128%22%20height%3D%22128%22%20rx%3D%2228%22%20fill%3D%22url%28%23g%29%22/%3E%20%3Crect%20width%3D%22128%22%20height%3D%22128%22%20rx%3D%2228%22%20fill%3D%22url%28%23sheen%29%22/%3E%20%3Cg%20transform%3D%22translate%2832%2026%29%20scale%281%29%22%3E%20%3Cpath%20d%3D%22M28.5%2040.5%20Q22%2031%2012.5%2017%22%20fill%3D%22none%22%20stroke%3D%22%23F4ECDD%22%20stroke-width%3D%227.5%22%20stroke-linecap%3D%22round%22/%3E%20%3Cpath%20d%3D%22M32%2038.5%20Q32%2024%2032%208.5%22%20fill%3D%22none%22%20stroke%3D%22%23F2C200%22%20stroke-width%3D%227.5%22%20stroke-linecap%3D%22round%22/%3E%20%3Cpath%20d%3D%22M35.5%2040.5%20Q42%2031%2051.5%2017%22%20fill%3D%22none%22%20stroke%3D%22%23D2202F%22%20stroke-width%3D%227.5%22%20stroke-linecap%3D%22round%22/%3E%20%3Ccircle%20cx%3D%2232%22%20cy%3D%2248%22%20r%3D%227.5%22%20fill%3D%22%23F4ECDD%22/%3E%20%3Ccircle%20cx%3D%2232%22%20cy%3D%2248%22%20r%3D%223%22%20fill%3D%22%23F2C200%22/%3E%20%3C/g%3E%20%3Ctext%20x%3D%2264%22%20y%3D%22106%22%20text-anchor%3D%22middle%22%20font-family%3D%22Unbounded%2C%20%27Albert%20Sans%27%2C%20system-ui%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2222%22%20letter-spacing%3D%221%22%20fill%3D%22%23F4ECDD%22%3EUG%3C/text%3E%20%3C/svg%3E%20">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Albert+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* ---------- Tokens: dark-first ("Kampala night"), light second ("murram noon") ---------- */
+:root{
+  --ground:#0F0C0A; --ground-2:#171310; --surface:#1E1915; --surface-2:#27211B; --line:#3A312A; --line-strong:#5A4D42;
+  --ink:#F4ECDD; --ink-2:#C9BBA8; --ink-3:#8E8071;
+  --yellow:#F2C200; --yellow-ink:#1A1400; --red:#D2202F; --red-soft:#5C1A1F; --crane:#94A8B6; --crane-soft:#1C262C;
+  --good:#3DBB7A; --warn:#F2A900; --bad:#E5484D;
+  --particle:#F4ECDD; --particle-2:#F2C200; --particle-3:#D2202F;
+  --sheen:rgba(255,255,255,.6);
+  --shadow:0 30px 80px rgba(0,0,0,.55);
+  --radius:6px; --radius-lg:14px;
+  --font-display:"Unbounded","Albert Sans",system-ui,sans-serif;
+  --font-body:"Albert Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --ground:#F3EEE3; --ground-2:#EAE3D4; --surface:#FFFDF8; --surface-2:#F7F2E8; --line:#D9CFBE; --line-strong:#B9AB95;
+    --ink:#17120E; --ink-2:#4A4038; --ink-3:#7E7266;
+    --yellow:#E0B300; --yellow-ink:#1A1400; --red:#B8161F; --red-soft:#F3D5D7; --crane:#4E6B7C; --crane-soft:#DCE6EC;
+    --good:#1D8A55; --warn:#B57A00; --bad:#C62828;
+    --particle:#2A211B; --particle-2:#C99F00; --particle-3:#B8161F;
+    --sheen:rgba(255,255,255,.95);
+    --shadow:0 30px 80px rgba(60,40,10,.18);
+    color-scheme:light;
+  }
+}
+:root[data-theme="light"]{
+  --ground:#F3EEE3; --ground-2:#EAE3D4; --surface:#FFFDF8; --surface-2:#F7F2E8; --line:#D9CFBE; --line-strong:#B9AB95;
+  --ink:#17120E; --ink-2:#4A4038; --ink-3:#7E7266;
+  --yellow:#E0B300; --yellow-ink:#1A1400; --red:#B8161F; --red-soft:#F3D5D7; --crane:#4E6B7C; --crane-soft:#DCE6EC;
+  --good:#1D8A55; --warn:#B57A00; --bad:#C62828;
+  --particle:#2A211B; --particle-2:#C99F00; --particle-3:#B8161F;
+  --sheen:rgba(255,255,255,.95);
+  --shadow:0 30px 80px rgba(60,40,10,.18);
+  color-scheme:light;
+}
+
+/* ---------- Base ---------- */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+input,select{font:inherit;color:inherit}
+h1,h2,h3,h4{margin:0;font-family:var(--font-display);line-height:1.05;text-wrap:balance;letter-spacing:-.01em}
+h1{font-weight:900} h2{font-weight:700} h3{font-weight:500}
+p{margin:0}
+.mono{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+.eyebrow{font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.eyebrow b{color:var(--yellow);font-weight:600}
+.wrap{width:min(1240px,calc(100% - 40px));margin:0 auto}
+:focus-visible{outline:2px solid var(--yellow);outline-offset:3px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+section{padding:96px 0;border-top:1px solid var(--line)}
+.sec-head{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:32px;align-items:end;margin-bottom:44px}
+.sec-head h2{font-size:clamp(28px,4vw,46px);margin-top:10px}
+.sec-head p{color:var(--ink-2);max-width:52ch}
+@media (max-width:860px){.sec-head{grid-template-columns:1fr}}
+
+/* ---------- Glass: used sparingly, where a surface floats over the page ---------- */
+.glass{background:color-mix(in srgb,var(--surface) 64%,transparent);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);border:1px solid color-mix(in srgb,var(--ink) 14%,transparent);box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 14%,transparent),var(--shadow)}
+
+/* ---------- Buttons ---------- */
+.btn{display:inline-flex;align-items:center;gap:10px;padding:12px 20px;border-radius:999px;border:1px solid var(--line-strong);background:transparent;font-weight:600;font-size:15px;transition:transform .15s,background .15s,border-color .15s;text-decoration:none;white-space:nowrap}
+.btn:hover{transform:translateY(-1px);border-color:var(--ink-2)}
+.btn.primary{background:var(--yellow);color:var(--yellow-ink);border-color:var(--yellow)}
+.btn.primary:hover{filter:brightness(1.05)}
+.btn.red{background:var(--red);color:#fff;border-color:var(--red)}
+.btn.small{padding:8px 14px;font-size:13px}
+.btn[disabled]{opacity:.5;cursor:not-allowed;transform:none}
+
+/* ---------- Nav ---------- */
+.nav{position:sticky;top:0;z-index:50;-webkit-backdrop-filter:blur(18px) saturate(1.3);backdrop-filter:blur(18px) saturate(1.3);background:color-mix(in srgb,var(--ground) 72%,transparent);border-bottom:1px solid color-mix(in srgb,var(--ink) 12%,transparent);box-shadow:inset 0 -1px 0 color-mix(in srgb,#fff 5%,transparent)}
+.nav .wrap{display:flex;align-items:center;gap:28px;height:66px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--font-display);font-weight:900;font-size:22px;letter-spacing:-.02em}
+.logo .crest{width:34px;height:34px;color:var(--ink);flex:none}
+.logo:hover .crest{animation:crestWave 1.2s cubic-bezier(.16,1,.3,1)}
+@keyframes crestWave{0%{transform:rotate(0)}30%{transform:rotate(-8deg)}60%{transform:rotate(6deg)}100%{transform:rotate(0)}}
+.tagline{font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-left:-14px;display:inline-flex;gap:.6em}
+.tagline span{transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.js .tagline.hidden span{opacity:0;transform:translateY(6px)}
+.tagline span:nth-child(2){transition-delay:.08s}.tagline span:nth-child(3){transition-delay:.16s}
+@media (max-width:600px){.tagline{display:none}}
+.nav-links{display:flex;gap:4px;margin-left:12px}
+.nav-links a{text-decoration:none;padding:8px 12px;border-radius:999px;font-size:14px;color:var(--ink-2)}
+.nav-links a:hover{color:var(--ink);background:var(--surface)}
+.nav .spacer{flex:1}
+.theme-toggle{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 10px;font-family:var(--font-mono);font-size:12px}
+@media (max-width:900px){.nav-links{display:none}}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;overflow:hidden;border-top:0;padding:0}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);min-height:640px;align-items:center;position:relative;z-index:2}
+.hero-copy{padding:72px 0 56px}
+.hero h1{font-size:clamp(52px,8vw,112px);line-height:.92;margin:16px 0 22px;letter-spacing:-.03em}
+.hero h1 .w{display:block;width:max-content;position:relative;color:var(--ink);transition:color 1.1s cubic-bezier(.16,1,.3,1)}
+.hero h1 .w.hl{color:var(--yellow)}
+.hero h1 .w::after{content:attr(data-w);position:absolute;inset:0;color:transparent;background:linear-gradient(105deg,transparent 38%,var(--sheen) 50%,transparent 62%);background-size:260% 100%;background-position:180% 0;-webkit-background-clip:text;background-clip:text;pointer-events:none}
+.lede.tag{font-family:var(--font-display);font-weight:500;color:var(--ink);margin-bottom:14px}
+.hero .lede{font-size:clamp(17px,1.6vw,21px);color:var(--ink-2);max-width:46ch}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.hero-stats{display:flex;gap:28px;margin-top:40px;flex-wrap:wrap}
+.hero-stats div{border-left:2px solid var(--line-strong);padding-left:12px}
+.hero-stats .v{font-family:var(--font-mono);font-size:22px;font-weight:600}
+.hero-stats .k{font-size:12px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.1em}
+.stage{position:relative;height:100%;min-height:560px}
+#scene{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:grab;touch-action:none}
+#scene.dragging{cursor:grabbing}
+.pins{position:absolute;inset:0;pointer-events:none}
+.pin{position:absolute;transform:translate(-50%,-50%);pointer-events:auto;cursor:pointer;display:flex;align-items:center;gap:6px;transition:opacity .2s}
+.pin .dot{width:10px;height:10px;border-radius:50%;background:var(--red);box-shadow:0 0 0 4px color-mix(in srgb,var(--red) 30%,transparent)}
+.pin .lbl{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;background:color-mix(in srgb,var(--ground) 82%,transparent);border:1px solid var(--line);padding:3px 7px;border-radius:4px;white-space:nowrap}
+.pin:hover .dot,.pin.active .dot{background:var(--yellow);box-shadow:0 0 0 6px color-mix(in srgb,var(--yellow) 30%,transparent)}
+.pin.behind{opacity:.25}
+.pin-card{position:absolute;right:0;bottom:12px;width:min(320px,90%);border-radius:var(--radius-lg);padding:14px 16px;pointer-events:auto}
+.pin-card h4{font-family:var(--font-display);font-weight:500;font-size:15px;margin-bottom:4px}
+.pin-card p{font-size:13px;color:var(--ink-2)}
+.pin-card .row{display:flex;justify-content:space-between;gap:12px;margin-top:10px;font-family:var(--font-mono);font-size:12px}
+.hint{position:absolute;left:0;bottom:12px;font-family:var(--font-mono);font-size:11px;color:var(--ink-3);letter-spacing:.08em}
+@media (max-width:960px){.hero .wrap{grid-template-columns:1fr;min-height:0}.stage{min-height:420px}.hero-copy{padding-top:48px}}
+
+/* ---------- Booking strip (Ride. Pool. Rent. plus Explore) ---------- */
+.strip{position:relative;z-index:3;margin-top:-28px}
+.strip-inner{border-radius:var(--radius-lg);overflow:hidden}
+.verbs{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--line)}
+.verbs button{background:none;border:0;padding:16px 10px;font-family:var(--font-display);font-weight:500;font-size:14px;letter-spacing:.02em;border-right:1px solid var(--line);color:var(--ink-3);position:relative}
+.verbs button:last-child{border-right:0}
+.verbs button span{display:block;font-family:var(--font-body);font-size:11px;font-weight:400;margin-top:3px;letter-spacing:0}
+.verbs button.on{color:var(--ink)}
+.verbs button.on::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:3px;background:var(--yellow)}
+.fields{display:grid;grid-template-columns:2fr 2fr 1.2fr 1.2fr auto;gap:0}
+.field{padding:14px 18px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:4px}
+.field label{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-3)}
+.field input,.field select{background:transparent;border:0;padding:0;font-size:15px;font-weight:500;width:100%}
+.field input:focus,.field select:focus{outline:none}
+.fields .go{display:grid;place-items:center;padding:12px 16px}
+@media (max-width:900px){.fields{grid-template-columns:1fr 1fr}.field{border-bottom:1px solid var(--line)}.fields .go{grid-column:1/-1}.verbs button{font-size:12px}}
+
+/* ---------- Ticker ---------- */
+.ticker{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--ground-2);margin-top:56px}
+.ticker-track{display:flex;gap:48px;white-space:nowrap;padding:12px 0;animation:tick 60s linear infinite;font-family:var(--font-mono);font-size:13px;color:var(--ink-2)}
+.ticker-track span b{color:var(--yellow);font-weight:600}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.ticker-track{animation:none}}
+
+/* ---------- Compare (arbitrage desk) ---------- */
+.desk{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:28px;align-items:start}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:20px}
+.panel h3{font-size:15px;margin-bottom:14px}
+.ctl{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.ctl label{font-size:12px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.1em}
+.ctl select,.ctl input[type=number],.ctl input[type=text],.ctl input[type=tel],.ctl input[type=email],.ctl input[type=date],.ctl input[type=time]{background:var(--surface-2);border:1px solid var(--line);border-radius:var(--radius);padding:10px 12px;width:100%}
+.seg{display:flex;background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:3px}
+.seg button{flex:1;border:0;background:transparent;border-radius:999px;padding:8px 6px;font-size:13px;color:var(--ink-2)}
+.seg button.on{background:var(--ink);color:var(--ground)}
+.toggle{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid var(--line);font-size:14px}
+.toggle input{width:18px;height:18px;accent-color:var(--yellow)}
+.route-meta{display:flex;gap:18px;font-family:var(--font-mono);font-size:12px;color:var(--ink-3);margin-top:6px}
+.results{display:flex;flex-direction:column;gap:10px}
+.res-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:6px}
+.res-summary>div{border-radius:var(--radius-lg);padding:14px 16px;box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 10%,transparent);background:color-mix(in srgb,var(--surface) 80%,transparent);border:1px solid color-mix(in srgb,var(--ink) 12%,transparent)}
+.res-summary .k{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-3)}
+.res-summary .v{font-family:var(--font-mono);font-size:22px;font-weight:600;margin-top:4px}
+.res-summary .v.good{color:var(--good)}
+.quote{display:grid;grid-template-columns:44px minmax(0,1.6fr) minmax(0,1fr) minmax(0,1fr) auto;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:14px 16px;transition:transform .2s,border-color .2s}
+.quote:hover{border-color:var(--line-strong)}
+.quote.best{border-color:var(--yellow);background:color-mix(in srgb,var(--yellow) 6%,var(--surface))}
+.quote.ug{border-left:4px solid var(--red)}
+.q-logo{width:44px;height:44px;border-radius:11px;display:grid;place-items:center;color:#fff;border:1px solid color-mix(in srgb,var(--ink) 18%,transparent);box-shadow:inset 0 1px 0 rgba(255,255,255,.18);overflow:hidden}
+.q-logo svg{width:44px;height:44px;display:block}
+.pm{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:6px;overflow:hidden;vertical-align:middle;margin-right:8px;border:1px solid color-mix(in srgb,var(--ink) 18%,transparent)}
+.pm svg{width:22px;height:22px;display:block}
+.partners span{display:inline-flex;align-items:center}
+.q-name{font-weight:600}
+.q-name small{display:block;font-weight:400;font-size:12px;color:var(--ink-3)}
+.q-price{font-family:var(--font-mono);font-size:22px;font-weight:600;font-variant-numeric:tabular-nums}
+.q-price small{font-size:11px;color:var(--ink-3);display:block;font-weight:400}
+.q-eta{font-family:var(--font-mono);font-size:13px;color:var(--ink-2)}
+.q-eta .tag{display:inline-block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:2px 6px;border-radius:4px;background:var(--surface-2);border:1px solid var(--line);margin-top:4px}
+.tag.best{background:var(--yellow);color:var(--yellow-ink);border-color:var(--yellow)}
+.tag.surge{background:var(--red-soft);color:var(--ink);border-color:transparent}
+.tag.est{color:var(--ink-3)}
+.q-act a,.q-act button{white-space:nowrap}
+.disclaimer{font-size:12px;color:var(--ink-3);margin-top:16px;max-width:80ch}
+@media (max-width:960px){.desk{grid-template-columns:1fr}.quote{grid-template-columns:44px 1fr auto;gap:10px}.q-eta{display:none}.q-act{grid-column:1/-1}.res-summary{grid-template-columns:1fr 1fr 1fr}}
+@media (max-width:560px){.res-summary{grid-template-columns:1fr}}
+
+/* ---------- Pool ---------- */
+.pool{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:28px;align-items:start}
+.trip{display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:16px 18px;margin-bottom:10px}
+.trip .when{font-family:var(--font-mono);font-size:12px;color:var(--ink-3);text-align:center;min-width:64px;border-right:1px solid var(--line);padding-right:14px}
+.trip .when b{display:block;font-size:20px;color:var(--ink);font-weight:600}
+.trip .route{font-weight:600;font-size:16px}
+.trip .driver{font-size:13px;color:var(--ink-2);margin-top:3px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.badge{display:inline-flex;align-items:center;gap:4px;font-family:var(--font-mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:4px;border:1px solid var(--line);background:var(--surface-2)}
+.badge.ok{border-color:var(--good);color:var(--good)}
+.badge.crane{border-color:var(--crane);color:var(--crane)}
+.seats{display:flex;gap:4px;margin-top:8px}
+.seat{width:14px;height:18px;border-radius:3px 3px 5px 5px;background:var(--surface-2);border:1px solid var(--line)}
+.seat.taken{background:var(--ink-3);border-color:var(--ink-3)}
+.seat.you{background:var(--yellow);border-color:var(--yellow)}
+.trip .fare{text-align:right}
+.trip .fare .p{font-family:var(--font-mono);font-size:22px;font-weight:600}
+.trip .fare small{display:block;font-size:11px;color:var(--ink-3)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.split .out{grid-column:1/-1;background:var(--surface-2);border-radius:var(--radius);padding:14px;font-family:var(--font-mono);font-size:13px;display:grid;gap:6px}
+.split .out .big{font-size:26px;font-weight:600;color:var(--yellow)}
+.circles{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.circle{border:1px dashed var(--line-strong);border-radius:999px;padding:6px 12px;font-size:13px}
+@media (max-width:960px){.pool{grid-template-columns:1fr}}
+
+/* ---------- Rent (fleet) ---------- */
+.fleet{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;perspective:1200px}
+.car{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:18px;transform-style:preserve-3d;transition:transform .12s ease-out,border-color .2s;position:relative}
+.car:hover{border-color:var(--line-strong)}
+.car .glyph{height:120px;display:grid;place-items:center;transform:translateZ(30px)}
+.car .glyph svg{width:100%;height:100%;max-width:220px}
+.car h3{font-size:17px;margin-top:6px;transform:translateZ(20px)}
+.car .spec{font-size:13px;color:var(--ink-2);margin-top:4px}
+.car .price{display:flex;justify-content:space-between;align-items:baseline;margin-top:14px;padding-top:12px;border-top:1px solid var(--line);transform:translateZ(16px)}
+.car .price .p{font-family:var(--font-mono);font-size:20px;font-weight:600}
+.car .price small{font-size:11px;color:var(--ink-3)}
+.car .per-head{font-family:var(--font-mono);font-size:12px;color:var(--good);margin-top:6px}
+.car .flair{position:absolute;top:14px;right:14px}
+.rent-bar{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:22px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:8px 8px 8px 18px}
+.rent-bar label{font-size:13px;color:var(--ink-2);display:flex;align-items:center;gap:8px}
+.rent-bar input[type=range]{accent-color:var(--yellow)}
+.rent-bar .mono{font-weight:600}
+@media (max-width:960px){.fleet{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.fleet{grid-template-columns:1fr}}
+
+/* ---------- Explore ---------- */
+.explore{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:28px;align-items:start}
+.dests{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.dest{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:16px;cursor:pointer;text-align:left;transition:border-color .2s,transform .15s;position:relative;overflow:hidden}
+.dest::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:var(--stripe,var(--crane))}
+.dest:hover{transform:translateY(-2px);border-color:var(--line-strong)}
+.dest.on{border-color:var(--yellow)}
+.dest h3{font-size:15px;margin-top:6px}
+.dest .region{font-family:var(--font-mono);font-size:11px;color:var(--ink-3);letter-spacing:.08em;text-transform:uppercase}
+.dest p{font-size:13px;color:var(--ink-2);margin-top:6px}
+.dest .meta{display:flex;gap:12px;margin-top:10px;font-family:var(--font-mono);font-size:12px;color:var(--ink-2)}
+.itin .line{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}
+.itin .line .mono{font-weight:500}
+.itin .total{display:flex;justify-content:space-between;align-items:baseline;padding-top:14px;font-family:var(--font-display);font-weight:700;font-size:18px}
+.itin .total .mono{font-family:var(--font-mono);font-size:26px;color:var(--yellow)}
+.itin .per{font-family:var(--font-mono);font-size:12px;color:var(--ink-3);text-align:right}
+.note{font-size:12px;color:var(--ink-3);margin-top:10px}
+@media (max-width:960px){.explore{grid-template-columns:1fr}}
+@media (max-width:560px){.dests{grid-template-columns:1fr}}
+
+/* ---------- Hustle mode ---------- */
+.hustle{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:28px;align-items:start}
+.day{position:relative;padding-left:26px}
+.day::before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:var(--line-strong)}
+.slot{position:relative;display:grid;grid-template-columns:64px 1fr auto;gap:14px;align-items:center;padding:12px 0}
+.slot::before{content:"";position:absolute;left:-23px;top:50%;width:12px;height:12px;border-radius:50%;background:var(--ground);border:2px solid var(--ink-3);transform:translateY(-50%)}
+.slot.ride::before{border-color:var(--yellow);background:var(--yellow)}
+.slot .t{font-family:var(--font-mono);font-size:13px;color:var(--ink-3)}
+.slot .what{font-weight:600}
+.slot .what small{display:block;font-weight:400;font-size:13px;color:var(--ink-2)}
+.slot .cost{font-family:var(--font-mono);font-size:14px;text-align:right}
+.slot .cost small{display:block;font-size:11px;color:var(--ink-3)}
+.wallet{background:linear-gradient(135deg,color-mix(in srgb,var(--surface) 70%,transparent) 0%,color-mix(in srgb,var(--surface-2) 70%,transparent) 100%);border:1px solid color-mix(in srgb,var(--ink) 14%,transparent);box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 12%,transparent);border-radius:var(--radius-lg);padding:20px;margin-bottom:16px;position:relative;overflow:hidden}
+.wallet::after{content:"";position:absolute;right:-40px;top:-60px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--yellow) 22%,transparent),transparent 70%);pointer-events:none}
+.wallet .bal{font-family:var(--font-mono);font-size:32px;font-weight:600;margin-top:4px}
+.wallet .meta{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:12px;color:var(--ink-3);margin-top:12px}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.plan{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:16px;display:flex;flex-direction:column;gap:8px}
+.plan.hot{border-color:var(--yellow)}
+.plan h3{font-size:15px}
+.plan .p{font-family:var(--font-mono);font-size:20px;font-weight:600}
+.plan .p small{font-size:11px;color:var(--ink-3);font-weight:400}
+.plan ul{margin:0;padding-left:16px;font-size:13px;color:var(--ink-2);flex:1}
+.plan li{margin-bottom:4px}
+@media (max-width:960px){.hustle{grid-template-columns:1fr}}
+@media (max-width:640px){.plans{grid-template-columns:1fr}}
+
+/* ---------- Plug-ins ---------- */
+.plugs{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.plug{border-radius:var(--radius-lg);padding:18px;display:flex;flex-direction:column;gap:10px;position:relative;overflow:hidden;background:color-mix(in srgb,var(--surface) 78%,transparent);border:1px solid color-mix(in srgb,var(--ink) 12%,transparent);box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 10%,transparent)}
+.plug::before{content:"";position:absolute;inset:auto -30px -60px auto;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--pc) 28%,transparent),transparent 70%);pointer-events:none}
+.plug .pl-mark{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;color:#fff;background:var(--pc);box-shadow:inset 0 1px 0 rgba(255,255,255,.2)}
+.plug .pl-mark svg{width:40px;height:40px}
+.plug h3{font-size:16px}
+.plug .role{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.plug p{font-size:13px;color:var(--ink-2);flex:1}
+.plug .st{font-family:var(--font-mono);font-size:11px;display:flex;align-items:center;gap:6px;color:var(--ink-3)}
+.plug .st i{width:8px;height:8px;border-radius:50%;background:var(--ink-3)}
+.plug .st.on{color:var(--good)}.plug .st.on i{background:var(--good);box-shadow:0 0 0 4px color-mix(in srgb,var(--good) 25%,transparent)}
+.plug .acts{display:flex;gap:8px;flex-wrap:wrap}
+.hooks{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.hook{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:11px;letter-spacing:.04em;padding:4px 9px;border-radius:999px;text-decoration:none;color:var(--ink-2);border:1px solid color-mix(in srgb,var(--ink) 14%,transparent);background:color-mix(in srgb,var(--surface) 60%,transparent)}
+.hook:hover{border-color:var(--yellow);color:var(--ink)}
+.hook i{width:6px;height:6px;border-radius:50%;background:var(--pc,var(--crane))}
+@media (max-width:1000px){.plugs{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.plugs{grid-template-columns:1fr}}
+
+/* ---------- Partners / trust ---------- */
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.trust div{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:20px}
+.trust h3{font-size:16px;margin-bottom:8px}
+.trust p{font-size:14px;color:var(--ink-2)}
+.partners{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.partners span{border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-family:var(--font-mono);font-size:12px;color:var(--ink-2)}
+@media (max-width:860px){.trust{grid-template-columns:1fr}}
+
+/* ---------- Checkout modal ---------- */
+.modal{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:rgba(0,0,0,.45);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);padding:20px}
+.modal[hidden]{display:none}
+.sheet{width:min(440px,100%);border-radius:var(--radius-lg);overflow:hidden}
+.sheet header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--line)}
+.sheet header b{font-family:var(--font-display);font-weight:500;font-size:14px}
+.sheet .body{padding:18px}
+.sheet .amt{font-family:var(--font-mono);font-size:30px;font-weight:600;margin-bottom:12px}
+.sheet .amt small{font-size:12px;color:var(--ink-3);display:block;font-weight:400}
+.sheet .net{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px}
+.sheet .net button{border:1px solid var(--line);background:var(--surface-2);border-radius:var(--radius);padding:10px;font-size:13px}
+.sheet .net button.on{border-color:var(--yellow);background:color-mix(in srgb,var(--yellow) 12%,var(--surface-2))}
+.sheet .status{font-family:var(--font-mono);font-size:13px;padding:12px;border-radius:var(--radius);background:var(--surface-2);margin-top:12px;min-height:44px}
+.sheet .status.ok{color:var(--good)}
+.sheet footer{padding:12px 18px;border-top:1px solid var(--line);font-size:11px;color:var(--ink-3);display:flex;justify-content:space-between;align-items:center}
+.x{border:0;background:transparent;font-size:20px;line-height:1;color:var(--ink-3)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--ground);padding:10px 16px;border-radius:999px;font-size:14px;z-index:120;box-shadow:var(--shadow)}
+.toast[hidden]{display:none}
+
+/* ---------- Footer ---------- */
+footer.site{border-top:1px solid var(--line);padding:56px 0 40px;background:var(--ground-2)}
+.foot{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:28px}
+.foot h4{font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-bottom:12px}
+.foot a{display:block;text-decoration:none;color:var(--ink-2);font-size:14px;margin-bottom:8px}
+.foot a:hover{color:var(--ink)}
+.foot p{font-size:13px;color:var(--ink-2);max-width:40ch}
+.socials{display:flex;flex-wrap:wrap;gap:10px;margin-top:32px}
+.soc{display:inline-flex;align-items:center;gap:8px;padding:8px 14px 8px 10px;border-radius:999px;text-decoration:none;font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;color:var(--ink-2);background:color-mix(in srgb,var(--surface) 64%,transparent);border:1px solid color-mix(in srgb,var(--ink) 14%,transparent);box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 12%,transparent);transition:transform .25s cubic-bezier(.16,1,.3,1),background .25s,color .25s,border-color .25s}
+.soc svg{width:16px;height:16px;display:block}
+.soc:hover{transform:translateY(-2px);background:var(--yellow);color:var(--yellow-ink);border-color:var(--yellow)}
+.legal{margin-top:36px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-3);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media (max-width:860px){.foot{grid-template-columns:1fr 1fr}}
+
+/* ---------- Intro choreography (Ride. Pool. Rent.) ---------- */
+@media (prefers-reduced-motion:no-preference){
+  .js .hero h1 .w{opacity:0;transform:translateY(34px) scale(1.04);filter:blur(16px);animation:wordIn 1.15s cubic-bezier(.16,1,.3,1) forwards}
+  .js .hero h1 .w:nth-child(1){animation-delay:.2s}
+  .js .hero h1 .w:nth-child(2){animation-delay:.5s}
+  .js .hero h1 .w:nth-child(3){animation-delay:.8s}
+  .js .hero h1 .w::after{animation:sheen 1.5s cubic-bezier(.4,0,.2,1) forwards}
+  .js .hero h1 .w:nth-child(1)::after{animation-delay:1.55s}
+  .js .hero h1 .w:nth-child(2)::after{animation-delay:1.7s}
+  .js .hero h1 .w:nth-child(3)::after{animation-delay:1.85s}
+  .js .fx{opacity:0;transform:translateY(20px);filter:blur(8px);animation:fxIn 1.05s cubic-bezier(.16,1,.3,1) var(--d,0s) forwards}
+  .js .stage{opacity:0;animation:fxIn 1.6s cubic-bezier(.16,1,.3,1) .35s forwards}
+  .js .pin .dot{transform:scale(0);animation:pop .7s cubic-bezier(.34,1.4,.64,1) forwards;animation-delay:calc(1.5s + var(--i,0)*.07s)}
+  .js .pin .lbl{opacity:0;animation:fxIn .8s cubic-bezier(.16,1,.3,1) forwards;animation-delay:calc(1.75s + var(--i,0)*.07s)}
+  .js .pin-card{opacity:0;animation:fxIn .9s cubic-bezier(.16,1,.3,1) 2.5s forwards}
+  .js .hint{opacity:0;animation:fxIn 1s ease 2.8s forwards}
+}
+@keyframes wordIn{to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes fxIn{to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes sheen{to{background-position:-80% 0}}
+@keyframes pop{to{transform:scale(1)}}
+
+/* ---------- Reveal ---------- */
+.rv{opacity:1;transform:none;filter:blur(0);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1),filter 1s cubic-bezier(.16,1,.3,1)}
+.js .rv.pending{opacity:0;transform:translateY(22px);filter:blur(6px)}
+@media (prefers-reduced-motion:reduce){.rv,.js .rv.pending{opacity:1;transform:none;transition:none}.car{transition:none}}
+</style>
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<nav class="nav" aria-label="Primary">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="UG home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true" class="crest">    <path d="M28.5 40.5 Q22 31 12.5 17" fill="none" stroke="currentColor" stroke-width="7.5" stroke-linecap="round"/>  <path d="M32 38.5 Q32 24 32 8.5" fill="none" stroke="#F2C200" stroke-width="7.5" stroke-linecap="round"/>  <path d="M35.5 40.5 Q42 31 51.5 17" fill="none" stroke="#D2202F" stroke-width="7.5" stroke-linecap="round"/>  <circle cx="32" cy="48" r="7.5" fill="currentColor"/>  <circle cx="32" cy="48" r="3" fill="#F2C200"/></svg>UG</a>
+    <span class="tagline" id="tagline" aria-hidden="true"><span>Ride.</span><span>Pool.</span><span>Rent.</span></span>
+    <div class="nav-links">
+      <a href="#compare">Compare</a>
+      <a href="#pool">Pool</a>
+      <a href="#rent">Rent</a>
+      <a href="#explore">Explore</a>
+      <a href="#hustle">Hustle Mode</a>
+      <a href="#partners">Partners</a>
+      <a href="#plugins">Plug-ins</a>
+    </div>
+    <span class="spacer"></span>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle colour theme">night / noon</button>
+    <a class="btn primary small" href="#strip">Book now</a>
+  </div>
+</nav>
+
+<!-- ===================== HERO ===================== -->
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-copy">
+      <div class="eyebrow fx" style="--d:.05s"><b>UG</b> · Kampala → everywhere</div>
+      <h1 id="verbs" aria-label="Ride. Pool. Rent."><span class="w" data-w="Ride.">Ride.</span><span class="w hl" data-w="Pool.">Pool.</span><span class="w" data-w="Rent.">Rent.</span></h1>
+      <p class="lede tag fx" style="--d:1.25s">Look the part. Pay the smart price.</p>
+      <p class="lede fx" style="--d:1.45s">One app that quotes every ride on the Ugandan market side by side, pools the road trip so the Prado costs a quarter, rents the car when you need to arrive, and books the park before the permits go. Paid the way Kampala pays: mobile money.</p>
+      <div class="hero-cta fx" style="--d:1.6s">
+        <a class="btn primary" href="#compare">Compare a ride now</a>
+        <a class="btn" href="#explore">Plan a weekend</a>
+      </div>
+      <div class="hero-stats fx" style="--d:1.75s" aria-label="Key figures">
+        <div><div class="v mono" id="statProviders">10</div><div class="k">quotes per search</div></div>
+        <div><div class="v mono">3 verbs</div><div class="k">ride · pool · rent, plus Explore for the weekend</div></div>
+        <div><div class="v mono">UGX</div><div class="k">MTN MoMo · Airtel Money · cards</div></div>
+      </div>
+    </div>
+    <div class="stage" id="stage">
+      <canvas id="scene" aria-label="Interactive particle map of Uganda. Drag to rotate, hover a place to see it." role="img"></canvas>
+      <div class="pins" id="pins"></div>
+      <div class="pin-card glass" id="pinCard" hidden></div>
+      <div class="hint" id="hint">DRAG TO ROTATE · HOVER A PLACE</div>
+    </div>
+  </div>
+
+  <!-- Booking strip: the three verbs plus Explore, after Sixt's rent/share/ride/plus pattern -->
+  <div class="wrap strip" id="strip">
+    <div class="strip-inner glass fx" style="--d:1.9s">
+      <div class="verbs" role="tablist" aria-label="What do you need">
+        <button role="tab" class="on" data-verb="ride" aria-selected="true">RIDE<span>Compare every app and go</span></button>
+        <button role="tab" data-verb="pool" aria-selected="false">POOL<span>Share the seat, split the fuel</span></button>
+        <button role="tab" data-verb="rent" aria-selected="false">RENT<span>Self-drive or with driver</span></button>
+        <button role="tab" data-verb="explore" aria-selected="false">EXPLORE<span>Parks, permits, weekends</span></button>
+      </div>
+      <form class="fields" id="stripForm">
+        <div class="field"><label for="sFrom">Pick-up</label><select id="sFrom"></select></div>
+        <div class="field"><label for="sTo">Drop-off / destination</label><select id="sTo"></select></div>
+        <div class="field"><label for="sDate">Date</label><input id="sDate" type="date"></div>
+        <div class="field"><label for="sTime">Time</label><input id="sTime" type="time" value="17:30"></div>
+        <div class="go"><button class="btn primary" type="submit" id="stripGo">Show prices</button></div>
+      </form>
+    </div>
+  </div>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track" id="ticker"></div>
+  </div>
+</header>
+
+<!-- ===================== COMPARE ===================== -->
+<section id="compare">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <div class="eyebrow">Compare · <b>the arbitrage desk</b></div>
+        <h2>Every ride in Kampala, quoted on one screen. Then we send you to whoever is cheapest.</h2>
+      </div>
+      <p>Uber, Bolt, SafeBoda, Faras, Yango, Tinka, the street boda, the matatu stage, a special hire, and UG's own pool and rentals. Same trip, same minute, ranked by price. Tap any quote and we hand you to that app with the trip pre-filled. We earn a referral or a UG booking, never a mark-up on the quote.</p>
+    </div>
+    <div class="desk">
+      <div class="panel rv">
+        <h3>Your trip</h3>
+        <div class="ctl"><label for="cFrom">From</label><select id="cFrom"></select></div>
+        <div class="ctl"><label for="cTo">To</label><select id="cTo"></select></div>
+        <div class="route-meta" id="routeMeta"></div>
+        <div class="ctl" style="margin-top:14px"><label>Leaving</label>
+          <div class="seg" id="segTime">
+            <button type="button" data-v="off" class="on">Off-peak</button>
+            <button type="button" data-v="peak">Rush hour</button>
+            <button type="button" data-v="night">Night</button>
+          </div>
+        </div>
+        <div class="ctl"><label>Show</label>
+          <div class="seg" id="segMode">
+            <button type="button" data-v="all" class="on">All</button>
+            <button type="button" data-v="boda">Boda</button>
+            <button type="button" data-v="car">Car</button>
+            <button type="button" data-v="shared">Shared</button>
+          </div>
+        </div>
+        <div class="ctl"><label for="cPax">People travelling</label><input id="cPax" type="number" min="1" max="7" value="1"></div>
+        <label class="toggle"><span>It is raining (Kampala surge)</span><input type="checkbox" id="cRain"></label>
+        <label class="toggle"><span>Split fare across the group</span><input type="checkbox" id="cSplit" checked></label>
+      </div>
+      <div>
+        <div class="res-summary rv" id="resSummary"></div>
+        <div class="results" id="results" aria-live="polite"></div>
+        <p class="disclaimer" id="disclaimer"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== POOL ===================== -->
+<section id="pool">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <div class="eyebrow">Pool · <b>share the seat, split the fuel</b></div>
+        <h2>The Friday Jinja run, the Saturday Mbarara dash, the 4 a.m. airport drop. Someone in your circle is already driving.</h2>
+      </div>
+      <p>Verified phone, verified plates, verified employer or church or alumni circle. Riders and drivers rate each other, chat inside the trip, and the fare is the true cost of the road divided by the seats. No surge, no meter, no awkward cash. UG takes ten percent of the rider share to keep the lights on.</p>
+    </div>
+    <div class="pool">
+      <div class="rv">
+        <div id="trips"></div>
+        <div class="circles" id="circles"></div>
+      </div>
+      <div class="panel rv">
+        <h3>Offer a seat, or see what a seat should cost</h3>
+        <div class="split">
+          <div class="ctl"><label for="pRoute">Route</label><select id="pRoute"></select></div>
+          <div class="ctl"><label for="pSeats">Seats filled (incl. you)</label><input id="pSeats" type="number" min="1" max="7" value="4"></div>
+          <div class="ctl"><label for="pCar">Car</label><select id="pCar"></select></div>
+          <div class="ctl"><label for="pWhen">Departure</label><input id="pWhen" type="time" value="06:00"></div>
+          <div class="out" id="splitOut"></div>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
+          <button class="btn primary" type="button" id="offerBtn">Post this trip</button>
+          <button class="btn" type="button" id="bookSeatBtn">Book a seat with MoMo</button>
+        </div>
+        <p class="note">Posted trips live only in this browser until you sign in. Pool follows the same pattern the Pool app popularised: phone-verified accounts, a trip chat, and two-way ratings, plus circles so you ride with people you already half-know.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== RENT ===================== -->
+<section id="rent">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <div class="eyebrow">Rent · <b>arrive properly</b></div>
+        <h2>Self-drive by the day, chauffeured by the hour, split four ways by default.</h2>
+      </div>
+      <p>The rental desk works the way Sixt's does: pick a class, pick dates, skip the counter. The difference is the price tag is always shown per head as well as per day, because in Kampala the Prado is a group decision.</p>
+    </div>
+    <div class="rent-bar rv">
+      <label>Days <input type="range" id="rDays" min="1" max="14" value="3"> <span class="mono" id="rDaysV">3</span></label>
+      <label>Split between <input type="range" id="rSplit" min="1" max="7" value="4"> <span class="mono" id="rSplitV">4</span></label>
+      <label><input type="checkbox" id="rDriver"> With driver (+UGX 90,000/day)</label>
+      <span class="spacer" style="flex:1"></span>
+      <span class="mono" style="font-size:12px;color:var(--ink-3)">Fuel and park fees billed separately</span>
+    </div>
+    <div class="fleet rv" id="fleet"></div>
+  </div>
+</section>
+
+<!-- ===================== EXPLORE ===================== -->
+<section id="explore">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <div class="eyebrow">Explore · <b>the Pearl, priced honestly</b></div>
+        <h2>Pick a place, tell us who is coming, and get the whole weekend in one number.</h2>
+      </div>
+      <p>Park entry, permits, vehicle fees, and the road there, computed for East African citizens, foreign residents, and visitors separately, because the Uganda Wildlife Authority charges each differently. Choose pooled transport and watch the total fall.</p>
+    </div>
+    <div class="explore">
+      <div class="dests rv" id="dests"></div>
+      <div class="panel rv itin">
+        <h3 id="itinTitle">Your weekend</h3>
+        <div class="split" style="margin-bottom:10px">
+          <div class="ctl"><label for="eCat">Who is travelling</label><select id="eCat">
+            <option value="eac">East African citizens</option>
+            <option value="fr">Foreign residents</option>
+            <option value="fnr">Foreign visitors</option>
+          </select></div>
+          <div class="ctl"><label for="ePax">People</label><input id="ePax" type="number" min="1" max="7" value="4"></div>
+          <div class="ctl"><label for="eDays">Days</label><input id="eDays" type="number" min="1" max="10" value="3"></div>
+          <div class="ctl"><label for="eMode">Getting there</label><select id="eMode">
+            <option value="pool">UG Pool (shared)</option>
+            <option value="rent">UG Rent (self-drive 4×4)</option>
+            <option value="rentdrv">UG Rent with driver</option>
+            <option value="bus">Bus + local boda</option>
+          </select></div>
+        </div>
+        <div id="itinLines"></div>
+        <div class="total"><span>Total</span><span class="mono" id="itinTotal">—</span></div>
+        <div class="per" id="itinPer"></div>
+        <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap">
+          <button class="btn primary" type="button" id="bookTripBtn">Reserve with a deposit</button>
+          <button class="btn" type="button" id="shareTripBtn">Share plan</button>
+        </div>
+        <p class="note" id="itinNote"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== HUSTLE MODE ===================== -->
+<section id="hustle">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <div class="eyebrow">Hustle Mode · <b>for people running three lives</b></div>
+        <h2>School run, board meeting, side-hustle delivery, kwanjula on Saturday. UG chains the day and tells you what it will cost before it starts.</h2>
+      </div>
+      <p>Drop the day's stops in once. UG quotes each leg on the cheapest sensible mode, warns you where a boda is faster than your dignity is worth, and holds the money on your MoMo wallet so nothing bounces at the gate.</p>
+    </div>
+    <div class="hustle">
+      <div class="day rv" id="day"></div>
+      <div class="rv">
+        <div class="wallet">
+          <div class="eyebrow">UG Wallet · funded by Flutterwave</div>
+          <div class="bal">UGX <span id="walletBal">184,500</span></div>
+          <div class="meta"><span>Today's legs: <b id="dayTotal">—</b></span><span>Plan: <b>Boujee</b></span></div>
+          <div style="display:flex;gap:8px;margin-top:14px"><button class="btn small primary" type="button" id="topupBtn">Top up UGX 50,000</button><button class="btn small" type="button" id="payDayBtn">Pre-pay the day</button></div>
+        </div>
+        <div class="plans" id="plans"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PARTNERS ===================== -->
+<section id="partners">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <div class="eyebrow">Partners · <b>we send you demand</b></div>
+        <h2>Competitors are listed on purpose. A rider who trusts the comparison comes back for the pool and the rental.</h2>
+      </div>
+      <p>UG is a marketplace first. Ride-hailing apps get pre-filled bookings with no acquisition cost. Rental yards get vetted weekend renters. Lodges get groups arriving on a known date. Drivers get a route full before they leave.</p>
+    </div>
+    <div class="trust rv">
+      <div><h3>For riders</h3><p>Verified drivers and plates, an in-trip SOS that shares live location with a contact you choose, helmets on every pooled boda, and a receipt for every shilling.</p></div>
+      <div><h3>For drivers and yards</h3><p>Ten percent on pool, a flat listing fee on rentals, weekly payouts to MoMo through Flutterwave, and demand you did not have to advertise for.</p></div>
+      <div><h3>For the apps we compare</h3><p>Deep links that open your app with pick-up and drop-off filled. We never show a price we did not compute openly, and the method is published.</p></div>
+    </div>
+    <div class="partners" id="partnerList"></div>
+  </div>
+</section>
+
+<!-- ===================== PLUG-INS ===================== -->
+<section id="plugins">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <div class="eyebrow">Plug-ins · <b>UG talks to the tools you already use</b></div>
+        <h2>Maps from Felt. Climate workflows from Infrared City. Entertainment from Tazama. Hands-free control from Cephable.</h2>
+      </div>
+      <p>Each plug-in is an adapter with its own endpoint and key, stored on this device until you sign in. Connect one and the matching buttons light up across Pool, Explore and Hustle Mode. Nothing leaves UG without a plug-in you switched on.</p>
+    </div>
+    <div class="plugs rv" id="plugs"></div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="site">
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a class="logo" href="#top" aria-label="UG home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true" class="crest">    <path d="M28.5 40.5 Q22 31 12.5 17" fill="none" stroke="currentColor" stroke-width="7.5" stroke-linecap="round"/>  <path d="M32 38.5 Q32 24 32 8.5" fill="none" stroke="#F2C200" stroke-width="7.5" stroke-linecap="round"/>  <path d="M35.5 40.5 Q42 31 51.5 17" fill="none" stroke="#D2202F" stroke-width="7.5" stroke-linecap="round"/>  <circle cx="32" cy="48" r="7.5" fill="currentColor"/>  <circle cx="32" cy="48" r="3" fill="#F2C200"/></svg>UG</a>
+        <p style="margin-top:12px">Ride. Pool. Rent. A Ugandan mobility marketplace for people who have places to be and a budget to respect.</p>
+      </div>
+      <div><h4>Product</h4><a href="#compare">Compare</a><a href="#pool">Pool</a><a href="#rent">Rent</a><a href="#explore">Explore</a><a href="#hustle">Hustle Mode</a></div>
+      <div><h4>Company</h4><a href="#partners">Partners</a><a href="#" data-soon>Drive with UG</a><a href="#" data-soon>List a car</a><a href="#" data-soon>Careers</a></div>
+      <div><h4>Trust</h4><a href="#" data-soon>Pricing method</a><a href="#" data-soon>Safety</a><a href="#" data-soon>Privacy</a><a href="#" data-soon>Terms</a></div>
+    </div>
+    <div class="socials" aria-label="UG on social media">
+      <a class="soc" href="https://instagram.com/ridepoolrent" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg>@ridepoolrent</a>
+      <a class="soc" href="https://tiktok.com/@ridepoolrent" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 3h3c.3 2.4 1.8 3.9 4 4.2v3c-1.5 0-2.9-.5-4-1.3V15a5.5 5.5 0 1 1-5.5-5.5c.3 0 .7 0 1 .1v3.1a2.5 2.5 0 1 0 1.5 2.3z"/></svg>TikTok</a>
+      <a class="soc" href="https://x.com/ridepoolrent" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4l16 16M20 4L4 20"/></svg>X</a>
+      <a class="soc" href="https://wa.me/256700000000" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.3-4A8 8 0 1 1 8 19z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 1a4 4 0 0 1-2-2l1-1-1-2z" fill="currentColor" stroke="none"/></svg>WhatsApp</a>
+      <a class="soc" href="https://linkedin.com/company/ridepoolrent" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 9h3v10H5zM6.5 4a1.7 1.7 0 1 1 0 3.4 1.7 1.7 0 0 1 0-3.4zM10 9h3v1.5c.5-.9 1.7-1.7 3.3-1.7 3.2 0 3.7 2 3.7 4.6V19h-3v-4.8c0-1.2 0-2.6-1.6-2.6s-1.9 1.2-1.9 2.5V19h-3z"/></svg>LinkedIn</a>
+      <a class="soc" href="https://youtube.com/@ridepoolrent" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="6" width="18" height="12" rx="4"/><path d="M10 9.5v5l4.5-2.5z" fill="currentColor" stroke="none"/></svg>YouTube</a>
+    </div>
+    <div class="legal">
+      <span>© 2026 UG. Prototype. Quotes are indicative estimates from a published model, not live fares.</span>
+      <span class="mono">Kampala · Entebbe · Jinja · Mbarara · Gulu</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== CHECKOUT ===================== -->
+<div class="modal" id="modal" hidden role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="sheet glass">
+    <header><b id="modalTitle">Pay with mobile money</b><button class="x" type="button" id="modalClose" aria-label="Close">×</button></header>
+    <div class="body">
+      <div class="amt">UGX <span id="payAmt">0</span><small id="payFor">—</small></div>
+      <div class="net" id="netPick">
+        <button type="button" data-net="MTN" class="on">MTN MoMo</button>
+        <button type="button" data-net="AIRTEL">Airtel Money</button>
+        <button type="button" data-net="CARD">Card</button>
+      </div>
+      <div class="ctl"><label for="payPhone">Phone number</label><input id="payPhone" type="tel" placeholder="07XX XXX XXX" value="0772 000 000"></div>
+      <div class="ctl"><label for="payEmail">Email for the receipt</label><input id="payEmail" type="email" placeholder="you@example.com" value="rider@example.com"></div>
+      <button class="btn primary" type="button" id="payBtn" style="width:100%;justify-content:center">Pay now</button>
+      <div class="status" id="payStatus">Flutterwave will send a prompt to your phone. Approve it with your PIN.</div>
+    </div>
+    <footer><span>Secured by Flutterwave · Bank of Uganda licensed PSO</span><span class="mono" id="payRef"></span></footer>
+  </div>
+</div>
+<div class="modal" id="plugModal" hidden role="dialog" aria-modal="true" aria-labelledby="plugTitle">
+  <div class="sheet glass">
+    <header><b id="plugTitle">Connect</b><button class="x" type="button" id="plugClose" aria-label="Close">×</button></header>
+    <div class="body">
+      <div class="ctl"><label for="plugEndpoint">Endpoint</label><input id="plugEndpoint" type="text" placeholder="https://"></div>
+      <div class="ctl"><label for="plugKey">API key or token (kept on this device)</label><input id="plugKey" type="text" placeholder="optional"></div>
+      <div style="display:flex;gap:8px"><button class="btn primary" type="button" id="plugSave" style="flex:1;justify-content:center">Save and connect</button><button class="btn" type="button" id="plugForget">Forget</button></div>
+      <div class="status" id="plugStatus"></div>
+    </div>
+    <footer><span id="plugFoot"></span><span class="mono">stored locally</span></footer>
+  </div>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<!-- Three.js UMD build (r128 is the last UMD release on cdnjs) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* =====================================================================
+   UG — data model. Every figure below is an ESTIMATE from a published,
+   editable model. Provenance tags: 'snippet' (from a search snippet or
+   secondary page, not verified first-hand), 'modelled' (our assumption),
+   'official' (read on the operator's own page). See docs/arbitrage-model.md.
+   ===================================================================== */
+const UGX_PER_USD = 3700;               // modelled working rate, 2026
+const FUEL_UGX_PER_L = 6300;            // snippet: ~6,000–6,600 UGX/L in 2026
+const FLW_PUBLIC_KEY = 'FLWPUBK_TEST-replace-me-X';   // placeholder; set a real key in production
+
+const ROUTES = [
+  {id:'kololo-nakasero', from:'Kololo', to:'Nakasero (CBD)', km:2.5, min:12, tolls:0, city:true},
+  {id:'ntinda-cbd', from:'Ntinda', to:'Kampala CBD', km:7, min:32, tolls:0, city:true},
+  {id:'bugolobi-makerere', from:'Bugolobi', to:'Makerere', km:8, min:36, tolls:0, city:true},
+  {id:'kira-nakawa', from:'Kira', to:'Nakawa', km:11, min:45, tolls:0, city:true},
+  {id:'cbd-entebbe', from:'Kampala CBD', to:'Entebbe Airport', km:40, min:60, tolls:5000, entebbe:true},
+  {id:'kampala-jinja', from:'Kampala', to:'Jinja (Source of the Nile)', km:80, min:150, tolls:0, inter:true, bus:25000},
+  {id:'kampala-mbarara', from:'Kampala', to:'Mbarara', km:270, min:300, tolls:0, inter:true, bus:40000},
+  {id:'kampala-fortportal', from:'Kampala', to:'Fort Portal', km:300, min:300, tolls:0, inter:true, bus:40000},
+  {id:'kampala-murchison', from:'Kampala', to:'Murchison Falls (Paraa)', km:305, min:360, tolls:0, inter:true, bus:45000},
+  {id:'kampala-gulu', from:'Kampala', to:'Gulu', km:335, min:360, tolls:0, inter:true, bus:45000},
+  {id:'kampala-sipi', from:'Kampala', to:'Sipi Falls', km:275, min:330, tolls:0, inter:true, bus:40000},
+  {id:'kampala-bunyonyi', from:'Kampala', to:'Lake Bunyonyi', km:410, min:480, tolls:0, inter:true, bus:55000},
+  {id:'kampala-bwindi', from:'Kampala', to:'Bwindi (Buhoma)', km:470, min:540, tolls:0, inter:true, bus:60000},
+  {id:'kampala-kidepo', from:'Kampala', to:'Kidepo Valley', km:520, min:660, tolls:0, inter:true, bus:70000},
+  {id:'kampala-ssese', from:'Kampala', to:'Ssese Islands (via Bukakata ferry)', km:130, min:240, tolls:0, inter:true, bus:35000, ferry:14000},
+];
+
+/* Provider fare models. base/perKm/perMin/min in UGX.  kind: boda|car|shared|rent */
+const PROVIDERS = [
+  {id:'uber', name:'Uber', sub:'UberX', kind:'car', base:1250, perKm:850, perMin:130, min:6000, colour:'#000000', link:'https://m.uber.com/ul/?action=setPickup', prov:'snippet (Uber UG blog, Jan 2020 rates)', surge:1.35},
+  {id:'uberboda', name:'Uber', sub:'UberBoda', kind:'boda', base:500, perKm:450, perMin:70, min:1500, colour:'#000000', link:'https://m.uber.com/ul/?action=setPickup', prov:'snippet (Uber UG blog)', surge:1.25},
+  {id:'bolt', name:'Bolt', sub:'Bolt car', kind:'car', base:1000, perKm:800, perMin:120, min:5000, colour:'#34D186', link:'https://bolt.eu/en/cities/kampala/', prov:'modelled (no public tariff found)', surge:1.4},
+  {id:'boltboda', name:'Bolt', sub:'Bolt Boda', kind:'boda', base:500, perKm:400, perMin:60, min:1500, colour:'#34D186', link:'https://bolt.eu/en/cities/kampala/', prov:'modelled', surge:1.3},
+  {id:'safeboda', name:'SafeBoda', sub:'Helmet included', kind:'boda', base:500, perKm:450, perMin:60, min:1500, colour:'#F7941D', link:'https://safeboda.com/', prov:'base fare from snippet; per-km modelled', surge:1.2},
+  {id:'faras', name:'Faras', sub:'Boda · 10% commission', kind:'boda', base:500, perKm:400, perMin:55, min:1500, colour:'#1F6FEB', link:'https://faras.com/', prov:'commission from snippet; rates modelled', surge:1.2},
+  {id:'farascar', name:'Faras', sub:'Faras car', kind:'car', base:1000, perKm:750, perMin:110, min:5000, colour:'#1F6FEB', link:'https://faras.com/', prov:'modelled', surge:1.3},
+  {id:'yango', name:'Yango', sub:'Car', kind:'car', base:1200, perKm:800, perMin:120, min:5500, colour:'#FF3B30', link:'https://yango.com/', prov:'modelled', surge:1.4},
+  {id:'tinka', name:'Tinka', sub:'Rounds down to UGX 500', kind:'car', base:1000, perKm:700, perMin:100, min:4500, colour:'#7C3AED', link:'https://tinkataxi.com/', prov:'claims from snippet; rates modelled', surge:1.25, round500:true},
+  {id:'streetboda', name:'Street boda', sub:'Negotiated at the stage', kind:'boda', base:1000, perKm:700, perMin:0, min:2000, colour:'#6B7280', link:null, prov:'snippet range UGX 3,000–15,000 in town', surge:1.3, haggle:true},
+  {id:'special', name:'Special hire', sub:'Negotiated taxi', kind:'car', base:3000, perKm:1200, perMin:0, min:10000, colour:'#6B7280', link:null, prov:'modelled', surge:1.2, haggle:true},
+  {id:'matatu', name:'Matatu', sub:'Stage taxi, 14 seats', kind:'shared', base:1000, perKm:150, perMin:0, min:1000, colour:'#2563EB', link:null, prov:'snippet (Kampala–Jinja UGX 20–30k)', surge:1.0, stage:true},
+  {id:'bus', name:'Intercity bus', sub:'Link, YY, Global and others', kind:'shared', base:0, perKm:0, perMin:0, min:0, colour:'#0EA5E9', link:'https://safarishare.com/', prov:'snippet (2026 fare ranges)', surge:1.0, busOnly:true},
+  {id:'ugpool', name:'UG Pool', sub:'Shared seat, true cost split', kind:'shared', colour:'#D2202F', link:'#pool', prov:'UG model', ug:true, pool:true},
+  {id:'ugrent', name:'UG Rent', sub:'RAV4 self-drive, per day', kind:'rent', colour:'#F2C200', link:'#rent', prov:'snippet (~US$45/day RAV4 self-drive)', ug:true, rent:true},
+];
+
+/* Fleet: per-day UGX (self-drive). Sources: snippet ranges from Kampala rental sites, USD converted at working rate. */
+const FLEET = [
+  {id:'premio', name:'Toyota Premio', cls:'Sedan · 5 seats · city', day:120000, kmPerL:13, glyph:'sedan'},
+  {id:'noah', name:'Toyota Noah', cls:'Van · 7 seats · the whole circle', day:150000, kmPerL:10, glyph:'van'},
+  {id:'rav4', name:'Toyota RAV4', cls:'4×4 · 5 seats · park roads', day:165000, kmPerL:10, glyph:'suv', hot:true},
+  {id:'prado', name:'Land Cruiser Prado', cls:'4×4 · 7 seats · arrive properly', day:300000, kmPerL:8, glyph:'suv'},
+  {id:'v8', name:'Land Cruiser V8', cls:'4×4 · 7 seats · kwanjula grade', day:400000, kmPerL:6, glyph:'suv'},
+  {id:'camper', name:'4×4 with rooftop tent', cls:'Camping kit · 4 sleepers', day:260000, kmPerL:8, glyph:'camper'},
+];
+
+/* Destinations. Fees in UGX for EAC citizens, USD for foreign residents (fr) and visitors (fnr).
+   UWA figures tagged 'snippet' were read from third-party tariff summaries valid to 30 June 2026 and may
+   have been revised in the July 2026 tariff. Re-check against uwa.go.ug before charging anyone. */
+const DESTS = [
+  {id:'kampala-jinja', name:'Jinja · Source of the Nile', region:'Eastern', stripe:'#0EA5E9', blurb:'Rafting, the Nile at sunset, and back for Monday.', fees:{eac:0,fr:0,fnr:0}, act:{name:'Grade-5 rafting (half day)', eac:250000, fr:110, fnr:140, prov:'modelled'}, lodge:{eac:120000, fr:60, fnr:90}, season:'Year-round'},
+  {id:'kampala-murchison', name:'Murchison Falls', region:'North-west', stripe:'#F2A900', blurb:'The Nile squeezed through a seven-metre gap. Boat to the base.', fees:{eac:25000,fr:35,fnr:45, prov:'snippet (UWA to Jun 2026)'}, act:{name:'Launch cruise to the falls', eac:30000, fr:25, fnr:30, prov:'modelled'}, vehicle:40000, lodge:{eac:180000, fr:120, fnr:180}, season:'Dec–Feb, Jun–Sep'},
+  {id:'kampala-bwindi', name:'Bwindi · Mountain gorillas', region:'South-west', stripe:'#3DBB7A', blurb:'An hour with a gorilla family. Permits sell out months ahead.', fees:{eac:0,fr:0,fnr:0}, act:{name:'Gorilla permit (1 day)', eac:300000, fr:700, fnr:800, prov:'snippet (UWA)'}, lodge:{eac:220000, fr:150, fnr:250}, season:'Jun–Sep, Dec–Feb (Apr/May/Nov permits discounted)'},
+  {id:'kampala-fortportal', name:'Kibale · Chimpanzees & crater lakes', region:'Western', stripe:'#8B5CF6', blurb:'Chimp tracking in the morning, crater-lake swim by lunch.', fees:{eac:0,fr:0,fnr:0}, act:{name:'Chimpanzee tracking permit', eac:150000, fr:200, fnr:250, prov:'FNR from snippet; others modelled'}, lodge:{eac:150000, fr:90, fnr:140}, season:'Year-round'},
+  {id:'kampala-kidepo', name:'Kidepo Valley', region:'Far north-east', stripe:'#D2202F', blurb:'The wildest park in the country and the emptiest game drives.', fees:{eac:20000,fr:35,fnr:45, prov:'snippet'}, act:{name:'Guided game drive', eac:20000, fr:20, fnr:30, prov:'modelled'}, vehicle:40000, lodge:{eac:160000, fr:110, fnr:170}, season:'Sep–Mar'},
+  {id:'kampala-sipi', name:'Sipi Falls', region:'Eastern · Mt Elgon', stripe:'#14B8A6', blurb:'Three waterfalls, coffee on the slopes, abseil if you dare.', fees:{eac:0,fr:0,fnr:0}, act:{name:'Guided three-falls hike', eac:30000, fr:15, fnr:20, prov:'modelled'}, lodge:{eac:100000, fr:55, fnr:80}, season:'Year-round'},
+  {id:'kampala-bunyonyi', name:'Lake Bunyonyi', region:'South-west', stripe:'#6366F1', blurb:'Twenty-nine islands, dugout canoes, no crocodiles, no hippos.', fees:{eac:0,fr:0,fnr:0}, act:{name:'Canoe and island walk', eac:25000, fr:10, fnr:15, prov:'modelled'}, lodge:{eac:130000, fr:70, fnr:110}, season:'Year-round'},
+  {id:'kampala-ssese', name:'Ssese Islands', region:'Lake Victoria', stripe:'#F59E0B', blurb:'Ferry, beach, fish. The Kampala weekend that feels furthest away.', fees:{eac:0,fr:0,fnr:0}, act:{name:'Ferry (MV Kalangala, return)', eac:28000, fr:8, fnr:8, prov:'modelled'}, lodge:{eac:110000, fr:60, fnr:90}, season:'Dry months'},
+];
+
+const PLANS = [
+  {name:'Hustler', price:0, per:'free', items:['Compare every ride, unlimited','Pool as a rider','Weekend planner','Pay-as-you-go with MoMo']},
+  {name:'Boujee', price:29000, per:'per month', hot:true, items:['Everything in Hustler','Priority seats on popular pools','8% off UG Rent, per-head billing','Day-chain planner with pre-pay','Airport lounge-style waiting room at Entebbe pick-up']},
+  {name:'Executive', price:79000, per:'per month', items:['Everything in Boujee','Chauffeur-hour credits (4/mo)','Park permit concierge','Family and PA sub-accounts','Monthly statement for the accountant']},
+];
+
+const DAY = [
+  {t:'06:40', what:'School run · Kololo → Ntinda', sub:'UG Pool with the Mugisha family (3 kids, 2 parents)', km:6, mode:'pool', ride:true},
+  {t:'08:15', what:'Office · Ntinda → Nakasero', sub:'Cheapest boda quoted at 08:10; helmet enforced', km:7, mode:'boda', ride:true},
+  {t:'12:30', what:'Client lunch · Nakasero → Kololo', sub:'Car, because it is a client lunch', km:3, mode:'car', ride:true},
+  {t:'15:00', what:'Side hustle · deliver 12 cakes to Bugolobi', sub:'Boda with box; two drop-offs chained', km:9, mode:'boda', ride:true},
+  {t:'18:10', what:'Home · Bugolobi → Ntinda', sub:'Rush hour: UG Pool seat instead of surge', km:8, mode:'pool', ride:true},
+  {t:'Sat', what:'Kwanjula in Mukono', sub:'Land Cruiser V8, split five ways, driver included', km:0, mode:'rent', ride:false, flat:98000},
+];
+
+
+/* Stylised partner marks: each provider's name and colour, drawn in one consistent hand. These are
+   UG's own renderings for the prototype, not the operators' official logo files; production should
+   use official assets under each partner's brand guidelines. */
+const SVG = (inner) => `<svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">${inner}</svg>`;
+const T = (txt, size=13, y=27, w=600, extra='') => `<text x="22" y="${y}" text-anchor="middle" font-family="'Albert Sans',system-ui,sans-serif" font-weight="${w}" font-size="${size}" fill="#fff" ${extra}>${txt}</text>`;
+const CREST = (c='#F4ECDD') => `<g transform="translate(8 6) scale(.45)"><path d="M28.5 40.5 Q22 31 12.5 17" fill="none" stroke="${c}" stroke-width="7.5" stroke-linecap="round"/><path d="M32 38.5 Q32 24 32 8.5" fill="none" stroke="#F2C200" stroke-width="7.5" stroke-linecap="round"/><path d="M35.5 40.5 Q42 31 51.5 17" fill="none" stroke="#D2202F" stroke-width="7.5" stroke-linecap="round"/><circle cx="32" cy="48" r="7.5" fill="${c}"/><circle cx="32" cy="48" r="3" fill="#F2C200"/></g>`;
+const LOGOS = {
+  uber: SVG(T('Uber',14,27,600,'letter-spacing="-.4"')),
+  uberboda: SVG(T('Uber',12,21,600,'letter-spacing="-.3"')+T('BODA',7,33,500,'letter-spacing="1.4" opacity=".8"')),
+  bolt: SVG(T('bolt',15,28,800,'letter-spacing="-.6"')),
+  boltboda: SVG(T('bolt',13,22,800,'letter-spacing="-.5"')+T('BODA',7,33,500,'letter-spacing="1.4" opacity=".85"')),
+  safeboda: SVG(`<path d="M11 25a11 11 0 0 1 22 0v2H11z" fill="#fff"/><path d="M13 29h18a2 2 0 0 1 0 4H13a2 2 0 0 1 0-4z" fill="#fff" opacity=".75"/><circle cx="22" cy="21" r="2.2" fill="#F7941D"/>`),
+  faras: SVG(`<path d="M15 33V22c0-5 3-8 7-9l3-5 3 5c4 1 6 4 6 9v11h-4V25l-3 2v6z" fill="#fff"/><circle cx="26.5" cy="19" r="1.4" fill="#1F6FEB"/>`),
+  farascar: SVG(`<path d="M15 33V22c0-5 3-8 7-9l3-5 3 5c4 1 6 4 6 9v11h-4V25l-3 2v6z" fill="#fff"/><circle cx="26.5" cy="19" r="1.4" fill="#1F6FEB"/>`),
+  yango: SVG(T('Yango',12,27,800,'letter-spacing="-.3"')),
+  tinka: SVG(T('tinka',13,27,700,'letter-spacing="-.2"')+`<circle cx="33.5" cy="17" r="1.8" fill="#F2C200"/>`),
+  streetboda: SVG(`<circle cx="13" cy="29" r="5" fill="none" stroke="#fff" stroke-width="2.2"/><circle cx="31" cy="29" r="5" fill="none" stroke="#fff" stroke-width="2.2"/><path d="M13 29l6-10h8l4 10M19 19l-3-4h6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>`),
+  special: SVG(`<path d="M9 28l3-8h20l3 8v6H9z" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/><circle cx="15" cy="32" r="2.6" fill="#fff"/><circle cx="29" cy="32" r="2.6" fill="#fff"/>`),
+  matatu: SVG(`<rect x="8" y="14" width="28" height="16" rx="3" fill="none" stroke="#fff" stroke-width="2.2"/><path d="M8 22h28M16 14v8M24 14v8" stroke="#fff" stroke-width="2"/><circle cx="14" cy="33" r="2.6" fill="#fff"/><circle cx="30" cy="33" r="2.6" fill="#fff"/>`),
+  bus: SVG(`<rect x="10" y="9" width="24" height="24" rx="4" fill="none" stroke="#fff" stroke-width="2.2"/><path d="M10 19h24M14 27h4M26 27h4" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><circle cx="15" cy="35" r="2.4" fill="#fff"/><circle cx="29" cy="35" r="2.4" fill="#fff"/>`),
+  ugpool: SVG(CREST()),
+  ugrent: SVG(CREST('#1A1400')),
+  generic: (t, ink='#fff') => SVG(`<text x="22" y="27" text-anchor="middle" font-family="'Albert Sans',system-ui,sans-serif" font-weight="700" font-size="${t.length>3?9:13}" fill="${ink}">${t}</text>`),
+};
+
+/* Uganda outline for the particle map: approximate (lon, lat) pairs, clockwise from the north-west. */
+/* Uganda's border and the lakes, from Natural Earth 10m (nvkelso/natural-earth-vector on GitHub),
+   simplified with Douglas-Peucker. See data/uganda-geometry.json. */
+const UG_LAND = [[30.472,-1.067],[30.446,-1.059],[30.403,-1.07],[30.337,-1.066],[30.317,-1.137],[30.288,-1.155],[30.27,-1.2],[30.212,-1.26],[30.166,-1.277],[30.147,-1.345],[30.061,-1.39],[30.039,-1.425],[29.938,-1.473],[29.898,-1.47],[29.881,-1.454],[29.864,-1.37],[29.825,-1.324],[29.798,-1.331],[29.775,-1.366],[29.735,-1.348],[29.639,-1.389],[29.578,-1.388],[29.587,-1.311],[29.572,-1.279],[29.581,-1.235],[29.557,-1.182],[29.57,-1.078],[29.548,-1.003],[29.56,-0.972],[29.555,-0.929],[29.567,-0.902],[29.597,-0.892],[29.611,-0.864],[29.603,-0.723],[29.616,-0.644],[29.631,-0.622],[29.619,-0.599],[29.651,-0.58],[29.653,-0.566],[29.65,-0.504],[29.629,-0.442],[29.694,-0.063],[29.714,-0.007],[29.703,0.073],[29.761,0.172],[29.787,0.158],[29.797,0.165],[29.84,0.358],[29.923,0.46],[29.94,0.498],[29.919,0.618],[29.927,0.775],[29.947,0.825],[30.038,0.879],[30.155,0.909],[30.221,1.017],[30.215,1.077],[30.239,1.136],[30.278,1.172],[30.324,1.156],[30.365,1.202],[30.432,1.207],[30.478,1.239],[30.682,1.5],[31.026,1.778],[31.243,2.051],[31.271,2.103],[31.28,2.153],[31.267,2.173],[31.19,2.222],[31.178,2.303],[31.113,2.282],[31.055,2.29],[31.036,2.307],[31.041,2.331],[30.968,2.405],[30.931,2.406],[30.901,2.346],[30.872,2.332],[30.82,2.376],[30.805,2.434],[30.711,2.445],[30.708,2.462],[30.737,2.52],[30.735,2.593],[30.802,2.769],[30.829,2.786],[30.853,2.853],[30.844,2.933],[30.821,2.973],[30.757,3.021],[30.744,3.055],[30.804,3.246],[30.822,3.281],[30.842,3.289],[30.916,3.415],[30.903,3.459],[30.909,3.496],[30.896,3.52],[30.84,3.49],[30.866,3.549],[30.956,3.689],[31.01,3.7],[31.168,3.792],[31.295,3.774],[31.505,3.66],[31.535,3.666],[31.565,3.69],[31.687,3.713],[31.781,3.816],[31.831,3.784],[31.902,3.704],[31.93,3.598],[32.03,3.586],[32.076,3.533],[32.168,3.512],[32.179,3.541],[32.176,3.606],[32.188,3.619],[32.372,3.731],[32.756,3.769],[32.84,3.794],[32.997,3.886],[33.164,3.763],[33.491,3.75],[33.533,3.774],[33.977,4.22],[34.006,4.206],[34.041,4.165],[34.041,4.12],[34.069,4.088],[34.061,4.008],[34.107,3.96],[34.085,3.877],[34.108,3.869],[34.183,3.886],[34.205,3.875],[34.197,3.847],[34.149,3.823],[34.179,3.796],[34.152,3.776],[34.241,3.784],[34.279,3.71],[34.29,3.703],[34.31,3.727],[34.337,3.735],[34.44,3.668],[34.435,3.526],[34.416,3.497],[34.381,3.477],[34.399,3.434],[34.384,3.388],[34.424,3.305],[34.434,3.182],[34.445,3.159],[34.534,3.118],[34.575,2.946],[34.631,2.87],[34.654,2.857],[34.685,2.881],[34.737,2.844],[34.777,2.686],[34.819,2.598],[34.842,2.588],[34.866,2.605],[34.887,2.522],[34.924,2.477],[34.921,2.455],[34.868,2.411],[34.859,2.387],[34.968,2.102],[34.962,1.978],[35.006,1.917],[34.98,1.87],[34.979,1.676],[34.934,1.576],[34.883,1.552],[34.86,1.518],[34.838,1.437],[34.779,1.389],[34.811,1.273],[34.798,1.232],[34.684,1.209],[34.629,1.164],[34.58,1.153],[34.561,1.093],[34.507,1.103],[34.487,1.082],[34.464,1.023],[34.457,0.958],[34.388,0.816],[34.298,0.759],[34.276,0.681],[34.252,0.655],[34.15,0.604],[34.104,0.462],[34.076,0.422],[34.085,0.347],[34.041,0.306],[33.894,0.11],[33.954,-0.154],[33.895,-0.663],[33.904,-1.003],[30.828,-1.003],[30.777,-0.986],[30.687,-1.025],[30.639,-1.073],[30.593,-1.063]];
+const UG_LAKES = [[[-81.527,29.257],[-81.52,29.229],[-81.571,29.203],[-81.598,29.199],[-81.623,29.216],[-81.618,29.235],[-81.643,29.243],[-81.64,29.274],[-81.675,29.307],[-81.677,29.339],[-81.659,29.342],[-81.658,29.353],[-81.671,29.374],[-81.664,29.415],[-81.685,29.441],[-81.682,29.496],[-81.677,29.511],[-81.671,29.504],[-81.668,29.452],[-81.659,29.43],[-81.64,29.421],[-81.644,29.386],[-81.596,29.374],[-81.563,29.314],[-81.535,29.301],[-81.544,29.268]],
+[[31.366,2.271],[31.406,1.915],[31.381,1.838],[31.331,1.833],[31.282,1.696],[31.124,1.582],[31.05,1.586],[31.037,1.556],[30.947,1.518],[30.731,1.24],[30.714,1.175],[30.59,1.045],[30.604,1.032],[30.556,1.045],[30.534,1.014],[30.536,1.058],[30.498,1.035],[30.51,1.095],[30.486,1.199],[30.508,1.216],[30.455,1.271],[30.433,1.223],[30.421,1.254],[30.392,1.257],[30.386,1.31],[30.549,1.565],[30.621,1.603],[30.654,1.663],[30.734,1.716],[30.913,1.907],[31.005,1.941],[31.237,2.117],[31.325,2.262],[31.368,2.31],[31.451,2.348],[31.475,2.408],[31.468,2.336]],
+[[33.914,-1.532],[33.825,-1.512],[33.798,-1.471],[33.726,-1.491],[33.654,-1.471],[33.681,-1.535],[33.612,-1.566],[33.675,-1.58],[33.668,-1.628],[33.702,-1.628],[33.709,-1.66],[33.543,-1.675],[33.641,-1.775],[33.578,-1.758],[33.493,-1.84],[33.451,-1.837],[33.448,-1.8],[33.365,-1.804],[33.283,-1.922],[33.314,-1.944],[33.462,-1.881],[33.49,-1.927],[33.462,-1.95],[33.573,-1.987],[33.551,-2.029],[33.4,-1.972],[33.372,-1.998],[33.4,-2.039],[33.38,-2.053],[33.324,-2.017],[33.318,-2.046],[33.282,-2],[33.286,-2.056],[33.219,-2.043],[33.208,-2.115],[33.221,-2.142],[33.282,-2.111],[33.358,-2.168],[33.509,-2.153],[33.606,-2.183],[33.749,-2.086],[33.816,-2.123],[33.838,-2.221],[33.532,-2.379],[33.515,-2.449],[33.408,-2.467],[33.462,-2.502],[33.428,-2.553],[33.345,-2.525],[33.345,-2.496],[33.208,-2.513],[33.08,-2.389],[32.963,-2.388],[32.875,-2.477],[32.907,-2.55],[32.866,-2.601],[32.909,-2.679],[32.879,-2.705],[32.955,-2.786],[32.927,-2.82],[33.01,-2.846],[33.023,-2.883],[32.934,-2.852],[32.899,-2.8],[32.756,-3.012],[32.762,-2.928],[32.797,-2.91],[32.72,-2.87],[32.847,-2.824],[32.873,-2.729],[32.823,-2.705],[32.845,-2.677],[32.797,-2.635],[32.817,-2.642],[32.838,-2.587],[32.811,-2.566],[32.838,-2.512],[32.805,-2.485],[32.735,-2.533],[32.728,-2.485],[32.673,-2.518],[32.695,-2.473],[32.66,-2.38],[32.625,-2.467],[32.502,-2.546],[32.551,-2.436],[32.509,-2.47],[32.371,-2.432],[32.32,-2.354],[32.361,-2.329],[32.31,-2.272],[32.259,-2.284],[32.219,-2.251],[32.222,-2.321],[32.159,-2.388],[32.066,-2.386],[32.068,-2.425],[32.167,-2.496],[32.157,-2.551],[32.087,-2.503],[32.07,-2.525],[32.03,-2.47],[32.023,-2.505],[31.986,-2.508],[31.992,-2.584],[31.934,-2.594],[32.015,-2.76],[31.981,-2.766],[31.932,-2.649],[31.9,-2.635],[31.906,-2.711],[31.872,-2.717],[31.858,-2.678],[31.827,-2.697],[31.845,-2.786],[31.796,-2.834],[31.789,-2.726],[31.76,-2.716],[31.774,-2.654],[31.858,-2.601],[31.755,-2.62],[31.72,-2.539],[31.718,-2.508],[31.796,-2.463],[31.755,-2.327],[31.634,-2.356],[31.707,-2.005],[31.611,-2.039],[31.761,-1.597],[31.755,-1.466],[31.796,-1.484],[31.851,-1.278],[31.87,-1.15],[31.845,-1.059],[31.874,-1.025],[31.84,-1.024],[31.837,-0.995],[31.814,-1.04],[31.769,-1.048],[31.769,-0.864],[31.701,-0.839],[31.699,-0.799],[31.798,-0.652],[31.793,-0.576],[31.847,-0.471],[31.926,-0.422],[31.998,-0.315],[32.037,-0.326],[31.975,-0.23],[31.98,-0.189],[31.927,-0.196],[31.92,-0.134],[31.995,-0.086],[32.07,-0.099],[32.016,-0.045],[32.188,-0.068],[32.208,0.037],[32.215,-0.003],[32.269,-0.029],[32.292,0.002],[32.256,0.051],[32.379,-0.024],[32.365,0.085],[32.421,0.083],[32.448,0.119],[32.42,0.055],[32.438,0.034],[32.496,0.085],[32.509,0.051],[32.53,0.078],[32.557,0.044],[32.551,0.119],[32.588,0.108],[32.572,0.133],[32.598,0.14],[32.563,0.19],[32.616,0.211],[32.645,0.291],[32.667,0.277],[32.648,0.231],[32.681,0.222],[32.661,0.172],[32.69,0.167],[32.715,0.209],[32.742,0.174],[32.653,0.133],[32.667,0.092],[32.756,0.126],[32.797,0.106],[32.811,0.161],[32.859,0.147],[32.851,0.181],[32.893,0.196],[32.899,0.147],[32.871,0.127],[32.901,0.077],[32.986,0.101],[33.092,0.186],[33.105,0.222],[33.043,0.229],[33.071,0.263],[33.124,0.247],[33.126,0.217],[33.167,0.263],[33.154,0.316],[33.27,0.373],[33.187,0.428],[33.236,0.427],[33.283,0.483],[33.291,0.44],[33.319,0.438],[33.366,0.497],[33.389,0.485],[33.366,0.407],[33.31,0.382],[33.318,0.352],[33.366,0.373],[33.359,0.339],[33.428,0.325],[33.414,0.346],[33.469,0.352],[33.508,0.3],[33.495,0.27],[33.4,0.298],[33.482,0.188],[33.493,0.236],[33.503,0.196],[33.531,0.222],[33.516,0.181],[33.566,0.184],[33.617,0.227],[33.642,0.323],[33.749,0.319],[33.702,0.284],[33.695,0.263],[33.743,0.263],[33.709,0.202],[33.777,0.188],[33.79,0.236],[33.818,0.154],[33.831,0.209],[33.894,0.174],[33.982,0.266],[33.988,0.119],[33.955,0.095],[33.996,-0.041],[34.065,-0.107],[34.077,-0.063],[34.135,-0.065],[34.113,-0.107],[34.138,-0.117],[34.085,-0.14],[34.094,-0.169],[34.188,-0.189],[34.249,-0.252],[34.243,-0.326],[34.288,-0.396],[34.387,-0.285],[34.345,-0.189],[34.506,-0.181],[34.674,-0.09],[34.737,-0.086],[34.743,-0.162],[34.855,-0.287],[34.829,-0.312],[34.75,-0.287],[34.74,-0.34],[34.562,-0.318],[34.449,-0.346],[34.457,-0.424],[34.506,-0.468],[34.424,-0.525],[34.386,-0.445],[34.348,-0.479],[34.311,-0.449],[34.311,-0.477],[34.223,-0.415],[34.189,-0.422],[34.15,-0.532],[34.057,-0.559],[34.085,-0.6],[34.048,-0.641],[34.037,-0.73],[34.072,-0.795],[34.183,-0.871],[34.14,-0.912],[34.133,-1.004],[34.072,-0.97],[34.037,-0.997],[34.098,-1.019],[34.023,-1.101],[33.976,-1.105],[33.993,-1.138],[33.873,-1.256],[33.934,-1.278],[33.986,-1.37],[33.905,-1.321],[33.793,-1.334],[33.859,-1.408],[33.798,-1.388],[33.781,-1.41],[33.847,-1.433],[33.894,-1.498],[33.936,-1.49],[33.956,-1.519]],
+[[29.47,-0.616],[29.438,-0.61],[29.411,-0.667],[29.37,-0.69],[29.376,-0.61],[29.309,-0.593],[29.344,-0.514],[29.309,-0.497],[29.392,-0.422],[29.392,-0.376],[29.493,-0.181],[29.675,-0.114],[29.732,-0.069],[29.823,-0.162],[29.902,-0.14],[29.867,-0.294],[29.815,-0.374],[29.686,-0.436],[29.626,-0.491],[29.588,-0.58],[29.48,-0.641]],
+[[33.488,1.659],[33.496,1.634],[33.403,1.649],[33.352,1.642],[33.318,1.613],[33.287,1.623],[33.095,1.507],[33.108,1.481],[33.147,1.469],[33.221,1.49],[33.215,1.477],[33.276,1.486],[33.277,1.469],[33.25,1.47],[33.249,1.442],[33.2,1.439],[33.153,1.414],[33.221,1.395],[33.195,1.395],[33.203,1.381],[33.256,1.395],[33.278,1.383],[33.29,1.421],[33.332,1.424],[33.329,1.404],[33.307,1.403],[33.311,1.38],[33.333,1.372],[33.327,1.354],[33.352,1.332],[33.329,1.305],[33.318,1.312],[33.262,1.281],[33.27,1.216],[33.242,1.223],[33.215,1.305],[33.201,1.298],[33.186,1.312],[33.153,1.285],[33.113,1.277],[33.13,1.326],[33.103,1.349],[33.068,1.367],[33.048,1.359],[32.899,1.441],[32.851,1.428],[32.873,1.421],[32.859,1.395],[32.838,1.414],[32.893,1.312],[32.865,1.326],[32.879,1.298],[32.859,1.309],[32.831,1.401],[32.783,1.421],[32.742,1.416],[32.72,1.378],[32.773,1.342],[32.776,1.305],[32.738,1.354],[32.584,1.397],[32.537,1.451],[32.558,1.499],[32.544,1.524],[32.561,1.531],[32.602,1.497],[32.681,1.49],[32.758,1.571],[32.811,1.6],[32.811,1.565],[32.797,1.579],[32.789,1.565],[32.811,1.538],[32.842,1.556],[32.899,1.556],[32.914,1.572],[32.936,1.553],[32.98,1.568],[32.995,1.558],[32.982,1.538],[33.008,1.542],[33.089,1.612],[33.088,1.636],[33.108,1.65],[33.105,1.621],[33.133,1.606],[33.156,1.63],[33.153,1.621],[33.171,1.627],[33.192,1.672],[33.224,1.653],[33.252,1.692],[33.25,1.658],[33.274,1.634],[33.325,1.674],[33.393,1.689],[33.438,1.774],[33.455,1.764],[33.434,1.732],[33.436,1.671],[33.476,1.689],[33.469,1.655]],
+[[32.54,1.625],[32.564,1.641],[32.514,1.645],[32.423,1.682],[32.324,1.641],[32.328,1.626],[32.35,1.617],[32.392,1.606],[32.41,1.617],[32.441,1.585],[32.505,1.584],[32.517,1.557],[32.475,1.565],[32.475,1.552],[32.402,1.568],[32.379,1.599],[32.303,1.621],[32.303,1.634],[32.235,1.668],[32.348,1.658],[32.392,1.689],[32.429,1.698],[32.52,1.668],[32.571,1.676],[32.648,1.743],[32.669,1.8],[32.687,1.812],[32.684,1.789],[32.701,1.764],[32.709,1.78],[32.763,1.812],[32.771,1.86],[32.783,1.866],[32.776,1.853],[32.789,1.855],[32.811,1.866],[32.839,1.855],[32.851,1.874],[32.865,1.84],[32.879,1.847],[32.907,1.825],[32.931,1.879],[33.003,1.929],[33.023,1.927],[32.955,1.847],[32.975,1.845],[32.986,1.812],[33.014,1.824],[33.017,1.808],[32.993,1.783],[32.989,1.716],[32.955,1.799],[32.909,1.784],[32.854,1.785],[32.817,1.833],[32.786,1.798],[32.78,1.77],[32.796,1.732],[32.731,1.725],[32.735,1.696],[32.708,1.702],[32.65,1.67],[32.629,1.635],[32.579,1.624],[32.564,1.613],[32.572,1.606],[32.537,1.593]]];
+const PLACES = [
+  {name:'Kampala', lon:32.58, lat:0.32, sub:'Capital · UG home base', route:'ntinda-cbd', fact:'Ten quotes, one screen'},
+  {name:'Entebbe', lon:32.46, lat:0.05, sub:'Airport · expressway toll UGX 5,000', route:'cbd-entebbe', fact:'Airport pools every hour'},
+  {name:'Jinja', lon:33.20, lat:0.43, sub:'Source of the Nile · 80 km', route:'kampala-jinja', fact:'Friday pools from UGX 21k'},
+  {name:'Mbarara', lon:30.66, lat:-0.61, sub:'South-west hub · 270 km', route:'kampala-mbarara', fact:'Faras and Tinka operate here'},
+  {name:'Fort Portal', lon:30.27, lat:0.67, sub:'Kibale chimps · crater lakes', route:'kampala-fortportal', fact:'Chimp permits from UGX 150k'},
+  {name:'Bwindi', lon:29.65, lat:-1.05, sub:'Mountain gorillas', route:'kampala-bwindi', fact:'EAC permit UGX 300,000'},
+  {name:'Murchison', lon:31.70, lat:2.28, sub:'Murchison Falls NP', route:'kampala-murchison', fact:'EAC entry UGX 25,000'},
+  {name:'Gulu', lon:32.30, lat:2.77, sub:'Northern hub · 335 km', route:'kampala-gulu', fact:'Bus from UGX 45k'},
+  {name:'Kidepo', lon:33.85, lat:3.85, sub:'Kidepo Valley NP', route:'kampala-kidepo', fact:'Fly-in or 11 h drive'},
+  {name:'Sipi', lon:34.37, lat:1.33, sub:'Sipi Falls · Mt Elgon', route:'kampala-sipi', fact:'Weekend from UGX 60k/head'},
+];
+
+/* =====================================================================
+   Helpers
+   ===================================================================== */
+const $ = s => document.querySelector(s);
+const fmt = n => Math.round(n).toLocaleString('en-UG');
+const clamp = (v,a,b) => Math.min(b,Math.max(a,v));
+const round500 = n => Math.floor(n/500)*500;
+const provKind = p => /UG model/.test(p) ? 'UG model' : /official/.test(p) ? 'official' : /snippet/.test(p) ? 'snippet' : 'modelled';
+let toastT;
+function toast(msg){ const t=$('#toast'); t.textContent=msg; t.hidden=false; clearTimeout(toastT); toastT=setTimeout(()=>t.hidden=true,2600); }
+function store(k,v){ try{ localStorage.setItem('ug:'+k, JSON.stringify(v)); }catch(e){} }
+function load(k,d){ try{ const v=localStorage.getItem('ug:'+k); return v?JSON.parse(v):d; }catch(e){ return d; } }
+document.documentElement.classList.add('js');
+
+/* =====================================================================
+   Fare engine (the arbitrage desk)
+   ===================================================================== */
+const TIME = { off:{mult:1, eta:1, label:'off-peak'}, peak:{mult:1.35, eta:1.45, label:'rush hour'}, night:{mult:1.2, eta:1.05, label:'night'} };
+function poolSeatCost(route, seats, car){
+  car = car || FLEET[2];
+  const fuel = (route.km / car.kmPerL) * FUEL_UGX_PER_L;
+  const wear = route.km * 250;                 // modelled: tyres, service, depreciation share
+  const total = fuel + wear + (route.tolls||0) + (route.ferry||0);
+  const perSeat = total / Math.max(1,seats);
+  return { total, perSeat, riderPays: perSeat * 1.10, driverKeeps: perSeat };
+}
+function quoteAll(route, timeKey, rain, pax){
+  const T = TIME[timeKey];
+  const surgeOn = timeKey !== 'off' || rain;
+  const out = [];
+  for (const p of PROVIDERS){
+    let price=null, eta=null, note=[], est=true;
+    if (p.pool){
+      const seats = clamp(pax+1,2,4);          // you plus at least one other rider, driver excluded
+      price = poolSeatCost(route, seats).riderPays * pax;
+      eta = route.min * (timeKey==='peak'?1.3:1) + 15;
+      note.push('seat × '+pax);
+    } else if (p.rent){
+      if (!route.inter && !route.entebbe) continue;   // rentals only make sense out of town
+      const days = Math.max(1, Math.ceil(route.min/60/5));
+      const fuel = (route.km / FLEET[2].kmPerL) * FUEL_UGX_PER_L;
+      price = FLEET[2].day*days + fuel + (route.tolls||0);
+      eta = route.min;
+      note.push(days+' day'+(days>1?'s':'')+' + fuel');
+    } else if (p.busOnly){
+      if (!route.inter) continue;
+      price = (route.bus||0) * pax; eta = route.min*1.25 + 40; note.push('per seat × '+pax);
+    } else if (p.stage){
+      if (route.entebbe || route.km>300) continue;
+      price = Math.max(p.min, p.base + p.perKm*route.km) * pax; eta = route.min*1.5 + 20; note.push('per seat × '+pax);
+    } else {
+      if (p.kind==='boda' && route.km>60) continue;         // nobody bodas to Bwindi
+      if (p.kind==='car' && route.km>120 && !p.haggle) continue;   // apps rarely accept 300 km trips
+      let f = p.base + p.perKm*route.km + p.perMin*route.min*(timeKey==='peak'?1.45:1);
+      if (route.entebbe && p.id==='uber') f += Math.max(0,route.km-5)*1200;   // snippet: Entebbe surcharge
+      f = Math.max(p.min, f);
+      const s = surgeOn ? (p.surge || 1) * (rain?1.1:1) : 1;
+      f *= s;
+      if (p.round500) f = round500(f);
+      if (p.haggle){ note.push('haggle ±20%'); }
+      if (route.tolls && p.kind==='car') f += route.tolls;
+      const cap = p.kind==='boda' ? 2 : 4;                   // seats per vehicle
+      const vehicles = Math.ceil(pax/cap);
+      price = f * vehicles;
+      if (vehicles>1) note.push(vehicles+' vehicles');
+      eta = route.min * T.eta + (p.kind==='boda'?4:8);
+      if (surgeOn && s>1.05) note.push('surge ×'+s.toFixed(2));
+    }
+    out.push({p, price, eta, note, est});
+  }
+  return out.sort((a,b)=>a.price-b.price);
+}
+
+/* =====================================================================
+   UI: selects and the booking strip
+   ===================================================================== */
+function fillRouteSelects(){
+  const froms = [...new Set(ROUTES.map(r=>r.from))];
+  for (const id of ['sFrom','cFrom']){
+    const el = $('#'+id); el.innerHTML = froms.map(f=>`<option>${f}</option>`).join('');
+  }
+  syncTo('sFrom','sTo'); syncTo('cFrom','cTo');
+  $('#pRoute').innerHTML = ROUTES.filter(r=>r.inter||r.entebbe).map(r=>`<option value="${r.id}">${r.from} → ${r.to}</option>`).join('');
+  $('#pCar').innerHTML = FLEET.map(c=>`<option value="${c.id}">${c.name}</option>`).join('');
+}
+function syncTo(fromId,toId){
+  const from = $('#'+fromId).value;
+  const tos = ROUTES.filter(r=>r.from===from);
+  $('#'+toId).innerHTML = tos.map(r=>`<option value="${r.id}">${r.to}</option>`).join('');
+}
+function routeFrom(toId){ return ROUTES.find(r=>r.id===$('#'+toId).value) || ROUTES[1]; }
+
+let state = { time:'off', mode:'all' };
+function renderCompare(){
+  const route = routeFrom('cTo');
+  const pax = clamp(parseInt($('#cPax').value||1,10),1,7);
+  const rain = $('#cRain').checked;
+  const split = $('#cSplit').checked;
+  $('#routeMeta').innerHTML = `<span>${route.km} km</span><span>~${route.min} min ${TIME[state.time].label}</span>${route.tolls?`<span>toll UGX ${fmt(route.tolls)}</span>`:''}`;
+  let quotes = quoteAll(route, state.time, rain, pax);
+  if (state.mode!=='all') quotes = quotes.filter(q => state.mode==='shared' ? (q.p.kind==='shared') : q.p.kind===state.mode);
+  const res = $('#results'); res.innerHTML='';
+  if (!quotes.length){ res.innerHTML = '<div class="panel">No provider in this filter will take that trip. Try "All" or a shorter route.</div>'; $('#resSummary').innerHTML=''; return; }
+  const best = quotes[0], worst = quotes[quotes.length-1];
+  const ugq = quotes.find(q=>q.p.ug);
+  $('#resSummary').innerHTML = `
+    <div><div class="k">Cheapest right now</div><div class="v good">UGX ${fmt(split?best.price/pax:best.price)}</div><div class="k">${best.p.name} ${best.p.sub}</div></div>
+    <div><div class="k">Spread across the market</div><div class="v">UGX ${fmt(worst.price-best.price)}</div><div class="k">what choosing badly costs</div></div>
+    <div><div class="k">Quotes returned</div><div class="v">${quotes.length}</div><div class="k">${route.from} → ${route.to}</div></div>`;
+  quotes.forEach((q,i)=>{
+    const shown = split ? q.price/pax : q.price;
+    const el = document.createElement('div');
+    el.className = 'quote' + (i===0?' best':'') + (q.p.ug?' ug':'');
+    const mark = LOGOS[q.p.id] || LOGOS.generic(q.p.name);
+    const act = q.p.ug
+      ? `<a class="btn small primary" href="${q.p.link}">Book on UG</a>`
+      : q.p.link ? `<a class="btn small" href="${q.p.link}" target="_blank" rel="noopener">Open ${q.p.name} ↗</a>`
+      : q.p.stage ? `<button class="btn small" type="button" data-tip="Board at the stage. The conductor collects cash; no app, no surge.">At the stage</button>`
+      : `<button class="btn small" type="button" data-haggle="${Math.round(q.price)}">Haggle script</button>`;
+    el.innerHTML = `
+      <div class="q-logo" style="background:${q.p.colour}" title="${q.p.name}">${mark}</div>
+      <div class="q-name">${q.p.name}<small>${q.p.sub}</small></div>
+      <div class="q-price">UGX ${fmt(shown)}<small>${split&&pax>1?'per person':'total'} · ${q.note.join(' · ')||'estimate'}</small></div>
+      <div class="q-eta">~${Math.round(q.eta)} min<br>${i===0?'<span class="tag best">Best price</span>':''}${q.note.some(n=>n.startsWith('surge'))?' <span class="tag surge">surge</span>':''} <span class="tag est" title="${q.p.prov}">${provKind(q.p.prov)}</span></div>
+      <div class="q-act">${act}</div>`;
+    res.appendChild(el);
+    if (i===0 && !q.p.ug && ugq){
+      // meter count-up on the best price
+    }
+  });
+  $('#disclaimer').textContent = `Estimates from UG's published fare model at ${new Date().toLocaleTimeString('en-UG',{hour:'2-digit',minute:'2-digit'})}. Provider tags show provenance: "snippet" means the rate was read from a public page or search summary, "modelled" means UG's own assumption, "official" means read on the operator's site. Live apps quote in real time and will differ. UG never marks up a competitor's price.`;
+  // meter roll on prices
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches){
+    res.querySelectorAll('.q-price').forEach(pe=>{
+      const target = pe.firstChild.textContent; const num = parseInt(target.replace(/[^0-9]/g,''),10);
+      let s=0; const steps=14; const t0=performance.now();
+      const tick=()=>{ s++; const k=s/steps; const v=Math.round(num*(1-Math.pow(1-k,3))); pe.firstChild.textContent='UGX '+fmt(v); if(s<steps) requestAnimationFrame(tick); else pe.firstChild.textContent=target; };
+      requestAnimationFrame(tick);
+    });
+  }
+}
+document.addEventListener('click', e=>{
+  const h = e.target.closest('[data-haggle]');
+  if (h){ const p=parseInt(h.dataset.haggle,10); toast(`Open at UGX ${fmt(p*0.8)}. Settle at UGX ${fmt(p)}. Walk away above UGX ${fmt(p*1.2)}.`); }
+  const tip = e.target.closest('[data-tip]'); if (tip) toast(tip.dataset.tip);
+  const soon = e.target.closest('[data-soon]');
+  if (soon){ e.preventDefault(); toast('Coming with the public beta.'); }
+});
+
+/* =====================================================================
+   Pool
+   ===================================================================== */
+const SEED_TRIPS = [
+  {when:'Fri 17:30', d:'FRI', t:'17:30', route:'kampala-jinja', driver:'Brenda K.', car:'RAV4', badges:['Plates verified','Stanbic circle'], seats:4, taken:2, rating:4.9},
+  {when:'Sat 05:45', d:'SAT', t:'05:45', route:'kampala-mbarara', driver:'Ivan T.', car:'Prado', badges:['Plates verified','MUBS alumni'], seats:6, taken:3, rating:4.8},
+  {when:'Sun 03:30', d:'SUN', t:'03:30', route:'cbd-entebbe', driver:'Aisha N.', car:'Noah', badges:['Plates verified','Airport regular'], seats:6, taken:4, rating:5.0},
+  {when:'Fri 14:00', d:'FRI', t:'14:00', route:'kampala-murchison', driver:'Denis O.', car:'Land Cruiser', badges:['Plates verified','Watoto circle'], seats:5, taken:1, rating:4.7},
+];
+let trips = load('trips', SEED_TRIPS);
+function renderTrips(){
+  const el = $('#trips'); el.innerHTML='';
+  trips.forEach((t,i)=>{
+    const r = ROUTES.find(x=>x.id===t.route); if(!r) return;
+    const car = FLEET.find(c=> t.car && c.name.includes(t.car.split(' ')[0])) || FLEET[2];
+    const cost = poolSeatCost(r, t.seats, car);
+    const seats = Array.from({length:t.seats},(_,k)=>`<span class="seat ${k<t.taken?'taken':''}"></span>`).join('');
+    const div = document.createElement('div'); div.className='trip'; div.dataset.min=r.min;
+    div.innerHTML = `
+      <div class="when">${t.d}<b>${t.t}</b></div>
+      <div><div class="route">${r.from} → ${r.to}</div>
+        <div class="driver">${t.driver} · ${t.car} · ★ ${t.rating.toFixed(1)} ${t.badges.map(b=>`<span class="badge ${b.includes('Plates')?'ok':'crane'}">${b}</span>`).join('')}</div>
+        <div class="seats" aria-label="${t.taken} of ${t.seats} seats taken">${seats}</div></div>
+      <div class="fare"><div class="p">UGX ${fmt(cost.riderPays)}</div><small>per seat · ${r.km} km · ${t.seats-t.taken} left</small>
+        <button class="btn small primary" type="button" data-book="${i}" style="margin-top:8px">Take a seat</button></div>`;
+    el.appendChild(div);
+  });
+  el.querySelectorAll('[data-book]').forEach(b=>b.addEventListener('click',()=>{
+    const t = trips[b.dataset.book]; const r = ROUTES.find(x=>x.id===t.route);
+    const car = FLEET.find(c=> c.name.includes(t.car.split(' ')[0])) || FLEET[2];
+    openCheckout(poolSeatCost(r,t.seats,car).riderPays, `Pool seat · ${r.from} → ${r.to} · ${t.when}`, ()=>{ t.taken=Math.min(t.seats,t.taken+1); store('trips',trips); renderTrips(); });
+  }));
+  if (typeof renderHooks==='function' && $('#plugs').children.length) renderHooks();
+  $('#circles').innerHTML = ['Stanbic circle','MUBS alumni','Watoto circle','Ntinda school run','Kampala Parents','Airport regulars','Ministry of Health','Kyambogo staff'].map(c=>`<span class="circle">${c}</span>`).join('');
+}
+function renderSplit(){
+  const r = ROUTES.find(x=>x.id===$('#pRoute').value) || ROUTES[5];
+  const seats = clamp(parseInt($('#pSeats').value||1,10),1,7);
+  const car = FLEET.find(c=>c.id===$('#pCar').value) || FLEET[2];
+  const c = poolSeatCost(r, seats, car);
+  $('#splitOut').innerHTML = `
+    <div>Road cost (fuel ${fmt((r.km/car.kmPerL)*FUEL_UGX_PER_L)} + wear ${fmt(r.km*250)}${r.tolls?' + toll '+fmt(r.tolls):''}${r.ferry?' + ferry '+fmt(r.ferry):''})</div>
+    <div class="big">UGX ${fmt(c.riderPays)} <span style="font-size:13px;color:var(--ink-2)">per rider</span></div>
+    <div>Driver keeps UGX ${fmt(c.driverKeeps*(seats-1))} of a UGX ${fmt(c.total)} trip · UG fee UGX ${fmt((c.riderPays-c.perSeat)*(seats-1))}</div>`;
+}
+$('#offerBtn').addEventListener('click', ()=>{
+  const r = ROUTES.find(x=>x.id===$('#pRoute').value); const car = FLEET.find(c=>c.id===$('#pCar').value);
+  const t = $('#pWhen').value || '06:00';
+  trips.unshift({when:'Sat '+t, d:'SAT', t, route:r.id, driver:'You', car:car.name.replace('Toyota ','').replace('Land Cruiser ',''), badges:['Phone verified'], seats:clamp(parseInt($('#pSeats').value,10),1,7), taken:1, rating:5});
+  store('trips',trips); renderTrips(); toast('Trip posted to your circles.'); location.hash='#pool';
+});
+$('#bookSeatBtn').addEventListener('click', ()=>{
+  const r = ROUTES.find(x=>x.id===$('#pRoute').value); const car = FLEET.find(c=>c.id===$('#pCar').value);
+  openCheckout(poolSeatCost(r, clamp(parseInt($('#pSeats').value,10),1,7), car).riderPays, `Pool seat · ${r.from} → ${r.to}`);
+});
+
+/* =====================================================================
+   Rent
+   ===================================================================== */
+const GLYPHS = {
+  sedan:`<svg viewBox="0 0 220 90" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M20 62h180l-6-18c-2-6-6-9-12-10l-38-4-22-16H86L58 34l-30 4c-6 1-9 4-9 10z"/><path d="M86 14l-4 20h56l-10-20"/><circle cx="60" cy="66" r="11" fill="var(--ground)"/><circle cx="160" cy="66" r="11" fill="var(--ground)"/><path d="M118 34v28" opacity=".5"/></svg>`,
+  van:`<svg viewBox="0 0 220 90" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M22 64h176V30c0-8-4-14-12-14H72L40 34l-14 6c-3 1-4 3-4 6z"/><path d="M72 16v18h-32M120 16v18M160 16v18"/><circle cx="62" cy="68" r="11" fill="var(--ground)"/><circle cx="162" cy="68" r="11" fill="var(--ground)"/></svg>`,
+  suv:`<svg viewBox="0 0 220 90" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M16 62h188V40c0-4-2-7-6-8l-24-4-24-16H78L44 30l-22 4c-4 1-6 4-6 8z"/><path d="M78 12v20h72M124 12v20"/><circle cx="58" cy="66" r="13" fill="var(--ground)"/><circle cx="162" cy="66" r="13" fill="var(--ground)"/><path d="M60 8h44" stroke-width="3"/></svg>`,
+  camper:`<svg viewBox="0 0 220 90" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M16 66h188V44c0-4-2-7-6-8l-24-4-24-16H78L44 34l-22 4c-4 1-6 4-6 8z"/><path d="M78 16v20h72M124 16v20"/><circle cx="58" cy="70" r="13" fill="var(--ground)"/><circle cx="162" cy="70" r="13" fill="var(--ground)"/><path d="M70 14l40-14 40 14z" fill="var(--yellow)" stroke="var(--yellow)"/></svg>`
+};
+function renderFleet(){
+  const days = parseInt($('#rDays').value,10), split = parseInt($('#rSplit').value,10), drv = $('#rDriver').checked;
+  $('#rDaysV').textContent = days; $('#rSplitV').textContent = split;
+  const el = $('#fleet'); el.innerHTML='';
+  FLEET.forEach(c=>{
+    const per = c.day + (drv?90000:0);
+    const total = per*days;
+    const d = document.createElement('article'); d.className='car';
+    d.innerHTML = `${c.hot?'<span class="flair badge ok">Most pooled</span>':''}<div class="glyph" style="color:var(--ink)">${GLYPHS[c.glyph]}</div>
+      <h3>${c.name}</h3><div class="spec">${c.cls} · ~${c.kmPerL} km/L</div>
+      <div class="price"><div><div class="p">UGX ${fmt(per)}</div><small>per day${drv?' with driver':' self-drive'}</small></div><div style="text-align:right"><div class="p" style="font-size:15px">UGX ${fmt(total)}</div><small>${days} day${days>1?'s':''}</small></div></div>
+      <div class="per-head">UGX ${fmt(total/split)} per head when ${split} split it</div>
+      <button class="btn small" type="button" style="margin-top:12px" data-rent="${c.id}">Reserve · pay 20% now</button>`;
+    el.appendChild(d);
+  });
+  el.querySelectorAll('[data-rent]').forEach(b=>b.addEventListener('click',()=>{
+    const c = FLEET.find(x=>x.id===b.dataset.rent); const per = c.day + (drv?90000:0);
+    openCheckout(per*days*0.2, `Deposit · ${c.name} · ${days} day${days>1?'s':''}`);
+  }));
+  // 3D tilt
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches && matchMedia('(hover:hover)').matches){
+    el.querySelectorAll('.car').forEach(card=>{
+      card.addEventListener('pointermove', e=>{ const r=card.getBoundingClientRect(); const x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5; card.style.transform=`rotateY(${x*14}deg) rotateX(${-y*14}deg) translateZ(6px)`; });
+      card.addEventListener('pointerleave', ()=>{ card.style.transform=''; });
+    });
+  }
+}
+['rDays','rSplit','rDriver'].forEach(id=>$('#'+id).addEventListener('input', renderFleet));
+
+/* =====================================================================
+   Explore
+   ===================================================================== */
+let dest = DESTS[0];
+function renderDests(){
+  const el = $('#dests'); el.innerHTML='';
+  DESTS.forEach(d=>{
+    const r = ROUTES.find(x=>x.id===d.id);
+    const b = document.createElement('button'); b.type='button'; b.className='dest'+(d===dest?' on':''); b.style.setProperty('--stripe', d.stripe);
+    b.innerHTML = `<div class="region">${d.region}</div><h3>${d.name}</h3><p>${d.blurb}</p><div class="meta"><span>${r.km} km</span><span>~${Math.round(r.min/60)} h drive</span><span>${d.season}</span></div>`;
+    b.addEventListener('click', ()=>{ dest=d; renderDests(); renderItin(); });
+    el.appendChild(b);
+  });
+}
+function renderItin(){
+  const r = ROUTES.find(x=>x.id===dest.id);
+  const cat = $('#eCat').value, pax = clamp(parseInt($('#ePax').value||1,10),1,7), days = clamp(parseInt($('#eDays').value||1,10),1,10), mode = $('#eMode').value;
+  const usd = v => v*UGX_PER_USD;
+  const fee = f => cat==='eac' ? (f.eac||0) : usd(f[cat]||0);
+  const lines = [];
+  let transport=0, tLabel='';
+  if (mode==='pool'){ const c = poolSeatCost(r, Math.max(pax,4)); transport = c.riderPays*pax*2; tLabel=`UG Pool · ${pax} seat${pax>1?'s':''} · return`; }
+  else if (mode==='rent' || mode==='rentdrv'){ const car=FLEET[2]; const perDay = car.day + (mode==='rentdrv'?90000:0); const fuel=(r.km*2/car.kmPerL)*FUEL_UGX_PER_L; transport = perDay*days + fuel + (r.tolls||0)*2; tLabel=`UG Rent · RAV4 ${mode==='rentdrv'?'with driver':'self-drive'} · ${days} days + fuel`; }
+  else { transport = (r.bus||30000)*pax*2 + 20000*pax; tLabel=`Bus · ${pax} seat${pax>1?'s':''} return + local boda`; }
+  lines.push([tLabel, transport]);
+  const entry = fee(dest.fees)*pax*days; if (entry) lines.push([`Park entry · ${pax} × ${days} day${days>1?'s':''}`, entry]);
+  if (dest.vehicle && (mode==='rent'||mode==='rentdrv')) lines.push([`Vehicle entry (UWA)`, dest.vehicle]);
+  const act = fee(dest.act)*pax; lines.push([`${dest.act.name} × ${pax}`, act]);
+  const rooms = Math.ceil(pax/2); const lodge = fee(dest.lodge)*rooms*Math.max(1,days-1); lines.push([`Lodge · ${rooms} room${rooms>1?'s':''} × ${Math.max(1,days-1)} night${days-1>1?'s':''}`, lodge]);
+  const food = 45000*pax*days; lines.push([`Meals and rolex money · ${pax} × ${days}`, food]);
+  const total = lines.reduce((s,l)=>s+l[1],0);
+  $('#itinTitle').textContent = dest.name;
+  $('#itinLines').innerHTML = lines.map(l=>`<div class="line"><span>${l[0]}</span><span class="mono">UGX ${fmt(l[1])}</span></div>`).join('');
+  $('#itinTotal').textContent = 'UGX '+fmt(total);
+  $('#itinPer').textContent = `UGX ${fmt(total/pax)} per person · ${cat==='eac'?'East African rates':'USD fees at UGX '+fmt(UGX_PER_USD)+' per dollar'}`;
+  $('#itinNote').textContent = `Fee provenance: ${dest.fees.prov||'no park fee'}; ${dest.act.prov}. Lodge and food are UG's mid-range assumptions. UWA tariffs are revised periodically; the July 2026 book should be re-checked before anyone is charged.`;
+  if (typeof renderHooks==='function' && $('#plugs').children.length) renderHooks();
+  $('#bookTripBtn').onclick = ()=> openCheckout(total*0.15, `15% deposit · ${dest.name} · ${pax} people · ${days} days`);
+  $('#shareTripBtn').onclick = ()=>{ const txt=`${dest.name} weekend for ${pax}: UGX ${fmt(total)} total (${fmt(total/pax)} each) via UG`; if(navigator.clipboard){ navigator.clipboard.writeText(txt).then(()=>toast('Plan copied. Paste it in the group chat.')).catch(()=>toast(txt)); } else toast(txt); };
+}
+['eCat','ePax','eDays','eMode'].forEach(id=>$('#'+id).addEventListener('input', renderItin));
+
+/* =====================================================================
+   Hustle mode
+   ===================================================================== */
+function renderDay(){
+  const el = $('#day'); el.innerHTML=''; let total=0;
+  DAY.forEach(s=>{
+    let cost=0, label='';
+    if (s.mode==='pool'){ cost = poolSeatCost({km:s.km,min:s.km*4,tolls:0},4).riderPays; label='UG Pool seat'; }
+    else if (s.mode==='boda'){ const p=PROVIDERS.find(x=>x.id==='faras'); cost=Math.max(p.min,p.base+p.perKm*s.km+p.perMin*s.km*4); label='cheapest boda'; }
+    else if (s.mode==='car'){ const p=PROVIDERS.find(x=>x.id==='tinka'); cost=round500(Math.max(p.min,p.base+p.perKm*s.km+p.perMin*s.km*4)); label='cheapest car'; }
+    else { cost=s.flat; label='V8 split five ways'; }
+    total+=cost;
+    const d=document.createElement('div'); d.className='slot'+(s.ride?' ride':'');
+    d.innerHTML=`<div class="t">${s.t}</div><div class="what">${s.what}<small>${s.sub}</small></div><div class="cost">UGX ${fmt(cost)}<small>${label}</small></div>`;
+    el.appendChild(d);
+  });
+  $('#dayTotal').textContent='UGX '+fmt(total);
+  $('#payDayBtn').onclick=()=>openCheckout(total,'Pre-pay today\'s legs');
+  $('#plans').innerHTML = PLANS.map(p=>`<div class="plan${p.hot?' hot':''}"><h3>${p.name}</h3><div class="p">${p.price?'UGX '+fmt(p.price):'Free'} <small>${p.per}</small></div><ul>${p.items.map(i=>`<li>${i}</li>`).join('')}</ul><button class="btn small ${p.hot?'primary':''}" type="button" data-plan="${p.name}" ${p.price?'':'disabled'}>${p.price?'Subscribe':'Current plan'}</button></div>`).join('');
+  $('#plans').querySelectorAll('[data-plan]').forEach(b=>b.addEventListener('click',()=>{ const p=PLANS.find(x=>x.name===b.dataset.plan); openCheckout(p.price, `UG ${p.name} · first month`); }));
+}
+$('#topupBtn').addEventListener('click', ()=>openCheckout(50000,'UG Wallet top-up', ()=>{ const b=$('#walletBal'); b.textContent=fmt(parseInt(b.textContent.replace(/,/g,''),10)+50000); }));
+
+/* =====================================================================
+   Flutterwave checkout (v3 inline). Loads https://checkout.flutterwave.com/v3.js on demand.
+   If the script cannot load (offline, blocked host, sandbox), a faithful stand-in modal runs the
+   same fields so the flow can be reviewed. Never ship without a real public key + server-side verify.
+   ===================================================================== */
+let pay = {amount:0, label:'', net:'MTN', onDone:null};
+function openCheckout(amount, label, onDone){
+  pay = {amount:Math.max(500,Math.round(amount)), label, net:pay.net, onDone};
+  $('#payAmt').textContent = fmt(pay.amount); $('#payFor').textContent = label;
+  $('#payRef').textContent = 'tx_ref UG-'+Date.now().toString(36).toUpperCase();
+  $('#payStatus').className='status'; $('#payStatus').textContent='Flutterwave will send a prompt to your phone. Approve it with your PIN.';
+  $('#payBtn').disabled=false; $('#modal').hidden=false; $('#payPhone').focus();
+}
+function closeCheckout(){ $('#modal').hidden=true; }
+$('#modalClose').addEventListener('click', closeCheckout);
+$('#modal').addEventListener('click', e=>{ if(e.target===$('#modal')) closeCheckout(); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeCheckout(); });
+$('#netPick').addEventListener('click', e=>{ const b=e.target.closest('button'); if(!b) return; $('#netPick').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); pay.net=b.dataset.net; });
+
+function loadFlutterwave(){
+  return new Promise((res,rej)=>{
+    if (window.FlutterwaveCheckout) return res(true);
+    const s=document.createElement('script'); s.src='https://checkout.flutterwave.com/v3.js'; s.async=true;
+    const t=setTimeout(()=>rej(new Error('timeout')),4000);
+    s.onload=()=>{ clearTimeout(t); res(true); }; s.onerror=()=>{ clearTimeout(t); rej(new Error('blocked')); };
+    document.head.appendChild(s);
+  });
+}
+$('#payBtn').addEventListener('click', async ()=>{
+  const phone = $('#payPhone').value.replace(/\s+/g,''), email=$('#payEmail').value.trim();
+  const status = $('#payStatus'); const btn=$('#payBtn'); btn.disabled=true;
+  const tx_ref = $('#payRef').textContent.replace('tx_ref ','');
+  const config = {
+    public_key: FLW_PUBLIC_KEY, tx_ref, amount: pay.amount, currency:'UGX',
+    payment_options: pay.net==='CARD' ? 'card' : 'mobilemoneyuganda',
+    customer:{ email: email||'rider@example.com', phone_number: phone.startsWith('0')?'256'+phone.slice(1):phone, name:'UG rider' },
+    customizations:{ title:'UG', description: pay.label, logo:'' },
+    meta:{ product:'ug', label: pay.label, network: pay.net },
+    callback: d=>{ status.className='status ok'; status.textContent=`Paid. flw_ref ${d.flw_ref||'—'} · status ${d.status}. Verify server-side before fulfilling.`; if(pay.onDone) pay.onDone(); },
+    onclose: ()=>{ btn.disabled=false; }
+  };
+  const realKey = /^FLWPUBK(_TEST)?-[0-9a-f]{32}-X$/i.test(FLW_PUBLIC_KEY);
+  status.textContent = 'Opening Flutterwave…';
+  try {
+    if (!realKey) throw new Error('no-key');
+    await loadFlutterwave();
+    window.FlutterwaveCheckout(config);
+  } catch (err) {
+    // Sandbox stand-in: same fields, same sequence, no money moves.
+    const why = err.message==='no-key' ? 'no public key configured' : 'checkout script unreachable here';
+    status.textContent = `Sandbox mode (${why}). Simulating ${pay.net==='CARD'?'card':pay.net+' mobile money'} prompt to ${phone||'your phone'}…`;
+    await new Promise(r=>setTimeout(r,1400));
+    status.textContent = 'Prompt sent. Waiting for PIN approval…';
+    await new Promise(r=>setTimeout(r,1400));
+    status.className='status ok';
+    status.textContent = `Approved (simulated). tx_ref ${tx_ref} · UGX ${fmt(pay.amount)} · ${pay.net}. In production this is where the webhook confirms and UG fulfils.`;
+    if (pay.onDone) pay.onDone();
+    setTimeout(()=>{ closeCheckout(); toast('Payment recorded (sandbox).'); btn.disabled=false; }, 1600);
+  }
+});
+
+/* =====================================================================
+   Plug-ins: adapters to outside tools. Each has a default endpoint, a link-out, and hooks that
+   appear on trips, weekends and the day plan once connected. Endpoints and keys stay in this
+   browser (localStorage) until accounts exist. The partner sites were not reachable from the
+   build session; the adapters are link-outs with a configurable endpoint, to be wired to each
+   product's real API in phase 1 (see docs/integrations.md).
+   ===================================================================== */
+const PLUGINS = [
+  {id:'felt', name:'Felt', role:'Maps', colour:'#FF5B4A', url:'https://felt.com/', endpoint:'https://felt.com/', blurb:'Every pool trip and weekend plan becomes a Felt map: the route, the stops, fuel and toll markers, the lodge. Share the link in the group chat and let people drop pins.', hooks:['Map this trip','Map the weekend'],
+    mark:`<svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="11" fill="none" stroke="#fff" stroke-width="2.4"/><circle cx="20" cy="20" r="3.5" fill="#fff"/><path d="M20 4v6M20 30v6M4 20h6M30 20h6" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg>`,
+    open:(ctx)=>`${plugEndpoint('felt')}${ctx&&ctx.q?'?q='+encodeURIComponent(ctx.q):''}`},
+  {id:'infrared', name:'Infrared City', role:'Workflows', colour:'#E0442D', url:'https://platform.infrared.city/workflows', endpoint:'https://platform.infrared.city/workflows', blurb:'Run an Infrared workflow on the road: heat, wind and shade along the route by hour, so the 2 p.m. boda leg moves to 4 and the Jinja departure beats the sun.', hooks:['Check the day\'s heat','Route comfort'],
+    mark:`<svg viewBox="0 0 40 40"><path d="M8 30c4-10 8-14 12-14s8 4 12 14" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/><path d="M14 30c2-5 4-7 6-7s4 2 6 7" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" opacity=".7"/><circle cx="20" cy="9" r="2.5" fill="#fff"/></svg>`,
+    open:(ctx)=>plugEndpoint('infrared')},
+  {id:'tazama', name:'Tazama', role:'Entertainment', colour:'#7C3AED', url:'https://tazama-watch.xulaye.chatgpt.site/', endpoint:'http://127.0.0.1:5178', blurb:'The road-trip playlist and a watch room for the back seats. A pool car opens Tazama with the trip\'s length, so the film ends when the car does. Rights-aware, Africa-first.', hooks:['Queue the trip playlist','Open a watch room'],
+    mark:`<svg viewBox="0 0 40 40"><rect x="6" y="9" width="28" height="19" rx="4" fill="none" stroke="#fff" stroke-width="2.4"/><path d="M17 14v9l8-4.5z" fill="#fff"/><path d="M14 33h12" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg>`,
+    open:(ctx)=>{ const e=plugEndpoint('tazama'); const p=new URLSearchParams({source:'ug', ...(ctx||{})}); return e.replace(/\/$/,'')+'/?'+p.toString(); }},
+  {id:'cephable', name:'Cephable', role:'Automation · hands-free', colour:'#0F766E', url:'https://cephable.com/downloads/', endpoint:'https://cephable.com/downloads/', blurb:'Voice, face and switch controls for UG through Cephable, and automations that book for you: "take my Friday Jinja seat the moment it opens", "top up when the wallet drops under 20k".', hooks:['Enable voice commands','Automate Friday seat'],
+    mark:`<svg viewBox="0 0 40 40"><path d="M10 22a10 10 0 0 1 20 0" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/><circle cx="20" cy="22" r="3" fill="#fff"/><path d="M20 25v8M14 33h12" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/></svg>`,
+    open:(ctx)=>plugEndpoint('cephable')},
+];
+function plugState(id){ return load('plug:'+id, null); }
+function plugEndpoint(id){ const st=plugState(id); const pl=PLUGINS.find(p=>p.id===id); return (st&&st.endpoint)||pl.endpoint; }
+function renderPlugins(){
+  const el=$('#plugs'); el.innerHTML='';
+  PLUGINS.forEach(pl=>{
+    const st=plugState(pl.id); const on=!!(st&&st.on);
+    const d=document.createElement('article'); d.className='plug'; d.style.setProperty('--pc',pl.colour);
+    d.innerHTML=`<div class="pl-mark">${pl.mark}</div><div class="role">${pl.role}</div><h3>${pl.name}</h3><p>${pl.blurb}</p>
+      <div class="st ${on?'on':''}"><i></i>${on?'Connected · '+(st.endpoint||pl.endpoint).replace(/^https?:\/\//,'').slice(0,34):'Not connected'}</div>
+      <div class="hooks">${pl.hooks.map(h=>`<span class="hook"><i></i>${h}</span>`).join('')}</div>
+      <div class="acts"><a class="btn small ${on?'primary':''}" href="${pl.open()}" target="_blank" rel="noopener">Open ${pl.name} ↗</a><button class="btn small" type="button" data-plug="${pl.id}">${on?'Settings':'Connect'}</button></div>`;
+    el.appendChild(d);
+  });
+  el.querySelectorAll('[data-plug]').forEach(b=>b.addEventListener('click',()=>openPlug(b.dataset.plug)));
+  renderHooks();
+}
+let plugEditing=null;
+function openPlug(id){
+  const pl=PLUGINS.find(p=>p.id===id); const st=plugState(id)||{}; plugEditing=id;
+  $('#plugTitle').textContent=`Connect ${pl.name} · ${pl.role}`; $('#plugEndpoint').value=st.endpoint||pl.endpoint; $('#plugKey').value=st.key||'';
+  $('#plugStatus').className='status'; $('#plugStatus').textContent=`UG will open ${pl.name} at this endpoint and pass trip context in the URL. Keys are used only if the endpoint is an API.`;
+  $('#plugFoot').textContent=pl.url; $('#plugModal').hidden=false; $('#plugEndpoint').focus();
+}
+$('#plugClose').addEventListener('click',()=>$('#plugModal').hidden=true);
+$('#plugModal').addEventListener('click',e=>{ if(e.target===$('#plugModal')) $('#plugModal').hidden=true; });
+$('#plugSave').addEventListener('click',()=>{ const ep=$('#plugEndpoint').value.trim(); if(!/^https?:\/\//.test(ep)){ $('#plugStatus').textContent='Endpoint must start with http:// or https://'; return; } store('plug:'+plugEditing,{on:true,endpoint:ep,key:$('#plugKey').value.trim()}); $('#plugStatus').className='status ok'; $('#plugStatus').textContent='Connected. Hooks are live across the app.'; renderPlugins(); setTimeout(()=>$('#plugModal').hidden=true,900); toast(`${PLUGINS.find(p=>p.id===plugEditing).name} connected.`); });
+$('#plugForget').addEventListener('click',()=>{ try{ localStorage.removeItem('ug:plug:'+plugEditing); }catch(e){} renderPlugins(); $('#plugModal').hidden=true; });
+/* Hooks that appear elsewhere once a plug-in is on */
+function hookLink(id,label,ctx){ const pl=PLUGINS.find(p=>p.id===id); const st=plugState(id); if(!(st&&st.on)) return ''; return `<a class="hook" style="--pc:${pl.colour}" href="${pl.open(ctx)}" target="_blank" rel="noopener"><i></i>${label}</a>`; }
+function renderHooks(){
+  document.querySelectorAll('.trip').forEach(t=>{ const old=t.querySelector('.hooks'); if(old) old.remove(); const r=t.querySelector('.route').textContent; const html=hookLink('felt','Map on Felt',{q:r})+hookLink('tazama','Tazama playlist',{trip:r,minutes:t.dataset.min||''}); if(html){ const h=document.createElement('div'); h.className='hooks'; h.innerHTML=html; t.children[1].appendChild(h);} });
+  const it=$('#itinHooks')||(()=>{ const h=document.createElement('div'); h.id='itinHooks'; h.className='hooks'; $('#itinNote').before(h); return h; })();
+  it.innerHTML = hookLink('felt','Map the weekend',{q:dest.name}) + hookLink('infrared','Route comfort',{}) + hookLink('tazama','Watch room for the drive',{trip:dest.name});
+  const dh=$('#dayHooks')||(()=>{ const h=document.createElement('div'); h.id='dayHooks'; h.className='hooks'; $('#day').after(h); return h; })();
+  dh.innerHTML = hookLink('infrared','Check the day\'s heat',{}) + hookLink('cephable','Hands-free today',{});
+}
+
+/* =====================================================================
+   Ticker, partners, strip, theme, reveal
+   ===================================================================== */
+function renderTicker(){
+  const items = [];
+  for (const r of ROUTES.filter(x=>x.inter||x.entebbe)){ const c=poolSeatCost(r,4); items.push(`<span>${r.from} → ${r.to} <b>UGX ${fmt(c.riderPays)}</b> pooled</span>`); }
+  const q = quoteAll(ROUTES[1],'off',false,1)[0]; items.push(`<span>Ntinda → CBD cheapest now <b>${q.p.name} UGX ${fmt(q.price)}</b></span>`);
+  items.push(`<span>Bwindi gorilla permit, EAC citizens <b>UGX 300,000</b></span>`,`<span>Entebbe expressway toll <b>UGX 5,000</b></span>`,`<span>Fuel today <b>UGX ${fmt(FUEL_UGX_PER_L)}/L</b></span>`);
+  $('#ticker').innerHTML = items.join('') + items.join('');
+}
+function renderPartners(){
+  $('#partnerList').innerHTML = PROVIDERS.filter(p=>!p.ug&&p.link).map(p=>`<span><i class="pm" style="background:${p.colour}">${LOGOS[p.id]||LOGOS.generic(p.name)}</i>${p.name} · ${p.sub}</span>`).join('') + [['Uganda Wildlife Authority','#2F6B3A','UWA'],['SafariShare','#0EA5E9','SS'],['Flutterwave','#F5A623','FW'],['MTN MoMo','#FFCB05','MoMo','#1a1400'],['Airtel Money','#E4002B','airtel']].map(([n,c,t,ink])=>`<span><i class="pm" style="background:${c}">${LOGOS.generic(t,ink)}</i>${n}</span>`).join('');
+}
+function initStrip(){
+  const d=new Date(); d.setDate(d.getDate()+ (5-d.getDay()+7)%7 || 7); $('#sDate').value=d.toISOString().slice(0,10);
+  $('#sFrom').addEventListener('change', ()=>syncTo('sFrom','sTo'));
+  $('#cFrom').addEventListener('change', ()=>{ syncTo('cFrom','cTo'); renderCompare(); });
+  $('#cTo').addEventListener('change', renderCompare);
+  ['cPax','cRain','cSplit'].forEach(id=>$('#'+id).addEventListener('input', renderCompare));
+  $('#segTime').addEventListener('click', e=>{ const b=e.target.closest('button'); if(!b) return; $('#segTime').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); state.time=b.dataset.v; renderCompare(); });
+  $('#segMode').addEventListener('click', e=>{ const b=e.target.closest('button'); if(!b) return; $('#segMode').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); state.mode=b.dataset.v; renderCompare(); });
+  let verb='ride';
+  $('.verbs').addEventListener('click', e=>{ const b=e.target.closest('button'); if(!b) return; $('.verbs').querySelectorAll('button').forEach(x=>{x.classList.toggle('on',x===b); x.setAttribute('aria-selected',x===b);}); verb=b.dataset.verb; $('#stripGo').textContent={ride:'Show prices',pool:'Find a seat',rent:'See the fleet',explore:'Price the weekend'}[verb]; });
+  $('#stripForm').addEventListener('submit', e=>{
+    e.preventDefault();
+    const rid = $('#sTo').value; const r = ROUTES.find(x=>x.id===rid);
+    const hh = parseInt(($('#sTime').value||'12:00').slice(0,2),10);
+    if (verb==='ride'){
+      $('#cFrom').value=r.from; syncTo('cFrom','cTo'); $('#cTo').value=rid;
+      state.time = (hh>=7&&hh<10)||(hh>=17&&hh<20) ? 'peak' : (hh>=21||hh<5) ? 'night' : 'off';
+      $('#segTime').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x.dataset.v===state.time));
+      renderCompare(); location.hash='#compare';
+    } else if (verb==='pool'){ if(r.inter||r.entebbe){ $('#pRoute').value=rid; renderSplit(); } location.hash='#pool'; }
+    else if (verb==='rent'){ location.hash='#rent'; }
+    else { const d=DESTS.find(x=>x.id===rid); if(d){ dest=d; renderDests(); renderItin(); } location.hash='#explore'; }
+  });
+  ['pRoute','pSeats','pCar','pWhen'].forEach(id=>$('#'+id).addEventListener('input', renderSplit));
+}
+function initTheme(){
+  const root=document.documentElement;
+  const saved = load('theme',null); if (saved) root.setAttribute('data-theme',saved);
+  $('#themeToggle').addEventListener('click', ()=>{
+    const dark = getComputedStyle(root).getPropertyValue('color-scheme').trim()==='dark';
+    const next = dark?'light':'dark'; root.setAttribute('data-theme',next); store('theme',next); scene && scene.recolour();
+  });
+}
+function initVerbs(){
+  const words=[...document.querySelectorAll('#verbs .w')]; const tagline=$('#tagline'); const h1=$('#verbs');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Nav tagline echoes the headline only once the headline has scrolled away.
+  if (!reduce && 'IntersectionObserver' in window){
+    tagline.classList.add('hidden');
+    new IntersectionObserver(en=>en.forEach(x=>tagline.classList.toggle('hidden', x.isIntersecting)),{threshold:0}).observe(h1);
+  }
+  if (reduce) return;
+  // After the intro, the highlight moves Ride → Pool → Rent, slowly. Hovering a word holds it.
+  let i=1, hold=null;
+  const set=n=>{ i=n; words.forEach((w,k)=>w.classList.toggle('hl',k===i)); };
+  words.forEach((w,k)=>{ w.addEventListener('pointerenter',()=>{ hold=k; set(k); }); w.addEventListener('pointerleave',()=>{ hold=null; }); });
+  setTimeout(()=>{ set(1); setInterval(()=>{ if(hold===null && !document.hidden) set((i+1)%3); }, 4200); }, 3600);
+}
+function initReveal(){
+  const els=[...document.querySelectorAll('.rv')];
+  if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  els.forEach(e=>{ const r=e.getBoundingClientRect(); if(r.top>innerHeight) e.classList.add('pending'); });
+  const io=new IntersectionObserver(en=>en.forEach(x=>{ if(x.isIntersecting){ x.target.classList.remove('pending'); io.unobserve(x.target);} }),{threshold:.08});
+  els.forEach(e=>io.observe(e));
+}
+
+/* =====================================================================
+   The hero: a particle map of Uganda (Three.js r128). Antigravity-style soft particles with ripple,
+   breath, pointer drift and scroll inertia; landmark nodes projected to HTML pins.
+   ===================================================================== */
+let scene = null;
+function initScene(){
+  const canvas = $('#scene'); const stage = $('#stage');
+  if (!window.THREE || !canvas.getContext('webgl')){ canvas.style.display='none'; $('#hint').textContent='3D VIEW NEEDS WEBGL'; return; }
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const renderer = new THREE.WebGLRenderer({canvas, alpha:true, antialias:true, powerPreference:'high-performance'});
+  renderer.setPixelRatio(Math.min(devicePixelRatio||1, 2));
+  const sc = new THREE.Scene();
+  const cam = new THREE.PerspectiveCamera(38, 1, 0.1, 100); cam.position.set(0,0,10.5);
+  const group = new THREE.Group(); sc.add(group);
+
+  // Map projection: lon/lat -> plane centred on Uganda (approx equirectangular; fine at the equator)
+  const cx=32.28, cy=1.37, S=1.15;
+  const P = (lon,lat)=>[(lon-cx)*S,(lat-cy)*S];
+  const inPoly = (x,y,poly)=>{ let ins=false; for(let i=0,j=poly.length-1;i<poly.length;j=i++){ const [xi,yi]=poly[i],[xj,yj]=poly[j]; if(((yi>y)!==(yj>y)) && (x < (xj-xi)*(y-yi)/(yj-yi)+xi)) ins=!ins; } return ins; };
+  const outline = UG_LAND.map(([a,b])=>P(a,b)); const lakes = UG_LAKES.map(r=>r.map(([a,b])=>P(a,b)));
+
+  // Soft round sprite texture
+  const tex = (()=>{ const c=document.createElement('canvas'); c.width=c.height=64; const g=c.getContext('2d'); const r=g.createRadialGradient(32,32,0,32,32,32); r.addColorStop(0,'rgba(255,255,255,1)'); r.addColorStop(.35,'rgba(255,255,255,.9)'); r.addColorStop(1,'rgba(255,255,255,0)'); g.fillStyle=r; g.fillRect(0,0,64,64); const t=new THREE.CanvasTexture(c); return t; })();
+
+  // Fill polygon with particles (land) and a sparser, cooler set for the lake
+  const land=[], water=[];
+  const minX=Math.min(...outline.map(p=>p[0])), maxX=Math.max(...outline.map(p=>p[0])), minY=Math.min(...outline.map(p=>p[1])), maxY=Math.max(...outline.map(p=>p[1]));
+  let tries=0; while (land.length<3000 && tries<60000){ tries++; const x=minX+Math.random()*(maxX-minX), y=minY+Math.random()*(maxY-minY); if(!inPoly(x,y,outline)) continue; if(lakes.some(l=>inPoly(x,y,l))){ if(Math.random()<0.3) water.push([x,y]); continue; } land.push([x,y]); }
+  // edge emphasis: sample along the outline
+  const along=(ring,density,keep)=>{ const out=[]; for(let i=0;i<ring.length;i++){ const a=ring[i], b=ring[(i+1)%ring.length]; const n=Math.max(1,Math.ceil(Math.hypot(b[0]-a[0],b[1]-a[1])*density)); for(let k=0;k<n;k++){ const t=k/n; const pt=[a[0]+(b[0]-a[0])*t, a[1]+(b[1]-a[1])*t]; if(!keep||keep(pt)) out.push(pt); } } return out; };
+  const edge=along(outline,26); const shore=lakes.flatMap(l=>along(l,20,pt=>inPoly(pt[0],pt[1],outline)));
+
+  const mk = (pts, size, opacity)=>{
+    const g=new THREE.BufferGeometry(); const n=pts.length; const pos=new Float32Array(n*3), base=new Float32Array(n*3), col=new Float32Array(n*3), ph=new Float32Array(n);
+    for(let i=0;i<n;i++){ const z=(Math.random()-.5)*.5; pos.set([pts[i][0],pts[i][1],z],i*3); base.set([pts[i][0],pts[i][1],z],i*3); ph[i]=Math.random()*Math.PI*2; }
+    g.setAttribute('position',new THREE.BufferAttribute(pos,3)); g.setAttribute('color',new THREE.BufferAttribute(col,3));
+    const m=new THREE.PointsMaterial({size, map:tex, transparent:true, opacity, vertexColors:true, depthWrite:false, sizeAttenuation:true});
+    const p=new THREE.Points(g,m); p.userData={base,ph,n}; group.add(p); return p;
+  };
+  const landP = mk(land, .1, .95), edgeP = mk(edge, .16, 1), waterP = mk(water, .08, .55), shoreP = mk(shore, .12, .9);
+
+  // Landmarks
+  const pinsEl = $('#pins'); const pins = PLACES.map(pl=>{ const [x,y]=P(pl.lon,pl.lat); const v=new THREE.Vector3(x,y,.35); const el=document.createElement('button'); el.type='button'; el.className='pin'; el.style.setProperty('--i', PLACES.indexOf(pl)); el.innerHTML=`<span class="dot"></span><span class="lbl">${pl.name}</span>`; el.setAttribute('aria-label',pl.name+': '+pl.sub); pinsEl.appendChild(el); return {pl,v,el}; });
+  const nodeGeo = new THREE.BufferGeometry(); nodeGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(pins.flatMap(p=>[p.v.x,p.v.y,p.v.z])),3));
+  const nodeMat = new THREE.PointsMaterial({size:.34, map:tex, transparent:true, opacity:.9, depthWrite:false, color:new THREE.Color('#D2202F')});
+  group.add(new THREE.Points(nodeGeo,nodeMat));
+
+  // Colours from theme tokens
+  function recolour(){
+    const cs=getComputedStyle(document.documentElement); const c1=new THREE.Color(cs.getPropertyValue('--particle').trim()), c2=new THREE.Color(cs.getPropertyValue('--particle-2').trim()), c3=new THREE.Color(cs.getPropertyValue('--particle-3').trim()), cw=new THREE.Color(cs.getPropertyValue('--crane').trim());
+    const dark = cs.getPropertyValue('color-scheme').trim()==='dark';
+    const paint=(p,fn)=>{ const col=p.geometry.attributes.color; for(let i=0;i<p.userData.n;i++){ const c=fn(i,p.userData.base[i*3],p.userData.base[i*3+1]); col.setXYZ(i,c.r,c.g,c.b); } col.needsUpdate=true; p.material.blending = dark?THREE.AdditiveBlending:THREE.NormalBlending; };
+    paint(landP,(i,x,y)=>{ const t=(y-(-2.8))/6.5; const c=c1.clone().lerp(c2, clamp(1-t,0,1)*.85); if(Math.random()<.04) return c3.clone(); return c; });
+    paint(edgeP,()=>c2.clone());
+    paint(waterP,()=>cw.clone()); paint(shoreP,()=>cw.clone().lerp(c1,.35));
+    nodeMat.color=c3;
+  }
+  recolour();
+
+  // Interaction state
+  const target=new THREE.Vector2(0,0), rot=new THREE.Vector2(0.15,-0.25), drag={on:false,x:0,y:0,rx:0,ry:0};
+  group.rotation.set(reduce?0.15:0.95, reduce?-0.25:-1.15, 0);
+  const t0=performance.now(); let baseZ=10.5;
+  const fadeTargets=[[landP.material,.95],[edgeP.material,1],[waterP.material,.55],[shoreP.material,.9],[nodeMat,.9]]; if(!reduce) fadeTargets.forEach(([m])=>m.opacity=0);
+  let scrollV=0, lastY=scrollY, active=null;
+  canvas.addEventListener('pointermove', e=>{ const r=canvas.getBoundingClientRect(); target.set(((e.clientX-r.left)/r.width)*2-1, -(((e.clientY-r.top)/r.height)*2-1)); if(drag.on){ rot.y = drag.ry + (e.clientX-drag.x)*0.006; rot.x = clamp(drag.rx + (e.clientY-drag.y)*0.006,-1,1); } });
+  canvas.addEventListener('pointerdown', e=>{ drag.on=true; drag.x=e.clientX; drag.y=e.clientY; drag.rx=rot.x; drag.ry=rot.y; canvas.classList.add('dragging'); canvas.setPointerCapture(e.pointerId); });
+  const up=()=>{ drag.on=false; canvas.classList.remove('dragging'); };
+  canvas.addEventListener('pointerup', up); canvas.addEventListener('pointercancel', up);
+  addEventListener('scroll', ()=>{ scrollV += (scrollY-lastY)*0.0025; lastY=scrollY; }, {passive:true});
+
+  const card=$('#pinCard');
+  function showPin(p){ active=p; pins.forEach(q=>q.el.classList.toggle('active',q===p)); const r=ROUTES.find(x=>x.id===p.pl.route); const c=r?poolSeatCost(r,4):null; card.hidden=false; card.innerHTML=`<h4>${p.pl.name}</h4><p>${p.pl.sub}</p><div class="row"><span>${r?r.km+' km · ~'+Math.round(r.min/60*10)/10+' h':''}</span><span>${c?'pool seat UGX '+fmt(c.riderPays):''}</span></div><div style="margin-top:10px;display:flex;gap:8px"><a class="btn small primary" href="#compare" data-route="${p.pl.route}">Compare rides</a>${DESTS.find(d=>d.id===p.pl.route)?`<a class="btn small" href="#explore" data-dest="${p.pl.route}">Plan weekend</a>`:''}</div>`; }
+  pins.forEach(p=>{ p.el.addEventListener('mouseenter',()=>showPin(p)); p.el.addEventListener('focus',()=>showPin(p)); p.el.addEventListener('click',()=>showPin(p)); });
+  card.addEventListener('click', e=>{ const a=e.target.closest('a'); if(!a) return; if(a.dataset.route){ const r=ROUTES.find(x=>x.id===a.dataset.route); if(r){ $('#cFrom').value=r.from; syncTo('cFrom','cTo'); $('#cTo').value=r.id; renderCompare(); } } if(a.dataset.dest){ const d=DESTS.find(x=>x.id===a.dataset.dest); if(d){ dest=d; renderDests(); renderItin(); } } });
+  showPin(pins[0]);
+
+  function resize(){ const w=stage.clientWidth, h=stage.clientHeight; renderer.setSize(w,h,false); cam.aspect=w/h; cam.updateProjectionMatrix(); const fit = Math.max(6.2, 7.6*(1/Math.min(1,cam.aspect))); baseZ = fit + (w<640?2.2:1.6); cam.position.z = baseZ; }
+  new ResizeObserver(resize).observe(stage); resize();
+
+  const tmp=new THREE.Vector3(); let last=performance.now();
+  function frame(now){
+    const t=now*0.001, dt=Math.min((now-last)*0.001,.1); last=now;
+    if (!reduce){ const k=Math.min(1,(now-t0)/2400); const e=1-Math.pow(1-k,4); cam.position.z = baseZ + (1-e)*3.4; if (k<1){ fadeTargets.forEach(([m,o])=>m.opacity=o*Math.min(1,k*1.6)); } }
+    // pointer drift + scroll inertia
+    const tx = rot.y + target.x*0.18, ty = rot.x - target.y*0.14 + scrollV;
+    const ease = drag.on ? 0.18 : 0.045; group.rotation.y += (tx-group.rotation.y)*ease; group.rotation.x += (ty-group.rotation.x)*ease;
+    scrollV *= 0.9;
+    if (!reduce){
+      const breath = 1 + 0.015*Math.sin(t*0.6);
+      for (const p of [landP,edgeP,waterP,shoreP]){ const pos=p.geometry.attributes.position, b=p.userData.base, ph=p.userData.ph; for(let i=0;i<p.userData.n;i++){ const bx=b[i*3],by=b[i*3+1],bz=b[i*3+2]; const d=Math.hypot(bx,by); const wave=Math.sin(d*2.2 - t*1.6 + ph[i])*0.03; pos.setXYZ(i, bx*breath + Math.sin(t*0.7+ph[i])*0.012, by*breath + Math.cos(t*0.6+ph[i])*0.012, bz + wave + Math.sin(t*0.9+ph[i])*0.02); } pos.needsUpdate=true; }
+    }
+    renderer.render(sc,cam);
+    // project pins
+    const w=stage.clientWidth,h=stage.clientHeight;
+    for (const p of pins){ tmp.copy(p.v).applyMatrix4(group.matrixWorld).project(cam); const x=(tmp.x*.5+.5)*w, y=(-tmp.y*.5+.5)*h; p.el.style.left=x+'px'; p.el.style.top=y+'px'; const behind = tmp.z>0.999; p.el.classList.toggle('behind', behind); }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', recolour);
+  scene = {recolour};
+}
+
+/* =====================================================================
+   Boot
+   ===================================================================== */
+fillRouteSelects();
+initStrip();
+initTheme();
+$('#statProviders').textContent = PROVIDERS.filter(p=>p.kind!=='rent').length;
+renderTicker(); renderPartners();
+$('#cFrom').value='Ntinda'; syncTo('cFrom','cTo'); renderCompare();
+renderTrips(); renderSplit();
+renderFleet();
+renderDests(); renderItin();
+renderDay();
+renderPlugins();
+initReveal(); initVerbs();
+try { initScene(); } catch (e) { console.warn('scene', e); $('#hint').textContent='3D VIEW UNAVAILABLE'; }
+</script>
+</body>
+</html>

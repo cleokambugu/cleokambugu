@@ -1,0 +1,52 @@
+<!doctype html><meta charset="utf-8">
+<title>UG end card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@88..120,400..800&family=Martian+Mono:wdth,wght@88..100,400..500&display=swap">
+<style>
+  /* Same tokens as the product: ground, ink, the yellow that means action.
+     ?w= and ?h= set the card size; every dimension scales off --k, which is measured
+     against the card's short side so the 9:16 card is composed rather than letterboxed. */
+  :root{--ground:#0F0C0A;--ink:#F4ECDD;--yellow:#F2C200;--red:#D2202F;--k:1}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{background:var(--ground);color:var(--ink);overflow:hidden}
+  body{display:grid;place-items:center;font-family:Archivo,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  .glow{position:absolute;inset:0;background:radial-gradient(46% 46% at 50% 42%,rgba(242,194,0,.13) 0%,rgba(15,12,10,0) 70%)}
+  .col{position:relative;display:flex;flex-direction:column;align-items:center;
+       gap:calc(34px*var(--k));text-align:center;padding:0 calc(60px*var(--k))}
+  svg{width:calc(150px*var(--k));height:calc(150px*var(--k));color:var(--ink)}
+  h1{font-size:calc(132px*var(--k));font-weight:900;letter-spacing:-.025em;line-height:1;font-stretch:118%}
+  .verbs{font-size:calc(44px*var(--k));font-weight:800;letter-spacing:-.01em;line-height:1.25;font-stretch:112%}
+  .verbs i{font-style:normal;color:var(--yellow)}
+  .rule{width:calc(132px*var(--k));height:2px;background:linear-gradient(90deg,transparent,rgba(244,236,221,.45),transparent)}
+  .tag{font:500 calc(21px*var(--k))/1.5 "Martian Mono",ui-monospace,monospace;color:rgba(244,236,221,.62);letter-spacing:.04em}
+  .fine{position:absolute;bottom:calc(54px*var(--k));left:0;right:0;text-align:center;
+        font:500 calc(15px*var(--k))/1 "Martian Mono",ui-monospace,monospace;color:rgba(244,236,221,.34);letter-spacing:.03em}
+</style>
+<div class="glow"></div>
+<div class="col">
+  <!-- the crest, the same 64-unit construction the app and the films draw -->
+  <svg viewBox="0 0 64 64" role="img" aria-label="UG crest">
+    <path d="M28.5 40.5 Q22 31 12.5 17" fill="none" stroke="currentColor" stroke-width="7.5" stroke-linecap="round"/>
+    <path d="M32 38.5 Q32 24 32 8.5" fill="none" stroke="#F2C200" stroke-width="7.5" stroke-linecap="round"/>
+    <path d="M35.5 40.5 Q42 31 51.5 17" fill="none" stroke="#D2202F" stroke-width="7.5" stroke-linecap="round"/>
+    <circle cx="32" cy="48" r="7.5" fill="currentColor"/><circle cx="32" cy="48" r="3" fill="#F2C200"/>
+  </svg>
+  <h1>UG</h1>
+  <div class="verbs"><i>Genda.</i> Gabana. Pangisa. Tuma.</div>
+  <div class="rule"></div>
+  <div class="tag">41 languages &middot; one app &middot; Uganda</div>
+</div>
+<div class="fine">Prototype. Estimates, sandbox payments.</div>
+<script>
+  const q = new URLSearchParams(location.search);
+  const w = +(q.get('w') || 1920), h = +(q.get('h') || 1080);
+  document.documentElement.style.width = document.body.style.width = w + 'px';
+  document.documentElement.style.height = document.body.style.height = h + 'px';
+  // Landscape scales off the short side. Portrait would then leave the crest floating in
+  // a tall empty frame at the same size it holds across 1920 px, which reads as a 16:9
+  // card dropped into a phone — so the portrait card is set 45% larger against its own
+  // width and the verbs wrap, which is a composition rather than a letterbox.
+  const k = h > w ? (w / 1080) * 1.45 : h === w ? (w / 1080) * 1.30 : Math.min(w, h) / 1080;
+  document.documentElement.style.setProperty('--k', k.toFixed(4));
+</script>

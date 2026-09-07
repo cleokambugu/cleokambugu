@@ -1,0 +1,52 @@
+name: UG site
+
+# The product is one HTML file, so a single syntax error is a blank page and a shadowed variable is
+# a section that silently stops translating. Neither is visible in a diff; both are visible to a
+# browser. These tests drive the real file in real Chromium — no build step, no test hooks in the
+# shipped artefact.
+#
+# i18n-build.cjs is in the path filter because this workflow is the only thing that checks the
+# generator still reproduces the committed site/index.html. Filtering on the output alone means a
+# change to the generator skips its own test.
+
+on:
+  push:
+    paths: ['projects/ug/site/**', 'projects/ug/data/i18n/**', 'projects/ug/showreel/*.html', 'projects/ug/showreel/voice/**', 'projects/ug/server/scripts/i18n-build.cjs', 'projects/ug/server/scripts/i18n-coverage.cjs', '.github/workflows/ug-site.yml']
+  pull_request:
+    paths: ['projects/ug/site/**', 'projects/ug/data/i18n/**', 'projects/ug/showreel/*.html', 'projects/ug/showreel/voice/**', 'projects/ug/server/scripts/i18n-build.cjs', 'projects/ug/server/scripts/i18n-coverage.cjs', '.github/workflows/ug-site.yml']
+  workflow_dispatch:
+
+jobs:
+  client:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '22' }
+      - name: The dictionaries agree with the site
+        working-directory: projects/ug
+        run: node server/scripts/i18n-build.cjs
+      # data/languages.json carries a generation date, so only the shipped file is compared
+      - name: The site is unchanged by its own build
+        working-directory: projects/ug
+        run: git diff --exit-code site/index.html
+      # A key table that says "missing 15 of 278" is true and useless: most of what the page prints is
+      # not a key at all, it is English written into a render function, where no dictionary can reach
+      # it. This counts what a reader actually sees and holds the number down, so the gap can only
+      # shrink. Raise the ceiling only by translating something, never to make a build pass.
+      - name: Untranslated text a reader still sees
+        working-directory: projects/ug
+        run: node server/scripts/i18n-coverage.cjs --max 116
+
+      - name: The films speak the script
+        working-directory: projects/ug/showreel
+        run: python3 voice/sync-voice.py --check
+      - name: Install a browser
+        working-directory: projects/ug/site
+        run: |
+          npm init -y > /dev/null
+          npm i --no-save playwright@1.49.1
+          npx playwright install --with-deps chromium
+      - name: Drive the real file
+        working-directory: projects/ug
+        run: node --test site/test/*.test.mjs

@@ -1,0 +1,60 @@
+<!doctype html><meta charset="utf-8"><title>captions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@88..120,400..900&family=Martian+Mono:wdth,wght@88..100,400..500&display=swap">
+<style>
+  /* Lower-third captions, so the ad reads with the sound off. Every line below is copy the
+     product already uses — the Atlas headline, the Ride caption, the Pool caption, the gate.
+     ?w= and ?h= set the plate size; everything scales off --k so the 9:16 cut is re-set for
+     the phone rather than being the 16:9 plate scaled down. */
+  :root{--ink:#F4ECDD;--yellow:#F2C200;--ground:#0F0C0A;--k:1}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{background:transparent}
+  body{font-family:Archivo,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  .cap{position:absolute;left:calc(96px*var(--k));right:calc(96px*var(--k));
+       bottom:calc(112px*var(--k));display:none}
+  .cap.on{display:block}
+  /* a soft scrim so the type holds over the busy compare desk */
+  .scrim{position:absolute;left:0;right:0;bottom:0;height:calc(420px*var(--k));display:none;
+    background:linear-gradient(to top,rgba(15,12,10,.86) 0%,rgba(15,12,10,.55) 42%,rgba(15,12,10,0) 100%)}
+  .scrim.on{display:block}
+  .kick{font:500 calc(19px*var(--k))/1 "Martian Mono",ui-monospace,monospace;
+    letter-spacing:.13em;text-transform:uppercase;color:var(--yellow);margin-bottom:calc(20px*var(--k))}
+  .line{font-weight:800;font-stretch:112%;letter-spacing:-.018em;line-height:1.06;
+    font-size:calc(74px*var(--k));color:var(--ink);text-wrap:balance;max-width:calc(1180px*var(--k))}
+  .line em{font-style:normal;color:var(--yellow)}
+  /* 9:16 is not a crop of 16:9: the plate is narrower, so the type is set larger against
+     its own measure and the scrim is taller to clear a phone's bottom furniture. */
+  body.vert .line{font-size:calc(96px*var(--k));max-width:100%}
+  body.vert .kick{font-size:calc(26px*var(--k));margin-bottom:calc(26px*var(--k))}
+  body.vert .cap{bottom:calc(300px*var(--k))}
+  body.vert .scrim{height:calc(900px*var(--k))}
+  /* 1:1 is the same phone type on a third of the height, so the plate sits lower and the
+     scrim is shorter — a 900 px scrim would be five-sixths of a square frame. */
+  body.sq .cap{bottom:calc(104px*var(--k))}
+  body.sq .line{font-size:calc(76px*var(--k))}
+  body.sq .kick{font-size:calc(22px*var(--k));margin-bottom:calc(18px*var(--k))}
+  body.sq .scrim{height:calc(640px*var(--k))}
+</style>
+<div class="scrim" id="scrim"></div>
+<div class="cap" id="c0"><div class="kick">41 languages &middot; 7 regions</div><div class="line">The app speaks <em>your</em> language.</div></div>
+<div class="cap" id="c1"><div class="kick">The Atlas</div><div class="line">Every way to move in Uganda.</div></div>
+<div class="cap" id="c2"><div class="kick">The compare desk</div><div class="line">Every fare, ranked. <em>One screen.</em></div></div>
+<div class="cap" id="c3"><div class="kick">The Virtual Stage</div><div class="line">The price falls as the car fills.</div></div>
+<script>
+  const q = new URLSearchParams(location.search);
+  const w = +(q.get('w') || 1920), h = +(q.get('h') || 1080);
+  document.documentElement.style.width = document.body.style.width = w + 'px';
+  document.documentElement.style.height = document.body.style.height = h + 'px';
+  // Landscape scales off 1920. Portrait and square scale off their own 1080 width instead
+  // — scaling a phone plate down by 0.5625 would put 54 px type on a 1080-wide frame,
+  // which is the "comfortable on a desktop, unreadable in a feed" failure the sheet
+  // marked down. The .vert rules above are written in those 1080-wide units.
+  const narrow = h >= w;
+  document.documentElement.style.setProperty('--k', (narrow ? w / 1080 : w / 1920).toFixed(4));
+  if (narrow) document.body.classList.add('vert');
+  if (h === w) document.body.classList.add('sq');
+  const i = q.get('i');
+  if (i !== null) { document.getElementById('c' + i)?.classList.add('on');
+                    document.getElementById('scrim').classList.add('on'); }
+</script>

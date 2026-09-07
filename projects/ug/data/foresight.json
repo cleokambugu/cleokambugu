@@ -1,0 +1,769 @@
+{
+  "generated": "2026-09-03",
+  "source": "projects/ug/site/index.html data block",
+  "note": "Every figure is an estimate. prov fields: snippet = read from a search snippet or third-party page, modelled = UG assumption, official = read on the operator page, UG model = UG own formula. See docs/arbitrage-model.md and docs/atlas.md.",
+  "vehicle_classes": {
+    "boda": "Boda",
+    "car": "Car",
+    "minibus": "Minibus · 14 seats or 1.5 t",
+    "pickup": "Pickup · 1 t",
+    "lorry": "Lorry · 3–7 t",
+    "bus": "Bus"
+  },
+  "seasons": [
+    {
+      "crop": "Mangoes",
+      "region": "Central and Eastern",
+      "towns": [
+        "Masaka",
+        "Luwero",
+        "Soroti",
+        "Lira"
+      ],
+      "months": [
+        11,
+        12,
+        1
+      ],
+      "vehicle": "minibus",
+      "loadsPerDay": 14,
+      "note": "Ripe from November; Soroti and Lira in December"
+    },
+    {
+      "crop": "Coffee (Robusta harvest)",
+      "region": "Central and Western",
+      "towns": [
+        "Masaka",
+        "Mukono",
+        "Mbarara",
+        "Bushenyi"
+      ],
+      "months": [
+        5,
+        6,
+        7,
+        11,
+        12
+      ],
+      "vehicle": "lorry",
+      "loadsPerDay": 22,
+      "note": "Two flushes: May to July, and November to December"
+    },
+    {
+      "crop": "Arabica coffee",
+      "region": "Elgon",
+      "towns": [
+        "Mbale",
+        "Sipi"
+      ],
+      "months": [
+        10,
+        11,
+        12,
+        1
+      ],
+      "vehicle": "pickup",
+      "loadsPerDay": 9,
+      "note": "Slopes of Elgon"
+    },
+    {
+      "crop": "Maize (first season)",
+      "region": "Eastern and Northern",
+      "towns": [
+        "Mbale",
+        "Tororo",
+        "Soroti",
+        "Lira",
+        "Gulu"
+      ],
+      "months": [
+        7,
+        8
+      ],
+      "vehicle": "lorry",
+      "loadsPerDay": 30,
+      "note": "Harvest after the long rains"
+    },
+    {
+      "crop": "Maize (second season)",
+      "region": "Eastern and Northern",
+      "towns": [
+        "Mbale",
+        "Tororo",
+        "Soroti",
+        "Lira",
+        "Gulu"
+      ],
+      "months": [
+        12,
+        1
+      ],
+      "vehicle": "lorry",
+      "loadsPerDay": 26,
+      "note": "Harvest after the short rains"
+    },
+    {
+      "crop": "Matooke",
+      "region": "Western and Central",
+      "towns": [
+        "Mbarara",
+        "Bushenyi",
+        "Masaka",
+        "Mukono"
+      ],
+      "months": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "vehicle": "lorry",
+      "loadsPerDay": 40,
+      "note": "Year-round; peaks in the dry months"
+    },
+    {
+      "crop": "Rice",
+      "region": "Eastern",
+      "towns": [
+        "Tororo",
+        "Mbale",
+        "Soroti"
+      ],
+      "months": [
+        6,
+        7,
+        12,
+        1
+      ],
+      "vehicle": "lorry",
+      "loadsPerDay": 12,
+      "note": "Doho and Kibimba schemes"
+    },
+    {
+      "crop": "Fish (Nile perch, tilapia)",
+      "region": "Lake Victoria and Albert",
+      "towns": [
+        "Entebbe",
+        "Jinja",
+        "Masaka",
+        "Hoima"
+      ],
+      "months": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "vehicle": "pickup",
+      "loadsPerDay": 18,
+      "note": "Daily landings; iced pickups before 07:00"
+    },
+    {
+      "crop": "Cassava",
+      "region": "Northern",
+      "towns": [
+        "Lira",
+        "Gulu",
+        "Arua"
+      ],
+      "months": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "vehicle": "lorry",
+      "loadsPerDay": 10,
+      "note": "Year-round"
+    },
+    {
+      "crop": "Tea",
+      "region": "Western",
+      "towns": [
+        "Fort Portal",
+        "Bushenyi",
+        "Kasese"
+      ],
+      "months": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "vehicle": "lorry",
+      "loadsPerDay": 16,
+      "note": "Plucked every week; wetter months heavier"
+    },
+    {
+      "crop": "Beans and groundnuts",
+      "region": "Northern and Eastern",
+      "towns": [
+        "Gulu",
+        "Lira",
+        "Soroti",
+        "Arua"
+      ],
+      "months": [
+        7,
+        8,
+        12
+      ],
+      "vehicle": "pickup",
+      "loadsPerDay": 8,
+      "note": "After each rains"
+    },
+    {
+      "crop": "Pineapples",
+      "region": "Central",
+      "towns": [
+        "Masaka",
+        "Mukono",
+        "Kayunga"
+      ],
+      "months": [
+        6,
+        7,
+        8,
+        12,
+        1
+      ],
+      "vehicle": "minibus",
+      "loadsPerDay": 11,
+      "note": "Kayunga and Masaka belts"
+    },
+    {
+      "crop": "Cattle and goats to market",
+      "region": "Karamoja and Western",
+      "towns": [
+        "Moroto",
+        "Kotido",
+        "Mbarara"
+      ],
+      "months": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "vehicle": "lorry",
+      "loadsPerDay": 6,
+      "note": "Market days; festive peaks in December"
+    },
+    {
+      "crop": "Sugarcane",
+      "region": "Busoga",
+      "towns": [
+        "Jinja"
+      ],
+      "months": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "vehicle": "lorry",
+      "loadsPerDay": 35,
+      "note": "Kakira and Lugazi; year-round"
+    }
+  ],
+  "venues": [
+    {
+      "name": "Entebbe Airport arrivals",
+      "town": "Entebbe",
+      "lon": 32.44,
+      "lat": 0.04,
+      "days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "hours": [
+        [
+          22,
+          24
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          12,
+          15
+        ]
+      ],
+      "people": 900,
+      "vehicle": "car",
+      "note": "Evening and night arrival banks; passengers want a car, not a boda"
+    },
+    {
+      "name": "Entebbe Airport departures",
+      "town": "Entebbe",
+      "lon": 32.44,
+      "lat": 0.04,
+      "days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "hours": [
+        [
+          3,
+          6
+        ],
+        [
+          14,
+          17
+        ]
+      ],
+      "people": 700,
+      "vehicle": "car",
+      "note": "Three hours before the morning and afternoon banks"
+    },
+    {
+      "name": "Mulago Hospital visiting hours",
+      "town": "Kampala",
+      "lon": 32.575,
+      "lat": 0.34,
+      "days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "hours": [
+        [
+          12,
+          14
+        ],
+        [
+          17,
+          19
+        ]
+      ],
+      "people": 1200,
+      "vehicle": "boda",
+      "note": "Two visiting windows a day"
+    },
+    {
+      "name": "Namboole Stadium",
+      "town": "Kampala",
+      "lon": 32.65,
+      "lat": 0.33,
+      "days": [
+        6,
+        0
+      ],
+      "hours": [
+        [
+          13,
+          17
+        ],
+        [
+          18,
+          21
+        ]
+      ],
+      "people": 8000,
+      "vehicle": "car",
+      "note": "Match and concert days; check the fixture list",
+      "event": true
+    },
+    {
+      "name": "Lugogo (Cricket Oval, Indoor Stadium)",
+      "town": "Kampala",
+      "lon": 32.6,
+      "lat": 0.33,
+      "days": [
+        5,
+        6,
+        0
+      ],
+      "hours": [
+        [
+          16,
+          23
+        ]
+      ],
+      "people": 3000,
+      "vehicle": "car",
+      "note": "Concerts and games",
+      "event": true
+    },
+    {
+      "name": "Kololo Independence Grounds",
+      "town": "Kampala",
+      "lon": 32.59,
+      "lat": 0.33,
+      "days": [
+        6,
+        0
+      ],
+      "hours": [
+        [
+          8,
+          12
+        ],
+        [
+          16,
+          22
+        ]
+      ],
+      "people": 5000,
+      "vehicle": "car",
+      "note": "National days and large events",
+      "event": true
+    },
+    {
+      "name": "Makerere University",
+      "town": "Kampala",
+      "lon": 32.57,
+      "lat": 0.335,
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "hours": [
+        [
+          7,
+          9
+        ],
+        [
+          17,
+          19
+        ]
+      ],
+      "people": 6000,
+      "vehicle": "boda",
+      "note": "Term time; graduation weeks are car days"
+    },
+    {
+      "name": "Owino and Nakasero markets",
+      "town": "Kampala",
+      "lon": 32.575,
+      "lat": 0.31,
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "hours": [
+        [
+          5,
+          8
+        ],
+        [
+          16,
+          18
+        ]
+      ],
+      "people": 4000,
+      "vehicle": "pickup",
+      "note": "Produce in before dawn, stock out at close"
+    },
+    {
+      "name": "Sunday services (Namirembe, Rubaga, Watoto, Miracle Centre)",
+      "town": "Kampala",
+      "lon": 32.56,
+      "lat": 0.31,
+      "days": [
+        0
+      ],
+      "hours": [
+        [
+          7,
+          9
+        ],
+        [
+          11,
+          13
+        ]
+      ],
+      "people": 15000,
+      "vehicle": "car",
+      "note": "Families; matatus and cars"
+    },
+    {
+      "name": "Friday prayers (Old Kampala, Gaddafi mosque)",
+      "town": "Kampala",
+      "lon": 32.565,
+      "lat": 0.315,
+      "days": [
+        5
+      ],
+      "hours": [
+        [
+          12,
+          14
+        ]
+      ],
+      "people": 5000,
+      "vehicle": "boda",
+      "note": "Short window"
+    },
+    {
+      "name": "Jinja Source of the Nile and Nyege Nyege",
+      "town": "Jinja",
+      "lon": 33.2,
+      "lat": 0.43,
+      "days": [
+        5,
+        6,
+        0
+      ],
+      "hours": [
+        [
+          8,
+          12
+        ],
+        [
+          15,
+          19
+        ]
+      ],
+      "people": 2500,
+      "vehicle": "car",
+      "note": "Weekend crowds; the festival weekend in November is a bus day",
+      "event": true
+    },
+    {
+      "name": "Gulu regional referral and university",
+      "town": "Gulu",
+      "lon": 32.3,
+      "lat": 2.77,
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "hours": [
+        [
+          7,
+          9
+        ],
+        [
+          16,
+          18
+        ]
+      ],
+      "people": 2000,
+      "vehicle": "boda",
+      "note": "Working days"
+    },
+    {
+      "name": "Mbarara university and referral hospital",
+      "town": "Mbarara",
+      "lon": 30.66,
+      "lat": -0.61,
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "hours": [
+        [
+          7,
+          9
+        ],
+        [
+          16,
+          18
+        ]
+      ],
+      "people": 2500,
+      "vehicle": "boda",
+      "note": "Working days"
+    },
+    {
+      "name": "Kisoro and Bwindi trekking briefings",
+      "town": "Kisoro",
+      "lon": 29.69,
+      "lat": -1.28,
+      "days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "hours": [
+        [
+          6,
+          8
+        ]
+      ],
+      "people": 120,
+      "vehicle": "car",
+      "note": "Every trek starts at 08:00; a 4×4 the evening before"
+    },
+    {
+      "name": "Bugembe and Jinja sugar belt shift change",
+      "town": "Jinja",
+      "lon": 33.22,
+      "lat": 0.46,
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "hours": [
+        [
+          6,
+          7
+        ],
+        [
+          14,
+          15
+        ],
+        [
+          22,
+          23
+        ]
+      ],
+      "people": 3000,
+      "vehicle": "minibus",
+      "note": "Three shifts"
+    }
+  ],
+  "events": [
+    {
+      "name": "Kampala City Festival",
+      "town": "Kampala",
+      "month": 10,
+      "day": 5,
+      "people": 200000,
+      "vehicle": "boda",
+      "note": "Roads closed in the centre; bodas to the edge"
+    },
+    {
+      "name": "Nyege Nyege festival",
+      "town": "Jinja",
+      "month": 11,
+      "day": 14,
+      "days": 4,
+      "people": 12000,
+      "vehicle": "bus",
+      "note": "Buses and pools from Kampala all weekend"
+    },
+    {
+      "name": "Kabaka birthday run",
+      "town": "Kampala",
+      "month": 4,
+      "day": 6,
+      "people": 80000,
+      "vehicle": "boda",
+      "note": "Early start, closed roads"
+    },
+    {
+      "name": "Independence Day",
+      "town": "Kampala",
+      "month": 10,
+      "day": 9,
+      "people": 20000,
+      "vehicle": "car",
+      "note": "National celebrations at Kololo"
+    },
+    {
+      "name": "Christmas travel",
+      "town": "Kampala",
+      "month": 12,
+      "day": 20,
+      "days": 6,
+      "people": 300000,
+      "vehicle": "bus",
+      "note": "Everyone goes to the village; every corridor fills"
+    },
+    {
+      "name": "Return from the village",
+      "town": "Kampala",
+      "month": 1,
+      "day": 2,
+      "days": 5,
+      "people": 300000,
+      "vehicle": "bus",
+      "note": "The reverse flow"
+    },
+    {
+      "name": "Martyrs Day, Namugongo",
+      "town": "Kampala",
+      "month": 6,
+      "day": 3,
+      "people": 500000,
+      "vehicle": "boda",
+      "note": "Pilgrims; buses from every region the week before"
+    }
+  ]
+}

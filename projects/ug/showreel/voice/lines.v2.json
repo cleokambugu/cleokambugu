@@ -1,0 +1,549 @@
+{
+ "note": "Narration v2 for the UG showreel, written as a voice-over script for ElevenLabs Eleven v3. Same schema as lines.json (speakers, scenes[].id, scenes[].lines[].lang/text) plus per-line text_v3 (the same words with v3 audio tags inline; this is what is sent to the API) and el (per-line voice settings), a per-scene budget_seconds (the shorter of the long and short cut durations, since both cuts share these lines), and a top-level elevenlabs block. See DIRECTION.md for the read and casting; render-elevenlabs.py renders it. Register: Ugandan English, Kampala, direct, unembarrassed about money; Luganda and Swahili where a Kampala voice would use them.",
+ "speakers": {
+  "en": {
+   "id": null,
+   "note": "ElevenLabs voice_id for the cast Ugandan English voice. Set here, or pass ELEVENLABS_VOICE_ID / --voice to the renderer (the renderer's value wins)."
+  },
+  "sw": {
+   "id": null,
+   "note": "Same voice as en unless a separate Swahili voice_id is set. Swahili is in the Eleven v3 language list (verified from the ElevenLabs blog snippet)."
+  },
+  "lg": {
+   "id": null,
+   "note": "Same voice as en. Luganda was not visible in the v3 language list from search snippets, so the line is spoken phonetically by the English voice; if Weebale or Tugende come out wrong, respell them in text_v3 only and keep text clean for the manifest and captions."
+  }
+ },
+ "elevenlabs": {
+  "model_id": "eleven_v3",
+  "model_note": "eleven_v3 (70+ languages) and eleven_multilingual_v2 (29) are the model ids in ElevenLabs' own skills repo (first-hand: elevenlabs/skills text-to-speech/SKILL.md, commit 44a05ea). Fallback for accounts without v3 access: eleven_multilingual_v2, which ignores audio tags; the renderer strips them for non-v3 models.",
+  "output_format": "mp3_44100_128",
+  "output_format_note": "mp3_44100_128 is the documented default (first-hand: SKILL.md output-formats table; mp3_44100_192 needs Creator+, wav_44100 is uncompressed). build-video.js mixes whatever file names manifest.json lists, so mp3 is fine for the films; pass --output-format wav_44100 if uncompressed is wanted.",
+  "language_codes": {
+   "en": "en",
+   "sw": "sw",
+   "lg": "lg"
+  },
+  "language_codes_note": "Sent as language_code per line on eleven_v3 (first-hand: SKILL.md says language_code works with eleven_v3, unsupported codes are ignored, and it is not supported on eleven_multilingual_v2). lg will likely be ignored; sw is a listed v3 language (snippet).",
+  "voice_search": [
+   "Ugandan",
+   "Uganda",
+   "Kampala",
+   "East African",
+   "Kenyan English",
+   "Swahili",
+   "African English",
+   "Tanzanian"
+  ],
+  "voice_search_note": "Try in this order in the Voice Library (language: English) or with render-elevenlabs.py --search-library TERM, which calls GET /v1/shared-voices?search=TERM (search, accent, language, gender, age filters verified). Whether 'ugandan' exists as an accent value is not verified; search the free text too.",
+  "voice_design_model_id": "eleven_ttv_v3",
+  "voice_design_prompt": "A Ugandan voice from Kampala, around thirty years old, a confident young professional narrating a radio advert. Ugandan English with the warmth and rhythm of a Luganda first language: open, rounded vowels; even syllable timing; a melody that rises through a thought and settles at the full stop; light r; consonants clean but unhurried; final syllables fully voiced. Explicitly not a generic African accent: not Nigerian, not South African, not Nairobi Sheng, not American. Medium-low pitch, natural chest voice, slightly amused, direct and unembarrassed when talking about money, like a friend at a function who already knows the smart price. Close, dry studio microphone, no reverb, no music, no background.",
+  "voice_design_preview_text": "Kampala. Six in the evening. Everyone is trying to move. Banange, three apps open before one trip, and you still ask the boda man. UG puts every way on one screen. Ranked. Priced. Honest. This is the desk: every quote, ranked by price, and an estimate says it is an estimate. The button is always Book on UG. Nobody sends you away. Tugende.",
+  "voice_design_note": "POST /v1/text-to-voice/design with voice_description, text (100 to 1000 characters, verified) and model_id eleven_ttv_v3 (verified) returns three previews; guidance_scale range and the endpoint that saves a preview as a voice were not verified from snippets. Do it in the ElevenLabs UI if in doubt.",
+  "stability_note": "First-hand (voice-settings.md): stability 0.0-1.0 default 0.5, similarity_boost 0.0-1.0 default 0.75, style 0.0-1.0 default 0.0 (v2+ and v3), speed 0.25-4.0 default 1.0 on REST, use_speaker_boost boolean; the repo's own v3 example sends all of them. Snippet (product guide): the UI presents v3 stability as Creative 0.0 / Natural 0.5 / Robust 1.0 and hides similarity and speaker boost for v3. The renderer follows the repo (sends the values as written, similarity included) and offers --snap-stability if an account rejects intermediate values. speed is only sent when it differs from 1.0.",
+  "tags_note": "Verified tags from the ElevenLabs audio-tags guide: [excited] [nervous] [frustrated] [sorrowful] [calm] [sigh] [laughs] [gulps] [gasps] [whispers] [pause] [pauses] [hesitates] [rushed] [drawn out]. [warm] is assumed to be interpreted as a free-form descriptor; if a take ignores it, replace with [calm]."
+ },
+ "cuts": {
+  "short": [
+   "opening",
+   "ride",
+   "pool",
+   "atlas",
+   "link"
+  ]
+ },
+ "scenes": [
+  {
+   "id": "opening",
+   "budget_seconds": 16,
+   "lines": [
+    {
+     "lang": "en",
+     "text": "Kampala. Six in the evening, the whole city moving at once.",
+     "text_v3": "[calm] Kampala. [pause] Six in the evening, the whole city moving at once.",
+     "el": {
+      "tags": "[calm] [pause]",
+      "stability": 0.5,
+      "similarity": 0.8,
+      "style": 0.2,
+      "speed": 1.0
+     }
+    },
+    {
+     "lang": "en",
+     "text": "UG. Ride. Pool. Rent. Deliver.",
+     "text_v3": "[pause] UG. [pause] Ride. Pool. Rent. Deliver.",
+     "el": {
+      "tags": "[pause] [pause]",
+      "stability": 0.5,
+      "similarity": 0.8,
+      "style": 0.3,
+      "speed": 1.0
+     }
+    },
+    {
+     "lang": "en",
+     "text": "One app for every way to move in Uganda. Tugende.",
+     "text_v3": "One app for every way to move in Uganda. [pause] [warm] Tugende.",
+     "el": {
+      "tags": "[pause] [warm]",
+      "stability": 0.5,
+      "similarity": 0.8,
+      "style": 0.3,
+      "speed": 1.0
+     }
+    }
+   ]
+  },
+  {
+   "id": "problem",
+   "budget_seconds": 20,
+   "lines": [
+    {
+     "lang": "en",
+     "text": "Banange. Three apps for one trip, and you still ask the boda man.",
+     "text_v3": "[wry] Banange. [pause] Three apps for one trip, and you still ask the boda man.",
+     "el": {
+      "tags": "[wry] [pause]",
+      "stability": 0.5,
+      "similarity": 0.8,
+      "style": 0.3,
+      "speed": 1.0
+     }
+    },
+    {
+     "lang": "en",
+     "text": "Two prices for the same road, and no special hire anywhere.",
+     "text_v3": "Two prices for the same road, and no special hire anywhere.",
+     "el": {
+      "tags": "",
+      "stability": 0.5,
+      "similarity": 0.8,
+      "style": 0.2,
+      "speed": 1.0
+     }
+    },
+    {
+     "lang": "en",
+     "text": "UG puts every way on one screen, ranked and honest.",
+     "text_v3": "[pause] UG puts every way on one screen, ranked and honest.",
+     "el": {
+      "tags": "[pause]",
+      "stability": 0.5,
+      "similarity": 0.8,
+      "style": 0.3,
+      "speed": 1.0
+     }
+    }
+   ]
+  },
+  {
+   "id": "ride",
+   "budget_seconds": 18.75,
+   "lines": [
+    {
+     "lang": "en",
+     "text": "This is the desk. Every quote, ranked by price. An estimate says it is an estimate.",
+     "text_v3": "This is the desk. [pause] Every quote, ranked by price. An estimate says it is an estimate.",
+     "el": {
+      "tags": "[pause]",
+      "stability": 0.5,
+      "similarity": 0.8,
+      "style": 0.2,
+      "speed": 1.0
+     }
+    },
+    {
+     "lang": "en",
+     "text": "The button is always Book on UG. Nobody sends you away.",
+     "text_v3": "[pause] The button is always Book on UG. Nobody sends you away.",
+     "el": {
+      "tags": "[pause]",
+      "stability": 0.5,
+      "similarity": 0.8,
+      "style": 0.3,
+      "speed": 1.0
+     }
+    },
+    {
+     "lang": "en",
+     "text": "Same trip, smarter price.",
+     "text_v3": "[pause] [warm] Same trip, smarter price.",
+     "el": {
+      "tags": "[pause] [warm]",
+      "stability": 0.5,
+      "similarity": 0.8,
+      "style": 0.3,
+      "speed": 1.0
+     }
+    }
+   ]
+  },
+  {
+   "id": "pool",
+   "budget_seconds": 20,
+   "lines": [
+    {
+     "lang": "en",
+     "text": "Now this one is ours. The Virtual Stage.",
+     "text_v3": "[warm] Now this one is ours. [pause] The Virtual Stage.",
+     "el": {
+      "tags": "[warm] [pause]",
+      "stability": 0.0,
+      "similarity": 0.8,
+      "style": 0.4,
+      "speed": 1.0
+     }
+    },
+    {
+     "lang": "en",
+     "text": "You pay for your seat first; friends join and the price drops for everyone.",
+     "text_v3": "You pay for your seat first; friends join and the price drops for everyone.",
+     "el": {
+      "tags": "",
+      "stability": 0.5,
+      "similarity": 0.8,
+      "style": 0.3,
+      "speed": 1.0
+     }
+    },
+    {
+     "lang": "en",
+     "text": "Money in first, and a driver who knows the road takes it. Twende.",
+     "text_v3": "[pause] Money in first, and a driver who knows the road takes it. [pause] [warm] Twende.",
+     "el": {
+      "tags": "[pause] [pause] [warm]",
+      "stability": 0.5,
+      "similarity": 0.8,
+      "style": 0.3,
+      "speed": 1.0
+     }
+    }
+   ]
+  },
+  {
+   "id": "drive",
+   "budget_seconds": 25,
+   "lines": [
+    {
+     "lang": "en",
+     "text": "Drivers, you do not chase trips here.",
+     "text_v3": "[calm] Drivers, you do not chase trips here.",
+     "el": {
+      "tags": "[calm]",
+      "stability": 0.5,
+      "similarity": 0.8,
+      "style": 0.2,
+      "speed": 1.0
+     }
+    },
+    {
+     "lang": "en",
+     "text": "You say once where you are comfortable working: your stage, your roads, your hours, and the no's that stay no.",
+     "text_v3": "[pause] You say once where you are comfortable working: your stage, your roads, your hours, and the no's that stay no.",
+     "el": {
+      "tags": "[pause]",
+      "stability": 0.5,
+      "similarity": 0.8,
+      "style": 0.2,
+      "speed": 1.0
+     }
+    },
+    {
+     "lang": "en",
+     "text": "Then funded offers come to you, with the money already in. Accept, and go.",
+     "text_v3": "[pause] Then funded offers come to you, with the money already in. [pause] Accept, and go.",
+     "el": {
+      "tags": "[pause] [pause]",
+      "stability": 0.5,
+      "similarity": 0.8,
+      "style": 0.3,
+      "speed": 1.0
+     }
+    }
+   ]
+  },
+  {
+   "id": "rent",
+   "budget_seconds": 20,
+   "lines": [
+    {
+     "lang": "en",
+     "text": "The kwanjula is Saturday. Rent the Prado, split it four ways.",
+     "text_v3": "[warm] The kwanjula is Saturday. Rent the Prado, split it four ways.",
+     "el": {
+      "tags": "[warm]",
+      "stability": 0.5,
+      "similarity": 0.8,
+      "style": 0.3,
+      "speed": 1.0
+     }
+    },
+    {
+     "lang": "en",
+     "text": "Three hundred thousand becomes seventy-five each. And you arrive properly.",
+     "text_v3": "Three hundred thousand becomes seventy-five each. [pause] And you arrive properly.",
+     "el": {
+      "tags": "[pause]",
+      "stability": 0.5,
+      "similarity": 0.8,
+      "style": 0.2,
+      "speed": 1.0
+     }
+    },
+    {
+     "lang": "en",
+     "text": "Or the Signature fleet, chauffeured, priced through the same desk.",
+     "text_v3": "[pause] [calm] Or the Signature fleet, chauffeured, priced through the same desk.",
+     "el": {
+      "tags": "[pause] [calm]",
+      "stability": 0.5,
+      "similarity": 0.8,
+      "style": 0.3,
+      "speed": 1.0
+     }
+    }
+   ]
+  },
+  {
+   "id": "deliver",
+   "budget_seconds": 20,
+   "lines": [
+    {
+     "lang": "en",
+     "text": "Your parcel rides in the boot of the stage car to Fort Portal.",
+     "text_v3": "Your parcel rides in the boot of the stage car to Fort Portal.",
+     "el": {
+      "tags": "",
+      "stability": 0.5,
+      "similarity": 0.8,
+      "style": 0.2,
+      "speed": 1.0
+     }
+    },
+    {
+     "lang": "en",
+     "text": "The seat is ninety-seven thousand; the parcel, twenty-four. A quarter of a seat, on a car already going.",
+     "text_v3": "[pause] The seat is ninety-seven thousand; the parcel, twenty-four. [pause] A quarter of a seat, on a car already going.",
+     "el": {
+      "tags": "[pause] [pause]",
+      "stability": 0.5,
+      "similarity": 0.8,
+      "style": 0.2,
+      "speed": 1.0
+     }
+    },
+    {
+     "lang": "en",
+     "text": "Send the thing.",
+     "text_v3": "[pause] [warm] Send the thing.",
+     "el": {
+      "tags": "[pause] [warm]",
+      "stability": 0.5,
+      "similarity": 0.8,
+      "style": 0.3,
+      "speed": 1.0
+     }
+    }
+   ]
+  },
+  {
+   "id": "atlas",
+   "budget_seconds": 18.75,
+   "lines": [
+    {
+     "lang": "en",
+     "text": "Every way to move in Uganda in one table — air, bus, water, rail, stays.",
+     "text_v3": "Every way to move in Uganda in one table — air, bus, water, rail, stays.",
+     "el": {
+      "tags": "",
+      "stability": 0.5,
+      "similarity": 0.8,
+      "style": 0.2,
+      "speed": 1.0
+     }
+    },
+    {
+     "lang": "en",
+     "text": "Four honest states, always on screen: Book on UG. Call ahead. Listed. Coming.",
+     "text_v3": "[pause] Four honest states, always on screen: Book on UG. Call ahead. Listed. Coming.",
+     "el": {
+      "tags": "[pause]",
+      "stability": 0.5,
+      "similarity": 0.8,
+      "style": 0.2,
+      "speed": 1.0
+     }
+    },
+    {
+     "lang": "en",
+     "text": "Nothing hidden, nothing faked.",
+     "text_v3": "[pause] [calm] Nothing hidden, nothing faked.",
+     "el": {
+      "tags": "[pause] [calm]",
+      "stability": 0.5,
+      "similarity": 0.8,
+      "style": 0.2,
+      "speed": 1.0
+     }
+    }
+   ]
+  },
+  {
+   "id": "explore",
+   "budget_seconds": 20,
+   "lines": [
+    {
+     "lang": "en",
+     "text": "The Pearl, priced honestly. A Bwindi weekend, totalled in shillings.",
+     "text_v3": "[warm] The Pearl, priced honestly. [pause] A Bwindi weekend, totalled in shillings.",
+     "el": {
+      "tags": "[warm] [pause]",
+      "stability": 0.5,
+      "similarity": 0.8,
+      "style": 0.3,
+      "speed": 1.0
+     }
+    },
+    {
+     "lang": "en",
+     "text": "The permit is three hundred thousand for an East African, eight hundred dollars for a visitor. We ask which you are rather than guess.",
+     "text_v3": "[pause] The permit is three hundred thousand for an East African, eight hundred dollars for a visitor. [pause] We ask which you are rather than guess.",
+     "el": {
+      "tags": "[pause] [pause]",
+      "stability": 0.5,
+      "similarity": 0.8,
+      "style": 0.2,
+      "speed": 1.0
+     }
+    }
+   ]
+  },
+  {
+   "id": "plugins",
+   "budget_seconds": 20,
+   "lines": [
+    {
+     "lang": "en",
+     "text": "Tazama in the dock; the drive starts on the first tap.",
+     "text_v3": "Tazama in the dock; the drive starts on the first tap.",
+     "el": {
+      "tags": "",
+      "stability": 0.5,
+      "similarity": 0.8,
+      "style": 0.2,
+      "speed": 1.0
+     }
+    },
+    {
+     "lang": "en",
+     "text": "Pulse shows where the paid demand is.",
+     "text_v3": "[pause] Pulse shows where the paid demand is.",
+     "el": {
+      "tags": "[pause]",
+      "stability": 0.5,
+      "similarity": 0.8,
+      "style": 0.3,
+      "speed": 1.0
+     }
+    },
+    {
+     "lang": "en",
+     "text": "Send the route to Felt, or run the whole thing hands-free through Cephable.",
+     "text_v3": "[pause] Send the route to Felt, or run the whole thing hands-free through Cephable.",
+     "el": {
+      "tags": "[pause]",
+      "stability": 0.5,
+      "similarity": 0.8,
+      "style": 0.2,
+      "speed": 1.0
+     }
+    }
+   ]
+  },
+  {
+   "id": "rail",
+   "budget_seconds": 15,
+   "lines": [
+    {
+     "lang": "en",
+     "text": "Whatever you book, one rail carries it to done.",
+     "text_v3": "[calm] Whatever you book, one rail carries it to done.",
+     "el": {
+      "tags": "[calm]",
+      "stability": 0.5,
+      "similarity": 0.8,
+      "style": 0.2,
+      "speed": 1.0
+     }
+    },
+    {
+     "lang": "en",
+     "text": "The same steps every time, in your own language.",
+     "text_v3": "[pause] The same steps every time, in your own language.",
+     "el": {
+      "tags": "[pause]",
+      "stability": 0.5,
+      "similarity": 0.8,
+      "style": 0.3,
+      "speed": 1.0
+     }
+    },
+    {
+     "lang": "sw",
+     "text": "Hakuna anayetumwa mbali. Twende.",
+     "text_v3": "[warm] Hakuna anayetumwa mbali. [pause] Twende.",
+     "el": {
+      "tags": "[warm] [pause]",
+      "stability": 0.5,
+      "similarity": 0.8,
+      "style": 0.3,
+      "speed": 1.0
+     }
+    }
+   ]
+  },
+  {
+   "id": "link",
+   "budget_seconds": 12.5,
+   "lines": [
+    {
+     "lang": "en",
+     "text": "Install it. Same crest, same account, same shillings.",
+     "text_v3": "[warm] Install it. [pause] Same crest, same account, same shillings.",
+     "el": {
+      "tags": "[warm] [pause]",
+      "stability": 0.5,
+      "similarity": 0.8,
+      "style": 0.3,
+      "speed": 1.0
+     }
+    },
+    {
+     "lang": "en",
+     "text": "Look the part. Pay the smart price.",
+     "text_v3": "[pause] [calm] Look the part. [pause] Pay the smart price.",
+     "el": {
+      "tags": "[pause] [calm] [pause]",
+      "stability": 0.0,
+      "similarity": 0.8,
+      "style": 0.4,
+      "speed": 1.0
+     }
+    },
+    {
+     "lang": "lg",
+     "text": "UG. Weebale. Tugende.",
+     "text_v3": "[pause] UG. [pause] Weebale. [pause] Tugende.",
+     "el": {
+      "tags": "[pause] [pause] [pause]",
+      "stability": 0.0,
+      "similarity": 0.8,
+      "style": 0.4,
+      "speed": 1.0
+     }
+    }
+   ]
+  }
+ ]
+}

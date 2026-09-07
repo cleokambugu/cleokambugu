@@ -1,0 +1,175 @@
+{
+ "note": "SUPERSEDED as the master by lines.v2.json - see README.md \"The lines\". Kept because render.py (Spark-TTS) still reads this file. Do not edit narration here: the reels are synced from lines.v2.json by sync-voice.py and CI fails if they drift. Master narration for the UG showreel. sound.html carries the same lines as its fallback text; render.py --check verifies they match. Register: Ugandan English, warm and direct, one Luganda or Swahili word where a Kampala voice would use it.",
+ "speakers": {
+  "en": {
+   "id": null,
+   "note": "Ugandan-accented English: the SALT notebook lists speaker ids only for the six local languages (241 Acholi, 242 Ateso, 243 Runyankore, 245 Lugbara, 246 Swahili, 248 Luganda). Take the English speaker id from the Sunbird/spark-tts-salt model card and set it here before rendering."
+  },
+  "lg": {
+   "id": "248",
+   "note": "Luganda, female, studio speaker from the SALT corpus"
+  },
+  "sw": {
+   "id": "246",
+   "note": "Swahili, male, studio speaker from the SALT corpus"
+  }
+ },
+ "scenes": [
+  {
+   "id": "opening",
+   "lines": [
+    {
+     "lang": "en",
+     "text": "UG. Ride. Pool. Rent. Deliver."
+    },
+    {
+     "lang": "en",
+     "text": "One app for every way to move in Uganda. Tugende."
+    }
+   ]
+  },
+  {
+   "id": "problem",
+   "lines": [
+    {
+     "lang": "en",
+     "text": "In Kampala we check three apps before every trip, and still ask the boda man."
+    },
+    {
+     "lang": "en",
+     "text": "UG puts every way on one screen."
+    }
+   ]
+  },
+  {
+   "id": "ride",
+   "lines": [
+    {
+     "lang": "en",
+     "text": "Every quote, ranked by price, and it tells you which ones are estimates."
+    },
+    {
+     "lang": "en",
+     "text": "The button is always Book on UG. Nobody sends you away."
+    }
+   ]
+  },
+  {
+   "id": "pool",
+   "lines": [
+    {
+     "lang": "en",
+     "text": "The Virtual Stage. You pay for your seat first, and the price drops as the car fills."
+    },
+    {
+     "lang": "en",
+     "text": "When the money is in, UG makes the trip and hands it to a driver who is comfortable on that road."
+    }
+   ]
+  },
+  {
+   "id": "drive",
+   "lines": [
+    {
+     "lang": "en",
+     "text": "Drivers do not chase trips. They say where they are comfortable, once."
+    },
+    {
+     "lang": "en",
+     "text": "Funded offers come to them. Accept, and go."
+    }
+   ]
+  },
+  {
+   "id": "rent",
+   "lines": [
+    {
+     "lang": "en",
+     "text": "Rent a Prado for the weekend and split it four ways."
+    },
+    {
+     "lang": "en",
+     "text": "Or arrive in the Signature fleet, and look the part."
+    }
+   ]
+  },
+  {
+   "id": "deliver",
+   "lines": [
+    {
+     "lang": "en",
+     "text": "Your parcel rides in the boot of the stage car to Fort Portal."
+    },
+    {
+     "lang": "en",
+     "text": "A quarter of a seat. That is it."
+    }
+   ]
+  },
+  {
+   "id": "atlas",
+   "lines": [
+    {
+     "lang": "en",
+     "text": "Air, bus, water, rail, Signature, stays. One table."
+    },
+    {
+     "lang": "en",
+     "text": "Four honest states, always on the screen."
+    }
+   ]
+  },
+  {
+   "id": "explore",
+   "lines": [
+    {
+     "lang": "en",
+     "text": "The Pearl, priced honestly. The whole weekend in one number."
+    },
+    {
+     "lang": "en",
+     "text": "East African citizens pay East African prices."
+    }
+   ]
+  },
+  {
+   "id": "plugins",
+   "lines": [
+    {
+     "lang": "en",
+     "text": "Tazama plays in the dock. Pulse shows where the demand is."
+    },
+    {
+     "lang": "en",
+     "text": "Send it to Felt. Talk to it through Cephable."
+    }
+   ]
+  },
+  {
+   "id": "rail",
+   "lines": [
+    {
+     "lang": "en",
+     "text": "Whatever you book, the same trip rail carries it to done."
+    },
+    {
+     "lang": "sw",
+     "text": "Hakuna anayetumwa mbali. Twende."
+    }
+   ]
+  },
+  {
+   "id": "link",
+   "lines": [
+    {
+     "lang": "en",
+     "text": "Install it. Same crest, same account, same shillings."
+    },
+    {
+     "lang": "lg",
+     "text": "UG. Weebale. Tugende."
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,617 @@
+<meta charset="utf-8">
+<title>UG Short Cut with Sound</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@88..120,400..800&family=Martian+Mono:wdth,wght@88..100,400..500&display=swap">
+<script src="ug-score.js"></script>
+<style>
+:root{--ground:#0F0C0A;--surface:#1E1915;--ink:#F4ECDD;--yellow:#F2C200;--red:#D2202F;--crane:#94A8B6;--u:1px;color-scheme:dark}
+html,body{margin:0;height:100%;background:var(--ground);color:var(--ink)}
+#app{position:fixed;inset:0;background:var(--ground);display:grid;place-items:center;font-family:Archivo,system-ui,sans-serif;overflow:hidden;-webkit-font-smoothing:antialiased}
+#stage{position:relative;width:min(100vw,177.777vh);aspect-ratio:16/9;overflow:hidden;background:var(--ground);outline:none}
+#c{position:absolute;inset:0;width:100%;height:100%;display:block}
+#cap{position:absolute;left:8%;right:8%;bottom:9.5%;text-align:center;pointer-events:none}
+#cap .eb{font:600 calc(var(--u)*12) Archivo,system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--yellow);margin-bottom:calc(var(--u)*10);opacity:0}
+#cap .main{font:700 calc(var(--u)*30)/1.2 Archivo,system-ui,sans-serif;text-wrap:balance;opacity:0;text-shadow:0 2px 24px rgba(15,12,10,.9)}
+#cap .sub{font:400 calc(var(--u)*17)/1.4 Archivo,system-ui,sans-serif;color:rgba(244,236,221,.72);margin-top:calc(var(--u)*10);opacity:0;text-wrap:balance;text-shadow:0 2px 16px rgba(15,12,10,.9)}
+#cap .in{animation:rise 1.15s cubic-bezier(.16,1,.3,1) forwards}
+#cap .sub.in{animation-delay:.18s}
+@keyframes rise{from{opacity:0;transform:translateY(calc(var(--u)*16));filter:blur(6px)}to{opacity:1;transform:none;filter:blur(0)}}
+#hud{position:absolute;left:0;right:0;bottom:3px;height:calc(var(--u)*44);display:flex;align-items:center;justify-content:space-between;padding:0 calc(var(--u)*22);font-size:calc(var(--u)*12);opacity:0;transition:opacity .5s}
+#hud.on{opacity:1}
+#counter{display:flex;gap:calc(var(--u)*10);align-items:center;color:rgba(244,236,221,.7)}
+#counter b{font:500 calc(var(--u)*12) "Martian Mono",monospace;color:var(--ink);font-variant-numeric:tabular-nums}
+#counter i{font-style:normal;color:rgba(244,236,221,.4)}
+.vlabel{color:rgba(244,236,221,.45);font:500 calc(var(--u)*11) "Martian Mono",monospace}
+.btns{display:flex;gap:calc(var(--u)*8);align-items:center}
+.btn{font:600 calc(var(--u)*12) Archivo,system-ui,sans-serif;color:var(--ink);background:rgba(30,25,21,.64);border:1px solid rgba(244,236,221,.14);box-shadow:inset 0 1px 0 rgba(244,236,221,.08);backdrop-filter:blur(8px);border-radius:999px;padding:calc(var(--u)*7) calc(var(--u)*14);cursor:pointer;line-height:1}
+.btn:hover{border-color:rgba(244,236,221,.35)}
+.btn.y{background:var(--yellow);color:#17120E;border-color:transparent}
+.hint{color:rgba(244,236,221,.35);font:500 calc(var(--u)*11) "Martian Mono",monospace;margin-right:calc(var(--u)*6)}
+#bar{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(244,236,221,.12)}
+#bar i{display:block;height:100%;width:0;background:var(--yellow);transition:width .2s linear}
+#poster{position:absolute;inset:0;display:grid;place-items:center;background:radial-gradient(60% 60% at 50% 45%,#1E1915 0%,#0F0C0A 72%);z-index:5;transition:opacity .8s ease}
+#poster.off{opacity:0;pointer-events:none}
+#poster .col{display:flex;flex-direction:column;align-items:center;gap:calc(var(--u)*14);text-align:center}
+#poster svg{width:calc(var(--u)*112);height:calc(var(--u)*112);color:var(--ink)}
+#poster h1{margin:0;font:900 calc(var(--u)*76)/1 Archivo,system-ui,sans-serif;letter-spacing:-.02em}
+#poster .cp{font:500 calc(var(--u)*16) "Martian Mono",monospace;color:rgba(244,236,221,.7);letter-spacing:.02em}
+#play{margin-top:calc(var(--u)*18);width:calc(var(--u)*96);height:calc(var(--u)*96);border-radius:50%;background:var(--yellow);border:0;cursor:pointer;display:grid;place-items:center;box-shadow:0 0 0 0 rgba(242,194,0,.45);animation:pulse 2.4s ease-out infinite}
+#play svg{width:calc(var(--u)*38);height:calc(var(--u)*38);color:#17120E}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(242,194,0,.45)}100%{box-shadow:0 0 0 calc(var(--u)*26) rgba(242,194,0,0)}}
+#poster .meta{font:600 calc(var(--u)*12) Archivo,system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:rgba(244,236,221,.5)}
+#end{position:absolute;left:0;right:0;bottom:15%;display:flex;justify-content:center;gap:calc(var(--u)*10);opacity:0;pointer-events:none;transition:opacity .6s}
+#end.on{opacity:1;pointer-events:auto}
+#end .btn{font-size:calc(var(--u)*14);padding:calc(var(--u)*12) calc(var(--u)*22)}
+#static{display:none;max-width:760px;width:100%;box-sizing:border-box;padding:40px 28px;max-height:100vh;overflow:auto;font-size:16px;line-height:1.5}
+#static header{display:flex;align-items:center;gap:18px;margin-bottom:8px}
+#static header svg{width:64px;height:64px;color:var(--ink)}
+#static h1{margin:0;font:900 44px/1 Archivo,system-ui,sans-serif}
+#static .cp{font:500 15px "Martian Mono",monospace;color:rgba(244,236,221,.7);margin:4px 0 26px}
+#static ol{padding-left:0;list-style:none;margin:0}
+#static li{padding:14px 0;border-top:1px solid rgba(244,236,221,.12)}
+#static li h2{margin:0 0 4px;font:700 17px Archivo,system-ui,sans-serif}
+#static li h2 span{font:500 12px "Martian Mono",monospace;color:var(--yellow);margin-right:10px}
+#static li p{margin:2px 0;color:rgba(244,236,221,.8)}
+#static li p.s{color:rgba(244,236,221,.55);font-size:14px}
+#static .note{margin-top:22px;font:500 12px "Martian Mono",monospace;color:rgba(244,236,221,.45)}
+@media (prefers-reduced-motion:reduce){#stage{display:none}#static{display:block}}
+</style>
+
+<div id="app">
+  <div id="stage" tabindex="0" aria-label="UG showreel">
+    <canvas id="c"></canvas>
+    <div id="cap" aria-live="polite"><div class="eb"></div><div class="main"></div><div class="sub"></div></div>
+    <div id="end"><button class="btn y" id="replay" type="button">Replay</button></div>
+    <div id="hud">
+      <div id="counter"><b id="cnt">01 / 12</b><i>·</i><span id="cname">Opening</span><i>·</i><span id="vlabel" class="vlabel" hidden></span></div>
+      <div class="btns"><span class="hint" id="hint">space · ← →</span><button class="btn" id="mute" type="button" hidden>Mute</button><button class="btn" id="skip" type="button">Skip ›</button></div>
+    </div>
+    <div id="bar"><i id="barfill"></i></div>
+    <div id="poster">
+      <div class="col">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="UG crest"><path d="M28.5 40.5 Q22 31 12.5 17" fill="none" stroke="currentColor" stroke-width="7.5" stroke-linecap="round"/><path d="M32 38.5 Q32 24 32 8.5" fill="none" stroke="#F2C200" stroke-width="7.5" stroke-linecap="round"/><path d="M35.5 40.5 Q42 31 51.5 17" fill="none" stroke="#D2202F" stroke-width="7.5" stroke-linecap="round"/><circle cx="32" cy="48" r="7.5" fill="currentColor"/><circle cx="32" cy="48" r="3" fill="#F2C200"/></svg>
+        <h1>UG</h1>
+        <div class="cp">Ride. Pool. Rent. Deliver.</div>
+        <button id="play" type="button" aria-label="Play the showreel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z" fill="currentColor"/></svg></button>
+        <div class="meta" id="pmeta">Showreel</div>
+      </div>
+    </div>
+  </div>
+  <div id="static">
+    <header><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true"><path d="M28.5 40.5 Q22 31 12.5 17" fill="none" stroke="currentColor" stroke-width="7.5" stroke-linecap="round"/><path d="M32 38.5 Q32 24 32 8.5" fill="none" stroke="#F2C200" stroke-width="7.5" stroke-linecap="round"/><path d="M35.5 40.5 Q42 31 51.5 17" fill="none" stroke="#D2202F" stroke-width="7.5" stroke-linecap="round"/><circle cx="32" cy="48" r="7.5" fill="currentColor"/><circle cx="32" cy="48" r="3" fill="#F2C200"/></svg><h1>UG</h1></header>
+    <div class="cp">Ride. Pool. Rent. Deliver. · Showreel, as a poster</div>
+    <ol id="staticlist"></ol>
+    <div class="note">Reduced motion is on, so the film is listed instead of played. Prototype. Estimates, sandbox payments.</div>
+  </div>
+</div>
+
+<script>
+(() => {
+'use strict';
+const GEO = {"land":[[30.472,-1.067],[30.446,-1.059],[30.403,-1.07],[30.337,-1.066],[30.317,-1.137],[30.288,-1.155],[30.27,-1.2],[30.212,-1.26],[30.166,-1.277],[30.147,-1.345],[30.061,-1.39],[30.039,-1.425],[29.938,-1.473],[29.898,-1.47],[29.881,-1.454],[29.864,-1.37],[29.825,-1.324],[29.798,-1.331],[29.775,-1.366],[29.735,-1.348],[29.639,-1.389],[29.578,-1.388],[29.587,-1.311],[29.572,-1.279],[29.581,-1.235],[29.557,-1.182],[29.57,-1.078],[29.548,-1.003],[29.56,-0.972],[29.555,-0.929],[29.567,-0.902],[29.597,-0.892],[29.611,-0.864],[29.603,-0.723],[29.616,-0.644],[29.631,-0.622],[29.619,-0.599],[29.651,-0.58],[29.653,-0.566],[29.65,-0.504],[29.629,-0.442],[29.694,-0.063],[29.714,-0.007],[29.703,0.073],[29.761,0.172],[29.787,0.158],[29.797,0.165],[29.84,0.358],[29.923,0.46],[29.94,0.498],[29.919,0.618],[29.927,0.775],[29.947,0.825],[30.038,0.879],[30.155,0.909],[30.221,1.017],[30.215,1.077],[30.239,1.136],[30.278,1.172],[30.324,1.156],[30.365,1.202],[30.432,1.207],[30.478,1.239],[30.682,1.5],[31.026,1.778],[31.243,2.051],[31.271,2.103],[31.28,2.153],[31.267,2.173],[31.19,2.222],[31.178,2.303],[31.113,2.282],[31.055,2.29],[31.036,2.307],[31.041,2.331],[30.968,2.405],[30.931,2.406],[30.901,2.346],[30.872,2.332],[30.82,2.376],[30.805,2.434],[30.711,2.445],[30.708,2.462],[30.737,2.52],[30.735,2.593],[30.802,2.769],[30.829,2.786],[30.853,2.853],[30.844,2.933],[30.821,2.973],[30.757,3.021],[30.744,3.055],[30.804,3.246],[30.822,3.281],[30.842,3.289],[30.916,3.415],[30.903,3.459],[30.909,3.496],[30.896,3.52],[30.84,3.49],[30.866,3.549],[30.956,3.689],[31.01,3.7],[31.168,3.792],[31.295,3.774],[31.505,3.66],[31.535,3.666],[31.565,3.69],[31.687,3.713],[31.781,3.816],[31.831,3.784],[31.902,3.704],[31.93,3.598],[32.03,3.586],[32.076,3.533],[32.168,3.512],[32.179,3.541],[32.176,3.606],[32.188,3.619],[32.372,3.731],[32.756,3.769],[32.84,3.794],[32.997,3.886],[33.164,3.763],[33.491,3.75],[33.533,3.774],[33.977,4.22],[34.006,4.206],[34.041,4.165],[34.041,4.12],[34.069,4.088],[34.061,4.008],[34.107,3.96],[34.085,3.877],[34.108,3.869],[34.183,3.886],[34.205,3.875],[34.197,3.847],[34.149,3.823],[34.179,3.796],[34.152,3.776],[34.241,3.784],[34.279,3.71],[34.29,3.703],[34.31,3.727],[34.337,3.735],[34.44,3.668],[34.435,3.526],[34.416,3.497],[34.381,3.477],[34.399,3.434],[34.384,3.388],[34.424,3.305],[34.434,3.182],[34.445,3.159],[34.534,3.118],[34.575,2.946],[34.631,2.87],[34.654,2.857],[34.685,2.881],[34.737,2.844],[34.777,2.686],[34.819,2.598],[34.842,2.588],[34.866,2.605],[34.887,2.522],[34.924,2.477],[34.921,2.455],[34.868,2.411],[34.859,2.387],[34.968,2.102],[34.962,1.978],[35.006,1.917],[34.98,1.87],[34.979,1.676],[34.934,1.576],[34.883,1.552],[34.86,1.518],[34.838,1.437],[34.779,1.389],[34.811,1.273],[34.798,1.232],[34.684,1.209],[34.629,1.164],[34.58,1.153],[34.561,1.093],[34.507,1.103],[34.487,1.082],[34.464,1.023],[34.457,0.958],[34.388,0.816],[34.298,0.759],[34.276,0.681],[34.252,0.655],[34.15,0.604],[34.104,0.462],[34.076,0.422],[34.085,0.347],[34.041,0.306],[33.894,0.11],[33.954,-0.154],[33.895,-0.663],[33.904,-1.003],[30.828,-1.003],[30.777,-0.986],[30.687,-1.025],[30.639,-1.073],[30.593,-1.063]],"lakes":{"Lake George":[[-81.527,29.257],[-81.52,29.229],[-81.571,29.203],[-81.598,29.199],[-81.623,29.216],[-81.618,29.235],[-81.643,29.243],[-81.64,29.274],[-81.675,29.307],[-81.677,29.339],[-81.659,29.342],[-81.658,29.353],[-81.671,29.374],[-81.664,29.415],[-81.685,29.441],[-81.682,29.496],[-81.677,29.511],[-81.671,29.504],[-81.668,29.452],[-81.659,29.43],[-81.64,29.421],[-81.644,29.386],[-81.596,29.374],[-81.563,29.314],[-81.535,29.301],[-81.544,29.268]],"Lake Albert":[[31.366,2.271],[31.406,1.915],[31.381,1.838],[31.331,1.833],[31.282,1.696],[31.124,1.582],[31.05,1.586],[31.037,1.556],[30.947,1.518],[30.731,1.24],[30.714,1.175],[30.59,1.045],[30.604,1.032],[30.556,1.045],[30.534,1.014],[30.536,1.058],[30.498,1.035],[30.51,1.095],[30.486,1.199],[30.508,1.216],[30.455,1.271],[30.433,1.223],[30.421,1.254],[30.392,1.257],[30.386,1.31],[30.549,1.565],[30.621,1.603],[30.654,1.663],[30.734,1.716],[30.913,1.907],[31.005,1.941],[31.237,2.117],[31.325,2.262],[31.368,2.31],[31.451,2.348],[31.475,2.408],[31.468,2.336]],"Lake Victoria":[[33.914,-1.532],[33.825,-1.512],[33.798,-1.471],[33.726,-1.491],[33.654,-1.471],[33.681,-1.535],[33.612,-1.566],[33.675,-1.58],[33.668,-1.628],[33.702,-1.628],[33.709,-1.66],[33.543,-1.675],[33.641,-1.775],[33.578,-1.758],[33.493,-1.84],[33.451,-1.837],[33.448,-1.8],[33.365,-1.804],[33.283,-1.922],[33.314,-1.944],[33.462,-1.881],[33.49,-1.927],[33.462,-1.95],[33.573,-1.987],[33.551,-2.029],[33.4,-1.972],[33.372,-1.998],[33.4,-2.039],[33.38,-2.053],[33.324,-2.017],[33.318,-2.046],[33.282,-2],[33.286,-2.056],[33.219,-2.043],[33.208,-2.115],[33.221,-2.142],[33.282,-2.111],[33.358,-2.168],[33.509,-2.153],[33.606,-2.183],[33.749,-2.086],[33.816,-2.123],[33.838,-2.221],[33.532,-2.379],[33.515,-2.449],[33.408,-2.467],[33.462,-2.502],[33.428,-2.553],[33.345,-2.525],[33.345,-2.496],[33.208,-2.513],[33.08,-2.389],[32.963,-2.388],[32.875,-2.477],[32.907,-2.55],[32.866,-2.601],[32.909,-2.679],[32.879,-2.705],[32.955,-2.786],[32.927,-2.82],[33.01,-2.846],[33.023,-2.883],[32.934,-2.852],[32.899,-2.8],[32.756,-3.012],[32.762,-2.928],[32.797,-2.91],[32.72,-2.87],[32.847,-2.824],[32.873,-2.729],[32.823,-2.705],[32.845,-2.677],[32.797,-2.635],[32.817,-2.642],[32.838,-2.587],[32.811,-2.566],[32.838,-2.512],[32.805,-2.485],[32.735,-2.533],[32.728,-2.485],[32.673,-2.518],[32.695,-2.473],[32.66,-2.38],[32.625,-2.467],[32.502,-2.546],[32.551,-2.436],[32.509,-2.47],[32.371,-2.432],[32.32,-2.354],[32.361,-2.329],[32.31,-2.272],[32.259,-2.284],[32.219,-2.251],[32.222,-2.321],[32.159,-2.388],[32.066,-2.386],[32.068,-2.425],[32.167,-2.496],[32.157,-2.551],[32.087,-2.503],[32.07,-2.525],[32.03,-2.47],[32.023,-2.505],[31.986,-2.508],[31.992,-2.584],[31.934,-2.594],[32.015,-2.76],[31.981,-2.766],[31.932,-2.649],[31.9,-2.635],[31.906,-2.711],[31.872,-2.717],[31.858,-2.678],[31.827,-2.697],[31.845,-2.786],[31.796,-2.834],[31.789,-2.726],[31.76,-2.716],[31.774,-2.654],[31.858,-2.601],[31.755,-2.62],[31.72,-2.539],[31.718,-2.508],[31.796,-2.463],[31.755,-2.327],[31.634,-2.356],[31.707,-2.005],[31.611,-2.039],[31.761,-1.597],[31.755,-1.466],[31.796,-1.484],[31.851,-1.278],[31.87,-1.15],[31.845,-1.059],[31.874,-1.025],[31.84,-1.024],[31.837,-0.995],[31.814,-1.04],[31.769,-1.048],[31.769,-0.864],[31.701,-0.839],[31.699,-0.799],[31.798,-0.652],[31.793,-0.576],[31.847,-0.471],[31.926,-0.422],[31.998,-0.315],[32.037,-0.326],[31.975,-0.23],[31.98,-0.189],[31.927,-0.196],[31.92,-0.134],[31.995,-0.086],[32.07,-0.099],[32.016,-0.045],[32.188,-0.068],[32.208,0.037],[32.215,-0.003],[32.269,-0.029],[32.292,0.002],[32.256,0.051],[32.379,-0.024],[32.365,0.085],[32.421,0.083],[32.448,0.119],[32.42,0.055],[32.438,0.034],[32.496,0.085],[32.509,0.051],[32.53,0.078],[32.557,0.044],[32.551,0.119],[32.588,0.108],[32.572,0.133],[32.598,0.14],[32.563,0.19],[32.616,0.211],[32.645,0.291],[32.667,0.277],[32.648,0.231],[32.681,0.222],[32.661,0.172],[32.69,0.167],[32.715,0.209],[32.742,0.174],[32.653,0.133],[32.667,0.092],[32.756,0.126],[32.797,0.106],[32.811,0.161],[32.859,0.147],[32.851,0.181],[32.893,0.196],[32.899,0.147],[32.871,0.127],[32.901,0.077],[32.986,0.101],[33.092,0.186],[33.105,0.222],[33.043,0.229],[33.071,0.263],[33.124,0.247],[33.126,0.217],[33.167,0.263],[33.154,0.316],[33.27,0.373],[33.187,0.428],[33.236,0.427],[33.283,0.483],[33.291,0.44],[33.319,0.438],[33.366,0.497],[33.389,0.485],[33.366,0.407],[33.31,0.382],[33.318,0.352],[33.366,0.373],[33.359,0.339],[33.428,0.325],[33.414,0.346],[33.469,0.352],[33.508,0.3],[33.495,0.27],[33.4,0.298],[33.482,0.188],[33.493,0.236],[33.503,0.196],[33.531,0.222],[33.516,0.181],[33.566,0.184],[33.617,0.227],[33.642,0.323],[33.749,0.319],[33.702,0.284],[33.695,0.263],[33.743,0.263],[33.709,0.202],[33.777,0.188],[33.79,0.236],[33.818,0.154],[33.831,0.209],[33.894,0.174],[33.982,0.266],[33.988,0.119],[33.955,0.095],[33.996,-0.041],[34.065,-0.107],[34.077,-0.063],[34.135,-0.065],[34.113,-0.107],[34.138,-0.117],[34.085,-0.14],[34.094,-0.169],[34.188,-0.189],[34.249,-0.252],[34.243,-0.326],[34.288,-0.396],[34.387,-0.285],[34.345,-0.189],[34.506,-0.181],[34.674,-0.09],[34.737,-0.086],[34.743,-0.162],[34.855,-0.287],[34.829,-0.312],[34.75,-0.287],[34.74,-0.34],[34.562,-0.318],[34.449,-0.346],[34.457,-0.424],[34.506,-0.468],[34.424,-0.525],[34.386,-0.445],[34.348,-0.479],[34.311,-0.449],[34.311,-0.477],[34.223,-0.415],[34.189,-0.422],[34.15,-0.532],[34.057,-0.559],[34.085,-0.6],[34.048,-0.641],[34.037,-0.73],[34.072,-0.795],[34.183,-0.871],[34.14,-0.912],[34.133,-1.004],[34.072,-0.97],[34.037,-0.997],[34.098,-1.019],[34.023,-1.101],[33.976,-1.105],[33.993,-1.138],[33.873,-1.256],[33.934,-1.278],[33.986,-1.37],[33.905,-1.321],[33.793,-1.334],[33.859,-1.408],[33.798,-1.388],[33.781,-1.41],[33.847,-1.433],[33.894,-1.498],[33.936,-1.49],[33.956,-1.519]],"Lake Edward":[[29.47,-0.616],[29.438,-0.61],[29.411,-0.667],[29.37,-0.69],[29.376,-0.61],[29.309,-0.593],[29.344,-0.514],[29.309,-0.497],[29.392,-0.422],[29.392,-0.376],[29.493,-0.181],[29.675,-0.114],[29.732,-0.069],[29.823,-0.162],[29.902,-0.14],[29.867,-0.294],[29.815,-0.374],[29.686,-0.436],[29.626,-0.491],[29.588,-0.58],[29.48,-0.641]],"Lake Kyoga":[[33.488,1.659],[33.496,1.634],[33.403,1.649],[33.352,1.642],[33.318,1.613],[33.287,1.623],[33.095,1.507],[33.108,1.481],[33.147,1.469],[33.221,1.49],[33.215,1.477],[33.276,1.486],[33.277,1.469],[33.25,1.47],[33.249,1.442],[33.2,1.439],[33.153,1.414],[33.221,1.395],[33.195,1.395],[33.203,1.381],[33.256,1.395],[33.278,1.383],[33.29,1.421],[33.332,1.424],[33.329,1.404],[33.307,1.403],[33.311,1.38],[33.333,1.372],[33.327,1.354],[33.352,1.332],[33.329,1.305],[33.318,1.312],[33.262,1.281],[33.27,1.216],[33.242,1.223],[33.215,1.305],[33.201,1.298],[33.186,1.312],[33.153,1.285],[33.113,1.277],[33.13,1.326],[33.103,1.349],[33.068,1.367],[33.048,1.359],[32.899,1.441],[32.851,1.428],[32.873,1.421],[32.859,1.395],[32.838,1.414],[32.893,1.312],[32.865,1.326],[32.879,1.298],[32.859,1.309],[32.831,1.401],[32.783,1.421],[32.742,1.416],[32.72,1.378],[32.773,1.342],[32.776,1.305],[32.738,1.354],[32.584,1.397],[32.537,1.451],[32.558,1.499],[32.544,1.524],[32.561,1.531],[32.602,1.497],[32.681,1.49],[32.758,1.571],[32.811,1.6],[32.811,1.565],[32.797,1.579],[32.789,1.565],[32.811,1.538],[32.842,1.556],[32.899,1.556],[32.914,1.572],[32.936,1.553],[32.98,1.568],[32.995,1.558],[32.982,1.538],[33.008,1.542],[33.089,1.612],[33.088,1.636],[33.108,1.65],[33.105,1.621],[33.133,1.606],[33.156,1.63],[33.153,1.621],[33.171,1.627],[33.192,1.672],[33.224,1.653],[33.252,1.692],[33.25,1.658],[33.274,1.634],[33.325,1.674],[33.393,1.689],[33.438,1.774],[33.455,1.764],[33.434,1.732],[33.436,1.671],[33.476,1.689],[33.469,1.655]],"Lake Kwania":[[32.54,1.625],[32.564,1.641],[32.514,1.645],[32.423,1.682],[32.324,1.641],[32.328,1.626],[32.35,1.617],[32.392,1.606],[32.41,1.617],[32.441,1.585],[32.505,1.584],[32.517,1.557],[32.475,1.565],[32.475,1.552],[32.402,1.568],[32.379,1.599],[32.303,1.621],[32.303,1.634],[32.235,1.668],[32.348,1.658],[32.392,1.689],[32.429,1.698],[32.52,1.668],[32.571,1.676],[32.648,1.743],[32.669,1.8],[32.687,1.812],[32.684,1.789],[32.701,1.764],[32.709,1.78],[32.763,1.812],[32.771,1.86],[32.783,1.866],[32.776,1.853],[32.789,1.855],[32.811,1.866],[32.839,1.855],[32.851,1.874],[32.865,1.84],[32.879,1.847],[32.907,1.825],[32.931,1.879],[33.003,1.929],[33.023,1.927],[32.955,1.847],[32.975,1.845],[32.986,1.812],[33.014,1.824],[33.017,1.808],[32.993,1.783],[32.989,1.716],[32.955,1.799],[32.909,1.784],[32.854,1.785],[32.817,1.833],[32.786,1.798],[32.78,1.77],[32.796,1.732],[32.731,1.725],[32.735,1.696],[32.708,1.702],[32.65,1.67],[32.629,1.635],[32.579,1.624],[32.564,1.613],[32.572,1.606],[32.537,1.593]]}};
+
+/* ---------- constants ---------- */
+const W = 1280, H = 720;
+const C = {ground:'#0F0C0A', surface:'#1E1915', ink:'#F4ECDD', yellow:'#F2C200', red:'#D2202F', crane:'#94A8B6', good:'#3DBB7A'};
+const inkA = a => `rgba(244,236,221,${a})`;
+const params = new URLSearchParams(location.search);
+const SOUND = true; // the sound cut
+const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const FONT = {
+  /* Same faces as the product: Archivo run expanded and heavy for display, Archivo for text,
+     Martian Mono only where a machine is speaking. */
+  disp:(w,s)=>`${w} ${s}px Archivo, system-ui, sans-serif`,
+  body:(w,s)=>`${w} ${s}px Archivo, system-ui, sans-serif`,
+  mono:(w,s)=>`${w} ${s}px "Martian Mono", ui-monospace, monospace`
+};
+
+/* ---------- maths ---------- */
+const clamp = (v,a=0,b=1) => Math.max(a, Math.min(b, v));
+const lerp = (a,b,t) => a + (b-a)*t;
+const seg = (t,a,b) => clamp((t-a)/(b-a));
+const E = {
+  outExpo: t => t>=1 ? 1 : 1-Math.pow(2,-10*t),
+  outCubic: t => 1-Math.pow(1-t,3),
+  inCubic: t => t*t*t,
+  inOutCubic: t => t<.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2,
+  outBack: t => { const c=1.70158; return 1+(c+1)*Math.pow(t-1,3)+c*Math.pow(t-1,2); },
+  smooth: t => t*t*(3-2*t)
+};
+const fmt = n => Math.round(n).toLocaleString('en-US');
+const roll = (target, p, q=50) => p >= 1 ? target : Math.round(target*E.outCubic(p)/q)*q;
+const rng = seed => () => { seed = (seed*1664525 + 1013904223) >>> 0; return seed/4294967296; };
+function inRing(ring, x, y){ let inside=false; for(let i=0,j=ring.length-1;i<ring.length;j=i++){ const xi=ring[i][0],yi=ring[i][1],xj=ring[j][0],yj=ring[j][1]; if(((yi>y)!==(yj>y)) && (x < (xj-xi)*(y-yi)/(yj-yi)+xi)) inside=!inside; } return inside; }
+
+/* ---------- places ---------- */
+const TOWNS = {Kampala:[32.58,0.32], Entebbe:[32.46,0.05], Jinja:[33.20,0.43], Mbarara:[30.65,-0.61], Gulu:[32.30,2.77], Kidepo:[33.85,3.85], Bwindi:[29.68,-1.00], Ssese:[32.29,-0.32], Namanve:[32.70,0.36], 'Fort Portal':[30.27,0.67], Arua:[30.91,3.02], Mbale:[34.18,1.08], Masaka:[31.73,-0.33], Lira:[32.90,2.25], Soroti:[33.61,1.71], Hoima:[31.35,1.43], Kasese:[30.08,0.18], Moroto:[34.65,2.53], Ntinda:[32.62,0.35], Murchison:[31.70,2.25], 'Queen Elizabeth':[30.00,-0.20]};
+
+/* ---------- the particle map ---------- */
+const MAP = (() => {
+  const land = GEO.land;
+  const bb = {minLon:1e9,maxLon:-1e9,minLat:1e9,maxLat:-1e9};
+  for (const p of land){ bb.minLon=Math.min(bb.minLon,p[0]); bb.maxLon=Math.max(bb.maxLon,p[0]); bb.minLat=Math.min(bb.minLat,p[1]); bb.maxLat=Math.max(bb.maxLat,p[1]); }
+  // Lake rings whose coordinates fall outside the country box are data errors (Lake George in this file); skip them.
+  const lakes = Object.values(GEO.lakes).filter(r => r.some(p => p[0]>bb.minLon-1 && p[0]<bb.maxLon+1 && p[1]>bb.minLat-1 && p[1]<bb.maxLat+1));
+  const r = rng(11);
+  const pts = [];
+  const step = 0.062;
+  for (let lat=bb.minLat; lat<=bb.maxLat; lat+=step) for (let lon=bb.minLon; lon<=bb.maxLon; lon+=step){
+    const x = lon+(r()-.5)*step*.8, y = lat+(r()-.5)*step*.8;
+    if (!inRing(land,x,y)) continue;
+    const lake = lakes.some(k => inRing(k,x,y));
+    pts.push({lon:x, lat:y, kind: lake?2:(r()<.16?1:0), ox:(r()*2-1)*820, oy:(r()*2-1)*520, d:r()*1.5+(lake?.7:0), ph:r()*6.28, sz: lake?1.9:(1.5+r()*1.1)});
+  }
+  for (let i=0;i<land.length;i++){ const a=land[i], b=land[(i+1)%land.length]; const n=Math.max(1,Math.round(Math.hypot(b[0]-a[0],b[1]-a[1])/.03));
+    for (let j=0;j<n;j++){ const u=j/n; pts.push({lon:lerp(a[0],b[0],u), lat:lerp(a[1],b[1],u), kind:3, ox:(r()*2-1)*820, oy:(r()*2-1)*520, d:r()*1.2, ph:r()*6.28, sz:2.3}); } }
+  const centre = [(bb.minLon+bb.maxLon)/2, (bb.minLat+bb.maxLat)/2];
+  const span = bb.maxLat-bb.minLat;
+  function proj(cx, cy, h){ const k=h/span; const p=(lon,lat)=>[cx+(lon-centre[0])*k, cy-(lat-centre[1])*k]; return {k, p, t:name=>p(TOWNS[name][0],TOWNS[name][1])}; }
+  const cols=[C.ink, C.yellow, C.crane, C.ink], al=[.72,.9,.85,1];
+  function draw(ctx, P, o={}){
+    const assemble = o.assemble==null ? 1e9 : o.assemble, now=o.now||0, alpha=o.alpha==null?1:o.alpha, breathe=o.breathe==null?1:o.breathe;
+    for (let kind=0; kind<4; kind++){
+      ctx.fillStyle=cols[kind]; ctx.globalAlpha=alpha*al[kind];
+      for (const q of pts){ if (q.kind!==kind) continue;
+        const [tx,ty]=P.p(q.lon,q.lat); let x=tx, y=ty;
+        if (assemble < q.d+2.4){ const a=E.outExpo(seg(assemble,q.d,q.d+2.4)); x=lerp(640+q.ox,tx,a); y=lerp(360+q.oy,ty,a); }
+        const b=Math.sin(now*1.3+q.ph)*.7*breathe;
+        ctx.fillRect(x-q.sz/2+b, y-q.sz/2-b*.5, q.sz, q.sz);
+      }
+    }
+    ctx.globalAlpha=1;
+  }
+  return {draw, proj, count: pts.length, lakes: lakes.length};
+})();
+
+/* ---------- drawing helpers ---------- */
+function rr(ctx,x,y,w,h,r){ r=Math.min(r,w/2,h/2); ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); }
+function txt(ctx,s,x,y,o={}){ ctx.save(); ctx.font=o.font||FONT.body(400,16); ctx.fillStyle=o.color||C.ink; ctx.textAlign=o.align||'left'; ctx.textBaseline=o.base||'alphabetic';
+  if (o.alpha!=null) ctx.globalAlpha*=clamp(o.alpha); if (o.tracking!=null && 'letterSpacing' in ctx) ctx.letterSpacing=o.tracking+'px'; if (o.blur && 'filter' in ctx) ctx.filter=`blur(${o.blur}px)`;
+  ctx.fillText(s,x,y); ctx.restore(); }
+function measure(ctx,s,font){ ctx.save(); ctx.font=font; const w=ctx.measureText(s).width; ctx.restore(); return w; }
+function eyebrow(ctx,s,x,y,o={}){ txt(ctx,s.toUpperCase(),x,y,{font:FONT.body(600,12),color:o.color||C.yellow,tracking:1.4,align:o.align,alpha:o.alpha}); }
+function card(ctx,x,y,w,h,o={}){ ctx.save(); if(o.alpha!=null) ctx.globalAlpha*=clamp(o.alpha); rr(ctx,x,y,w,h,o.r||18); ctx.fillStyle=o.fill||C.surface; ctx.fill(); ctx.strokeStyle=inkA(.14); ctx.lineWidth=1; ctx.stroke();
+  rr(ctx,x+1,y+1,w-2,h-2,(o.r||18)-1); ctx.strokeStyle=inkA(.05); ctx.stroke(); ctx.restore(); }
+function pill(ctx,s,x,y,o={}){ ctx.save(); const font=o.font||FONT.body(600,12); ctx.font=font; const w=ctx.measureText(s).width+(o.px||22), h=o.h||26; const sc=o.scale==null?1:o.scale;
+  ctx.translate(x,y); ctx.scale(sc,sc); if(o.alpha!=null) ctx.globalAlpha*=clamp(o.alpha); const ax=o.align==='left'?0:o.align==='right'?-w:-w/2; rr(ctx,ax,-h/2,w,h,h/2);
+  ctx.fillStyle=o.fill||'rgba(30,25,21,.72)'; ctx.fill(); if(o.dash) ctx.setLineDash(o.dash); if(o.stroke!==null){ ctx.strokeStyle=o.stroke||inkA(.16); ctx.lineWidth=o.lw||1; ctx.stroke(); }
+  ctx.fillStyle=o.color||C.ink; ctx.textAlign='center'; ctx.textBaseline='middle'; if (o.tracking!=null && 'letterSpacing' in ctx) ctx.letterSpacing=o.tracking+'px'; ctx.fillText(s,ax+w/2,1); ctx.restore(); return w; }
+function glow(ctx,x,y,col,r,a=.9){ const g=ctx.createRadialGradient(x,y,0,x,y,r); g.addColorStop(0,col); g.addColorStop(1,'rgba(0,0,0,0)'); ctx.save(); ctx.globalAlpha*=a; ctx.fillStyle=g; ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.fill(); ctx.restore(); }
+function dot(ctx,x,y,r,col,a=1){ ctx.save(); ctx.globalAlpha*=a; ctx.fillStyle=col; ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.fill(); ctx.restore(); }
+function money(ctx,n,x,y,o={}){ const size=o.size||28; const s=fmt(n); ctx.save(); if(o.alpha!=null) ctx.globalAlpha*=clamp(o.alpha); ctx.font=FONT.mono(500,size); const w=ctx.measureText(s).width; ctx.font=FONT.mono(400,size*.5); const pw=o.prefix===null?0:ctx.measureText('UGX ').width; const total=w+pw;
+  let sx = o.align==='right' ? x-total : o.align==='center' ? x-total/2 : x; if(o.prefix!==null) txt(ctx,'UGX',sx,y,{font:FONT.mono(400,size*.5),color:o.pcolor||inkA(.55)}); txt(ctx,s,sx+pw,y,{font:FONT.mono(500,size),color:o.color||C.ink}); ctx.restore(); return total; }
+function pathBetween(a,b,k){ const mx=(a[0]+b[0])/2,my=(a[1]+b[1])/2,dx=b[0]-a[0],dy=b[1]-a[1]; const cx=mx-dy*k, cy=my+dx*k; return u=>{ const v=1-u; return [v*v*a[0]+2*v*u*cx+u*u*b[0], v*v*a[1]+2*v*u*cy+u*u*b[1]]; }; }
+function strokePath(ctx,path,u0,u1,col,w,a=1,dash){ ctx.save(); ctx.globalAlpha*=a; ctx.strokeStyle=col; ctx.lineWidth=w; ctx.lineCap='round'; if(dash) ctx.setLineDash(dash); ctx.beginPath(); const n=24; for(let i=0;i<=n;i++){ const p=path(lerp(u0,u1,i/n)); if(i===0) ctx.moveTo(p[0],p[1]); else ctx.lineTo(p[0],p[1]); } ctx.stroke(); ctx.restore(); }
+function trail(ctx,path,u1,len,dir,col,w){ const n=16; ctx.save(); ctx.lineCap='round'; ctx.strokeStyle=col;
+  for(let i=0;i<n;i++){ const ua=clamp(u1-dir*len*(1-i/n)), ub=clamp(u1-dir*len*(1-(i+1)/n)); const A=path(ua),B=path(ub); ctx.globalAlpha=(i+1)/n*.85; ctx.lineWidth=w*(0.4+0.6*(i+1)/n); ctx.beginPath(); ctx.moveTo(A[0],A[1]); ctx.lineTo(B[0],B[1]); ctx.stroke(); }
+  ctx.restore(); const h=path(clamp(u1)); glow(ctx,h[0],h[1],col,w*3.2,.7); dot(ctx,h[0],h[1],w*.9,C.ink); }
+function crest(ctx,x,y,size,ink,p=1,alpha=1){ // 64-unit construction from brand/crest.svg
+  const s=size/64; ctx.save(); ctx.translate(x-32*s,y-32*s); ctx.scale(s,s); ctx.globalAlpha*=alpha; ctx.lineCap='round'; ctx.lineWidth=7.5;
+  const pp=seg(p,0,.3); if(pp>0){ ctx.fillStyle=ink; ctx.beginPath(); ctx.arc(32,48,7.5*E.outBack(pp),0,7); ctx.fill(); ctx.fillStyle=C.yellow; ctx.beginPath(); ctx.arc(32,48,3*E.outBack(pp),0,7); ctx.fill(); }
+  const feathers=[[[28.5,40.5],[22,31],[12.5,17],ink],[[32,38.5],[32,24],[32,8.5],C.yellow],[[35.5,40.5],[42,31],[51.5,17],C.red]];
+  feathers.forEach((f,i)=>{ const q=E.outCubic(seg(p,.25+i*.18,.6+i*.18)); if(q<=0) return; ctx.strokeStyle=f[3]; ctx.beginPath(); const [a,c,b]=f; ctx.moveTo(a[0],a[1]); const n=12; for(let j=1;j<=n;j++){ const u=q*j/n, v=1-u; ctx.lineTo(v*v*a[0]+2*v*u*c[0]+u*u*b[0], v*v*a[1]+2*v*u*c[1]+u*u*b[1]); } ctx.stroke(); });
+  ctx.restore(); }
+function carSide(ctx,x,y,s,o={}){ // side view, faces right, origin rear-bottom, 202 x 46
+  ctx.save(); ctx.translate(x,y); ctx.scale(s,s); ctx.globalAlpha*=o.alpha==null?1:clamp(o.alpha);
+  const body=o.suv?[[0,50],[2,20],[10,16],[50,14],[60,4],[140,4],[150,14],[196,20],[206,50]]:[[0,46],[2,30],[14,26],[44,24],[62,8],[126,6],[152,12],[178,26],[198,30],[202,46]];
+  ctx.beginPath(); body.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1])); ctx.closePath(); ctx.fillStyle=o.fill||C.ink; ctx.fill();
+  const gy=o.suv?50:46; ctx.fillStyle=o.glass||'rgba(15,12,10,.75)';
+  if(o.suv){ rr(ctx,62,8,34,12,3); ctx.fill(); rr(ctx,102,8,34,12,3); ctx.fill(); }
+  else { ctx.beginPath(); ctx.moveTo(66,11); ctx.lineTo(100,10); ctx.lineTo(100,23); ctx.lineTo(50,23); ctx.closePath(); ctx.fill(); ctx.beginPath(); ctx.moveTo(106,10); ctx.lineTo(126,10); ctx.lineTo(146,23); ctx.lineTo(106,23); ctx.closePath(); ctx.fill(); }
+  const wx=o.suv?[48,162]:[44,160], wr=o.suv?14:12;
+  for(const w of wx){ ctx.fillStyle=C.ground; ctx.beginPath(); ctx.arc(w,gy,wr+2,0,7); ctx.fill(); ctx.fillStyle='#2a2521'; ctx.beginPath(); ctx.arc(w,gy,wr,0,7); ctx.fill(); ctx.fillStyle=inkA(.6); ctx.beginPath(); ctx.arc(w,gy,wr*.45,0,7); ctx.fill(); }
+  if(o.heads){ ctx.fillStyle=o.headColor||C.crane; o.heads.forEach(h=>{ ctx.beginPath(); ctx.arc(h[0],h[1],4.2,0,7); ctx.fill(); }); }
+  if(o.parcel){ ctx.save(); ctx.globalAlpha*=o.parcel; ctx.fillStyle=C.yellow; rr(ctx,14,30,20,14,2); ctx.fill(); ctx.strokeStyle=C.ground; ctx.lineWidth=1.5; ctx.beginPath(); ctx.moveTo(24,30); ctx.lineTo(24,44); ctx.stroke(); ctx.restore(); }
+  ctx.restore(); }
+function railSteps(ctx,steps,x0,x1,y,lit,o={}){ const n=steps.length; ctx.save(); if(o.alpha!=null) ctx.globalAlpha*=clamp(o.alpha);
+  ctx.strokeStyle=inkA(.14); ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(x0,y); ctx.lineTo(x1,y); ctx.stroke();
+  const litF=clamp(lit); ctx.strokeStyle=C.yellow; ctx.beginPath(); ctx.moveTo(x0,y); ctx.lineTo(lerp(x0,x1,litF*(n-1)/(n-1)),y); ctx.stroke();
+  steps.forEach((s,i)=>{ const x=lerp(x0,x1,i/(n-1)); const on=lit>=i/(n-1)-1e-6; const cur=on && (i===n-1 ? lit>=1 : lit<(i+1)/(n-1));
+    if(cur){ glow(ctx,x,y,'rgba(242,194,0,.5)',26,.8); } dot(ctx,x,y,o.r||8,on?C.yellow:C.surface); if(!on){ ctx.strokeStyle=inkA(.3); ctx.lineWidth=1.5; ctx.beginPath(); ctx.arc(x,y,o.r||8,0,7); ctx.stroke(); }
+    txt(ctx,s,x,y+(o.dy||30),{font:FONT.body(600,o.fs||14),color:on?C.ink:inkA(.45),align:'center'});
+    if(o.times&&on) txt(ctx,o.times[i],x,y+(o.dy||30)+18,{font:FONT.mono(400,12),color:inkA(.45),align:'center'}); });
+  ctx.restore(); }
+function fade(ctx,t,dur,last){ const a=Math.min(seg(t,0,.45), last?1:1-seg(t,dur-.45,dur)); if(a<1){ ctx.fillStyle=C.ground; ctx.globalAlpha=1-a; ctx.fillRect(-2,-2,W+4,H+4); ctx.globalAlpha=1; } }
+function tap(ctx,x,y,p){ if(p<=0||p>=1) return; ctx.save(); ctx.strokeStyle=C.yellow; ctx.globalAlpha=1-p; ctx.lineWidth=3; ctx.beginPath(); ctx.arc(x,y,8+p*40,0,7); ctx.stroke(); ctx.restore(); }
+function vignette(ctx){ const g=ctx.createRadialGradient(640,360,300,640,360,860); g.addColorStop(0,'rgba(15,12,10,0)'); g.addColorStop(1,'rgba(15,12,10,.75)'); ctx.fillStyle=g; ctx.fillRect(0,0,W,H); }
+function offerCard(ctx,x,y,o){ // x,y top-left, 420 x 168
+  card(ctx,x,y,420,168,{alpha:o.alpha}); ctx.save(); ctx.globalAlpha*=clamp(o.alpha==null?1:o.alpha);
+  eyebrow(ctx,o.accepted?'Accepted · funded offer':'Funded offer',x+22,y+30);
+  if(!o.accepted){ money(ctx,o.amount,x+22,y+78,{size:40}); txt(ctx,'is waiting',x+22+money(ctx,o.amount,-9999,-9999,{size:40}),y+78,{font:FONT.body(400,16),color:inkA(.6)}); }
+  else { txt(ctx,o.driver,x+22,y+78,{font:FONT.disp(700,24)}); pill(ctx,'✓ ' + o.plate,x+398,y+70,{fill:'rgba(61,187,122,.18)',stroke:'rgba(61,187,122,.6)',color:C.good,font:FONT.mono(500,13),h:30,px:22,align:'right'}); }
+  txt(ctx,o.line,x+22,y+108,{font:FONT.body(400,15),color:inkA(.72)});
+  if(!o.accepted) pill(ctx,'Accept',x+398,y+142,{fill:C.yellow,color:'#17120E',font:FONT.body(700,14),h:34,px:34,align:'right',stroke:null});
+  if(o.split) txt(ctx,o.split,x+22,y+146,{font:FONT.mono(400,12),color:inkA(.5)});
+  ctx.restore(); }
+
+/* ---------- data for scenes ---------- */
+const APPS=[['Bolt','#34D186','#0b2a1c'],['SafeBoda','#F7941D','#2a1500'],['Faras','#1F6FEB',C.ink],['Yango','#FF3B30',C.ink],['Tinka','#7C3AED',C.ink],['inDrive','#C1F11D','#1d2400']];
+const QUOTES=[ // arrival order; price = base + perKm x 8 km from data/providers.json (estimates)
+  {n:'SafeBoda',k:'boda',p:4100,c:'#F7941D'},{n:'Bolt',k:'car',p:7400,c:'#34D186'},{n:'Matatu',k:'shared',p:2200,c:'#2563EB'},
+  {n:'Yango',k:'car',p:7600,c:'#FF3B30'},{n:'Tinka',k:'car',p:6600,c:'#7C3AED'},{n:'Faras',k:'boda',p:3700,c:'#1F6FEB'},{n:'Special hire',k:'car',p:12600,c:'#6B7280'}];
+const RANK=QUOTES.map((q,i)=>i).sort((a,b)=>QUOTES[a].p-QUOTES[b].p); const rankOf=i=>RANK.indexOf(i);
+const VEH=[ ['Kampala','Jinja','road',2.6,5.5,.08],['Kampala','Mbarara','road',2.9,6.5,-.08],['Kampala','Gulu','road',3.2,7,.06],['Kampala','Fort Portal','road',3.5,6,.1],['Kampala','Mbale','road',3.8,6,-.1],
+  ['Kampala','Masaka','road',4.1,5,.1],['Kampala','Arua','road',4.4,7.5,-.06],['Kampala','Lira','road',4.7,6.5,.08],['Kampala','Hoima','road',5,5.5,-.1],['Kampala','Kasese','road',5.3,6.5,.08],
+  ['Entebbe','Kidepo','air',4,6.5,.35],['Entebbe','Bwindi','air',5,5.5,-.35],['Entebbe','Gulu','air',6,5,.3],['Entebbe','Ssese','boat',4.5,5,.25],['Kampala','Namanve','rail',5.5,4,0] ];
+const VCOL={road:[C.ink,C.yellow,C.red],air:C.ink,boat:C.crane,rail:C.yellow};
+const SIGNATURE=[['Mercedes-Benz E-Class',350000],['Mercedes-Benz S-Class',600000],['Range Rover Sport',450000],['Lexus LX 570',500000],['Land Cruiser V8',400000],['Toyota Alphard',380000]];
+const RAIL=['requested','placed with the partner','driver and plate','arriving','on trip','done'];
+const RAIL_T=['17:02','17:03','17:05','17:12','17:16','17:41'];
+
+/* ---------- glyphs for the Atlas ---------- */
+const GLYPH={
+  air(ctx){ ctx.beginPath(); [[0,-18],[3,-10],[3,-2],[18,6],[18,9],[3,6],[3,12],[8,16],[8,18],[0,16],[-8,18],[-8,16],[-3,12],[-3,6],[-18,9],[-18,6],[-3,-2],[-3,-10]].forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1])); ctx.closePath(); ctx.fill(); },
+  bus(ctx){ rr(ctx,-20,-12,40,24,5); ctx.fill(); ctx.fillStyle=C.ground; for(let i=0;i<3;i++){ rr(ctx,-15+i*12,-7,9,8,1.5); ctx.fill(); } ctx.beginPath(); ctx.arc(-11,13,4,0,7); ctx.arc(11,13,4,0,7); ctx.fill(); },
+  water(ctx){ ctx.beginPath(); ctx.moveTo(-22,2); ctx.lineTo(22,2); ctx.lineTo(15,12); ctx.lineTo(-15,12); ctx.closePath(); ctx.fill(); rr(ctx,-9,-8,18,10,2); ctx.fill(); ctx.fillRect(-1,-18,2,10); ctx.fillStyle=C.ground; ctx.fillRect(-6,-5,4,3); ctx.fillRect(2,-5,4,3); },
+  rail(ctx){ rr(ctx,-20,-10,40,20,5); ctx.fill(); ctx.fillStyle=C.ground; rr(ctx,10,-6,7,7,1.5); ctx.fill(); rr(ctx,-16,-6,20,7,1.5); ctx.fill(); ctx.fillStyle=C.ink; ctx.beginPath(); ctx.arc(-12,12,3.5,0,7); ctx.arc(0,12,3.5,0,7); ctx.arc(12,12,3.5,0,7); ctx.fill(); ctx.fillRect(-22,16,44,2); },
+  signature(ctx){ ctx.beginPath(); [[-22,8],[-21,0],[-16,-2],[-8,-3],[-3,-10],[10,-10],[16,-3],[22,0],[22,8]].forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1])); ctx.closePath(); ctx.fill(); ctx.fillStyle=C.ground; ctx.beginPath(); ctx.arc(-13,9,4,0,7); ctx.arc(13,9,4,0,7); ctx.fill(); ctx.fillStyle=C.yellow; ctx.beginPath(); ctx.arc(2,-4,2.4,0,7); ctx.fill(); },
+  stays(ctx){ rr(ctx,-20,-14,6,26,2); ctx.fill(); rr(ctx,-20,0,40,10,3); ctx.fill(); ctx.fillRect(-20,10,3,6); ctx.fillRect(17,10,3,6); ctx.fillStyle=C.crane; rr(ctx,-13,-6,11,5,2); ctx.fill(); }
+};
+
+/* ---------- scenes ---------- */
+const SCENES = [
+{ id:'opening', name:'Opening', dur:20,
+  caps:[{at:1.2,eb:'UG · Showreel',main:'The map you watch assemble is the map you land on.'},{at:8.6,main:''}],
+  voice:['Kampala. Six in the evening, the whole city moving at once.','UG. Ride. Pool. Rent. Deliver.','One app for every way to move in Uganda. Tugende.'],
+  draw(g,t){ const {ctx,now}=g; const P=MAP.proj(640,330,600);
+    const dim = 1-.62*E.outCubic(seg(t,9,10.6));
+    MAP.draw(ctx,P,{assemble:t,now,alpha:dim});
+    // corridors + vehicles
+    for (let i=0;i<VEH.length;i++){ const [a,b,kind,s,d,k]=VEH[i]; const p=seg(t,s,s+d); if(p<=0||p>=1) continue;
+      const path=pathBetween(P.t(a),P.t(b),k); const u = kind==='air' ? p : 1-Math.abs(2*p-1); const dir = kind==='air' ? 1 : (p<.5?1:-1);
+      const col = kind==='road' ? VCOL.road[i%3] : VCOL[kind];
+      if(kind==='air') strokePath(ctx,path,0,u,inkA(.18),1,dim);
+      ctx.save(); ctx.globalAlpha=dim; trail(ctx,path,u,kind==='road'?.28:.2,dir,col,kind==='air'?2.2:2.6); ctx.restore(); }
+    // town pills
+    const towns=[['Kampala',3,1],['Jinja',3.6],['Entebbe',3.9],['Mbarara',4.3],['Gulu',4.6],['Fort Portal',4.9],['Mbale',5.2],['Arua',5.5],['Kidepo',6.6,0,'park'],['Bwindi',7.2,0,'park'],['Ssese',6.0],['Namanve',6.3]];
+    for(const [n,s,big,park] of towns){ const q=E.outBack(seg(t,s,s+.6)); if(q<=0) continue; const [x,y]=P.t(n); dot(ctx,x,y,big?4:2.5,park?C.good:C.yellow,dim); const nm=n==='Namanve'; pill(ctx,n,x+(nm?36:0),y+(nm?14:-16),{scale:q,alpha:dim*(park?.7:nm?.8:1),font:FONT.body(big?700:600,big?12:11),h:big?24:22,px:18}); }
+    // letters
+    const pu=E.outExpo(seg(t,9,10.5)), pg=E.outExpo(seg(t,9.15,10.65));
+    if(pu>0){ const fontL=FONT.disp(900,250); ctx.save(); ctx.shadowColor='rgba(15,12,10,.8)'; ctx.shadowBlur=40;
+      txt(ctx,'U',lerp(-420,470,pu),430,{font:fontL,align:'center',alpha:pu}); txt(ctx,'G',lerp(1700,810,pg),430,{font:fontL,align:'center',alpha:pg}); ctx.restore();
+      // sweep
+      const sw=seg(t,10.8,11.9); if(sw>0&&sw<1){ const sx=lerp(300,980,sw); const gr=ctx.createLinearGradient(sx-120,0,sx+120,0); gr.addColorStop(0,'rgba(242,194,0,0)'); gr.addColorStop(.5,'rgba(242,194,0,.95)'); gr.addColorStop(1,'rgba(242,194,0,0)'); ctx.save(); ctx.fillStyle=gr; ctx.font=fontL; ctx.textAlign='center'; ctx.fillText('U',470,430); ctx.fillText('G',810,430); ctx.restore(); } }
+    // lock flash
+    const fl=seg(t,10.55,11.35); if(fl>0&&fl<1){ ctx.save(); ctx.globalCompositeOperation='lighter'; glow(ctx,640,340,`rgba(242,194,0,${.85*(1-fl)})`,lerp(80,760,E.outCubic(fl)),1); ctx.restore(); ctx.fillStyle=`rgba(244,236,221,${.6*Math.pow(1-fl,3)})`; ctx.fillRect(0,0,W,H); }
+    // verbs
+    ['Ride.','Pool.','Rent.','Deliver.'].forEach((v,i)=>{ const q=E.outExpo(seg(t,11.9+i*.6,13.05+i*.6)); if(q<=0) return; const xs=[400,560,720,910]; txt(ctx,v,xs[i],560+18*(1-q),{font:FONT.disp(900,40),align:'center',alpha:q,blur:(1-q)*8,color:i===1?C.yellow:C.ink}); });
+    const pl=E.outCubic(seg(t,15.2,16.4)); if(pl>0) txt(ctx,'Look the part. Pay the smart price.',640,616+10*(1-pl),{font:FONT.body(400,22),align:'center',alpha:pl*.85});
+    vignette(ctx); }
+},
+{ id:'problem', name:'The problem', dur:20,
+  caps:[{at:1.5,eb:'The problem',main:'Kampala checks three apps before every trip.'},{at:11,eb:'One crest',main:'Every way, one screen.',sub:'Every partner quote, drawn in one consistent hand, ranked on one desk.'}],
+  voice:['Banange. Three apps for one trip, and you still ask the boda man.','Two prices for the same road, and no special hire anywhere.','UG puts every way on one screen, ranked and honest.'],
+  draw(g,t){ const {ctx,now}=g;
+    const px=640,py=330, pw=300,ph=560; const pp=E.outExpo(seg(t,0,1.2));
+    ctx.save(); ctx.globalAlpha=pp; card(ctx,px-pw/2,py-ph/2+30*(1-pp),pw,ph,{r:44,fill:'#161210'}); rr(ctx,px-40,py-ph/2+12+30*(1-pp),80,14,7); ctx.fillStyle='#0a0807'; ctx.fill(); ctx.restore();
+    const col=seg(t,10,13.2);
+    APPS.forEach((a,i)=>{ const q=E.outBack(seg(t,1+i*.35,1.6+i*.35)); if(q<=0) return; const cx0=px-96+(i%3)*96, cy0=py-160+Math.floor(i/3)*104; const cq=E.inCubic(seg(t,10+i*.18,11.5+i*.18)); const cx=lerp(cx0,px,cq), cy=lerp(cy0,py-40,cq); const sc=q*(1-cq); if(sc<=0) return;
+      ctx.save(); ctx.translate(cx,cy); ctx.scale(sc,sc); ctx.globalAlpha=1-cq; rr(ctx,-32,-32,64,64,16); ctx.fillStyle=a[1]; ctx.fill(); ctx.strokeStyle=inkA(.14); ctx.stroke(); txt(ctx,a[0].slice(0,2),0,2,{font:FONT.disp(700,18),color:a[2],align:'center',base:'middle'}); txt(ctx,a[0],0,50,{font:FONT.body(600,11),align:'center',color:inkA(.75)}); ctx.restore(); });
+    // taps: which app? a cursor hesitates between three
+    const hes=seg(t,4,9); if(hes>0&&hes<1){ const seq=[0,1,2,0,1]; const k=Math.min(4,Math.floor(hes*5)); const i=seq[k]; const cx0=px-96+(i%3)*96, cy0=py-160+Math.floor(i/3)*104; tap(ctx,cx0,cy0,(hes*5)%1); }
+    // crest
+    const cp=seg(t,11.4,13.8); if(cp>0){ glow(ctx,px,py-40,'rgba(242,194,0,.28)',170*E.outCubic(cp),1); crest(ctx,px,py-40,150,C.ink,cp); const ug=E.outExpo(seg(t,13.6,14.8)); if(ug>0) txt(ctx,'UG',px,py+120+12*(1-ug),{font:FONT.disp(900,54),align:'center',alpha:ug}); }
+    vignette(ctx); }
+},
+{ id:'ride', name:'Ride', dur:30,
+  caps:[{at:1,eb:'Ride · the compare desk',main:'Every way, one screen.'},{at:8.5,main:'Ranked by price. Estimates say so.',sub:'Every quote carries its provenance in words, on the card.'},{at:14,main:'The ones that cannot serve you stay on the screen.',sub:'Greyed, with the reason.'},{at:20,main:'Every fare on one screen.',sub:'And we tell you plainly which of them UG can actually book.'}],
+  voice:['This is the desk. Every quote, ranked by price. An estimate says it is an estimate.','The button is always Book on UG. Nobody sends you away.','Same trip, smarter price.'],
+  draw(g,t){ const {ctx,now}=g;
+    const hp=E.outExpo(seg(t,.3,1.4)); eyebrow(ctx,'Ride · Ntinda → Downtown Kampala',200,86,{alpha:hp}); txt(ctx,'Ntinda → Downtown Kampala',200,128,{font:FONT.disp(700,32),alpha:hp}); txt(ctx,'8 km · 25 min · now',1080,128,{font:FONT.mono(400,15),align:'right',color:inkA(.55),alpha:hp});
+    const rk=E.inOutCubic(seg(t,8.5,10)); const y0=168, rh=42;
+    const focusDim = t>21 ? .35 : 1;
+    QUOTES.forEach((q,i)=>{ const ap=E.outExpo(seg(t,.8+i*.4,1.8+i*.4)); if(ap<=0) return; const y=y0+lerp(i,rankOf(i),rk)*rh; const x=200+40*(1-ap); const isBest=rankOf(i)===0; const a=ap*(t>21&&!isBest?focusDim:1);
+      ctx.save(); ctx.globalAlpha=a; ctx.strokeStyle=inkA(.1); ctx.beginPath(); ctx.moveTo(200,y+rh-1); ctx.lineTo(1080,y+rh-1); ctx.stroke();
+      if(isBest&&rk>=1){ ctx.fillStyle='rgba(242,194,0,.07)'; rr(ctx,192,y+2,896,rh-4,10); ctx.fill(); }
+      dot(ctx,x+10,y+21,6,q.c); txt(ctx,q.n,x+28,y+26,{font:FONT.body(600,16)}); const nw=measure(ctx,q.n,FONT.body(600,16));
+      pill(ctx,q.k,x+28+nw+34,y+21,{font:FONT.body(600,11),h:20,px:16,color:inkA(.7)}); txt(ctx,'estimate · ' + (q.k==='shared'?'snippet':'modelled'),x+28+nw+90,y+26,{font:FONT.body(400,12),color:inkA(.4)});
+      const pr=roll(q.p,seg(t,.9+i*.4,2.3+i*.4)); money(ctx,pr,790,y+27,{size:20,align:'right'});
+      if(isBest&&t>10.5){ const bq=E.outBack(seg(t,10.5,11.1)); pill(ctx,'Likely cheapest',870,y+21,{fill:C.yellow,color:'#17120E',font:FONT.body(700,11),h:22,px:16,scale:bq,stroke:null}); }
+      const bp=E.outExpo(seg(t,12+rankOf(i)*.12,12.7+rankOf(i)*.12)); if(bp>0){ const big=isBest&&t>21?1+.08*E.outBack(seg(t,21.4,22)):1; pill(ctx,'Book on UG',978,y+21,{fill:C.yellow,color:'#17120E',font:FONT.body(700,12),h:26,px:22,alpha:bp,scale:bp*big,stroke:null}); txt(ctx,'open ↗',1080,y+26,{font:FONT.body(400,11),color:inkA(.32),align:'right',alpha:bp}); }
+      ctx.restore(); });
+    const gp=E.outExpo(seg(t,14,15)); if(gp>0){ const y=y0+8*rh; ctx.save(); ctx.globalAlpha=gp*.45*(1-seg(t,21,21.8)); dot(ctx,210,y+21,6,'#0F766E'); txt(ctx,'Aerolink',228,y+26,{font:FONT.body(600,16)}); pill(ctx,'flight',330,y+21,{font:FONT.body(600,11),h:20,px:16,color:inkA(.7)}); txt(ctx,'no airstrip on this route',400,y+26,{font:FONT.body(400,13)}); txt(ctx,'—',790,y+27,{font:FONT.mono(500,20),align:'right'}); ctx.restore(); }
+    if(t>21.6){ const y=y0+rankOf(RANK[0])*rh; tap(ctx,978,y+21,seg(t,21.6,22.4)); const rp=E.outExpo(seg(t,22.2,23.2)); ctx.save(); ctx.globalAlpha=rp; railSteps(ctx,['placed','driver and plate','arriving','on trip','done'],300,980,534,seg(t,22.8,28),{fs:13,dy:24,r:6}); ctx.restore(); }
+    vignette(ctx); }
+},
+{ id:'pool', name:'Pool', dur:40,
+  caps:[{at:1,eb:'Pool · the Virtual Stage',main:'A stage that fills before the car exists.'},{at:5,main:'Riders queue money, not requests.',sub:'Where, roughly when, and the seat paid into escrow.'},{at:13,main:'The price falls as the car fills.',sub:'Invite the circle; the seat gets cheaper for everyone.'},{at:22,main:'Full early, leave early.',sub:'Not full at cut-off: top up from the empty-leg pool, or refund.'},{at:30,main:'UG manufactures the trip and offers it with the money already in it.'},{at:35.5,main:'One tap. The riders get a car, a plate and a face.'}],
+  voice:['Now this one is ours. The Virtual Stage.','You pay for your seat first; friends join and the price drops for everyone.','Money in first, and a driver who knows the road takes it. Twende.'],
+  draw(g,t){ const {ctx,now}=g;
+    const ap=E.outExpo(seg(t,.3,1.4));
+    // corridor strip
+    card(ctx,120,90,520,84,{alpha:ap}); eyebrow(ctx,'Corridor',142,116,{alpha:ap}); txt(ctx,'Kampala → Fort Portal',142,152,{font:FONT.disp(700,20),alpha:ap}); txt(ctx,'300 km · Fri 17:00–19:00',618,152,{font:FONT.mono(400,13),align:'right',color:inkA(.55),alpha:ap});
+    // stage card
+    card(ctx,120,196,520,364,{alpha:ap}); eyebrow(ctx,'Virtual stage · Fort Portal · Fri 17:00–19:00',142,226,{alpha:ap});
+    const seats=Math.min(4, t<4?0:t<9?1:t<14?2:t<19?3:4); const prices=[389400,389400,194700,129800,97350]; const pt=[0,4,9,14,19][seats]; const price=roll(prices[seats],seg(t,pt,pt+1.1))+(seg(t,pt,pt+1.1)<1?prices[seats-1>=0?seats-1:0]-roll(prices[seats-1>=0?seats-1:0],seg(t,pt,pt+1.1))+0:0);
+    const shown = seats===0 ? 389400 : Math.round(lerp(prices[seats-1],prices[seats],E.outCubic(seg(t,pt,pt+1.1)))/50)*50;
+    money(ctx,shown,142,300,{size:56,alpha:ap}); txt(ctx,'per seat · paid into escrow',142,326,{font:FONT.body(400,14),color:inkA(.55),alpha:ap});
+    // fill bar
+    for(let i=0;i<4;i++){ const x=142+i*120, y=352; const on=i<seats; const st=[4,9,14,19][i]; const q=E.outBack(seg(t,st,st+.6)); rr(ctx,x,y,110,34,8); ctx.fillStyle=on?C.yellow:inkA(.08); ctx.globalAlpha=ap; ctx.fill(); ctx.globalAlpha=1; if(on){ txt(ctx,['AN','BK','CM','DO'][i],x+55,y+18,{font:FONT.body(700,13),color:'#17120E',align:'center',base:'middle',alpha:q}); } else txt(ctx,'seat '+(i+1),x+55,y+18,{font:FONT.body(600,12),color:inkA(.35),align:'center',base:'middle',alpha:ap}); }
+    txt(ctx,`${seats} of 4 seats`,142,420,{font:FONT.body(600,14),alpha:ap}); const full=t>=19;
+    // cut-off chip
+    pill(ctx,full?'Full · departs 17:30':'cut-off 16:30',618,412,{align:'right',font:FONT.mono(500,12),h:26,px:18,fill:full?'rgba(61,187,122,.16)':undefined,stroke:full?'rgba(61,187,122,.6)':undefined,color:full?C.good:inkA(.75),alpha:ap});
+    // paid ticks
+    for(let i=0;i<seats;i++){ const st=[4,9,14,19][i]; const q=E.outExpo(seg(t,st+.2,st+1)); txt(ctx,`✓ ${['Anita','Brian','Cissy','Deo'][i]} paid UGX ${fmt(shown)}`,142,458+i*22,{font:FONT.mono(400,13),color:C.good,alpha:q*ap}); }
+    // right: car + offer
+    const cx=760, cy=300;
+    if(t<24.6){ const dp=E.outExpo(seg(t,1.2,2.2)); ctx.save(); ctx.globalAlpha=dp*.35; ctx.setLineDash([6,8]); ctx.strokeStyle=C.ink; ctx.lineWidth=1.5; rr(ctx,700,180,440,240,24); ctx.stroke(); ctx.restore(); txt(ctx,'no car yet',920,310,{font:FONT.body(600,15),color:inkA(.4),align:'center',alpha:dp*(1-seg(t,23.8,24.6))}); }
+    const mp=seg(t,24,29.5); if(mp>0){ const r=rng(3); const n=340; ctx.save(); const pa=E.outCubic(seg(mp,0,.95)); // particles converge onto the silhouette, then the solid car fades in
+      for(let i=0;i<n;i++){ const u=r(), v=r(); const tx=cx+u*202*1.9, ty=cy+lerp(6,46,v)*1.9; const inside = v>0.45 || (u>.3&&u<.75&&v>.15) || (u>.2&&u<.9&&v>.3); if(!inside) continue; const d=r()*.5; const q=E.outExpo(seg(mp,d,d+.5)); const x=lerp(690+r()*560,tx,q), y=lerp(60+r()*520,ty,q); ctx.fillStyle=r()<.2?C.yellow:C.ink; ctx.globalAlpha=(1-E.inCubic(seg(mp,.8,1)))*.9; ctx.fillRect(x,y,2,2); }
+      ctx.restore(); carSide(ctx,cx,cy,1.9,{alpha:E.smooth(seg(mp,.7,1)),heads:[[75,15],[95,15],[115,15],[135,15]]}); if(mp>.9) txt(ctx,'manufactured · 4 seats · Ntinda pick-up 17:30',cx+192,cy+130,{font:FONT.mono(400,12),color:inkA(.5),align:'center',alpha:seg(mp,.9,1)}); }
+    const op=E.outExpo(seg(t,30,31.2)); if(op>0){ const acc=t>=34.6; const ox=720, oy=lerp(560,420,op); offerCard(ctx,ox,oy,{alpha:op,amount:354000,line:'Fort Portal · Fri 17:30 · 4 seats · from Ntinda',accepted:acc,driver:'Ronald · RAV4',plate:'UBK 412X',split: acc?'4 × 97,350 = 389,400 · driver 354,000 · UG 35,400':null}); tap(ctx,ox+360,oy+142,seg(t,33.9,34.7)); }
+    vignette(ctx); }
+},
+{ id:'drive', name:'Drive', dur:25,
+  caps:[{at:1,eb:'Drive · the Comfort Map',main:'Drivers declare a comfort map, not trips.'},{at:9,sub:'Base, radius, corridors, days, hours, car. Hard no’s stay no.',main:'One screen. Never post a trip again.'},{at:15,main:'Funded offers come to you.'},{at:20,main:'Offers arrive now. Accept after verification.',sub:'Usually within a day.'}],
+  voice:['Drivers, you do not chase trips here.','You say once where you are comfortable working: your stage, your roads, your hours, and the no\'s that stay no.','Then funded offers come to you, with the money already in. Accept, and go.'],
+  draw(g,t){ const {ctx,now}=g;
+    const ap=E.outExpo(seg(t,.3,1.4));
+    // map (zoomed on the centre), clipped right
+    ctx.save(); rr(ctx,600,80,600,520,24); ctx.clip(); ctx.fillStyle='#120F0C'; ctx.fillRect(600,80,600,520);
+    const k=900/5.693; const [kl,kt]=[TOWNS.Kampala[0],TOWNS.Kampala[1]]; const P=MAP.proj(1033-(kl-32.277)*k, 400+(kt-1.3735)*k, 900);
+    MAP.draw(ctx,P,{now,alpha:.55*ap,breathe:.6});
+    const corr=[['Fort Portal',2],['Jinja',3.5],['Entebbe',5],['Entebbe',6.5]]; const chips=['Kampala–Fort Portal','Kampala–Jinja','Kampala–Entebbe','Airport, any night'];
+    corr.forEach(([to,st],i)=>{ const q=E.outCubic(seg(t,st,st+1)); if(q<=0) return; const path=pathBetween(P.t('Kampala'),P.t(to),i%2?-.08:.08); strokePath(ctx,path,0,q,C.yellow,3,.9); const h=path(q); glow(ctx,h[0],h[1],'rgba(242,194,0,.6)',14,q<1?1:0); });
+    const [nx,ny]=P.t('Ntinda'); const rq=E.outBack(seg(t,8,9.2)); if(rq>0){ const R=15*k/111*rq; ctx.save(); ctx.fillStyle='rgba(148,168,182,.16)'; ctx.strokeStyle=C.crane; ctx.lineWidth=1.5; ctx.beginPath(); ctx.arc(nx,ny,R,0,7); ctx.fill(); ctx.stroke(); ctx.restore(); dot(ctx,nx,ny,4,C.crane); pill(ctx,'Ntinda · 15 km',nx,ny-R-14,{font:FONT.body(600,11),h:22,px:16,alpha:rq}); }
+    for(const n of ['Kampala','Fort Portal','Jinja','Entebbe','Mbarara']){ const [x,y]=P.t(n); if(x<610||x>1190||y<90||y>590) continue; dot(ctx,x,y,3,C.yellow,ap); pill(ctx,n,x,y-16,{font:FONT.body(600,11),h:22,px:16,alpha:ap}); }
+    ctx.restore(); ctx.save(); ctx.globalAlpha=ap; ctx.strokeStyle=inkA(.14); rr(ctx,600,80,600,520,24); ctx.stroke(); ctx.restore();
+    // panel
+    card(ctx,90,80,486,520,{alpha:ap}); eyebrow(ctx,'Comfort map · Ronald · RAV4 · 4 seats',112,110,{alpha:ap}); txt(ctx,'Where I am comfortable',112,150,{font:FONT.disp(700,24),alpha:ap});
+    txt(ctx,'Base',112,190,{font:FONT.body(600,12),color:inkA(.45),alpha:ap}); pill(ctx,'Ntinda',112,214,{align:'left',font:FONT.body(600,13),h:30,px:22,alpha:ap}); pill(ctx,'15 km radius',196,214,{align:'left',font:FONT.body(600,13),h:30,px:22,alpha:ap,fill:t>8?'rgba(148,168,182,.18)':undefined,stroke:t>8?C.crane:undefined});
+    txt(ctx,'Corridors',112,262,{font:FONT.body(600,12),color:inkA(.45),alpha:ap}); let cxp=112, cyp=286; chips.forEach((c,i)=>{ const on=t>=corr[i][1]; const w=measure(ctx,c,FONT.body(600,13))+22; if(cxp+w>560){ cxp=112; cyp+=40; } const q=on?E.outBack(seg(t,corr[i][1],corr[i][1]+.5)):0; pill(ctx,c,cxp,cyp,{align:'left',font:FONT.body(600,13),h:30,px:22,alpha:ap,fill:on?C.yellow:undefined,color:on?'#17120E':inkA(.6),stroke:on?null:undefined,scale:on?1+.06*(1-q):1}); cxp+=w+8; });
+    const nq=E.outExpo(seg(t,7.2,8)); pill(ctx,'No upcountry after dark',112,cyp+40,{align:'left',font:FONT.body(600,13),h:30,px:22,alpha:ap*nq,stroke:'rgba(210,32,47,.7)',color:'#f08a93'});
+    txt(ctx,'Days and hours',112,cyp+92,{font:FONT.body(600,12),color:inkA(.45),alpha:ap}); const days=['Mo','Tu','We','Th','Fr','Sa','Su']; days.forEach((d,i)=>{ const on=i!==5; const q=E.outCubic(seg(t,10+i*.12,10.5+i*.12)); rr(ctx,112+i*44,cyp+106,36,30,8); ctx.fillStyle=on&&q>0?`rgba(242,194,0,${.85*q})`:inkA(.08); ctx.globalAlpha=ap; ctx.fill(); ctx.globalAlpha=1; txt(ctx,d,130+i*44,cyp+121,{font:FONT.body(700,12),color:on&&q>.5?'#17120E':inkA(.6),align:'center',base:'middle',alpha:ap}); });
+    const hq=E.outCubic(seg(t,11,12.4)); rr(ctx,112,cyp+150,448,10,5); ctx.fillStyle=inkA(.08); ctx.globalAlpha=ap; ctx.fill(); rr(ctx,112+448*(6/24),cyp+150,448*(16/24)*hq,10,5); ctx.fillStyle=C.yellow; ctx.fill(); ctx.globalAlpha=1; txt(ctx,'06:00',112,cyp+178,{font:FONT.mono(400,11),color:inkA(.45),alpha:ap}); txt(ctx,'22:00',560,cyp+178,{font:FONT.mono(400,11),color:inkA(.45),align:'right',alpha:ap*hq});
+    // offers slide in over the map
+    const o1=E.outExpo(seg(t,15,16.1)); if(o1>0) offerCard(ctx,lerp(1300,740,o1),150,{alpha:o1,amount:354000,line:'Fort Portal · Fri 17:30 · 4 seats · from Ntinda'});
+    const o2=E.outExpo(seg(t,19,20.1)); if(o2>0) offerCard(ctx,lerp(1300,740,o2),340,{alpha:o2,amount:32000,line:'Entebbe Airport · Sat 23:10 · 2 seats · from Ntinda'});
+    vignette(ctx); }
+},
+{ id:'rent', name:'Rent and Signature', dur:20,
+  caps:[{at:1,eb:'Rent',main:'Arrive properly.',sub:'Rent the ride. Split it four ways.'},{at:6,main:'UGX 300,000 becomes 75,000 each.',sub:'Per head, with the empty leg on sale the moment you book.'},{at:11,eb:'Signature',main:'The Signature fleet. Chauffeured, priced through the same desk.'}],
+  voice:['The kwanjula is Saturday. Rent the Prado, split it four ways.','Three hundred thousand becomes seventy-five each. And you arrive properly.','Or the Signature fleet, chauffeured, priced through the same desk.'],
+  draw(g,t){ const {ctx,now}=g;
+    const a1=E.outExpo(seg(t,.3,1.4))*(1-E.inCubic(seg(t,9.6,10.6)));
+    if(a1>0){ card(ctx,190,120,900,400,{alpha:a1}); eyebrow(ctx,'Rent · per day · with driver or self-drive',220,156,{alpha:a1}); txt(ctx,'Land Cruiser Prado',220,200,{font:FONT.disp(700,30),alpha:a1}); txt(ctx,'4×4 · 7 seats · arrive properly',220,228,{font:FONT.body(400,15),color:inkA(.6),alpha:a1});
+      carSide(ctx,640,330,2,{suv:true,alpha:a1}); const split=E.outCubic(seg(t,4,5.4)); const v=Math.round(lerp(300000,75000,split)/500)*500; money(ctx,v,220,320,{size:54,alpha:a1}); txt(ctx,split<.5?'per day':'each · four of you',220,348,{font:FONT.body(400,15),color:inkA(.6),alpha:a1});
+      for(let i=0;i<4;i++){ const q=E.outBack(seg(t,4+i*.25,4.5+i*.25)); if(q<=0) continue; ctx.save(); ctx.translate(236+i*46,410); ctx.scale(q,q); ctx.globalAlpha=a1; dot(ctx,0,0,18,C.crane); txt(ctx,['AN','BK','CM','DO'][i],0,1,{font:FONT.body(700,13),color:'#17120E',align:'center',base:'middle'}); ctx.restore(); }
+      const el=E.outExpo(seg(t,6.5,7.5)); pill(ctx,'Empty leg · Sunday back · seats at 40%',220,470,{align:'left',font:FONT.mono(500,12),h:28,px:18,alpha:a1*el,stroke:C.crane,color:C.crane}); }
+    const a2=E.outExpo(seg(t,10.2,11.4)); if(a2>0){ eyebrow(ctx,'Signature · UG’s own fleet',640,150,{align:'center',alpha:a2}); const speed=[70,55]; for(let row=0;row<2;row++){ const y=[300,400][row]; const items=SIGNATURE.slice(row*3,row*3+3); let total=0; const ws=items.map(s=>{ const w=measure(ctx,s[0],FONT.disp(700,44))+measure(ctx,'from UGX '+fmt(s[1]),FONT.mono(400,14))+120; total+=w; return w; }); let x=((row?-260:0)-(t-10)*speed[row])%total; if(x>0) x-=total; x+=140;
+        for(let rep=0;rep<3;rep++){ items.forEach((s,i)=>{ txt(ctx,s[0],x,y,{font:FONT.disp(700,44),alpha:a2}); txt(ctx,'from UGX '+fmt(s[1])+' · day, with driver',x,y+26,{font:FONT.mono(400,14),color:inkA(.5),alpha:a2}); txt(ctx,'·',x+ws[i]-60,y,{font:FONT.disp(700,44),color:C.yellow,alpha:a2}); x+=ws[i]; }); } } }
+    vignette(ctx); }
+},
+{ id:'deliver', name:'Deliver', dur:20,
+  caps:[{at:3.5,eb:'Deliver',main:'A quarter of a seat.',sub:'A seat to Fort Portal is UGX 97,350. The parcel rides in the boot for 24,350.'},{at:11,main:'Send the thing. It runs on the same rail.',sub:'Placed, courier assigned, picked up, on the way, delivered.'}],
+  voice:['Your parcel rides in the boot of the stage car to Fort Portal.','The seat is ninety-seven thousand; the parcel, twenty-four. A quarter of a seat, on a car already going.','Send the thing.'],
+  draw(g,t){ const {ctx,now}=g;
+    // road
+    ctx.fillStyle='#14100D'; ctx.fillRect(0,300,W,200); ctx.fillStyle='#1c1713'; ctx.fillRect(0,300,W,4); const off=(t*260)%80; ctx.save(); ctx.strokeStyle=inkA(.35); ctx.lineWidth=3; ctx.setLineDash([40,40]); ctx.lineDashOffset=off; ctx.beginPath(); ctx.moveTo(0,405); ctx.lineTo(W,405); ctx.stroke(); ctx.restore();
+    // distant map, faint
+    const P=MAP.proj(1040,140,260); MAP.draw(ctx,P,{now,alpha:.22,breathe:.4});
+    const cx=lerp(-500,300,E.outExpo(seg(t,0,2.6))); const bob=Math.sin(t*9)*1.2; const pp=E.outBack(seg(t,3,3.8));
+    carSide(ctx,cx,300+bob,2.6,{heads:[[75,15],[95,15],[115,15],[135,15]],parcel:pp});
+    if(pp>0){ const bx=cx+24*2.6, by=300+37*2.6; const pulse=.5+.5*Math.sin(t*4); glow(ctx,bx,by,`rgba(242,194,0,${.35+.25*pulse})`,60,pp); pill(ctx,'Parcel · UGX 24,350 · Fort Portal',bx,by-80,{font:FONT.mono(500,13),h:30,px:20,fill:C.yellow,color:'#17120E',stroke:null,scale:pp}); ctx.save(); ctx.globalAlpha=pp; ctx.strokeStyle=C.yellow; ctx.lineWidth=1.5; ctx.beginPath(); ctx.moveTo(bx,by-65); ctx.lineTo(bx,by-12); ctx.stroke(); ctx.restore(); }
+    // seats vs parcel legend
+    const lq=E.outExpo(seg(t,5,6)); if(lq>0){ ctx.save(); ctx.globalAlpha=lq; const x=120; txt(ctx,'seat',x,190,{font:FONT.body(600,12),color:inkA(.45)}); money(ctx,97350,x,224,{size:28}); txt(ctx,'parcel · ¼',x,264,{font:FONT.body(600,12),color:inkA(.45)}); money(ctx,24350,x,298,{size:28,color:C.yellow}); ctx.restore(); }
+    const rq=E.outExpo(seg(t,10,11)); if(rq>0) railSteps(ctx,['placed','courier assigned','picked up','on the way','delivered'],240,1040,540,seg(t,10.6,18),{alpha:rq,fs:13,dy:26,r:7});
+    vignette(ctx); }
+},
+{ id:'atlas', name:'The Atlas', dur:30,
+  caps:[{at:1,eb:'The Atlas',main:'Every way to move in Uganda is a row in one table.'},{at:13,main:'Four honest states, always shown.'},{at:22,sub:'Nothing is hidden, nothing is faked. Fares are modelled and marked so.',main:'Book on UG. Call ahead. Listed. Coming.'}],
+  voice:['Every way to move in Uganda in one table — air, bus, water, rail, stays.','Four honest states, always on screen: Book on UG. Call ahead. Listed. Coming.','Nothing hidden, nothing faked.'],
+  draw(g,t){ const {ctx,now}=g;
+    const P=MAP.proj(640,250,420); const ma=E.outCubic(seg(t,0,1.5)); MAP.draw(ctx,P,{now,alpha:.38*ma,breathe:.5});
+    const modes=['air','bus','water','rail','signature','stays'], labels=['Air','Bus','Water','Rail','Signature','Stays'];
+    const routes={air:[['Entebbe','Kidepo',.3],['Entebbe','Bwindi',-.3]],bus:[['Kampala','Gulu',.06],['Kampala','Mbarara',-.08],['Kampala','Mbale',-.1]],water:[['Entebbe','Ssese',.25]],rail:[['Kampala','Namanve',0]],signature:[['Kampala','Entebbe',.1]],stays:[]};
+    modes.forEach((m,i)=>{ const st=1+i*.8; const q=E.outExpo(seg(t,st,st+1)); if(q<=0) return; const x=140+i*200, y=470;
+      routes[m].forEach(([a,b,k])=>{ const path=pathBetween(P.t(a),P.t(b),k); strokePath(ctx,path,0,E.outCubic(seg(t,st,st+1.2)),m==='water'?C.crane:m==='rail'?C.yellow:C.ink,m==='air'?1.5:2.5,.8*q,m==='air'?[4,6]:null); });
+      if(m==='stays') for(const n of ['Bwindi','Murchison','Kidepo','Queen Elizabeth']){ const [px,py]=P.t(n); dot(ctx,px,py,4,C.good,q); glow(ctx,px,py,'rgba(61,187,122,.5)',16,q); }
+      ctx.save(); ctx.translate(x,y-40*(1-q)); ctx.globalAlpha=q; ctx.fillStyle=C.ink; GLYPH[m](ctx); ctx.restore(); txt(ctx,labels[i],x,y+44,{font:FONT.disp(700,24),align:'center',alpha:q}); if(i<5) txt(ctx,'·',x+100,y+44,{font:FONT.disp(700,24),align:'center',alpha:q,color:C.yellow}); });
+    const states=[['Book on UG','Aerolink · Entebbe to Kihihi',{fill:C.yellow,color:'#17120E',stroke:null}],['Call ahead · 0800 800 000','Eagle Air',{stroke:C.crane,color:C.crane}],['Listed','URC commuter train',{stroke:inkA(.35),color:inkA(.75)}],['Coming','SGR · standard gauge',{stroke:inkA(.5),color:inkA(.6),dash:[4,4]}]];
+    states.forEach(([s,ex,o],i)=>{ const q=E.outBack(seg(t,13+i*1,13.7+i*1)); if(q<=0) return; const x=260+i*250; pill(ctx,s,x,590,Object.assign({font:FONT.body(700,14),h:38,px:28,scale:q},o)); txt(ctx,ex,x,626,{font:FONT.body(400,13),color:inkA(.5),align:'center',alpha:q}); });
+    vignette(ctx); }
+},
+{ id:'explore', name:'Explore', dur:20,
+  caps:[{at:1,eb:'Explore · the weekend',main:'The Pearl, priced honestly.'},{at:7,main:'A Bwindi weekend, totalled in shillings.'},{at:12,main:'The permit: UGX 300,000 for East African citizens. USD 800 for visitors.',sub:'Fees from UWA snippets, marked as such. Lodge and seats modelled.'}],
+  voice:['The Pearl, priced honestly. A Bwindi weekend, totalled in shillings.','The permit is three hundred thousand for an East African, eight hundred dollars for a visitor. We ask which you are rather than guess.'],
+  draw(g,t){ const {ctx,now}=g;
+    const P=MAP.proj(960,370,400); const ma=E.outCubic(seg(t,0,1.5)); MAP.draw(ctx,P,{now,alpha:.42*ma,breathe:.5});
+    const path=pathBetween(P.t('Kampala'),P.t('Bwindi'),.12); const rp=E.outCubic(seg(t,1,3.5)); strokePath(ctx,path,0,rp,C.yellow,2.5,.9); const [bx,by]=P.t('Bwindi'); if(rp>=1){ const pq=E.outBack(seg(t,3.5,4.1)); glow(ctx,bx,by,'rgba(210,32,47,.5)',22*pq,1); dot(ctx,bx,by,5,C.red); pill(ctx,'Bwindi · mountain gorillas',bx+96,by-24,{scale:pq,font:FONT.body(700,12),h:24,px:18}); }
+    const [kx,ky]=P.t('Kampala'); dot(ctx,kx,ky,3.5,C.yellow,ma); pill(ctx,'Kampala',kx,ky-16,{font:FONT.body(700,11),h:22,px:16,alpha:ma});
+    const ap=E.outExpo(seg(t,.3,1.4)); card(ctx,110,110,520,420,{alpha:ap}); eyebrow(ctx,'Explore · Bwindi · EAC citizen',134,144,{alpha:ap}); txt(ctx,'A weekend with the gorillas',134,184,{font:FONT.disp(700,24),alpha:ap});
+    const rows=[['Gorilla permit (1 day)',300000,'snippet · UWA'],['Lodge · 2 nights',440000,'modelled'],['Stage seats · there and back',120000,'UG model']];
+    rows.forEach(([n,v,pv],i)=>{ const st=1.5+i*1.5; const q=E.outExpo(seg(t,st,st+.9)); if(q<=0) return; const y=232+i*56; ctx.save(); ctx.globalAlpha=q; txt(ctx,n,134+20*(1-q),y,{font:FONT.body(600,16)}); txt(ctx,pv,134,y+20,{font:FONT.body(400,12),color:inkA(.4)}); money(ctx,roll(v,seg(t,st,st+1.2),1000),606,y,{size:22,align:'right'}); ctx.strokeStyle=inkA(.1); ctx.beginPath(); ctx.moveTo(134,y+34); ctx.lineTo(606,y+34); ctx.stroke(); ctx.restore(); });
+    const tq=E.outExpo(seg(t,7,8)); if(tq>0){ txt(ctx,'Total',134,430,{font:FONT.body(600,14),color:inkA(.55),alpha:tq}); money(ctx,roll(860000,seg(t,7,9.2),1000),606,470,{size:44,align:'right',alpha:tq,color:C.yellow}); txt(ctx,'for one, in shillings',606,496,{font:FONT.body(400,13),color:inkA(.5),align:'right',alpha:tq}); }
+    const vq=E.outExpo(seg(t,11.5,12.6)); if(vq>0){ const cy=50+16*(1-vq); card(ctx,700,cy,480,110,{alpha:vq}); eyebrow(ctx,'The same permit',724,cy+30,{alpha:vq}); money(ctx,300000,724,cy+78,{size:30,alpha:vq,color:C.yellow}); txt(ctx,'EAC citizen',724,cy+98,{font:FONT.body(400,12),color:inkA(.5),alpha:vq}); txt(ctx,'USD 800',1156,cy+78,{font:FONT.mono(500,30),align:'right',color:inkA(.55),alpha:vq}); txt(ctx,'visitor · ≈ UGX 2,960,000',1156,cy+98,{font:FONT.body(400,12),color:inkA(.45),align:'right',alpha:vq}); }
+    vignette(ctx); }
+},
+{ id:'plugins', name:'Plug-ins', dur:20,
+  caps:[{at:.8,eb:'Plug-ins · Tazama',main:'Tazama in the dock. The drive starts with the first tap.'},{at:5.8,eb:'Plug-ins · Pulse',main:'Pulse: where paid demand outruns cars. Point me there.'},{at:10.8,eb:'Plug-ins · Felt',main:'Export the layer to Felt. A shared map, not a pin.'},{at:15.8,eb:'Plug-ins · Cephable',main:'Cephable: hands-free. Say it, UG does it.'}],
+  voice:['Tazama in the dock; the drive starts on the first tap.','Pulse shows where the paid demand is.','Send the route to Felt, or run the whole thing hands-free through Cephable.'],
+  draw(g,t){ const {ctx,now}=g; const beat=Math.min(3,Math.floor(t/5)); const bt=t-beat*5; const ba=Math.min(E.outExpo(seg(bt,0,.8)),1-E.inCubic(seg(bt,4.5,5)));
+    ctx.save(); ctx.globalAlpha=ba; const sx=340,sy=150,sw=600,sh=400; card(ctx,sx,sy,sw,sh);
+    if(beat===0){ eyebrow(ctx,'Tazama · the dock',sx+26,sy+36); txt(ctx,'UG mix 03',sx+26,sy+76,{font:FONT.disp(700,24)}); txt(ctx,'96 bpm · warm chords · sized to the trip',sx+26,sy+100,{font:FONT.body(400,14),color:inkA(.55)});
+      for(let i=0;i<40;i++){ const h=18+Math.abs(Math.sin(t*3.1+i*.6)*Math.cos(t*1.7+i*.21))*110; rr(ctx,sx+26+i*13.6,sy+300-h,9,h,3); ctx.fillStyle=i%7===3?C.yellow:inkA(.7); ctx.fill(); }
+      ctx.save(); rr(ctx,sx+26,sy+322,sw-52,44,10); ctx.clip(); ctx.fillStyle=inkA(.05); ctx.fillRect(sx,sy+322,sw,44); const bl='UG Bulletin · Fuel today UGX 5,200/L · Entebbe expressway toll UGX 5,000 · Jinja stage 3 of 4 filling · Gorilla permits Apr–May discounted · '; const bw=measure(ctx,bl,FONT.mono(500,13)); const bx=sx+26-((bt*90)%bw); txt(ctx,bl+bl,bx,sy+349,{font:FONT.mono(500,13),color:inkA(.75)}); ctx.restore();
+      pill(ctx,'❚❚ Pause',sx+sw-26,sy+80,{align:'right',font:FONT.body(600,12),h:28,px:18}); pill(ctx,'Next mix ›',sx+sw-120,sy+80,{align:'right',font:FONT.body(600,12),h:28,px:18}); }
+    if(beat===1){ eyebrow(ctx,'Pulse · the demand map',sx+26,sy+36); ctx.save(); rr(ctx,sx+1,sy+56,sw-2,sh-57,18); ctx.clip(); const zq=E.inOutCubic(seg(bt,2.2,3.6)); const P0=MAP.proj(sx+300,sy+250,300*(1+.5*zq)); const [jx,jy]=P0.t('Fort Portal'); const P=MAP.proj(sx+300-(jx-(sx+300))*zq,sy+250-(jy-(sy+250))*zq,300*(1+.5*zq)); MAP.draw(ctx,P,{now,alpha:.5,breathe:.5});
+      [['Kampala',C.yellow,52],['Fort Portal',C.red,44],['Jinja',C.yellow,34],['Mbarara',C.yellow,28],['Gulu',C.red,32]].forEach(([n,c,r])=>{ const [x,y]=P.t(n); const br=r*(1+.1*Math.sin(now*2+x)); glow(ctx,x,y,c===C.red?'rgba(210,32,47,.55)':'rgba(242,194,0,.5)',br,1); });
+      const [Jx,Jy]=P.t('Fort Portal'); if(zq>0){ pill(ctx,'Fort Portal · 14 seats paid · 2 drivers near',Jx,Jy-22,{font:FONT.body(700,12),h:26,px:18,alpha:zq}); }
+      ctx.restore(); pill(ctx,'Point me there',sx+sw-26,sy+sh-30,{align:'right',font:FONT.body(700,13),h:32,px:22,fill:C.yellow,color:'#17120E',stroke:null}); tap(ctx,sx+sw-90,sy+sh-30,seg(bt,1.6,2.4));
+      txt(ctx,'yellow: demand · red: a gap, seats paid and no car',sx+sw-26,sy+36,{font:FONT.body(400,12),color:inkA(.5),align:'right'}); }
+    if(beat===2){ eyebrow(ctx,'Felt · export Pulse layer',sx+26,sy+36); const P=MAP.proj(sx+165,sy+205,250); MAP.draw(ctx,P,{now,alpha:.35,breathe:.4});
+      const fq=E.inOutCubic(seg(bt,1.2,3.2)); const tx=sx+430, ty=sy+120; card(ctx,sx+330,sy+70,240,290,{fill:'#161210'}); txt(ctx,'Felt',sx+352,sy+104,{font:FONT.disp(700,20)}); txt(ctx,'shared map · live layer',sx+352,sy+124,{font:FONT.body(400,12),color:inkA(.5)});
+      const pts=['Kampala','Jinja','Mbarara','Gulu','Mbale','Fort Portal','Arua','Masaka','Lira','Hoima']; pts.forEach((n,i)=>{ const [x,y]=P.t(n); const q=E.inOutCubic(seg(fq,i*.05,i*.05+.5)); const dx=lerp(x,sx+352+(i%5)*40,q), dy=lerp(y,sy+170+Math.floor(i/5)*40,q); dot(ctx,dx,dy,4,C.yellow); });
+      [['Kampala','Jinja'],['Kampala','Mbarara'],['Kampala','Gulu']].forEach(([a,b],i)=>{ const path=pathBetween(P.t(a),P.t(b),.08); strokePath(ctx,path,0,1,C.ink,1.5,.5*(1-fq)); });
+      const cnt=Math.round(lerp(0,18,fq)); txt(ctx,`${cnt} towns · ${Math.round(lerp(0,9,fq))} corridors`,sx+352,sy+270,{font:FONT.mono(500,13),color:inkA(.7)}); txt(ctx,'points: demand, drivers, seats, gap',sx+352,sy+292,{font:FONT.body(400,11),color:inkA(.45)}); txt(ctx,'lines: stage fill, seat price',sx+352,sy+308,{font:FONT.body(400,11),color:inkA(.45)});
+      pill(ctx,fq>=1?'✓ Layer exported · GeoJSON':'Export Pulse layer',sx+26,sy+sh-30,{align:'left',font:FONT.body(700,13),h:32,px:22,fill:fq>=1?'rgba(61,187,122,.16)':C.yellow,color:fq>=1?C.good:'#17120E',stroke:fq>=1?'rgba(61,187,122,.6)':null}); tap(ctx,sx+90,sy+sh-30,seg(bt,.8,1.6)); }
+    if(beat===3){ eyebrow(ctx,'Cephable · hands-free',sx+26,sy+36); const mx=sx+300,my=sy+170; for(let i=0;i<3;i++){ const r=((now*.6+i/3)%1); ctx.save(); ctx.strokeStyle=C.yellow; ctx.globalAlpha=(1-r)*.6; ctx.lineWidth=2; ctx.beginPath(); ctx.arc(mx,my,30+r*70,0,7); ctx.stroke(); ctx.restore(); }
+      dot(ctx,mx,my,30,C.yellow); rr(ctx,mx-6,my-16,12,22,6); ctx.fillStyle='#17120E'; ctx.fill(); ctx.strokeStyle='#17120E'; ctx.lineWidth=2.5; ctx.beginPath(); ctx.arc(mx,my+2,11,.2,Math.PI-.2); ctx.stroke(); ctx.beginPath(); ctx.moveTo(mx,my+13); ctx.lineTo(mx,my+18); ctx.stroke();
+      for(let i=0;i<50;i++){ const x=sx+60+i*9.8; const h=4+Math.abs(Math.sin(now*9+i*.9)*Math.sin(now*2.3+i*.3))*36*(bt<2.6?1:.15); ctx.fillStyle=inkA(.6); rr(ctx,x,my+90-h/2,4,h,2); ctx.fill(); }
+      const cmd='compare Ntinda to Downtown Kampala'; const n=Math.floor(seg(bt,.6,2.4)*cmd.length); txt(ctx,'“'+cmd.slice(0,n)+(n<cmd.length?'|':'”'),mx,sy+300,{font:FONT.disp(500,20),align:'center'});
+      const rq=E.outExpo(seg(bt,2.8,3.6)); if(rq>0) pill(ctx,'Matatu, UGX 2,200. Likely cheapest. Book it?',mx,sy+350,{font:FONT.body(600,13),h:32,px:22,alpha:rq,fill:'rgba(242,194,0,.12)',stroke:'rgba(242,194,0,.5)'}); }
+    ctx.restore();
+    // beat dots
+    for(let i=0;i<4;i++) dot(ctx,616+i*16,122,3,i===beat?C.yellow:inkA(.25));
+    vignette(ctx); }
+},
+{ id:'rail', name:'Stay on UG', dur:15,
+  caps:[{at:1,eb:'Stay on UG',main:'Whatever you book, one rail.'},{at:7,main:'What UG books, UG carries to done.'},{at:12,sub:'Timers stand in for the concierge in this prototype. UG takes payment only for its own seats and cars.',main:'One rail, from paid to done.'}],
+  voice:['Whatever you book, one rail carries it to done.','The same steps every time, in your own language.','Hakuna anayetumwa mbali. Twende.'],
+  draw(g,t){ const {ctx,now}=g; const ap=E.outExpo(seg(t,.3,1.3));
+    eyebrow(ctx,'Trip rail · Ntinda → Downtown Kampala · Bolt · Book on UG',640,150,{align:'center',alpha:ap});
+    const lit=seg(t,1,13); railSteps(ctx,RAIL,140,1140,300,lit,{alpha:ap,fs:15,dy:36,times:RAIL_T,r:10});
+    const pq=E.outBack(seg(t,5.6,6.4)); if(pq>0){ pill(ctx,'UBK 412X · Ronald · Bolt',540,236,{scale:pq,font:FONT.mono(500,14),h:34,px:22,fill:'rgba(52,209,134,.14)',stroke:'rgba(52,209,134,.6)'}); }
+    const aq=E.outBack(seg(t,8.6,9.2)); if(aq>0) pill(ctx,'ETA 4 min · share',740,236,{scale:aq,font:FONT.body(600,13),h:30,px:20});
+    if(lit>=1){ const dq=E.outBack(seg(t,13,13.6)); pill(ctx,'✓ Done · say what happened',1140,236,{scale:dq,font:FONT.body(600,13),h:30,px:20,fill:'rgba(61,187,122,.16)',stroke:'rgba(61,187,122,.6)',color:C.good}); }
+    txt(ctx,'Open in Bolt ↗',640,470,{font:FONT.body(400,13),color:inkA(.32),align:'center',alpha:ap});
+    vignette(ctx); }
+},
+{ id:'link', name:'One link', dur:15,
+  caps:[{at:1,eb:'One link',main:'Install it. Same crest, same account.',sub:'The site is the app. Scan from the desktop and the screen is in your hand.'},{at:7.6,main:''}],
+  voice:['Install it. Same crest, same account, same shillings.','Look the part. Pay the smart price.','UG. Weebale. Tugende.'],
+  draw(g,t){ const {ctx,now}=g; const a1=E.outExpo(seg(t,.3,1.4))*(1-E.inCubic(seg(t,7.2,8.2)));
+    if(a1>0){ ctx.save(); ctx.globalAlpha=a1; const qx=430,qy=330,size=300,n=25,m=size/n; rr(ctx,qx-size/2-22,qy-size/2-22,size+44,size+44,22); ctx.fillStyle=C.ink; ctx.fill();
+      const r=rng(7); const reveal=E.outCubic(seg(t,.6,2.4)); const finder=(i,j)=>(i<7&&j<7)||(i>=n-7&&j<7)||(i<7&&j>=n-7); const ring=(i,j,ox,oy)=>{ const a=i-ox,b=j-oy; return (a===0||a===6||b===0||b===6)||(a>=2&&a<=4&&b>=2&&b<=4); };
+      ctx.fillStyle='#17120E'; for(let i=0;i<n;i++) for(let j=0;j<n;j++){ const centre=i>=9&&i<=15&&j>=9&&j<=15; if(centre) continue; let on; if(finder(i,j)) on=ring(i,j,i<7?0:n-7,j<7?0:n-7); else on=r()<.46; if(!on) continue; if((i+j)/(2*n)>reveal) continue; ctx.fillRect(qx-size/2+i*m+.5,qy-size/2+j*m+.5,m-1,m-1); }
+      crest(ctx,qx,qy,64,'#17120E',1); ctx.restore();
+      // phone with the icon
+      const px=880,py=330; card(ctx,px-120,py-240,240,480,{r:36,fill:'#161210',alpha:a1}); ctx.save(); ctx.globalAlpha=a1; rr(ctx,px-40,py-228,80,12,6); ctx.fillStyle='#0a0807'; ctx.fill();
+      const iq=E.outBack(seg(t,2.2,3)); ctx.save(); ctx.translate(px,py-90); ctx.scale(iq,iq); rr(ctx,-40,-40,80,80,20); ctx.fillStyle='#0F0C0A'; ctx.fill(); ctx.strokeStyle=inkA(.2); ctx.stroke(); ctx.save(); rr(ctx,-40,-40,80,80,20); ctx.clip(); const sh=ctx.createLinearGradient(-40,-40,40,40); sh.addColorStop(0,'rgba(244,236,221,0)'); sh.addColorStop(.5,'rgba(244,236,221,.06)'); sh.addColorStop(1,'rgba(244,236,221,0)'); ctx.fillStyle=sh; ctx.fillRect(-40,-40,80,80); ctx.restore(); crest(ctx,0,-6,44,C.ink,1); txt(ctx,'UG',0,32,{font:FONT.disp(900,12),align:'center'}); ctx.restore();
+      txt(ctx,'UG',px,py-20,{font:FONT.body(600,13),align:'center',alpha:iq});
+      const bq=E.outExpo(seg(t,3.4,4.4)); if(bq>0){ card(ctx,px-100,py+60+20*(1-bq),200,88,{alpha:bq,r:14,fill:'#1E1915'}); txt(ctx,'Install UG',px-84,py+92,{font:FONT.body(700,14),alpha:bq}); txt(ctx,'same account, stages and rail',px-84,py+112,{font:FONT.body(400,11),color:inkA(.5),alpha:bq}); pill(ctx,'Install',px+84,py+130,{align:'right',font:FONT.body(700,12),h:26,px:18,fill:C.yellow,color:'#17120E',stroke:null,alpha:bq}); tap(ctx,px+60,py+130,seg(t,5,5.8)); }
+      ctx.restore(); }
+    // closing card
+    const c1=E.outExpo(seg(t,8,9.4)); if(c1>0){ glow(ctx,640,280,'rgba(242,194,0,.16)',260*c1,1); crest(ctx,640,250,128,C.ink,seg(t,8,9.6),1); const c2=E.outExpo(seg(t,9.2,10.4)); txt(ctx,'UG',640,412+16*(1-c2),{font:FONT.disp(900,92),align:'center',alpha:c2});
+      const c3=E.outExpo(seg(t,10,11)); txt(ctx,'Ride. Pool. Rent. Deliver.',640,462+10*(1-c3),{font:FONT.mono(500,22),align:'center',alpha:c3*.85});
+      const c4=E.outExpo(seg(t,10.8,11.8)); txt(ctx,'Look the part. Pay the smart price.',640,506+10*(1-c4),{font:FONT.body(400,20),align:'center',alpha:c4*.8});
+      const c5=E.outExpo(seg(t,12,13)); txt(ctx,'Prototype. Estimates, sandbox payments.',640,668,{font:FONT.mono(400,12),align:'center',color:inkA(.42),alpha:c5}); }
+    vignette(ctx); }
+}
+];
+/* The short cut: five scenes, each run a little faster. index.html?cut=short, or short.html / short-sound.html from build.js. */
+const SHORT = [['opening',1.25],['ride',1.6],['pool',2],['atlas',1.6],['link',1.2]];
+const FORCE_CUT = 'short';
+const CUT = (typeof FORCE_CUT!=='undefined' && FORCE_CUT) || params.get('cut') || 'long';
+/* The camera edition (short cut only): a keyframed camera that pushes in on the thing being said and
+   punches on the hits — the UG lock (8.4), the Stage drop (49.75), the Atlas lift (64.9). index.html?cut=short&cam=1,
+   or short-cam.html / short-cam-sound.html from build.js. z is zoom (never < 1), x/y the focal point. */
+const CAM_ON = ((typeof FORCE_CAM!=='undefined' && FORCE_CAM) || params.get('cam')==='1') && CUT==='short';
+const CAM_KEYS = [
+  {at:0,   z:1.00, x:640, y:360}, {at:5,    z:1.08, x:640, y:340}, {at:8.1,  z:1.08, x:640, y:345},
+  {at:8.45,z:1.28, x:640, y:350}, {at:10.6, z:1.06, x:640, y:360}, {at:13,   z:1.00, x:640, y:390},
+  {at:16,  z:1.00, x:640, y:360}, {at:18.5, z:1.22, x:580, y:270}, {at:23,   z:1.22, x:580, y:320},
+  {at:26,  z:1.00, x:640, y:360}, {at:30,   z:1.12, x:640, y:450}, {at:34.75,z:1.00, x:640, y:360},
+  {at:37.5,z:1.30, x:390, y:300}, {at:43,   z:1.30, x:410, y:350}, {at:47.4, z:1.10, x:640, y:360},
+  {at:49.7,z:1.02, x:640, y:360}, {at:49.9, z:1.32, x:700, y:330}, {at:51.6, z:1.00, x:640, y:360},
+  {at:54.75,z:1.00,x:640, y:360}, {at:58,   z:1.18, x:640, y:465}, {at:62,   z:1.02, x:640, y:360},
+  {at:64.85,z:1.00,x:640, y:360}, {at:65.05,z:1.22, x:640, y:400}, {at:67,   z:1.05, x:640, y:380},
+  {at:69.5,z:1.16, x:640, y:585}, {at:72.5, z:1.00, x:640, y:360},
+  {at:76,  z:1.16, x:655, y:330}, {at:80,   z:1.00, x:640, y:360}, {at:82.5, z:1.12, x:640, y:310},
+  {at:86,  z:1.04, x:640, y:340}
+];
+function camAt(tt){
+  const K=CAM_KEYS; if(tt<=K[0].at) return K[0];
+  for(let i=0;i<K.length-1;i++){ const a=K[i], b=K[i+1]; if(tt>=a.at&&tt<b.at){ const u=(tt-a.at)/(b.at-a.at); const e=u*u*(3-2*u); return {z:a.z+(b.z-a.z)*e, x:a.x+(b.x-a.x)*e, y:a.y+(b.y-a.y)*e}; } }
+  return K[K.length-1];
+}
+function camApply(ctx, tt){ if(!CAM_ON) return; const c=camAt(tt); const drift=Math.sin(tt*.7)*2.2, drift2=Math.cos(tt*.53)*1.6; ctx.translate(W/2,H/2); ctx.scale(c.z,c.z); ctx.translate(-(c.x+drift), -(c.y+drift2)); }
+if (CUT==='short'){ const picked=[]; SHORT.forEach(([id,k])=>{ const src=SCENES.find(x=>x.id===id); if(!src) return; picked.push({ id:src.id, name:src.name, dur:src.dur/k, voice:src.voice, caps:src.caps.map(c=>Object.assign({},c,{at:c.at/k})), draw:(g,t)=>src.draw(Object.assign({},g,{now:g.now*k,dur:src.dur}),t*k) }); }); SCENES.length=0; picked.forEach(x=>SCENES.push(x)); }
+
+const TOTAL = SCENES.reduce((s,x)=>s+x.dur,0);
+const OFFSET = SCENES.map((s,i)=>SCENES.slice(0,i).reduce((a,x)=>a+x.dur,0));
+{ const mm=Math.floor(TOTAL/60), ss=String(Math.round(TOTAL%60)).padStart(2,'0'); const pm=document.getElementById('pmeta'); if(pm) pm.textContent=(CUT==='short'?'Short cut':'Showreel')+' · '+mm+':'+ss+(SOUND?' · with sound':''); }
+
+/* ---------- DOM ---------- */
+const $ = id => document.getElementById(id);
+const stage=$('stage'), canvas=$('c'), ctx=canvas.getContext('2d');
+const capEb=document.querySelector('#cap .eb'), capMain=document.querySelector('#cap .main'), capSub=document.querySelector('#cap .sub');
+const hud=$('hud'), cnt=$('cnt'), cname=$('cname'), barfill=$('barfill'), poster=$('poster'), playBtn=$('play'), endEl=$('end'), muteBtn=$('mute'), skipBtn=$('skip'), hint=$('hint');
+const mm=Math.floor(TOTAL/60), ss=String(Math.round(TOTAL%60)).padStart(2,'0');
+$('pmeta').textContent = `Showreel · ${mm}:${ss} · ${SOUND?'with sound and narration':'silent · captions'}`;
+
+/* reduced motion: a poster with the captions listed */
+if (REDUCED){
+  const ol=$('staticlist');
+  SCENES.forEach((s,i)=>{ const li=document.createElement('li'); const h=document.createElement('h2'); const sp=document.createElement('span'); sp.textContent=String(i+1).padStart(2,'0'); h.appendChild(sp); h.appendChild(document.createTextNode(s.name)); li.appendChild(h);
+    s.caps.filter(c=>c.main).forEach(c=>{ const p=document.createElement('p'); p.textContent=c.main; li.appendChild(p); if(c.sub){ const q=document.createElement('p'); q.className='s'; q.textContent=c.sub; li.appendChild(q); } }); ol.appendChild(li); });
+  return;
+}
+
+/* ---------- sizing ---------- */
+let S=1, dpr=1;
+function resize(){ const w=stage.clientWidth, h=stage.clientHeight; dpr=Math.min(2,window.devicePixelRatio||1); S=w/W; canvas.width=Math.round(w*dpr); canvas.height=Math.round(h*dpr); stage.style.setProperty('--u',(w/W)+'px'); }
+new ResizeObserver(resize).observe(stage); resize();
+
+/* ---------- audio: the generative score (ug-score.js, sound mode only; never constructed in silent mode) ---------- */
+const audio = SOUND ? (() => {
+  let ac=null, master=null, score=null, muted=false, track=null, trackGain=null;
+  const TRACK='music/'+(CUT==='short'?'short':'long')+'.mp3';   // a produced track, when one exists (see music/BRIEF.md)
+  function startScore(){ if(window.UGScore){ score=window.UGScore.create(ac, master); score.play(CUT==='short'?'short':'long'); } }
+  function start(){ if(ac){ ac.resume(); return; } ac=new (window.AudioContext||window.webkitAudioContext)(); master=ac.createGain(); master.gain.value=muted?0:.9; master.connect(ac.destination);
+    if(location.protocol==='file:'||location.protocol==='http:'||location.protocol==='https:'){
+      fetch(TRACK,{method:'HEAD',cache:'no-store'}).then(r=>{ if(!r.ok||!/audio|octet/.test(r.headers.get('content-type')||'')) throw 0; track=new Audio(TRACK); track.crossOrigin='anonymous'; trackGain=ac.createGain(); trackGain.gain.value=1; ac.createMediaElementSource(track).connect(trackGain); trackGain.connect(master); track.currentTime=Math.max(0,clock); track.play().catch(()=>{}); const vl=document.getElementById('vlabel'); if(vl) vl.textContent=(vl.textContent||'').replace(/ · music.*$/,'')+' · produced track'; }).catch(()=>{ if(!score) startScore(); });
+    } else startScore(); }
+  function cue(i){ if(score && CUT!=='short') score.cue(i); if(track && Math.abs(track.currentTime-clock)>.6) track.currentTime=clock; }
+  function tick(){ }
+  function sting(){ }
+  function duck(on){ if(score) score.duck(on); if(trackGain&&ac) trackGain.gain.setTargetAtTime(on?.4:1,ac.currentTime,.06); }
+  function pause(){ if(ac) ac.suspend(); if(track) track.pause(); } function resume(){ if(ac) ac.resume(); if(track){ track.currentTime=clock; track.play().catch(()=>{}); } }
+  function setMuted(m){ muted=m; if(master&&ac) master.gain.setTargetAtTime(m?0:.9,ac.currentTime,.05); }
+  return {start,tick,sting,cue,duck,pause,resume,setMuted,get muted(){return muted;}};
+})() : null;
+
+/* narration: rendered Ugandan voices (voice/manifest.json, see voice/README.md) when present; else the browser voice, labelled as a placeholder */
+const voice = SOUND ? (() => {
+  let v=null, manifest=null, files={}, cur=[], label=$('vlabel');
+  const pick=()=>{ if(!('speechSynthesis' in window)) return; const vs=speechSynthesis.getVoices(); const pref=['en-UG','en-KE','en-TZ','en-NG','en-ZA','en-GB']; for(const p of pref){ v=vs.find(x=>x.lang.replace('_','-').toLowerCase()===p.toLowerCase()); if(v) break; } v = v || vs.find(x=>/^en/i.test(x.lang)) || vs[0] || null; if(label&&!manifest) label.textContent = v ? `placeholder voice · ${v.name.replace(/Microsoft |Google /,'')}` : 'placeholder voice'; };
+  if('speechSynthesis' in window){ pick(); speechSynthesis.addEventListener('voiceschanged',pick); }
+  fetch('voice/manifest.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(m=>{ if(!m||!m.scenes) return; manifest=m; m.scenes.forEach(sc=>{ files[sc.id]=sc.files.map(f=>'voice/'+f.file); }); if(label) label.textContent='Ugandan voices · '+(m.engine||'rendered').split('/').pop(); }).catch(()=>{});
+  function stopAll(){ cur.forEach(a=>{ try{ a.pause(); }catch(e){} }); cur=[]; if(audio&&audio.duck) audio.duck(false); try{ if('speechSynthesis' in window) speechSynthesis.cancel(); }catch(e){} }
+  function playFiles(list){ let i=0; if(audio.duck) audio.duck(true); const next=()=>{ if(i>=list.length){ if(audio.duck) audio.duck(false); return; } const a=new Audio(list[i++]); a.volume=1; cur=[a]; a.addEventListener('ended',()=>setTimeout(next,260)); a.play().catch(()=>{}); }; next(); }
+  return { say(sceneId, lines){ if(audio.muted) return; stopAll(); if(manifest&&files[sceneId]){ playFiles(files[sceneId]); return; } if(!('speechSynthesis' in window)) return; try{ if(audio.duck) audio.duck(true); lines.forEach((l,i)=>{ const u=new SpeechSynthesisUtterance(l); if(v) u.voice=v; u.rate=.96; u.pitch=.98; if(i===lines.length-1){ u.onend=()=>{ if(audio.duck) audio.duck(false); }; u.onerror=u.onend; } speechSynthesis.speak(u); }); }catch(e){} },
+    stop(){ stopAll(); }, pause(){ cur.forEach(a=>{ try{ a.pause(); }catch(e){} }); try{ if('speechSynthesis' in window) speechSynthesis.pause(); }catch(e){} }, resume(){ cur.forEach(a=>{ a.play().catch(()=>{}); }); try{ if('speechSynthesis' in window) speechSynthesis.resume(); }catch(e){} },
+    get rendered(){ return !!manifest; } };
+})() : null;
+
+/* ---------- player ---------- */
+let clock=0, playing=false, started=false, ended=false, sceneI=-1, capI=-1, lastTs=0;
+function setCaption(c){ const set=(el,s)=>{ el.classList.remove('in'); el.textContent=s||''; if(s){ void el.offsetWidth; el.classList.add('in'); } }; set(capEb,c&&c.eb); set(capMain,c&&c.main); set(capSub,c&&c.sub); }
+function enterScene(i,{sting=true}={}){ sceneI=i; capI=-1; setCaption(null); cnt.textContent=`${String(i+1).padStart(2,'0')} / ${SCENES.length}`; cname.textContent=SCENES[i].name; if(audio&&audio.cue) audio.cue(i); if(voice) voice.say(SCENES[i].id, SCENES[i].voice); }
+function goto(i){ i=clamp(i,0,SCENES.length-1); clock=OFFSET[i]; if(ended){ ended=false; endEl.classList.remove('on'); } enterScene(i); if(!playing) setPlaying(true); }
+function setPlaying(p){ playing=p; if(audio){ p?audio.resume():audio.pause(); } if(voice){ p?voice.resume():voice.pause(); } hint.textContent = p ? 'space · ← →' : 'paused · space'; }
+function finish(){ playing=false; ended=true; endEl.classList.add('on'); hint.textContent='ended · r to replay'; if(audio) audio.pause(); }
+function start(){ if(started) return; started=true; if(audio) audio.start(); poster.classList.add('off'); hud.classList.add('on'); if(SOUND){ muteBtn.hidden=false; const vl=$('vlabel'); if(vl) vl.hidden=false; } stage.focus({preventScroll:true}); clock=0; playing=true; lastTs=performance.now(); enterScene(0,{sting:false}); requestAnimationFrame(loop); }
+
+let RENDERING=false, capT0=0;
+function loop(ts){ if(!RENDERING) requestAnimationFrame(loop); const dt=RENDERING?0:Math.min(.1,(ts-lastTs)/1000); lastTs=ts; if(playing&&!RENDERING){ clock+=dt; if(clock>=TOTAL){ clock=TOTAL-.001; finish(); } }
+  let i=SCENES.length-1; while(i>0&&clock<OFFSET[i]) i--; if(i!==sceneI) enterScene(i); const sc=SCENES[i], t=clock-OFFSET[i];
+  let ci=-1; for(let k=0;k<sc.caps.length;k++) if(sc.caps[k].at<=t) ci=k; if(ci!==capI){ capI=ci; capT0=clock; setCaption(ci>=0?sc.caps[ci]:null); }
+  barfill.style.width=(clock/TOTAL*100)+'%';
+  if(audio&&playing) audio.tick(clock);
+  ctx.setTransform(dpr*S,0,0,dpr*S,0,0); ctx.fillStyle=C.ground; ctx.fillRect(-2,-2,W+4,H+4);
+  ctx.save(); camApply(ctx, clock); sc.draw({ctx,now:clock,dur:sc.dur},t); ctx.restore();
+  ctx.globalAlpha=1; if('filter' in ctx) ctx.filter='none'; fade(ctx,t,sc.dur,i===SCENES.length-1);
+  if(!playing&&!ended&&!RENDERING){ ctx.fillStyle='rgba(15,12,10,.35)'; ctx.fillRect(0,0,W,H); pill(ctx,'paused',640,360,{font:FONT.body(700,14),h:36,px:28}); } }
+
+/* ---------- controls ---------- */
+playBtn.addEventListener('click',start);
+skipBtn.addEventListener('click',()=>{ if(!started) return start(); if(sceneI>=SCENES.length-1){ clock=TOTAL-.001; finish(); } else goto(sceneI+1); });
+$('replay').addEventListener('click',()=>goto(0));
+muteBtn.addEventListener('click',()=>{ if(!audio) return; const m=!audio.muted; audio.setMuted(m); if(m&&voice) voice.stop(); muteBtn.textContent=m?'Unmute':'Mute'; });
+stage.addEventListener('keydown',e=>{ if(!started){ if(e.key===' '||e.key==='Enter'){ e.preventDefault(); start(); } return; }
+  if(e.key===' '){ e.preventDefault(); if(ended) goto(0); else setPlaying(!playing); }
+  else if(e.key==='ArrowRight'){ e.preventDefault(); if(sceneI<SCENES.length-1) goto(sceneI+1); else { clock=TOTAL-.001; finish(); } }
+  else if(e.key==='ArrowLeft'){ e.preventDefault(); const t=clock-OFFSET[sceneI]; goto(t>2?sceneI:sceneI-1); }
+  else if(e.key==='m'||e.key==='M'){ muteBtn.click(); } else if(e.key==='r'||e.key==='R'){ goto(0); } });
+document.addEventListener('keydown',e=>{ if(document.activeElement!==stage && (e.key===' '||e.key.startsWith('Arrow'))){ stage.focus({preventScroll:true}); stage.dispatchEvent(new KeyboardEvent('keydown',{key:e.key})); e.preventDefault(); } });
+
+/* fonts, then go */
+const fontsReady = Promise.race([ (document.fonts ? Promise.all([document.fonts.load('800 40px Archivo'),document.fonts.load('700 20px Archivo'),document.fonts.load('600 14px Archivo'),document.fonts.load('500 14px "Martian Mono"')]) : Promise.resolve()).catch(()=>{}), new Promise(r=>setTimeout(r,2500)) ]);
+if (!SOUND) fontsReady.then(()=>setTimeout(start,900));
+window.__UG_REEL = {cut:CUT, sound:SOUND, total:TOTAL, voiceLines:SCENES.map(s=>({id:s.id, at:0, lines:s.voice})),
+  render(sec){ if(poster&&poster.isConnected) poster.remove(); if(!started){ RENDERING=true; started=true; hud.classList.add('on'); if(SOUND) muteBtn.hidden=false; stage.focus({preventScroll:true}); } RENDERING=true; playing=false; ended=false; hud.style.display='none'; $('bar').style.display='none'; endEl.style.display='none'; clock=clamp(sec,0,TOTAL-.001); let i=SCENES.length-1; while(i>0&&clock<OFFSET[i]) i--; if(i!==sceneI){ sceneI=i; capI=-1; cnt.textContent=`${String(i+1).padStart(2,'0')} / ${SCENES.length}`; cname.textContent=SCENES[i].name; } loop(performance.now()); const ms=Math.max(0,(clock-capT0)*1000); document.getAnimations().forEach(a=>{ a.pause(); try{ a.currentTime=ms; }catch(e){} }); barfill.style.transition='none'; endEl.classList.toggle('on', clock>=TOTAL-.05); return {scene:SCENES[i].id, t:clock-OFFSET[i]}; },
+  offsets:OFFSET.slice(), scenes:SCENES.map(s=>({id:s.id,name:s.name,dur:s.dur})), particles:MAP.count, lakes:MAP.lakes, seek(sec){ if(!started) start(); clock=clamp(sec,0,TOTAL-.001); let i=SCENES.length-1; while(i>0&&clock<OFFSET[i]) i--; enterScene(i,{sting:false}); }, get clock(){return clock;}, get playing(){return playing;}};
+})();
+</script>
